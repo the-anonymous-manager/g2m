@@ -3,6 +3,8 @@
 The crypto card directory: every crypto card ranked on rewards, fees and where it works.
 Tagline "Spend your bags better." Sub-line "From on-chain to checkout."
 
+Read `docs/HANDOFF.md` for every decision made so far (brand, research, what is built, open items, v2 ideas).
+
 The owner is not a developer. Explain changes in plain words, do the technical steps yourself,
 and confirm what changed on the site (not which files moved).
 
