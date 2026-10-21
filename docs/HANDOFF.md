@@ -27,7 +27,8 @@ Rejected along the way, so do not bring them back: the neon blue/mint isometric 
 emerald greens, Kite-style green (too close to a card brand G2M ranks), flat bright colourways, the "Market M"
 and "Card Stack" marks, the "#1 crypto card directory" claim (cannot be backed up by a new site).
 
-Design exploration lives in the claude.ai artifact "G2M Brand Exploration" (rounds 1 to 7). Logo files are in
+Design exploration lives in the claude.ai artifact "G2M Brand Exploration" (rounds 1 to 7):
+https://claude.ai/artifact/Ea7SgPvFWucUhaW9L8FpYF Logo files are in
 `public/brand/`.
 
 ## Research (version 1 data)
