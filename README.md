@@ -47,7 +47,7 @@ Copy `.env.example` to `.env.local` for local use, or add them in Vercel.
 | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Canonical URL, default `https://g2m.life` |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | Where "Submit a card" messages go, default `info@g2m.life` |
-| `NEXT_PUBLIC_TWITTER_HANDLE` | Your X handle, e.g. `@g2mlife`. Adds an X link and Twitter card tags |
+| `NEXT_PUBLIC_TWITTER_HANDLE` | Your X handle, default `@0akash0x`. Adds an X link and Twitter card tags |
 | `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | Turns on Plausible analytics for that domain (no cookies) |
 
 ## Add or update a card
