@@ -1,0 +1,594 @@
+[
+  {
+    "slug": "crypto-com",
+    "name": "Crypto.com Visa Card",
+    "brand": "Crypto.com",
+    "issuer": "Varies by region (Comenity Capital Bank for the US credit card)",
+    "network": "Visa / Mastercard",
+    "type": "mixed",
+    "forms": ["virtual", "physical"],
+    "custody": "custodial",
+    "summary": "The best-known crypto card: prepaid in most regions plus a US Visa Signature credit card, paying rewards in CRO through Crypto.com's Level Up membership.",
+    "cashback": { "basePct": null, "maxPct": 6, "payout": "CRO", "note": "Up to 5% back on the prepaid card and 1.5% to 6% on the US credit card, depending on your Level Up tier. The free Basic rate is not published." },
+    "fees": { "annualUsd": 0, "fxPct": 0, "fxNote": "Crypto.com says the prepaid card has no foreign transaction fee; fees may apply on some tiers or in some regions.", "topUpPct": null, "atm": "Supported; fees not published in our sources", "other": [] },
+    "tiers": [
+      { "name": "Basic", "feeUsdYear": 0, "cashbackPct": null, "requirement": "No subscription or CRO lockup" },
+      { "name": "Level Up (top tier)", "feeUsdYear": null, "feeNote": "Plans start at $4.99/month; top-tier price not published. CRO lockup or staking also qualifies.", "cashbackPct": 5, "requirement": "Level Up subscription, CRO lockup or staking", "stake": { "token": "CRO", "amount": null, "coingeckoId": "crypto-com-chain" }, "perks": ["Up to 5% back in CRO on the prepaid card", "Higher APY on cash balances"] }
+    ],
+    "coverage": { "countries": 38, "scope": "US, UK, EEA, Canada, Australia, Singapore, Brazil and Bahrain", "examples": ["United States", "United Kingdom", "Germany", "Australia", "Singapore", "Brazil"], "markets": { "IN": "unknown", "AE": "unknown", "US": "yes", "GB": "yes", "EU": "yes" } },
+    "wallets": { "applePay": null, "googlePay": null },
+    "assets": ["CRO"],
+    "perks": ["Level Up membership benefits"],
+    "pros": ["Huge, established brand", "Up to 5% back on prepaid and up to 6% on the US credit card"],
+    "cons": ["The best rates need a paid tier or a CRO lockup", "Rewards paid in CRO, so their value moves with the token"],
+    "links": { "official": "https://crypto.com/cards" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/cex/card-details/crypto-com", "verified": "2026-09-28" },
+      { "label": "Crypto.com: Level Up announcement", "url": "https://crypto.com/en/company-news/revamped-levelup", "verified": "2025-09-02" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "gunmetal"
+  },
+  {
+    "slug": "bybit",
+    "name": "Bybit Card",
+    "brand": "Bybit",
+    "issuer": "Varies by region (e.g. Harmoniie SAS in the EEA)",
+    "network": "Mastercard",
+    "type": "mixed",
+    "forms": ["virtual", "physical"],
+    "custody": "custodial",
+    "summary": "Exchange-linked Mastercard with no annual fee. Cashback climbs with your Bybit VIP level, up to 10% for Supreme VIPs.",
+    "cashback": { "basePct": null, "maxPct": 10, "payout": "Points, redeemable for USDT or crypto", "note": "2% for VIP 1 to 2, 4% for VIP 3, 10% for Supreme VIP. The non-VIP rate is not published." },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "0.5% in the EEA, 1% to 2% in most regions, 7% in Argentina.", "topUpPct": null, "atm": "Around $100 or €100 a month depending on region", "other": ["Crypto conversion fee 0.9% outside the EEA"] },
+    "tiers": [
+      { "name": "VIP 1 to 2", "feeUsdYear": 0, "cashbackPct": 2, "requirement": "Bybit VIP 1 or 2" },
+      { "name": "VIP 3 (Alpha)", "feeUsdYear": 0, "cashbackPct": 4, "requirement": "Bybit VIP 3" },
+      { "name": "Supreme VIP", "feeUsdYear": 0, "cashbackPct": 10, "requirement": "Bybit Supreme VIP", "perks": ["100% rebates on Netflix, Spotify and ChatGPT"] }
+    ],
+    "coverage": { "countries": null, "scope": "EEA, Asia-Pacific, Australia, Latin America, Kazakhstan and Georgia", "examples": ["Argentina", "Australia", "Brazil", "Georgia", "Mexico", "Peru"], "markets": { "IN": "unknown", "AE": "unknown", "US": "no", "GB": "unknown", "EU": "yes" } },
+    "wallets": { "applePay": null, "googlePay": null },
+    "assets": [],
+    "perks": ["Subscription rebates for VIPs"],
+    "pros": ["No annual fee", "Very high cashback for active traders"],
+    "cons": ["Top rates are tied to trading VIP status", "FX fee is high outside the EEA"],
+    "links": { "official": "https://www.bybitcard.com/" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/cex/card-details/bybit", "verified": "2026-09-01" },
+      { "label": "Bybit Learn: Bybit Card for VIPs", "url": "https://www.bybit.com/en/learn/bybit-vip/bybit-vip-bybit-card", "verified": "2026-06-15" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "black"
+  },
+  {
+    "slug": "coinbase-one",
+    "name": "Coinbase One Card",
+    "brand": "Coinbase",
+    "issuer": "First Electronic Bank",
+    "network": "Amex",
+    "type": "credit",
+    "forms": ["virtual", "physical"],
+    "custody": "custodial",
+    "summary": "A US-only American Express credit card for Coinbase One members, earning 2% to 4% back on every purchase.",
+    "cashback": { "basePct": 2, "maxPct": 4, "payout": null, "note": "2% base; 2.5% to 4% on the first $10,000 each month, then 2%." },
+    "fees": { "annualUsd": 49.99, "fxPct": null, "topUpPct": null, "atm": "Cash advance: the greater of $10 or 5%", "other": ["Requires Coinbase One ($49.99/year)", "Late payment up to $41"] },
+    "tiers": [
+      { "name": "Coinbase One Card", "feeUsdYear": 49.99, "feeNote": "Coinbase One membership", "cashbackPct": 2, "bands": [ { "uptoUsd": 10000, "pct": 2.5 }, { "uptoUsd": null, "pct": 2 } ], "requirement": "Coinbase One membership and credit approval" }
+    ],
+    "coverage": { "countries": 1, "scope": "United States only", "examples": ["United States"], "markets": { "IN": "no", "AE": "no", "US": "yes", "GB": "no", "EU": "no" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": [],
+    "perks": [],
+    "pros": ["Strong flat rewards on everything", "Real credit card with no staking needed"],
+    "cons": ["US only", "Needs a paid Coinbase One membership"],
+    "links": { "official": "https://www.coinbase.com/" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/coinbase-card", "verified": "2026-09-18" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "silver"
+  },
+  {
+    "slug": "bitget-wallet",
+    "name": "Bitget Wallet Card",
+    "brand": "Bitget Wallet",
+    "issuer": null,
+    "network": "Visa",
+    "type": "debit",
+    "forms": ["virtual", "physical"],
+    "custody": "unknown",
+    "summary": "A no-fee Visa debit card from Bitget Wallet for Asia-Pacific, with 2% back as standard and 3% for new or high-spend users.",
+    "cashback": { "basePct": 2, "maxPct": 3, "payout": null, "note": "3% for new users or after a monthly spend threshold (amount not published)." },
+    "fees": { "annualUsd": 0, "fxPct": 1.7, "fxNote": "0% when paying in USD, 1.7% in other currencies.", "topUpPct": 0, "atm": "1% or $5, whichever is higher", "other": ["Crypto-to-fiat conversion about 0.05%"] },
+    "tiers": [
+      { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 2 },
+      { "name": "Boosted", "feeUsdYear": 0, "cashbackPct": 3, "requirement": "New users, or a monthly spend threshold" }
+    ],
+    "coverage": { "countries": 9, "scope": "Asia-Pacific", "examples": ["Australia", "Japan", "South Korea", "Malaysia", "Philippines", "Singapore", "Thailand", "Taiwan", "Vietnam"], "markets": { "IN": "unknown", "AE": "no", "US": "no", "GB": "no", "EU": "no" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": [],
+    "perks": [],
+    "pros": ["No annual or top-up fee", "2% base back is high for a free card"],
+    "cons": ["Only 9 Asia-Pacific countries", "1.7% FX on non-USD spend"],
+    "links": { "official": "https://web3.bitget.com/" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/bitget-wallet", "verified": "2026-08-30" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "champagne"
+  },
+  {
+    "slug": "kast",
+    "name": "KAST Card",
+    "brand": "KAST",
+    "issuer": "Third National",
+    "network": "Visa",
+    "type": "credit",
+    "forms": ["virtual", "physical"],
+    "custody": "unknown",
+    "summary": "Stablecoin card built for global spenders, with USD cashback on every tier and KAST Points on top for Premium and Private members.",
+    "cashback": { "basePct": 1.5, "maxPct": 3, "payout": "USD plus KAST Points", "note": "Standard pays 1.5% on the first $2,000 each month. Premium adds 1% in points, Private adds 2%." },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "Up to 2% on non-USD FX; up to 3% foreign transaction fee.", "topUpPct": 0, "atm": "$3 + 2%; up to $250 per withdrawal", "other": ["Standard card shipping $40", "$0.10 on non-USD purchases under $25", "Extra virtual cards $2 each"] },
+    "tiers": [
+      { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 1.5, "bands": [ { "uptoUsd": 2000, "pct": 1.5 }, { "uptoUsd": null, "pct": 0 } ], "perks": ["Concierge"] },
+      { "name": "Premium", "feeUsdYear": 1000, "cashbackPct": 2, "requirement": "$1,000 a year", "perks": ["+1% back in KAST Points", "Concierge"] },
+      { "name": "Private", "feeUsdYear": 10000, "cashbackPct": 3, "requirement": "$10,000 a year", "perks": ["+2% back in KAST Points", "Concierge"] }
+    ],
+    "coverage": { "countries": null, "scope": "Global (full country list not published)", "examples": [], "markets": { "IN": "yes", "AE": "unknown", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["BTC", "ETH", "BNB", "ARB", "ENA", "CRO"],
+    "perks": ["Concierge on every tier"],
+    "pros": ["USD cashback, not a volatile token", "Free top-ups and no card spend fee in USD"],
+    "cons": ["Standard cashback stops after $2,000 a month", "Up to 2% FX plus a $40 shipping fee"],
+    "links": { "official": "https://www.kast.xyz/" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/kast-card", "verified": "2026-08-30" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "black"
+  },
+  {
+    "slug": "redotpay",
+    "name": "RedotPay Card",
+    "brand": "RedotPay",
+    "issuer": null,
+    "network": "Visa",
+    "type": "prepaid",
+    "forms": ["virtual", "physical"],
+    "custody": "custodial",
+    "summary": "One of the most widely available crypto cards, covering 200+ countries with no annual fee. Best for access, not rewards.",
+    "cashback": { "basePct": null, "maxPct": null, "payout": "Points", "note": "No cashback rate published; the card earns points. $5 welcome bonus." },
+    "fees": { "annualUsd": 0, "fxPct": 1.2, "fxNote": "1.2% on non-default-currency transactions.", "topUpPct": null, "atm": "2% up to $10,000 a month, 3% above", "other": ["Physical card $100", "Virtual card $10", "1% crypto conversion", "$0.50 per declined transaction after 3 a month"] },
+    "tiers": [
+      { "name": "Virtual card", "feeUsdYear": 0, "feeNote": "$10 one-off issuance", "cashbackPct": null },
+      { "name": "Physical card", "feeUsdYear": 0, "feeNote": "$100 one-off issuance", "cashbackPct": null }
+    ],
+    "coverage": { "countries": 201, "scope": "Global", "examples": ["United Arab Emirates", "Argentina", "Armenia", "Angola"], "markets": { "IN": "unknown", "AE": "yes", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["USDT", "USDC", "BTC", "ETH", "SOL", "BNB", "TRX", "XRP", "SUI"],
+    "perks": ["Points rewards"],
+    "pros": ["Available in 201 countries", "No annual fee, Apple Pay and Google Pay"],
+    "cons": ["No published cashback", "$100 physical card and 1% conversion fee"],
+    "links": { "official": "https://www.redotpay.com/" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/redotpay-card", "verified": "2026-08-30" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "rose"
+  },
+  {
+    "slug": "etherfi",
+    "name": "ether.fi Cash Card",
+    "brand": "ether.fi",
+    "issuer": "Third National",
+    "network": "Visa",
+    "type": "credit",
+    "forms": ["virtual", "physical"],
+    "custody": "self-custodial",
+    "summary": "Self-custodial Visa card paying 3% back on every tier, with airport lounge access and Visa Signature perks.",
+    "cashback": { "basePct": 3, "maxPct": 4, "payout": null, "note": "3% on Core, Luxe and Pinnacle; 4% on VIP. Monthly payout caps run from $60 (Core) to $2,000 (VIP)." },
+    "fees": { "annualUsd": null, "fxPct": 1.5, "fxNote": "About 1% network rate plus a 0% to 0.5% margin depending on tier.", "topUpPct": null, "atm": "$500 per withdrawal; 10 free a month on Pinnacle and VIP", "other": ["Physical card $50 (Core) or $100 (Luxe, Pinnacle)", "Virtual card $10"] },
+    "tiers": [
+      { "name": "Core", "feeUsdYear": null, "cashbackPct": 3, "capMonthlyUsd": 60, "fxPct": 1.5, "perks": ["Airport lounge access", "Baggage protection", "Price protection"] },
+      { "name": "Luxe", "feeUsdYear": 199, "feeNote": "Or hold 5K points, $15K in Liquid, or 30K ETHFI staked", "cashbackPct": 3, "capMonthlyUsd": 300, "fxPct": 1.25, "requirement": "$199/year, 5K points, $15K Liquid deposit or 30K ETHFI staked", "stake": { "token": "ETHFI", "amount": 30000, "coingeckoId": "ether-fi" }, "perks": ["Airport lounge access", "Concierge"] },
+      { "name": "Pinnacle", "feeUsdYear": null, "cashbackPct": 3, "capMonthlyUsd": 1500, "fxPct": 1, "requirement": "Not published", "perks": ["Airport lounge access", "10 free ATM withdrawals a month"] },
+      { "name": "VIP", "feeUsdYear": null, "cashbackPct": 4, "capMonthlyUsd": 2000, "fxPct": 1, "requirement": "Not published", "perks": ["Airport lounge access", "Free card issuance"] }
+    ],
+    "coverage": { "countries": 85, "scope": "Global (85 countries)", "examples": ["United Arab Emirates", "Argentina", "Austria", "Australia"], "markets": { "IN": "unknown", "AE": "yes", "US": "unknown", "GB": "unknown", "EU": "yes" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": [],
+    "perks": ["Airport lounge access on every tier", "Visa Signature benefits"],
+    "pros": ["3% back even on the entry tier", "Self-custodial with lounge access"],
+    "cons": ["Core cashback is capped at $60 a month", "Card issuance fees of $50 to $100"],
+    "links": { "official": "https://www.ether.fi/" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/ether.fi", "verified": "2026-08-30" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "silver"
+  },
+  {
+    "slug": "metamask",
+    "name": "MetaMask Card",
+    "brand": "MetaMask",
+    "issuer": null,
+    "network": "Mastercard",
+    "type": "debit",
+    "forms": ["virtual", "physical", "metal"],
+    "custody": "self-custodial",
+    "summary": "Spend straight from your MetaMask wallet. Free virtual card, or a $199 Metal card with 0% FX and free ATM cash.",
+    "cashback": { "basePct": 1, "maxPct": 1, "payout": null, "note": "1% on both the free and Metal cards." },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "1% cross-border on the free card, 0% on Metal.", "topUpPct": null, "atm": "2%; Metal: free up to $1,200 a month", "other": ["Metal card replacement $99"] },
+    "tiers": [
+      { "name": "Virtual", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 1 },
+      { "name": "Metal", "feeUsdYear": 199, "cashbackPct": 1, "fxPct": 0, "perks": ["Free ATM withdrawals up to $1,200 a month", "Physical metal card"] }
+    ],
+    "coverage": { "countries": 45, "scope": "45 countries incl. the EU, Latin America and Canada", "examples": ["Argentina", "Austria", "Brazil", "Canada", "Switzerland"], "markets": { "IN": "unknown", "AE": "unknown", "US": "unknown", "GB": "unknown", "EU": "yes" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["USDC", "USDT", "EURe", "GBPe"],
+    "perks": ["Works on Base, Linea, Monad and Solana"],
+    "pros": ["Self-custodial, spends from your own wallet", "Metal tier has 0% FX"],
+    "cons": ["Only 1% back", "Metal costs $199 a year"],
+    "links": { "official": "https://metamask.io/" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/metamask-card", "verified": "2026-09-28" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "gold"
+  },
+  {
+    "slug": "nexo",
+    "name": "Nexo Card",
+    "brand": "Nexo",
+    "issuer": "DiPocket UAB",
+    "network": "Mastercard",
+    "type": "mixed",
+    "forms": ["virtual", "physical"],
+    "custody": "custodial",
+    "summary": "Dual-mode Mastercard: spend against your crypto in credit mode or from your balance in debit mode, with up to 2% back.",
+    "cashback": { "basePct": null, "maxPct": 2, "payout": "NEXO or BTC", "note": "Up to 2% in credit mode, capped at $50 a month. Needs a portfolio of at least $5,000." },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "0.2% for EEA, UK and Swiss currencies; 2% for others; +0.5% on weekends.", "topUpPct": null, "atm": "Free monthly allowance from €200 (Base) to €2,000 (Platinum)", "other": ["Replacement card 15 EUR/GBP/USD"] },
+    "tiers": [
+      { "name": "Credit mode (top loyalty tier)", "feeUsdYear": 0, "cashbackPct": 2, "capMonthlyUsd": 50, "requirement": "Portfolio of at least $5,000; the top rate needs a higher loyalty tier" }
+    ],
+    "coverage": { "countries": 34, "scope": "EEA, UK, Argentina, Brazil and Mexico", "examples": ["United Kingdom", "Germany", "Argentina", "Brazil", "Mexico"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "yes", "EU": "yes" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": [],
+    "perks": ["Credit mode: spend without selling your crypto"],
+    "pros": ["Very low FX on European currencies", "Free ATM allowance on every tier"],
+    "cons": ["Cashback capped at $50 a month", "Needs a $5,000 portfolio for rewards"],
+    "links": { "official": "https://nexo.com/" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/nexo-card", "verified": "2026-09-01" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "gunmetal"
+  },
+  {
+    "slug": "krak",
+    "name": "Krak Card",
+    "brand": "Kraken",
+    "issuer": "Monavate (EEA, UK); Lead Bank (US)",
+    "network": "Visa / Mastercard",
+    "type": "debit",
+    "forms": ["virtual", "physical"],
+    "custody": "unknown",
+    "summary": "Kraken's debit card for the EEA, UK and US, with no subscription and up to 2% back in Europe.",
+    "cashback": { "basePct": null, "maxPct": 2, "payout": null, "note": "Up to 2% in the EEA and UK; the US rate is not published." },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "US: Visa rate + 1%. EEA and UK FX not published.", "topUpPct": null, "atm": "Supported; fees not published", "other": [] },
+    "tiers": [
+      { "name": "Krak Card", "feeUsdYear": 0, "cashbackPct": 2, "requirement": "Rate shown is the EEA/UK maximum" }
+    ],
+    "coverage": { "countries": null, "scope": "EEA, UK and US", "examples": ["United Kingdom", "United States", "Germany"], "markets": { "IN": "unknown", "AE": "no", "US": "yes", "GB": "yes", "EU": "yes" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": [],
+    "perks": [],
+    "pros": ["Big, regulated exchange", "No subscription"],
+    "cons": ["Most fees not published", "US cashback not published"],
+    "links": { "official": "https://www.kraken.com/" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/kraken-card", "verified": "2026-09-28" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "black"
+  },
+  {
+    "slug": "mexc",
+    "name": "MEXC Card",
+    "brand": "MEXC",
+    "issuer": null,
+    "network": "Visa",
+    "type": "mixed",
+    "forms": ["virtual", "physical"],
+    "custody": "unknown",
+    "summary": "Exchange card in three versions: a 110-country virtual card with no FX markup, a Thailand card paying 4% to 10%, and a co-branded ether.fi credit card.",
+    "cashback": { "basePct": null, "maxPct": 10, "payout": "USDT", "note": "Thailand card: 4% Standard, 6% Premier, 10% Elite, capped at 100 to 800 USDT a month. No cashback published for the global virtual card." },
+    "fees": { "annualUsd": 0, "fxPct": 0, "fxNote": "Global card: Visa rate with 0% markup, plus a 1% card transaction fee. Thailand card: Visa rate + 1%.", "topUpPct": null, "txPct": 1, "atm": "Not available on the global virtual card", "other": ["1% card transaction fee (global card)", "1% crypto conversion (Thailand card)"] },
+    "tiers": [
+      { "name": "Global virtual", "feeUsdYear": 0, "cashbackPct": null },
+      { "name": "Thailand Standard", "feeUsdYear": 0, "cashbackPct": 4, "capMonthlyUsd": 100, "fxPct": 1, "requirement": "Thailand residents" },
+      { "name": "Thailand Premier", "feeUsdYear": 0, "cashbackPct": 6, "capMonthlyUsd": 300, "fxPct": 1, "requirement": "Thailand residents; tier criteria not published" },
+      { "name": "Thailand Elite", "feeUsdYear": 0, "cashbackPct": 10, "capMonthlyUsd": 800, "fxPct": 1, "requirement": "Thailand residents; tier criteria not published" }
+    ],
+    "coverage": { "countries": 110, "scope": "Global virtual card in 110 countries; physical card in Thailand", "examples": ["United Arab Emirates", "Argentina", "Azerbaijan", "Thailand"], "markets": { "IN": "unknown", "AE": "yes", "US": "no", "GB": "unknown", "EU": "unknown" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["USDT"],
+    "perks": [],
+    "pros": ["No FX markup on the global card", "Up to 10% back in Thailand"],
+    "cons": ["1% fee on every global-card purchase", "High cashback only in Thailand"],
+    "links": { "official": "https://www.mexc.com/" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/cex/card-details/mexc", "verified": "2026-09-01" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "gunmetal"
+  },
+  {
+    "slug": "gnosis-pay",
+    "name": "Gnosis Pay Card",
+    "brand": "Gnosis Pay",
+    "issuer": "Monavate",
+    "network": "Visa",
+    "type": "debit",
+    "forms": ["physical"],
+    "custody": "self-custodial",
+    "summary": "The original self-custodial Visa card, spending from a Gnosis Safe. Cashback in GNO grows with how much GNO you hold.",
+    "cashback": { "basePct": 1, "maxPct": 5, "payout": "GNO", "note": "1% holding 0.1 GNO, up to 4% holding 100 GNO, +1% with the OG NFT." },
+    "fees": { "annualUsd": null, "fxPct": 0, "topUpPct": null, "atm": "5 free a month (up to 200), then 2%", "other": ["Top-up fee 4.99 EURe / GBPe / USDCe", "Free card order and shipping"] },
+    "tiers": [
+      { "name": "Hold 0.1 GNO", "feeUsdYear": 0, "cashbackPct": 1, "stake": { "token": "GNO", "amount": 0.1, "coingeckoId": "gnosis" } },
+      { "name": "Hold 1 GNO", "feeUsdYear": 0, "cashbackPct": 2, "stake": { "token": "GNO", "amount": 1, "coingeckoId": "gnosis" } },
+      { "name": "Hold 10 GNO", "feeUsdYear": 0, "cashbackPct": 3, "stake": { "token": "GNO", "amount": 10, "coingeckoId": "gnosis" } },
+      { "name": "Hold 100 GNO", "feeUsdYear": 0, "cashbackPct": 4, "stake": { "token": "GNO", "amount": 100, "coingeckoId": "gnosis" } }
+    ],
+    "coverage": { "countries": 35, "scope": "EU, UK, Switzerland and Latin America", "examples": ["Austria", "Belgium", "Switzerland", "Argentina", "Brazil"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "yes", "EU": "yes" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["EURe", "GBPe", "USDCe"],
+    "perks": ["Spends directly from a Safe smart account"],
+    "pros": ["No FX fee", "Truly self-custodial"],
+    "cons": ["Cashback needs GNO holdings", "Physical card only"],
+    "links": { "official": "https://gnosispay.com/" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/gnosis-pay", "verified": "2026-08-30" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "champagne"
+  },
+  {
+    "slug": "jupiter",
+    "name": "Jupiter Card",
+    "brand": "Jupiter",
+    "issuer": "DCS (APAC) / Rain (other markets)",
+    "network": "Visa",
+    "type": "debit",
+    "forms": ["virtual", "physical"],
+    "custody": "unknown",
+    "summary": "Solana-native Visa card with 2% back in USDC, rising to 4% when you refer friends. Available across Asia-Pacific, the Gulf and Latin America.",
+    "cashback": { "basePct": 2, "maxPct": 4, "payout": "USDC", "note": "4% after 2 qualifying referrals in the previous month. Capped at $100 a month." },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "1% in Rain-issued markets, 1.8% in APAC (DCS) markets.", "topUpPct": null, "atm": "Not published", "other": ["Physical card $13.13 plus shipping"] },
+    "tiers": [
+      { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 2, "capMonthlyUsd": 100 },
+      { "name": "Referral boost", "feeUsdYear": 0, "cashbackPct": 4, "capMonthlyUsd": 100, "requirement": "2 qualifying referrals in the previous month" }
+    ],
+    "coverage": { "countries": 52, "scope": "Asia-Pacific, the Gulf and Latin America", "examples": ["United Arab Emirates", "Singapore", "Japan", "Argentina", "Brazil"], "markets": { "IN": "unknown", "AE": "yes", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["USDC", "USDT"],
+    "perks": ["Works on Arbitrum, Base, Solana and Sui"],
+    "pros": ["2% back in USDC with no annual fee", "Cheap physical card"],
+    "cons": ["Cashback capped at $100 a month", "4% needs ongoing referrals"],
+    "links": { "official": "https://jup.ag/" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/jupiter", "verified": "2026-10-01" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "rose"
+  },
+  {
+    "slug": "avalanche-card",
+    "name": "Avalanche Card",
+    "brand": "Avalanche",
+    "issuer": "Third National",
+    "network": "Visa",
+    "type": "mixed",
+    "forms": ["virtual", "physical"],
+    "custody": "self-custodial",
+    "summary": "Self-custodial Visa card from the Avalanche ecosystem with no card fees, earning Avax Points instead of cashback.",
+    "cashback": { "basePct": null, "maxPct": null, "payout": "Avax Points", "note": "Earns Avax Points with travel portal redemptions; no cashback rate published." },
+    "fees": { "annualUsd": 0, "fxPct": 3, "fxNote": "Up to 3% globally, 1% in the US.", "topUpPct": null, "atm": "Not published", "other": ["No shipping, account or card fees"] },
+    "tiers": [
+      { "name": "Global", "feeUsdYear": 0, "cashbackPct": null, "fxPct": 3 },
+      { "name": "United States", "feeUsdYear": 0, "cashbackPct": null, "fxPct": 1 }
+    ],
+    "coverage": { "countries": 31, "scope": "Latin America, the Caribbean and the US", "examples": ["Argentina", "Brazil", "Chile", "Bahamas"], "markets": { "IN": "unknown", "AE": "unknown", "US": "yes", "GB": "unknown", "EU": "unknown" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["AVAX", "USDC", "USDT"],
+    "perks": ["Avax Points", "Travel portal redemptions"],
+    "pros": ["No card, shipping or account fees", "Self-custodial"],
+    "cons": ["No cashback rate", "Up to 3% FX outside the US"],
+    "links": { "official": "https://www.avax.network/" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/avalanche-card", "verified": "2026-09-28" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "rose"
+  },
+  {
+    "slug": "solayer",
+    "name": "Solayer Card",
+    "brand": "Solayer",
+    "issuer": "Third National",
+    "network": "Visa",
+    "type": "credit",
+    "forms": ["virtual", "physical"],
+    "custody": "self-custodial",
+    "summary": "Solana-based USDC card available in 154 countries for a $20 yearly membership. Earns points rather than cashback.",
+    "cashback": { "basePct": null, "maxPct": null, "payout": "Points", "note": "Earns points; no cashback rate published." },
+    "fees": { "annualUsd": 20, "fxPct": 1.5, "fxNote": "$0.10 + 1.5% per international transaction.", "topUpPct": 1, "txFlatUsd": 0.15, "atm": "Supported; fee not published", "other": ["$0.15 per transaction", "1% top-up fee"] },
+    "tiers": [
+      { "name": "Membership", "feeUsdYear": 20, "cashbackPct": null }
+    ],
+    "coverage": { "countries": 154, "scope": "Global", "examples": ["Argentina", "Armenia", "Angola", "Aruba"], "markets": { "IN": "unknown", "AE": "unknown", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["USDC"],
+    "perks": ["Referral points"],
+    "pros": ["Available in 154 countries", "Low $20 yearly fee"],
+    "cons": ["Per-transaction and top-up fees add up", "No cashback rate"],
+    "links": { "official": "https://solayer.org/" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/solayer", "verified": "2026-08-27" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "gunmetal"
+  },
+  {
+    "slug": "wirex-one",
+    "name": "Wirex One Card",
+    "brand": "Wirex",
+    "issuer": null,
+    "network": "Visa",
+    "type": "debit",
+    "forms": ["virtual", "physical"],
+    "custody": "self-custodial",
+    "summary": "Self-custodial Visa card with zero FX fees and five tiers paying 0.5% up to 8% back in USD.",
+    "cashback": { "basePct": 0.5, "maxPct": 8, "payout": "USD", "note": "Base 0.5%, Premium 1%, Elite 3%, Private 5%, Bespoke 8%. Tier requirements not published." },
+    "fees": { "annualUsd": 0, "fxPct": 0, "topUpPct": null, "atm": "Premium tier and above", "other": [] },
+    "tiers": [
+      { "name": "Base", "feeUsdYear": 0, "cashbackPct": 0.5, "requirement": "Virtual card only" },
+      { "name": "Premium", "feeUsdYear": null, "cashbackPct": 1, "requirement": "Not published" },
+      { "name": "Elite", "feeUsdYear": null, "cashbackPct": 3, "requirement": "Not published" },
+      { "name": "Private", "feeUsdYear": null, "cashbackPct": 5, "requirement": "Not published", "perks": ["AirRefund flight compensation", "Up to 15% off SIXT", "Visa Signature benefits"] },
+      { "name": "Bespoke", "feeUsdYear": null, "cashbackPct": 8, "requirement": "Not published", "perks": ["AirRefund flight compensation", "Up to 15% off SIXT", "Visa Signature benefits"] }
+    ],
+    "coverage": { "countries": 79, "scope": "79 countries incl. the UAE, EU and Australia", "examples": ["United Arab Emirates", "Austria", "Australia", "Belgium", "Argentina"], "markets": { "IN": "unknown", "AE": "yes", "US": "unknown", "GB": "unknown", "EU": "yes" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": [],
+    "perks": ["No locked funds required"],
+    "pros": ["0% FX on every tier", "Up to 8% back on top tiers"],
+    "cons": ["Base tier pays only 0.5%", "Upper-tier requirements not published"],
+    "links": { "official": "https://wirexapp.com/" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/wirex-one", "verified": "2026-08-29" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "silver"
+  },
+  {
+    "slug": "bleap",
+    "name": "Bleap Card",
+    "brand": "Bleap",
+    "issuer": "Unlimit EU Ltd",
+    "network": "Mastercard",
+    "type": "debit",
+    "forms": ["virtual", "physical"],
+    "custody": "self-custodial",
+    "summary": "Self-custodial Mastercard for Europe with 0% FX, free ATM cash up to €400 a month and category cashback up to 20% on subscriptions.",
+    "cashback": { "basePct": 1, "maxPct": 20, "payout": "USDC", "note": "1% base, 2% restaurants and supermarkets, 3% rides and food delivery, up to 20% on small subscriptions. A fair-usage limit applies." },
+    "fees": { "annualUsd": 0, "fxPct": 0, "topUpPct": null, "atm": "Free up to €400 a month, then 2%", "other": [] },
+    "tiers": [
+      { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 1 }
+    ],
+    "coverage": { "countries": null, "scope": "EEA, with some Latin American markets", "examples": ["EEA", "Mexico"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "unknown", "EU": "yes" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["USDC"],
+    "perks": ["Category cashback", "Free ATM up to €400 a month"],
+    "pros": ["0% FX and no fees", "Category cashback beats flat 1%"],
+    "cons": ["Mainly Europe", "Fair-usage limit on cashback"],
+    "links": { "official": "https://www.bleap.finance/en-us/card/crypto-card" },
+    "sources": [
+      { "label": "SpendNode review", "url": "https://www.spendnode.io/crypto-cards/bleap/", "verified": "2026-08-03" },
+      { "label": "Bleap: card page", "url": "https://www.bleap.finance/en-us/card/crypto-card" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "black"
+  },
+  {
+    "slug": "tangem-pay",
+    "name": "Tangem Pay",
+    "brand": "Tangem",
+    "issuer": null,
+    "network": "Visa",
+    "type": "debit",
+    "forms": ["virtual", "physical", "metal"],
+    "custody": "unknown",
+    "summary": "Visa card from the Tangem hardware wallet team, with three tiers from free to $999 a year and up to 4% back in USDC.",
+    "cashback": { "basePct": 1, "maxPct": 4, "payout": "USDC", "note": "Basic 1% (cap $100/month), Plus 2% (cap $500), Prestige 4% (cap $1,000, coming soon)." },
+    "fees": { "annualUsd": 0, "fxPct": 1.5, "topUpPct": null, "atm": "4% on Basic, 2% on Plus, 1% on Prestige", "other": ["Plastic card delivery $17.44 in the US", "Virtual card replacement $5"] },
+    "tiers": [
+      { "name": "Basic", "feeUsdYear": 0, "cashbackPct": 1, "capMonthlyUsd": 100, "perks": ["Welcome offer: 5% on your first $500"] },
+      { "name": "Plus", "feeUsdYear": 359.88, "feeNote": "$29.99/month, free with $4,500 monthly spend or $65,000 in Yield Mode", "cashbackPct": 2, "capMonthlyUsd": 500, "perks": ["2 airport lounge visits a year"] },
+      { "name": "Prestige", "feeUsdYear": 999, "cashbackPct": 4, "capMonthlyUsd": 1000, "comingSoon": true, "perks": ["8 airport lounge visits a year", "Metal card"] }
+    ],
+    "coverage": { "countries": null, "scope": "Select regions worldwide", "examples": ["United States"], "markets": { "IN": "unknown", "AE": "unknown", "US": "yes", "GB": "unknown", "EU": "unknown" } },
+    "wallets": { "applePay": null, "googlePay": null },
+    "assets": ["USDC"],
+    "perks": ["Priority Pass lounges on Plus and Prestige"],
+    "pros": ["Clear, published tier pricing", "Free Basic tier with 1% back"],
+    "cons": ["4% ATM fee on Basic", "Prestige not launched yet"],
+    "links": { "official": "https://tangem.com/tangem-pay/" },
+    "sources": [
+      { "label": "Tangem: Pay tiers explained", "url": "https://tangem.com/en/blog/post/tangem-pay-tiers/", "verified": "2026-08-06" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "silver"
+  },
+  {
+    "slug": "ethena-pay",
+    "name": "Ethena Pay",
+    "brand": "Ethena",
+    "issuer": "Third National",
+    "network": "Visa",
+    "type": "spend",
+    "forms": ["virtual"],
+    "custody": "self-custodial",
+    "summary": "Virtual Visa card from Ethena with one of the highest flat rates around: 4% on your first $2,500 a month.",
+    "cashback": { "basePct": 4, "maxPct": 5, "payout": null, "note": "Standard: 4% on the first $2,500 a month, then 1% on the next $1,500. Pro and VIP raise both the rate and the limits." },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "About 1% card-network fee passed through at cost, no Ethena markup.", "topUpPct": null, "atm": "$1 + 0.65% per withdrawal", "other": [] },
+    "tiers": [
+      { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 4, "bands": [ { "uptoUsd": 2500, "pct": 4 }, { "uptoUsd": 4000, "pct": 1 }, { "uptoUsd": null, "pct": 0 } ] },
+      { "name": "Pro", "feeUsdYear": null, "cashbackPct": 4.5, "bands": [ { "uptoUsd": 8000, "pct": 4.5 }, { "uptoUsd": 10000, "pct": 2 }, { "uptoUsd": 12000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "requirement": "Not published" },
+      { "name": "VIP", "feeUsdYear": null, "cashbackPct": 5, "bands": [ { "uptoUsd": 20000, "pct": 5 }, { "uptoUsd": 30000, "pct": 2 }, { "uptoUsd": 40000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "requirement": "Not published" }
+    ],
+    "coverage": { "countries": 48, "scope": "48 countries incl. the UAE, Australia and Latin America", "examples": ["United Arab Emirates", "Australia", "Argentina", "Brazil"], "markets": { "IN": "unknown", "AE": "yes", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": [],
+    "perks": ["Works on Arbitrum, Ethereum, Optimism and Polygon"],
+    "pros": ["4% back on everyday spend with no annual fee", "No FX markup from Ethena"],
+    "cons": ["Rate drops sharply above $2,500 a month on Standard", "Virtual card only"],
+    "links": { "official": "https://ethena.fi/" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/ethena", "verified": "2026-09-29" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "gold"
+  },
+  {
+    "slug": "exa",
+    "name": "Exa Card",
+    "brand": "Exactly",
+    "issuer": "Third National",
+    "network": "Visa",
+    "type": "mixed",
+    "forms": ["virtual"],
+    "custody": "self-custodial",
+    "summary": "Self-custodial virtual Visa from Exactly, paid from USDC, with Visa purchase-protection perks and listed availability in India.",
+    "cashback": { "basePct": 1, "maxPct": 1, "payout": null, "note": "1% per cryptocards.so; DefiLlama does not publish a rate." },
+    "fees": { "annualUsd": 0, "fxPct": 3, "fxNote": "Global: up to 1.5% FX plus up to 1.5% cross-border. US: 1%.", "topUpPct": null, "atm": "$1 + 0.65% per withdrawal; up to $250 each", "other": [] },
+    "tiers": [
+      { "name": "Global", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 3 },
+      { "name": "United States", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 1 }
+    ],
+    "coverage": { "countries": 47, "scope": "47 countries incl. the UAE, India and Latin America", "examples": ["United Arab Emirates", "India", "Argentina", "Australia"], "markets": { "IN": "yes", "AE": "yes", "US": "yes", "GB": "unknown", "EU": "unknown" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["USDC"],
+    "perks": ["Concierge", "Extended warranty", "Purchase protection"],
+    "pros": ["Available in India and the UAE", "Self-custodial with Visa protections"],
+    "cons": ["Up to 3% FX outside the US", "Virtual card only"],
+    "links": { "official": "https://exactly.app/" },
+    "sources": [
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/exa-card", "verified": "2026-08-29" },
+      { "label": "cryptocards.so: India guide", "url": "https://www.cryptocards.so/en/crypto-cards/india", "verified": "2026-10-20" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "rose"
+  }
+]

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<defs>
+<linearGradient id="t" gradientUnits="userSpaceOnUse" x1="0" y1="64" x2="64" y2="0"><stop offset="0" stop-color="#E6E2D9"/><stop offset="0.4" stop-color="#F6F4EF"/><stop offset="0.55" stop-color="#FFFFFF"/><stop offset="0.7" stop-color="#EEEAE2"/><stop offset="1" stop-color="#DAD5CA"/></linearGradient>
+<linearGradient id="c" gradientUnits="userSpaceOnUse" x1="16" y1="50" x2="56" y2="22"><stop offset="0" stop-color="#7A3F31"/><stop offset="0.25" stop-color="#E8A891"/><stop offset="0.45" stop-color="#B9705C"/><stop offset="0.6" stop-color="#FFD9CB"/><stop offset="0.8" stop-color="#C9806B"/><stop offset="1" stop-color="#6B372A"/></linearGradient>
+<linearGradient id="o" gradientUnits="userSpaceOnUse" x1="10" y1="38" x2="38" y2="10"><stop offset="0" stop-color="#5E6368"/><stop offset="0.2" stop-color="#E4E7EA"/><stop offset="0.45" stop-color="#8F959B"/><stop offset="0.6" stop-color="#FFFFFF"/><stop offset="0.8" stop-color="#A4AAB0"/><stop offset="1" stop-color="#4E5357"/></linearGradient>
+<linearGradient id="v" gradientUnits="userSpaceOnUse" x1="16" y1="40" x2="38" y2="22"><stop offset="0" stop-color="#3A1A13"/><stop offset="0.4" stop-color="#7E4537"/><stop offset="0.6" stop-color="#5A2E24"/><stop offset="1" stop-color="#2E140F"/></linearGradient>
+<clipPath id="k"><rect x="16" y="22" width="40" height="28" rx="6"/></clipPath>
+</defs>
+<rect width="64" height="64" rx="15" fill="url(#t)"/>
+<rect x="0.5" y="0.5" width="63" height="63" rx="14.5" fill="none" stroke="#9A5340" stroke-opacity="0.35"/>
+<g transform="translate(-1 2)">
+<rect x="16" y="22" width="40" height="28" rx="6" fill="url(#c)"/>
+<rect x="16.4" y="22.4" width="39.2" height="27.2" rx="5.6" fill="none" stroke="#F0B5A0" stroke-opacity="0.55" stroke-width="0.8"/>
+<circle cx="24" cy="24" r="14" fill="url(#o)"/>
+<circle cx="24" cy="24" r="14" fill="url(#v)" clip-path="url(#k)"/>
+<circle cx="24" cy="24" r="11" fill="none" stroke="#000" stroke-opacity="0.18" stroke-width="0.9"/>
+<circle cx="24" cy="24" r="13.6" fill="none" stroke="#FFF" stroke-opacity="0.4" stroke-width="0.6"/>
+</g></svg>

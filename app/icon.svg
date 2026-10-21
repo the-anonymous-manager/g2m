@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="t" gradientUnits="userSpaceOnUse" x1="0" y1="64" x2="64" y2="0">
+      <stop offset="0" stop-color="#050506"/>
+      <stop offset="0.55" stop-color="#2a2b30"/>
+      <stop offset="1" stop-color="#0e0e10"/>
+    </linearGradient>
+    <linearGradient id="c" gradientUnits="userSpaceOnUse" x1="14" y1="52" x2="58" y2="20">
+      <stop offset="0" stop-color="#9a5340"/>
+      <stop offset="0.35" stop-color="#e8a891"/>
+      <stop offset="0.6" stop-color="#ffd9cb"/>
+      <stop offset="1" stop-color="#b9705c"/>
+    </linearGradient>
+    <linearGradient id="o" gradientUnits="userSpaceOnUse" x1="8" y1="38" x2="38" y2="8">
+      <stop offset="0" stop-color="#8f959b"/>
+      <stop offset="0.5" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#a4aab0"/>
+    </linearGradient>
+    <clipPath id="k"><rect x="14" y="20" width="44" height="31" rx="6"/></clipPath>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#t)"/>
+  <g transform="translate(-1 1)">
+    <rect x="14" y="20" width="44" height="31" rx="6" fill="url(#c)"/>
+    <circle cx="23" cy="22" r="15" fill="url(#o)"/>
+    <circle cx="23" cy="22" r="15" fill="#5a2e24" clip-path="url(#k)"/>
+  </g>
+</svg>
