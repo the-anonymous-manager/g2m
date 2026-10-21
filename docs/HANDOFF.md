@@ -84,7 +84,7 @@ compare, finder, calculator input checks, theme memory, share images, and a clea
 ## Still open
 
 1. Deploy on Vercel from this repo and connect the g2m.life domain (Akash has not done this yet).
-2. Set `NEXT_PUBLIC_CONTACT_EMAIL` (defaults to hello@g2m.life) and `NEXT_PUBLIC_TWITTER_HANDLE`.
+2. Set `NEXT_PUBLIC_CONTACT_EMAIL` (defaults to info@g2m.life) and `NEXT_PUBLIC_TWITTER_HANDLE`.
 3. Decide whether Tangem Pay stays listed.
 4. Add referral links per card when deals are signed.
 5. Re-check every card within 90 days of its `lastChecked` date (the validator warns).

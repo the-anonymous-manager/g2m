@@ -8,7 +8,7 @@ export const site = {
     'G2M is the crypto card directory. Every crypto card ranked on rewards, fees and where it actually works, from on-chain to checkout.',
   url: (process.env.NEXT_PUBLIC_SITE_URL || 'https://g2m.life').replace(/\/$/, ''),
   twitter: process.env.NEXT_PUBLIC_TWITTER_HANDLE || '',
-  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'hello@g2m.life',
+  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'info@g2m.life',
   utm: { source: 'g2m', medium: 'referral', campaign: 'directory' }
 } as const;
 
