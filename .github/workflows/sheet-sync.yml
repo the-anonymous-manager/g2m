@@ -1,0 +1,98 @@
+# Copies card data from the G2M Google Sheet to the site every hour (or now, with "Run workflow").
+# A change is only published when every card passes the same checks as `npm run build`.
+# If something in the sheet is wrong, the site stays as it is and an issue labelled "sheet-sync"
+# explains what to fix; it closes itself once the sheet is fixed.
+name: Sync cards from Google Sheet
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: sheet-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Fast check without installing anything: most hours nothing changed.
+      - name: Check the sheet
+        id: check
+        run: node scripts/sheet-sync.mjs --check
+
+      - name: Install
+        if: steps.check.outputs.changed == 'true'
+        run: npm ci
+
+      - name: Copy and check the cards
+        id: sync
+        if: steps.check.outputs.changed == 'true'
+        run: node scripts/sheet-sync.mjs
+
+      - name: Build the site
+        if: steps.check.outputs.changed == 'true'
+        run: npm run build
+
+      - name: Publish
+        if: steps.check.outputs.changed == 'true'
+        env:
+          SUMMARY: ${{ steps.sync.outputs.summary }}
+        run: |
+          git config user.name "G2M sheet sync"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cards.json data/sponsor.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Update cards from Google Sheet: ${SUMMARY:-card data}"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Close the problem report
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for n in $(gh issue list --label sheet-sync --state open --json number --jq '.[].number'); do
+            gh issue close "$n" --comment "The sheet is fine again and the site is up to date."
+          done
+
+      - name: Report the problem
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          {
+            echo "The latest change in the Google Sheet was **not** published. g2m.life still shows the previous data."
+            echo
+            if [ -f sheet-sync-report.md ]; then
+              echo "What to fix in the sheet:"
+              echo
+              cat sheet-sync-report.md
+            else
+              echo "The site did not build with the new data. Details are in the run log: $RUN_URL"
+            fi
+            echo
+            echo "Fix it in the sheet; the next hourly run (or **Actions → Sync cards from Google Sheet → Run workflow**) tries again, and this issue closes by itself once it works."
+          } > issue.md
+          gh label create sheet-sync --color B76E79 --description "Google Sheet sync problems" --force
+          n=$(gh issue list --label sheet-sync --state open --json number --jq '.[0].number')
+          if [ -n "$n" ]; then
+            gh issue edit "$n" --body-file issue.md
+          else
+            gh issue create --title "Card sheet: a change could not be published" --label sheet-sync --body-file issue.md
+          fi

@@ -7,7 +7,9 @@
     "dev": "next dev",
     "build": "npm run validate && next build",
     "start": "next start",
-    "validate": "node scripts/validate-cards.mjs"
+    "validate": "node scripts/validate-cards.mjs",
+    "sheet:sync": "node scripts/sheet-sync.mjs",
+    "sheet:export": "node scripts/sheet-export.mjs"
   },
   "engines": {
     "node": ">=18.18"
