@@ -831,42 +831,69 @@ body::before {
   flex-direction: column;
   gap: 24px;
 }
-.hero-art {
+/* Featured spot: the sponsor while booked, otherwise the top-ranked card */
+.hero-feature {
   flex: 1 1 380px;
   min-width: 0;
-  position: relative;
-  height: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.hero-art .card-art {
-  position: absolute;
-  width: 78%;
-  max-width: 360px;
+.hero-feature .card-art {
+  width: 76%;
+  max-width: 340px;
   box-shadow: var(--card-shadow);
+  transform: rotate(-4deg);
 }
-.hero-art .c1 {
-  top: 6%;
-  left: 0;
-  transform: rotate(-14deg);
+.hero-feature-panel {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin-top: -14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: var(--shadow);
 }
-.hero-art .c2 {
-  top: 24%;
-  left: 10%;
-  transform: rotate(-5deg);
+.hero-feature-head,
+.hero-feature-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
-.hero-art .c3 {
-  top: 44%;
-  left: 20%;
-  transform: rotate(5deg);
+.hero-feature-title .h3 {
+  margin: 0;
+}
+.hero-feature-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+.hero-feature-facts dt {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+}
+.hero-feature-facts dd {
+  margin: 2px 0 0;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+.hero-feature-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .hero-art .card-art {
+  .hero-feature .card-art {
     transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-  .hero-art:hover .c1 {
-    transform: rotate(-18deg) translate(-12px, -8px);
-  }
-  .hero-art:hover .c3 {
-    transform: rotate(8deg) translate(12px, 6px);
+  .hero-feature:hover .card-art {
+    transform: rotate(-7deg) translateY(-6px);
   }
 }
 @media (max-width: 640px) {
@@ -874,8 +901,8 @@ body::before {
     padding-block: 40px 24px;
     gap: 24px;
   }
-  .hero-art {
-    height: 280px;
+  .hero-feature-panel {
+    margin-top: -8px;
   }
 }
 

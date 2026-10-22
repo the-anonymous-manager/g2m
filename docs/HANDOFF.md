@@ -108,7 +108,10 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   that fee larger than the cashback, plus flat and small-purchase fees, counts in the fees section. Small-purchase
   fees live in `fees.smallPurchase` (feeUsd, underUsd, foreignOnly) and the calculator applies them at the
   visitor's typical purchase size. This moved MEXC from #1 to #2 (Ethena Pay #1).
-  No paid placement, ever.
+  No paid rankings, ever. Since 22 Oct 2026 the home page hero is a "Featured" spot: a sponsor booked in
+  `data/sponsor.json` (slug, start, end; labelled Sponsored, shows its real score and rank, clicks tagged
+  utm_campaign=sponsored), otherwise the top-ranked card. The home page re-checks hourly, so bookings start and end
+  on their dates without a deploy. Move Vercel to Pro before the first paid booking (Hobby is non-commercial).
 - Plausible analytics events when `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` is set.
 
 Tested before handoff: every route, light and dark, desktop and phone widths (no sideways scrolling), filters,

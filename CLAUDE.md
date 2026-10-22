@@ -31,6 +31,8 @@ and confirm what changed on the site (not which files moved).
 - Scores and ranks are computed (`lib/score.ts`). Never edit a rank or score by hand, and never change
   a card's position because of a referral deal.
 - Run `npm run validate` and fix every error before committing.
+- Sponsored spot: book it in `data/sponsor.json` (`slug`, `start`, `end` as YYYY-MM-DD; `slug: null` = none).
+  It is always labelled Sponsored and never changes a score or rank.
 
 ## Brand
 

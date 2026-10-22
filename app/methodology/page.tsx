@@ -8,7 +8,7 @@ import { Eyebrow } from '@/components/bits';
 export const metadata: Metadata = {
   title: 'How we score crypto cards',
   description:
-    'The G2M score explained: rewards 40, fees 30, coverage 20, control 10. Same rules for every card, no paid placement.',
+    'The G2M score explained: rewards 40, fees 30, coverage 20, control 10. Same rules for every card, no paid rankings.',
   alternates: { canonical: '/methodology' }
 };
 
@@ -96,10 +96,15 @@ export default function MethodologyPage() {
           are applied where published. Rewards in tokens or points are counted at face value.
         </p>
 
-        <h2>How G2M makes money</h2>
+        <h2 id="money">How G2M makes money</h2>
         <p>
-          Some “Get the card” buttons may use referral links. A referral never changes a card&apos;s score, rank or
-          position, and cards without one are ranked exactly the same way.
+          Some “Get the card” buttons may use referral links, and card issuers can pay for the Featured spot at the top
+          of the home page. That spot is always labelled Sponsored, shows the card&apos;s real G2M score and rank, and runs
+          for a fixed period. When no one has booked it, it shows the top-ranked card.
+        </p>
+        <p>
+          Neither a referral nor a sponsorship ever changes a card&apos;s score, rank or position in the rankings, and cards
+          without either are ranked exactly the same way.
         </p>
 
         <h2>Found a mistake?</h2>
