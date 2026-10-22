@@ -83,7 +83,7 @@ export default function MethodologyPage() {
           update sooner when an issuer changes its terms.
         </p>
 
-        <h2>India, UAE and other regions</h2>
+        <h2>Where each card works</h2>
         <p>
           For India, the UAE, the US, the UK and the EU we mark each card as available, not available, or not confirmed.
           “Not confirmed” means the issuer has not said either way, so check their country list before you apply.

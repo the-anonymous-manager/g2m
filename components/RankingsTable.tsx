@@ -33,12 +33,17 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
   const { market: myMarket, ready } = useRegion();
   const firstRun = useRef(true);
   const appliedRegion = useRef(false);
+  // True while the region filter is the one we detected, not one the viewer picked.
+  const [autoMarket, setAutoMarket] = useState(false);
 
   // Default the region filter to the viewer's market once, unless the link already set one.
   useEffect(() => {
     if (!ready || appliedRegion.current || hadMarketParam) return;
     appliedRegion.current = true;
-    if (myMarket) setF((prev) => ({ ...prev, market: myMarket }));
+    if (myMarket) {
+      setF((prev) => ({ ...prev, market: myMarket }));
+      setAutoMarket(true);
+    }
   }, [ready, myMarket, hadMarketParam]);
 
   // Keep the URL in sync so any view can be shared and reopened exactly.
@@ -47,10 +52,11 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
       firstRun.current = false;
       return;
     }
-    const qs = serializeFilters(f);
+    // A detected region stays out of the URL, so a shared link follows each reader's own location.
+    const qs = serializeFilters(autoMarket ? { ...f, market: '' } : f);
     const url = `${window.location.pathname}${qs ? `?${qs}` : ''}`;
     window.history.replaceState(window.history.state, '', url);
-  }, [f]);
+  }, [f, autoMarket]);
 
   const visible = useMemo(() => sortRows(filterRows(rows, f), f.sort), [rows, f]);
   const set = <K extends keyof Filters>(key: K, value: Filters[K]) => setF((prev) => ({ ...prev, [key]: value }));
@@ -130,7 +136,10 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
               id="f-market"
               className="select"
               value={f.market}
-              onChange={(e) => set('market', e.target.value as Market | '')}
+              onChange={(e) => {
+                setAutoMarket(false);
+                set('market', e.target.value as Market | '');
+              }}
             >
               <option value="">All regions</option>
               {MARKETS.map((m) => (

@@ -8,12 +8,10 @@ import { CardArt } from '@/components/CardArt';
 import { MarketBadge, ScorePill } from '@/components/bits';
 import { useRegion } from '@/components/RegionContext';
 
-// G2M's home markets, shown until we know where the visitor lives (or when they are elsewhere).
-const FALLBACK: Market[] = ['IN', 'AE'];
-
 export function HomeLeaderboard({ rows }: { rows: CardRow[] }) {
   const { market, ready } = useRegion();
-  const markets = ready && market ? [market] : FALLBACK;
+  // The visitor's market when we know it; otherwise how many countries each card covers.
+  const local: Market | null = ready ? market : null;
 
   return (
     <div className="table-wrap">
@@ -26,11 +24,7 @@ export function HomeLeaderboard({ rows }: { rows: CardRow[] }) {
             <th scope="col">Cashback</th>
             <th scope="col">Annual fee</th>
             <th scope="col">FX fee</th>
-            {markets.map((m) => (
-              <th scope="col" key={m}>
-                {MARKET_LABELS[m]}
-              </th>
-            ))}
+            <th scope="col">{local ? MARKET_LABELS[local] : 'Countries'}</th>
           </tr>
         </thead>
         <tbody>
@@ -49,11 +43,13 @@ export function HomeLeaderboard({ rows }: { rows: CardRow[] }) {
               <td className="num">{cashbackLabel(c.cashback.basePct, c.cashback.maxPct)}</td>
               <td className="num">{usd(c.fees.annualUsd, '—')}</td>
               <td className="num">{pct(c.fees.fxPct, '—')}</td>
-              {markets.map((m) => (
-                <td key={m}>
-                  <MarketBadge value={c.coverage.markets[m]} market={m} short />
-                </td>
-              ))}
+              <td className={local ? undefined : 'num'}>
+                {local ? (
+                  <MarketBadge value={c.coverage.markets[local]} market={local} short />
+                ) : (
+                  <span title={c.coverage.scope}>{c.coverage.countries ?? '—'}</span>
+                )}
+              </td>
             </tr>
           ))}
         </tbody>

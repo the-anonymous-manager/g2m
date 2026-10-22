@@ -9,6 +9,13 @@ Akash builds a name on X as a KOL on crypto cards and stablecoin payments, with 
 retention angle. g2m.life is his crypto card directory, like CoinMarketCap or CoinGecko but for crypto cards:
 "a market for spenders who want to learn about better card rewards".
 
+G2M is a **global** brand (Akash, 22 Oct 2026). The site favours no market: visitors see their own market, and
+anyone outside the five tracked markets sees all regions. India and the UAE stay Akash's angle on X, not on the site.
+
+Location: middleware refreshes the `g2m_cc` country cookie from Vercel's geo header on every page load (so VPNs and
+travel apply at once); the browser timezone is only used when there is no header. A detected region is never written
+into the rankings URL; only a region the visitor picks is, so shared links follow each reader's location.
+
 ## Brand decisions (locked)
 
 | Item | Decision |
@@ -94,8 +101,8 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
 
 ## What version 1 does
 
-- Home: headline, search, Featured spot, top 5 (its market column follows the visitor's location; India and UAE
-  when unknown), browse chips, cards confirmed for India and the UAE, links to the tools.
+- Home: headline, search, Featured spot, top 5 (its last column is the visitor's market, or a country count when
+  unknown), browse chips, cards confirmed in all five markets (the visitor's first), links to the tools.
 - Rankings (`/cards`): sort by any column incl. # (overall rank; shift-click for a second sort), filters for region, custody, network,
   minimum cashback, no annual fee, physical, metal, lounge. Every view has its own URL, with "Post on X" and
   "Copy link". The region defaults to where the visitor is. Pick up to 3 cards to compare. On phones it shows a list.
