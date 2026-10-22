@@ -79,8 +79,9 @@ Notes for the next data check:
 - **Karta**: Karta.io is the right Karta (Akash, 22 Oct 2026). Karta at conkarta.com, #4 on DefiLlama, stays off
   the site: it is a US charge card backed by brokerage assets, with no crypto involved.
 - **Gate Card**: removed by Akash on 22 Oct 2026. Do not add it back unless he asks.
-- **Tria**: Pro ($109/year) and Max ($250/year) prices and perks come from screenshots of the Tria app that Akash
-  sent on 22 Oct 2026; the website does not publish them. The Lite price is still unknown.
+- **Tria**: prices (Lite $20, Pro $109, Max $250 a year) and perks come from screenshots of the Tria app that Akash
+  sent on 22 Oct 2026; the website does not publish them. The app says Lite pays 0.5% after $1,000 a month; the
+  help center still says 1%. The app was used.
 - **Kolo**: listed, but Akash will send more details. Kolo does not publish its fees, and DefiLlama reportedly
   shows 1% cashback after the first month against Kolo's advertised 2%.
 - XPL (Plasma) and COCA token ids for live staking values were not added (CoinGecko lookup was throttled).
@@ -112,7 +113,7 @@ compare, finder, calculator input checks, theme memory, share images, and a clea
 
 1. Deploy on Vercel from this repo and connect the g2m.life domain (Akash has not done this yet).
 2. Settings now default to info@g2m.life and @0akash0x; override them on Vercel only if they change.
-3. Update Kolo with the details Akash sends; confirm Tria's Lite price.
+3. Update Kolo with the details Akash sends.
 4. Add referral links per card when deals are signed.
 5. Re-check every card within 90 days of its `lastChecked` date (the validator warns).
 

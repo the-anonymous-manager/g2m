@@ -692,10 +692,10 @@
     "forms": ["virtual", "physical", "metal"],
     "custody": "self-custodial",
     "summary": "Self-custodial Visa from Tria that spends from 1,000+ tokens, with cashback from 1.5% to 6% depending on your membership.",
-    "cashback": { "basePct": 1.5, "maxPct": 6, "payout": null, "note": "Lite 1.5% and Pro 4.5% on the first $1,000 a month; Max 6% on the first $2,000. 1% after that." },
-    "fees": { "annualUsd": null, "fxPct": 0, "fxNote": "Tria's help center lists zero FX fees on every tier, but also says fees vary by region and card type.", "topUpPct": 0, "atm": "Pro and Max: up to $750 a day, fee not published. No ATM access on Lite.", "other": [] },
+    "cashback": { "basePct": 1.5, "maxPct": 6, "payout": null, "note": "Lite: 1.5% on the first $1,000 a month, then 0.5%. Pro: 4.5% on the first $1,000, then 1%. Max: 6% on the first $2,000, then 1%." },
+    "fees": { "annualUsd": 20, "fxPct": 0, "fxNote": "Tria's help center lists zero FX fees on every tier, but also says fees vary by region and card type.", "topUpPct": 0, "atm": "Pro and Max: up to $750 a day, fee not published. No ATM access on Lite.", "other": [] },
     "tiers": [
-      { "name": "Lite", "feeUsdYear": null, "cashbackPct": 1.5, "bands": [ { "uptoUsd": 1000, "pct": 1.5 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "perks": ["Virtual card"] },
+      { "name": "Lite", "feeUsdYear": 20, "cashbackPct": 1.5, "bands": [ { "uptoUsd": 1000, "pct": 1.5 }, { "uptoUsd": null, "pct": 0.5 } ], "fxPct": 0, "perks": ["Virtual Visa Platinum card", "1.5% with no cap on Tria Travel (hotels, rentals; not flights)"] },
       { "name": "Pro", "feeUsdYear": 109, "cashbackPct": 4.5, "bands": [ { "uptoUsd": 1000, "pct": 4.5 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "$109 a year", "perks": ["Plastic Visa Signature card", "4.5% with no cap on Tria Travel (hotels, rentals; not flights)", "Lounge access", "Visa Luxury Hotels and Visa concierge", "ATM up to $750 a day"] },
       { "name": "Max", "feeUsdYear": 250, "cashbackPct": 6, "bands": [ { "uptoUsd": 2000, "pct": 6 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "$250 a year", "perks": ["Metal Visa Signature card", "6% with no cap on Tria Travel (hotels, rentals; not flights)", "Lounge access", "Visa Luxury Hotels and Visa concierge", "ATM up to $750 a day"] }
     ],
@@ -704,11 +704,11 @@
     "assets": [],
     "perks": ["Price protection up to $2,000", "Purchase protection up to $10,000", "Spend up to $1M a day on Pro and Max"],
     "pros": ["No FX or deposit fees on any tier", "1.5% on the entry tier, up to 6% on Max", "Lounge access on Pro and Max"],
-    "cons": ["Pro costs $109 and Max $250 a year; the Lite price is not shown", "Higher rates stop after $1,000 to $2,000 a month", "Country list not published"],
+    "cons": ["Every tier has a yearly fee: $20 Lite, $109 Pro, $250 Max", "Higher rates stop after $1,000 to $2,000 a month (0.5% after that on Lite)", "Country list not published"],
     "links": { "official": "https://tria.so/" },
     "sources": [
       { "label": "Tria Help Center: What are Tria Cards?", "url": "https://intercom.help/tria/en/articles/13513481-what-are-tria-cards", "verified": "2026-10-22" },
-      { "label": "Tria app: Pro and Max membership screens", "url": "https://tria.so/", "verified": "2026-10-22" }
+      { "label": "Tria app: Lite, Pro and Max membership screens", "url": "https://tria.so/", "verified": "2026-10-22" }
     ],
     "lastChecked": "2026-10-22",
     "metal": "black"
