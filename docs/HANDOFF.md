@@ -110,6 +110,12 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
 Tested before handoff: every route, light and dark, desktop and phone widths (no sideways scrolling), filters,
 compare, finder, calculator input checks, theme memory, share images, and a clean `npm ci && npm run build`.
 
+## Security
+
+`package.json` pins PostCSS to 8.5.31 or later with an npm `overrides` entry (22 Oct 2026). Next 15 ships PostCSS
+8.4.31, which has known advisories; npm's own fix was a jump to Next 16. The override clears `npm audit` while
+staying on Next 15. Remove it when the site moves to a Next version that ships a patched PostCSS.
+
 ## Still open
 
 1. Deploy on Vercel from this repo and connect the g2m.life domain (Akash has not done this yet).
