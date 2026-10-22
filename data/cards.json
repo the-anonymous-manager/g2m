@@ -333,37 +333,6 @@
     "metal": "gunmetal"
   },
   {
-    "slug": "gnosis-pay",
-    "name": "Gnosis Pay Card",
-    "brand": "Gnosis Pay",
-    "issuer": "Monavate",
-    "network": "Visa",
-    "type": "debit",
-    "forms": ["physical"],
-    "custody": "self-custodial",
-    "summary": "The original self-custodial Visa card, spending from a Gnosis Safe. Cashback in GNO grows with how much GNO you hold.",
-    "cashback": { "basePct": 1, "maxPct": 5, "payout": "GNO", "note": "1% holding 0.1 GNO, up to 4% holding 100 GNO, +1% with the OG NFT." },
-    "fees": { "annualUsd": null, "fxPct": 0, "topUpPct": null, "atm": "5 free a month (up to 200), then 2%", "other": ["Top-up fee 4.99 EURe / GBPe / USDCe", "Free card order and shipping"] },
-    "tiers": [
-      { "name": "Hold 0.1 GNO", "feeUsdYear": 0, "cashbackPct": 1, "stake": { "token": "GNO", "amount": 0.1, "coingeckoId": "gnosis" } },
-      { "name": "Hold 1 GNO", "feeUsdYear": 0, "cashbackPct": 2, "stake": { "token": "GNO", "amount": 1, "coingeckoId": "gnosis" } },
-      { "name": "Hold 10 GNO", "feeUsdYear": 0, "cashbackPct": 3, "stake": { "token": "GNO", "amount": 10, "coingeckoId": "gnosis" } },
-      { "name": "Hold 100 GNO", "feeUsdYear": 0, "cashbackPct": 4, "stake": { "token": "GNO", "amount": 100, "coingeckoId": "gnosis" } }
-    ],
-    "coverage": { "countries": 35, "scope": "EU, UK, Switzerland and Latin America", "examples": ["Austria", "Belgium", "Switzerland", "Argentina", "Brazil"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "yes", "EU": "yes" } },
-    "wallets": { "applePay": true, "googlePay": true },
-    "assets": ["EURe", "GBPe", "USDCe"],
-    "perks": ["Spends directly from a Safe smart account"],
-    "pros": ["No FX fee", "Truly self-custodial"],
-    "cons": ["Cashback needs GNO holdings", "Physical card only"],
-    "links": { "official": "https://gnosispay.com/" },
-    "sources": [
-      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/gnosis-pay", "verified": "2026-08-30" }
-    ],
-    "lastChecked": "2026-10-22",
-    "metal": "champagne"
-  },
-  {
     "slug": "jupiter",
     "name": "Jupiter Card",
     "brand": "Jupiter",

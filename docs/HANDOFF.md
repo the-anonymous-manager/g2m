@@ -30,11 +30,18 @@ Bitget Wallet was re-read on its own page (52 countries; Card Map also had Singa
 Lists that only exist on DefiLlama were not imported, so "confirmed" always means the issuer said so. Changes this
 caused: Bitget now covers the UK and EEA (was "Asia-Pacific only"); Wirex's UAE is now "not confirmed" (Wirex's list
 leaves it out, an older source said yes, and Wirex's list page is offline); MetaMask has paused new US and UK sign-ups.
-Still without an issuer list: KAST (in-app only), Gnosis Pay, Coinbase One, Avalanche, Solayer, Bleap, Tangem Pay,
-Kolo, Karta.io, Tuyo, and Tria (one country only).
+Still without an issuer list: KAST (in-app only), Coinbase One, Avalanche, Solayer, Bleap, Tangem Pay, Kolo,
+Karta.io, Tuyo, and Tria (one country only).
 
-**Gnosis Pay is closing** its own card on 20 Dec 2026 and ended GNO cashback on 30 Sep 2026 (per Gnosis Pay's help
-center, found via Card Map). G2M still shows the old 1-5% GNO cashback: update or remove the card.
+Gnosis Pay was removed (Akash, 22 Oct 2026): it closes its own card on 20 Dec 2026 and ended GNO cashback on
+30 Sep 2026, per its help center. 26 cards remain.
+
+Motion (Akash asked for a zerobrand.xyz feel, 22 Oct 2026), all in `components/motion/`, no extra libraries:
+a metal-square cursor that turns into a card outline over links (mouse/trackpad only); a drifting mono glyph field
+behind the home hero that lights up rose gold around the cursor (30 fps cap, paused off-screen, still frame on
+touch screens); a staggered blur-in entrance for the hero; blocks that rise and un-blur as they scroll in; the
+Featured card tilting toward the cursor with light across the metal; magnetic metal buttons; counting stats.
+All of it switches off for visitors whose system asks for reduced motion, and content never depends on it.
 
 ## Brand decisions (locked)
 

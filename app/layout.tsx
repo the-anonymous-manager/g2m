@@ -5,6 +5,7 @@ import { Footer } from '@/components/Footer';
 import { Analytics } from '@/components/Analytics';
 import { RegionProvider } from '@/components/RegionContext';
 import { themeInitScript } from '@/components/ThemeToggle';
+import { MotionRoot, motionInitScript } from '@/components/motion/MotionRoot';
 import { site } from '@/lib/site';
 import { lastUpdated } from '@/lib/cards';
 
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: motionInitScript }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
@@ -65,6 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main id="main">{children}</main>
           <Footer updated={lastUpdated()} />
         </RegionProvider>
+        <MotionRoot />
         <Analytics />
       </body>
     </html>
