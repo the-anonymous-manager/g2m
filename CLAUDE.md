@@ -52,5 +52,5 @@ and confirm what changed on the site (not which files moved).
 - `app/` pages: home, `/cards`, `/cards/[slug]`, `/compare`, `/finder`, `/calculator`, `/methodology`, `/submit`
 - `app/go/[slug]` outbound redirect with UTM tags
 - `components/` UI, `lib/` logic (score, table engine, calculator, finder, regions), `middleware.ts` geo cookie
-- `components/motion/` cursor, hero glyph field, scroll reveals, tilt; all off under reduced motion
+- `components/motion/` hero glyph field, scroll reveals, tilt; all off under reduced motion (no custom cursor)
 - Settings via env vars, see `.env.example` and `README.md`
