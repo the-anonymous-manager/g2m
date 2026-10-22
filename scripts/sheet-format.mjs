@@ -180,10 +180,16 @@ export function tablesToCards(tables) {
     }
     const header = rows[0].map(str);
     for (const h of cols) if (!header.includes(h)) errors.push(`The "${tab}" tab has no "${h}" column.`);
-    return rows
+    const found = rows
       .slice(1)
       .map((cells, i) => ({ row: i + 2, get: (h) => cells[header.indexOf(h)] ?? '' }))
       .filter((r) => header.some((h) => str(r.get(h))));
+    // Text starting with = or + is read by Google as a formula; a broken one shows as #ERROR! and similar.
+    for (const r of found)
+      for (const h of header)
+        if (/^#(ERROR!|REF!|N\/A|VALUE!|NAME\?|DIV\/0!|NUM!|NULL!)/.test(str(r.get(h))))
+          errors.push(`${tab} row ${r.row}, column "${h}": shows ${str(r.get(h))}. Text starting with + or = needs an apostrophe in front, e.g. '+1% back.`);
+    return found;
   };
   // Runs one field's conversion, turning a bad cell into a message instead of an exception.
   const cell = (tab, r, col, fn) => {

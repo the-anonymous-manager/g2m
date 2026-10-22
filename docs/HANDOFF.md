@@ -164,8 +164,9 @@ Akash picked this first for version 2 so he can edit cards himself. The Google S
 `.github/workflows/sheet-sync.yml` copies it to `data/cards.json` and `data/sponsor.json` every hour, publishing
 automatically when every card passes the build checks (Akash chose automatic over approving each change). Bad
 data never reaches the site: the run stops and opens a `sheet-sync` issue listing the tab, card and column to fix.
-Akash creates the sheet himself (22 Oct 2026); Claude then fills it from `npm run sheet:export`, sets every cell to
-plain text, and records the sheet id and tab ids (gid) in `data/sheet.json`. The sheet must be shared
+Akash created the sheet "G2M Card data" (https://docs.google.com/spreadsheets/d/1MEa-pk0sYr6EJWT6nLHNJcl68EwSLg4sf_sjkKtA0pw)
+on 22 Oct 2026; Claude filled it from `npm run sheet:export`, set every cell to plain text, added a "How to edit"
+tab, and recorded the tab ids (gid) in `data/sheet.json`. The live sheet was checked to match cards.json exactly. The sheet must be shared
 "Anyone with the link can view". Converter: `scripts/sheet-format.mjs`; it round-trips all cards unchanged.
 
 ## Security

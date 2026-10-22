@@ -67,7 +67,8 @@ in sheet terms (tab, card, column). It closes itself when a later run succeeds.
 - Tabs: Cards (one row per card), Tiers, Country lists, Sources (rows point at a card by its Card ID), Sponsor.
 - Empty cell = not published. Lists in one cell: one item per line; country codes, forms and assets with commas.
 - Tier cashback that changes with spend: `2.5% up to $10000; 2%`.
-- Cells are plain text, so `2026-10-22` and `1.5%` stay exactly as typed.
+- Cells are plain text, so `2026-10-22` and `1.5%` stay exactly as typed. Text starting with `+` or `=` still needs
+  an apostrophe in front (`'+1% back`), or Google treats it as a formula; the sync rejects `#ERROR!` cells.
 - `npm run sheet:export -- <folder>` writes the current data as one CSV per tab (to refill the sheet);
   `npm run sheet:sync` pulls the sheet locally.
 
