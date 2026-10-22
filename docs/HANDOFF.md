@@ -13,7 +13,8 @@ The owner, Akash, is not a developer: explain in plain words and do the technica
 - Real card pictures come from the sheet's "Card image" column (none added yet).
 - Outreach to card issuers (email, DM, per-card gaps, how to sell the Sponsored spot) is in the Claude Doc
   "G2M card issuer outreach": https://claude.ai/artifact/96NsBhL6naMwqvFJctKpt5
-- Pull requests so far: #1 to #9 merged; #10 (small display bugs, see "Bug sweep") waiting for Akash to merge.
+- Pull requests so far: #1 to #9 merged; #10 (small display bugs, and every country in the finder and calculator)
+  waiting for Akash to merge.
 
 ## Who it is for
 
@@ -208,7 +209,25 @@ sections) plus screenshots read by eye. Fixed:
   to the current page and fades its edge, "Custody not published" wording, "#1 of 26 worldwide" on the Featured spot.
 
 Known, left for later (bigger than small bugs): the tiers table on card pages and the Compare table still scroll
-sideways on phones; the Card finder and calculator offer only the five markets plus "Somewhere else".
+sideways on phones.
+
+## Every country in the finder and calculator, with FX at home (22 Oct 2026, pull request #10)
+
+Akash: the finder and calculator must offer every country, because someone in the US or EU spending dollars or
+euros pays no FX fee. Both tools now list all 250 countries (starting on the visitor's own). Each country has an
+everyday currency (`lib/currencies.mjs`). Cards carry `fees.fxByCurrency` (currencies with no or a lower FX fee,
+sheet column "No-FX currencies", e.g. `USD 0; EUR 0`) and `fees.fxHome` (billed in the holder's own currency,
+MetaMask). `lib/fx.ts` works out FX on spending at home: none when the card bills in that currency, the card's FX
+fee otherwise, and the FX fee when the issuer does not say (Solayer, COCA). The calculator charges FX on home
+spending plus the "other currencies" share; the finder uses country scores and mentions FX at home.
+
+Research (22 Oct 2026, issuer pages only; Card Map used for leads): 17 cards bill in US dollars only; ether.fi and
+Kolo are free in USD and EUR; Crypto.com, Krak and Bybit bill in the region's currency (union stored); Nexo charges
+0.2% on EEA, UK and Swiss currencies; Wirex and Bleap charge no FX at all. FX figures corrected from issuer pages,
+which moved ranks: Crypto.com 0% to 3% (US non-USD on the lower tiers; #5 to #15), Coinbase One not published to 0%
+(#18 to #11), Karta not published to 1% (#26 to #21), Avalanche US tier 1% to 2% (card agreement). Known gaps the
+single FX number does not capture: cross-border fees on USD at foreign merchants (Tuyo, Exa, Avalanche, US Krak,
+MetaMask free tier) and per-region card currencies (stored as a union of currencies).
 
 ## Security
 
@@ -232,10 +251,10 @@ staying on Next 15. Remove it when the site moves to a Next version that ships a
 
 ## Ideas for version 2 (not decided, ask Akash)
 
-Done so far: edit card data from a Google Sheet, real card pictures, small bug sweep.
+Done so far: edit card data from a Google Sheet, real card pictures, small bug sweep, every country in the finder
+and calculator with FX at home.
 
 - Add the radar cards above, then grow towards 50+ cards.
-- Card finder and calculator for every country (they use the five markets today).
 - Phone-friendly tiers and Compare tables.
 - Show the live USD value of staking requirements (each tier's `stake.coingeckoId` is already stored for this).
 - "X vs Y" comparison pages for SEO, and short guides (custodial vs self-custodial, how card fees work).

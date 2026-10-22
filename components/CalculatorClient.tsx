@@ -63,6 +63,20 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry }: 
       <form className="panel panel-pad stack" style={{ gap: 16 }} onSubmit={(e) => e.preventDefault()}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', gap: 14 }}>
           <div className="field">
+            <label className="field-label" htmlFor="c-country">
+              Where you live
+            </label>
+            <select id="c-country" className="select" value={country} onChange={(e) => setCountry(isCountry(e.target.value) ? e.target.value : '')}>
+              <option value="">All countries</option>
+              {COUNTRIES.map((c) => (
+                <option key={c.code} value={c.code}>
+                  {c.name}
+                  {c.code === myCountry ? ' (your location)' : ''}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="field">
             <label className="field-label" htmlFor="c-spend">
               Monthly card spend (USD)
             </label>
@@ -116,20 +130,6 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry }: 
             <span id="c-ticket-help" className="faint" style={{ fontSize: 12, color: ticketErr ? 'var(--bad)' : undefined }}>
               {ticketErr ? 'Enter an amount from 1 to 10,000' : 'Used for per-purchase fees'}
             </span>
-          </div>
-          <div className="field">
-            <label className="field-label" htmlFor="c-country">
-              Where you live
-            </label>
-            <select id="c-country" className="select" value={country} onChange={(e) => setCountry(isCountry(e.target.value) ? e.target.value : '')}>
-              <option value="">All countries</option>
-              {COUNTRIES.map((c) => (
-                <option key={c.code} value={c.code}>
-                  {c.name}
-                  {c.code === myCountry ? ' (your location)' : ''}
-                </option>
-              ))}
-            </select>
           </div>
         </div>
         <label className="check">
