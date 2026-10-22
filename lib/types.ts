@@ -33,6 +33,7 @@ export type CardRow = Pick<
   | 'tiers'
   | 'wallets'
   | 'metal'
+  | 'image'
   | 'score'
   | 'rank'
   | 'perks'
@@ -53,6 +54,7 @@ export function toRow(c: Card): CardRow {
     tiers: c.tiers,
     wallets: c.wallets,
     metal: c.metal,
+    image: c.image,
     score: c.score,
     rank: c.rank,
     perks: c.perks

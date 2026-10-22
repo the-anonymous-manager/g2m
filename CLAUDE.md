@@ -36,6 +36,8 @@ and confirm what changed on the site (not which files moved).
   (see its data-official.js): use the issuer URL it cites as the source, never an aggregator-only list.
 - A tier only offered in some countries gets `countries` (e.g. `["TH"]`, `"EEA"` for all 30 EEA countries), or
   `exceptCountries` (e.g. a "Global" tier when the US has its own). Country scores use these.
+- Real card pictures: "Card image" link in the sheet (`image.source`); the sync stores the files in
+  `public/card-images/`. Only use issuer press-kit images or ones an issuer sent; never copy from other sites.
 - Referral links go in `links.affiliate`; all "Get the card" buttons use `/go/<slug>`, which picks it up.
 - Scores and ranks are computed (`lib/score.ts`). Never edit a rank or score by hand, and never change
   a card's position because of a referral deal.

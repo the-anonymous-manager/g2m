@@ -69,6 +69,10 @@ in sheet terms (tab, card, column). It closes itself when a later run succeeds.
 - Tier cashback that changes with spend: `2.5% up to $10000; 2%`.
 - Cells are plain text, so `2026-10-22` and `1.5%` stay exactly as typed. Text starting with `+` or `=` still needs
   an apostrophe in front (`'+1% back`), or Google treats it as a formula; the sync rejects `#ERROR!` cells.
+- Card pictures: paste a link in "Card image" (Cards tab). The sync downloads it once (Google Drive and Dropbox
+  share links work), trims a plain border, and saves `public/card-images/<slug>-<hash>.webp` (1000 x 631),
+  `-sm.webp` (184 x 116) and `.png` (for share images). Card-shaped pictures fill the card; upright ones are fitted
+  inside. A link that is broken or not a picture stops the sync with a `sheet-sync` issue. No link = metal art.
 - `npm run sheet:export -- <folder>` writes the current data as one CSV per tab (to refill the sheet);
   `npm run sheet:sync` pulls the sheet locally.
 

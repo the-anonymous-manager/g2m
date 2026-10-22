@@ -5,7 +5,13 @@
 // "Card ID" (the slug). Empty cell = not published (null). Lists inside one cell are one item per line,
 // except country codes, card forms and assets, which are separated by commas.
 
+import { createHash } from 'node:crypto';
+
 export const TABS = ['Cards', 'Tiers', 'Country lists', 'Sources', 'Sponsor'];
+
+/** Where the site keeps a card's downloaded picture. Named after the link, so a new link means a new file. */
+export const imageFile = (slug, source) =>
+  `/card-images/${slug}-${createHash('sha1').update(source).digest('hex').slice(0, 8)}.webp`;
 
 // ---------- Cell helpers ----------
 
@@ -73,6 +79,7 @@ const CARD_COLUMNS = [
   ['Forms', (c) => c.forms.join(', ')],
   ['Custody', (c) => c.custody],
   ['Card colour', (c) => c.metal],
+  ['Card image', (c) => c.image?.source ?? ''],
   ['Summary', (c) => c.summary],
   ['Base cashback %', (c) => showNum(c.cashback.basePct)],
   ['Max cashback %', (c) => showNum(c.cashback.maxPct)],
@@ -306,7 +313,8 @@ export function tablesToCards(tables) {
         .filter((s) => str(s.get('Card ID')) === slug)
         .map((s) => ({ label: str(s.get('Label')), url: str(s.get('Link')), verified: optText(s.get('Verified on')) })),
       lastChecked: str(r.get('Last checked')),
-      metal: str(r.get('Card colour')).toLowerCase()
+      metal: str(r.get('Card colour')).toLowerCase(),
+      image: str(r.get('Card image')) ? { source: str(r.get('Card image')), file: imageFile(slug, str(r.get('Card image'))) } : undefined
     };
   });
 
@@ -403,7 +411,7 @@ const FIELD_COLUMNS = {
   'coverage.countries': 'Number of countries', 'coverage.scope': 'Where it works',
   'coverage.markets.IN': 'India', 'coverage.markets.AE': 'UAE', 'coverage.markets.US': 'US', 'coverage.markets.GB': 'UK',
   'coverage.markets.EU': 'EU / EEA', 'links.official': 'Official link', 'links.affiliate': 'Referral link',
-  lastChecked: 'Last checked', tiers: 'Tiers tab', sources: 'Sources tab',
+  lastChecked: 'Last checked', 'image.source': 'Card image', tiers: 'Tiers tab', sources: 'Sources tab',
   feeUsdYear: 'Cost per year $', cashbackPct: 'Cashback %', bands: 'Cashback by monthly spend',
   capMonthlyUsd: 'Monthly cashback cap $', fxPct: 'FX fee % (if different)', 'stake.amount': 'Stake amount',
   countries: 'Only in countries', exceptCountries: 'All countries except', label: 'Label', url: 'Link', verified: 'Verified on',

@@ -169,6 +169,16 @@ on 22 Oct 2026; Claude filled it from `npm run sheet:export`, set every cell to 
 tab, and recorded the tab ids (gid) in `data/sheet.json`. The live sheet was checked to match cards.json exactly. The sheet must be shared
 "Anyone with the link can view". Converter: `scripts/sheet-format.mjs`; it round-trips all cards unchanged.
 
+## Real card pictures (22 Oct 2026)
+
+Akash asked for real card pictures. Cards tab column "Card image" takes a link; the hourly sync
+(`scripts/card-images.mjs`, using sharp) downloads it once, trims a plain border, and stores WebP (1000 and 184 wide)
+plus a PNG for share images in `public/card-images/`, named from the link so a new link means a new file; unused
+files are deleted. `CardArt` shows the picture everywhere (hero, card page, rankings, compare, finder, calculator,
+share image) and falls back to the metal art. Upright pictures are fitted inside the card shape with the shadow
+following the picture. Source pictures only from issuer press kits or from the issuer directly (the outreach email
+asks for one); remove any picture an issuer asks us to take down.
+
 ## Security
 
 `package.json` pins PostCSS to 8.5.31 or later with an npm `overrides` entry (22 Oct 2026). Next 15 ships PostCSS

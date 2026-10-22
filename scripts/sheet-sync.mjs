@@ -8,6 +8,7 @@
 import { appendFileSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { downloadImages, imagesMissing, pruneImages } from './card-images.mjs';
 import { TABS, formatCards, formatSponsor, parseCsv, sheetMessage, tablesToCards } from './sheet-format.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -73,7 +74,8 @@ const nextCards = formatCards(cards);
 const nextSponsor = formatSponsor(sponsor);
 const changed =
   nextCards !== readFileSync(path('data', 'cards.json'), 'utf8') ||
-  nextSponsor !== readFileSync(path('data', 'sponsor.json'), 'utf8');
+  nextSponsor !== readFileSync(path('data', 'sponsor.json'), 'utf8') ||
+  imagesMissing(cards, root);
 output('changed', String(changed));
 
 // Which cards changed, for the commit message.
@@ -105,6 +107,11 @@ for (const e of validateCards(cards).errors) {
 const booking = SponsorSchema.safeParse(sponsor);
 if (!booking.success) problems.push(`Sponsor tab: ${booking.error.issues.map((i) => i.message).join('; ')}`);
 if (problems.length) fail(problems);
+
+// Card pictures: download new ones (needs sharp, installed with npm install) and drop unused ones.
+const imageProblems = await downloadImages(cards, root);
+if (imageProblems.length) fail(imageProblems);
+pruneImages(cards, root);
 
 writeFileSync(path('data', 'cards.json'), nextCards);
 writeFileSync(path('data', 'sponsor.json'), nextSponsor);
