@@ -158,7 +158,7 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
 - Compare (`/compare?c=a,b,c`), Card finder (3 questions, `/finder`), Rewards calculator (`/calculator`, yearly
   value after plan, FX and per-purchase fees), Methodology, Submit a card (prepares an email), 404, sitemap, robots.
 - `/go/<slug>` sends visitors to the card's site with UTM tags, or to `links.affiliate` when one is added.
-- G2M score: rewards 40, fees 30, coverage 20, control 10. Unknown figures score below known good ones.
+- G2M score: rewards 40, fees 30, coverage 20, control 10 (rules v2 below). Unpublished figures score 0.
   Since 22 Oct 2026 rewards use cashback minus any fee charged on every purchase (`fees.txPct`); only the part of
   that fee larger than the cashback, plus flat and small-purchase fees, counts in the fees section. Small-purchase
   fees live in `fees.smallPurchase` (feeUsd, underUsd, foreignOnly) and the calculator applies them at the
@@ -228,6 +228,28 @@ which moved ranks: Crypto.com 0% to 3% (US non-USD on the lower tiers; #5 to #15
 (#18 to #11), Karta not published to 1% (#26 to #21), Avalanche US tier 1% to 2% (card agreement). Known gaps the
 single FX number does not capture: cross-border fees on USD at foreign merchants (Tuyo, Exa, Avalanche, US Krak,
 MetaMask free tier) and per-region card currencies (stored as a union of currencies).
+
+## Scoring rules v2 (22 Oct 2026, Akash's exact rules)
+
+`lib/score.ts`, explained on /methodology. Changed from version 1:
+- Rewards: the entry tier's ongoing rate (no intro offers) on a $1,000 test basket (1 x $200, 2 x $100, 4 x $50,
+  8 x $25, 20 x $10; 35 purchases), so bands and caps count; minus `fees.txPct`; 40 x min(net / 5%, 1). Only an
+  "up to" rate and no entry-tier base rate scores 0 (was 40% of the headline rate).
+- Other transaction costs (8): monthly cost on the basket of the per-purchase % fee above the cashback, flat fees
+  x 35, top-up fee, and small-purchase fees on basket sizes below the limit ($0 = 8, up to $10 = 4, more = 1). A
+  small-purchase fee charged only on foreign purchases is not counted (the basket is home spending; FX is scored on
+  its own). Not published (top-up fee unknown) = 0.
+- Annual and card-access costs (10): entry-tier yearly fee plus `fees.cardFeeUsd` (one-off fee to get the card,
+  sheet "Card activation fee $"); optional physical card shipping is not counted here.
+- Physical card (4 in Coverage): physical card 3, +1 when `fees.physicalCardFeeUsd` (sheet "Physical card cost $
+  (issuance + shipping)") is under $50; virtual-only 0.
+- Countries (12): confirmed countries from the issuer list, else the five checked markets (EU = 30 EEA countries):
+  100+ = 12, 50-99 = 10, 20-49 = 8, 5-19 = 5, 1-4 = 2, 0 = 0. The issuer-stated count (`coverage.countries`) is
+  shown on the site but no longer scored. Per-country view unchanged (confirmed 12, not confirmed 5).
+- Not published scores 0: annual fee, FX fee, top-up fee, wallets, custody (was a middle score).
+Big moves on the first run: MEXC #2 to #15 and Bybit #3 to #21 (no published entry-tier rate), Crypto.com to #25.
+Many cards lose the 8 transaction-cost points only because their top-up fee is not published yet; filling the
+sheet's "Top-up fee %", "Card activation fee $" and "Physical card cost $" columns will move them back.
 
 ## Security
 
