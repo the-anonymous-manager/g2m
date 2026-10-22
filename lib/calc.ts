@@ -1,5 +1,7 @@
 import { z } from 'zod';
-import type { CardRow, Tier } from '@/lib/types';
+import type { CardRow, Market, Tier } from '@/lib/types';
+import { tierOffered } from '@/lib/regions';
+import { EEA } from '@/lib/countries.mjs';
 
 // Calculator inputs are validated and clamped, so bad URL params or typed values
 // can never break the page: anything invalid falls back to a sensible default.
@@ -96,15 +98,24 @@ export function tierValue(card: CardRow, tier: Tier, input: CalcInput, index = 1
 
 export type CardResult = TierResult & { card: CardRow };
 
-/** Best tier per card for this spending profile, sorted by net yearly value. */
-export function rankByValue(cards: CardRow[], input: CalcInput): CardResult[] {
+/** Is this tier offered in the market? The EU counts when any EEA country qualifies. */
+const offeredIn = (tier: Tier, market: Market) =>
+  market === 'EU' ? EEA.some((cc: string) => tierOffered(tier, cc)) : tierOffered(tier, market);
+
+/**
+ * Best tier per card for this spending profile, sorted by net yearly value. With a market, tiers only offered
+ * elsewhere (e.g. a US-only plan for someone in India) are left out.
+ */
+export function rankByValue(cards: CardRow[], input: CalcInput, market?: Market | null): CardResult[] {
   return cards
     .map((card) => {
       const options = card.tiers
         .map((t, i) => ({ t, i }))
+        .filter(({ t }) => !market || offeredIn(t, market))
         .filter(({ t, i }) => (input.all ? !t.comingSoon : isOpenTier(t, i)))
         .map(({ t, i }) => tierValue(card, t, input, i));
-      const best = options.sort((a, b) => b.net - a.net)[0] ?? tierValue(card, card.tiers[0], input, 0);
+      const fallback = card.tiers.find((t) => !market || offeredIn(t, market)) ?? card.tiers[0];
+      const best = options.sort((a, b) => b.net - a.net)[0] ?? tierValue(card, fallback, input, card.tiers.indexOf(fallback));
       return { ...best, card };
     })
     .sort((a, b) => b.net - a.net);

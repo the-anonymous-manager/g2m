@@ -377,6 +377,10 @@ body::before {
   .nav::-webkit-scrollbar {
     display: none;
   }
+  .nav[data-more='true'] {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+  }
   .nav a {
     white-space: nowrap;
   }
@@ -1326,4 +1330,65 @@ body::before {
     filter 0.15s ease,
     background 0.15s ease,
     translate 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Shown only on phone widths, e.g. to repeat a key figure from a table column that scrolls off screen. */
+.phone-only {
+  display: none;
+}
+@media (max-width: 640px) {
+  .phone-only {
+    display: inline;
+  }
+}
+
+/* A table of short labels and long text: on phones each row becomes a block, so nothing scrolls sideways. */
+@media (max-width: 640px) {
+  .table.stack-on-phone,
+  .table.stack-on-phone tbody {
+    display: block;
+    min-width: 0 !important;
+  }
+  .table.stack-on-phone thead {
+    display: none;
+  }
+  .table.stack-on-phone tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+    padding: 14px 16px;
+  }
+  .table.stack-on-phone tr + tr {
+    border-top: 1px solid var(--border);
+  }
+  .table.stack-on-phone td {
+    padding: 0;
+    border: 0;
+  }
+  .table.stack-on-phone td:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Home top-5 on phones: keep rank, card, score and the visitor's country; the fee columns are on the card pages. */
+@media (max-width: 640px) {
+  .table.leaderboard {
+    min-width: 0 !important;
+  }
+  .table.leaderboard :is(th, td):nth-child(n + 4):nth-child(-n + 6) {
+    display: none;
+  }
+  .table.leaderboard :is(th, td) {
+    padding-inline: 8px;
+  }
+  .table.leaderboard .score-bar {
+    display: none;
+  }
+  .table.leaderboard .card-cell {
+    min-width: 0;
+    gap: 8px;
+  }
+  .table.leaderboard th {
+    letter-spacing: 0;
+  }
 }

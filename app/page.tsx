@@ -117,7 +117,7 @@ export default function HomePage() {
               <div className="hero-feature-head">
                 <Eyebrow>{sponsor ? 'sponsored' : 'top ranked'}</Eyebrow>
                 <span className="mono faint" style={{ fontSize: 12 }}>
-                  #{getRank(featured.slug)} of {cards.length}
+                  #{getRank(featured.slug)} of {cards.length} worldwide
                 </span>
               </div>
               <div className="hero-feature-title">
@@ -160,7 +160,7 @@ export default function HomePage() {
                   </>
                 ) : (
                   <>
-                    The highest G2M score right now. Card issuers can{' '}
+                    The highest G2M score worldwide right now. Card issuers can{' '}
                     <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Sponsored spot on G2M')}`}>
                       book this spot
                     </a>{' '}

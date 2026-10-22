@@ -38,7 +38,7 @@ export function CalculatorClient({ rows, initial, initialMarket, hadMarket }: Pr
   );
 
   const eligible = useMemo(() => (market ? rows.filter((r) => r.coverage.markets[market] !== 'no') : rows), [rows, market]);
-  const results = useMemo(() => rankByValue(eligible, input), [eligible, input]);
+  const results = useMemo(() => rankByValue(eligible, input, market || null), [eligible, input, market]);
 
   useEffect(() => {
     if (first.current) {
@@ -166,6 +166,10 @@ export function CalculatorClient({ rows, initial, initialMarket, hadMarket }: Pr
                       <Link href={`/cards/${r.card.slug}`}>{r.card.name}</Link>
                       <span className="faint" style={{ fontSize: 13 }}>
                         {r.tier.name}
+                      </span>
+                      {/* Phones see this column only after scrolling sideways, so repeat the answer here. */}
+                      <span className="phone-only" style={{ fontSize: 13, fontWeight: 700, color: r.net >= 0 ? 'var(--ok)' : 'var(--bad)' }}>
+                        You keep {money(r.net)} a year
                       </span>
                     </div>
                   </div>

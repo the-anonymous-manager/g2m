@@ -49,7 +49,7 @@ export default function MethodologyPage() {
       </div>
 
       <div className="table-wrap">
-        <table className="table" style={{ minWidth: 640 }}>
+        <table className="table stack-on-phone" style={{ minWidth: 640 }}>
           <thead>
             <tr>
               <th scope="col">Part</th>
@@ -107,7 +107,8 @@ export default function MethodologyPage() {
         <p>
           The calculator uses your monthly spend to work out a year of cashback for every tier of every card, then takes off
           plan fees, FX fees on the share you spend in other currencies, and per-purchase fees, including small-purchase fees when your typical purchase is below the limit. Monthly caps and spend bands
-          are applied where published. Rewards in tokens or points are counted at face value.
+          are applied where published, and plans only offered in other countries are left out once you pick where you
+          live. Rewards in tokens or points are counted at face value.
         </p>
 
         <h2 id="money">How G2M makes money</h2>

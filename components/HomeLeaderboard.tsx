@@ -22,7 +22,7 @@ export function HomeLeaderboard({ rows }: { rows: CardRow[] }) {
   return (
     <div className="stack" style={{ gap: 10 }}>
       <div className="table-wrap">
-        <table className="table" style={{ minWidth: 760 }}>
+        <table className="table leaderboard" style={{ minWidth: 760 }}>
           <thead>
             <tr>
               <th scope="col">#</th>
