@@ -61,8 +61,8 @@ pages, and DefiLlama's crypto card dataset.
 
 ### Version 2 additions (22 Oct 2026)
 
-Akash asked for DefiLlama's top 20 cards by spend volume to be covered first. 11 were already listed. 8 were added,
-taking the site to 28 cards. Nothing was removed: volume rankings under-count custodial exchange cards (Crypto.com,
+Akash asked for DefiLlama's top 20 cards by spend volume to be covered first. 11 were already listed. 8 were added
+and Gate Card was then taken off again (Akash's call), leaving 27 cards. None of the original 20 were removed: volume rankings under-count custodial exchange cards (Crypto.com,
 Coinbase, Bybit), which settle off-chain. Every figure below comes from the issuer's own site, docs or help center.
 
 | Card | Custody | Network | India / UAE |
@@ -72,19 +72,16 @@ Coinbase, Bybit), which settle off-chain. Every figure below comes from the issu
 | COCA Card | self-custodial | Visa | unknown / unknown |
 | Avici Card | self-custodial | Visa | no / yes |
 | Kolo Card | not published | Visa | unknown / yes |
-| Gate Card | custodial | Visa | unknown / unknown |
 | Tuyo Card | self-custodial | Visa | unknown / unknown |
 | Karta.io Card | self-custodial | Visa | unknown / unknown |
 
 Notes for the next data check:
-- **Karta (conkarta.com) was not added; Akash to decide.** DefiLlama lists it at #4, but it is a $300/year US
-  Visa Infinite charge card for non-US residents, with credit based on US brokerage assets (the Interactive Brokers
-  card). Its site does not mention crypto. It is a different company from Karta.io, which was added.
-- **Gate Card**: gate.com blocks automated access, so its figures were read from Gate's own help center and Learn
-  pages through search, not opened directly. Gate's fee page says 1% FX; some Gate blog posts say 0.4%.
-- **Kolo**: the site says 2% BTC cashback; DefiLlama reportedly shows 2% in the first month, then 1%. Fees are not
-  published.
-- **Tria**: membership prices are not published, so Pro and Max show no cost.
+- **Karta**: Karta.io is the right Karta (Akash, 22 Oct 2026). Karta at conkarta.com, #4 on DefiLlama, stays off
+  the site: it is a US charge card backed by brokerage assets, with no crypto involved.
+- **Gate Card**: removed by Akash on 22 Oct 2026. Do not add it back unless he asks.
+- **Tria and Kolo**: listed, but Akash will send more details. Gaps today: Tria does not publish membership prices
+  (Pro and Max show no cost); Kolo does not publish its fees, and DefiLlama reportedly shows 1% cashback after the
+  first month against Kolo's advertised 2%.
 - XPL (Plasma) and COCA token ids for live staking values were not added (CoinGecko lookup was throttled).
 
 Cards Akash had on his radar but not yet added: PEXX, Fizen, Infini, Cashi, WasabiCard, Kite.
@@ -114,13 +111,13 @@ compare, finder, calculator input checks, theme memory, share images, and a clea
 
 1. Deploy on Vercel from this repo and connect the g2m.life domain (Akash has not done this yet).
 2. Settings now default to info@g2m.life and @0akash0x; override them on Vercel only if they change.
-3. Decide whether Karta (conkarta.com, a non-crypto US charge card) belongs on the site. See Version 2 additions.
+3. Update Tria and Kolo with the details Akash sends.
 4. Add referral links per card when deals are signed.
 5. Re-check every card within 90 days of its `lastChecked` date (the validator warns).
 
 ## Ideas for version 2 (not decided, ask Akash)
 
-- Add the radar cards above (28 listed as of 22 Oct 2026), then grow towards 50+ cards.
+- Add the radar cards above (27 listed as of 22 Oct 2026), then grow towards 50+ cards.
 - Edit card data from a Google Sheet instead of `cards.json`.
 - Show the live USD value of staking requirements (each tier's `stake.coingeckoId` is already stored for this).
 - "X vs Y" comparison pages for SEO, and short guides (custodial vs self-custodial, how card fees work).
