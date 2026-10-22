@@ -59,9 +59,38 @@ pages, and DefiLlama's crypto card dataset.
 | Ethena Pay | self-custodial | Visa | unknown / yes |
 | Exa Card | self-custodial | Visa | yes / yes |
 
+### Version 2 additions (22 Oct 2026)
+
+Akash asked for DefiLlama's top 20 cards by spend volume to be covered first. 11 were already listed. 8 were added
+and Gate Card was then taken off again (Akash's call), leaving 27 cards. None of the original 20 were removed: volume rankings under-count custodial exchange cards (Crypto.com,
+Coinbase, Bybit), which settle off-chain. Every figure below comes from the issuer's own site, docs or help center.
+
+| Card | Custody | Network | India / UAE |
+| --- | --- | --- | --- |
+| Plasma One | self-custodial | Visa | unknown / unknown |
+| Tria Card | self-custodial | Visa | unknown / unknown |
+| COCA Card | self-custodial | Visa | unknown / unknown |
+| Avici Card | self-custodial | Visa | no / yes |
+| Kolo Card | not published | Visa | unknown / yes |
+| Tuyo Card | self-custodial | Visa | unknown / unknown |
+| Karta.io Card | self-custodial | Visa | unknown / unknown |
+
+Notes for the next data check:
+- **Karta**: Karta.io is the right Karta (Akash, 22 Oct 2026). Karta at conkarta.com, #4 on DefiLlama, stays off
+  the site: it is a US charge card backed by brokerage assets, with no crypto involved.
+- **Gate Card**: removed by Akash on 22 Oct 2026. Do not add it back unless he asks.
+- **Tria**: prices (Lite $20, Pro $109, Max $250 a year) and perks come from screenshots of the Tria app that Akash
+  sent on 22 Oct 2026; the website does not publish them. The app says Lite pays 0.5% after $1,000 a month; the
+  help center still says 1%. The app was used.
+- **Kolo**: rebuilt from help.kolo.xyz (Akash pointed to it, 22 Oct 2026). Cashback is 2% for 30 days, then 1%,
+  capped at $100 a month. Every card payment pays a 1% conversion fee, even though the homepage says "0% markups".
+  Cards are virtual only; physical cards are planned for 2027.
+- XPL (Plasma) and COCA token ids for live staking values were not added (CoinGecko lookup was throttled).
+
 Cards Akash had on his radar but not yet added: PEXX, Fizen, Infini, Cashi, WasabiCard, Kite.
-Akash does not write about Klickl, UPay, Tangem or Hotcoin on X. Klickl, UPay and Hotcoin were left off the site;
-Tangem Pay is listed and still needs his decision.
+Akash does not write about Klickl, UPay, Tangem or Hotcoin on X. Klickl, UPay and Hotcoin were left off the site.
+Tangem Pay stays: Akash decided on 22 Oct 2026 that it belongs in the directory even though he does not post about it.
+Not posting about a card is not a reason to leave it out; the directory aims to be complete.
 
 ## What version 1 does
 
@@ -81,17 +110,22 @@ Tangem Pay is listed and still needs his decision.
 Tested before handoff: every route, light and dark, desktop and phone widths (no sideways scrolling), filters,
 compare, finder, calculator input checks, theme memory, share images, and a clean `npm ci && npm run build`.
 
+## Security
+
+`package.json` pins PostCSS to 8.5.31 or later with an npm `overrides` entry (22 Oct 2026). Next 15 ships PostCSS
+8.4.31, which has known advisories; npm's own fix was a jump to Next 16. The override clears `npm audit` while
+staying on Next 15. Remove it when the site moves to a Next version that ships a patched PostCSS.
+
 ## Still open
 
 1. Deploy on Vercel from this repo and connect the g2m.life domain (Akash has not done this yet).
-2. Set `NEXT_PUBLIC_CONTACT_EMAIL` (defaults to hello@g2m.life) and `NEXT_PUBLIC_TWITTER_HANDLE`.
-3. Decide whether Tangem Pay stays listed.
-4. Add referral links per card when deals are signed.
-5. Re-check every card within 90 days of its `lastChecked` date (the validator warns).
+2. Settings now default to info@g2m.life and @0akash0x; override them on Vercel only if they change.
+3. Add referral links per card when deals are signed.
+4. Re-check every card within 90 days of its `lastChecked` date (the validator warns).
 
 ## Ideas for version 2 (not decided, ask Akash)
 
-- Add the radar cards above, then grow towards 50+ cards.
+- Add the radar cards above (27 listed as of 22 Oct 2026), then grow towards 50+ cards.
 - Edit card data from a Google Sheet instead of `cards.json`.
 - Show the live USD value of staking requirements (each tier's `stake.coingeckoId` is already stored for this).
 - "X vs Y" comparison pages for SEO, and short guides (custodial vs self-custodial, how card fees work).

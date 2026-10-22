@@ -590,5 +590,228 @@
     ],
     "lastChecked": "2026-10-22",
     "metal": "rose"
+  },
+  {
+    "slug": "plasma-one",
+    "name": "Plasma One",
+    "brand": "Plasma",
+    "issuer": "Rain",
+    "network": "Visa",
+    "type": "spend",
+    "forms": ["virtual", "physical"],
+    "custody": "self-custodial",
+    "summary": "Self-custodial Visa from Plasma that spends USDT, with cashback paid in XPL. The free Lite tier pays 2% on your first $500 a month.",
+    "cashback": { "basePct": 2, "maxPct": 4, "payout": "XPL, weekly", "note": "Lite: 2% on the first $500 a month, then 0.1%. Core: 3% stepping down to 0.25%. Platinum: 4% stepping down to 1%. AI merchants and partner airlines earn up to 10% on higher tiers." },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "Lite: 1% Plasma markup plus about 1% Visa FX. Core: 0.5% plus about 1%. Platinum: no FX fee.", "topUpPct": null, "atm": "$2 + 2% per USD withdrawal; physical card only, up to $1,000 a withdrawal and 3 a day", "other": ["Crypto deposits: 0.15% to 0.75% Plasma fee plus network fees"] },
+    "tiers": [
+      { "name": "Lite", "feeUsdYear": 0, "cashbackPct": 2, "bands": [ { "uptoUsd": 500, "pct": 2 }, { "uptoUsd": null, "pct": 0.1 } ], "fxPct": 2, "perks": ["1 free virtual card"] },
+      { "name": "Core", "feeUsdYear": 199, "feeNote": "Or lock 20,000 XPL for 12 months instead", "cashbackPct": 3, "bands": [ { "uptoUsd": 1000, "pct": 3 }, { "uptoUsd": 2000, "pct": 2 }, { "uptoUsd": 3000, "pct": 1 }, { "uptoUsd": null, "pct": 0.25 } ], "fxPct": 1.5, "requirement": "$199 a year, or lock 20,000 XPL for 12 months", "stake": { "token": "XPL", "amount": 20000 }, "perks": ["5% on AI merchants (first $250 a month)", "ChatGPT Go subscription", "Up to 2 free virtual cards"] },
+      { "name": "Platinum", "feeUsdYear": 0, "feeNote": "No fee; needs 100,000 XPL locked for 12 months", "cashbackPct": 4, "bands": [ { "uptoUsd": 3000, "pct": 4 }, { "uptoUsd": 10000, "pct": 3 }, { "uptoUsd": 15000, "pct": 2 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "Lock 100,000 XPL for 12 months", "stake": { "token": "XPL", "amount": 100000 }, "perks": ["10% on AI merchants (first $500 a month)", "10% on partner airlines, up to $600 a year", "Lounge access", "Visa concierge", "Travel insurance"] }
+    ],
+    "coverage": { "countries": null, "scope": "Growing list of countries, full list not published; the US in 31 states", "examples": ["United States"], "markets": { "IN": "unknown", "AE": "unknown", "US": "yes", "GB": "unknown", "EU": "unknown" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["USDT"],
+    "perks": ["Earn on your balance until you spend it (variable rate)", "Free USDT transfers on Plasma"],
+    "pros": ["2% back on the free tier, up to 4% on Platinum", "Self-custodial: Plasma does not hold your funds", "No FX fee on Platinum"],
+    "cons": ["Lite drops to 0.1% after $500 a month", "Cashback is paid in XPL, so its value moves with the token", "Indian ID documents are blocked by default at sign-up"],
+    "links": { "official": "https://www.plasma.org/" },
+    "sources": [
+      { "label": "Plasma Help Center: fees on Plasma One", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15506070-what-are-the-fees-on-plasma-one", "verified": "2026-10-22" },
+      { "label": "Plasma Help Center: cashback rates and spend bands by tier", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15506768-cashback-rates-and-spend-bands-by-tier", "verified": "2026-10-22" },
+      { "label": "Plasma Help Center: countries and US states", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/14703938-which-countries-and-us-states-is-plasma-one-available-in", "verified": "2026-10-22" },
+      { "label": "Plasma Help Center: ATM withdrawals", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/14648465-can-i-withdraw-cash-from-an-atm", "verified": "2026-10-22" },
+      { "label": "Plasma: Core and Platinum tiers", "url": "https://www.plasma.org/personal/platinum", "verified": "2026-10-22" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "silver"
+  },
+  {
+    "slug": "kolo",
+    "name": "Kolo Card",
+    "brand": "Kolo",
+    "issuer": "Banco Popular de Puerto Rico (USD card); Wirex (EUR card)",
+    "network": "Visa",
+    "type": "debit",
+    "forms": ["virtual"],
+    "custody": "unknown",
+    "summary": "Virtual Visa debit card from Kolo that you fund with crypto. Pays 2% back in bitcoin for your first 30 days, then 1%.",
+    "cashback": { "basePct": 1, "maxPct": 2, "payout": "BTC, daily", "note": "2% for the first 30 days after activation, then 1%. Capped at $2 a purchase during the 2% period, $1 a purchase after, and $100 a month. Purchases under $1 earn nothing." },
+    "fees": { "annualUsd": 0, "fxPct": 1.35, "fxNote": "Visa rate plus a surcharge when you pay in another currency. USD card: +1%. EUR card: +0.55% to +1.35%, depending on the currency.", "topUpPct": 0, "txPct": 1, "atm": "USD card only: $1 + 0.65%, up to $500 a withdrawal and 3 a day, at contactless ATMs. No ATM access on the EUR card.", "other": ["1% conversion fee on every card payment", "USD card: extra 1% on USD payments at non-US merchants", "SEPA bank withdrawal: 1 EUR"] },
+    "tiers": [
+      { "name": "Kolo Card", "feeUsdYear": 0, "cashbackPct": 1, "capMonthlyUsd": 100, "perks": ["2% for the first 30 days"] }
+    ],
+    "coverage": { "countries": 60, "scope": "60+ countries incl. Europe, the UK and the UAE", "examples": ["United Kingdom", "United Arab Emirates"], "markets": { "IN": "unknown", "AE": "yes", "US": "unknown", "GB": "yes", "EU": "yes" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["BTC", "ETH", "USDT", "USDC", "EURC", "LTC"],
+    "perks": ["Visa Platinum benefits, claimed through Visa", "Send crypto to any SEPA bank account"],
+    "pros": ["No issuance or monthly fee", "Cashback in bitcoin at any merchant, no category limits", "Available in the UAE and the UK"],
+    "cons": ["1% conversion fee on every purchase cancels out the 1% cashback", "Cashback drops to 1% after 30 days and is capped at $100 a month", "Virtual only until physical cards arrive (planned for 2027)"],
+    "links": { "official": "https://kolo.xyz/" },
+    "sources": [
+      { "label": "Kolo Help Center: cashback program", "url": "https://help.kolo.xyz/en/articles/13623113-cashback-program", "verified": "2026-10-22" },
+      { "label": "Kolo Help Center: fees and pricing", "url": "https://help.kolo.xyz/en/articles/13942206-fees-pricing", "verified": "2026-10-22" },
+      { "label": "Kolo Help Center: card overview", "url": "https://help.kolo.xyz/en/articles/13605242-card-overview", "verified": "2026-10-22" },
+      { "label": "Kolo Help Center: cash withdrawal", "url": "https://help.kolo.xyz/en/articles/16001482-cash-withdrawal", "verified": "2026-10-22" },
+      { "label": "Kolo: where Kolo works", "url": "https://kolo.xyz/countries", "verified": "2026-10-22" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "gold"
+  },
+  {
+    "slug": "karta-io",
+    "name": "Karta.io Card",
+    "brand": "Karta.io",
+    "issuer": null,
+    "network": "Visa",
+    "type": "prepaid",
+    "forms": ["virtual", "physical"],
+    "custody": "self-custodial",
+    "summary": "Visa Signature card run from a Telegram app, topped up with USDT or USDC on eight networks. Every card payment carries a 1.5% fee.",
+    "cashback": { "basePct": null, "maxPct": null, "payout": null, "note": "No cashback on your own spending. You earn cashback on the spending of friends you refer." },
+    "fees": { "annualUsd": 0, "fxPct": null, "fxNote": "Karta lists a flat 1.5% fee on card payments; a separate FX fee is not published.", "topUpPct": 0, "txPct": 1.5, "atm": "1.5% + 1 USDT per withdrawal", "other": ["Virtual card: 5 USDT one-time", "Physical card: from 100 USDT one-time", "Bank payouts: SEPA 1.5% + €2, SWIFT 1.4% + $2"] },
+    "tiers": [
+      { "name": "Karta Personal", "feeUsdYear": 0, "feeNote": "One-time: 5 USDT for the virtual card, from 100 USDT for a physical card", "cashbackPct": null }
+    ],
+    "coverage": { "countries": null, "scope": "Not published; depends on local rules and card partners", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["USDT", "USDC"],
+    "perks": ["Visa Signature", "Fiat top-ups by ACH, SEPA, SWIFT, PIX and SPEI"],
+    "pros": ["Free crypto top-ups on eight networks", "Virtual card for a one-time 5 USDT", "Self-custody wallet"],
+    "cons": ["1.5% fee on every card payment", "No cashback on your own spending", "Country list not published"],
+    "links": { "official": "https://karta.io/" },
+    "sources": [
+      { "label": "Karta: fees and limits", "url": "https://karta.io/", "verified": "2026-10-22" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "gunmetal"
+  },
+  {
+    "slug": "tria",
+    "name": "Tria Card",
+    "brand": "Tria",
+    "issuer": null,
+    "network": "Visa",
+    "type": "spend",
+    "forms": ["virtual", "physical", "metal"],
+    "custody": "self-custodial",
+    "summary": "Self-custodial Visa from Tria that spends from 1,000+ tokens, with cashback from 1.5% to 6% depending on your membership.",
+    "cashback": { "basePct": 1.5, "maxPct": 6, "payout": null, "note": "Lite: 1.5% on the first $1,000 a month, then 0.5%. Pro: 4.5% on the first $1,000, then 1%. Max: 6% on the first $2,000, then 1%." },
+    "fees": { "annualUsd": 20, "fxPct": 0, "fxNote": "Tria's help center lists zero FX fees on every tier, but also says fees vary by region and card type.", "topUpPct": 0, "atm": "Pro and Max: up to $750 a day, fee not published. No ATM access on Lite.", "other": [] },
+    "tiers": [
+      { "name": "Lite", "feeUsdYear": 20, "cashbackPct": 1.5, "bands": [ { "uptoUsd": 1000, "pct": 1.5 }, { "uptoUsd": null, "pct": 0.5 } ], "fxPct": 0, "perks": ["Virtual Visa Platinum card", "1.5% with no cap on Tria Travel (hotels, rentals; not flights)"] },
+      { "name": "Pro", "feeUsdYear": 109, "cashbackPct": 4.5, "bands": [ { "uptoUsd": 1000, "pct": 4.5 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "$109 a year", "perks": ["Plastic Visa Signature card", "4.5% with no cap on Tria Travel (hotels, rentals; not flights)", "Lounge access", "Visa Luxury Hotels and Visa concierge", "ATM up to $750 a day"] },
+      { "name": "Max", "feeUsdYear": 250, "cashbackPct": 6, "bands": [ { "uptoUsd": 2000, "pct": 6 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "$250 a year", "perks": ["Metal Visa Signature card", "6% with no cap on Tria Travel (hotels, rentals; not flights)", "Lounge access", "Visa Luxury Hotels and Visa concierge", "ATM up to $750 a day"] }
+    ],
+    "coverage": { "countries": null, "scope": "Card support in 150+ countries per Tria; full list not published", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": [],
+    "perks": ["Price protection up to $2,000", "Purchase protection up to $10,000", "Spend up to $1M a day on Pro and Max"],
+    "pros": ["No FX or deposit fees on any tier", "1.5% on the entry tier, up to 6% on Max", "Lounge access on Pro and Max"],
+    "cons": ["Every tier has a yearly fee: $20 Lite, $109 Pro, $250 Max", "Higher rates stop after $1,000 to $2,000 a month (0.5% after that on Lite)", "Country list not published"],
+    "links": { "official": "https://tria.so/" },
+    "sources": [
+      { "label": "Tria Help Center: What are Tria Cards?", "url": "https://intercom.help/tria/en/articles/13513481-what-are-tria-cards", "verified": "2026-10-22" },
+      { "label": "Tria app: Lite, Pro and Max membership screens", "url": "https://tria.so/", "verified": "2026-10-22" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "black"
+  },
+  {
+    "slug": "coca",
+    "name": "COCA Card",
+    "brand": "COCA",
+    "issuer": null,
+    "network": "Visa",
+    "type": "debit",
+    "forms": ["virtual", "physical"],
+    "custody": "self-custodial",
+    "summary": "Self-custodial Visa debit card from COCA. Cashback runs from 1% to 8% depending on how many COCA tokens you hold.",
+    "cashback": { "basePct": 1, "maxPct": 8, "payout": "Stablecoins, monthly", "note": "Starter: 1% with no limit. Standard to Elite: 3% to 8% up to a monthly spend limit of $1,000 to $10,000, then 1%." },
+    "fees": { "annualUsd": 0, "fxPct": null, "topUpPct": null, "atm": "Free up to $250 a month, then 2%", "other": ["Plastic card: $5 on Starter, Standard and Standard+; free on higher tiers"] },
+    "tiers": [
+      { "name": "Starter", "feeUsdYear": 0, "cashbackPct": 1, "perks": [] },
+      { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 3, "bands": [ { "uptoUsd": 1000, "pct": 3 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "Hold 300 COCA", "stake": { "token": "COCA", "amount": 300 }, "perks": ["50% back on 1 subscription"] },
+      { "name": "Standard+", "feeUsdYear": 0, "cashbackPct": 4, "bands": [ { "uptoUsd": 1750, "pct": 4 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "Hold 1,000 COCA", "stake": { "token": "COCA", "amount": 1000 }, "perks": ["50% back on 2 subscriptions"] },
+      { "name": "Premium", "feeUsdYear": 0, "cashbackPct": 5, "bands": [ { "uptoUsd": 2500, "pct": 5 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "Hold 3,000 COCA", "stake": { "token": "COCA", "amount": 3000 }, "perks": ["50% back on 2 subscriptions"] },
+      { "name": "Premium+", "feeUsdYear": 0, "cashbackPct": 6, "bands": [ { "uptoUsd": 5000, "pct": 6 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "Hold 10,000 COCA", "stake": { "token": "COCA", "amount": 10000 }, "perks": ["50% back on 3 subscriptions"] },
+      { "name": "Elite", "feeUsdYear": 0, "cashbackPct": 8, "bands": [ { "uptoUsd": 10000, "pct": 8 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "Hold 30,000 COCA", "stake": { "token": "COCA", "amount": 30000 }, "perks": ["50% back on 4 subscriptions"] }
+    ],
+    "coverage": { "countries": null, "scope": "UK, EEA, Asia, South America, the Middle East and Africa", "examples": ["United Kingdom"], "markets": { "IN": "unknown", "AE": "unknown", "US": "no", "GB": "yes", "EU": "yes" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": [],
+    "perks": ["Yield on your card balance (variable)"],
+    "pros": ["1% with no tokens needed", "Up to 8% on higher tiers", "Free ATM withdrawals up to $250 a month"],
+    "cons": ["Higher tiers need you to hold COCA tokens", "FX fee not published", "Not offered in the US"],
+    "links": { "official": "https://www.coca.xyz/" },
+    "sources": [
+      { "label": "COCA docs: membership tiers", "url": "https://docs.coca.xyz/coca/membership-and-rewards/membership-you-deserve", "verified": "2026-10-22" },
+      { "label": "COCA docs: COCA Card fees and limits", "url": "https://docs.coca.xyz/coca/banking-account/coca-card", "verified": "2026-10-22" },
+      { "label": "COCA docs: who controls your money", "url": "https://docs.coca.xyz/coca/the-bank-we-all-deserve/where-is-my-money-stored-and-who-controls-it", "verified": "2026-10-22" },
+      { "label": "COCA: available regions", "url": "https://www.coca.xyz/", "verified": "2026-10-22" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "rose"
+  },
+  {
+    "slug": "avici",
+    "name": "Avici Card",
+    "brand": "Avici",
+    "issuer": "Third National",
+    "network": "Visa",
+    "type": "credit",
+    "forms": ["virtual", "physical"],
+    "custody": "self-custodial",
+    "summary": "Visa secured credit card from Avici, backed by USDC that stays in a smart contract you own. No cashback, but no FX markup from Avici.",
+    "cashback": { "basePct": null, "maxPct": null, "payout": null, "note": "No cashback program. Signature cards carry standard Visa Signature benefits." },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "No Avici FX markup; Visa may charge 0.4% to 1% cross-border on non-USD spending.", "topUpPct": 0, "atm": "Platinum: $1 + 0.65%. Signature: free. Up to $1,000 a withdrawal and $3,000 a day.", "other": ["Virtual Platinum: $15 one-time ($10 for each extra card)", "Physical Platinum: $50 one-time", "Signature: $30 (virtual) or $75 (physical) the first year, then $20 a year"] },
+    "tiers": [
+      { "name": "Platinum", "feeUsdYear": 0, "feeNote": "One-time card fee: $15 virtual, $50 physical", "cashbackPct": null, "fxPct": 1 },
+      { "name": "Signature", "feeUsdYear": 20, "feeNote": "$30 (virtual) or $75 (physical) in the first year", "cashbackPct": null, "fxPct": 1, "requirement": "$30 the first year, then $20 a year", "perks": ["Visa Signature benefits", "Free ATM withdrawals"] }
+    ],
+    "coverage": { "countries": 49, "scope": "49 countries incl. the UAE, Latin America and 31 US states", "examples": ["United Arab Emirates", "Singapore", "Mexico", "Brazil"], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "no", "EU": "no" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["USDC"],
+    "perks": ["No transaction, top-up or wallet withdrawal fees"],
+    "pros": ["No Avici FX markup and $0 transaction fees", "Available in the UAE and 31 US states", "Self-custodial: only your wallet can withdraw"],
+    "cons": ["No cashback", "Not available to residents of India", "Not available in the UK or EU"],
+    "links": { "official": "https://avici.money/" },
+    "sources": [
+      { "label": "Avici docs: fees and limits", "url": "https://docs.avici.money/getting-started/secured-credit-cards/fees-and-limits", "verified": "2026-10-22" },
+      { "label": "Avici docs: regions and prohibitions", "url": "https://docs.avici.money/getting-started/secured-credit-cards/regions-and-prohibitions-for-avici-card", "verified": "2026-10-22" },
+      { "label": "Avici docs: how secured credit cards work", "url": "https://docs.avici.money/getting-started/secured-credit-cards", "verified": "2026-10-22" },
+      { "label": "Avici docs: Platinum and Signature cards", "url": "https://docs.avici.money/getting-started/secured-credit-cards/virtual-and-physical-cards", "verified": "2026-10-22" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "champagne"
+  },
+  {
+    "slug": "tuyo",
+    "name": "Tuyo Card",
+    "brand": "Tuyo",
+    "issuer": "Rain",
+    "network": "Visa",
+    "type": "spend",
+    "forms": ["virtual"],
+    "custody": "self-custodial",
+    "summary": "Self-custodial virtual Visa from Tuyo that spends USDC. No card fees, and no fee on US dollar purchases in the US.",
+    "cashback": { "basePct": null, "maxPct": null, "payout": null, "note": "No cashback rate. Instead, some purchases are made free at random (\"Buy Now, Pay Maybe\")." },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "1% FX fee on non-USD purchases plus 1% on purchases outside the US; up to 2% combined. 0% on USD purchases in the US.", "topUpPct": null, "atm": "Up to $250 a withdrawal incl. the ATM surcharge, 3 attempts a day; Tuyo fee not published", "other": ["Trades: 0.25% (stablecoin swaps and bridging exempt)"] },
+    "tiers": [
+      { "name": "Tuyo Card", "feeUsdYear": 0, "cashbackPct": null, "fxPct": 2 }
+    ],
+    "coverage": { "countries": null, "scope": "Not published; not offered in the UK", "examples": ["United States"], "markets": { "IN": "unknown", "AE": "unknown", "US": "yes", "GB": "no", "EU": "unknown" } },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["USDC"],
+    "perks": ["Some purchases made free at random", "Interest on your USD balance (variable)", "Daily limit up to $200,000"],
+    "pros": ["No issuance, monthly or yearly fee", "0% on USD purchases in the US", "Self-custodial"],
+    "cons": ["Up to 2% on non-USD or non-US purchases", "No cashback rate", "Virtual only for now; not offered in the UK"],
+    "links": { "official": "https://tuyo.com/" },
+    "sources": [
+      { "label": "Tuyo: card fees and limits", "url": "https://tuyo.com/card", "verified": "2026-10-22" },
+      { "label": "Tuyo: FAQ", "url": "https://tuyo.com/faq", "verified": "2026-10-22" },
+      { "label": "Tuyo: home page (custody and UK notice)", "url": "https://tuyo.com/", "verified": "2026-10-22" }
+    ],
+    "lastChecked": "2026-10-22",
+    "metal": "champagne"
   }
 ]
