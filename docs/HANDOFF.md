@@ -1,7 +1,19 @@
 # G2M handoff: everything decided so far
 
-Written 22 Oct 2026 at the end of the version 1 build. Read this with `CLAUDE.md` before starting version 2.
+Started 22 Oct 2026 at the end of the version 1 build; last updated 22 Oct 2026 during version 2 (sheet editing,
+real card pictures, bug fixes). Read this with `CLAUDE.md` before changing anything.
 The owner, Akash, is not a developer: explain in plain words and do the technical steps yourself.
+
+## Where things stand (quick summary)
+
+- Live at https://g2m.life (Vercel, from `main`). 26 cards. Work happens on a branch and goes live through a pull
+  request that Akash merges; pushing straight to `main` deploys the site.
+- Card data is edited in the Google Sheet "G2M Card data" (see "Card data in a Google Sheet"). An hourly GitHub
+  Action copies it to the site. Claude edits the sheet, not `data/cards.json`, for data changes.
+- Real card pictures come from the sheet's "Card image" column (none added yet).
+- Outreach to card issuers (email, DM, per-card gaps, how to sell the Sponsored spot) is in the Claude Doc
+  "G2M card issuer outreach": https://claude.ai/artifact/96NsBhL6naMwqvFJctKpt5
+- Pull requests so far: #1 to #9 merged; #10 (small display bugs, see "Bug sweep") waiting for Akash to merge.
 
 ## Who it is for
 
@@ -89,7 +101,7 @@ pages, and DefiLlama's crypto card dataset.
 | Nexo Card | custodial | Mastercard | no / no |
 | Krak Card | not published | Visa / Mastercard | unknown / no |
 | MEXC Card | not published | Visa | unknown / yes |
-| Gnosis Pay Card | self-custodial | Visa | no / no |
+| Gnosis Pay Card (removed 22 Oct 2026) | self-custodial | Visa | no / no |
 | Jupiter Card | not published | Visa | unknown / yes |
 | Avalanche Card | self-custodial | Visa | unknown / unknown |
 | Solayer Card | self-custodial | Visa | unknown / unknown |
@@ -102,7 +114,7 @@ pages, and DefiLlama's crypto card dataset.
 ### Version 2 additions (22 Oct 2026)
 
 Akash asked for DefiLlama's top 20 cards by spend volume to be covered first. 11 were already listed. 8 were added
-and Gate Card was then taken off again (Akash's call), leaving 27 cards. None of the original 20 were removed: volume rankings under-count custodial exchange cards (Crypto.com,
+and Gate Card was then taken off again (Akash's call), leaving 27 cards (26 after Gnosis Pay was removed). None of the original 20 were removed: volume rankings under-count custodial exchange cards (Crypto.com,
 Coinbase, Bybit), which settle off-chain. Every figure below comes from the issuer's own site, docs or help center.
 
 | Card | Custody | Network | India / UAE |
@@ -134,8 +146,9 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
 
 ## What version 1 does
 
-- Home: headline, search, Featured spot, top 5 (its last column is the visitor's market, or a country count when
-  unknown), browse chips, cards confirmed in all five markets (the visitor's first), links to the tools.
+- Home: headline, search, Featured spot, top 5 for the visitor's country (its last column is that country, or a
+  country count when unknown), browse chips, region panels (the visitor's country, US, UK, EU / EEA, Asia), links
+  to the tools.
 - Rankings (`/cards`): sort by any column incl. # (overall rank; shift-click for a second sort), filters for region, custody, network,
   minimum cashback, no annual fee, physical, metal, lounge. Every view has its own URL, with "Post on X" and
   "Copy link". The region defaults to where the visitor is. Pick up to 3 cards to compare. On phones it shows a list.
@@ -149,8 +162,9 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   that fee larger than the cashback, plus flat and small-purchase fees, counts in the fees section. Small-purchase
   fees live in `fees.smallPurchase` (feeUsd, underUsd, foreignOnly) and the calculator applies them at the
   visitor's typical purchase size. This moved MEXC from #1 to #2 (Ethena Pay #1).
-  No paid rankings, ever. Since 22 Oct 2026 the home page hero is a "Featured" spot: a sponsor booked in
-  `data/sponsor.json` (slug, start, end; labelled Sponsored, shows its real score and rank, clicks tagged
+  No paid rankings, ever. Since 22 Oct 2026 the home page hero is a "Featured" spot: a sponsor booked in the
+  sheet's Sponsor tab, which the sync writes to `data/sponsor.json` (slug, start, end; labelled Sponsored, shows
+  its real score and rank, clicks tagged
   utm_campaign=sponsored), otherwise the top-ranked card. The home page re-checks hourly, so bookings start and end
   on their dates without a deploy. Move Vercel to Pro before the first paid booking (Hobby is non-commercial).
 - Plausible analytics events when `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` is set.
@@ -179,6 +193,23 @@ share image) and falls back to the metal art. Upright pictures are fitted inside
 following the picture. Source pictures only from issuer press kits or from the issuer directly (the outreach email
 asks for one); remove any picture an issuer asks us to take down.
 
+## Bug sweep (22 Oct 2026, pull request #10)
+
+Akash asked for small bugs first. Every page (all 26 card pages included) was checked on phone, tablet and desktop,
+light and dark, with an automatic sweep (sideways scrolling, broken images and links, script errors, hidden
+sections) plus screenshots read by eye. Fixed:
+- Card page score: "/100" was clipped. Metal gradient text only paints inside its box, so tight letter-spacing cuts
+  the last glyph; that span gets `paddingRight`. Do not add a negative margin to `.metal-text`: it made the hero
+  headline wrap "bags / better." onto two lines.
+- Card page: the country count was repeated when the description already contained it.
+- Calculator: plans only offered elsewhere (Exa and Avalanche US-only tiers) were picked for other markets. It now
+  leaves out tiers not offered in the chosen market (EU = any EEA country). Phones also see "You keep $X a year".
+- Home top 5 fits phones (fee columns hidden there), methodology score table stacks on phones, phone menu scrolls
+  to the current page and fades its edge, "Custody not published" wording, "#1 of 26 worldwide" on the Featured spot.
+
+Known, left for later (bigger than small bugs): the tiers table on card pages and the Compare table still scroll
+sideways on phones; the Card finder and calculator offer only the five markets plus "Somewhere else".
+
 ## Security
 
 `package.json` pins PostCSS to 8.5.31 or later with an npm `overrides` entry (22 Oct 2026). Next 15 ships PostCSS
@@ -191,12 +222,21 @@ staying on Next 15. Remove it when the site moves to a Next version that ships a
    g2m.life. DNS stays at Hostinger: A `@` 216.198.79.1, CNAME `www` to Vercel, two `_vercel` TXT verification
    records. All email records (Google Workspace MX/SPF/DKIM, Hostinger mail CNAMEs, DMARC) were left untouched.
 2. Settings now default to info@g2m.life and @0akash0x; override them on Vercel only if they change.
-3. Add referral links per card when deals are signed. Move Vercel to the Pro plan first (Hobby is non-commercial only).
+3. Add referral links per card when deals are signed (sheet column "Referral link"). Move Vercel to the Pro plan
+   first (Hobby is non-commercial only); also before the first paid Sponsored booking.
 4. Re-check every card within 90 days of its `lastChecked` date (the validator warns).
+5. Run the sheet sync once on GitHub (Actions > Sync cards from Google Sheet > Run workflow) to confirm it works
+   there; it was tested locally against the live sheet. The hourly check uses roughly 720 GitHub Actions minutes a
+   month (2,000 free on a private repo).
+6. Send the issuer outreach and add the answers (country lists, fees, card pictures) through the sheet.
 
 ## Ideas for version 2 (not decided, ask Akash)
 
-- Add the radar cards above (27 listed as of 22 Oct 2026), then grow towards 50+ cards.
+Done so far: edit card data from a Google Sheet, real card pictures, small bug sweep.
+
+- Add the radar cards above, then grow towards 50+ cards.
+- Card finder and calculator for every country (they use the five markets today).
+- Phone-friendly tiers and Compare tables.
 - Show the live USD value of staking requirements (each tier's `stake.coingeckoId` is already stored for this).
 - "X vs Y" comparison pages for SEO, and short guides (custodial vs self-custodial, how card fees work).
 - A changelog of fee and cashback changes per card, which also feeds his X posts.
