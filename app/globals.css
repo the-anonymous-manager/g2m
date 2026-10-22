@@ -1238,12 +1238,10 @@ body::before {
   from {
     opacity: 0;
     transform: translateY(22px);
-    filter: blur(10px);
   }
   to {
     opacity: 1;
     transform: none;
-    filter: none;
   }
 }
 .motion .hero-copy > :not(.h1),
@@ -1272,46 +1270,30 @@ body::before {
   animation-delay: 0.3s;
 }
 
-/* Blocks rise and un-blur as they scroll into view (MotionRoot adds .reveal / .in). */
-.motion main .section > *,
-.motion main .section-tight > *,
-.motion [data-reveal] {
-  transition:
-    opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
-    transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
-    filter 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.motion main .section > :not(.in),
-.motion main .section-tight > :not(.in),
-.motion [data-reveal]:not(.in) {
-  opacity: 0;
-  transform: translateY(18px);
-  filter: blur(6px);
-}
-/* Cards in a grid follow one after another. */
-.motion .reveal:is(.grid-2, .grid-3, .market-grid) > *,
-.motion .reveal :is(.grid-2, .grid-3, .market-grid) > * {
+/* Blocks fade and rise as they scroll into view. MotionRoot sets data-rv="wait" only on blocks below the
+   fold that it is watching, then "in"; anything it has not touched simply shows. Opacity and transform only,
+   so the browser can animate on the GPU without repainting. */
+.motion [data-rv] {
   transition:
     opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
     transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-  transition-delay: calc(var(--i, 0) * 70ms + 120ms);
 }
-.motion .reveal:not(.in):is(.grid-2, .grid-3, .market-grid) > *,
-.motion .reveal:not(.in) :is(.grid-2, .grid-3, .market-grid) > * {
+.motion [data-rv='wait'] {
+  opacity: 0;
+  transform: translateY(18px);
+}
+/* Cards in a grid follow one after another. */
+.motion [data-rv]:is(.grid-2, .grid-3, .market-grid) > *,
+.motion [data-rv] :is(.grid-2, .grid-3, .market-grid) > * {
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: calc(var(--i, 0) * 60ms + 100ms);
+}
+.motion [data-rv='wait']:is(.grid-2, .grid-3, .market-grid) > *,
+.motion [data-rv='wait'] :is(.grid-2, .grid-3, .market-grid) > * {
   opacity: 0;
   transform: translateY(14px);
-}
-/* Safety net: if the script never starts, show everything after a moment. */
-@keyframes g2m-show {
-  to {
-    opacity: 1;
-    transform: none;
-    filter: none;
-  }
-}
-.motion:not(.motion-ready) main .section > *,
-.motion:not(.motion-ready) main .section-tight > * {
-  animation: g2m-show 0.6s 2.5s forwards;
 }
 
 /* Metal buttons drift toward the cursor (--tx/--ty from MotionRoot). */
@@ -1322,60 +1304,4 @@ body::before {
     filter 0.15s ease,
     background 0.15s ease,
     translate 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-/* Custom cursor: a metal square that turns into a card outline over anything clickable. */
-.has-cursor,
-.has-cursor * {
-  cursor: none;
-}
-.has-cursor :is(input, textarea, [contenteditable='true']) {
-  cursor: text;
-}
-.cursor {
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 9999;
-  width: 10px;
-  height: 10px;
-  margin: -5px 0 0 -5px;
-  border: 1.5px solid transparent;
-  border-radius: 3px;
-  background: var(--metal);
-  background-size: 200% 100%;
-  pointer-events: none;
-  opacity: 0;
-  transition:
-    width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
-    height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
-    margin 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
-    border-radius 0.3s ease,
-    border-color 0.3s ease,
-    background-color 0.3s ease,
-    opacity 0.2s ease,
-    scale 0.15s ease;
-}
-.cursor {
-  display: none;
-}
-.has-cursor .cursor {
-  display: block;
-}
-.cursor[data-on='true'] {
-  opacity: 1;
-}
-.cursor[data-mode='link'] {
-  width: 46px;
-  height: 29px;
-  margin: -14.5px 0 0 -23px;
-  border-radius: 6px;
-  border-color: var(--accent);
-  background: transparent;
-}
-.cursor[data-mode='text'] {
-  opacity: 0;
-}
-.cursor[data-down='true'] {
-  scale: 0.85;
 }

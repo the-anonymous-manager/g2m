@@ -11,6 +11,10 @@ retention angle. g2m.life is his crypto card directory, like CoinMarketCap or Co
 
 G2M is a **global** brand (Akash, 22 Oct 2026). The site favours no market: visitors see their own market, and
 anyone outside the five tracked markets sees all regions. India and the UAE stay Akash's angle on X, not on the site.
+The home page region panels are the visitor's own country (when it has no panel), the US, the UK, the EU / EEA and
+Asia (Akash, 22 Oct 2026: Asia replaces separate India and UAE panels). Asia follows the UN geoscheme without Cyprus
+(`ASIA` in `lib/countries.mjs`); a card counts there when it is confirmed in at least one Asian country, and each card
+shows how many.
 
 Location: middleware refreshes the `g2m_cc` country cookie from Vercel's geo header on every page load (so VPNs and
 travel apply at once); the browser timezone is only used when there is no header. A detected region is never written
@@ -37,11 +41,13 @@ Gnosis Pay was removed (Akash, 22 Oct 2026): it closes its own card on 20 Dec 20
 30 Sep 2026, per its help center. 26 cards remain.
 
 Motion (Akash asked for a zerobrand.xyz feel, 22 Oct 2026), all in `components/motion/`, no extra libraries:
-a metal-square cursor that turns into a card outline over links (mouse/trackpad only); a drifting mono glyph field
-behind the home hero that lights up rose gold around the cursor (30 fps cap, paused off-screen, still frame on
-touch screens); a staggered blur-in entrance for the hero; blocks that rise and un-blur as they scroll in; the
-Featured card tilting toward the cursor with light across the metal; magnetic metal buttons; counting stats.
-All of it switches off for visitors whose system asks for reduced motion, and content never depends on it.
+a drifting mono glyph field behind the home hero that lights up rose gold around the cursor (24 fps cap, paused
+off-screen, still frame on touch screens); a staggered entrance for the hero; blocks that fade and rise as they
+scroll in; the Featured card tilting toward the cursor with light across the metal; magnetic metal buttons; counting
+stats. All of it switches off for visitors whose system asks for reduced motion, and content never depends on it.
+The custom cursor was removed (Akash, 22 Oct 2026: it felt laggy); keep the normal system cursor. Reveals only
+animate opacity and transform (no blur, which was slow), and fail open: a block is hidden only while the script is
+watching it below the fold, so a page change or re-render can never leave a section blank.
 
 ## Brand decisions (locked)
 

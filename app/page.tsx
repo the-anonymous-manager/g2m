@@ -4,9 +4,10 @@ import { getSponsor } from '@/lib/sponsor';
 import { OutboundLink } from '@/components/OutboundLink';
 import { HomeLeaderboard } from '@/components/HomeLeaderboard';
 import { GlyphField } from '@/components/motion/GlyphField';
-import { MarketPanels } from '@/components/MarketPanels';
+import { MarketPanels, type MarketPanel } from '@/components/MarketPanels';
 import { toRow, type Card, type Market } from '@/lib/types';
-import { MARKET_LABELS } from '@/lib/regions';
+import { MARKET_LABELS, availabilityIn } from '@/lib/regions';
+import { ASIA } from '@/lib/countries.mjs';
 import { cashbackLabel, fmtDate, pct, usd } from '@/lib/format';
 import { site } from '@/lib/site';
 import { CardArt } from '@/components/CardArt';
@@ -25,13 +26,40 @@ const BROWSE = [
   { label: 'UAE', href: '/cards?country=AE' }
 ];
 
-const MARKETS: Market[] = ['US', 'GB', 'EU', 'IN', 'AE'];
+const MARKETS: Market[] = ['US', 'GB', 'EU'];
 
 // Re-check hourly so a sponsorship starts and ends on its dates without a new deploy.
 export const revalidate = 3600;
 
 function confirmedIn(cards: Card[], m: Market) {
   return cards.filter((c) => c.coverage.markets[m] === 'yes');
+}
+
+// One panel each for the US, the UK and the EU, then Asia as a whole: a card counts there when it is
+// confirmed in at least one Asian country, and says how many.
+function regionPanels(cards: Card[]): MarketPanel[] {
+  const panels: MarketPanel[] = MARKETS.map((m) => {
+    const list = confirmedIn(cards, m);
+    return {
+      key: m,
+      title: MARKET_LABELS[m],
+      // The EU is not one country, so its link opens the full list; the visitor's own country is picked there.
+      href: m === 'EU' ? '/cards' : `/cards?country=${m}`,
+      count: list.length,
+      cards: list.slice(0, 3).map((c) => ({ row: toRow(c) }))
+    };
+  });
+  const asia = cards
+    .map((c) => ({ c, n: ASIA.filter((cc) => availabilityIn(c, cc) === 'yes').length }))
+    .filter((x) => x.n > 0);
+  panels.push({
+    key: 'ASIA',
+    title: 'Asia',
+    href: '/cards',
+    count: asia.length,
+    cards: asia.slice(0, 3).map(({ c, n }) => ({ row: toRow(c), note: `${n} ${n === 1 ? 'country' : 'countries'} in Asia` }))
+  });
+  return panels;
 }
 
 export default function HomePage() {
@@ -209,17 +237,11 @@ export default function HomePage() {
             Cards confirmed where you live
           </h2>
           <p className="lead">
-            A card is only useful if you can get it. We check every card for the US, the UK, the EU, India and the UAE,
-            and say clearly when an issuer has not confirmed a country.
+            A card is only useful if you can get it. We check every card country by country, and say clearly when an
+            issuer has not confirmed a country.
           </p>
         </div>
-        <MarketPanels
-          rows={rows}
-          panels={MARKETS.map((m) => {
-            const list = confirmedIn(cards, m);
-            return { market: m, count: list.length, cards: list.slice(0, 3).map(toRow) };
-          })}
-        />
+        <MarketPanels rows={rows} panels={regionPanels(cards)} />
       </section>
 
       {/* How we judge */}

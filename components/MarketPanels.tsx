@@ -2,39 +2,44 @@
 
 import Link from 'next/link';
 import { useMemo } from 'react';
-import type { CardRow, Market } from '@/lib/types';
-import { MARKET_LABELS, availabilityIn, countryName, countryToMarket } from '@/lib/regions';
+import type { CardRow } from '@/lib/types';
+import { availabilityIn, countryName, countryToMarket } from '@/lib/regions';
 import { rankIn } from '@/lib/score';
 import { CardArt } from '@/components/CardArt';
 import { ScorePill } from '@/components/bits';
 import { useRegion } from '@/components/RegionContext';
 
-export type MarketPanel = { market: Market; count: number; cards: CardRow[] };
+export type MarketPanel = {
+  key: string;
+  title: string;
+  href: string;
+  count: number;
+  cards: { row: CardRow; note?: string }[];
+};
 
-type Panel = { key: string; title: string; href: string; count: number; cards: CardRow[]; mine: boolean };
+type Panel = MarketPanel & { mine: boolean };
 
-// Cards confirmed in each checked market. A visitor from anywhere else gets a panel for their
-// own country first; a visitor inside a checked market sees that market first.
+// Cards confirmed in the US, the UK, the EU and Asia. A visitor whose country has no panel of its own
+// (Japan, India, Brazil...) gets one first; a visitor in the US, the UK or the EEA sees that panel first.
 export function MarketPanels({ panels, rows }: { panels: MarketPanel[]; rows: CardRow[] }) {
   const { country, ready } = useRegion();
   const here = ready ? country : null;
   const myMarket = countryToMarket(here);
 
   const ordered = useMemo<Panel[]>(() => {
-    const fixed: Panel[] = panels.map((p) => ({
-      key: p.market,
-      title: MARKET_LABELS[p.market],
-      // The EU is not one country, so its link opens the full list; the visitor's own country is picked there.
-      href: p.market === 'EU' ? '/cards' : `/cards?country=${p.market}`,
-      count: p.count,
-      cards: p.cards,
-      mine: p.market === myMarket
-    }));
-    if (here && !myMarket) {
+    const all: Panel[] = panels.map((p) => ({ ...p, mine: p.key === myMarket }));
+    if (here && !all.some((p) => p.mine)) {
       const yes = rankIn(rows, here).filter((c) => availabilityIn(c, here) === 'yes');
-      fixed.unshift({ key: here, title: countryName(here), href: `/cards?country=${here}`, count: yes.length, cards: yes.slice(0, 3), mine: true });
+      all.unshift({
+        key: here,
+        title: countryName(here),
+        href: `/cards?country=${here}`,
+        count: yes.length,
+        cards: yes.slice(0, 3).map((row) => ({ row })),
+        mine: true
+      });
     }
-    return [...fixed].sort((a, b) => Number(b.mine) - Number(a.mine));
+    return all.sort((a, b) => Number(b.mine) - Number(a.mine));
   }, [panels, rows, here, myMarket]);
   const anyMine = ordered.some((p) => p.mine);
 
@@ -54,14 +59,21 @@ export function MarketPanels({ panels, rows }: { panels: MarketPanel[]; rows: Ca
           </div>
           {cards.length ? (
             <ul className="list-plain">
-              {cards.map((c) => (
+              {cards.map(({ row: c, note }) => (
                 <li key={c.slug} style={{ alignItems: 'center', justifyContent: 'space-between' }}>
                   <Link
                     href={`/cards/${c.slug}`}
                     style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', fontWeight: 600 }}
                   >
                     <CardArt card={c} size="sm" />
-                    {c.name}
+                    <span className="stack" style={{ gap: 2 }}>
+                      {c.name}
+                      {note ? (
+                        <span className="faint" style={{ fontSize: 12, fontWeight: 500 }}>
+                          {note}
+                        </span>
+                      ) : null}
+                    </span>
                   </Link>
                   <ScorePill value={c.score.total} showBar={false} />
                 </li>
