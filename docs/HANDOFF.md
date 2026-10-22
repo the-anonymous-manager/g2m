@@ -82,8 +82,9 @@ Notes for the next data check:
 - **Tria**: prices (Lite $20, Pro $109, Max $250 a year) and perks come from screenshots of the Tria app that Akash
   sent on 22 Oct 2026; the website does not publish them. The app says Lite pays 0.5% after $1,000 a month; the
   help center still says 1%. The app was used.
-- **Kolo**: listed, but Akash will send more details. Kolo does not publish its fees, and DefiLlama reportedly
-  shows 1% cashback after the first month against Kolo's advertised 2%.
+- **Kolo**: rebuilt from help.kolo.xyz (Akash pointed to it, 22 Oct 2026). Cashback is 2% for 30 days, then 1%,
+  capped at $100 a month. Every card payment pays a 1% conversion fee, even though the homepage says "0% markups".
+  Cards are virtual only; physical cards are planned for 2027.
 - XPL (Plasma) and COCA token ids for live staking values were not added (CoinGecko lookup was throttled).
 
 Cards Akash had on his radar but not yet added: PEXX, Fizen, Infini, Cashi, WasabiCard, Kite.
@@ -113,9 +114,8 @@ compare, finder, calculator input checks, theme memory, share images, and a clea
 
 1. Deploy on Vercel from this repo and connect the g2m.life domain (Akash has not done this yet).
 2. Settings now default to info@g2m.life and @0akash0x; override them on Vercel only if they change.
-3. Update Kolo with the details Akash sends.
-4. Add referral links per card when deals are signed.
-5. Re-check every card within 90 days of its `lastChecked` date (the validator warns).
+3. Add referral links per card when deals are signed.
+4. Re-check every card within 90 days of its `lastChecked` date (the validator warns).
 
 ## Ideas for version 2 (not decided, ask Akash)
 
