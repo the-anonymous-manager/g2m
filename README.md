@@ -26,7 +26,11 @@ npm run build      # checks cards.json first, then builds
 npm start
 ```
 
-## Put it live on g2m.life (Vercel, free tier is enough)
+## Put it live on g2m.life (Vercel)
+
+Vercel's free Hobby plan handles the traffic, but its terms limit it to non-commercial sites. Launch on Hobby, then
+move to the Pro plan (see vercel.com/pricing) before adding the first referral link in `links.affiliate`, since
+referral fees make the site commercial. No other hosting or database is needed.
 
 1. Push this folder to a GitHub repo (private is fine).
 2. On vercel.com: **Add New → Project → Import** the repo. Framework is detected as Next.js. Click **Deploy**.
