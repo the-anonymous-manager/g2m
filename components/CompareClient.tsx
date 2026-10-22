@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CardRow, Market } from '@/lib/types';
 import { MARKET_LABELS } from '@/lib/regions';
-import { CUSTODY_LABEL, NP, TYPE_LABEL, cashbackLabel, pct, usd } from '@/lib/format';
+import { CUSTODY_LABEL, NP, TYPE_LABEL, cashbackLabel, pct, perPurchaseFee, usd } from '@/lib/format';
 import { CardArt } from '@/components/CardArt';
 import { MarketBadge, ScorePill } from '@/components/bits';
 import { OutboundLink } from '@/components/OutboundLink';
@@ -29,13 +29,7 @@ const ROWS: Row[] = [
   { label: 'Annual fee', render: (c) => usd(c.fees.annualUsd), value: (c) => c.fees.annualUsd, better: 'low' },
   { label: 'FX fee', render: (c) => pct(c.fees.fxPct), value: (c) => c.fees.fxPct, better: 'low' },
   { label: 'Top-up fee', render: (c) => pct(c.fees.topUpPct), value: (c) => c.fees.topUpPct, better: 'low' },
-  {
-    label: 'Per-purchase fee',
-    render: (c) =>
-      c.fees.txPct === 0 && c.fees.txFlatUsd === 0
-        ? 'None listed'
-        : [c.fees.txPct ? pct(c.fees.txPct) : null, c.fees.txFlatUsd ? `$${c.fees.txFlatUsd}` : null].filter(Boolean).join(' + ')
-  },
+  { label: 'Per-purchase fee', render: (c) => perPurchaseFee(c.fees) },
   { label: 'ATM', render: (c) => c.fees.atm ?? NP },
   { label: 'Network', render: (c) => c.network },
   { label: 'Card type', render: (c) => TYPE_LABEL[c.type] },

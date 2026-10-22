@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { getCard, getCards, getRank } from '@/lib/cards';
 import type { Card, Market, Tier } from '@/lib/types';
 import { MARKET_LABELS } from '@/lib/regions';
-import { CUSTODY_LABEL, NP, TYPE_LABEL, cashbackLabel, fmtDate, pct, usd } from '@/lib/format';
+import { CUSTODY_LABEL, NP, TYPE_LABEL, cashbackLabel, fmtDate, pct, perPurchaseFee, usd } from '@/lib/format';
 import { SCORE_WEIGHTS } from '@/lib/score';
 import { absoluteUrl, site } from '@/lib/site';
 import { CardArt } from '@/components/CardArt';
@@ -190,13 +190,7 @@ export default async function CardPage({ params }: Props) {
           </div>
           <div className="fact">
             <dt>Per-purchase fee</dt>
-            <dd>
-              {card.fees.txPct === 0 && card.fees.txFlatUsd === 0
-                ? 'None listed'
-                : [card.fees.txPct ? pct(card.fees.txPct) : null, card.fees.txFlatUsd ? `$${card.fees.txFlatUsd}` : null]
-                    .filter(Boolean)
-                    .join(' + ')}
-            </dd>
+            <dd>{perPurchaseFee(card.fees)}</dd>
           </div>
           <div className="fact">
             <dt>ATM</dt>

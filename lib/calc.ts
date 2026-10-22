@@ -76,7 +76,9 @@ export function tierValue(card: CardRow, tier: Tier, input: CalcInput, index = 1
   const fx = (yearSpend * (input.foreign / 100) * (fxPct ?? 0)) / 100;
 
   const purchases = input.spend > 0 ? (input.spend / input.ticket) * 12 : 0;
-  const tx = (yearSpend * card.fees.txPct) / 100 + card.fees.txFlatUsd * purchases;
+  const small = card.fees.smallPurchase;
+  const smallCount = small && input.ticket < small.underUsd ? purchases * (small.foreignOnly ? input.foreign / 100 : 1) : 0;
+  const tx = (yearSpend * card.fees.txPct) / 100 + card.fees.txFlatUsd * purchases + (small ? small.feeUsd * smallCount : 0);
 
   const req = tier.requirement?.trim();
   if (req && !req.startsWith('$')) {

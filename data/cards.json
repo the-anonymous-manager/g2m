@@ -128,7 +128,7 @@
     "custody": "unknown",
     "summary": "Stablecoin card built for global spenders, with USD cashback on every tier and KAST Points on top for Premium and Private members.",
     "cashback": { "basePct": 1.5, "maxPct": 3, "payout": "USD plus KAST Points", "note": "Standard pays 1.5% on the first $2,000 each month. Premium adds 1% in points, Private adds 2%." },
-    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "Up to 2% on non-USD FX; up to 3% foreign transaction fee.", "topUpPct": 0, "atm": "$3 + 2%; up to $250 per withdrawal", "other": ["Standard card shipping $40", "$0.10 on non-USD purchases under $25", "Extra virtual cards $2 each"] },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "Up to 2% on non-USD FX; up to 3% foreign transaction fee.", "topUpPct": 0, "smallPurchase": { "feeUsd": 0.1, "underUsd": 25, "foreignOnly": true }, "atm": "$3 + 2%; up to $250 per withdrawal", "other": ["Standard card shipping $40", "Extra virtual cards $2 each"] },
     "tiers": [
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 1.5, "bands": [ { "uptoUsd": 2000, "pct": 1.5 }, { "uptoUsd": null, "pct": 0 } ], "perks": ["Concierge"] },
       { "name": "Premium", "feeUsdYear": 1000, "cashbackPct": 2, "requirement": "$1,000 a year", "perks": ["+1% back in KAST Points", "Concierge"] },
