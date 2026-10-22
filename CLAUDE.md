@@ -36,6 +36,9 @@ and confirm what changed on the site (not which files moved).
   (see its data-official.js): use the issuer URL it cites as the source, never an aggregator-only list.
 - A tier only offered in some countries gets `countries` (e.g. `["TH"]`, `"EEA"` for all 30 EEA countries), or
   `exceptCountries` (e.g. a "Global" tier when the US has its own). Country scores use these.
+- `fees.fxByCurrency` (sheet "No-FX currencies", e.g. `USD 0; EUR 0.2`) and `fees.fxHome` ("Billed in your own
+  currency") say which spending carries no FX fee; only from issuer sources, else leave empty. `fees.fxPct` stays the
+  fee on all other currencies. Country currencies live in `lib/currencies.mjs`.
 - Real card pictures: "Card image" link in the sheet (`image.source`); the sync stores the files in
   `public/card-images/`. Only use issuer press-kit images or ones an issuer sent; never copy from other sites.
 - Referral links go in `links.affiliate`; all "Get the card" buttons use `/go/<slug>`, which picks it up.

@@ -1,11 +1,13 @@
-import type { CardRow, Market } from '@/lib/types';
-import { isMarket, MARKET_LABELS } from '@/lib/regions';
+import type { CardRow } from '@/lib/types';
+import { availabilityIn, countryName, isCountry } from '@/lib/regions';
 import { cashbackLabel, pct } from '@/lib/format';
-import { netRate } from '@/lib/score';
+import { netRate, rankIn } from '@/lib/score';
+import { homeFx } from '@/lib/fx';
 
 export type Hold = 'self' | 'exchange' | 'any';
 export type Priority = 'cashback' | 'fees' | 'travel' | 'perks';
-export type FinderAnswers = { market: Market | 'OTHER'; hold: Hold; priority: Priority };
+/** country: where the visitor lives (ISO code), or 'ALL' when they would rather not say. */
+export type FinderAnswers = { country: string; hold: Hold; priority: Priority };
 
 export type Pick = { card: CardRow; fit: number; reasons: string[]; caution: string | null };
 
@@ -20,32 +22,39 @@ export function parseAnswers(p: Record<string, string | string[] | undefined>): 
   const m = one('m').toUpperCase();
   const h = one('h');
   const pr = one('p');
-  const market = m === 'OTHER' ? 'OTHER' : isMarket(m) ? m : null;
+  // Older links used OTHER for "somewhere else" and EU for the whole EU (not one country, so asked again).
+  const country = m === 'ALL' || m === 'OTHER' ? 'ALL' : isCountry(m) ? m : null;
   const hold = h === 'self' || h === 'exchange' || h === 'any' ? h : null;
   const priority = pr === 'cashback' || pr === 'fees' || pr === 'travel' || pr === 'perks' ? pr : null;
-  if (!market || !hold || !priority) return null;
-  return { market, hold, priority };
+  if (!country || !hold || !priority) return null;
+  return { country, hold, priority };
 }
 
-/** Three cards that fit the answers, with plain reasons. Cards not available in the market are left out. */
+/**
+ * Three cards that fit the answers, with plain reasons. With a country, cards not available there are left out,
+ * scores are the ones for that country, and fees include FX on everyday spending in its currency.
+ */
 export function recommend(cards: CardRow[], a: FinderAnswers, count = 3): Pick[] {
+  const here = a.country === 'ALL' ? null : a.country;
+  const place = here ? countryName(here) : null;
+  const pool = here ? rankIn(cards, here) : cards;
   const picks: Pick[] = [];
-  for (const c of cards) {
+  for (const c of pool) {
     const reasons: string[] = [];
     let caution: string | null = null;
     let fit = c.score.total * 0.4;
 
-    if (a.market !== 'OTHER') {
-      const av = c.coverage.markets[a.market];
-      if (av === 'no') continue;
-      if (av === 'yes') {
+    if (here) {
+      if (availabilityIn(c, here) === 'yes') {
         fit += 20;
-        reasons.push(`Confirmed for ${MARKET_LABELS[a.market]}`);
+        reasons.push(`Confirmed for ${place}`);
       } else {
         fit -= 20;
-        caution = `${MARKET_LABELS[a.market]} is not confirmed by the issuer yet. Check before you apply.`;
+        caution = `${place} is not confirmed by the issuer yet. Check before you apply.`;
       }
     }
+    // FX on everyday spending at home: none when the card bills in the local currency.
+    const home = here ? homeFx(c, null, here) : null;
 
     if (a.hold === 'self') {
       if (c.custody === 'self-custodial') {
@@ -59,13 +68,19 @@ export function recommend(cards: CardRow[], a: FinderAnswers, count = 3): Pick[]
     const typical = netRate(c);
     if (a.priority === 'cashback') {
       fit += Math.min(typical * 8, 40) + Math.min(c.cashback.maxPct ?? 0, 10);
+      // An FX fee on every purchase at home eats into the cashback.
+      if (home?.known && home.pct) fit -= Math.min(home.pct * 8, 16);
       if (c.cashback.basePct != null || c.cashback.maxPct != null) {
         reasons.push(`${cashbackLabel(c.cashback.basePct, c.cashback.maxPct)} back`);
       }
     } else if (a.priority === 'fees') {
       fit += c.score.fees * 1.2 + (c.fees.annualUsd === 0 ? 5 : 0);
       if (c.fees.annualUsd === 0) reasons.push('No annual fee');
-      if (c.fees.fxPct != null) reasons.push(`${pct(c.fees.fxPct)} FX fee`);
+      if (home?.currency && home.known && home.pct != null) {
+        // Everyday spending matters more than travel here.
+        fit += home.pct === 0 ? 10 : home.pct <= 1 ? 4 : 0;
+        reasons.push(home.pct === 0 ? `No FX fee on your ${home.currency} spending` : `${pct(home.pct)} FX fee on your ${home.currency} spending`);
+      } else if (c.fees.fxPct != null) reasons.push(`${pct(c.fees.fxPct)} FX fee`);
     } else if (a.priority === 'travel') {
       const fx = c.fees.fxPct;
       fit += fx == null ? 0 : fx === 0 ? 20 : fx <= 1 ? 12 : fx <= 1.5 ? 8 : fx <= 2 ? 4 : 0;

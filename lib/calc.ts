@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import type { CardRow, Market, Tier } from '@/lib/types';
+import type { CardRow, Tier } from '@/lib/types';
 import { tierOffered } from '@/lib/regions';
-import { EEA } from '@/lib/countries.mjs';
+import { homeFx, otherFxPct } from '@/lib/fx';
 
 // Calculator inputs are validated and clamped, so bad URL params or typed values
 // can never break the page: anything invalid falls back to a sensible default.
@@ -62,7 +62,12 @@ export type TierResult = {
   flags: string[];
 };
 
-export function tierValue(card: CardRow, tier: Tier, input: CalcInput, index = 1): TierResult {
+/**
+ * One tier's yearly value. With `country`, spending at home is in that country's currency: no FX fee when the card
+ * bills in it, the card's FX fee otherwise. `input.foreign` is the share spent in other currencies (travel, foreign
+ * shops), which pays the card's usual FX fee.
+ */
+export function tierValue(card: CardRow, tier: Tier, input: CalcInput, index = 1, country?: string | null): TierResult {
   const flags: string[] = [];
   const yearSpend = input.spend * 12;
 
@@ -73,9 +78,15 @@ export function tierValue(card: CardRow, tier: Tier, input: CalcInput, index = 1
   if (tier.feeUsdYear == null) flags.push('Tier price not published');
   const fee = tier.feeUsdYear ?? 0;
 
-  const fxPct = tier.fxPct ?? card.fees.fxPct;
-  if (fxPct == null && input.foreign > 0) flags.push('FX fee not published');
-  const fx = (yearSpend * (input.foreign / 100) * (fxPct ?? 0)) / 100;
+  const foreignShare = input.foreign / 100;
+  const otherPct = otherFxPct(card, tier);
+  const home = country ? homeFx(card, tier, country) : null;
+  const homePct = home ? home.pct : 0;
+  if ((otherPct == null && foreignShare > 0) || (home && homePct == null && foreignShare < 1)) flags.push('FX fee not published');
+  if (home && !home.known && homePct && foreignShare < 1) {
+    flags.push(`Billing currency not published, so FX is counted on your ${home.currency ?? 'local'} spending too`);
+  }
+  const fx = (yearSpend * ((1 - foreignShare) * (homePct ?? 0) + foreignShare * (otherPct ?? 0))) / 100;
 
   const purchases = input.spend > 0 ? (input.spend / input.ticket) * 12 : 0;
   const small = card.fees.smallPurchase;
@@ -98,24 +109,20 @@ export function tierValue(card: CardRow, tier: Tier, input: CalcInput, index = 1
 
 export type CardResult = TierResult & { card: CardRow };
 
-/** Is this tier offered in the market? The EU counts when any EEA country qualifies. */
-const offeredIn = (tier: Tier, market: Market) =>
-  market === 'EU' ? EEA.some((cc: string) => tierOffered(tier, cc)) : tierOffered(tier, market);
-
 /**
- * Best tier per card for this spending profile, sorted by net yearly value. With a market, tiers only offered
- * elsewhere (e.g. a US-only plan for someone in India) are left out.
+ * Best tier per card for this spending profile, sorted by net yearly value. With a country, tiers only offered
+ * elsewhere (e.g. a US-only plan for someone in India) are left out and FX follows that country's currency.
  */
-export function rankByValue(cards: CardRow[], input: CalcInput, market?: Market | null): CardResult[] {
+export function rankByValue(cards: CardRow[], input: CalcInput, country?: string | null): CardResult[] {
   return cards
     .map((card) => {
       const options = card.tiers
         .map((t, i) => ({ t, i }))
-        .filter(({ t }) => !market || offeredIn(t, market))
+        .filter(({ t }) => !country || tierOffered(t, country))
         .filter(({ t, i }) => (input.all ? !t.comingSoon : isOpenTier(t, i)))
-        .map(({ t, i }) => tierValue(card, t, input, i));
-      const fallback = card.tiers.find((t) => !market || offeredIn(t, market)) ?? card.tiers[0];
-      const best = options.sort((a, b) => b.net - a.net)[0] ?? tierValue(card, fallback, input, card.tiers.indexOf(fallback));
+        .map(({ t, i }) => tierValue(card, t, input, i, country));
+      const fallback = card.tiers.find((t) => !country || tierOffered(t, country)) ?? card.tiers[0];
+      const best = options.sort((a, b) => b.net - a.net)[0] ?? tierValue(card, fallback, input, card.tiers.indexOf(fallback), country);
       return { ...best, card };
     })
     .sort((a, b) => b.net - a.net);

@@ -48,6 +48,25 @@ const showBool = (b) => (b == null ? '' : b ? 'yes' : 'no');
 const optText = (v) => str(v) || undefined;
 const optList = (a) => (a.length ? a : undefined);
 
+// Currencies with no (or a lower) FX fee, e.g. "USD 0; EUR 0.2".
+function showRates(map) {
+  return map ? Object.entries(map).map(([cur, p]) => `${cur} ${p}`).join('; ') : '';
+}
+function rates(v) {
+  const parts = str(v)
+    .split(';')
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (!parts.length) return undefined;
+  const out = {};
+  for (const p of parts) {
+    const m = p.match(/^([A-Za-z]{3})\s*([\d.]+)\s*%?$/);
+    if (!m) throw new CellError(`"${p}" should look like "USD 0" or "EUR 0.2"`);
+    out[m[1].toUpperCase()] = Number(m[2]);
+  }
+  return out;
+}
+
 // Tier cashback that changes with monthly spend, e.g. "2.5% up to $10000; 2%".
 function showBands(bands) {
   if (!bands) return '';
@@ -88,6 +107,8 @@ const CARD_COLUMNS = [
   ['Annual fee $', (c) => showNum(c.fees.annualUsd)],
   ['FX fee %', (c) => showNum(c.fees.fxPct)],
   ['FX note', (c) => c.fees.fxNote ?? ''],
+  ['No-FX currencies', (c) => showRates(c.fees.fxByCurrency)],
+  ['Billed in your own currency', (c) => (c.fees.fxHome ? 'yes' : '')],
   ['Top-up fee %', (c) => showNum(c.fees.topUpPct)],
   ['Fee on every purchase %', (c) => (c.fees.txPct ? showNum(c.fees.txPct) : '')],
   ['Fee on every purchase $', (c) => (c.fees.txFlatUsd ? showNum(c.fees.txFlatUsd) : '')],
@@ -285,6 +306,8 @@ export function tablesToCards(tables) {
         annualUsd: n('Annual fee $'),
         fxPct: n('FX fee %'),
         fxNote: optText(r.get('FX note')),
+        fxByCurrency: cell('Cards', r, 'No-FX currencies', rates),
+        fxHome: b('Billed in your own currency') || undefined,
         topUpPct: n('Top-up fee %'),
         txPct: n('Fee on every purchase %') || undefined,
         txFlatUsd: n('Fee on every purchase $') || undefined,
@@ -405,7 +428,7 @@ const FIELD_COLUMNS = {
   slug: 'Card ID', name: 'Name', brand: 'Brand', issuer: 'Issuer (bank)', network: 'Network', type: 'Type',
   forms: 'Forms', custody: 'Custody', metal: 'Card colour', summary: 'Summary',
   'cashback.basePct': 'Base cashback %', 'cashback.maxPct': 'Max cashback %', 'cashback.payout': 'Cashback paid in',
-  'fees.annualUsd': 'Annual fee $', 'fees.fxPct': 'FX fee %', 'fees.topUpPct': 'Top-up fee %',
+  'fees.annualUsd': 'Annual fee $', 'fees.fxPct': 'FX fee %', 'fees.fxByCurrency': 'No-FX currencies', 'fees.topUpPct': 'Top-up fee %',
   'fees.txPct': 'Fee on every purchase %', 'fees.txFlatUsd': 'Fee on every purchase $',
   'fees.smallPurchase.feeUsd': 'Small-purchase fee $', 'fees.smallPurchase.underUsd': 'Small purchase = under $',
   'coverage.countries': 'Number of countries', 'coverage.scope': 'Where it works',

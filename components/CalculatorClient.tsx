@@ -2,8 +2,9 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import type { CardRow, Market } from '@/lib/types';
-import { MARKET_LABELS, isMarket } from '@/lib/regions';
+import type { CardRow } from '@/lib/types';
+import { COUNTRIES, availabilityIn, countryName, isCountry } from '@/lib/regions';
+import { currencyOf } from '@/lib/currencies.mjs';
 import { parseCalcInput, rankByValue, type CalcInput } from '@/lib/calc';
 import { money } from '@/lib/format';
 import { CardArt } from '@/components/CardArt';
@@ -11,34 +12,34 @@ import { ShareBar } from '@/components/ShareBar';
 import { useRegion } from '@/components/RegionContext';
 import { track } from '@/lib/analytics';
 
-const MARKETS: Market[] = ['IN', 'AE', 'US', 'GB', 'EU'];
+type Props = { rows: CardRow[]; initial: CalcInput; initialCountry: string; hadCountry: boolean };
 
-type Props = { rows: CardRow[]; initial: CalcInput; initialMarket: Market | '' ; hadMarket: boolean };
-
-export function CalculatorClient({ rows, initial, initialMarket, hadMarket }: Props) {
+export function CalculatorClient({ rows, initial, initialCountry, hadCountry }: Props) {
   // Raw text for the inputs, so typing never jumps; parsed and clamped values drive the maths.
   const [spendText, setSpendText] = useState(String(initial.spend));
   const [foreignText, setForeignText] = useState(String(initial.foreign));
   const [ticketText, setTicketText] = useState(String(initial.ticket));
   const [all, setAll] = useState(initial.all);
-  const [market, setMarket] = useState<Market | ''>(initialMarket);
-  const { market: myMarket, ready } = useRegion();
+  const [country, setCountry] = useState(initialCountry);
+  const { country: myCountry, ready } = useRegion();
   const first = useRef(true);
   const regionApplied = useRef(false);
 
+  // Start from where the visitor is, unless the link already says a country.
   useEffect(() => {
-    if (!ready || regionApplied.current || hadMarket) return;
+    if (!ready || regionApplied.current || hadCountry) return;
     regionApplied.current = true;
-    if (myMarket) setMarket(myMarket);
-  }, [ready, myMarket, hadMarket]);
+    if (myCountry) setCountry(myCountry);
+  }, [ready, myCountry, hadCountry]);
+  const currency = currencyOf(country);
 
   const input = useMemo(
     () => parseCalcInput({ spend: spendText, foreign: foreignText, ticket: ticketText, all }),
     [spendText, foreignText, ticketText, all]
   );
 
-  const eligible = useMemo(() => (market ? rows.filter((r) => r.coverage.markets[market] !== 'no') : rows), [rows, market]);
-  const results = useMemo(() => rankByValue(eligible, input, market || null), [eligible, input, market]);
+  const eligible = useMemo(() => (country ? rows.filter((r) => availabilityIn(r, country) !== 'no') : rows), [rows, country]);
+  const results = useMemo(() => rankByValue(eligible, input, country || null), [eligible, input, country]);
 
   useEffect(() => {
     if (first.current) {
@@ -47,11 +48,11 @@ export function CalculatorClient({ rows, initial, initialMarket, hadMarket }: Pr
     }
     const p = new URLSearchParams({ spend: String(input.spend), foreign: String(input.foreign), ticket: String(input.ticket) });
     if (input.all) p.set('all', '1');
-    if (market) p.set('market', market);
+    if (country) p.set('country', country);
     window.history.replaceState(window.history.state, '', `${window.location.pathname}?${p.toString()}`);
-    const t = setTimeout(() => track('Calculator', { spend: input.spend, market: market || 'ALL' }), 800);
+    const t = setTimeout(() => track('Calculator', { spend: input.spend, country: country || 'ALL' }), 800);
     return () => clearTimeout(t);
-  }, [input, market]);
+  }, [input, country]);
 
   const spendErr = spendText !== '' && (!Number.isFinite(Number(spendText)) || Number(spendText) < 0 || Number(spendText) > 1_000_000);
   const foreignErr = foreignText !== '' && (!Number.isFinite(Number(foreignText)) || Number(foreignText) < 0 || Number(foreignText) > 100);
@@ -92,7 +93,11 @@ export function CalculatorClient({ rows, initial, initialMarket, hadMarket }: Pr
               aria-describedby="c-foreign-help"
             />
             <span id="c-foreign-help" className="faint" style={{ fontSize: 12, color: foreignErr ? 'var(--bad)' : undefined }}>
-              {foreignErr ? 'Enter a percentage from 0 to 100' : 'Travel and non-USD shopping'}
+              {foreignErr
+                ? 'Enter a percentage from 0 to 100'
+                : currency
+                  ? `Not in ${currency}: travel and foreign shops. The rest is spent in ${currency}.`
+                  : 'Travel and shopping in other currencies'}
             </span>
           </div>
           <div className="field">
@@ -113,14 +118,15 @@ export function CalculatorClient({ rows, initial, initialMarket, hadMarket }: Pr
             </span>
           </div>
           <div className="field">
-            <label className="field-label" htmlFor="c-market">
+            <label className="field-label" htmlFor="c-country">
               Where you live
             </label>
-            <select id="c-market" className="select" value={market} onChange={(e) => setMarket(isMarket(e.target.value) ? e.target.value : '')}>
-              <option value="">All regions</option>
-              {MARKETS.map((m) => (
-                <option key={m} value={m}>
-                  {MARKET_LABELS[m]}
+            <select id="c-country" className="select" value={country} onChange={(e) => setCountry(isCountry(e.target.value) ? e.target.value : '')}>
+              <option value="">All countries</option>
+              {COUNTRIES.map((c) => (
+                <option key={c.code} value={c.code}>
+                  {c.name}
+                  {c.code === myCountry ? ' (your location)' : ''}
                 </option>
               ))}
             </select>
@@ -135,7 +141,8 @@ export function CalculatorClient({ rows, initial, initialMarket, hadMarket }: Pr
       <div className="pager">
         <p className="muted">
           Yearly value at <b style={{ color: 'var(--text)' }}>{money(input.spend)}</b> a month
-          {market ? ` · cards you may get in ${MARKET_LABELS[market]}` : ''} · best tier for each card
+          {country ? ` · cards you may get in ${countryName(country)}` : ''}
+          {currency ? ` · everyday spending in ${currency}` : ''} · best tier for each card
         </p>
         <ShareBar text={`What ${money(input.spend)}/month earns on each crypto card, after fees · G2M calculator`} />
       </div>

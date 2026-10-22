@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
-import type { CardRow, Market } from '@/lib/types';
-import { MARKET_LABELS } from '@/lib/regions';
+import type { CardRow } from '@/lib/types';
+import { COUNTRIES, isCountry } from '@/lib/regions';
 import { recommend, type FinderAnswers, type Hold, type Priority } from '@/lib/finder';
 import { CardArt } from '@/components/CardArt';
 import { ScorePill } from '@/components/bits';
@@ -14,14 +14,6 @@ import { track } from '@/lib/analytics';
 
 type Option<T> = { value: T; label: string; hint?: string };
 
-const Q_MARKET: Option<Market | 'OTHER'>[] = [
-  { value: 'IN', label: MARKET_LABELS.IN },
-  { value: 'AE', label: MARKET_LABELS.AE },
-  { value: 'US', label: MARKET_LABELS.US },
-  { value: 'GB', label: MARKET_LABELS.GB },
-  { value: 'EU', label: MARKET_LABELS.EU },
-  { value: 'OTHER', label: 'Somewhere else' }
-];
 const Q_HOLD: Option<Hold>[] = [
   { value: 'self', label: 'In my own wallet', hint: 'Self-custodial: you keep the keys' },
   { value: 'exchange', label: 'On an exchange is fine', hint: 'Custodial: easier, the issuer holds funds' },
@@ -34,27 +26,27 @@ const Q_PRIORITY: Option<Priority>[] = [
   { value: 'perks', label: 'Premium perks' }
 ];
 
-type Draft = { market: Market | 'OTHER' | null; hold: Hold | null; priority: Priority | null };
+type Draft = { country: string | null; hold: Hold | null; priority: Priority | null };
 
 export function FinderClient({ rows, initial }: { rows: CardRow[]; initial: FinderAnswers | null }) {
-  const [a, setA] = useState<Draft>(initial ?? { market: null, hold: null, priority: null });
-  const { market: myMarket, ready } = useRegion();
+  const [a, setA] = useState<Draft>(initial ?? { country: null, hold: null, priority: null });
+  const { country: myCountry, ready } = useRegion();
 
-  // Pre-select the viewer's region the first time, if they have not answered yet.
+  // Pre-select the viewer's country the first time, if they have not answered yet.
   useEffect(() => {
-    if (ready && myMarket && !initial) setA((prev) => (prev.market ? prev : { ...prev, market: myMarket }));
-  }, [ready, myMarket, initial]);
+    if (ready && myCountry && !initial) setA((prev) => (prev.country ? prev : { ...prev, country: myCountry }));
+  }, [ready, myCountry, initial]);
 
-  const done = a.market && a.hold && a.priority;
+  const done = a.country && a.hold && a.priority;
   const answers = done ? (a as FinderAnswers) : null;
   const picks = useMemo(() => (answers ? recommend(rows, answers) : []), [rows, answers]);
 
   useEffect(() => {
     if (!answers) return;
-    const qs = `m=${answers.market}&h=${answers.hold}&p=${answers.priority}`;
+    const qs = `m=${answers.country}&h=${answers.hold}&p=${answers.priority}`;
     window.history.replaceState(window.history.state, '', `${window.location.pathname}?${qs}`);
-    track('Finder', { market: answers.market, hold: answers.hold, priority: answers.priority });
-  }, [answers?.market, answers?.hold, answers?.priority]); // eslint-disable-line react-hooks/exhaustive-deps
+    track('Finder', { country: answers.country, hold: answers.hold, priority: answers.priority });
+  }, [answers?.country, answers?.hold, answers?.priority]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const Question = <T extends string>({
     n,
@@ -103,7 +95,38 @@ export function FinderClient({ rows, initial }: { rows: CardRow[]; initial: Find
   return (
     <div className="stack" style={{ gap: 28 }}>
       <div className="stack" style={{ gap: 14 }}>
-        {Question({ n: 1, title: 'Where do you live?', name: 'market', options: Q_MARKET, value: a.market, onPick: (v) => setA({ ...a, market: v }) })}
+        <fieldset className="panel panel-pad stack" style={{ gap: 14, border: '1px solid var(--border)', margin: 0, minWidth: 0 }}>
+          <legend className="sr-only">Where do you live?</legend>
+          <div style={{ display: 'flex', gap: 12, alignItems: 'baseline' }}>
+            <span className="mono faint" style={{ fontSize: 13 }}>
+              1/3
+            </span>
+            <label className="h3" htmlFor="finder-country">
+              Where do you live?
+            </label>
+          </div>
+          <select
+            id="finder-country"
+            className="select"
+            style={{ maxWidth: 420 }}
+            value={a.country ?? ''}
+            onChange={(e) => setA({ ...a, country: e.target.value === 'ALL' || isCountry(e.target.value) ? e.target.value : null })}
+          >
+            <option value="" disabled>
+              Pick your country
+            </option>
+            {COUNTRIES.map((c) => (
+              <option key={c.code} value={c.code}>
+                {c.name}
+                {c.code === myCountry ? ' (your location)' : ''}
+              </option>
+            ))}
+            <option value="ALL">I&apos;d rather not say</option>
+          </select>
+          <span className="faint" style={{ fontSize: 13 }}>
+            We leave out cards not offered there, and count FX fees on your everyday spending in your own currency.
+          </span>
+        </fieldset>
         {Question({ n: 2, title: 'Where do you want to keep your crypto?', name: 'hold', options: Q_HOLD, value: a.hold, onPick: (v) => setA({ ...a, hold: v }) })}
         {Question({ n: 3, title: 'What matters most?', name: 'priority', options: Q_PRIORITY, value: a.priority, onPick: (v) => setA({ ...a, priority: v }) })}
       </div>
@@ -115,7 +138,7 @@ export function FinderClient({ rows, initial }: { rows: CardRow[]; initial: Find
           <div className="panel panel-pad stack" style={{ gap: 8 }}>
             <h2 className="h3">No card fits all three yet</h2>
             <p className="muted">Try “No preference” on question 2, or browse every card for your region.</p>
-            <Link href={answers.market === 'OTHER' ? '/cards' : `/cards?market=${answers.market}`} className="btn btn-sm" style={{ alignSelf: 'flex-start' }}>
+            <Link href={answers.country === 'ALL' ? '/cards' : `/cards?country=${answers.country}`} className="btn btn-sm" style={{ alignSelf: 'flex-start' }}>
               Browse cards
             </Link>
           </div>
