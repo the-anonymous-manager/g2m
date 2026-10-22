@@ -3,7 +3,7 @@
 //   npm run validate
 // Exits with code 1 if any card is invalid. The website build itself never crashes on bad
 // data: lib/cards.ts skips invalid cards and logs a warning instead.
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { SponsorSchema, validateCards } from '../lib/card-schema.mjs';
@@ -20,6 +20,13 @@ try {
 }
 
 const { valid, errors } = validateCards(raw);
+
+// A card with a picture needs its downloaded files in public/ (the Google Sheet sync makes them).
+for (const c of valid.filter((card) => card.image)) {
+  const files = [c.image.file, c.image.file.replace(/\.webp$/, '-sm.webp'), c.image.file.replace(/\.webp$/, '.png')];
+  const gone = files.filter((f) => !existsSync(join(root, 'public', f)));
+  if (gone.length) errors.push({ card: c.slug, issues: [`image: missing ${gone.join(', ')} (run npm run sheet:sync)`] });
+}
 const today = new Date();
 const stale = valid.filter((c) => (today - new Date(c.lastChecked)) / 86400000 > 90);
 

@@ -9,3 +9,5 @@ out/
 .vercel
 next-env.d.ts
 *.tsbuildinfo
+sheet-sync-report.md
+sheet-export/

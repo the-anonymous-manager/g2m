@@ -158,6 +158,27 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
 Tested before handoff: every route, light and dark, desktop and phone widths (no sideways scrolling), filters,
 compare, finder, calculator input checks, theme memory, share images, and a clean `npm ci && npm run build`.
 
+## Card data in a Google Sheet (22 Oct 2026)
+
+Akash picked this first for version 2 so he can edit cards himself. The Google Sheet becomes the master copy;
+`.github/workflows/sheet-sync.yml` copies it to `data/cards.json` and `data/sponsor.json` every hour, publishing
+automatically when every card passes the build checks (Akash chose automatic over approving each change). Bad
+data never reaches the site: the run stops and opens a `sheet-sync` issue listing the tab, card and column to fix.
+Akash created the sheet "G2M Card data" (https://docs.google.com/spreadsheets/d/1MEa-pk0sYr6EJWT6nLHNJcl68EwSLg4sf_sjkKtA0pw)
+on 22 Oct 2026; Claude filled it from `npm run sheet:export`, set every cell to plain text, added a "How to edit"
+tab, and recorded the tab ids (gid) in `data/sheet.json`. The live sheet was checked to match cards.json exactly. The sheet must be shared
+"Anyone with the link can view". Converter: `scripts/sheet-format.mjs`; it round-trips all cards unchanged.
+
+## Real card pictures (22 Oct 2026)
+
+Akash asked for real card pictures. Cards tab column "Card image" takes a link; the hourly sync
+(`scripts/card-images.mjs`, using sharp) downloads it once, trims a plain border, and stores WebP (1000 and 184 wide)
+plus a PNG for share images in `public/card-images/`, named from the link so a new link means a new file; unused
+files are deleted. `CardArt` shows the picture everywhere (hero, card page, rankings, compare, finder, calculator,
+share image) and falls back to the metal art. Upright pictures are fitted inside the card shape with the shadow
+following the picture. Source pictures only from issuer press kits or from the issuer directly (the outreach email
+asks for one); remove any picture an issuer asks us to take down.
+
 ## Security
 
 `package.json` pins PostCSS to 8.5.31 or later with an npm `overrides` entry (22 Oct 2026). Next 15 ships PostCSS
@@ -176,7 +197,6 @@ staying on Next 15. Remove it when the site moves to a Next version that ships a
 ## Ideas for version 2 (not decided, ask Akash)
 
 - Add the radar cards above (27 listed as of 22 Oct 2026), then grow towards 50+ cards.
-- Edit card data from a Google Sheet instead of `cards.json`.
 - Show the live USD value of staking requirements (each tier's `stake.coingeckoId` is already stored for this).
 - "X vs Y" comparison pages for SEO, and short guides (custodial vs self-custodial, how card fees work).
 - A changelog of fee and cashback changes per card, which also feeds his X posts.

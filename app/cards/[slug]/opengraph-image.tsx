@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { ImageResponse } from 'next/og';
 import { getCard, getCards, getRank } from '@/lib/cards';
 import { cashbackLabel, pct, usd } from '@/lib/format';
@@ -19,6 +21,10 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     return new ImageResponse(<div style={{ display: 'flex', width: '100%', height: '100%', background: '#0a0a0c' }} />, size);
   }
   const darkCard = card.metal === 'black' || card.metal === 'gunmetal';
+  // The card's real picture, as the PNG the sheet sync saves next to the WebP versions.
+  const photo = card.image
+    ? `data:image/png;base64,${readFileSync(join(process.cwd(), 'public', card.image.file.replace(/\.webp$/, '.png'))).toString('base64')}`
+    : null;
   const facts = [
     { k: 'Cashback', v: cashbackLabel(card.cashback.basePct, card.cashback.maxPct) },
     { k: 'Annual fee', v: usd(card.fees.annualUsd) },
@@ -62,31 +68,36 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           <span style={{ fontSize: 20, color: '#8f8e87' }}>g2m.life · Spend your bags better.</span>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 36, width: 380 }}>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              width: 360,
-              height: 227,
-              borderRadius: 22,
-              backgroundImage: METAL_BG[card.metal] ?? METAL_BG.black,
-              padding: 26,
-              transform: 'rotate(-6deg)',
-              color: darkCard ? '#e6e5e0' : '#141416',
-              boxShadow: '0 30px 60px rgba(0,0,0,0.6)'
-            }}
-          >
+          {photo ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={photo} width={360} height={227} alt="" style={{ transform: 'rotate(-6deg)', borderRadius: 18 }} />
+          ) : (
             <div
               style={{
-                width: 56,
-                height: 42,
-                borderRadius: 8,
-                backgroundImage: 'linear-gradient(135deg, #5e6368, #f4f6f8 40%, #8f959b 60%, #ffffff 85%)'
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                width: 360,
+                height: 227,
+                borderRadius: 22,
+                backgroundImage: METAL_BG[card.metal] ?? METAL_BG.black,
+                padding: 26,
+                transform: 'rotate(-6deg)',
+                color: darkCard ? '#e6e5e0' : '#141416',
+                boxShadow: '0 30px 60px rgba(0,0,0,0.6)'
               }}
-            />
-            <span style={{ fontSize: 30, fontWeight: 800 }}>{card.brand}</span>
-          </div>
+            >
+              <div
+                style={{
+                  width: 56,
+                  height: 42,
+                  borderRadius: 8,
+                  backgroundImage: 'linear-gradient(135deg, #5e6368, #f4f6f8 40%, #8f959b 60%, #ffffff 85%)'
+                }}
+              />
+              <span style={{ fontSize: 30, fontWeight: 800 }}>{card.brand}</span>
+            </div>
+          )}
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
             <span
               style={{

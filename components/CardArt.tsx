@@ -1,9 +1,9 @@
 import type { CardRow } from '@/lib/types';
 
-// A generic metal card rendered in CSS. It carries the card's name as text only:
-// no issuer artwork or logos, so every card on the site looks consistent.
+// The card's real picture when the sheet links one (downloaded by the sync into public/card-images),
+// otherwise a generic metal card rendered in CSS that carries the card's name as text only.
 type Props = {
-  card: Pick<CardRow, 'name' | 'brand' | 'network' | 'metal'>;
+  card: Pick<CardRow, 'name' | 'brand' | 'network' | 'metal'> & Partial<Pick<CardRow, 'image'>>;
   size?: 'sm' | 'md' | 'lg';
   width?: number | string;
   className?: string;
@@ -18,6 +18,17 @@ const NET: Record<string, string> = {
 };
 
 export function CardArt({ card, size = 'md', width, className = '', style }: Props) {
+  if (card.image) {
+    // Already resized by the sync, so a plain <img>. Small slots get the 184px version.
+    const small = size === 'sm' || (typeof width === 'number' && width <= 92);
+    const src = small ? card.image.file.replace(/\.webp$/, '-sm.webp') : card.image.file;
+    const Box = size === 'sm' ? 'span' : 'div';
+    return (
+      <Box className={`card-art photo ${size === 'sm' ? 'sm' : ''} ${className}`} aria-hidden="true" style={{ width, ...style }}>
+        <img src={src} alt="" width={small ? 184 : 1000} height={small ? 116 : 631} loading={small ? 'lazy' : 'eager'} decoding="async" />
+      </Box>
+    );
+  }
   if (size === 'sm') {
     return <span className={`card-art sm ${className}`} data-metal={card.metal} aria-hidden="true" style={style} />;
   }

@@ -22,7 +22,10 @@ and confirm what changed on the site (not which files moved).
 
 ## Editing card data (most requests)
 
-- Edit `data/cards.json` only. Never hard-code card facts in pages or components.
+- Once `data/sheet.json` has a sheet id, the Google Sheet is the master copy: an hourly GitHub Action copies it
+  into `data/cards.json` and `data/sponsor.json` (see README "Edit cards in the Google Sheet"). Make data edits in
+  the sheet (Google Sheets connector), not in the JSON, or the next sync overwrites them. The rules below still apply.
+- Without a sheet, edit `data/cards.json` only. Never hard-code card facts in pages or components.
 - Use `null` for anything the issuer does not publish. Never guess a fee, rate or country.
 - Every change needs a source: add or update an entry in that card's `sources` (label, url, verified date)
   and set `lastChecked` to today (YYYY-MM-DD).
@@ -33,6 +36,8 @@ and confirm what changed on the site (not which files moved).
   (see its data-official.js): use the issuer URL it cites as the source, never an aggregator-only list.
 - A tier only offered in some countries gets `countries` (e.g. `["TH"]`, `"EEA"` for all 30 EEA countries), or
   `exceptCountries` (e.g. a "Global" tier when the US has its own). Country scores use these.
+- Real card pictures: "Card image" link in the sheet (`image.source`); the sync stores the files in
+  `public/card-images/`. Only use issuer press-kit images or ones an issuer sent; never copy from other sites.
 - Referral links go in `links.affiliate`; all "Get the card" buttons use `/go/<slug>`, which picks it up.
 - Scores and ranks are computed (`lib/score.ts`). Never edit a rank or score by hand, and never change
   a card's position because of a referral deal.
