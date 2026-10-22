@@ -14,7 +14,8 @@ export type ScoreBreakdown = {
   control: number;
 };
 
-export type Card = CardData & { score: ScoreBreakdown };
+// rank: position by G2M score across all cards (1 = best), fixed whatever the view.
+export type Card = CardData & { score: ScoreBreakdown; rank: number };
 
 // The slimmed-down shape sent to client components (keeps page payloads small).
 export type CardRow = Pick<
@@ -33,6 +34,7 @@ export type CardRow = Pick<
   | 'wallets'
   | 'metal'
   | 'score'
+  | 'rank'
   | 'perks'
 >;
 
@@ -52,6 +54,7 @@ export function toRow(c: Card): CardRow {
     wallets: c.wallets,
     metal: c.metal,
     score: c.score,
+    rank: c.rank,
     perks: c.perks
   };
 }

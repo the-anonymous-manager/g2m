@@ -94,8 +94,9 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
 
 ## What version 1 does
 
-- Home: headline, search, top 5, browse chips, cards confirmed for India and the UAE, links to the tools.
-- Rankings (`/cards`): sort by any column (shift-click for a second sort), filters for region, custody, network,
+- Home: headline, search, Featured spot, top 5 (its market column follows the visitor's location; India and UAE
+  when unknown), browse chips, cards confirmed for India and the UAE, links to the tools.
+- Rankings (`/cards`): sort by any column incl. # (overall rank; shift-click for a second sort), filters for region, custody, network,
   minimum cashback, no annual fee, physical, metal, lounge. Every view has its own URL, with "Post on X" and
   "Copy link". The region defaults to where the visitor is. Pick up to 3 cards to compare. On phones it shows a list.
 - Card pages (`/cards/<slug>`): key facts, G2M score breakdown, availability for 5 markets, tiers table,

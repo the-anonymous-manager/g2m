@@ -2,7 +2,8 @@ import Link from 'next/link';
 import { getCards, getRank, lastUpdated } from '@/lib/cards';
 import { getSponsor } from '@/lib/sponsor';
 import { OutboundLink } from '@/components/OutboundLink';
-import type { Card, Market } from '@/lib/types';
+import { HomeLeaderboard } from '@/components/HomeLeaderboard';
+import { toRow, type Card, type Market } from '@/lib/types';
 import { MARKET_LABELS } from '@/lib/regions';
 import { cashbackLabel, fmtDate, pct, usd } from '@/lib/format';
 import { site } from '@/lib/site';
@@ -176,47 +177,7 @@ export default function HomePage() {
             Full rankings <ArrowIcon />
           </Link>
         </div>
-        <div className="table-wrap">
-          <table className="table" style={{ minWidth: 760 }}>
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Card</th>
-                <th scope="col">G2M score</th>
-                <th scope="col">Cashback</th>
-                <th scope="col">Annual fee</th>
-                <th scope="col">FX fee</th>
-                <th scope="col">India</th>
-                <th scope="col">UAE</th>
-              </tr>
-            </thead>
-            <tbody>
-              {top.map((c, i) => (
-                <tr key={c.slug}>
-                  <td className={`rank ${i === 0 ? 'rank-1' : ''}`}>{i + 1}</td>
-                  <td>
-                    <div className="card-cell">
-                      <CardArt card={c} size="sm" />
-                      <Link href={`/cards/${c.slug}`}>{c.name}</Link>
-                    </div>
-                  </td>
-                  <td>
-                    <ScorePill value={c.score.total} />
-                  </td>
-                  <td className="num">{cashbackLabel(c.cashback.basePct, c.cashback.maxPct)}</td>
-                  <td className="num">{usd(c.fees.annualUsd, '—')}</td>
-                  <td className="num">{pct(c.fees.fxPct, '—')}</td>
-                  <td>
-                    <MarketBadge value={c.coverage.markets.IN} market="IN" short />
-                  </td>
-                  <td>
-                    <MarketBadge value={c.coverage.markets.AE} market="AE" short />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <HomeLeaderboard rows={top.map(toRow)} />
       </section>
 
       {/* Browse */}

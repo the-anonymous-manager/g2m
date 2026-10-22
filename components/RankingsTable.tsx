@@ -34,9 +34,6 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
   const firstRun = useRef(true);
   const appliedRegion = useRef(false);
 
-  // Overall rank never changes with sorting or filtering, like a market-cap rank.
-  const rankOf = useMemo(() => new Map(rows.map((r, i) => [r.slug, i + 1])), [rows]);
-
   // Default the region filter to the viewer's market once, unless the link already set one.
   useEffect(() => {
     if (!ready || appliedRegion.current || hadMarketParam) return;
@@ -79,13 +76,14 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
 
   const marketLabel = f.market ? MARKET_LABELS[f.market] : undefined;
   const description = describeFilters(f, marketLabel);
+  const confirmed = f.market ? visible.filter((c) => c.coverage.markets[f.market as Market] === 'yes').length : 0;
   const isDefault = serializeFilters(f) === serializeFilters(DEFAULT_FILTERS);
 
-  const sortHead = (k: SortKey, label?: string) => {
+  const sortHead = (k: SortKey, label?: string, style?: React.CSSProperties) => {
     const s = sortState(k);
     const ariaSort = s && s.order === 1 ? (s.dir === 'asc' ? 'ascending' : 'descending') : 'none';
     return (
-      <th scope="col" aria-sort={ariaSort} key={k}>
+      <th scope="col" aria-sort={ariaSort} key={k} style={style}>
         <button
           type="button"
           className="sort-btn"
@@ -138,6 +136,7 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
               {MARKETS.map((m) => (
                 <option key={m} value={m}>
                   {MARKET_LABELS[m]}
+                  {m === myMarket ? ' (your location)' : ''}
                 </option>
               ))}
             </select>
@@ -220,6 +219,7 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
       <div className="pager">
         <p className="muted" aria-live="polite">
           <b style={{ color: 'var(--text)' }}>{visible.length}</b> of {rows.length} cards · {description}
+          {f.market && !f.strict ? ` (${confirmed} confirmed)` : ''}
         </p>
         <ShareBar text={`Crypto cards ${description === 'all cards' ? 'ranked' : `${description}, ranked`} on G2M`} />
       </div>
@@ -240,9 +240,7 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
               <caption className="sr-only">Crypto cards ranked by G2M score</caption>
               <thead>
                 <tr>
-                  <th scope="col" style={{ width: 48 }}>
-                    #
-                  </th>
+                  {sortHead('rank', '#', { width: 64 })}
                   {sortHead('name')}
                   {sortHead('score')}
                   {sortHead('cashback', 'Base back')}
@@ -258,7 +256,8 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
               </thead>
               <tbody>
                 {visible.map((c) => {
-                  const rank = rankOf.get(c.slug) ?? 0;
+                  // Overall rank never changes with sorting or filtering, like a market-cap rank.
+                  const rank = c.rank;
                   const on = picked.includes(c.slug);
                   return (
                     <tr key={c.slug}>
@@ -323,7 +322,7 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
           {/* Phone list */}
           <ol className="rank-list" aria-label="Crypto cards ranked by G2M score">
             {visible.map((c) => {
-              const rank = rankOf.get(c.slug) ?? 0;
+              const rank = c.rank;
               const on = picked.includes(c.slug);
               return (
                 <li key={c.slug} className="panel rank-item">
