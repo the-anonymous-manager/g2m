@@ -120,7 +120,7 @@ staying on Next 15. Remove it when the site moves to a Next version that ships a
 
 1. Deploy on Vercel from this repo and connect the g2m.life domain (Akash has not done this yet).
 2. Settings now default to info@g2m.life and @0akash0x; override them on Vercel only if they change.
-3. Add referral links per card when deals are signed.
+3. Add referral links per card when deals are signed. Move Vercel to the Pro plan first (Hobby is non-commercial only).
 4. Re-check every card within 90 days of its `lastChecked` date (the validator warns).
 
 ## Ideas for version 2 (not decided, ask Akash)
