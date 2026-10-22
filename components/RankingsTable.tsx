@@ -353,7 +353,7 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
                         {c.name}
                       </Link>
                       <span className="faint" style={{ fontSize: 13 }}>
-                        {c.network} · {CUSTODY_LABEL[c.custody]}
+                        {c.network} · {c.custody === 'unknown' ? 'Custody not published' : CUSTODY_LABEL[c.custody]}
                       </span>
                     </div>
                     <ScorePill value={c.score.total} showBar={false} />

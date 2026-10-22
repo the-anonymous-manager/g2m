@@ -10,7 +10,7 @@
     "custody": "custodial",
     "summary": "The best-known crypto card: prepaid in most regions plus a US Visa Signature credit card, paying rewards in CRO through Crypto.com's Level Up membership.",
     "cashback": { "basePct": null, "maxPct": 6, "payout": "CRO", "note": "Up to 5% back on the prepaid card and 1.5% to 6% on the US credit card, depending on your Level Up tier. The free Basic rate is not published." },
-    "fees": { "annualUsd": 0, "fxPct": 3, "fxNote": "Billed in your region's currency (US dollars, euros or pounds). US: 3% on non-USD purchases on Midnight, Ruby, Jade and Indigo, none on Rose and above. Europe and UK: 0.2% inside the EU/UK and 2% outside on the base tier, less on higher tiers.", "topUpPct": null, "atm": "Supported; fees not published in our sources", "other": [] },
+    "fees": { "annualUsd": 0, "fxPct": 3, "fxNote": "Billed in your region's currency (US dollars, euros or pounds). US: 3% on non-USD purchases on Midnight, Ruby, Jade and Indigo, none on Rose and above. Europe and UK: 0.2% inside the EU/UK and 2% outside on the base tier, less on higher tiers.", "fxByCurrency": { "USD": 0, "EUR": 0, "GBP": 0 }, "topUpPct": null, "atm": "Supported; fees not published in our sources", "other": [] },
     "tiers": [
       { "name": "Basic", "feeUsdYear": 0, "cashbackPct": null, "requirement": "No subscription or CRO lockup" },
       { "name": "Level Up (top tier)", "feeUsdYear": null, "feeNote": "Plans start at $4.99/month; top-tier price not published. CRO lockup or staking also qualifies.", "cashbackPct": 5, "requirement": "Level Up subscription, CRO lockup or staking", "stake": { "token": "CRO", "amount": null, "coingeckoId": "crypto-com-chain" }, "perks": ["Up to 5% back in CRO on the prepaid card", "Higher APY on cash balances"] }
@@ -42,7 +42,7 @@
     "custody": "custodial",
     "summary": "Exchange-linked Mastercard with no annual fee. Cashback climbs with your Bybit VIP level, up to 10% for Supreme VIPs.",
     "cashback": { "basePct": null, "maxPct": 10, "payout": "Points, redeemable for USDT or crypto", "note": "2% for VIP 1 to 2, 4% for VIP 3, 10% for Supreme VIP. The non-VIP rate is not published." },
-    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "Billed in your region's currency (EUR in the EEA, USD in Asia-Pacific, ARS, BRL, MXN or PEN in Latin America). Other currencies: 0.5% in the EEA, 1% to 2% in most regions, 7% in Argentina.", "topUpPct": null, "atm": "Around $100 or €100 a month depending on region", "other": ["Crypto conversion fee 0.9% outside the EEA"] },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "Billed in your region's currency (EUR in the EEA, USD in Asia-Pacific, ARS, BRL, MXN or PEN in Latin America). Other currencies: 0.5% in the EEA, 1% to 2% in most regions, 7% in Argentina.", "fxByCurrency": { "EUR": 0, "USD": 0, "ARS": 0, "BRL": 0, "MXN": 0, "PEN": 0 }, "topUpPct": null, "atm": "Around $100 or €100 a month depending on region", "other": ["Crypto conversion fee 0.9% outside the EEA"] },
     "tiers": [
       { "name": "VIP 1 to 2", "feeUsdYear": 0, "cashbackPct": 2, "requirement": "Bybit VIP 1 or 2" },
       { "name": "VIP 3 (Alpha)", "feeUsdYear": 0, "cashbackPct": 4, "requirement": "Bybit VIP 3" },
@@ -75,7 +75,7 @@
     "custody": "custodial",
     "summary": "A US-only American Express credit card for Coinbase One members, earning 2% to 4% back on every purchase.",
     "cashback": { "basePct": 2, "maxPct": 4, "payout": null, "note": "2% base; 2.5% to 4% on the first $10,000 each month, then 2%." },
-    "fees": { "annualUsd": 49.99, "fxPct": 0, "fxNote": "Billed in US dollars; no foreign transaction fee (American Express converts at its rate).", "topUpPct": null, "atm": "Cash advance: the greater of $10 or 5%", "other": ["Requires Coinbase One ($49.99/year)", "Late payment up to $41"] },
+    "fees": { "annualUsd": 49.99, "fxPct": 0, "fxNote": "Billed in US dollars; no foreign transaction fee (American Express converts at its rate).", "fxByCurrency": { "USD": 0 }, "topUpPct": null, "atm": "Cash advance: the greater of $10 or 5%", "other": ["Requires Coinbase One ($49.99/year)", "Late payment up to $41"] },
     "tiers": [
       { "name": "Coinbase One Card", "feeUsdYear": 49.99, "feeNote": "Coinbase One membership", "cashbackPct": 2, "bands": [ { "uptoUsd": 10000, "pct": 2.5 }, { "uptoUsd": null, "pct": 2 } ], "requirement": "Coinbase One membership and credit approval" }
     ],
@@ -104,7 +104,7 @@
     "custody": "unknown",
     "summary": "A no-fee Visa debit card from Bitget Wallet in 52 countries across Europe, Latin America, Asia-Pacific and South Africa, with 2% back as standard and 3% for new or high-spend users.",
     "cashback": { "basePct": 2, "maxPct": 3, "payout": null, "note": "3% for new users or after a monthly spend threshold (amount not published)." },
-    "fees": { "annualUsd": 0, "fxPct": 1.7, "fxNote": "No fee when paying in USD, 1.7% conversion fee in other currencies.", "topUpPct": 0, "atm": "1% or $5, whichever is higher", "other": ["Crypto-to-fiat conversion about 0.05%"] },
+    "fees": { "annualUsd": 0, "fxPct": 1.7, "fxNote": "No fee when paying in USD, 1.7% conversion fee in other currencies.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "atm": "1% or $5, whichever is higher", "other": ["Crypto-to-fiat conversion about 0.05%"] },
     "tiers": [
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 2 },
       { "name": "Boosted", "feeUsdYear": 0, "cashbackPct": 3, "requirement": "New users, or a monthly spend threshold" }
@@ -135,7 +135,7 @@
     "custody": "unknown",
     "summary": "Stablecoin card built for global spenders, with USD cashback on every tier and KAST Points on top for Premium and Private members.",
     "cashback": { "basePct": 1.5, "maxPct": 3, "payout": "USD plus KAST Points", "note": "Standard pays 1.5% on the first $2,000 each month. Premium adds 1% in points, Private adds 2%." },
-    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "Billed in US dollars. Up to 2% on non-USD purchases; up to 3% foreign transaction fee.", "topUpPct": 0, "smallPurchase": { "feeUsd": 0.1, "underUsd": 25, "foreignOnly": true }, "atm": "$3 + 2%; up to $250 per withdrawal", "other": ["Standard card shipping $40", "Extra virtual cards $2 each"] },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "Billed in US dollars. Up to 2% on non-USD purchases; up to 3% foreign transaction fee.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "smallPurchase": { "feeUsd": 0.1, "underUsd": 25, "foreignOnly": true }, "atm": "$3 + 2%; up to $250 per withdrawal", "other": ["Standard card shipping $40", "Extra virtual cards $2 each"] },
     "tiers": [
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 1.5, "bands": [ { "uptoUsd": 2000, "pct": 1.5 }, { "uptoUsd": null, "pct": 0 } ], "perks": ["Concierge"] },
       { "name": "Premium", "feeUsdYear": 1000, "cashbackPct": 2, "requirement": "$1,000 a year", "perks": ["+1% back in KAST Points", "Concierge"] },
@@ -166,7 +166,7 @@
     "custody": "custodial",
     "summary": "One of the most widely available crypto cards, covering 200+ countries with no annual fee. Best for access, not rewards.",
     "cashback": { "basePct": null, "maxPct": null, "payout": "Points", "note": "No cashback rate published; the card earns points. $5 welcome bonus." },
-    "fees": { "annualUsd": 0, "fxPct": 1.2, "fxNote": "New cards are billed in US dollars (some older cards in HKD). 1.2% on purchases in other currencies.", "topUpPct": null, "atm": "2% up to $10,000 a month, 3% above", "other": ["Physical card $100", "Virtual card $10", "1% crypto conversion", "$0.50 per declined transaction after 3 a month"] },
+    "fees": { "annualUsd": 0, "fxPct": 1.2, "fxNote": "New cards are billed in US dollars (some older cards in HKD). 1.2% on purchases in other currencies.", "fxByCurrency": { "USD": 0, "HKD": 0 }, "topUpPct": null, "atm": "2% up to $10,000 a month, 3% above", "other": ["Physical card $100", "Virtual card $10", "1% crypto conversion", "$0.50 per declined transaction after 3 a month"] },
     "tiers": [
       { "name": "Virtual card", "feeUsdYear": 0, "feeNote": "$10 one-off issuance", "cashbackPct": null },
       { "name": "Physical card", "feeUsdYear": 0, "feeNote": "$100 one-off issuance", "cashbackPct": null }
@@ -197,7 +197,7 @@
     "custody": "self-custodial",
     "summary": "Self-custodial Visa card paying 3% back on every tier, with airport lounge access and Visa Signature perks.",
     "cashback": { "basePct": 3, "maxPct": 4, "payout": null, "note": "3% on Core, Luxe and Pinnacle; 4% on VIP. Monthly payout caps run from $60 (Core) to $2,000 (VIP)." },
-    "fees": { "annualUsd": null, "fxPct": 1.5, "fxNote": "No FX fee on USD or EUR purchases (EUR in beta). Other currencies: about 1% network rate plus 0.5% (Core), 0.25% (Luxe) or nothing (Pinnacle, VIP).", "topUpPct": null, "atm": "$500 per withdrawal; 10 free a month on Pinnacle and VIP", "other": ["Physical card $50 (Core) or $100 (Luxe, Pinnacle)", "Virtual card $10"] },
+    "fees": { "annualUsd": null, "fxPct": 1.5, "fxNote": "No FX fee on USD or EUR purchases (EUR in beta). Other currencies: about 1% network rate plus 0.5% (Core), 0.25% (Luxe) or nothing (Pinnacle, VIP).", "fxByCurrency": { "USD": 0, "EUR": 0 }, "topUpPct": null, "atm": "$500 per withdrawal; 10 free a month on Pinnacle and VIP", "other": ["Physical card $50 (Core) or $100 (Luxe, Pinnacle)", "Virtual card $10"] },
     "tiers": [
       { "name": "Core", "feeUsdYear": null, "cashbackPct": 3, "capMonthlyUsd": 60, "fxPct": 1.5, "perks": ["Airport lounge access", "Baggage protection", "Price protection"] },
       { "name": "Luxe", "feeUsdYear": 199, "feeNote": "Or hold 5K points, $15K in Liquid, or 30K ETHFI staked", "cashbackPct": 3, "capMonthlyUsd": 300, "fxPct": 1.25, "requirement": "$199/year, 5K points, $15K Liquid deposit or 30K ETHFI staked", "stake": { "token": "ETHFI", "amount": 30000, "coingeckoId": "ether-fi" }, "perks": ["Airport lounge access", "Concierge"] },
@@ -230,7 +230,7 @@
     "custody": "self-custodial",
     "summary": "Spend straight from your MetaMask wallet. Free virtual card, or a $199 Metal card with 0% FX and free ATM cash.",
     "cashback": { "basePct": 1, "maxPct": 1, "payout": null, "note": "1% on both the free and Metal cards." },
-    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in your own local currency (US dollars in Argentina), so no FX fee at home. The free card adds 1% when the merchant is abroad; Metal does not.", "topUpPct": null, "atm": "2%; Metal: free up to $1,200 a month", "other": ["Metal card replacement $99"] },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in your own local currency (US dollars in Argentina), so no FX fee at home. The free card adds 1% when the merchant is abroad; Metal does not.", "fxHome": true, "topUpPct": null, "atm": "2%; Metal: free up to $1,200 a month", "other": ["Metal card replacement $99"] },
     "tiers": [
       { "name": "Virtual", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 1 },
       { "name": "Metal", "feeUsdYear": 199, "cashbackPct": 1, "fxPct": 0, "perks": ["Free ATM withdrawals up to $1,200 a month", "Physical metal card"] }
@@ -261,7 +261,7 @@
     "custody": "custodial",
     "summary": "Dual-mode Mastercard: spend against your crypto in credit mode or from your balance in debit mode, with up to 2% back.",
     "cashback": { "basePct": null, "maxPct": 2, "payout": "NEXO or BTC", "note": "Up to 2% in credit mode, capped at $50 a month. Needs a portfolio of at least $5,000." },
-    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "0.2% on EEA, UK and Swiss currencies, 2% on others (0.7% and 2.5% at weekends). No currency is free of FX fees.", "topUpPct": null, "atm": "Free monthly allowance from €200 (Base) to €2,000 (Platinum)", "other": ["Replacement card 15 EUR/GBP/USD"] },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "0.2% on EEA, UK and Swiss currencies, 2% on others (0.7% and 2.5% at weekends). No currency is free of FX fees.", "fxByCurrency": { "EUR": 0.2, "GBP": 0.2, "CHF": 0.2, "CZK": 0.2, "DKK": 0.2, "HUF": 0.2, "PLN": 0.2, "RON": 0.2, "SEK": 0.2, "ISK": 0.2, "NOK": 0.2 }, "topUpPct": null, "atm": "Free monthly allowance from €200 (Base) to €2,000 (Platinum)", "other": ["Replacement card 15 EUR/GBP/USD"] },
     "tiers": [
       { "name": "Credit mode (top loyalty tier)", "feeUsdYear": 0, "cashbackPct": 2, "capMonthlyUsd": 50, "requirement": "Portfolio of at least $5,000; the top rate needs a higher loyalty tier" }
     ],
@@ -291,7 +291,7 @@
     "custody": "unknown",
     "summary": "Kraken's debit card for the EEA, UK and US, with no subscription and up to 2% back in Europe.",
     "cashback": { "basePct": null, "maxPct": 2, "payout": null, "note": "Up to 2% in the EEA and UK; the US rate is not published." },
-    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in your primary currency: GBP in the UK, EUR in the EEA (no FX markup), USD in the US (1% on foreign-currency purchases and purchases outside the US).", "topUpPct": null, "atm": "Supported; fees not published", "other": [] },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in your primary currency: GBP in the UK, EUR in the EEA (no FX markup), USD in the US (1% on foreign-currency purchases and purchases outside the US).", "fxByCurrency": { "USD": 0, "EUR": 0, "GBP": 0 }, "topUpPct": null, "atm": "Supported; fees not published", "other": [] },
     "tiers": [
       { "name": "Krak Card", "feeUsdYear": 0, "cashbackPct": 2, "requirement": "Rate shown is the EEA/UK maximum", "countries": ["EEA", "GB"] }
     ],
@@ -321,7 +321,7 @@
     "custody": "unknown",
     "summary": "Exchange card in three versions: a 110-country virtual card with no FX markup, a Thailand card paying 4% to 10%, and a co-branded ether.fi credit card.",
     "cashback": { "basePct": null, "maxPct": 10, "payout": "USDT", "note": "Thailand card: 4% Standard, 6% Premier, 10% Elite, capped at 100 to 800 USDT a month. No cashback published for the global virtual card." },
-    "fees": { "annualUsd": 0, "fxPct": 0, "fxNote": "Billed in US dollars. Global card: no markup on the Visa rate, plus a 1% card transaction fee on every purchase. Thailand (APAC) card: 1% on non-USD purchases.", "topUpPct": null, "txPct": 1, "atm": "Not available on the global virtual card", "other": ["1% card transaction fee (global card)", "1% crypto conversion (Thailand card)"] },
+    "fees": { "annualUsd": 0, "fxPct": 0, "fxNote": "Billed in US dollars. Global card: no markup on the Visa rate, plus a 1% card transaction fee on every purchase. Thailand (APAC) card: 1% on non-USD purchases.", "fxByCurrency": { "USD": 0 }, "topUpPct": null, "txPct": 1, "atm": "Not available on the global virtual card", "other": ["1% card transaction fee (global card)", "1% crypto conversion (Thailand card)"] },
     "tiers": [
       { "name": "Global virtual", "feeUsdYear": 0, "cashbackPct": null },
       { "name": "Thailand Standard", "feeUsdYear": 0, "cashbackPct": 4, "capMonthlyUsd": 100, "fxPct": 1, "requirement": "Thailand residents", "countries": ["TH"] },
@@ -354,7 +354,7 @@
     "custody": "unknown",
     "summary": "Solana-native Visa card with 2% back in USDC, rising to 4% when you refer friends. Available across Asia-Pacific, the Gulf, Latin America and 31 US states.",
     "cashback": { "basePct": 2, "maxPct": 4, "payout": "USDC", "note": "4% after 2 qualifying referrals in the previous month. Capped at $100 a month." },
-    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "No fee on USD payments. Other currencies: 1% on Rain-issued cards, 1.8% on DCS-issued cards (Asia-Pacific).", "topUpPct": null, "atm": "Not published", "other": ["Physical card $13.13 plus shipping"] },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "No fee on USD payments. Other currencies: 1% on Rain-issued cards, 1.8% on DCS-issued cards (Asia-Pacific).", "fxByCurrency": { "USD": 0 }, "topUpPct": null, "atm": "Not published", "other": ["Physical card $13.13 plus shipping"] },
     "tiers": [
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 2, "capMonthlyUsd": 100 },
       { "name": "Referral boost", "feeUsdYear": 0, "cashbackPct": 4, "capMonthlyUsd": 100, "requirement": "2 qualifying referrals in the previous month" }
@@ -384,7 +384,7 @@
     "custody": "self-custodial",
     "summary": "Self-custodial Visa card from the Avalanche ecosystem with no card fees, earning Avax Points instead of cashback.",
     "cashback": { "basePct": null, "maxPct": null, "payout": "Avax Points", "note": "Earns Avax Points with travel portal redemptions; no cashback rate published." },
-    "fees": { "annualUsd": 0, "fxPct": 3, "fxNote": "Billed in US dollars. International card: up to 3% on non-USD purchases plus a cross-border fee of up to 3%. US card agreement: 2% on foreign-currency purchases and purchases outside the US.", "topUpPct": null, "atm": "Not published", "other": ["No shipping, account or card fees"] },
+    "fees": { "annualUsd": 0, "fxPct": 3, "fxNote": "Billed in US dollars. International card: up to 3% on non-USD purchases plus a cross-border fee of up to 3%. US card agreement: 2% on foreign-currency purchases and purchases outside the US.", "fxByCurrency": { "USD": 0 }, "topUpPct": null, "atm": "Not published", "other": ["No shipping, account or card fees"] },
     "tiers": [
       { "name": "Global", "feeUsdYear": 0, "cashbackPct": null, "fxPct": 3, "exceptCountries": ["US"] },
       { "name": "United States", "feeUsdYear": 0, "cashbackPct": null, "fxPct": 2, "countries": ["US"] }
@@ -504,7 +504,7 @@
     "custody": "unknown",
     "summary": "Visa card from the Tangem hardware wallet team, with three tiers from free to $999 a year and up to 4% back in USDC.",
     "cashback": { "basePct": 1, "maxPct": 4, "payout": "USDC", "note": "Basic 1% (cap $100/month), Plus 2% (cap $500), Prestige 4% (cap $1,000, coming soon)." },
-    "fees": { "annualUsd": 0, "fxPct": 1.5, "fxNote": "Billed in US dollars. Visa rate + 1.5% on non-USD purchases.", "topUpPct": null, "atm": "4% on Basic, 2% on Plus, 1% on Prestige", "other": ["Plastic card delivery $17.44 in the US", "Virtual card replacement $5"] },
+    "fees": { "annualUsd": 0, "fxPct": 1.5, "fxNote": "Billed in US dollars. Visa rate + 1.5% on non-USD purchases.", "fxByCurrency": { "USD": 0 }, "topUpPct": null, "atm": "4% on Basic, 2% on Plus, 1% on Prestige", "other": ["Plastic card delivery $17.44 in the US", "Virtual card replacement $5"] },
     "tiers": [
       { "name": "Basic", "feeUsdYear": 0, "cashbackPct": 1, "capMonthlyUsd": 100, "perks": ["Welcome offer: 5% on your first $500"] },
       { "name": "Plus", "feeUsdYear": 359.88, "feeNote": "$29.99/month, free with $4,500 monthly spend or $65,000 in Yield Mode", "cashbackPct": 2, "capMonthlyUsd": 500, "perks": ["2 airport lounge visits a year"] },
@@ -535,7 +535,7 @@
     "custody": "self-custodial",
     "summary": "Virtual Visa card from Ethena with one of the highest flat rates around: 4% on your first $2,500 a month.",
     "cashback": { "basePct": 4, "maxPct": 5, "payout": null, "note": "Standard: 4% on the first $2,500 a month, then 1% on the next $1,500. Pro and VIP raise both the rate and the limits." },
-    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "No conversion cost on US-dollar purchases. Other currencies: the card network's fee, about 1%, passed through at cost with no Ethena markup.", "topUpPct": null, "atm": "$1 + 0.65% per withdrawal", "other": [] },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "No conversion cost on US-dollar purchases. Other currencies: the card network's fee, about 1%, passed through at cost with no Ethena markup.", "fxByCurrency": { "USD": 0 }, "topUpPct": null, "atm": "$1 + 0.65% per withdrawal", "other": [] },
     "tiers": [
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 4, "bands": [ { "uptoUsd": 2500, "pct": 4 }, { "uptoUsd": 4000, "pct": 1 }, { "uptoUsd": null, "pct": 0 } ] },
       { "name": "Pro", "feeUsdYear": null, "cashbackPct": 4.5, "bands": [ { "uptoUsd": 8000, "pct": 4.5 }, { "uptoUsd": 10000, "pct": 2 }, { "uptoUsd": 12000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "requirement": "Not published" },
@@ -567,7 +567,7 @@
     "custody": "self-custodial",
     "summary": "Self-custodial virtual Visa from Exactly, paid from USDC, with Visa purchase-protection perks and listed availability in India.",
     "cashback": { "basePct": 1, "maxPct": 1, "payout": null, "note": "1% per cryptocards.so; DefiLlama does not publish a rate." },
-    "fees": { "annualUsd": 0, "fxPct": 3, "fxNote": "Billed in US dollars. Global card: 1.5% on non-USD purchases, plus up to 1.5% cross-border. US card: 1%.", "topUpPct": null, "atm": "$1 + 0.65% per withdrawal; up to $250 each", "other": [] },
+    "fees": { "annualUsd": 0, "fxPct": 3, "fxNote": "Billed in US dollars. Global card: 1.5% on non-USD purchases, plus up to 1.5% cross-border. US card: 1%.", "fxByCurrency": { "USD": 0 }, "topUpPct": null, "atm": "$1 + 0.65% per withdrawal; up to $250 each", "other": [] },
     "tiers": [
       { "name": "Global", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 3, "exceptCountries": ["US"] },
       { "name": "United States", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 1, "countries": ["US"] }
@@ -599,7 +599,7 @@
     "custody": "self-custodial",
     "summary": "Self-custodial Visa from Plasma that spends USDT, with cashback paid in XPL. The free Lite tier pays 2% on your first $500 a month.",
     "cashback": { "basePct": 2, "maxPct": 4, "payout": "XPL, weekly", "note": "Lite: 2% on the first $500 a month, then 0.1%. Core: 3% stepping down to 0.25%. Platinum: 4% stepping down to 1%. AI merchants and partner airlines earn up to 10% on higher tiers." },
-    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "Billed in US dollars. Lite: 1% Plasma markup plus about 1% Visa FX. Core: 0.5% plus about 1%. Platinum: no FX fee.", "topUpPct": null, "atm": "$2 + 2% per USD withdrawal; physical card only, up to $1,000 a withdrawal and 3 a day", "other": ["Crypto deposits: 0.15% to 0.75% Plasma fee plus network fees"] },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "Billed in US dollars. Lite: 1% Plasma markup plus about 1% Visa FX. Core: 0.5% plus about 1%. Platinum: no FX fee.", "fxByCurrency": { "USD": 0 }, "topUpPct": null, "atm": "$2 + 2% per USD withdrawal; physical card only, up to $1,000 a withdrawal and 3 a day", "other": ["Crypto deposits: 0.15% to 0.75% Plasma fee plus network fees"] },
     "tiers": [
       { "name": "Lite", "feeUsdYear": 0, "cashbackPct": 2, "bands": [ { "uptoUsd": 500, "pct": 2 }, { "uptoUsd": null, "pct": 0.1 } ], "fxPct": 2, "perks": ["1 free virtual card"] },
       { "name": "Core", "feeUsdYear": 199, "feeNote": "Or lock 20,000 XPL for 12 months instead", "cashbackPct": 3, "bands": [ { "uptoUsd": 1000, "pct": 3 }, { "uptoUsd": 2000, "pct": 2 }, { "uptoUsd": 3000, "pct": 1 }, { "uptoUsd": null, "pct": 0.25 } ], "fxPct": 1.5, "requirement": "$199 a year, or lock 20,000 XPL for 12 months", "stake": { "token": "XPL", "amount": 20000 }, "perks": ["5% on AI merchants (first $250 a month)", "ChatGPT Go subscription", "Up to 2 free virtual cards"] },
@@ -634,7 +634,7 @@
     "custody": "unknown",
     "summary": "Virtual Visa debit card from Kolo that you fund with crypto. Pays 2% back in bitcoin for your first 30 days, then 1%.",
     "cashback": { "basePct": 1, "maxPct": 2, "payout": "BTC, daily", "note": "2% for the first 30 days after activation, then 1%. Capped at $2 a purchase during the 2% period, $1 a purchase after, and $100 a month. Purchases under $1 earn nothing." },
-    "fees": { "annualUsd": 0, "fxPct": 1.35, "fxNote": "USD card: no fee in USD, Visa rate + 1% on other currencies (and +1% on USD at non-US merchants). EUR card: no fee in EUR, +0.55% to +1.35% on other currencies.", "topUpPct": 0, "txPct": 1, "atm": "USD card only: $1 + 0.65%, up to $500 a withdrawal and 3 a day, at contactless ATMs. No ATM access on the EUR card.", "other": ["1% conversion fee on every card payment", "USD card: extra 1% on USD payments at non-US merchants", "SEPA bank withdrawal: 1 EUR"] },
+    "fees": { "annualUsd": 0, "fxPct": 1.35, "fxNote": "USD card: no fee in USD, Visa rate + 1% on other currencies (and +1% on USD at non-US merchants). EUR card: no fee in EUR, +0.55% to +1.35% on other currencies.", "fxByCurrency": { "USD": 0, "EUR": 0 }, "topUpPct": 0, "txPct": 1, "atm": "USD card only: $1 + 0.65%, up to $500 a withdrawal and 3 a day, at contactless ATMs. No ATM access on the EUR card.", "other": ["1% conversion fee on every card payment", "USD card: extra 1% on USD payments at non-US merchants", "SEPA bank withdrawal: 1 EUR"] },
     "tiers": [
       { "name": "Kolo Card", "feeUsdYear": 0, "cashbackPct": 1, "capMonthlyUsd": 100, "perks": ["2% for the first 30 days"] }
     ],
@@ -666,7 +666,7 @@
     "custody": "self-custodial",
     "summary": "Visa Signature card run from a Telegram app, topped up with USDT or USDC on eight networks. Every card payment carries a 1.5% fee.",
     "cashback": { "basePct": null, "maxPct": null, "payout": null, "note": "No cashback on your own spending. You earn cashback on the spending of friends you refer." },
-    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in US dollars. Visa adds 1% on payments in other currencies, on top of Karta's 1.5% fee on every card payment.", "topUpPct": 0, "txPct": 1.5, "atm": "1.5% + 1 USDT per withdrawal", "other": ["Virtual card: 5 USDT one-time", "Physical card: from 100 USDT one-time", "Bank payouts: SEPA 1.5% + €2, SWIFT 1.4% + $2"] },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in US dollars. Visa adds 1% on payments in other currencies, on top of Karta's 1.5% fee on every card payment.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txPct": 1.5, "atm": "1.5% + 1 USDT per withdrawal", "other": ["Virtual card: 5 USDT one-time", "Physical card: from 100 USDT one-time", "Bank payouts: SEPA 1.5% + €2, SWIFT 1.4% + $2"] },
     "tiers": [
       { "name": "Karta Personal", "feeUsdYear": 0, "feeNote": "One-time: 5 USDT for the virtual card, from 100 USDT for a physical card", "cashbackPct": null }
     ],
@@ -695,7 +695,7 @@
     "custody": "self-custodial",
     "summary": "Self-custodial Visa from Tria that spends from 1,000+ tokens, with cashback from 1.5% to 6% depending on your membership.",
     "cashback": { "basePct": 1.5, "maxPct": 6, "payout": null, "note": "Lite: 1.5% on the first $1,000 a month, then 0.5%. Pro: 4.5% on the first $1,000, then 1%. Max: 6% on the first $2,000, then 1%." },
-    "fees": { "annualUsd": 20, "fxPct": 0, "fxNote": "Billed in US dollars. Tria charges no FX fee of its own; its help center says fees vary by region and card type, and the card terms allow Visa FX of up to 3%.", "topUpPct": 0, "atm": "Pro and Max: up to $750 a day, fee not published. No ATM access on Lite.", "other": [] },
+    "fees": { "annualUsd": 20, "fxPct": 0, "fxNote": "Billed in US dollars. Tria charges no FX fee of its own; its help center says fees vary by region and card type, and the card terms allow Visa FX of up to 3%.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "atm": "Pro and Max: up to $750 a day, fee not published. No ATM access on Lite.", "other": [] },
     "tiers": [
       { "name": "Lite", "feeUsdYear": 20, "cashbackPct": 1.5, "bands": [ { "uptoUsd": 1000, "pct": 1.5 }, { "uptoUsd": null, "pct": 0.5 } ], "fxPct": 0, "perks": ["Virtual Visa Platinum card", "1.5% with no cap on Tria Travel (hotels, rentals; not flights)"] },
       { "name": "Pro", "feeUsdYear": 109, "cashbackPct": 4.5, "bands": [ { "uptoUsd": 1000, "pct": 4.5 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "$109 a year", "perks": ["Plastic Visa Signature card", "4.5% with no cap on Tria Travel (hotels, rentals; not flights)", "Lounge access", "Visa Luxury Hotels and Visa concierge", "ATM up to $750 a day"] },
@@ -764,7 +764,7 @@
     "custody": "self-custodial",
     "summary": "Visa secured credit card from Avici, backed by USDC that stays in a smart contract you own. No cashback, but no FX markup from Avici.",
     "cashback": { "basePct": null, "maxPct": null, "payout": null, "note": "No cashback program. Signature cards carry standard Visa Signature benefits." },
-    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in US dollars. No Avici FX markup; Visa charges about 1% on non-USD purchases (0.4% to 1%).", "topUpPct": 0, "atm": "Platinum: $1 + 0.65%. Signature: free. Up to $1,000 a withdrawal and $3,000 a day.", "other": ["Virtual Platinum: $15 one-time ($10 for each extra card)", "Physical Platinum: $50 one-time", "Signature: $30 (virtual) or $75 (physical) the first year, then $20 a year"] },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in US dollars. No Avici FX markup; Visa charges about 1% on non-USD purchases (0.4% to 1%).", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "atm": "Platinum: $1 + 0.65%. Signature: free. Up to $1,000 a withdrawal and $3,000 a day.", "other": ["Virtual Platinum: $15 one-time ($10 for each extra card)", "Physical Platinum: $50 one-time", "Signature: $30 (virtual) or $75 (physical) the first year, then $20 a year"] },
     "tiers": [
       { "name": "Platinum", "feeUsdYear": 0, "feeNote": "One-time card fee: $15 virtual, $50 physical", "cashbackPct": null, "fxPct": 1 },
       { "name": "Signature", "feeUsdYear": 20, "feeNote": "$30 (virtual) or $75 (physical) in the first year", "cashbackPct": null, "fxPct": 1, "requirement": "$30 the first year, then $20 a year", "perks": ["Visa Signature benefits", "Free ATM withdrawals"] }
@@ -797,7 +797,7 @@
     "custody": "self-custodial",
     "summary": "Self-custodial virtual Visa from Tuyo that spends USDC. No card fees, and no fee on US dollar purchases in the US.",
     "cashback": { "basePct": null, "maxPct": null, "payout": null, "note": "No cashback rate. Instead, some purchases are made free at random (\"Buy Now, Pay Maybe\")." },
-    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "0% on USD purchases in the US. 1% FX fee on non-USD purchases plus 1% on purchases outside the US; up to 2% combined.", "topUpPct": null, "atm": "Up to $250 a withdrawal incl. the ATM surcharge, 3 attempts a day; Tuyo fee not published", "other": ["Trades: 0.25% (stablecoin swaps and bridging exempt)"] },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "0% on USD purchases in the US. 1% FX fee on non-USD purchases plus 1% on purchases outside the US; up to 2% combined.", "fxByCurrency": { "USD": 0 }, "topUpPct": null, "atm": "Up to $250 a withdrawal incl. the ATM surcharge, 3 attempts a day; Tuyo fee not published", "other": ["Trades: 0.25% (stablecoin swaps and bridging exempt)"] },
     "tiers": [
       { "name": "Tuyo Card", "feeUsdYear": 0, "cashbackPct": null, "fxPct": 2 }
     ],

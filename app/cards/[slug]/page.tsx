@@ -221,7 +221,8 @@ export default async function CardPage({ params }: Props) {
             <h2 id="score" className="h3">
               G2M score <span className="faint" style={{ fontSize: 14, fontWeight: 500 }}>worldwide</span>
             </h2>
-            <span style={{ fontSize: 40, fontWeight: 800, letterSpacing: '-0.04em' }} className="metal-text num">
+            {/* paddingRight: the metal fill only paints inside the box, and tight letter-spacing pushes the last digit past it. */}
+            <span style={{ fontSize: 40, fontWeight: 800, letterSpacing: '-0.04em', paddingRight: '0.12em' }} className="metal-text num">
               {card.score.total}
               <span style={{ fontSize: 16 }}>/100</span>
             </span>
@@ -260,7 +261,11 @@ export default async function CardPage({ params }: Props) {
           </ul>
           <p className="muted" style={{ fontSize: 14 }}>
             {card.coverage.scope}
-            {card.coverage.countries ? ` · ${card.coverage.countries} countries` : ''}.{' '}
+            {/* Skip the count when the description already says it ("48 countries incl. ..."). */}
+            {card.coverage.countries && !card.coverage.scope.includes(String(card.coverage.countries))
+              ? ` · ${card.coverage.countries} countries`
+              : ''}
+            .{' '}
             {card.coverage.examples.length ? `Includes ${card.coverage.examples.join(', ')}.` : ''}
           </p>
         </section>

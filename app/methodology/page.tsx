@@ -49,7 +49,7 @@ export default function MethodologyPage() {
       </div>
 
       <div className="table-wrap">
-        <table className="table" style={{ minWidth: 640 }}>
+        <table className="table stack-on-phone" style={{ minWidth: 640 }}>
           <thead>
             <tr>
               <th scope="col">Part</th>
@@ -106,8 +106,16 @@ export default function MethodologyPage() {
         <h2>The rewards calculator</h2>
         <p>
           The calculator uses your monthly spend to work out a year of cashback for every tier of every card, then takes off
-          plan fees, FX fees on the share you spend in other currencies, and per-purchase fees, including small-purchase fees when your typical purchase is below the limit. Monthly caps and spend bands
-          are applied where published. Rewards in tokens or points are counted at face value.
+          plan fees, FX fees and per-purchase fees, including small-purchase fees when your typical purchase is below the
+          limit. Monthly caps and spend bands are applied where published. Rewards in tokens or points are counted at face
+          value.
+        </p>
+        <p>
+          Pick where you live and we use your country&apos;s currency. Spending at home is free of FX fees only on a card
+          that bills in that currency (most crypto cards bill in US dollars, some also in euros), so someone in the US
+          paying in dollars pays no FX fee, while someone in India paying in rupees on a dollar card pays it on every
+          purchase. When an issuer does not say which currency it bills in, we count the FX fee on all spending. Plans
+          only offered in other countries are left out. The card finder uses the same rules.
         </p>
 
         <h2 id="money">How G2M makes money</h2>

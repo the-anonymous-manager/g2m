@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getCards } from '@/lib/cards';
 import { toRow } from '@/lib/types';
 import { parseCalcInput } from '@/lib/calc';
-import { isMarket } from '@/lib/regions';
+import { isCountry } from '@/lib/regions';
 import { CalculatorClient } from '@/components/CalculatorClient';
 import { Eyebrow } from '@/components/bits';
 
@@ -25,7 +25,9 @@ export default async function CalculatorPage({ searchParams }: Props) {
     ...(one(p.ticket) ? { ticket: one(p.ticket) } : {}),
     ...(one(p.all) ? { all: one(p.all) } : {})
   });
-  const m = (one(p.market) ?? '').toUpperCase();
+  // `country=JP`; older links used `market=IN` (the EU was a market, not a country, so it has no default).
+  const raw = (one(p.country) ?? one(p.market) ?? '').toUpperCase();
+  const country = isCountry(raw) ? raw : '';
   const rows = getCards().map(toRow);
   return (
     <div className="wrap section stack" style={{ gap: 28 }}>
@@ -33,11 +35,11 @@ export default async function CalculatorPage({ searchParams }: Props) {
         <Eyebrow>your numbers</Eyebrow>
         <h1 className="h2">Rewards calculator</h1>
         <p className="lead">
-          What each card pays you back in a year, minus plan fees, FX fees and per-purchase fees. We pick the best tier for
-          your spend on every card.
+          What each card pays you back in a year, minus plan fees, FX fees and per-purchase fees. Pick where you live: a
+          card billed in your own currency charges no FX fee at home. We pick the best tier for your spend on every card.
         </p>
       </div>
-      <CalculatorClient rows={rows} initial={initial} initialMarket={isMarket(m) ? m : ''} hadMarket={isMarket(m)} />
+      <CalculatorClient rows={rows} initial={initial} initialCountry={country} hadCountry={Boolean(country)} />
     </div>
   );
 }

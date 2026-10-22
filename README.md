@@ -69,6 +69,10 @@ in sheet terms (tab, card, column). It closes itself when a later run succeeds.
 - Tier cashback that changes with spend: `2.5% up to $10000; 2%`.
 - Cells are plain text, so `2026-10-22` and `1.5%` stay exactly as typed. Text starting with `+` or `=` still needs
   an apostrophe in front (`'+1% back`), or Google treats it as a formula; the sync rejects `#ERROR!` cells.
+- FX at home: "No-FX currencies" lists currencies the issuer charges no (or a lower) FX fee on, e.g. `USD 0; EUR 0`
+  or `EUR 0.2; GBP 0.2`; "Billed in your own currency" = yes when the issuer bills in the holder's local currency.
+  The calculator and finder use these with the visitor's country (`lib/currencies.mjs`) to charge FX on everyday
+  spending only when the card does not bill in that currency. Empty = not published, so FX is counted on all spending.
 - Card pictures: paste a link in "Card image" (Cards tab). The sync downloads it once (Google Drive and Dropbox
   share links work), trims a plain border, and saves `public/card-images/<slug>-<hash>.webp` (1000 x 631),
   `-sm.webp` (184 x 116) and `.png` (for share images). Card-shaped pictures fill the card; upright ones are fitted
