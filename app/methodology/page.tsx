@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getCards, lastUpdated } from '@/lib/cards';
-import { SCORE_WEIGHTS } from '@/lib/score';
+import { BASKET, BASKET_PURCHASES, BASKET_USD, SCORE_WEIGHTS } from '@/lib/score';
+import { money } from '@/lib/format';
 import { fmtDate } from '@/lib/format';
 import { Eyebrow } from '@/components/bits';
 
@@ -16,22 +17,22 @@ const PARTS = [
   {
     name: 'Rewards',
     max: SCORE_WEIGHTS.rewards,
-    how: 'The cashback most people actually get. We use the base rate when the issuer publishes one. If only an “up to” rate exists, we count 40% of it, because the headline rate usually needs a top tier, staking or a paid plan. Any fee charged on every purchase comes off this rate first, since it eats into every reward. 5% or more earns full marks.'
+    how: 'The ongoing cashback on the entry tier, worked out on the $1,000 test basket below, so spending bands and monthly caps count. Short intro offers (such as 2% for the first 30 days) are left out. Any fee charged on every purchase comes off this rate first. Points: 40 × (net rate ÷ 5%), up to 40 and never below 0. If the issuer only publishes an “up to” rate and no entry-tier rate, Rewards scores 0.'
   },
   {
     name: 'Fees',
     max: SCORE_WEIGHTS.fees,
-    how: 'Annual fee (10 points: free scores 10, up to $100 scores 6, up to $300 scores 3, more scores zero). FX fee (12 points: 0% scores 12, up to 1% scores 9, up to 2% scores 5, more scores 2). Other purchase costs (8 points): top-up fees, flat or small-purchase fees, and any per-purchase fee larger than the cashback. None scores 8, up to 1% scores 4, more scores 1. A fee the issuer does not publish scores in the middle.'
+    how: 'Annual and card-access costs (10 points): the yearly or subscription fee of the entry tier plus any fee to get the card itself, but not optional physical card shipping. Free scores 10, up to $100 scores 6, up to $300 scores 3, more scores 0. FX fee (12 points): 0% scores 12, up to 1% scores 9, up to 2% scores 5, more scores 2. Other transaction costs on the test basket (8 points): $0 a month scores 8, up to $10 scores 4, more scores 1.'
   },
   {
     name: 'Coverage',
     max: SCORE_WEIGHTS.coverage,
-    how: 'How many countries can get the card (12 points: 100+ countries is best), Apple Pay and Google Pay (2 points each) and a physical card (4 points). For one country, the 12 points become: confirmed there 12, not confirmed 5.'
+    how: 'Confirmed countries (12 points): 100 or more scores 12, 50 to 99 scores 10, 20 to 49 scores 8, 5 to 19 scores 5, 1 to 4 scores 2, none scores 0. Apple Pay and Google Pay (2 points each). Physical card (4 points): a confirmed physical card scores 3, plus 1 when getting it (issuance and shipping) costs under $50; a virtual-only card scores 0.'
   },
   {
     name: 'Control',
     max: SCORE_WEIGHTS.control,
-    how: 'Who holds your funds while you spend. Self-custodial cards score 10, custodial cards 5, and cards that do not say score 4.'
+    how: 'Who holds your funds while you spend. Self-custodial cards score 10, custodial cards 5, and cards that do not say score 0.'
   }
 ];
 
@@ -70,10 +71,52 @@ export default function MethodologyPage() {
       </div>
 
       <div className="prose">
+        <h2 id="basket">The $1,000 test basket</h2>
+        <p>
+          Rewards and other transaction costs are worked out on the same month of spending for every card: {money(BASKET_USD)}{' '}
+          split into five equal {money(200)} buckets, {BASKET_PURCHASES} purchases in all.
+        </p>
+      </div>
+
+      <div className="table-wrap" style={{ maxWidth: 520 }}>
+        <table className="table" style={{ minWidth: 0 }}>
+          <thead>
+            <tr>
+              <th scope="col">Purchase size</th>
+              <th scope="col">Purchases</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {BASKET.map((b) => (
+              <tr key={b.usd}>
+                <td className="num">{money(b.usd)}</td>
+                <td className="num">{b.count}</td>
+                <td className="num">{money(b.usd * b.count)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="prose">
+        <p>
+          A fee charged as a percentage of every purchase comes off the cashback first. Only the part larger than the
+          cashback counts as a transaction cost, together with flat fees per purchase (charged on all {BASKET_PURCHASES}),
+          top-up or funding fees, and small-purchase fees on the basket purchases below the issuer&apos;s limit. FX fees are
+          scored on their own.
+        </p>
+
         <h2>Missing figures</h2>
         <p>
-          When an issuer does not publish a number, we say “Not published” and score that part below a known good value. A
-          card that states its fees clearly will always beat one that hides them.
+          Anything the issuer does not publish scores 0 for that part: a fee, a cashback rate, Apple Pay or Google Pay
+          support, or who holds your funds. We show it as “Not published”. A card that states its terms clearly will
+          always beat one that leaves them out.
+        </p>
+        <p>
+          Confirmed countries come from the issuer&apos;s own country list. When a card has no full list yet, we count the
+          countries confirmed among the markets we check for every card (the US, the UK, India, the UAE and the EU, which
+          counts as all 30 EEA countries).
         </p>
 
         <h2>Where the data comes from</h2>
@@ -95,7 +138,7 @@ export default function MethodologyPage() {
           The same card is not the same deal everywhere. Some tiers, fees and cashback rates are only for one country, so
           the rankings pick up where you live and score every card for that country with the same formula. Rewards and
           fees come from the tiers offered there, cards that are not available there drop out, and # is the rank in that
-          country. Cards confirmed in your country score higher than cards that have not confirmed it. When no card has
+          country. For one country, the 12 country points become: confirmed there 12, not confirmed 5. When no card has
           confirmed a country yet, you see the worldwide ranking with each card marked not confirmed.
         </p>
         <p>

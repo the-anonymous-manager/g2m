@@ -115,6 +115,8 @@ const CARD_COLUMNS = [
   ['Small-purchase fee $', (c) => showNum(c.fees.smallPurchase?.feeUsd)],
   ['Small purchase = under $', (c) => showNum(c.fees.smallPurchase?.underUsd)],
   ['Small-purchase fee foreign only', (c) => (c.fees.smallPurchase ? showBool(c.fees.smallPurchase.foreignOnly) : '')],
+  ['Card activation fee $', (c) => showNum(c.fees.cardFeeUsd)],
+  ['Physical card cost $ (issuance + shipping)', (c) => showNum(c.fees.physicalCardFeeUsd)],
   ['ATM', (c) => c.fees.atm ?? ''],
   ['Other fees', (c) => c.fees.other.join('\n')],
   ['Number of countries', (c) => showNum(c.coverage.countries)],
@@ -315,6 +317,8 @@ export function tablesToCards(tables) {
           smallFee != null || smallUnder != null
             ? { feeUsd: smallFee, underUsd: smallUnder, foreignOnly: b('Small-purchase fee foreign only') ?? false }
             : undefined,
+        cardFeeUsd: n('Card activation fee $') ?? undefined,
+        physicalCardFeeUsd: n('Physical card cost $ (issuance + shipping)') ?? undefined,
         atm: str(r.get('ATM')) || null,
         other: lines(r.get('Other fees'))
       },
@@ -428,7 +432,8 @@ const FIELD_COLUMNS = {
   slug: 'Card ID', name: 'Name', brand: 'Brand', issuer: 'Issuer (bank)', network: 'Network', type: 'Type',
   forms: 'Forms', custody: 'Custody', metal: 'Card colour', summary: 'Summary',
   'cashback.basePct': 'Base cashback %', 'cashback.maxPct': 'Max cashback %', 'cashback.payout': 'Cashback paid in',
-  'fees.annualUsd': 'Annual fee $', 'fees.fxPct': 'FX fee %', 'fees.fxByCurrency': 'No-FX currencies', 'fees.topUpPct': 'Top-up fee %',
+  'fees.annualUsd': 'Annual fee $', 'fees.cardFeeUsd': 'Card activation fee $',
+  'fees.physicalCardFeeUsd': 'Physical card cost $ (issuance + shipping)', 'fees.fxPct': 'FX fee %', 'fees.fxByCurrency': 'No-FX currencies', 'fees.topUpPct': 'Top-up fee %',
   'fees.txPct': 'Fee on every purchase %', 'fees.txFlatUsd': 'Fee on every purchase $',
   'fees.smallPurchase.feeUsd': 'Small-purchase fee $', 'fees.smallPurchase.underUsd': 'Small purchase = under $',
   'coverage.countries': 'Number of countries', 'coverage.scope': 'Where it works',
