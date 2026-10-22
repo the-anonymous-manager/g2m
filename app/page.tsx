@@ -1,5 +1,7 @@
 import Link from 'next/link';
-import { getCards, lastUpdated } from '@/lib/cards';
+import { getCards, getRank, lastUpdated } from '@/lib/cards';
+import { getSponsor } from '@/lib/sponsor';
+import { OutboundLink } from '@/components/OutboundLink';
 import type { Card, Market } from '@/lib/types';
 import { MARKET_LABELS } from '@/lib/regions';
 import { cashbackLabel, fmtDate, pct, usd } from '@/lib/format';
@@ -22,6 +24,9 @@ const BROWSE = [
 
 const FOCUS: Market[] = ['IN', 'AE'];
 
+// Re-check hourly so a sponsorship starts and ends on its dates without a new deploy.
+export const revalidate = 3600;
+
 function confirmedIn(cards: Card[], m: Market) {
   return cards.filter((c) => c.coverage.markets[m] === 'yes');
 }
@@ -29,9 +34,9 @@ function confirmedIn(cards: Card[], m: Market) {
 export default function HomePage() {
   const cards = getCards();
   const top = cards.slice(0, 5);
-  const heroCards = [cards.find((c) => c.metal === 'silver'), cards.find((c) => c.metal === 'black'), cards.find((c) => c.metal === 'rose')].filter(
-    (c): c is Card => Boolean(c)
-  );
+  // The Featured spot: a booked sponsor while its dates run, otherwise the top-ranked card.
+  const sponsor = getSponsor();
+  const featured = sponsor ?? cards[0];
   const selfCustodial = cards.filter((c) => c.custody === 'self-custodial').length;
   const noFee = cards.filter((c) => c.fees.annualUsd === 0).length;
 
@@ -71,11 +76,65 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-        <div className="hero-art" aria-hidden="true">
-          {heroCards.map((c, i) => (
-            <CardArt key={c.slug} card={c} className={`c${i + 1}`} />
-          ))}
-        </div>
+        <aside className="hero-feature" aria-label={sponsor ? 'Sponsored card' : 'Top-ranked card'}>
+          <CardArt card={featured} />
+          <div className="panel panel-pad hero-feature-panel">
+            <div className="hero-feature-head">
+              <Eyebrow>{sponsor ? 'sponsored' : 'top ranked'}</Eyebrow>
+              <span className="mono faint" style={{ fontSize: 12 }}>
+                #{getRank(featured.slug)} of {cards.length}
+              </span>
+            </div>
+            <div className="hero-feature-title">
+              <h2 className="h3">{featured.name}</h2>
+              <ScorePill value={featured.score.total} />
+            </div>
+            <dl className="hero-feature-facts">
+              <div>
+                <dt>Cashback</dt>
+                <dd>{cashbackLabel(featured.cashback.basePct, featured.cashback.maxPct)}</dd>
+              </div>
+              <div>
+                <dt>Annual fee</dt>
+                <dd>{usd(featured.fees.annualUsd)}</dd>
+              </div>
+              <div>
+                <dt>FX fee</dt>
+                <dd>{pct(featured.fees.fxPct)}</dd>
+              </div>
+            </dl>
+            <div className="hero-feature-actions">
+              <OutboundLink
+                slug={featured.slug}
+                name={featured.name}
+                placement={sponsor ? 'hero-sponsored' : 'hero-top'}
+                campaign={sponsor ? 'sponsored' : undefined}
+                className="btn btn-metal btn-sm"
+              >
+                Get the card
+              </OutboundLink>
+              <Link href={`/cards/${featured.slug}`} className="btn btn-sm">
+                Read the review
+              </Link>
+            </div>
+            <p className="faint" style={{ fontSize: 13, margin: 0 }}>
+              {sponsor ? (
+                <>
+                  Paid placement. It never changes a card&apos;s score or rank.{' '}
+                  <Link href="/methodology#money">How G2M makes money</Link>
+                </>
+              ) : (
+                <>
+                  The highest G2M score right now. Card issuers can{' '}
+                  <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Sponsored spot on G2M')}`}>
+                    book this spot
+                  </a>{' '}
+                  as a labelled sponsor.
+                </>
+              )}
+            </p>
+          </div>
+        </aside>
       </section>
 
       {/* Stats */}
