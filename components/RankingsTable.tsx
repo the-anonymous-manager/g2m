@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import type { CardRow, Market } from '@/lib/types';
+import type { CardRow } from '@/lib/types';
 import {
   COLUMNS,
   DEFAULT_FILTERS,
@@ -14,7 +14,8 @@ import {
   type Filters,
   type SortKey
 } from '@/lib/table';
-import { MARKET_LABELS } from '@/lib/regions';
+import { COUNTRIES, availabilityIn, countryName } from '@/lib/regions';
+import { rankIn } from '@/lib/score';
 import { CUSTODY_LABEL, NP, pct, usd } from '@/lib/format';
 import { CardArt } from '@/components/CardArt';
 import { MarketBadge, ScorePill, SearchIcon } from '@/components/bits';
@@ -22,7 +23,6 @@ import { ShareBar } from '@/components/ShareBar';
 import { useRegion } from '@/components/RegionContext';
 import { track } from '@/lib/analytics';
 
-const MARKETS: Market[] = ['IN', 'AE', 'US', 'GB', 'EU'];
 const MAX_COMPARE = 3;
 
 type Props = { rows: CardRow[]; initial: Filters; hadMarketParam: boolean };
@@ -30,21 +30,21 @@ type Props = { rows: CardRow[]; initial: Filters; hadMarketParam: boolean };
 export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
   const [f, setF] = useState<Filters>(initial);
   const [picked, setPicked] = useState<string[]>([]);
-  const { market: myMarket, ready } = useRegion();
+  const { country: myCountry, ready } = useRegion();
   const firstRun = useRef(true);
   const appliedRegion = useRef(false);
-  // True while the region filter is the one we detected, not one the viewer picked.
-  const [autoMarket, setAutoMarket] = useState(false);
+  // True while the country filter is the one we detected, not one the viewer picked.
+  const [autoCountry, setAutoCountry] = useState(false);
 
-  // Default the region filter to the viewer's market once, unless the link already set one.
+  // Default the country filter to the viewer's country once, unless the link already set one.
   useEffect(() => {
     if (!ready || appliedRegion.current || hadMarketParam) return;
     appliedRegion.current = true;
-    if (myMarket) {
-      setF((prev) => ({ ...prev, market: myMarket }));
-      setAutoMarket(true);
+    if (myCountry) {
+      setF((prev) => ({ ...prev, country: myCountry }));
+      setAutoCountry(true);
     }
-  }, [ready, myMarket, hadMarketParam]);
+  }, [ready, myCountry, hadMarketParam]);
 
   // Keep the URL in sync so any view can be shared and reopened exactly.
   useEffect(() => {
@@ -52,13 +52,15 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
       firstRun.current = false;
       return;
     }
-    // A detected region stays out of the URL, so a shared link follows each reader's own location.
-    const qs = serializeFilters(autoMarket ? { ...f, market: '' } : f);
+    // A detected country stays out of the URL, so a shared link follows each reader's own location.
+    const qs = serializeFilters(autoCountry ? { ...f, country: '' } : f);
     const url = `${window.location.pathname}${qs ? `?${qs}` : ''}`;
     window.history.replaceState(window.history.state, '', url);
-  }, [f, autoMarket]);
+  }, [f, autoCountry]);
 
-  const visible = useMemo(() => sortRows(filterRows(rows, f), f.sort), [rows, f]);
+  // In a country view every card is scored and ranked for that country.
+  const ranked = useMemo(() => (f.country ? rankIn(rows, f.country) : rows), [rows, f.country]);
+  const visible = useMemo(() => sortRows(filterRows(ranked, f), f.sort), [ranked, f]);
   const set = <K extends keyof Filters>(key: K, value: Filters[K]) => setF((prev) => ({ ...prev, [key]: value }));
 
   const onSort = (key: SortKey, additive: boolean) => {
@@ -80,9 +82,9 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
     return { dir: f.sort[i].dir, order: i + 1 };
   };
 
-  const marketLabel = f.market ? MARKET_LABELS[f.market] : undefined;
-  const description = describeFilters(f, marketLabel);
-  const confirmed = f.market ? visible.filter((c) => c.coverage.markets[f.market as Market] === 'yes').length : 0;
+  const place = f.country ? countryName(f.country) : undefined;
+  const description = describeFilters(f, place);
+  const confirmed = f.country ? ranked.filter((c) => availabilityIn(c, f.country) === 'yes').length : 0;
   const isDefault = serializeFilters(f) === serializeFilters(DEFAULT_FILTERS);
 
   const sortHead = (k: SortKey, label?: string, style?: React.CSSProperties) => {
@@ -135,17 +137,17 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
             <select
               id="f-market"
               className="select"
-              value={f.market}
+              value={f.country}
               onChange={(e) => {
-                setAutoMarket(false);
-                set('market', e.target.value as Market | '');
+                setAutoCountry(false);
+                set('country', e.target.value);
               }}
             >
-              <option value="">All regions</option>
-              {MARKETS.map((m) => (
-                <option key={m} value={m}>
-                  {MARKET_LABELS[m]}
-                  {m === myMarket ? ' (your location)' : ''}
+              <option value="">All countries</option>
+              {COUNTRIES.map((c) => (
+                <option key={c.code} value={c.code}>
+                  {c.name}
+                  {c.code === myCountry ? ' (your location)' : ''}
                 </option>
               ))}
             </select>
@@ -211,10 +213,10 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
           <button type="button" className="chip" aria-pressed={f.lounge} onClick={() => set('lounge', !f.lounge)}>
             Lounge access
           </button>
-          {f.market ? (
+          {f.country ? (
             <label className="check" style={{ marginLeft: 4 }}>
               <input type="checkbox" checked={f.strict} onChange={(e) => set('strict', e.target.checked)} />
-              Only cards confirmed in {marketLabel}
+              Only cards confirmed in {place}
             </label>
           ) : null}
           {!isDefault ? (
@@ -228,7 +230,13 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
       <div className="pager">
         <p className="muted" aria-live="polite">
           <b style={{ color: 'var(--text)' }}>{visible.length}</b> of {rows.length} cards · {description}
-          {f.market && !f.strict ? ` (${confirmed} confirmed)` : ''}
+          {f.country && !f.strict ? ` (${confirmed} confirmed)` : ''}
+          {f.country && confirmed === 0 && visible.length ? (
+            <>
+              <br />
+              No card has confirmed {place} yet, so this is the global ranking. Check with the issuer before you apply.
+            </>
+          ) : null}
         </p>
         <ShareBar text={`Crypto cards ${description === 'all cards' ? 'ranked' : `${description}, ranked`} on G2M`} />
       </div>
@@ -236,7 +244,7 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
       {visible.length === 0 ? (
         <div className="panel panel-pad stack" style={{ gap: 10, alignItems: 'flex-start' }}>
           <h2 className="h3">No cards match these filters</h2>
-          <p className="muted">Try another region, or allow cards whose availability is not confirmed yet.</p>
+          <p className="muted">Try another country, or allow cards whose availability is not confirmed yet.</p>
           <button type="button" className="btn btn-sm" onClick={() => setF(DEFAULT_FILTERS)}>
             Show all cards
           </button>
@@ -257,7 +265,7 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
                   {sortHead('annual')}
                   {sortHead('fx')}
                   <th scope="col">Custody</th>
-                  {f.market ? <th scope="col">In {marketLabel}</th> : sortHead('countries')}
+                  {f.country ? <th scope="col">In {place}</th> : sortHead('countries')}
                   <th scope="col">
                     <span className="sr-only">Compare</span>
                   </th>
@@ -302,8 +310,8 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
                         </span>
                       </td>
                       <td>
-                        {f.market ? (
-                          <MarketBadge value={c.coverage.markets[f.market]} market={f.market} />
+                        {f.country ? (
+                          <MarketBadge value={availabilityIn(c, f.country)} where={place} />
                         ) : (
                           <span className="num" title={c.coverage.scope}>
                             {c.coverage.countries ?? '—'}
@@ -370,10 +378,10 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
                       <dd>{pct(c.fees.fxPct, '—')}</dd>
                     </div>
                     <div>
-                      <dt>{f.market ? `In ${marketLabel}` : 'Countries'}</dt>
+                      <dt>{f.country ? `In ${place}` : 'Countries'}</dt>
                       <dd>
-                        {f.market ? (
-                          <MarketBadge value={c.coverage.markets[f.market]} short />
+                        {f.country ? (
+                          <MarketBadge value={availabilityIn(c, f.country)} short />
                         ) : (
                           c.coverage.countries ?? '—'
                         )}

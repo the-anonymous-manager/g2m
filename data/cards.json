@@ -15,7 +15,7 @@
       { "name": "Basic", "feeUsdYear": 0, "cashbackPct": null, "requirement": "No subscription or CRO lockup" },
       { "name": "Level Up (top tier)", "feeUsdYear": null, "feeNote": "Plans start at $4.99/month; top-tier price not published. CRO lockup or staking also qualifies.", "cashbackPct": 5, "requirement": "Level Up subscription, CRO lockup or staking", "stake": { "token": "CRO", "amount": null, "coingeckoId": "crypto-com-chain" }, "perks": ["Up to 5% back in CRO on the prepaid card", "Higher APY on cash balances"] }
     ],
-    "coverage": { "countries": 38, "scope": "US, UK, EEA, Canada, Australia, Singapore, Brazil and Bahrain", "examples": ["United States", "United Kingdom", "Germany", "Australia", "Singapore", "Brazil"], "markets": { "IN": "unknown", "AE": "unknown", "US": "yes", "GB": "yes", "EU": "yes" } },
+    "coverage": { "countries": 38, "scope": "US, UK, EEA, Canada, Australia, Singapore, Brazil and Bahrain", "examples": ["United States", "United Kingdom", "Germany", "Australia", "Singapore", "Brazil"], "markets": { "IN": "unknown", "AE": "unknown", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AT", "AU", "BE", "BG", "CA", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MT", "NL", "NO", "NZ", "PL", "PT", "RO", "SE", "SG", "SI", "SK", "US"], "others": "unknown" } },
     "wallets": { "applePay": null, "googlePay": null },
     "assets": ["CRO"],
     "perks": ["Level Up membership benefits"],
@@ -24,7 +24,8 @@
     "links": { "official": "https://crypto.com/cards" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/cex/card-details/crypto-com", "verified": "2026-09-28" },
-      { "label": "Crypto.com: Level Up announcement", "url": "https://crypto.com/en/company-news/revamped-levelup", "verified": "2025-09-02" }
+      { "label": "Crypto.com: Level Up announcement", "url": "https://crypto.com/en/company-news/revamped-levelup", "verified": "2025-09-02" },
+      { "label": "Crypto.com Help Center: card availability by region (country list compiled by Card Map)", "url": "https://help.crypto.com/en/articles/3966346", "verified": "2026-10-03" }
     ],
     "lastChecked": "2026-10-22",
     "metal": "gunmetal"
@@ -46,7 +47,7 @@
       { "name": "VIP 3 (Alpha)", "feeUsdYear": 0, "cashbackPct": 4, "requirement": "Bybit VIP 3" },
       { "name": "Supreme VIP", "feeUsdYear": 0, "cashbackPct": 10, "requirement": "Bybit Supreme VIP", "perks": ["100% rebates on Netflix, Spotify and ChatGPT"] }
     ],
-    "coverage": { "countries": null, "scope": "EEA, Asia-Pacific, Australia, Latin America, Kazakhstan and Georgia", "examples": ["Argentina", "Australia", "Brazil", "Georgia", "Mexico", "Peru"], "markets": { "IN": "unknown", "AE": "unknown", "US": "no", "GB": "unknown", "EU": "yes" } },
+    "coverage": { "countries": 33, "scope": "EEA, Asia-Pacific, Australia, Latin America, Kazakhstan and Georgia", "examples": ["Argentina", "Australia", "Brazil", "Georgia", "Mexico", "Peru"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "no", "EU": "yes" }, "countryList": { "yes": ["AR", "AT", "AU", "BE", "BG", "BR", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GE", "GR", "HU", "IT", "KZ", "LT", "LU", "LV", "MT", "MX", "NL", "NO", "PE", "PL", "PT", "RO", "SE", "SI", "SK"], "unclear": ["HR", "IE", "IS", "LI"], "others": "no" } },
     "wallets": { "applePay": null, "googlePay": null },
     "assets": [],
     "perks": ["Subscription rebates for VIPs"],
@@ -55,7 +56,8 @@
     "links": { "official": "https://www.bybitcard.com/" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/cex/card-details/bybit", "verified": "2026-09-01" },
-      { "label": "Bybit Learn: Bybit Card for VIPs", "url": "https://www.bybit.com/en/learn/bybit-vip/bybit-vip-bybit-card", "verified": "2026-06-15" }
+      { "label": "Bybit Learn: Bybit Card for VIPs", "url": "https://www.bybit.com/en/learn/bybit-vip/bybit-vip-bybit-card", "verified": "2026-06-15" },
+      { "label": "Bybit Help Center: Bybit Card FAQ, and Bybit EU: Virtual Card Lite (country list compiled by Card Map)", "url": "https://www.bybit.com/en/help-center/article/FAQ-Bybit-Card-General-Inquiries", "verified": "2026-10-03" }
     ],
     "lastChecked": "2026-10-22",
     "metal": "black"
@@ -97,22 +99,23 @@
     "type": "debit",
     "forms": ["virtual", "physical"],
     "custody": "unknown",
-    "summary": "A no-fee Visa debit card from Bitget Wallet for Asia-Pacific, with 2% back as standard and 3% for new or high-spend users.",
+    "summary": "A no-fee Visa debit card from Bitget Wallet in 52 countries across Europe, Latin America, Asia-Pacific and South Africa, with 2% back as standard and 3% for new or high-spend users.",
     "cashback": { "basePct": 2, "maxPct": 3, "payout": null, "note": "3% for new users or after a monthly spend threshold (amount not published)." },
     "fees": { "annualUsd": 0, "fxPct": 1.7, "fxNote": "0% when paying in USD, 1.7% in other currencies.", "topUpPct": 0, "atm": "1% or $5, whichever is higher", "other": ["Crypto-to-fiat conversion about 0.05%"] },
     "tiers": [
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 2 },
       { "name": "Boosted", "feeUsdYear": 0, "cashbackPct": 3, "requirement": "New users, or a monthly spend threshold" }
     ],
-    "coverage": { "countries": 9, "scope": "Asia-Pacific", "examples": ["Australia", "Japan", "South Korea", "Malaysia", "Philippines", "Singapore", "Thailand", "Taiwan", "Vietnam"], "markets": { "IN": "unknown", "AE": "no", "US": "no", "GB": "no", "EU": "no" } },
+    "coverage": { "countries": 52, "scope": "EEA, UK, Latin America, Asia-Pacific and South Africa", "examples": ["United Kingdom", "Germany", "Brazil", "Japan", "South Korea", "South Africa"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AR", "AT", "AU", "BD", "BE", "BG", "BR", "CL", "CO", "CY", "CZ", "DE", "DK", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HR", "HU", "IE", "IS", "IT", "JP", "KR", "LI", "LT", "LU", "LV", "MT", "MX", "MY", "NL", "NO", "PA", "PE", "PH", "PK", "PL", "PT", "RO", "SE", "SI", "SK", "SV", "TH", "TW", "VN", "ZA"], "others": "no" } },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": [],
     "perks": [],
     "pros": ["No annual or top-up fee", "2% base back is high for a free card"],
-    "cons": ["Only 9 Asia-Pacific countries", "1.7% FX on non-USD spend"],
+    "cons": ["1.7% FX on non-USD spend"],
     "links": { "official": "https://web3.bitget.com/" },
     "sources": [
-      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/bitget-wallet", "verified": "2026-08-30" }
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/bitget-wallet", "verified": "2026-08-30" },
+      { "label": "Bitget: Bitget Wallet Card eligible countries", "url": "https://www.bitget.com/support/articles/12560603890043", "verified": "2026-10-22" }
     ],
     "lastChecked": "2026-10-22",
     "metal": "champagne"
@@ -163,7 +166,7 @@
       { "name": "Virtual card", "feeUsdYear": 0, "feeNote": "$10 one-off issuance", "cashbackPct": null },
       { "name": "Physical card", "feeUsdYear": 0, "feeNote": "$100 one-off issuance", "cashbackPct": null }
     ],
-    "coverage": { "countries": 201, "scope": "Global", "examples": ["United Arab Emirates", "Argentina", "Armenia", "Angola"], "markets": { "IN": "unknown", "AE": "yes", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
+    "coverage": { "countries": 201, "scope": "Global", "examples": ["United Arab Emirates", "Argentina", "Armenia", "Angola"], "markets": { "IN": "no", "AE": "yes", "US": "no", "GB": "yes", "EU": "yes" }, "countryList": { "yes": [], "no": ["AF", "AL", "BA", "BF", "BI", "BQ", "BV", "BY", "CD", "CF", "CN", "CU", "CW", "ER", "ET", "GW", "HR", "HT", "ID", "IN", "IQ", "IR", "KP", "LB", "LR", "LY", "MA", "ME", "MK", "ML", "MM", "NI", "NP", "RS", "RU", "SD", "SG", "SI", "SO", "SS", "SX", "SY", "TR", "TZ", "UA", "US", "VE", "XK", "YE", "ZW"], "others": "yes" } },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDT", "USDC", "BTC", "ETH", "SOL", "BNB", "TRX", "XRP", "SUI"],
     "perks": ["Points rewards"],
@@ -171,7 +174,8 @@
     "cons": ["No published cashback", "$100 physical card and 1% conversion fee"],
     "links": { "official": "https://www.redotpay.com/" },
     "sources": [
-      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/redotpay-card", "verified": "2026-08-30" }
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/redotpay-card", "verified": "2026-08-30" },
+      { "label": "RedotPay Help Center: Card Issuance Restrictions (country list compiled by Card Map)", "url": "https://helpcenter.redotpay.com/en/articles/14254838-card-issuance-restrictions", "verified": "2026-10-03" }
     ],
     "lastChecked": "2026-10-22",
     "metal": "rose"
@@ -194,7 +198,7 @@
       { "name": "Pinnacle", "feeUsdYear": null, "cashbackPct": 3, "capMonthlyUsd": 1500, "fxPct": 1, "requirement": "Not published", "perks": ["Airport lounge access", "10 free ATM withdrawals a month"] },
       { "name": "VIP", "feeUsdYear": null, "cashbackPct": 4, "capMonthlyUsd": 2000, "fxPct": 1, "requirement": "Not published", "perks": ["Airport lounge access", "Free card issuance"] }
     ],
-    "coverage": { "countries": 85, "scope": "Global (85 countries)", "examples": ["United Arab Emirates", "Argentina", "Austria", "Australia"], "markets": { "IN": "unknown", "AE": "yes", "US": "unknown", "GB": "unknown", "EU": "yes" } },
+    "coverage": { "countries": 91, "scope": "Global (91 countries)", "examples": ["United Arab Emirates", "Argentina", "Austria", "Australia"], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AD", "AE", "AG", "AO", "AR", "AT", "AU", "BB", "BD", "BE", "BG", "BH", "BO", "BR", "BS", "BZ", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DM", "DO", "EC", "ES", "FR", "GB", "GG", "GI", "GR", "GT", "GY", "HK", "HN", "HR", "HU", "ID", "IE", "IM", "IS", "IT", "JE", "JP", "KN", "KR", "KY", "LC", "LI", "LT", "LU", "LV", "MC", "MT", "MV", "MX", "MY", "NG", "NO", "NZ", "OM", "PA", "PE", "PH", "PL", "PR", "PT", "PW", "PY", "RO", "SA", "SC", "SE", "SG", "SI", "SK", "SR", "SV", "TC", "TH", "TT", "TW", "US", "UY", "VC", "VG", "VU", "ZA"], "others": "no" } },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": [],
     "perks": ["Airport lounge access on every tier", "Visa Signature benefits"],
@@ -202,7 +206,8 @@
     "cons": ["Core cashback is capped at $60 a month", "Card issuance fees of $50 to $100"],
     "links": { "official": "https://www.ether.fi/" },
     "sources": [
-      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/ether.fi", "verified": "2026-08-30" }
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/ether.fi", "verified": "2026-08-30" },
+      { "label": "ether.fi Help Center: In which countries is the Cash card available? (country list compiled by Card Map)", "url": "https://help.ether.fi/en/articles/758780-in-which-countries-is-the-cash-card-available", "verified": "2026-10-03" }
     ],
     "lastChecked": "2026-10-22",
     "metal": "silver"
@@ -223,15 +228,16 @@
       { "name": "Virtual", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 1 },
       { "name": "Metal", "feeUsdYear": 199, "cashbackPct": 1, "fxPct": 0, "perks": ["Free ATM withdrawals up to $1,200 a month", "Physical metal card"] }
     ],
-    "coverage": { "countries": 45, "scope": "45 countries incl. the EU, Latin America and Canada", "examples": ["Argentina", "Austria", "Brazil", "Canada", "Switzerland"], "markets": { "IN": "unknown", "AE": "unknown", "US": "unknown", "GB": "unknown", "EU": "yes" } },
+    "coverage": { "countries": 53, "scope": "53 countries incl. the EU, Latin America and Canada; new sign-ups paused in the US and UK", "examples": ["Argentina", "Austria", "Brazil", "Canada", "Switzerland"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "no", "EU": "yes" }, "countryList": { "yes": ["AD", "AR", "AS", "AT", "BE", "BG", "BH", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "DE", "DK", "DO", "ES", "FI", "FR", "GG", "GI", "GR", "GT", "GU", "HR", "HU", "IE", "IM", "IS", "IT", "JE", "LI", "LU", "MC", "MP", "MT", "MX", "NL", "NO", "OM", "PA", "PL", "PR", "PT", "RO", "SE", "SI", "SK", "SV", "UM", "UY", "VI"], "no": ["GB", "US"], "others": "no" } },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT", "EURe", "GBPe"],
     "perks": ["Works on Base, Linea, Monad and Solana"],
     "pros": ["Self-custodial, spends from your own wallet", "Metal tier has 0% FX"],
-    "cons": ["Only 1% back", "Metal costs $199 a year"],
+    "cons": ["Only 1% back", "Metal costs $199 a year", "New sign-ups paused in the US and UK"],
     "links": { "official": "https://metamask.io/" },
     "sources": [
-      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/metamask-card", "verified": "2026-09-28" }
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/metamask-card", "verified": "2026-09-28" },
+      { "label": "MetaMask Help Center: Card FAQ (region selector) (country list compiled by Card Map)", "url": "https://support.metamask.io/manage-crypto/metamask-card/card-faq", "verified": "2026-10-04" }
     ],
     "lastChecked": "2026-10-22",
     "metal": "gold"
@@ -251,7 +257,7 @@
     "tiers": [
       { "name": "Credit mode (top loyalty tier)", "feeUsdYear": 0, "cashbackPct": 2, "capMonthlyUsd": 50, "requirement": "Portfolio of at least $5,000; the top rate needs a higher loyalty tier" }
     ],
-    "coverage": { "countries": 34, "scope": "EEA, UK, Argentina, Brazil and Mexico", "examples": ["United Kingdom", "Germany", "Argentina", "Brazil", "Mexico"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "yes", "EU": "yes" } },
+    "coverage": { "countries": 34, "scope": "EEA, UK, Argentina, Brazil and Mexico", "examples": ["United Kingdom", "Germany", "Argentina", "Brazil", "Mexico"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AD", "AR", "AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MC", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK"], "others": "unknown" } },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": [],
     "perks": ["Credit mode: spend without selling your crypto"],
@@ -259,7 +265,8 @@
     "cons": ["Cashback capped at $50 a month", "Needs a $5,000 portfolio for rewards"],
     "links": { "official": "https://nexo.com/" },
     "sources": [
-      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/nexo-card", "verified": "2026-09-01" }
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/nexo-card", "verified": "2026-09-01" },
+      { "label": "Nexo Support: Who can order the Nexo Card (country list compiled by Card Map)", "url": "https://support.nexo.com/article/who-can-order-the-nexo-card", "verified": "2026-10-03" }
     ],
     "lastChecked": "2026-10-22",
     "metal": "gunmetal"
@@ -277,9 +284,9 @@
     "cashback": { "basePct": null, "maxPct": 2, "payout": null, "note": "Up to 2% in the EEA and UK; the US rate is not published." },
     "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "US: Visa rate + 1%. EEA and UK FX not published.", "topUpPct": null, "atm": "Supported; fees not published", "other": [] },
     "tiers": [
-      { "name": "Krak Card", "feeUsdYear": 0, "cashbackPct": 2, "requirement": "Rate shown is the EEA/UK maximum" }
+      { "name": "Krak Card", "feeUsdYear": 0, "cashbackPct": 2, "requirement": "Rate shown is the EEA/UK maximum", "countries": ["EEA", "GB"] }
     ],
-    "coverage": { "countries": null, "scope": "EEA, UK and US", "examples": ["United Kingdom", "United States", "Germany"], "markets": { "IN": "unknown", "AE": "no", "US": "yes", "GB": "yes", "EU": "yes" } },
+    "coverage": { "countries": 32, "scope": "EEA, UK and US", "examples": ["United Kingdom", "United States", "Germany"], "markets": { "IN": "no", "AE": "no", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK", "US"], "others": "no" } },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": [],
     "perks": [],
@@ -287,7 +294,8 @@
     "cons": ["Most fees not published", "US cashback not published"],
     "links": { "official": "https://www.kraken.com/" },
     "sources": [
-      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/kraken-card", "verified": "2026-09-28" }
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/kraken-card", "verified": "2026-09-28" },
+      { "label": "Kraken Support: Getting started with Kraken Card (country list compiled by Card Map)", "url": "https://support.kraken.com/articles/getting-started-kraken-card", "verified": "2026-10-03" }
     ],
     "lastChecked": "2026-10-22",
     "metal": "black"
@@ -306,11 +314,11 @@
     "fees": { "annualUsd": 0, "fxPct": 0, "fxNote": "Global card: Visa rate with 0% markup, plus a 1% card transaction fee. Thailand card: Visa rate + 1%.", "topUpPct": null, "txPct": 1, "atm": "Not available on the global virtual card", "other": ["1% card transaction fee (global card)", "1% crypto conversion (Thailand card)"] },
     "tiers": [
       { "name": "Global virtual", "feeUsdYear": 0, "cashbackPct": null },
-      { "name": "Thailand Standard", "feeUsdYear": 0, "cashbackPct": 4, "capMonthlyUsd": 100, "fxPct": 1, "requirement": "Thailand residents" },
-      { "name": "Thailand Premier", "feeUsdYear": 0, "cashbackPct": 6, "capMonthlyUsd": 300, "fxPct": 1, "requirement": "Thailand residents; tier criteria not published" },
-      { "name": "Thailand Elite", "feeUsdYear": 0, "cashbackPct": 10, "capMonthlyUsd": 800, "fxPct": 1, "requirement": "Thailand residents; tier criteria not published" }
+      { "name": "Thailand Standard", "feeUsdYear": 0, "cashbackPct": 4, "capMonthlyUsd": 100, "fxPct": 1, "requirement": "Thailand residents", "countries": ["TH"] },
+      { "name": "Thailand Premier", "feeUsdYear": 0, "cashbackPct": 6, "capMonthlyUsd": 300, "fxPct": 1, "requirement": "Thailand residents; tier criteria not published", "countries": ["TH"] },
+      { "name": "Thailand Elite", "feeUsdYear": 0, "cashbackPct": 10, "capMonthlyUsd": 800, "fxPct": 1, "requirement": "Thailand residents; tier criteria not published", "countries": ["TH"] }
     ],
-    "coverage": { "countries": 110, "scope": "Global virtual card in 110 countries; physical card in Thailand", "examples": ["United Arab Emirates", "Argentina", "Azerbaijan", "Thailand"], "markets": { "IN": "unknown", "AE": "yes", "US": "no", "GB": "unknown", "EU": "unknown" } },
+    "coverage": { "countries": 110, "scope": "Global virtual card in 110 countries; physical card in Thailand", "examples": ["United Arab Emirates", "Argentina", "Azerbaijan", "Thailand"], "markets": { "IN": "no", "AE": "yes", "US": "no", "GB": "yes", "EU": "yes" }, "countryList": { "yes": [], "no": ["AF", "AL", "AM", "AQ", "BA", "BI", "BQ", "BV", "BY", "CD", "CF", "CN", "CU", "CW", "CY", "ET", "GN", "GS", "GT", "GW", "HM", "HT", "ID", "IN", "IQ", "IR", "KG", "KN", "KP", "LB", "LY", "MA", "MD", "ME", "ML", "MM", "NE", "NI", "NP", "PN", "RS", "RU", "SD", "SO", "SS", "SX", "SY", "TF", "TJ", "TN", "TR", "UA", "UM", "US", "VE", "VU", "YE", "ZW"], "unclear": ["AU", "CH", "SA", "ZA"], "others": "yes" } },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDT"],
     "perks": [],
@@ -318,7 +326,8 @@
     "cons": ["1% fee on every global-card purchase", "High cashback only in Thailand"],
     "links": { "official": "https://www.mexc.com/" },
     "sources": [
-      { "label": "DefiLlama card dataset", "url": "https://defillama.com/cex/card-details/mexc", "verified": "2026-09-01" }
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/cex/card-details/mexc", "verified": "2026-09-01" },
+      { "label": "MEXC Learn: MEXC Card supported countries, restricted regions and KYC (21 Sep 2026) (country list compiled by Card Map)", "url": "https://www.mexc.com/learn/article/mexc-card-supported-countries-restricted-regions-what-kyc-actually-requires/1", "verified": "2026-10-04" }
     ],
     "lastChecked": "2026-10-22",
     "metal": "gunmetal"
@@ -363,14 +372,14 @@
     "type": "debit",
     "forms": ["virtual", "physical"],
     "custody": "unknown",
-    "summary": "Solana-native Visa card with 2% back in USDC, rising to 4% when you refer friends. Available across Asia-Pacific, the Gulf and Latin America.",
+    "summary": "Solana-native Visa card with 2% back in USDC, rising to 4% when you refer friends. Available across Asia-Pacific, the Gulf, Latin America and 31 US states.",
     "cashback": { "basePct": 2, "maxPct": 4, "payout": "USDC", "note": "4% after 2 qualifying referrals in the previous month. Capped at $100 a month." },
     "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "1% in Rain-issued markets, 1.8% in APAC (DCS) markets.", "topUpPct": null, "atm": "Not published", "other": ["Physical card $13.13 plus shipping"] },
     "tiers": [
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 2, "capMonthlyUsd": 100 },
       { "name": "Referral boost", "feeUsdYear": 0, "cashbackPct": 4, "capMonthlyUsd": 100, "requirement": "2 qualifying referrals in the previous month" }
     ],
-    "coverage": { "countries": 52, "scope": "Asia-Pacific, the Gulf and Latin America", "examples": ["United Arab Emirates", "Singapore", "Japan", "Argentina", "Brazil"], "markets": { "IN": "unknown", "AE": "yes", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
+    "coverage": { "countries": 52, "scope": "Asia-Pacific, the Gulf and Latin America", "examples": ["United Arab Emirates", "Singapore", "Japan", "Argentina", "Brazil"], "markets": { "IN": "unknown", "AE": "yes", "US": "yes", "GB": "unknown", "EU": "unknown" }, "countryList": { "yes": ["AE", "AG", "AR", "AU", "BB", "BO", "BR", "BS", "BZ", "CI", "CO", "CR", "DM", "DO", "EC", "EG", "GD", "GH", "GT", "GY", "HN", "JP", "KE", "KN", "KR", "KY", "LC", "MA", "MX", "MY", "NZ", "PA", "PE", "PH", "PK", "PY", "SG", "SN", "SR", "SV", "TC", "TH", "TT", "TW", "UG", "US", "UY", "VC", "VN", "ZA", "ZM"], "unclear": ["BD", "NG"], "others": "unknown" } },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
     "perks": ["Works on Arbitrum, Base, Solana and Sui"],
@@ -378,7 +387,8 @@
     "cons": ["Cashback capped at $100 a month", "4% needs ongoing referrals"],
     "links": { "official": "https://jup.ag/" },
     "sources": [
-      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/jupiter", "verified": "2026-10-01" }
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/jupiter", "verified": "2026-10-01" },
+      { "label": "Jupiter docs: Jupiter Card supported regions (country list compiled by Card Map)", "url": "https://docs.jup.ag/user-docs/global/spend/jupiter-card", "verified": "2026-10-03" }
     ],
     "lastChecked": "2026-10-22",
     "metal": "rose"
@@ -396,8 +406,8 @@
     "cashback": { "basePct": null, "maxPct": null, "payout": "Avax Points", "note": "Earns Avax Points with travel portal redemptions; no cashback rate published." },
     "fees": { "annualUsd": 0, "fxPct": 3, "fxNote": "Up to 3% globally, 1% in the US.", "topUpPct": null, "atm": "Not published", "other": ["No shipping, account or card fees"] },
     "tiers": [
-      { "name": "Global", "feeUsdYear": 0, "cashbackPct": null, "fxPct": 3 },
-      { "name": "United States", "feeUsdYear": 0, "cashbackPct": null, "fxPct": 1 }
+      { "name": "Global", "feeUsdYear": 0, "cashbackPct": null, "fxPct": 3, "exceptCountries": ["US"] },
+      { "name": "United States", "feeUsdYear": 0, "cashbackPct": null, "fxPct": 1, "countries": ["US"] }
     ],
     "coverage": { "countries": 31, "scope": "Latin America, the Caribbean and the US", "examples": ["Argentina", "Brazil", "Chile", "Bahamas"], "markets": { "IN": "unknown", "AE": "unknown", "US": "yes", "GB": "unknown", "EU": "unknown" } },
     "wallets": { "applePay": true, "googlePay": true },
@@ -459,7 +469,7 @@
       { "name": "Private", "feeUsdYear": null, "cashbackPct": 5, "requirement": "Not published", "perks": ["AirRefund flight compensation", "Up to 15% off SIXT", "Visa Signature benefits"] },
       { "name": "Bespoke", "feeUsdYear": null, "cashbackPct": 8, "requirement": "Not published", "perks": ["AirRefund flight compensation", "Up to 15% off SIXT", "Visa Signature benefits"] }
     ],
-    "coverage": { "countries": 79, "scope": "79 countries incl. the UAE, EU and Australia", "examples": ["United Arab Emirates", "Austria", "Australia", "Belgium", "Argentina"], "markets": { "IN": "unknown", "AE": "yes", "US": "unknown", "GB": "unknown", "EU": "yes" } },
+    "coverage": { "countries": 35, "scope": "35 countries incl. the EU, the UK and Australia", "examples": ["United Kingdom", "Austria", "Australia", "Belgium", "Argentina"], "markets": { "IN": "no", "AE": "unknown", "US": "no", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AR", "AT", "AU", "BE", "BG", "BR", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GR", "HK", "HU", "IE", "IS", "IT", "LU", "LV", "MT", "NL", "NO", "NZ", "PL", "PT", "RO", "SE", "SI", "SK", "TW"], "unclear": ["AE"], "others": "no" } },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": [],
     "perks": ["No locked funds required"],
@@ -467,7 +477,8 @@
     "cons": ["Base tier pays only 0.5%", "Upper-tier requirements not published"],
     "links": { "official": "https://wirexapp.com/" },
     "sources": [
-      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/wirex-one", "verified": "2026-08-29" }
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/wirex-one", "verified": "2026-08-29" },
+      { "label": "Wirex Help: Supported countries (Card column) (country list compiled by Card Map)", "url": "https://help.wirexapp.com/article/supported-countries-1189", "verified": "2026-10-03" }
     ],
     "lastChecked": "2026-10-22",
     "metal": "silver"
@@ -548,7 +559,7 @@
       { "name": "Pro", "feeUsdYear": null, "cashbackPct": 4.5, "bands": [ { "uptoUsd": 8000, "pct": 4.5 }, { "uptoUsd": 10000, "pct": 2 }, { "uptoUsd": 12000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "requirement": "Not published" },
       { "name": "VIP", "feeUsdYear": null, "cashbackPct": 5, "bands": [ { "uptoUsd": 20000, "pct": 5 }, { "uptoUsd": 30000, "pct": 2 }, { "uptoUsd": 40000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "requirement": "Not published" }
     ],
-    "coverage": { "countries": 48, "scope": "48 countries incl. the UAE, Australia and Latin America", "examples": ["United Arab Emirates", "Australia", "Argentina", "Brazil"], "markets": { "IN": "unknown", "AE": "yes", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
+    "coverage": { "countries": 48, "scope": "48 countries incl. the UAE, Australia and Latin America", "examples": ["United Arab Emirates", "Australia", "Argentina", "Brazil"], "markets": { "IN": "no", "AE": "yes", "US": "no", "GB": "no", "EU": "no" }, "countryList": { "yes": ["AE", "AG", "AR", "AU", "BB", "BO", "BR", "BS", "BZ", "CI", "CO", "CR", "DM", "DO", "EC", "EG", "GD", "GH", "GT", "GY", "HK", "HN", "JP", "KE", "KN", "KY", "LC", "MA", "MX", "MY", "NZ", "PA", "PE", "PH", "PK", "PY", "SG", "SN", "SR", "SV", "TC", "TH", "TT", "UG", "UY", "VC", "ZA", "ZM"], "others": "no" } },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": [],
     "perks": ["Works on Arbitrum, Ethereum, Optimism and Polygon"],
@@ -556,7 +567,8 @@
     "cons": ["Rate drops sharply above $2,500 a month on Standard", "Virtual card only"],
     "links": { "official": "https://ethena.fi/" },
     "sources": [
-      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/ethena", "verified": "2026-09-29" }
+      { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/ethena", "verified": "2026-09-29" },
+      { "label": "Ethena Pay: Available Jurisdictions (country list compiled by Card Map)", "url": "https://pay.ethena.fi/jurisdictions", "verified": "2026-10-03" }
     ],
     "lastChecked": "2026-10-22",
     "metal": "gold"
@@ -574,10 +586,10 @@
     "cashback": { "basePct": 1, "maxPct": 1, "payout": null, "note": "1% per cryptocards.so; DefiLlama does not publish a rate." },
     "fees": { "annualUsd": 0, "fxPct": 3, "fxNote": "Global: up to 1.5% FX plus up to 1.5% cross-border. US: 1%.", "topUpPct": null, "atm": "$1 + 0.65% per withdrawal; up to $250 each", "other": [] },
     "tiers": [
-      { "name": "Global", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 3 },
-      { "name": "United States", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 1 }
+      { "name": "Global", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 3, "exceptCountries": ["US"] },
+      { "name": "United States", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 1, "countries": ["US"] }
     ],
-    "coverage": { "countries": 47, "scope": "47 countries incl. the UAE, India and Latin America", "examples": ["United Arab Emirates", "India", "Argentina", "Australia"], "markets": { "IN": "yes", "AE": "yes", "US": "yes", "GB": "unknown", "EU": "unknown" } },
+    "coverage": { "countries": 211, "scope": "211 countries incl. the UAE, India and Latin America", "examples": ["United Arab Emirates", "India", "Argentina", "Australia"], "markets": { "IN": "yes", "AE": "yes", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AD", "AE", "AG", "AI", "AL", "AM", "AO", "AQ", "AR", "AS", "AT", "AU", "AW", "AX", "AZ", "BA", "BB", "BE", "BF", "BH", "BJ", "BL", "BM", "BN", "BO", "BQ", "BR", "BS", "BT", "BV", "BW", "BZ", "CA", "CC", "CG", "CH", "CI", "CK", "CL", "CM", "CO", "CR", "CV", "CW", "CX", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "EH", "ES", "FI", "FJ", "FK", "FM", "FO", "FR", "GA", "GB", "GD", "GE", "GF", "GG", "GH", "GI", "GL", "GM", "GN", "GP", "GQ", "GR", "GS", "GT", "GU", "GY", "HK", "HM", "HN", "HU", "ID", "IE", "IM", "IN", "IO", "IS", "IT", "JE", "JM", "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KR", "KW", "KY", "KZ", "LA", "LC", "LI", "LK", "LS", "LT", "LU", "LV", "MA", "MC", "MD", "ME", "MF", "MG", "MH", "MK", "MN", "MO", "MP", "MQ", "MR", "MS", "MT", "MU", "MV", "MW", "MX", "MY", "MZ", "NA", "NC", "NE", "NF", "NL", "NO", "NR", "NU", "NZ", "OM", "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM", "PN", "PR", "PS", "PT", "PW", "PY", "QA", "RE", "RO", "RS", "SA", "SB", "SC", "SE", "SG", "SH", "SI", "SJ", "SK", "SM", "SN", "SR", "ST", "SV", "SX", "SZ", "TC", "TD", "TF", "TG", "TH", "TJ", "TK", "TL", "TM", "TN", "TO", "TT", "TV", "TW", "TZ", "UG", "UM", "US", "UY", "UZ", "VA", "VC", "VG", "VI", "VN", "VU", "WF", "WS", "YT", "ZA", "ZM"], "unclear": ["BD", "BG", "CN", "ET", "HR", "IL", "NG", "NP", "TR"], "others": "no" } },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC"],
     "perks": ["Concierge", "Extended warranty", "Purchase protection"],
@@ -586,7 +598,8 @@
     "links": { "official": "https://exactly.app/" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/exa-card", "verified": "2026-08-29" },
-      { "label": "cryptocards.so: India guide", "url": "https://www.cryptocards.so/en/crypto-cards/india", "verified": "2026-10-20" }
+      { "label": "cryptocards.so: India guide", "url": "https://www.cryptocards.so/en/crypto-cards/india", "verified": "2026-10-20" },
+      { "label": "Exa on X: \"Exa is available to users around the world\" (17 Oct 2026) (country list compiled by Card Map)", "url": "https://x.com/Exa_App/status/2111418552167096620", "verified": "2026-10-20" }
     ],
     "lastChecked": "2026-10-22",
     "metal": "rose"
@@ -608,7 +621,7 @@
       { "name": "Core", "feeUsdYear": 199, "feeNote": "Or lock 20,000 XPL for 12 months instead", "cashbackPct": 3, "bands": [ { "uptoUsd": 1000, "pct": 3 }, { "uptoUsd": 2000, "pct": 2 }, { "uptoUsd": 3000, "pct": 1 }, { "uptoUsd": null, "pct": 0.25 } ], "fxPct": 1.5, "requirement": "$199 a year, or lock 20,000 XPL for 12 months", "stake": { "token": "XPL", "amount": 20000 }, "perks": ["5% on AI merchants (first $250 a month)", "ChatGPT Go subscription", "Up to 2 free virtual cards"] },
       { "name": "Platinum", "feeUsdYear": 0, "feeNote": "No fee; needs 100,000 XPL locked for 12 months", "cashbackPct": 4, "bands": [ { "uptoUsd": 3000, "pct": 4 }, { "uptoUsd": 10000, "pct": 3 }, { "uptoUsd": 15000, "pct": 2 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "Lock 100,000 XPL for 12 months", "stake": { "token": "XPL", "amount": 100000 }, "perks": ["10% on AI merchants (first $500 a month)", "10% on partner airlines, up to $600 a year", "Lounge access", "Visa concierge", "Travel insurance"] }
     ],
-    "coverage": { "countries": null, "scope": "Growing list of countries, full list not published; the US in 31 states", "examples": ["United States"], "markets": { "IN": "unknown", "AE": "unknown", "US": "yes", "GB": "unknown", "EU": "unknown" } },
+    "coverage": { "countries": null, "scope": "Growing list of countries, full list not published; the US in 31 states", "examples": ["United States"], "markets": { "IN": "unknown", "AE": "unknown", "US": "yes", "GB": "unknown", "EU": "unknown" }, "countryList": {"yes": ["US"], "no": ["CU", "IR", "KP", "RU", "SY", "UA", "VE"], "others": "unknown"} },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDT"],
     "perks": ["Earn on your balance until you spend it (variable rate)", "Free USDT transfers on Plasma"],
@@ -702,7 +715,7 @@
       { "name": "Pro", "feeUsdYear": 109, "cashbackPct": 4.5, "bands": [ { "uptoUsd": 1000, "pct": 4.5 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "$109 a year", "perks": ["Plastic Visa Signature card", "4.5% with no cap on Tria Travel (hotels, rentals; not flights)", "Lounge access", "Visa Luxury Hotels and Visa concierge", "ATM up to $750 a day"] },
       { "name": "Max", "feeUsdYear": 250, "cashbackPct": 6, "bands": [ { "uptoUsd": 2000, "pct": 6 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "$250 a year", "perks": ["Metal Visa Signature card", "6% with no cap on Tria Travel (hotels, rentals; not flights)", "Lounge access", "Visa Luxury Hotels and Visa concierge", "ATM up to $750 a day"] }
     ],
-    "coverage": { "countries": null, "scope": "Card support in 150+ countries per Tria; full list not published", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
+    "coverage": { "countries": null, "scope": "Card support in 150+ countries per Tria; full list not published", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "unknown", "GB": "unknown", "EU": "unknown" }, "countryList": { "yes": ["NG"], "others": "unknown" } },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": [],
     "perks": ["Price protection up to $2,000", "Purchase protection up to $10,000", "Spend up to $1M a day on Pro and Max"],
@@ -711,7 +724,8 @@
     "links": { "official": "https://tria.so/" },
     "sources": [
       { "label": "Tria Help Center: What are Tria Cards?", "url": "https://intercom.help/tria/en/articles/13513481-what-are-tria-cards", "verified": "2026-10-22" },
-      { "label": "Tria app: Lite, Pro and Max membership screens", "url": "https://tria.so/", "verified": "2026-10-22" }
+      { "label": "Tria app: Lite, Pro and Max membership screens", "url": "https://tria.so/", "verified": "2026-10-22" },
+      { "label": "Tria Docs: Card Terms International (Nigeria Users section) (country list compiled by Card Map)", "url": "https://docs.tria.so/card-terms-international", "verified": "2026-10-03" }
     ],
     "lastChecked": "2026-10-22",
     "metal": "black"
@@ -736,7 +750,7 @@
       { "name": "Premium+", "feeUsdYear": 0, "cashbackPct": 6, "bands": [ { "uptoUsd": 5000, "pct": 6 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "Hold 10,000 COCA", "stake": { "token": "COCA", "amount": 10000 }, "perks": ["50% back on 3 subscriptions"] },
       { "name": "Elite", "feeUsdYear": 0, "cashbackPct": 8, "bands": [ { "uptoUsd": 10000, "pct": 8 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "Hold 30,000 COCA", "stake": { "token": "COCA", "amount": 30000 }, "perks": ["50% back on 4 subscriptions"] }
     ],
-    "coverage": { "countries": null, "scope": "UK, EEA, Asia, South America, the Middle East and Africa", "examples": ["United Kingdom"], "markets": { "IN": "unknown", "AE": "unknown", "US": "no", "GB": "yes", "EU": "yes" } },
+    "coverage": { "countries": 73, "scope": "UK, EEA, Asia, South America, the Middle East and Africa", "examples": ["United Kingdom"], "markets": { "IN": "no", "AE": "yes", "US": "no", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AD", "AE", "AR", "AT", "AU", "AZ", "BE", "BG", "BR", "CH", "CL", "CO", "CY", "CZ", "DE", "DK", "EC", "EE", "ES", "FI", "FR", "GB", "GE", "GG", "GH", "GI", "GR", "HK", "HR", "HU", "IE", "IL", "IM", "IS", "IT", "JE", "JP", "KE", "KR", "KZ", "LI", "LT", "LU", "LV", "MC", "MD", "ME", "MO", "MT", "MX", "MY", "NG", "NL", "NO", "NZ", "OM", "PA", "PE", "PH", "PL", "PT", "RO", "SA", "SE", "SI", "SK", "SV", "TH", "TW", "UA", "UG", "UZ", "ZA"], "others": "no" } },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": [],
     "perks": ["Yield on your card balance (variable)"],
@@ -747,7 +761,8 @@
       { "label": "COCA docs: membership tiers", "url": "https://docs.coca.xyz/coca/membership-and-rewards/membership-you-deserve", "verified": "2026-10-22" },
       { "label": "COCA docs: COCA Card fees and limits", "url": "https://docs.coca.xyz/coca/banking-account/coca-card", "verified": "2026-10-22" },
       { "label": "COCA docs: who controls your money", "url": "https://docs.coca.xyz/coca/the-bank-we-all-deserve/where-is-my-money-stored-and-who-controls-it", "verified": "2026-10-22" },
-      { "label": "COCA: available regions", "url": "https://www.coca.xyz/", "verified": "2026-10-22" }
+      { "label": "COCA: available regions", "url": "https://www.coca.xyz/", "verified": "2026-10-22" },
+      { "label": "COCA Help Center: How do I order a COCA card? (updated 12 Oct 2026), confirmed with the COCA team (country list compiled by Card Map)", "url": "https://help.coca.xyz/support/solutions/articles/205000042704", "verified": "2026-10-19" }
     ],
     "lastChecked": "2026-10-22",
     "metal": "rose"
@@ -768,7 +783,7 @@
       { "name": "Platinum", "feeUsdYear": 0, "feeNote": "One-time card fee: $15 virtual, $50 physical", "cashbackPct": null, "fxPct": 1 },
       { "name": "Signature", "feeUsdYear": 20, "feeNote": "$30 (virtual) or $75 (physical) in the first year", "cashbackPct": null, "fxPct": 1, "requirement": "$30 the first year, then $20 a year", "perks": ["Visa Signature benefits", "Free ATM withdrawals"] }
     ],
-    "coverage": { "countries": 49, "scope": "49 countries incl. the UAE, Latin America and 31 US states", "examples": ["United Arab Emirates", "Singapore", "Mexico", "Brazil"], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "no", "EU": "no" } },
+    "coverage": { "countries": 49, "scope": "49 countries incl. the UAE, Latin America and 31 US states", "examples": ["United Arab Emirates", "Singapore", "Mexico", "Brazil"], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "no", "EU": "no" }, "countryList": {"yes": ["AG", "AR", "AU", "BS", "BB", "BD", "BZ", "BO", "BR", "KY", "CO", "CR", "CI", "DO", "EC", "EG", "SV", "GH", "GD", "GT", "GY", "HN", "HK", "JP", "KE", "MY", "MX", "MA", "NZ", "PK", "PA", "PY", "PE", "PH", "KN", "LC", "VC", "SN", "SG", "ZA", "SR", "TH", "TT", "TC", "AE", "UG", "UY", "ZM", "US"], "no": ["BY", "CN", "CU", "IN", "IR", "IQ", "IL", "MM", "NP", "NI", "KP", "RU", "SY", "TR", "UA", "VE", "VN"], "others": "no"} },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC"],
     "perks": ["No transaction, top-up or wallet withdrawal fees"],

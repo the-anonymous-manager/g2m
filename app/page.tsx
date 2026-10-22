@@ -18,11 +18,10 @@ const BROWSE = [
   { label: 'Metal cards', href: '/cards?metal=1' },
   { label: '2%+ cashback', href: '/cards?min=2' },
   { label: 'Lowest FX fee', href: '/cards?sort=fx:asc' },
-  { label: 'US', href: '/cards?market=US' },
-  { label: 'UK', href: '/cards?market=GB' },
-  { label: 'EU', href: '/cards?market=EU' },
-  { label: 'India', href: '/cards?market=IN' },
-  { label: 'UAE', href: '/cards?market=AE' }
+  { label: 'US', href: '/cards?country=US' },
+  { label: 'UK', href: '/cards?country=GB' },
+  { label: 'India', href: '/cards?country=IN' },
+  { label: 'UAE', href: '/cards?country=AE' }
 ];
 
 const MARKETS: Market[] = ['US', 'GB', 'EU', 'IN', 'AE'];
@@ -36,7 +35,7 @@ function confirmedIn(cards: Card[], m: Market) {
 
 export default function HomePage() {
   const cards = getCards();
-  const top = cards.slice(0, 5);
+  const rows = cards.map(toRow);
   // The Featured spot: a booked sponsor while its dates run, otherwise the top-ranked card.
   const sponsor = getSponsor();
   const featured = sponsor ?? cards[0];
@@ -179,7 +178,7 @@ export default function HomePage() {
             Full rankings <ArrowIcon />
           </Link>
         </div>
-        <HomeLeaderboard rows={top.map(toRow)} />
+        <HomeLeaderboard rows={rows} />
       </section>
 
       {/* Browse */}
@@ -209,6 +208,7 @@ export default function HomePage() {
           </p>
         </div>
         <MarketPanels
+          rows={rows}
           panels={MARKETS.map((m) => {
             const list = confirmedIn(cards, m);
             return { market: m, count: list.length, cards: list.slice(0, 3).map(toRow) };

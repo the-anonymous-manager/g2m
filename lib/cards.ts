@@ -2,7 +2,9 @@ import 'server-only';
 import raw from '@/data/cards.json';
 import { validateCards } from '@/lib/card-schema.mjs';
 import type { Card, CardData } from '@/lib/types';
-import { scoreCard } from '@/lib/score';
+import { rankIn, scoreCard } from '@/lib/score';
+import { availabilityIn } from '@/lib/regions';
+import { COUNTRY_CODES } from '@/lib/countries.mjs';
 
 // Validate once per server process. Invalid cards are skipped with a warning,
 // so one bad edit in cards.json can never take the whole site down.
@@ -31,4 +33,25 @@ export function getRank(slug: string): number {
 
 export function lastUpdated(): string {
   return cards.reduce((latest, c) => (c.lastChecked > latest ? c.lastChecked : latest), '1970-01-01');
+}
+
+const rankedByCountry = new Map<string, Card[]>();
+function rankedIn(cc: string): Card[] {
+  let ranked = rankedByCountry.get(cc);
+  if (!ranked) rankedByCountry.set(cc, (ranked = rankIn(cards, cc)));
+  return ranked;
+}
+
+/** A card's standing in one country: score, rank, how many cards rank there, and y = confirmed or u = not confirmed. */
+export type Standing = [score: number, rank: number, of: number, here: 'y' | 'u'];
+
+/** One card's standing in every country where it is not ruled out (worked out at build time). */
+export function standings(slug: string): Record<string, Standing> {
+  const out: Record<string, Standing> = {};
+  for (const cc of COUNTRY_CODES) {
+    const ranked = rankedIn(cc);
+    const card = ranked.find((c) => c.slug === slug);
+    if (card) out[cc] = [card.score.total, card.rank, ranked.length, availabilityIn(card, cc) === 'yes' ? 'y' : 'u'];
+  }
+  return out;
 }

@@ -16,9 +16,21 @@ export function ScorePill({ value, showBar = true }: { value: number; showBar?: 
 
 const AVAIL_TEXT: Record<Availability, string> = { yes: 'Available', no: 'Not available', unknown: 'Not confirmed' };
 
-export function MarketBadge({ value, market, short = false }: { value: Availability; market?: Market; short?: boolean }) {
+export function MarketBadge({
+  value,
+  market,
+  where,
+  short = false
+}: {
+  value: Availability;
+  market?: Market;
+  // Place name for the tooltip when it is a country rather than one of the five markets.
+  where?: string;
+  short?: boolean;
+}) {
   const text = short ? (value === 'yes' ? 'Yes' : value === 'no' ? 'No' : 'Unclear') : AVAIL_TEXT[value];
-  const label = market ? `${MARKET_LABELS[market]}: ${AVAIL_TEXT[value]}` : AVAIL_TEXT[value];
+  const place = where ?? (market ? MARKET_LABELS[market] : undefined);
+  const label = place ? `${place}: ${AVAIL_TEXT[value]}` : AVAIL_TEXT[value];
   return (
     <span className={`badge badge-${value}`} title={label} aria-label={label}>
       {value === 'yes' ? (

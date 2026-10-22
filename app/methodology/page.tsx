@@ -26,7 +26,7 @@ const PARTS = [
   {
     name: 'Coverage',
     max: SCORE_WEIGHTS.coverage,
-    how: 'How many countries can get the card (12 points: 100+ countries is best), Apple Pay and Google Pay (2 points each) and a physical card (4 points).'
+    how: 'How many countries can get the card (12 points: 100+ countries is best), Apple Pay and Google Pay (2 points each) and a physical card (4 points). For one country, the 12 points become: confirmed there 12, not confirmed 5.'
   },
   {
     name: 'Control',
@@ -85,8 +85,22 @@ export default function MethodologyPage() {
 
         <h2>Where each card works</h2>
         <p>
-          For India, the UAE, the US, the UK and the EU we mark each card as available, not available, or not confirmed.
-          “Not confirmed” means the issuer has not said either way, so check their country list before you apply.
+          For every country we mark each card as available, not available, or not confirmed. We use the issuer&apos;s own
+          country list when it publishes one, and we have checked the US, the UK, the EU, India and the UAE for every
+          card. “Not confirmed” means the issuer has not said either way, so check their country list before you apply.
+        </p>
+
+        <h2 id="by-country">Scores by country</h2>
+        <p>
+          The same card is not the same deal everywhere. Some tiers, fees and cashback rates are only for one country, so
+          the rankings pick up where you live and score every card for that country with the same formula. Rewards and
+          fees come from the tiers offered there, cards that are not available there drop out, and # is the rank in that
+          country. Cards confirmed in your country score higher than cards that have not confirmed it. When no card has
+          confirmed a country yet, you see the worldwide ranking with each card marked not confirmed.
+        </p>
+        <p>
+          Card pages show the worldwide score, plus the score and rank in your country. Pick “All countries” in the
+          rankings to see the worldwide list.
         </p>
 
         <h2>The rewards calculator</h2>

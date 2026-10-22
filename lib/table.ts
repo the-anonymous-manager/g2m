@@ -1,5 +1,5 @@
-import type { CardRow, Market } from '@/lib/types';
-import { isMarket } from '@/lib/regions';
+import type { CardRow } from '@/lib/types';
+import { availabilityIn, isCountry } from '@/lib/regions';
 
 // Table engine: multi-column sorting + filters, all serialisable to the URL
 // so any filtered view can be shared (e.g. on X) and reopened exactly.
@@ -12,8 +12,8 @@ export type Filters = {
   q: string;
   net: '' | 'visa' | 'mastercard' | 'amex';
   custody: '' | 'self' | 'custodial';
-  market: Market | '';
-  strict: boolean; // true: only "yes" for the market; false: also "unknown"
+  country: string; // ISO code, '' = all countries
+  strict: boolean; // true: only "yes" in the country; false: also "unknown"
   nofee: boolean;
   physical: boolean;
   metal: boolean;
@@ -28,7 +28,7 @@ export const DEFAULT_FILTERS: Filters = {
   q: '',
   net: '',
   custody: '',
-  market: '',
+  country: '',
   strict: false,
   nofee: false,
   physical: false,
@@ -85,8 +85,8 @@ export function filterRows(rows: CardRow[], f: Filters): CardRow[] {
     if (f.net && !c.network.toLowerCase().includes(f.net)) return false;
     if (f.custody === 'self' && c.custody !== 'self-custodial') return false;
     if (f.custody === 'custodial' && c.custody !== 'custodial') return false;
-    if (f.market) {
-      const a = c.coverage.markets[f.market];
+    if (f.country) {
+      const a = availabilityIn(c, f.country);
       if (a === 'no' || (f.strict && a !== 'yes')) return false;
     }
     if (f.nofee && c.fees.annualUsd !== 0) return false;
@@ -129,13 +129,14 @@ export function parseFilters(p: ParamSource): Filters {
     .map(([k, d]) => ({ key: k as SortKey, dir: d as SortDir }));
   const net = read(p, 'net');
   const custody = read(p, 'custody');
-  const market = read(p, 'market').toUpperCase();
+  // `market` is the older name of the parameter; links using it keep working.
+  const country = (read(p, 'country') || read(p, 'market')).toUpperCase();
   const min = Number(read(p, 'min'));
   return {
     q: read(p, 'q').slice(0, 80),
     net: net === 'visa' || net === 'mastercard' || net === 'amex' ? net : '',
     custody: custody === 'self' || custody === 'custodial' ? custody : '',
-    market: isMarket(market) ? market : '',
+    country: isCountry(country) ? country : '',
     strict: read(p, 'strict') === '1',
     nofee: read(p, 'nofee') === '1',
     physical: read(p, 'physical') === '1',
@@ -151,7 +152,7 @@ export function serializeFilters(f: Filters): string {
   if (f.q) p.set('q', f.q);
   if (f.net) p.set('net', f.net);
   if (f.custody) p.set('custody', f.custody);
-  if (f.market) p.set('market', f.market);
+  if (f.country) p.set('country', f.country);
   if (f.strict) p.set('strict', '1');
   if (f.nofee) p.set('nofee', '1');
   if (f.physical) p.set('physical', '1');
@@ -163,10 +164,10 @@ export function serializeFilters(f: Filters): string {
   return p.toString();
 }
 
-export function describeFilters(f: Filters, marketLabel?: string): string {
+export function describeFilters(f: Filters, countryLabel?: string): string {
   const parts: string[] = [];
-  // Without strict, the list also holds cards whose issuer has not confirmed the market.
-  if (f.market) parts.push(`${f.strict ? 'confirmed in' : 'for'} ${marketLabel ?? f.market}`);
+  // Without strict, the list also holds cards whose issuer has not confirmed the country.
+  if (f.country) parts.push(`${f.strict ? 'confirmed in' : 'for'} ${countryLabel ?? f.country}`);
   if (f.custody === 'self') parts.push('self-custodial');
   if (f.custody === 'custodial') parts.push('custodial');
   if (f.nofee) parts.push('no annual fee');
