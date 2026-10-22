@@ -60,8 +60,9 @@ pages, and DefiLlama's crypto card dataset.
 | Exa Card | self-custodial | Visa | yes / yes |
 
 Cards Akash had on his radar but not yet added: PEXX, Fizen, Infini, Cashi, WasabiCard, Kite.
-Akash does not write about Klickl, UPay, Tangem or Hotcoin on X. Klickl, UPay and Hotcoin were left off the site;
-Tangem Pay is listed and still needs his decision.
+Akash does not write about Klickl, UPay, Tangem or Hotcoin on X. Klickl, UPay and Hotcoin were left off the site.
+Tangem Pay stays: Akash decided on 22 Oct 2026 that it belongs in the directory even though he does not post about it.
+Not posting about a card is not a reason to leave it out; the directory aims to be complete.
 
 ## What version 1 does
 
@@ -85,9 +86,8 @@ compare, finder, calculator input checks, theme memory, share images, and a clea
 
 1. Deploy on Vercel from this repo and connect the g2m.life domain (Akash has not done this yet).
 2. Settings now default to info@g2m.life and @0akash0x; override them on Vercel only if they change.
-3. Decide whether Tangem Pay stays listed.
-4. Add referral links per card when deals are signed.
-5. Re-check every card within 90 days of its `lastChecked` date (the validator warns).
+3. Add referral links per card when deals are signed.
+4. Re-check every card within 90 days of its `lastChecked` date (the validator warns).
 
 ## Ideas for version 2 (not decided, ask Akash)
 
