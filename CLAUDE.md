@@ -26,7 +26,13 @@ and confirm what changed on the site (not which files moved).
 - Use `null` for anything the issuer does not publish. Never guess a fee, rate or country.
 - Every change needs a source: add or update an entry in that card's `sources` (label, url, verified date)
   and set `lastChecked` to today (YYYY-MM-DD).
-- `coverage.markets` values are only `yes`, `no` or `unknown` for IN, AE, US, GB, EU.
+- `coverage.markets` values are only `yes`, `no` or `unknown` for IN, AE, US, GB, EU (checked for every card).
+- `coverage.countryList` holds the issuer's own country list when it publishes one: `yes`, `no` and `unclear`
+  arrays of ISO codes (e.g. `JP`), and `others` for every country not listed (`no` for a complete list).
+  It must agree with `markets`; the validator checks. https://cardmap.org compiles issuer lists
+  (see its data-official.js): use the issuer URL it cites as the source, never an aggregator-only list.
+- A tier only offered in some countries gets `countries` (e.g. `["TH"]`, `"EEA"` for all 30 EEA countries), or
+  `exceptCountries` (e.g. a "Global" tier when the US has its own). Country scores use these.
 - Referral links go in `links.affiliate`; all "Get the card" buttons use `/go/<slug>`, which picks it up.
 - Scores and ranks are computed (`lib/score.ts`). Never edit a rank or score by hand, and never change
   a card's position because of a referral deal.
@@ -46,4 +52,5 @@ and confirm what changed on the site (not which files moved).
 - `app/` pages: home, `/cards`, `/cards/[slug]`, `/compare`, `/finder`, `/calculator`, `/methodology`, `/submit`
 - `app/go/[slug]` outbound redirect with UTM tags
 - `components/` UI, `lib/` logic (score, table engine, calculator, finder, regions), `middleware.ts` geo cookie
+- `components/motion/` cursor, hero glyph field, scroll reveals, tilt; all off under reduced motion
 - Settings via env vars, see `.env.example` and `README.md`

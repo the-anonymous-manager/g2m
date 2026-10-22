@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getCard, getCards, getRank } from '@/lib/cards';
+import { getCard, getCards, getRank, standings } from '@/lib/cards';
 import type { Card, Market, Tier } from '@/lib/types';
 import { MARKET_LABELS } from '@/lib/regions';
 import { CUSTODY_LABEL, NP, TYPE_LABEL, cashbackLabel, fmtDate, pct, perPurchaseFee, usd } from '@/lib/format';
@@ -11,6 +11,7 @@ import { CardArt } from '@/components/CardArt';
 import { Eyebrow, MarketBadge, ScorePill } from '@/components/bits';
 import { OutboundLink } from '@/components/OutboundLink';
 import { ShareBar } from '@/components/ShareBar';
+import { CountryStanding } from '@/components/CountryStanding';
 
 export const dynamicParams = false;
 
@@ -218,13 +219,14 @@ export default async function CardPage({ params }: Props) {
         <section className="panel panel-pad stack" style={{ gap: 18 }} aria-labelledby="score">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12 }}>
             <h2 id="score" className="h3">
-              G2M score
+              G2M score <span className="faint" style={{ fontSize: 14, fontWeight: 500 }}>worldwide</span>
             </h2>
             <span style={{ fontSize: 40, fontWeight: 800, letterSpacing: '-0.04em' }} className="metal-text num">
               {card.score.total}
               <span style={{ fontSize: 16 }}>/100</span>
             </span>
           </div>
+          <CountryStanding standings={standings(card.slug)} />
           <div className="breakdown">
             {breakdown.map((b) => (
               <div className="breakdown-row" key={b.label}>

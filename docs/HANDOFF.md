@@ -16,6 +16,33 @@ Location: middleware refreshes the `g2m_cc` country cookie from Vercel's geo hea
 travel apply at once); the browser timezone is only used when there is no header. A detected region is never written
 into the rankings URL; only a region the visitor picks is, so shared links follow each reader's location.
 
+Scores by country (Akash, 22 Oct 2026): the site detects the visitor's country (all 250, not five markets) and ranks
+every card for it. Same formula, but rewards and fees come from the tiers offered there (`tier.countries` /
+`tier.exceptCountries`), coverage becomes confirmed 12 / not confirmed 5, and cards not available there drop out.
+If no card is confirmed in a country, the worldwide coverage points are kept, so visitors see the global ranking with
+every card marked not confirmed. Card pages show the worldwide score plus "In <country>: score, #rank".
+Availability per country comes from `coverage.countryList` (the issuer's list), then the five checked markets
+(EU covers all EEA countries), else "not confirmed".
+
+Country lists (22 Oct 2026): 16 cards have the issuer's own list. Avici and Plasma One came straight from their docs;
+14 came from issuer pages compiled by https://cardmap.org (Akash's suggestion), each with the issuer URL as the source.
+Bitget Wallet was re-read on its own page (52 countries; Card Map also had Singapore, which Bitget no longer lists).
+Lists that only exist on DefiLlama were not imported, so "confirmed" always means the issuer said so. Changes this
+caused: Bitget now covers the UK and EEA (was "Asia-Pacific only"); Wirex's UAE is now "not confirmed" (Wirex's list
+leaves it out, an older source said yes, and Wirex's list page is offline); MetaMask has paused new US and UK sign-ups.
+Still without an issuer list: KAST (in-app only), Coinbase One, Avalanche, Solayer, Bleap, Tangem Pay, Kolo,
+Karta.io, Tuyo, and Tria (one country only).
+
+Gnosis Pay was removed (Akash, 22 Oct 2026): it closes its own card on 20 Dec 2026 and ended GNO cashback on
+30 Sep 2026, per its help center. 26 cards remain.
+
+Motion (Akash asked for a zerobrand.xyz feel, 22 Oct 2026), all in `components/motion/`, no extra libraries:
+a metal-square cursor that turns into a card outline over links (mouse/trackpad only); a drifting mono glyph field
+behind the home hero that lights up rose gold around the cursor (30 fps cap, paused off-screen, still frame on
+touch screens); a staggered blur-in entrance for the hero; blocks that rise and un-blur as they scroll in; the
+Featured card tilting toward the cursor with light across the metal; magnetic metal buttons; counting stats.
+All of it switches off for visitors whose system asks for reduced motion, and content never depends on it.
+
 ## Brand decisions (locked)
 
 | Item | Decision |

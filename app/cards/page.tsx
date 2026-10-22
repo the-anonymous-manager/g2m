@@ -30,7 +30,7 @@ export default async function CardsPage({ searchParams }: Props) {
           you can actually get. Last checked {fmtDate(lastUpdated())}.
         </p>
       </div>
-      <RankingsTable rows={rows} initial={initial} hadMarketParam={Boolean(params.market)} />
+      <RankingsTable rows={rows} initial={initial} hadMarketParam={Boolean(initial.country)} />
     </div>
   );
 }

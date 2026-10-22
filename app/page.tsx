@@ -3,6 +3,7 @@ import { getCards, getRank, lastUpdated } from '@/lib/cards';
 import { getSponsor } from '@/lib/sponsor';
 import { OutboundLink } from '@/components/OutboundLink';
 import { HomeLeaderboard } from '@/components/HomeLeaderboard';
+import { GlyphField } from '@/components/motion/GlyphField';
 import { MarketPanels } from '@/components/MarketPanels';
 import { toRow, type Card, type Market } from '@/lib/types';
 import { MARKET_LABELS } from '@/lib/regions';
@@ -18,11 +19,10 @@ const BROWSE = [
   { label: 'Metal cards', href: '/cards?metal=1' },
   { label: '2%+ cashback', href: '/cards?min=2' },
   { label: 'Lowest FX fee', href: '/cards?sort=fx:asc' },
-  { label: 'US', href: '/cards?market=US' },
-  { label: 'UK', href: '/cards?market=GB' },
-  { label: 'EU', href: '/cards?market=EU' },
-  { label: 'India', href: '/cards?market=IN' },
-  { label: 'UAE', href: '/cards?market=AE' }
+  { label: 'US', href: '/cards?country=US' },
+  { label: 'UK', href: '/cards?country=GB' },
+  { label: 'India', href: '/cards?country=IN' },
+  { label: 'UAE', href: '/cards?country=AE' }
 ];
 
 const MARKETS: Market[] = ['US', 'GB', 'EU', 'IN', 'AE'];
@@ -36,7 +36,7 @@ function confirmedIn(cards: Card[], m: Market) {
 
 export default function HomePage() {
   const cards = getCards();
-  const top = cards.slice(0, 5);
+  const rows = cards.map(toRow);
   // The Featured spot: a booked sponsor while its dates run, otherwise the top-ranked card.
   const sponsor = getSponsor();
   const featured = sponsor ?? cards[0];
@@ -46,113 +46,118 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="wrap hero">
-        <div className="hero-copy">
-          <Eyebrow>the crypto card directory</Eyebrow>
-          <h1 className="h1">
-            Spend your
-            <br />
-            <span className="metal-text" style={{ fontStyle: 'italic', paddingRight: '0.08em' }}>
-              bags better.
-            </span>
-          </h1>
-          <p className="lead">
-            {site.subline} Every crypto card ranked on rewards, fees and where it actually works, so you can pick the one
-            that pays you back.
-          </p>
-          <form action="/cards" method="get" role="search" className="search">
-            <label htmlFor="home-q" className="sr-only">
-              Search cards
-            </label>
-            <SearchIcon />
-            <input id="home-q" name="q" type="search" placeholder="Search a card, brand or region" autoComplete="off" />
-            <button type="submit" className="btn btn-metal">
-              Search
-            </button>
-          </form>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 24px' }}>
-            <Link href="/cards" style={{ padding: '10px 0', fontWeight: 600, textUnderlineOffset: 4 }}>
-              See all {cards.length} cards
-            </Link>
-            <Link href="/finder" style={{ padding: '10px 0', fontWeight: 600, textUnderlineOffset: 4 }}>
-              Find your best card
-            </Link>
-          </div>
-        </div>
-        <aside className="hero-feature" aria-label={sponsor ? 'Sponsored card' : 'Top-ranked card'}>
-          <CardArt card={featured} />
-          <div className="panel panel-pad hero-feature-panel">
-            <div className="hero-feature-head">
-              <Eyebrow>{sponsor ? 'sponsored' : 'top ranked'}</Eyebrow>
-              <span className="mono faint" style={{ fontSize: 12 }}>
-                #{getRank(featured.slug)} of {cards.length}
+      <div className="hero-shell">
+        <GlyphField />
+        <section className="wrap hero">
+          <div className="hero-copy">
+            <Eyebrow>the crypto card directory</Eyebrow>
+            <h1 className="h1">
+              <span className="line">Spend your</span>
+              <br />
+              <span className="line">
+                <span className="metal-text" style={{ fontStyle: 'italic', paddingRight: '0.08em' }}>
+                  bags better.
+                </span>
               </span>
-            </div>
-            <div className="hero-feature-title">
-              <h2 className="h3">{featured.name}</h2>
-              <ScorePill value={featured.score.total} />
-            </div>
-            <dl className="hero-feature-facts">
-              <div>
-                <dt>Cashback</dt>
-                <dd>{cashbackLabel(featured.cashback.basePct, featured.cashback.maxPct)}</dd>
-              </div>
-              <div>
-                <dt>Annual fee</dt>
-                <dd>{usd(featured.fees.annualUsd)}</dd>
-              </div>
-              <div>
-                <dt>FX fee</dt>
-                <dd>{pct(featured.fees.fxPct)}</dd>
-              </div>
-            </dl>
-            <div className="hero-feature-actions">
-              <OutboundLink
-                slug={featured.slug}
-                name={featured.name}
-                placement={sponsor ? 'hero-sponsored' : 'hero-top'}
-                campaign={sponsor ? 'sponsored' : undefined}
-                className="btn btn-metal btn-sm"
-              >
-                Get the card
-              </OutboundLink>
-              <Link href={`/cards/${featured.slug}`} className="btn btn-sm">
-                Read the review
+            </h1>
+            <p className="lead">
+              {site.subline} Every crypto card ranked on rewards, fees and where it actually works, so you can pick the one
+              that pays you back.
+            </p>
+            <form action="/cards" method="get" role="search" className="search">
+              <label htmlFor="home-q" className="sr-only">
+                Search cards
+              </label>
+              <SearchIcon />
+              <input id="home-q" name="q" type="search" placeholder="Search a card, brand or region" autoComplete="off" />
+              <button type="submit" className="btn btn-metal">
+                Search
+              </button>
+            </form>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 24px' }}>
+              <Link href="/cards" style={{ padding: '10px 0', fontWeight: 600, textUnderlineOffset: 4 }}>
+                See all {cards.length} cards
+              </Link>
+              <Link href="/finder" style={{ padding: '10px 0', fontWeight: 600, textUnderlineOffset: 4 }}>
+                Find your best card
               </Link>
             </div>
-            <p className="faint" style={{ fontSize: 13, margin: 0 }}>
-              {sponsor ? (
-                <>
-                  Paid placement. It never changes a card&apos;s score or rank.{' '}
-                  <Link href="/methodology#money">How G2M makes money</Link>
-                </>
-              ) : (
-                <>
-                  The highest G2M score right now. Card issuers can{' '}
-                  <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Sponsored spot on G2M')}`}>
-                    book this spot
-                  </a>{' '}
-                  as a labelled sponsor.
-                </>
-              )}
-            </p>
           </div>
-        </aside>
-      </section>
+          <aside className="hero-feature" data-tilt aria-label={sponsor ? 'Sponsored card' : 'Top-ranked card'}>
+            <CardArt card={featured} />
+            <div className="panel panel-pad hero-feature-panel">
+              <div className="hero-feature-head">
+                <Eyebrow>{sponsor ? 'sponsored' : 'top ranked'}</Eyebrow>
+                <span className="mono faint" style={{ fontSize: 12 }}>
+                  #{getRank(featured.slug)} of {cards.length}
+                </span>
+              </div>
+              <div className="hero-feature-title">
+                <h2 className="h3">{featured.name}</h2>
+                <ScorePill value={featured.score.total} />
+              </div>
+              <dl className="hero-feature-facts">
+                <div>
+                  <dt>Cashback</dt>
+                  <dd>{cashbackLabel(featured.cashback.basePct, featured.cashback.maxPct)}</dd>
+                </div>
+                <div>
+                  <dt>Annual fee</dt>
+                  <dd>{usd(featured.fees.annualUsd)}</dd>
+                </div>
+                <div>
+                  <dt>FX fee</dt>
+                  <dd>{pct(featured.fees.fxPct)}</dd>
+                </div>
+              </dl>
+              <div className="hero-feature-actions">
+                <OutboundLink
+                  slug={featured.slug}
+                  name={featured.name}
+                  placement={sponsor ? 'hero-sponsored' : 'hero-top'}
+                  campaign={sponsor ? 'sponsored' : undefined}
+                  className="btn btn-metal btn-sm"
+                >
+                  Get the card
+                </OutboundLink>
+                <Link href={`/cards/${featured.slug}`} className="btn btn-sm">
+                  Read the review
+                </Link>
+              </div>
+              <p className="faint" style={{ fontSize: 13, margin: 0 }}>
+                {sponsor ? (
+                  <>
+                    Paid placement. It never changes a card&apos;s score or rank.{' '}
+                    <Link href="/methodology#money">How G2M makes money</Link>
+                  </>
+                ) : (
+                  <>
+                    The highest G2M score right now. Card issuers can{' '}
+                    <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Sponsored spot on G2M')}`}>
+                      book this spot
+                    </a>{' '}
+                    as a labelled sponsor.
+                  </>
+                )}
+              </p>
+            </div>
+          </aside>
+        </section>
+      </div>
 
       {/* Stats */}
       <section className="wrap section-tight">
         <div className="panel panel-pad stats" style={{ justifyContent: 'space-between' }}>
           <div className="stat">
-            <b>{cards.length}</b>
+            <b data-count>{cards.length}</b>
             <span>Cards tracked</span>
           </div>
           <div className="stat">
-            <b>{selfCustodial}</b>
+            <b data-count>{selfCustodial}</b>
             <span>Self-custodial</span>
           </div>
           <div className="stat">
-            <b>{noFee}</b>
+            <b data-count>{noFee}</b>
             <span>No annual fee</span>
           </div>
           <div className="stat">
@@ -179,7 +184,7 @@ export default function HomePage() {
             Full rankings <ArrowIcon />
           </Link>
         </div>
-        <HomeLeaderboard rows={top.map(toRow)} />
+        <HomeLeaderboard rows={rows} />
       </section>
 
       {/* Browse */}
@@ -209,6 +214,7 @@ export default function HomePage() {
           </p>
         </div>
         <MarketPanels
+          rows={rows}
           panels={MARKETS.map((m) => {
             const list = confirmedIn(cards, m);
             return { market: m, count: list.length, cards: list.slice(0, 3).map(toRow) };
