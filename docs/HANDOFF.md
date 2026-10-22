@@ -104,6 +104,10 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   value after plan, FX and per-purchase fees), Methodology, Submit a card (prepares an email), 404, sitemap, robots.
 - `/go/<slug>` sends visitors to the card's site with UTM tags, or to `links.affiliate` when one is added.
 - G2M score: rewards 40, fees 30, coverage 20, control 10. Unknown figures score below known good ones.
+  Since 22 Oct 2026 rewards use cashback minus any fee charged on every purchase (`fees.txPct`); only the part of
+  that fee larger than the cashback, plus flat and small-purchase fees, counts in the fees section. Small-purchase
+  fees live in `fees.smallPurchase` (feeUsd, underUsd, foreignOnly) and the calculator applies them at the
+  visitor's typical purchase size. This moved MEXC from #1 to #2 (Ethena Pay #1).
   No paid placement, ever.
 - Plausible analytics events when `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` is set.
 

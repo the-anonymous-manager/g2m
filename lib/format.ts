@@ -1,3 +1,5 @@
+import type { CardData } from '@/lib/types';
+
 export const NP = 'Not published';
 
 export function pct(n: number | null | undefined, empty = NP): string {
@@ -17,6 +19,17 @@ export function money(n: number): string {
   const abs = Math.abs(n);
   const s = abs >= 1000 ? Math.round(abs).toLocaleString('en-US') : abs.toFixed(0);
   return `${n < 0 ? '−' : ''}$${s}`;
+}
+
+/** Every per-purchase cost as one label: percentage, flat fee and any small-purchase fee. */
+export function perPurchaseFee(f: Pick<CardData['fees'], 'txPct' | 'txFlatUsd' | 'smallPurchase'>): string {
+  const small = f.smallPurchase;
+  const parts = [
+    f.txPct ? pct(f.txPct) : null,
+    f.txFlatUsd ? `$${f.txFlatUsd}` : null,
+    small ? `${usd(small.feeUsd)} under ${usd(small.underUsd)}${small.foreignOnly ? ' (non-USD)' : ''}` : null
+  ];
+  return parts.filter(Boolean).join(' + ') || 'None listed';
 }
 
 export function cashbackLabel(base: number | null, max: number | null): string {

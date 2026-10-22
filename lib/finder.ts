@@ -1,7 +1,7 @@
 import type { CardRow, Market } from '@/lib/types';
 import { isMarket, MARKET_LABELS } from '@/lib/regions';
 import { cashbackLabel, pct } from '@/lib/format';
-import { typicalRate } from '@/lib/score';
+import { netRate } from '@/lib/score';
 
 export type Hold = 'self' | 'exchange' | 'any';
 export type Priority = 'cashback' | 'fees' | 'travel' | 'perks';
@@ -56,7 +56,7 @@ export function recommend(cards: CardRow[], a: FinderAnswers, count = 3): Pick[]
       fit += 4;
     }
 
-    const typical = typicalRate(c);
+    const typical = netRate(c);
     if (a.priority === 'cashback') {
       fit += Math.min(typical * 8, 40) + Math.min(c.cashback.maxPct ?? 0, 10);
       if (c.cashback.basePct != null || c.cashback.maxPct != null) {

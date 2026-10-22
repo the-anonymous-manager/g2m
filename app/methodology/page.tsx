@@ -16,12 +16,12 @@ const PARTS = [
   {
     name: 'Rewards',
     max: SCORE_WEIGHTS.rewards,
-    how: 'The cashback most people actually get. We use the base rate when the issuer publishes one. If only an “up to” rate exists, we count 40% of it, because the headline rate usually needs a top tier, staking or a paid plan. 5% or more earns full marks.'
+    how: 'The cashback most people actually get. We use the base rate when the issuer publishes one. If only an “up to” rate exists, we count 40% of it, because the headline rate usually needs a top tier, staking or a paid plan. Any fee charged on every purchase comes off this rate first, since it eats into every reward. 5% or more earns full marks.'
   },
   {
     name: 'Fees',
     max: SCORE_WEIGHTS.fees,
-    how: 'Annual fee (10 points: free is best, over $300 scores zero), FX fee (12 points: 0% is best, over 2% scores 2) and top-up or per-purchase fees (8 points).'
+    how: 'Annual fee (10 points: free scores 10, up to $100 scores 6, up to $300 scores 3, more scores zero). FX fee (12 points: 0% scores 12, up to 1% scores 9, up to 2% scores 5, more scores 2). Other purchase costs (8 points): top-up fees, flat or small-purchase fees, and any per-purchase fee larger than the cashback. None scores 8, up to 1% scores 4, more scores 1. A fee the issuer does not publish scores in the middle.'
   },
   {
     name: 'Coverage',
@@ -92,7 +92,7 @@ export default function MethodologyPage() {
         <h2>The rewards calculator</h2>
         <p>
           The calculator uses your monthly spend to work out a year of cashback for every tier of every card, then takes off
-          plan fees, FX fees on the share you spend in other currencies, and per-purchase fees. Monthly caps and spend bands
+          plan fees, FX fees on the share you spend in other currencies, and per-purchase fees, including small-purchase fees when your typical purchase is below the limit. Monthly caps and spend bands
           are applied where published. Rewards in tokens or points are counted at face value.
         </p>
 
