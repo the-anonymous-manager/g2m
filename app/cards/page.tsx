@@ -9,7 +9,7 @@ import { fmtDate } from '@/lib/format';
 export const metadata: Metadata = {
   title: 'Crypto card rankings',
   description:
-    'Every crypto card ranked by the G2M score: cashback, annual fee, FX fee, custody and where each card works. Filter by India, UAE, US, UK and EU.',
+    'Every crypto card ranked by the G2M score: cashback, annual fee, FX fee, custody and where each card works. Filter by US, UK, EU, India and UAE.',
   alternates: { canonical: '/cards' }
 };
 

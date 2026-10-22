@@ -2,7 +2,9 @@ import Link from 'next/link';
 import { getCards, getRank, lastUpdated } from '@/lib/cards';
 import { getSponsor } from '@/lib/sponsor';
 import { OutboundLink } from '@/components/OutboundLink';
-import type { Card, Market } from '@/lib/types';
+import { HomeLeaderboard } from '@/components/HomeLeaderboard';
+import { MarketPanels } from '@/components/MarketPanels';
+import { toRow, type Card, type Market } from '@/lib/types';
 import { MARKET_LABELS } from '@/lib/regions';
 import { cashbackLabel, fmtDate, pct, usd } from '@/lib/format';
 import { site } from '@/lib/site';
@@ -16,13 +18,14 @@ const BROWSE = [
   { label: 'Metal cards', href: '/cards?metal=1' },
   { label: '2%+ cashback', href: '/cards?min=2' },
   { label: 'Lowest FX fee', href: '/cards?sort=fx:asc' },
-  { label: 'India', href: '/cards?market=IN' },
-  { label: 'UAE', href: '/cards?market=AE' },
+  { label: 'US', href: '/cards?market=US' },
   { label: 'UK', href: '/cards?market=GB' },
-  { label: 'EU', href: '/cards?market=EU' }
+  { label: 'EU', href: '/cards?market=EU' },
+  { label: 'India', href: '/cards?market=IN' },
+  { label: 'UAE', href: '/cards?market=AE' }
 ];
 
-const FOCUS: Market[] = ['IN', 'AE'];
+const MARKETS: Market[] = ['US', 'GB', 'EU', 'IN', 'AE'];
 
 // Re-check hourly so a sponsorship starts and ends on its dates without a new deploy.
 export const revalidate = 3600;
@@ -176,47 +179,7 @@ export default function HomePage() {
             Full rankings <ArrowIcon />
           </Link>
         </div>
-        <div className="table-wrap">
-          <table className="table" style={{ minWidth: 760 }}>
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Card</th>
-                <th scope="col">G2M score</th>
-                <th scope="col">Cashback</th>
-                <th scope="col">Annual fee</th>
-                <th scope="col">FX fee</th>
-                <th scope="col">India</th>
-                <th scope="col">UAE</th>
-              </tr>
-            </thead>
-            <tbody>
-              {top.map((c, i) => (
-                <tr key={c.slug}>
-                  <td className={`rank ${i === 0 ? 'rank-1' : ''}`}>{i + 1}</td>
-                  <td>
-                    <div className="card-cell">
-                      <CardArt card={c} size="sm" />
-                      <Link href={`/cards/${c.slug}`}>{c.name}</Link>
-                    </div>
-                  </td>
-                  <td>
-                    <ScorePill value={c.score.total} />
-                  </td>
-                  <td className="num">{cashbackLabel(c.cashback.basePct, c.cashback.maxPct)}</td>
-                  <td className="num">{usd(c.fees.annualUsd, '—')}</td>
-                  <td className="num">{pct(c.fees.fxPct, '—')}</td>
-                  <td>
-                    <MarketBadge value={c.coverage.markets.IN} market="IN" short />
-                  </td>
-                  <td>
-                    <MarketBadge value={c.coverage.markets.AE} market="AE" short />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <HomeLeaderboard rows={top.map(toRow)} />
       </section>
 
       {/* Browse */}
@@ -233,49 +196,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* India and UAE */}
+      {/* Markets */}
       <section className="wrap section stack" style={{ gap: 20 }} aria-labelledby="regions">
         <div className="stack" style={{ gap: 8 }}>
           <Eyebrow>where you live matters</Eyebrow>
           <h2 id="regions" className="h2">
-            Cards confirmed for India and the UAE
+            Cards confirmed where you live
           </h2>
           <p className="lead">
-            Most rankings assume you live in the US or Europe. We check every card for India and the UAE too, and say
-            clearly when an issuer has not confirmed a country.
+            A card is only useful if you can get it. We check every card for the US, the UK, the EU, India and the UAE,
+            and say clearly when an issuer has not confirmed a country.
           </p>
         </div>
-        <div className="grid-2">
-          {FOCUS.map((m) => {
+        <MarketPanels
+          panels={MARKETS.map((m) => {
             const list = confirmedIn(cards, m);
-            return (
-              <div key={m} className="panel panel-pad stack" style={{ gap: 14 }}>
-                <div className="pager">
-                  <h3 className="h3">{MARKET_LABELS[m]}</h3>
-                  <span className="badge badge-yes">{list.length} confirmed</span>
-                </div>
-                {list.length ? (
-                  <ul className="list-plain">
-                    {list.slice(0, 5).map((c) => (
-                      <li key={c.slug} style={{ alignItems: 'center', justifyContent: 'space-between' }}>
-                        <Link href={`/cards/${c.slug}`} style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', fontWeight: 600 }}>
-                          <CardArt card={c} size="sm" />
-                          {c.name}
-                        </Link>
-                        <ScorePill value={c.score.total} showBar={false} />
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="muted">No card has confirmed {MARKET_LABELS[m]} yet.</p>
-                )}
-                <Link href={`/cards?market=${m}`} className="muted" style={{ fontSize: 15 }}>
-                  All cards for {MARKET_LABELS[m]}, including unconfirmed
-                </Link>
-              </div>
-            );
+            return { market: m, count: list.length, cards: list.slice(0, 3).map(toRow) };
           })}
-        </div>
+        />
       </section>
 
       {/* How we judge */}

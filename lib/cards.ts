@@ -1,7 +1,7 @@
 import 'server-only';
 import raw from '@/data/cards.json';
 import { validateCards } from '@/lib/card-schema.mjs';
-import type { Card } from '@/lib/types';
+import type { Card, CardData } from '@/lib/types';
 import { scoreCard } from '@/lib/score';
 
 // Validate once per server process. Invalid cards are skipped with a warning,
@@ -12,9 +12,10 @@ if (errors.length) {
   for (const e of errors) console.warn(`[g2m]   ${e.card}: ${e.issues.join('; ')}`);
 }
 
-const cards: Card[] = (valid as Card[])
+const cards: Card[] = (valid as CardData[])
   .map((card) => ({ ...card, score: scoreCard(card) }))
-  .sort((a, b) => b.score.total - a.score.total);
+  .sort((a, b) => b.score.total - a.score.total)
+  .map((card, i) => ({ ...card, rank: i + 1 }));
 
 export function getCards(): Card[] {
   return cards;

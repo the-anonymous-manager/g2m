@@ -4,7 +4,7 @@ import { isMarket } from '@/lib/regions';
 // Table engine: multi-column sorting + filters, all serialisable to the URL
 // so any filtered view can be shared (e.g. on X) and reopened exactly.
 
-export type SortKey = 'score' | 'name' | 'cashback' | 'max' | 'annual' | 'fx' | 'countries';
+export type SortKey = 'rank' | 'score' | 'name' | 'cashback' | 'max' | 'annual' | 'fx' | 'countries';
 export type SortDir = 'asc' | 'desc';
 export type SortRule = { key: SortKey; dir: SortDir };
 
@@ -22,7 +22,7 @@ export type Filters = {
   sort: SortRule[];
 };
 
-export const DEFAULT_SORT: SortRule[] = [{ key: 'score', dir: 'desc' }];
+export const DEFAULT_SORT: SortRule[] = [{ key: 'rank', dir: 'asc' }];
 
 export const DEFAULT_FILTERS: Filters = {
   q: '',
@@ -42,6 +42,7 @@ const typical = (c: CardRow) =>
   c.cashback.basePct ?? (c.cashback.maxPct != null ? c.cashback.maxPct * 0.4 : null);
 
 export const COLUMNS: Record<SortKey, { label: string; get: (c: CardRow) => number | string | null; first: SortDir }> = {
+  rank: { label: '#', get: (c) => c.rank, first: 'asc' },
   score: { label: 'G2M score', get: (c) => c.score.total, first: 'desc' },
   name: { label: 'Card', get: (c) => c.name.toLowerCase(), first: 'asc' },
   cashback: { label: 'Base cashback', get: (c) => c.cashback.basePct, first: 'desc' },
@@ -70,7 +71,7 @@ export function sortRows(rows: CardRow[], rules: SortRule[]): CardRow[] {
       const r = compareValues(get(x), get(y), rule.dir);
       if (r !== 0) return r;
     }
-    return y.score.total - x.score.total || x.name.localeCompare(y.name);
+    return x.rank - y.rank;
   });
 }
 
@@ -158,13 +159,14 @@ export function serializeFilters(f: Filters): string {
   if (f.lounge) p.set('lounge', '1');
   if (f.min) p.set('min', String(f.min));
   const sort = f.sort.map((r) => `${r.key}:${r.dir}`).join(',');
-  if (sort !== 'score:desc') p.set('sort', sort);
+  if (sort !== 'rank:asc') p.set('sort', sort);
   return p.toString();
 }
 
 export function describeFilters(f: Filters, marketLabel?: string): string {
   const parts: string[] = [];
-  if (f.market) parts.push(`available in ${marketLabel ?? f.market}`);
+  // Without strict, the list also holds cards whose issuer has not confirmed the market.
+  if (f.market) parts.push(`${f.strict ? 'confirmed in' : 'for'} ${marketLabel ?? f.market}`);
   if (f.custody === 'self') parts.push('self-custodial');
   if (f.custody === 'custodial') parts.push('custodial');
   if (f.nofee) parts.push('no annual fee');

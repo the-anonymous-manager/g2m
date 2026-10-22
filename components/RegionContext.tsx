@@ -33,10 +33,11 @@ export function RegionProvider({ children }: { children: React.ReactNode }) {
       if (saved === 'ALL') found = null;
       else if (isMarket(saved)) found = saved;
       else {
-        // 1. Country from the host's geo header (set by middleware). 2. Browser timezone.
-        found =
-          countryToMarket(readCookie(REGION_COOKIE)) ??
-          marketFromTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+        // 1. Country from the host's geo header (set by middleware). A country outside our five
+        // markets means "all regions", not a guess. 2. Browser timezone, only when there is no header
+        // (a VPN changes the country but not the computer's clock).
+        const cc = readCookie(REGION_COOKIE);
+        found = cc ? countryToMarket(cc) : marketFromTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
       }
     } catch {
       found = marketFromTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
