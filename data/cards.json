@@ -534,26 +534,27 @@
     "forms": ["virtual"],
     "custody": "self-custodial",
     "summary": "Virtual Visa card from Ethena with one of the highest flat rates around: 4% on your first $2,500 a month.",
-    "cashback": { "basePct": 4, "maxPct": 5, "payout": null, "note": "Standard: 4% on the first $2,500 a month, then 1% on the next $1,500. Pro and VIP raise both the rate and the limits." },
+    "cashback": { "basePct": 4, "maxPct": 5, "payout": "AVAX, daily", "note": "Standard: 4% on the first $2,500 a month, then 1% on the next $1,500. Pro and VIP raise both the rate and the limits." },
     "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "No conversion cost on US-dollar purchases. Other currencies: the card network's fee, about 1%, passed through at cost with no Ethena markup.", "fxByCurrency": { "USD": 0 }, "topUpPct": null, "atm": "$1 + 0.65% per withdrawal", "other": [] },
     "tiers": [
-      { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 4, "bands": [ { "uptoUsd": 2500, "pct": 4 }, { "uptoUsd": 4000, "pct": 1 }, { "uptoUsd": null, "pct": 0 } ] },
-      { "name": "Pro", "feeUsdYear": null, "feeNote": "Lock $2000 in ENA or Invite 10 users", "cashbackPct": 4.5, "bands": [ { "uptoUsd": 8000, "pct": 4.5 }, { "uptoUsd": 10000, "pct": 2 }, { "uptoUsd": 12000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "requirement": "Not published" },
-      { "name": "VIP", "feeUsdYear": null, "feeNote": "Lock $10000 in ENA or Invite 50 users", "cashbackPct": 5, "bands": [ { "uptoUsd": 20000, "pct": 5 }, { "uptoUsd": 30000, "pct": 2 }, { "uptoUsd": 40000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "requirement": "Not published" }
+      { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 4, "bands": [ { "uptoUsd": 2500, "pct": 4 }, { "uptoUsd": 4000, "pct": 1 }, { "uptoUsd": null, "pct": 0 } ], "perks": ["5% a year on your balance, up to $5,000, paid daily in USDe"] },
+      { "name": "Pro", "feeUsdYear": null, "cashbackPct": 4.5, "bands": [ { "uptoUsd": 8000, "pct": 4.5 }, { "uptoUsd": 10000, "pct": 2 }, { "uptoUsd": 12000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "requirement": "Lock $2000 in ENA or invite 10 users", "perks": ["6% a year on your balance, up to $100,000, paid daily in USDe"] },
+      { "name": "VIP", "feeUsdYear": null, "cashbackPct": 5, "bands": [ { "uptoUsd": 20000, "pct": 5 }, { "uptoUsd": 30000, "pct": 2 }, { "uptoUsd": 40000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "requirement": "Lock $10000 in ENA or invite 50 users", "perks": ["6% a year on your balance, up to $1,000,000, paid daily in USDe"] }
     ],
     "coverage": { "countries": 48, "scope": "48 countries incl. the UAE, Australia and Latin America", "examples": ["United Arab Emirates", "Australia", "Argentina", "Brazil"], "markets": { "IN": "no", "AE": "yes", "US": "no", "GB": "no", "EU": "no" }, "countryList": { "yes": ["AE", "AG", "AR", "AU", "BB", "BO", "BR", "BS", "BZ", "CI", "CO", "CR", "DM", "DO", "EC", "EG", "GD", "GH", "GT", "GY", "HK", "HN", "JP", "KE", "KN", "KY", "LC", "MA", "MX", "MY", "NZ", "PA", "PE", "PH", "PK", "PY", "SG", "SN", "SR", "SV", "TC", "TH", "TT", "UG", "UY", "VC", "ZA", "ZM"], "others": "no" } },
     "wallets": { "applePay": true, "googlePay": true },
-    "assets": [],
+    "assets": ["AVAX"],
     "perks": ["Works on Arbitrum, Ethereum, Optimism and Polygon"],
-    "pros": ["4% back on everyday spend with no annual fee", "No FX markup from Ethena"],
-    "cons": ["Rate drops sharply above $2,500 a month on Standard", "Virtual card only"],
+    "pros": ["4% back on everyday spend with no annual fee", "No FX markup from Ethena", "Daily yield up to 6% a year on your balance, paid in USDe"],
+    "cons": ["Rate drops sharply above $2,500 a month on Standard", "Virtual card only", "Cashback paid in AVAX, not Ethena's own token, so its value moves with Avalanche"],
     "links": { "official": "https://ethena.fi/" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/ethena", "verified": "2026-09-29" },
       { "label": "Ethena Pay: Available Jurisdictions (country list compiled by Card Map)", "url": "https://pay.ethena.fi/jurisdictions", "verified": "2026-10-03" },
-      { "label": "Ethena Pay: Pricing", "url": "https://pay.ethena.fi/pricing", "verified": "2026-10-22" }
+      { "label": "Ethena Pay: Pricing", "url": "https://pay.ethena.fi/pricing", "verified": "2026-10-22" },
+      { "label": "Ethena Pay: home page (Daily Boost yield, cashback paid in AVAX)", "url": "https://pay.ethena.fi/", "verified": "2026-10-23" }
     ],
-    "lastChecked": "2026-10-22",
+    "lastChecked": "2026-10-23",
     "metal": "gold"
   },
   {
@@ -701,19 +702,20 @@
       { "name": "Pro", "feeUsdYear": 109, "cashbackPct": 4.5, "bands": [ { "uptoUsd": 1000, "pct": 4.5 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "$109 a year", "perks": ["Plastic Visa Signature card", "4.5% with no cap on Tria Travel (hotels, rentals; not flights)", "Lounge access", "Visa Luxury Hotels and Visa concierge", "ATM up to $750 a day"] },
       { "name": "Max", "feeUsdYear": 250, "cashbackPct": 6, "bands": [ { "uptoUsd": 2000, "pct": 6 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "$250 a year", "perks": ["Metal Visa Signature card", "6% with no cap on Tria Travel (hotels, rentals; not flights)", "Lounge access", "Visa Luxury Hotels and Visa concierge", "ATM up to $750 a day"] }
     ],
-    "coverage": { "countries": null, "scope": "Card support in 150+ countries per Tria; full list not published", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "unknown", "GB": "unknown", "EU": "unknown" }, "countryList": { "yes": ["NG"], "others": "unknown" } },
+    "coverage": { "countries": 229, "scope": "229 countries and territories, almost worldwide; excludes sanctioned and high-risk jurisdictions", "examples": ["United States", "United Kingdom", "Germany", "Japan", "Brazil"], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AR", "AS", "AT", "AU", "AW", "AX", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN", "BO", "BQ", "BR", "BS", "BT", "BV", "BW", "BZ", "CA", "CC", "CD", "CF", "CG", "CH", "CI", "CK", "CL", "CM", "CO", "CR", "CV", "CW", "CX", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EH", "ER", "ES", "ET", "FI", "FJ", "FK", "FM", "FO", "FR", "GA", "GB", "GD", "GE", "GF", "GG", "GH", "GI", "GL", "GM", "GN", "GP", "GQ", "GR", "GS", "GT", "GU", "GW", "GY", "HK", "HM", "HN", "HR", "HT", "HU", "ID", "IE", "IM", "IO", "IS", "IT", "JE", "JM", "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KR", "KW", "KY", "KZ", "LA", "LB", "LC", "LI", "LR", "LS", "LT", "LU", "LV", "LY", "MA", "MC", "MD", "ME", "MF", "MG", "MH", "MK", "ML", "MN", "MO", "MP", "MQ", "MR", "MS", "MT", "MU", "MV", "MW", "MX", "MY", "MZ", "NA", "NC", "NE", "NF", "NG", "NL", "NO", "NR", "NU", "NZ", "OM", "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM", "PN", "PR", "PS", "PT", "PW", "PY", "QA", "RE", "RO", "RS", "RW", "SA", "SB", "SC", "SD", "SE", "SG", "SH", "SI", "SJ", "SK", "SL", "SM", "SN", "SO", "SR", "SS", "ST", "SV", "SX", "SZ", "TC", "TD", "TF", "TH", "TJ", "TK", "TL", "TM", "TN", "TO", "TT", "TV", "TW", "TZ", "UG", "UM", "US", "UY", "UZ", "VA", "VC", "VG", "VI", "VU", "WF", "WS", "XK", "YE", "YT", "ZA", "ZM", "ZW"], "no": ["AQ", "BY", "CN", "CU", "EG", "IL", "IN", "IQ", "IR", "KP", "LK", "MM", "NI", "NP", "RU", "SY", "TG", "TR", "UA", "VE", "VN"], "others": "no" } },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": [],
     "perks": ["Price protection up to $2,000", "Purchase protection up to $10,000", "Spend up to $1M a day on Pro and Max"],
     "pros": ["No FX or deposit fees on any tier", "1.5% on the entry tier, up to 6% on Max", "Lounge access on Pro and Max"],
-    "cons": ["Every tier has a yearly fee: $20 Lite, $109 Pro, $250 Max", "Higher rates stop after $1,000 to $2,000 a month (0.5% after that on Lite)", "Country list not published"],
+    "cons": ["Every tier has a yearly fee: $20 Lite, $109 Pro, $250 Max", "Higher rates stop after $1,000 to $2,000 a month (0.5% after that on Lite)"],
     "links": { "official": "https://tria.so/" },
     "sources": [
       { "label": "Tria Help Center: What are Tria Cards?", "url": "https://intercom.help/tria/en/articles/13513481-what-are-tria-cards", "verified": "2026-10-22" },
       { "label": "Tria app: Lite, Pro and Max membership screens", "url": "https://tria.so/", "verified": "2026-10-22" },
-      { "label": "Tria Docs: Card Terms International (Nigeria Users section) (country list compiled by Card Map)", "url": "https://docs.tria.so/card-terms-international", "verified": "2026-10-22" }
+      { "label": "Tria Docs: Card Terms International (Nigeria Users section) (country list compiled by Card Map)", "url": "https://docs.tria.so/card-terms-international", "verified": "2026-10-22" },
+      { "label": "Tria app: Country of Residence picker (sign-up)", "url": "https://tria.so/", "verified": "2026-10-23" }
     ],
-    "lastChecked": "2026-10-22",
+    "lastChecked": "2026-10-23",
     "metal": "black"
   },
   {
