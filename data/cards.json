@@ -534,26 +534,27 @@
     "forms": ["virtual"],
     "custody": "self-custodial",
     "summary": "Virtual Visa card from Ethena with one of the highest flat rates around: 4% on your first $2,500 a month.",
-    "cashback": { "basePct": 4, "maxPct": 5, "payout": null, "note": "Standard: 4% on the first $2,500 a month, then 1% on the next $1,500. Pro and VIP raise both the rate and the limits." },
+    "cashback": { "basePct": 4, "maxPct": 5, "payout": "AVAX, daily", "note": "Standard: 4% on the first $2,500 a month, then 1% on the next $1,500. Pro and VIP raise both the rate and the limits." },
     "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "No conversion cost on US-dollar purchases. Other currencies: the card network's fee, about 1%, passed through at cost with no Ethena markup.", "fxByCurrency": { "USD": 0 }, "topUpPct": null, "atm": "$1 + 0.65% per withdrawal", "other": [] },
     "tiers": [
-      { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 4, "bands": [ { "uptoUsd": 2500, "pct": 4 }, { "uptoUsd": 4000, "pct": 1 }, { "uptoUsd": null, "pct": 0 } ] },
-      { "name": "Pro", "feeUsdYear": null, "cashbackPct": 4.5, "bands": [ { "uptoUsd": 8000, "pct": 4.5 }, { "uptoUsd": 10000, "pct": 2 }, { "uptoUsd": 12000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "requirement": "Not published" },
-      { "name": "VIP", "feeUsdYear": null, "cashbackPct": 5, "bands": [ { "uptoUsd": 20000, "pct": 5 }, { "uptoUsd": 30000, "pct": 2 }, { "uptoUsd": 40000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "requirement": "Not published" }
+      { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 4, "bands": [ { "uptoUsd": 2500, "pct": 4 }, { "uptoUsd": 4000, "pct": 1 }, { "uptoUsd": null, "pct": 0 } ], "perks": ["5% a year on your balance, up to $5,000, paid daily in USDe"] },
+      { "name": "Pro", "feeUsdYear": null, "cashbackPct": 4.5, "bands": [ { "uptoUsd": 8000, "pct": 4.5 }, { "uptoUsd": 10000, "pct": 2 }, { "uptoUsd": 12000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "requirement": "Lock $2000 in ENA or invite 10 users", "perks": ["6% a year on your balance, up to $100,000, paid daily in USDe"] },
+      { "name": "VIP", "feeUsdYear": null, "cashbackPct": 5, "bands": [ { "uptoUsd": 20000, "pct": 5 }, { "uptoUsd": 30000, "pct": 2 }, { "uptoUsd": 40000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "requirement": "Lock $10000 in ENA or invite 50 users", "perks": ["6% a year on your balance, up to $1,000,000, paid daily in USDe"] }
     ],
     "coverage": { "countries": 48, "scope": "48 countries incl. the UAE, Australia and Latin America", "examples": ["United Arab Emirates", "Australia", "Argentina", "Brazil"], "markets": { "IN": "no", "AE": "yes", "US": "no", "GB": "no", "EU": "no" }, "countryList": { "yes": ["AE", "AG", "AR", "AU", "BB", "BO", "BR", "BS", "BZ", "CI", "CO", "CR", "DM", "DO", "EC", "EG", "GD", "GH", "GT", "GY", "HK", "HN", "JP", "KE", "KN", "KY", "LC", "MA", "MX", "MY", "NZ", "PA", "PE", "PH", "PK", "PY", "SG", "SN", "SR", "SV", "TC", "TH", "TT", "UG", "UY", "VC", "ZA", "ZM"], "others": "no" } },
     "wallets": { "applePay": true, "googlePay": true },
-    "assets": [],
+    "assets": ["AVAX"],
     "perks": ["Works on Arbitrum, Ethereum, Optimism and Polygon"],
-    "pros": ["4% back on everyday spend with no annual fee", "No FX markup from Ethena"],
-    "cons": ["Rate drops sharply above $2,500 a month on Standard", "Virtual card only"],
+    "pros": ["4% back on everyday spend with no annual fee", "No FX markup from Ethena", "Daily yield up to 6% a year on your balance, paid in USDe"],
+    "cons": ["Rate drops sharply above $2,500 a month on Standard", "Virtual card only", "Cashback paid in AVAX, not Ethena's own token, so its value moves with Avalanche"],
     "links": { "official": "https://ethena.fi/" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/ethena", "verified": "2026-09-29" },
       { "label": "Ethena Pay: Available Jurisdictions (country list compiled by Card Map)", "url": "https://pay.ethena.fi/jurisdictions", "verified": "2026-10-03" },
-      { "label": "Ethena Pay: Pricing", "url": "https://pay.ethena.fi/pricing", "verified": "2026-10-22" }
+      { "label": "Ethena Pay: Pricing", "url": "https://pay.ethena.fi/pricing", "verified": "2026-10-22" },
+      { "label": "Ethena Pay: home page (Daily Boost yield, cashback paid in AVAX)", "url": "https://pay.ethena.fi/", "verified": "2026-10-23" }
     ],
-    "lastChecked": "2026-10-22",
+    "lastChecked": "2026-10-23",
     "metal": "gold"
   },
   {
