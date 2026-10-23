@@ -140,6 +140,13 @@ Notes for the next data check:
   Cards are virtual only; physical cards are planned for 2027.
 - XPL (Plasma) and COCA token ids for live staking values were not added (CoinGecko lookup was throttled).
 
+Tria's full country list (22 Oct -> 23 Oct 2026): Akash sent 16 screenshots of the Tria app's "Country of
+Residence" picker (A-Z) plus the tail as pasted text; 229 of 250 tracked countries are listed, so the 21 missing
+(Antarctica, Belarus, China, Cuba, Egypt, India, Iran, Iraq, Israel, Myanmar, Nepal, Nicaragua, North Korea,
+Russia, Sri Lanka, Syria, Togo, Turkiye, Ukraine, Venezuela, Vietnam) are "no". Source: "Tria app: Country of
+Residence picker (sign-up)". Raised Tria's score from 57 to 67 (rank unchanged, #2) since countries were previously
+not published (0 Coverage points); India flips from "unknown" to confirmed not available.
+
 Cards Akash had on his radar but not yet added: PEXX, Fizen, Infini, Cashi, WasabiCard, Kite.
 Akash does not write about Klickl, UPay, Tangem or Hotcoin on X. Klickl, UPay and Hotcoin were left off the site.
 Tangem Pay stays: Akash decided on 22 Oct 2026 that it belongs in the directory even though he does not post about it.
