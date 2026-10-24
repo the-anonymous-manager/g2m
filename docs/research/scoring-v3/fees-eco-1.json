@@ -1,0 +1,833 @@
+[
+ {
+  "slug": "crypto-com",
+  "topUpPct": 0,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": 4.99,
+  "iban": "named",
+  "payoutCorridors": 7,
+  "ramps": "both",
+  "credit": false,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Crypto.com Help: Prepaid Visa Card Fees and Limits (United States)",
+    "url": "https://help.crypto.com/en/articles/5966563-crypto-com-prepaid-visa-card-fees-and-limits-united-states",
+    "quote": "Debit/Credit Card Top-Up: Debit – 1% Credit – 2.99% PayPal Top-Up: 2.1%",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Crypto.com Help: Prepaid Visa Card Fees and Limits (United States)",
+    "url": "https://help.crypto.com/en/articles/5966563-crypto-com-prepaid-visa-card-fees-and-limits-united-states",
+    "quote": "Card Upgrade: Waived",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Crypto.com Help: Prepaid Visa Card Fees and Limits (United States)",
+    "url": "https://help.crypto.com/en/articles/5966563-crypto-com-prepaid-visa-card-fees-and-limits-united-states",
+    "quote": "Physical Card Issuance Fee: Midnight: US$4.99",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Crypto.com Help: Prepaid Visa Card Fees and Limits (United States)",
+    "url": "https://help.crypto.com/en/articles/5966563-crypto-com-prepaid-visa-card-fees-and-limits-united-states",
+    "quote": "Physical Card Issuance Fee: Midnight: US$4.99",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Crypto.com Help: Prepaid Visa Card Fees and Limits (Europe)",
+    "url": "https://help.crypto.com/en/articles/5977463-crypto-com-prepaid-visa-card-fees-and-limits-europe-for-users-with-a-residential-address-in-europe",
+    "quote": "Physical Card Issuance: Midnight: €4.99",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Crypto.com Help: Set up EUR Account",
+    "url": "https://help.crypto.com/en/articles/9794701-set-up-eur-account",
+    "quote": "Upon successful setup of your EUR Account, personal bank transfer details are provided",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Crypto.com Help: Set Up USD Account",
+    "url": "https://help.crypto.com/en/articles/9739732-set-up-usd-account",
+    "quote": "you can deposit USD using your personalized account and routing number",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Crypto.com Help: Cash Account General Information",
+    "url": "https://help.crypto.com/en/articles/4777911-cash-account-general-information",
+    "quote": "Cash accounts are available in the Crypto.com App for users to deposit & withdraw funds from and to their bank account(s).",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Crypto.com Help: Closure of the BRL Account",
+    "url": "https://help.crypto.com/en/articles/16858433-closure-of-the-brl-account",
+    "quote": "On 25th October 2026, the BRL Cash Account will no longer be available for Brazilian users on the Crypto.com App.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Crypto.com Help: Cash Account General Information",
+    "url": "https://help.crypto.com/en/articles/4777911-cash-account-general-information",
+    "quote": "Sell crypto to cash",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Crypto.com Help: APY and Fees (United States) – Cash Earn",
+    "url": "https://help.crypto.com/en/articles/11549762-apy-and-fees-united-states",
+    "quote": "If you have not signed up for level up, you will be assigned the same rate as the BASIC tier.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Crypto.com Help: Rewards and Fees (Europe) – EUR Cash Yield",
+    "url": "https://help.crypto.com/en/articles/13127177-rewards-and-fees-europe",
+    "quote": "Your reward rate is variable and determined by the following:",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Entry tier = Basic/Midnight prepaid card. Neither the US nor the EU fee table lists a fee for topping up from crypto or the Cash account, or any per-purchase fee, so topUpPct/txPct = 0; topping up with a bank card costs 1% (debit) / 2.99% credit (US), 1% (EU); PayPal 2.1% (US). No virtual-card fee is listed (0). Physical Midnight card: US$4.99 (US) or EUR 4.99 (~US$5.39 at 1.08) in Europe; shipping not listed separately. Cash accounts: EUR (EEA, 'personal bank transfer details', deposits only from accounts in your own name), USD (US, 'personalized account and routing number'), also GBP, AUD, CAD, SGD, AED. Payout corridors counted from the issuer's withdrawal articles: AUD, CAD, EUR, GBP, USD, SGD, AED = 7. BRL closes 25 Oct 2026 (not counted); TRY is listed as a cash account but no TRY withdrawal article was found (not counted). Yield: US Cash Earn account (Green Dot Bank) 3.00% APY at BASIC tier, paid in CRO; EEA EUR Cash Yield (money market fund) up to 1.53% p.a. at Basic. The prepaid card itself has no credit line; Crypto.com also has a separate US-only Visa Signature credit card (collection exists in help center; not assessed here). FX on Midnight: US 3% on non-USD; EEA 0.2% within EU/UK, 2% outside."
+ },
+ {
+  "slug": "bybit",
+  "topUpPct": 0,
+  "txPct": 0.9,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": 0,
+  "iban": "shared",
+  "payoutCorridors": 1,
+  "ramps": "both",
+  "credit": false,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Bybit EU Help: Fees and Limits (Bybit Card)",
+    "url": "https://www.bybit.eu/en-EU/help-center/article/Fees-and-Spending-Limits-Bybit-Card",
+    "quote": "Annual Fee None Inactivity Fee None Card Cancellation Fee None",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Bybit EU Help: Fees and Limits (Bybit Card)",
+    "url": "https://www.bybit.eu/en-EU/help-center/article/Fees-and-Spending-Limits-Bybit-Card",
+    "quote": "Crypto Conversion Fee applies to all transactions funded with non-fiat assets in your Bybit EU Funding Account.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Bybit EU Help: Fees and Limits (Bybit Card)",
+    "url": "https://www.bybit.eu/en-EU/help-center/article/Fees-and-Spending-Limits-Bybit-Card",
+    "quote": "Crypto Conversion Fee 0.9%",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Bybit EU Help: Fees and Limits (Bybit Card)",
+    "url": "https://www.bybit.eu/en-EU/help-center/article/Fees-and-Spending-Limits-Bybit-Card",
+    "quote": "No fee is required for the issuance of Bybit Card until further notice.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Bybit EU Help: Fees and Limits (Bybit Card)",
+    "url": "https://www.bybit.eu/en-EU/help-center/article/Fees-and-Spending-Limits-Bybit-Card",
+    "quote": "First Issuance: No fee Replacement: 5 EUR (for physical Bybit Card)",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Bybit Help (global): Fees and Limits (Bybit Card)",
+    "url": "https://www.bybit.com/en/help-center/article/Fees-and-Spending-Limits-Bybit-Card",
+    "quote": "29.99 USD (for physical Bybit Card)",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Bybit EU Help: FAQ — Fiat Deposit",
+    "url": "https://www.bybit.eu/en-EU/help-center/article/FAQ-Fiat-Deposit",
+    "quote": "A virtual account needs to be created before making the first deposit.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Bybit EU Help: FAQ — Fiat Deposit",
+    "url": "https://www.bybit.eu/en-EU/help-center/article/FAQ-Fiat-Deposit",
+    "quote": "Offline Payment Public Account IBAN/ Account No eg. SEPA",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Bybit EU Help: How to Withdraw Fiat Currencies on Bybit EU",
+    "url": "https://www.bybit.eu/en-EU/help-center/article/How-to-Withdraw-Fiat-Currencies-on-Bybit",
+    "quote": "Supported Fiat Currencies Available Payment Methods Remarks EUR SEPA Zen.com PayPal",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Bybit EU Help: FAQ — Fiat Deposit",
+    "url": "https://www.bybit.eu/en-EU/help-center/article/FAQ-Fiat-Deposit",
+    "quote": "After that, you can purchase coins at any time with the fiat balance in your Funding Account.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Bybit EU Help: How to Withdraw Fiat Currencies on Bybit EU",
+    "url": "https://www.bybit.eu/en-EU/help-center/article/How-to-Withdraw-Fiat-Currencies-on-Bybit",
+    "quote": "Please make sure that the name on your withdrawal account matches the name that you've provided for Individual Verification on Bybit EU.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Bybit EU Help: FAQ — Reward Services",
+    "url": "https://www.bybit.eu/en-EU/help-center/article/FAQ-Rewards-Service",
+    "quote": "For Flexible Term products, your return is determined by a dynamic APR that fluctuates with market conditions.",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "EEA answer (bybit.eu, Bybit EU GmbH). Since Dec 31 2025, EEA/CH residents need the Bybit EU Card on bybit.eu; the old bybit.com EUR card was moved there. Bybit EU fee table: no annual/inactivity/cancellation fee, no fee for virtual or first physical card (replacement EUR 5; shipping not mentioned), FX 0.5%, crypto conversion 0.9% on every purchase paid from non-fiat assets, including USDC/USDT (0% if paid from a EUR fiat balance), ATM 2% after first EUR 100/month. No top-up fee is listed (0); Bybit EU says it charges zero fees on fiat deposits. Non-EEA programmes (bybit.com): physical card 29.99 USD (Australia, Georgia) or 5 USDT (Asia Pacific, Argentina); crypto conversion 0.9% (0.5% Argentina); FX 2% (AU/APAC/Mexico). SEPA deposits use a per-user 'virtual account', but Bybit says some suppliers need a Reference ID, so 'named' is not certain for every user. Payout: EUR via SEPA only (Zen.com and PayPal are not bank rails) = 1. Yield: Bybit EU Earn Flexible Term (USDC supported); APR is dynamic, not published on a static page, and funds in Earn are moved out of the Funding Account the card spends from. Card is debit only."
+ },
+ {
+  "slug": "coinbase-one",
+  "topUpPct": 0,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": 0,
+  "iban": null,
+  "payoutCorridors": null,
+  "ramps": null,
+  "credit": false,
+  "yield": null,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Coinbase One Card Cardholder Agreement (First Electronic Bank / Cardless), effective May 11 2026",
+    "url": "https://legal.cardless.com/cardholder_agreement/coinbase/cardholder_agreement.pdf",
+    "quote": "Fees Annual Fee None for this credit card with an active and eligible Coinbase One membership",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Coinbase One Card Cardholder Agreement",
+    "url": "https://legal.cardless.com/cardholder_agreement/coinbase/cardholder_agreement.pdf",
+    "quote": "Foreign Transaction $0",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Coinbase One Card Cardholder Agreement",
+    "url": "https://legal.cardless.com/cardholder_agreement/coinbase/cardholder_agreement.pdf",
+    "quote": "The fee for a replacement card is waived for the first occurrence.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Coinbase One Card Cardholder Agreement",
+    "url": "https://legal.cardless.com/cardholder_agreement/coinbase/cardholder_agreement.pdf",
+    "quote": "A fee of up to $40 per card will apply for each subsequent replacement.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Coinbase One Card Cardholder Agreement",
+    "url": "https://legal.cardless.com/cardholder_agreement/coinbase/cardholder_agreement.pdf",
+    "quote": "19.49% to 29.49% when you open your",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "US-only unsecured American Express credit card issued by First Electronic Bank; needs an active Coinbase One membership (cards-brief has $49.99/yr; the agreement only says the card has no annual fee with an eligible membership). There is no top-up: you pay a monthly bill. The agreement's fee disclosure lists annual fee, foreign transaction $0, cash advance ($10 or 5%), late/returned payment (up to $41), replacement card (first free, then up to $40) and $5 paper statements; no issuance, shipping, per-purchase or payment fee is listed, so topUpPct/txPct/cardFee/physical = 0 under the published-schedule rule. credit=false because the line is based on creditworthiness, not crypto collateral (it is a real credit card, just not borrow-against-crypto). iban/payoutCorridors/ramps/yield = null: coinbase.com and help.coinbase.com return Cloudflare 403 to every fetch method here (curl, WebFetch DNS failure, Wayback blocked), so no issuer quote could be checked. Leads to verify by hand: Coinbase app supports ACH/wire cash-out to US bank (USD), USDC rewards for Coinbase One members, and wire deposits that are moving from reference codes to a unique Virtual Account Number (per search snippets, not verified)."
+ },
+ {
+  "slug": "bitget-wallet",
+  "topUpPct": 0,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 0.1,
+  "physicalCardFeeUsd": null,
+  "iban": "named",
+  "payoutCorridors": 3,
+  "ramps": "both",
+  "credit": false,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Bitget Wallet Help: Fees (Europe, Africa, and LATAM card)",
+    "url": "https://web3.bitget.com/helpCenter/283",
+    "quote": "You do not need to pay monthly or annual fees, and top-up is free.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Bitget Wallet Help: Spending fees FAQ",
+    "url": "https://web3.bitget.com/helpCenter/318",
+    "quote": "There are no extra transaction fees when you use the card for purchases. There’s no fee for spending in USD.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Bitget Wallet Help: Fees (Europe, Africa, and LATAM card)",
+    "url": "https://web3.bitget.com/helpCenter/283",
+    "quote": "Within 72 hours: 0.1 USD After 72 hours: 10 USD",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Bitget Wallet Help: How to apply and verify my identity? (Europe, Africa, and LATAM)",
+    "url": "https://web3.bitget.com/helpCenter/277",
+    "quote": "A physical card is currently in development – stay tuned!",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Bitget Wallet Help: Physical card FAQ (APAC)",
+    "url": "https://web3.bitget.com/helpCenter/675",
+    "quote": "49 USD (including international shipping costs).",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Bitget Wallet Help: What is a Virtual Account?",
+    "url": "https://web3.bitget.com/helpCenter/872",
+    "quote": "After approval, you get a Virtual Account in your name:USD account: routing number and account number (ACH, Fedwire, SWIFT)EUR account: IBAN and BIC (SEPA)",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Bitget Wallet Help: How to transfer funds to a bank account",
+    "url": "https://web3.bitget.com/helpCenter/465",
+    "quote": "Currently, we support transfers to Nigeria, Mexico, and Pakistan.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Bitget Wallet Help: How to transfer funds to a bank account",
+    "url": "https://web3.bitget.com/helpCenter/465",
+    "quote": "Now, you can easily send funds from your wallet to bank accounts in Nigeria, Mexico, and Pakistan.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Bitget Wallet Help: What is a Virtual Account?",
+    "url": "https://web3.bitget.com/helpCenter/872",
+    "quote": "Funds arrive via standard bank transfer and are automatically converted to USDC or USDT in your Bitget Wallet.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Bitget Wallet Help: What is Stablecoin Earn Plus?",
+    "url": "https://web3.bitget.com/helpCenter/380",
+    "quote": "After 30 days:  - All subscription amounts default back to ~2.3% APY (based on real-time Aave interest)",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Entry = the Europe, Africa and LATAM card programme (EEA, UK, South Africa, 12 LATAM countries, Pakistan). Top-up free, no per-purchase fee, USD spend free, non-USD 1.7%. Card fee: 0.1 USD activation if done within 72h of KYC approval, 10 USD after (cardFeeUsd 0.1). This programme has no physical card yet and no ATM/POS cash ('this card does not support POS purchases, ATM withdrawals'), so physicalCardFeeUsd = null. The APAC programme (KR, JP, VN, MY, TW, AU, TH, PH) has a physical Visa card for 49 USD incl. international shipping, ATM 1% or $5, and a 0.05%–0.2% crypto-to-fiat conversion fee on all transactions; Nigeria-issued cards pay a $2 issuance fee. cards-brief's ATM fee and '0.05% conversion' come from the APAC programme, not the EEA/UK one. Virtual Account (USD ACH/Fedwire/SWIFT and EUR SEPA IBAN in your name) by region; ARS (CVU) and MXN (CLABE) named accounts too; deposits pay a fee. Bank payouts: NGN, MXN, PKR = 3. The separate Fiat24 card (Mainland China programme) can send EUR/CHF to a European IBAN; not counted. Yield: Stablecoin Earn Plus ~2.3% APY (4% for the first 30 days on up to $1,000), in the same wallet app but not on the card balance itself. custody: wallet is self-custodial; card balance sits with the card provider."
+ },
+ {
+  "slug": "kast",
+  "topUpPct": 0,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": {
+   "feeUsd": 0.1,
+   "underUsd": 25,
+   "foreignOnly": true
+  },
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": 40,
+  "iban": "named",
+  "payoutCorridors": 38,
+  "ramps": "both",
+  "credit": false,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "KAST Help: What Are the Fees and Conditions for KAST Cards and Accounts?",
+    "url": "https://concierge.kast.xyz/hc/en-us/articles/9850062738703-What-Are-the-Fees-and-Conditions-for-KAST-Cards-and-Accounts",
+    "quote": "Top-up Fee | \n 0% |",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "topUpPct",
+    "label": "KAST Help: What Are the Fees and Conditions for KAST Cards and Accounts?",
+    "url": "https://concierge.kast.xyz/hc/en-us/articles/9850062738703-What-Are-the-Fees-and-Conditions-for-KAST-Cards-and-Accounts",
+    "quote": "Supported stablecoin deposits are converted to USD at a 1:1 rate with 0% spread.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "KAST Help: What Are the Fees and Conditions for KAST Cards and Accounts?",
+    "url": "https://concierge.kast.xyz/hc/en-us/articles/9850062738703-What-Are-the-Fees-and-Conditions-for-KAST-Cards-and-Accounts",
+    "quote": "Transaction Fee | \n 0% |",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "smallPurchase",
+    "label": "KAST Help: What Are the Fees and Conditions for KAST Cards and Accounts?",
+    "url": "https://concierge.kast.xyz/hc/en-us/articles/9850062738703-What-Are-the-Fees-and-Conditions-for-KAST-Cards-and-Accounts",
+    "quote": "Small Transaction Fee (Non-USD) | \n $0.10 for transactions under $25 |",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "KAST Help: How Much Do KAST Memberships Cost and What Fees Should I Expect?",
+    "url": "https://concierge.kast.xyz/hc/en-us/articles/15806471110671-How-Much-Do-KAST-Memberships-Cost-and-What-Fees-Should-I-Expect",
+    "quote": "Standard Virtual Cards: Up to 2 Standard cards are included in the Standard allowance. In some regions, a $2 issuance fee may apply, including for included allowance cards.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "KAST Help: How Much Do Standard Physical KAST Cards Cost?",
+    "url": "https://concierge.kast.xyz/hc/en-us/articles/14812085370511-How-Much-Do-Standard-Physical-KAST-Cards-Cost",
+    "quote": "The only cost you’ll see when ordering a standard physical card is the shipping fee, which is $40.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "KAST: USD & Euro Accounts",
+    "url": "https://www.kast.xyz/en/global-accounts",
+    "quote": "Get your own IBAN the moment you activate.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "KAST: USD & Euro Accounts",
+    "url": "https://www.kast.xyz/en/global-accounts",
+    "quote": "Your USD account number and ACH details activate the moment you're verified.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "KAST Help: What Are the Fees and Conditions for KAST Cards and Accounts?",
+    "url": "https://concierge.kast.xyz/hc/en-us/articles/9850062738703-What-Are-the-Fees-and-Conditions-for-KAST-Cards-and-Accounts",
+    "quote": "Sending Fiat Transfers to Bank Accounts",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "KAST: USD & Euro Accounts",
+    "url": "https://www.kast.xyz/en/global-accounts",
+    "quote": "Send Bitcoin, Ethereum, or other supported crypto. Converts to USD instantly in your account.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "KAST: USD & Euro Accounts",
+    "url": "https://www.kast.xyz/en/global-accounts",
+    "quote": "Transfer USD globally to 170+ countries in 30+ local currencies.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "KAST: USD Reserve Account",
+    "url": "https://www.kast.xyz/en/reserve",
+    "quote": "Standard 8%. Premium 10% on the first $50,000. Private 12% on the first $200,000. Balances above the cap earn 8%.",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Standard tier ($0/yr). Fee page: top-up 0%, card spend USD 0%, transaction fee 0%, FX 0.5%–1.75% (cards-brief has 2%: issuer now says 0.5%–1.75% depending on residence/merchant country/programme; card terms PDF says 'up to 2%'), small non-USD purchases under $25: $0.10 (card terms PDF dated 20 Mar 2025 says USD 0.2, the newer help page says $0.10). Stablecoin deposits 0%; non-stablecoin crypto deposits are auto-converted at a fee shown in-app; bank deposits: ACH $2, Fedwire $15, SWIFT $30, SEPA 0.5%. Virtual cards: 2 Standard included, $2 each in some regions; physical Standard card $0 + $40 shipping. Named USD account number (ACH/wire) and own EU IBAN. Payout corridors: 36 currencies in the fiat payout table (USD, AED, AUD, BDT, BOB, BRL, CLP, COP, CRC, CZK, DKK, EGP, EUR, GBP, GHS, IDR, ILS, INR, JOD, JPY, KES, KRW, LKR, MYR, NGN, NPR, PEN, PHP, PKR, PLN, QAR, RON, SAR, THB, TRY, ZAR) + MXN (SPEI) + ARS = 38; a help article titled 'MNX Deposits & Withdrawals — Temporary Pause' exists (not read; may affect MXN). Yield: USD Reserve Account 8% on Standard (KAST-funded 'rewards, not interest', introductory until 1 July 2027); also Earn vaults (Gauntlet ~7%, USD Prime 3.3%, variable). Credit: card terms are written as a charge account repaid to KAST with 0% APR, but there is no borrow-against-crypto feature, so false. ATM: fee page says up to $500 per withdrawal / $1,500 per 24h (cards-brief and the kast.xyz/cards FAQ say $250 per withdrawal: issuer pages disagree)."
+ },
+ {
+  "slug": "redotpay",
+  "topUpPct": 0,
+  "txPct": 1,
+  "txFlatUsd": 0,
+  "smallPurchase": {
+   "feeUsd": 0.2,
+   "underUsd": 1,
+   "foreignOnly": false
+  },
+  "cardFeeUsd": 10,
+  "physicalCardFeeUsd": 100,
+  "iban": "named",
+  "payoutCorridors": 6,
+  "ramps": "both",
+  "credit": true,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "RedotPay Help: RedotPay Card Limitations & Fees (fee table image, updated July 24 2026)",
+    "url": "https://helpcenter.redotpay.com/en/articles/10339271-redotpay-card-limitations-fees",
+    "quote": "Deposit Fee | HKB BIN: Free | USD BIN: Free",
+    "verified": "2026-10-24",
+    "quote_note": "transcribed from the fee-table image in the article"
+   },
+   {
+    "field": "txPct",
+    "label": "RedotPay Help: RedotPay Card Limitations & Fees (fee table image)",
+    "url": "https://helpcenter.redotpay.com/en/articles/10339271-redotpay-card-limitations-fees",
+    "quote": "Transaction Fee | 1.00% | Refers to the cryptocurrency conversion fee",
+    "verified": "2026-10-24",
+    "quote_note": "transcribed from the fee-table image in the article"
+   },
+   {
+    "field": "smallPurchase",
+    "label": "RedotPay Help: RedotPay Card Limitations & Fees (fee table image)",
+    "url": "https://helpcenter.redotpay.com/en/articles/10339271-redotpay-card-limitations-fees",
+    "quote": "Small Auth Transaction Fee | Waived for the first 5 small transactions per card each month; 0.2 USD for each following small transaction | Refers to transactions less than or equal to 1.00 USD",
+    "verified": "2026-10-24",
+    "quote_note": "transcribed from the fee-table image in the article"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "RedotPay Help: RedotPay Card Limitations & Fees (fee table image)",
+    "url": "https://helpcenter.redotpay.com/en/articles/10339271-redotpay-card-limitations-fees",
+    "quote": "Virtual Card Application | 10.00 USD",
+    "verified": "2026-10-24",
+    "quote_note": "transcribed from the fee-table image in the article"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "RedotPay Help: RedotPay Card Limitations & Fees (fee table image)",
+    "url": "https://helpcenter.redotpay.com/en/articles/10339271-redotpay-card-limitations-fees",
+    "quote": "Physical Card Application | 100.00 USD; Mailing Of Your Physical Card | Standard Mail: Waived",
+    "verified": "2026-10-24",
+    "quote_note": "transcribed from the fee-table image in the article"
+   },
+   {
+    "field": "iban",
+    "label": "RedotPay Help: What Details Will I Receive After Opening an Account?",
+    "url": "https://helpcenter.redotpay.com/en/articles/11990965-what-details-will-i-receive-after-opening-an-account",
+    "quote": "EUR account Account name IBAN Bank name",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "RedotPay Help: Which Currencies Can I Open an Account In?",
+    "url": "https://helpcenter.redotpay.com/en/articles/11990957-which-currencies-can-i-open-an-account-in",
+    "quote": "You can currently open a personal funding account in:",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "RedotPay Help: Can I Withdraw EUR or GBP to a Bank Account?",
+    "url": "https://helpcenter.redotpay.com/en/articles/11991671-can-i-withdraw-eur-or-gbp-to-a-bank-account",
+    "quote": "Yes. You can withdraw EUR or GBP to a bank account.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "RedotPay Help: Common Questions About International Transfer",
+    "url": "https://helpcenter.redotpay.com/en/articles/11325255-common-questions-about-international-transfer",
+    "quote": "Most local networks (such as Pix, SPEI, and SEPA) don't charge extra fees. For USD transfers via SWIFT, the recipient's bank or intermediary bank may deduct extra handling fee.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "RedotPay Help: Are BDT Transfers Eligible for the Remittance Incentive?",
+    "url": "https://helpcenter.redotpay.com/en/articles/17693157-are-bdt-transfers-eligible-for-the-remittance-incentive",
+    "quote": "BDT transfers sent through RedotPay are not eligible for Bangladesh’s government remittance incentive.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "RedotPay Help: Common Questions About International Transfer",
+    "url": "https://helpcenter.redotpay.com/en/articles/11325255-common-questions-about-international-transfer",
+    "quote": "It's a way to turn your crypto (like USDT, USDC, or BTC) to local currency and send it to a bank account or e-wallet.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "RedotPay Help: How Do I Buy Crypto With a Card on RedotPay?",
+    "url": "https://helpcenter.redotpay.com/en/articles/10650778-how-do-i-buy-crypto-with-a-card-on-redotpay",
+    "quote": "Tap [Buy Coins] and choose the crypto you want to buy.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "RedotPay Help: Getting Started with RedotPay Credit",
+    "url": "https://helpcenter.redotpay.com/en/articles/13224754-getting-started-with-redotpay-credit",
+    "quote": "Credit is a payment tool that lets you access a flexible credit line backed by your cryptocurrency holdings. It allows you to spend seamlessly across the RedotPay ecosystem without selling your assets.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "RedotPay Help: Getting Started with RedotPay Earn",
+    "url": "https://helpcenter.redotpay.com/en/articles/11828476-getting-started-with-redotpay-earn",
+    "quote": "Yes! You can spend both unconfirmed and confirmed funds with your RedotPay Card",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Fee table is an image inside the help article (no text); quotes are transcribed from that image (downloaded to research/fe1/img/rp-fees.png). Deposit free; purchases in the card's default currency free; non-default currency 1.20%; 'Transaction Fee 1.00%' described as the cryptocurrency conversion fee (issuer does not say whether it is charged when spending USDT/USDC, so treat as on every crypto-funded purchase). Small auth fee: purchases <= $1.00, first 5 per card per month free, then $0.20 each (not foreign-only). Virtual card $10, physical $100, standard mail waived (DHL Express extra, varies). Personal funding account in USD (account name, account number, SWIFT/BIC), EUR (account name, IBAN) and GBP (account name, number, sort code), availability by region; no RedotPay fee on deposits. Payouts: EUR and GBP to own bank; International Transfer sends crypto as local currency to bank or e-wallet; confirmed currencies from issuer pages: EUR, GBP, USD (SWIFT), BRL (Pix), MXN (SPEI), BDT = 6 minimum (full list only in-app). Credit: crypto-collateral credit line usable for card spending (Hong Kong money lender licence 1715/2025), stablecoins excluded as collateral. Earn: USDC/USDT, min 100, spendable by card; rate is variable and only shown in-app (7-day APY), not published. Earn 'only available in selected regions'."
+ },
+ {
+  "slug": "etherfi",
+  "topUpPct": 0,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": null,
+  "iban": "named",
+  "payoutCorridors": 27,
+  "ramps": "both",
+  "credit": true,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "ether.fi Help: Fund Your Vault with Crypto",
+    "url": "https://help.ether.fi/en/articles/637846-fund-your-vault-with-crypto",
+    "quote": "You can generate a deposit address and send funds to it.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "topUpPct",
+    "label": "ether.fi Help: Bank Transfers - FAQs",
+    "url": "https://help.ether.fi/en/articles/758758-bank-transfers-faqs",
+    "quote": "The table below applies to eligible bank-transfer funding methods only.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "ether.fi Help: How Borrow Works",
+    "url": "https://help.ether.fi/en/articles/764754-how-borrow-works",
+    "quote": "Prefer no borrowing? Use your card in Direct Pay mode to spend your stablecoin balances 1:1",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "ether.fi Help: Why is there a $10 fee for my first virtual Cash card?",
+    "url": "https://help.ether.fi/en/articles/833743-why-is-there-a-10-fee-for-my-first-virtual-cash-card",
+    "quote": "Core members normally receive one free virtual Cash card. In some regions, regional pricing means the first virtual Cash card has a $10 fee instead.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "ether.fi Help: Bank Transfers - FAQs",
+    "url": "https://help.ether.fi/en/articles/758758-bank-transfers-faqs",
+    "quote": "You can receive microdeposits to your assigned bank account or IBAN for account verification purposes.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "ether.fi Help: Send and Receive GBP via FPS",
+    "url": "https://help.ether.fi/en/articles/601603-send-and-receive-gbp-via-fps",
+    "quote": "copy your unique account details exactly as shown.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "ether.fi Help: Supported Payment Methods (Deposits & Withdrawals)",
+    "url": "https://help.ether.fi/en/articles/759961-supported-payment-methods-deposits-withdrawals",
+    "quote": "You can withdraw funds from your Vault using the following supported payment methods:",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "ether.fi Help: Send and Receive EUR via SEPA Bank Transfers",
+    "url": "https://help.ether.fi/en/articles/586168-send-and-receive-eur-via-sepa-bank-transfers",
+    "quote": "Yes, you can use SEPA to fund/send your Cash account in EUR or send EUR to a supported bank account. For deposits, you can choose EURC or USDC.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "ether.fi Help: How Borrow Works",
+    "url": "https://help.ether.fi/en/articles/764754-how-borrow-works",
+    "quote": "spend with your card in Borrow mode, where purchases automatically borrow against your assets instead of selling them",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "ether.fi Help: How Borrow Works",
+    "url": "https://help.ether.fi/en/articles/764754-how-borrow-works",
+    "quote": "Borrow-eligible assets in your account are supplied to a dedicated onchain lending market managed by ether.fi and earn yield automatically. Rates are variable and set by market supply and demand.",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Core tier. No fee is listed for crypto top-ups (the help center publishes bank-transfer funding fees, e.g. ACH $0.50 + 0.10%, SEPA EUR 0.90 (+0.15% to USDC), GBP 0.90 + 0.20% FX, SWIFT $20 + 0.10%), so topUpPct = 0 for crypto/stablecoin. Direct Pay spends stablecoins 1:1, no per-purchase fee listed; FX markup now 0.5% on Core (help article 304414: Core 0.5%, Luxe 0.25%, Pinnacle/VIP none) — cards-brief fxPct 1.5% is contradicted. Virtual card: one free for Core; $10 in 14 countries (Argentina, Angola, Bangladesh, Bolivia, Colombia, Ecuador, Indonesia, Malaysia, Mexico, Nigeria, Peru, Philippines, South Africa, Thailand). A $10 initial deposit before verification stays as your own balance (not a fee). Physical card: membership benefits page says Core physical card 'Free; shipping fee applies' but no shipping amount is published (another help page lists 0 free physical cards for Core), so null; cards-brief's $50 physical fee could not be confirmed (ether.fi.com pages returned HTTP 429). Bank accounts: 'assigned bank account or IBAN', 'unique account details' (named per user; SEPA deposits also show a reference). Deposits in EUR, USD, BRL, MXN, COP, GBP, AED, CAD, ARS, AUD, JPY(C). Payout currencies listed: 29; counted 27 bank currencies (USD, AED, AUD, BRL, CAD, CHF, CLP, COP, EGP, EUR, GBP, HKD, HNL, IDR, ILS, INR via UPI, JPY, KRW, MXN, MYR, NGN, NOK, PKR, PLN, SAR, UGX, VND), excluding CNY (Alipay/WeChat) and PHP (e-wallet). Credit: Borrow mode spends against collateral. Yield: borrow-eligible assets earn a variable lending rate (no rate published); Liquid vaults also exist."
+ },
+ {
+  "slug": "metamask",
+  "topUpPct": 0,
+  "txPct": 0,
+  "txFlatUsd": 0.01,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": null,
+  "iban": "none",
+  "payoutCorridors": 3,
+  "ramps": "both",
+  "credit": false,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "MetaMask Help: MetaMask Card limits and fees",
+    "url": "https://support.metamask.io/trade/metamask-card/limits-and-fees/",
+    "quote": "Delegate funds for spending No fee (no min. balance)",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "MetaMask Help: MetaMask Card limits and fees",
+    "url": "https://support.metamask.io/trade/metamask-card/limits-and-fees/",
+    "quote": "Stablecoin of non-US cardholder denominated in local currency No fee Stablecoin of US cardholder denominated in USD No fee",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "MetaMask Help: MetaMask Card limits and fees",
+    "url": "https://support.metamask.io/trade/metamask-card/limits-and-fees/",
+    "quote": "Other cryptocurrencies (e.g., wETH) 0.875%",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txFlatUsd",
+    "label": "MetaMask Help: MetaMask Card limits and fees",
+    "url": "https://support.metamask.io/trade/metamask-card/limits-and-fees/",
+    "quote": "Network gas (e.g., Linea) Small, variable gas fee (typically $0.01)",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "MetaMask Help: MetaMask Card FAQs",
+    "url": "https://support.metamask.io/trade/metamask-card/card-faq/",
+    "quote": "The Virtual card has no annual fees or maintenance fees associated with MetaMask Card.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "MetaMask Help: MetaMask Metal card",
+    "url": "https://support.metamask.io/trade/metamask-card/metal-card/",
+    "quote": "Orders for the MetaMask Metal card are temporarily paused as of June 2nd, 2026.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "MetaMask Help: Money Account",
+    "url": "https://support.metamask.io/trade/money-account/",
+    "quote": "Money Account is not a bank account, savings account, or insured deposit product.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "MetaMask Help: Sell crypto for currency in MetaMask",
+    "url": "https://support.metamask.io/manage-crypto/move-crypto/sell/how-to-sell-your-crypto-assets-for-fiat-currency-in-metamask/",
+    "quote": "for SEPA (Europe) and Faster Payments (UK), the cash could be received as soon as the provider completes processing the order, but for the US, you might have to wait 1-3 business days.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "MetaMask Help: Sell crypto for currency in MetaMask",
+    "url": "https://support.metamask.io/manage-crypto/move-crypto/sell/how-to-sell-your-crypto-assets-for-fiat-currency-in-metamask/",
+    "quote": "When you sell crypto assets, the value from the sale is deposited into the bank account of your choice.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "MetaMask Help: User guide: mUSD",
+    "url": "https://support.metamask.io/manage-crypto/tokens/musd/",
+    "quote": "You can also buy mUSD with cash.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "MetaMask Help: MetaMask Card FAQs",
+    "url": "https://support.metamask.io/trade/metamask-card/card-faq/",
+    "quote": "No, MetaMask Card is not a credit card. It is a debit card that allows you to spend assets directly from your MetaMask wallet.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "MetaMask Help: Money Account",
+    "url": "https://support.metamask.io/trade/money-account/",
+    "quote": "MetaMask Money Account is a self-custodial account that earns up to 4% APY* on deposited mUSD.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "MetaMask Help: Money Account",
+    "url": "https://support.metamask.io/trade/money-account/",
+    "quote": "You can link your Money Account to your MetaMask Card to spend directly from your Money Account funds.",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Free (Virtual) tier. Funding = delegating a spending limit from your own wallet: no fee (gas to approve a limit; Money Account link needs none). Per purchase: stablecoin in your local currency (or USD for US) no fee; stablecoin in a third currency 0.5%; DeFi/yield tokens free up to $1,200/mo then 0.5%; other crypto e.g. wETH 0.875%. Network gas typically ~$0.01 per payment (variable, an estimate, not a fixed fee) -> txFlatUsd 0.01. Cross-border fee 1% on Free tier when the merchant is outside the cardholder's country (this is what cards-brief stores as fxPct 1). No physical card on the Free tier; Metal ($199/yr subscription incl. physical metal card) orders paused since 2 June 2026, so physicalCardFeeUsd = null. Help pages now show 'You are viewing guidance for United States' and say new Metal orders were 'only available to US users (excluding Vermont)' and US users can use ATMs — cards-brief marks US as 'no' (new sign-ups paused); worth re-checking the region page. No bank account details of any kind (Money Account is explicitly not a bank account) -> iban none. Ramps: buy and sell inside MetaMask via third-party providers (Transak, MoonPay, Sardine, Banxa; MetaMask takes 1%); sell payouts go to a bank in the US, UK and parts of Europe, i.e. USD, GBP (Faster Payments), EUR (SEPA) = 3. Yield: Money Account mUSD up to 4% APY (limited-time up to ~6% until January 2027), variable; can be linked as the card's funding source. Money Account not available in the UK."
+ },
+ {
+  "slug": "nexo",
+  "topUpPct": null,
+  "txPct": null,
+  "txFlatUsd": null,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": 0,
+  "iban": null,
+  "payoutCorridors": 3,
+  "ramps": "both",
+  "credit": true,
+  "yield": true,
+  "sources": [
+   {
+    "field": "cardFeeUsd",
+    "label": "Nexo: Crypto Card (EEA) page, FAQ 'Is the Nexo Card free?'",
+    "url": "https://nexo.com/eea/crypto-card",
+    "quote": "The virtual Nexo Card costs nothing to get or activate. You only need a balance of at least $50 in your Nexo account to activate it. That $50 isn’t a fee: it stays in your account and you can spend it with the card straight away.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Nexo: Crypto Card (EEA) page",
+    "url": "https://nexo.com/eea/crypto-card",
+    "quote": "The physical Nexo Card is also free, including shipping. To order one, you need at least Gold Loyalty Tier and a portfolio balance above $5,000 in digital assets.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Nexo: Earn crypto page",
+    "url": "https://nexo.com/earn-crypto",
+    "quote": "Enjoy seamless USD, EUR, and GBP transfers via SEPA, Faster Payments, or SWIFT.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Nexo: Home page",
+    "url": "https://nexo.com/",
+    "quote": "Once you buy or top up crypto, you can immediately access your Credit Line to borrow funds — either sent to your bank account or your Nexo account in the form of stablecoins.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Nexo: Crypto Card (EEA) page",
+    "url": "https://nexo.com/eea/crypto-card",
+    "quote": "Credit Mode allows you to make purchases without having to sell your Bitcoin or other crypto.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Nexo: Crypto Card (EEA) page",
+    "url": "https://nexo.com/eea/crypto-card",
+    "quote": "Earn up to 13% on idle funds Nexo Loyalty Program members earn daily interest on unspent funds.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Nexo: Earn Tether (USDT) page",
+    "url": "https://nexo.com/earn-crypto/usdt",
+    "quote": "Earn up to 11.5% interest on your Tether (USDT).",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Nexo's fee schedule and card fee article live on support.nexo.com, which renders only with JavaScript (Salesforce) and WebFetch could not resolve it, so topUpPct/txPct/txFlatUsd are null (not 0): I could not read the published schedule. Leads to read by hand: support.nexo.com/article/what-are-the-limits-and-fees-of-the-nexo-card and /article/nexo-general-fee-schedule. Aggregators also say the Debit Mode conversion cost is unpublished. nexo.com card page: no monthly/annual/inactivity card fees; virtual card free (needs $50 balance that stays spendable); physical card free incl. shipping but needs Gold tier + $5,000 portfolio. FX (contradicts cards-brief fxPct 2): weekdays 0.2% for EEA/UK/CH currencies, 2% rest of world; weekends 0.7% / 2.5%. ATM free EUR 200 (Base) to EUR 2,000 (Platinum), then 2% (min 1.99 EUR/GBP). iban null: Nexo says it supports USD, EUR and GBP bank transfers (SEPA, Faster Payments, SWIFT) but I could not confirm whether deposit details are personal or a pooled account with reference. payoutCorridors 3 (USD, EUR, GBP) is based on the 'transfers' wording plus credit-line proceeds 'sent to your bank account'; withdrawal currency list not read directly. Credit Mode = credit line against crypto (from 1.9% interest per card page). Yield: up to 13% on idle funds (loyalty-tier dependent; USDT up to 11.5%); Base-tier flexible rate not shown in static HTML."
+ }
+]

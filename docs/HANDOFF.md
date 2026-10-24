@@ -259,11 +259,11 @@ Big moves on the first run: MEXC #2 to #15 and Bybit #3 to #21 (no published ent
 Many cards lose the 8 transaction-cost points only because their top-up fee is not published yet; filling the
 sheet's "Top-up fee %", "Card activation fee $" and "Physical card cost $" columns will move them back.
 
-## Scoring rules v3 (24 Oct 2026, Akash's exact rules) — IN PROGRESS, do not merge yet
+## Scoring rules v3 (24 Oct 2026, Akash's exact rules)
 
-The code is done (`lib/score.ts`, /methodology, card pages, compare page, sheet columns). The card data is not
-filled in yet, so every card currently scores 0 for Banking features. Do not merge the pull request until the data
-below is in. Akash will say "start" in a new session to finish it.
+Code and data are done (pull request #13): `lib/score.ts`, /methodology, card and compare pages, the 5 banking
+columns in the sheet, and fees, banking features, custody and country lists for all 26 cards, written to the sheet
+and checked with `sheet-sync --check`. Akash reviews the 26-card ranking table before merging.
 
 Rules (as built):
 - Rewards 25: 25 x min(entry-tier ongoing cashback on the $1,000 basket / 3.5%, 1). Bands and caps apply; intro
@@ -292,28 +292,26 @@ Research done on 24 Oct 2026 (issuer sources only, with quotes), saved in `docs/
 - `fees-eco-2.json` (Krak, MEXC, Jupiter, Avalanche, Solayer, Wirex One, Bleap, Tangem Pay, Ethena Pay) and
   `fees-eco-3.json` (Exa, Plasma One, Kolo, Karta, Tria, COCA, Avici, Tuyo): top-up, per-purchase, flat and
   small-purchase fees, card fee, physical card cost and the 5 banking features, each with a source.
-- NOT done: the same fees and banking research for Crypto.com, Bybit, Coinbase One, Bitget Wallet, KAST, RedotPay,
-  ether.fi, MetaMask and Nexo (the helper was stopped before saving).
+- `fees-eco-1.json` (Crypto.com, Bybit, Coinbase One, Bitget Wallet, KAST, RedotPay, ether.fi, MetaMask, Nexo).
+  Gaps: Coinbase's help pages block every download, so Coinbase One's banking features are empty (0 points); Nexo's
+  fee help page only opens in the US, so its $0 top-up and per-purchase fees come from the card page's fee FAQ.
 
-Corrections the research found (apply with the data):
+Corrections the research found (applied):
 - Exa FX 1.5% (site says 3%). Avici FX 0% markup (Visa may add 0.4-1%). Krak FX 0% in the UK/EEA, 1% on the US card.
 - MEXC has no physical card ("Physical cards are not available at this time"): remove physical from its forms.
 - Karta: bank payouts now "coming soon"; ATM 1 USDT + 2.5%; plastic card 99 USDT plus unpublished shipping.
 - Solayer's restricted list includes India, UAE, UK and most EU countries.
 - Tangem Pay physical delivery is now $28.82+ (not $17.44) and its FAQ says physical "is not available yet".
 
-Values to flag to Akash before publishing: Tria card fee (conflicting pages, left empty), Plasma top-up (0.15-0.75%
+Values flagged to Akash: Tria card fee (conflicting pages, left empty), Plasma top-up (0.15-0.75%
 by asset; 0.15 used), Karta and COCA physical cost (shipping not published), Avici credit (separate credit line,
 partly "coming soon"), Ethena payout currencies (not published) and Daily Boost counted as yield (Ethena says "not
 yield"), MEXC yield (campaign Earn product), Avalanche FX (1% / 2% / 3% on different pages; keep 3).
 
-Next steps when Akash says "start":
-1. Finish the fees and banking research for the 9 cards above.
-2. Apply all research to the Google Sheet (Cards, Country lists and Sources tabs; sources dated when checked,
-   "Last checked" updated), then check with `node scripts/sheet-sync.mjs --check`.
-3. `npm run validate` and `npm run build`; show Akash the 26-card ranking table (v2 vs v3, with part scores)
-   before marking the pull request ready.
-4. Update the sheet's "How to edit" tab and CLAUDE.md for the 5 banking columns.
+Applied with these calls (24 Oct): Bybit's EU deposit account is a shared public account with a reference
+("shared"); MetaMask's ~$0.01 gas is not an issuer fee (0); KAST India back to "unknown" (only an aggregator said
+yes); Tangem Pay UK/EU "unknown"; Kolo EU "unknown"; MEXC has no physical card; ether.fi FX 0.5% (Core) / 0.25%
+(Luxe) / 0 (Pinnacle, VIP); Wirex One country list refreshed (73 countries).
 
 ## Security
 
