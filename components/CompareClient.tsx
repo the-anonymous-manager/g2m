@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CardRow, Market } from '@/lib/types';
 import { MARKET_LABELS } from '@/lib/regions';
-import { CUSTODY_LABEL, NP, TYPE_LABEL, cashbackLabel, pct, perPurchaseFee, usd } from '@/lib/format';
+import { CUSTODY_LABEL, NP, TYPE_LABEL, cashbackLabel, ecosystemFeatures, pct, perPurchaseFee, usd } from '@/lib/format';
 import { CardArt } from '@/components/CardArt';
 import { MarketBadge, ScorePill } from '@/components/bits';
 import { OutboundLink } from '@/components/OutboundLink';
@@ -45,6 +45,10 @@ const ROWS: Row[] = [
     render: (c) => <MarketBadge value={c.coverage.markets[m]} market={m} short />
   })),
   { label: 'Countries', render: (c) => (c.coverage.countries != null ? String(c.coverage.countries) : c.coverage.scope) },
+  ...[0, 1, 2, 3, 4].map<Row>((i) => ({
+    label: ecosystemFeatures(undefined)[i].label,
+    render: (c) => ecosystemFeatures(c.ecosystem)[i].value
+  })),
   { label: 'Tiers', render: (c) => c.tiers.map((t) => t.name).join(' · ') },
   {
     label: 'Perks',

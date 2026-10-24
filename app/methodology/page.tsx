@@ -9,7 +9,7 @@ import { Eyebrow } from '@/components/bits';
 export const metadata: Metadata = {
   title: 'How we score crypto cards',
   description:
-    'The G2M score explained: rewards 40, fees 30, coverage 20, control 10. Same rules for every card, no paid rankings.',
+    'The G2M score explained: rewards 25, fees 30, coverage 20, banking features 15, control 10. Same rules for every card, no paid rankings.',
   alternates: { canonical: '/methodology' }
 };
 
@@ -17,17 +17,22 @@ const PARTS = [
   {
     name: 'Rewards',
     max: SCORE_WEIGHTS.rewards,
-    how: 'The ongoing cashback on the entry tier, worked out on the $1,000 test basket below, so spending bands and monthly caps count. Short intro offers (such as 2% for the first 30 days) are left out. Any fee charged on every purchase comes off this rate first. Points: 40 × (net rate ÷ 5%), up to 40 and never below 0. If the issuer only publishes an “up to” rate and no entry-tier rate, Rewards scores 0.'
+    how: 'The ongoing cashback on the entry tier, worked out on the $1,000 test basket below, so spending bands and monthly caps count. Short intro offers (such as 2% for the first 30 days) are left out. Points: 25 × (cashback rate ÷ 3.5%), so 3.5% or more earns all 25. If the issuer only publishes an “up to” rate and no entry-tier rate, Rewards scores 0. Fees never reduce this part; they are scored under Fees.'
   },
   {
     name: 'Fees',
     max: SCORE_WEIGHTS.fees,
-    how: 'Annual and card-access costs (10 points): the yearly or subscription fee of the entry tier plus any fee to get the card itself, but not optional physical card shipping. Free scores 10, up to $100 scores 6, up to $300 scores 3, more scores 0. FX fee (12 points): 0% scores 12, up to 1% scores 9, up to 2% scores 5, more scores 2. Other transaction costs on the test basket (8 points): $0 a month scores 8, up to $10 scores 4, more scores 1.'
+    how: 'Annual and card-access costs (10 points): the entry tier’s yearly or subscription fee plus any non-refundable fee to get the card. Optional physical card shipping and a first top-up that stays in your balance do not count. Free scores 10, up to $100 scores 6, up to $300 scores 3, more scores 0. FX fee (12 points): 0% scores 12, up to 1% scores 9, up to 2% scores 5, more scores 2. Other transaction costs on the test basket (8 points): $0 a month scores 8, up to $10 scores 6, up to $20 scores 3, up to $30 scores 1, more scores 0.'
   },
   {
     name: 'Coverage',
     max: SCORE_WEIGHTS.coverage,
     how: 'Confirmed countries (12 points): 100 or more scores 12, 50 to 99 scores 10, 20 to 49 scores 8, 5 to 19 scores 5, 1 to 4 scores 2, none scores 0. Apple Pay and Google Pay (2 points each). Physical card (4 points): a confirmed physical card scores 3, plus 1 when getting it (issuance and shipping) costs under $50; a virtual-only card scores 0.'
+  },
+  {
+    name: 'Banking features',
+    max: SCORE_WEIGHTS.ecosystem,
+    how: 'Five features worth 3 points each. A bank account number to receive money (3 in your own name, 2 for a shared account with a reference code). Sending money out to a bank account (3 for two or more currencies, 1.5 for one). Buying and selling crypto with fiat in the app (3 for both, 1.5 for one way). Spending against your crypto without selling it (3). A yield on your unspent balance (3).'
   },
   {
     name: 'Control',
@@ -101,10 +106,16 @@ export default function MethodologyPage() {
 
       <div className="prose">
         <p>
-          A fee charged as a percentage of every purchase comes off the cashback first. Only the part larger than the
-          cashback counts as a transaction cost, together with flat fees per purchase (charged on all {BASKET_PURCHASES}),
-          top-up or funding fees, and small-purchase fees on the basket purchases below the issuer&apos;s limit. FX fees are
-          scored on their own.
+          Other transaction costs are everything the basket costs you in fees in a month: a percentage fee on every
+          purchase (including conversion fees), flat fees per purchase (charged on all {BASKET_PURCHASES}), top-up or
+          funding fees, and small-purchase fees on the basket purchases below the issuer&apos;s limit. As a guide, $10 a
+          month is 1% of the basket and $20 is 2%. A card with a 2% fee on every purchase and no FX fee costs $20 a month
+          wherever you are.
+        </p>
+        <p>
+          When an issuer publishes its fees and lists no per-purchase or small-purchase fee, we count it as $0. A fee is
+          only “not published” when there is no fee schedule at all, or the issuer says a fee applies without giving the
+          amount.
         </p>
 
         <h2>Missing figures</h2>
@@ -140,6 +151,12 @@ export default function MethodologyPage() {
           fees come from the tiers offered there, cards that are not available there drop out, and # is the rank in that
           country. For one country, the 12 country points become: confirmed there 12, not confirmed 5. When no card has
           confirmed a country yet, you see the worldwide ranking with each card marked not confirmed.
+        </p>
+        <p>
+          The test basket is spent in your country&apos;s currency. If the card does not bill in it (for example a US dollar
+          card used in India or the UAE), the FX fee applies to every purchase, so it is added to the basket&apos;s
+          transaction costs together with any fee on every purchase and any small-purchase fee charged on foreign
+          purchases. Worldwide, the basket is spent in the card&apos;s own currency.
         </p>
         <p>
           Card pages show the worldwide score, plus the score and rank in your country. Pick “All countries” in the

@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { getCard, getCards, getRank, standings } from '@/lib/cards';
 import type { Card, Market, Tier } from '@/lib/types';
 import { MARKET_LABELS } from '@/lib/regions';
-import { CUSTODY_LABEL, NP, TYPE_LABEL, cashbackLabel, fmtDate, pct, perPurchaseFee, usd } from '@/lib/format';
+import { CUSTODY_LABEL, NP, TYPE_LABEL, cashbackLabel, ecosystemFeatures, fmtDate, pct, perPurchaseFee, usd } from '@/lib/format';
 import { SCORE_WEIGHTS } from '@/lib/score';
 import { absoluteUrl, site } from '@/lib/site';
 import { CardArt } from '@/components/CardArt';
@@ -100,6 +100,7 @@ export default async function CardPage({ params }: Props) {
     { label: 'Rewards', value: card.score.rewards, max: SCORE_WEIGHTS.rewards },
     { label: 'Fees', value: card.score.fees, max: SCORE_WEIGHTS.fees },
     { label: 'Coverage', value: card.score.coverage, max: SCORE_WEIGHTS.coverage },
+    { label: 'Ecosystem', value: card.score.ecosystem, max: SCORE_WEIGHTS.ecosystem },
     { label: 'Control', value: card.score.control, max: SCORE_WEIGHTS.control }
   ];
 
@@ -270,6 +271,21 @@ export default async function CardPage({ params }: Props) {
           </p>
         </section>
       </div>
+
+      {/* Ecosystem and banking */}
+      <section aria-labelledby="banking" className="stack" style={{ gap: 14 }}>
+        <h2 id="banking" className="h3">
+          Banking features
+        </h2>
+        <dl className="facts">
+          {ecosystemFeatures(card.ecosystem).map((f) => (
+            <div className="fact" key={f.label}>
+              <dt>{f.label}</dt>
+              <dd style={{ color: f.on ? undefined : 'var(--faint)' }}>{f.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
 
       {/* Tiers */}
       <section aria-labelledby="tiers" className="stack" style={{ gap: 14 }}>

@@ -57,3 +57,28 @@ export const TYPE_LABEL = {
   spend: 'Spend',
   mixed: 'Varies by region'
 } as const;
+
+/** The five ecosystem and banking features in plain words, with whether each is confirmed. */
+export function ecosystemFeatures(e: CardData['ecosystem']): { label: string; value: string; on: boolean }[] {
+  const yesNo = (v: boolean | null | undefined) => (v == null ? 'Not confirmed' : v ? 'Yes' : 'No');
+  const n = e?.payoutCorridors;
+  return [
+    {
+      label: 'Bank account (IBAN or account number)',
+      value: e?.iban === 'named' ? 'In your name' : e?.iban === 'shared' ? 'Shared, with a reference code' : e?.iban === 'none' ? 'No' : 'Not confirmed',
+      on: e?.iban === 'named' || e?.iban === 'shared'
+    },
+    {
+      label: 'Send money to a bank account',
+      value: n == null ? 'Not confirmed' : n === 0 ? 'No' : `${n} ${n === 1 ? 'currency' : 'currencies'}`,
+      on: (n ?? 0) > 0
+    },
+    {
+      label: 'Buy and sell crypto with fiat',
+      value: e?.ramps === 'both' ? 'Buy and sell' : e?.ramps === 'on' ? 'Buy only' : e?.ramps === 'off' ? 'Sell only' : e?.ramps === 'none' ? 'No' : 'Not confirmed',
+      on: e?.ramps === 'both' || e?.ramps === 'on' || e?.ramps === 'off'
+    },
+    { label: 'Spend against crypto without selling', value: yesNo(e?.credit), on: Boolean(e?.credit) },
+    { label: 'Yield on your balance', value: yesNo(e?.yield), on: Boolean(e?.yield) }
+  ];
+}

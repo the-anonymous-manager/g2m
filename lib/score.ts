@@ -2,19 +2,26 @@ import type { CardData, ScoreBreakdown, Tier } from '@/lib/types';
 import { availabilityIn, tierOffered } from '@/lib/regions';
 import { COUNTRY_CODES } from '@/lib/countries.mjs';
 import { monthlyCashback } from '@/lib/calc';
+import { homeFx } from '@/lib/fx';
 
 // The G2M score (0 to 100). Data-driven and identical for every card: no paid placement.
 // Anything the issuer does not publish scores 0 for that part, so publishing terms is rewarded.
 //
-//   Rewards  40  entry-tier ongoing cashback on the $1,000 basket, minus fees on every purchase, capped at 5%
-//   Fees     30  annual and card-access costs 10 · FX fee 12 · other transaction costs on the basket 8
-//   Coverage 20  confirmed countries 12 · Apple Pay 2 · Google Pay 2 · physical card 4
-//   Control  10  self-custodial 10 · custodial 5 · not published 0
+//   Rewards    25  entry-tier ongoing cashback on the $1,000 basket (bands and caps applied); 3.5% = full marks
+//   Fees       30  annual and card-access costs 10 · FX fee 12 · other transaction costs on the basket 8
+//   Coverage   20  confirmed countries 12 · Apple Pay 2 · Google Pay 2 · physical card 3 (+1 under $50)
+//   Ecosystem  15  bank account 3 · bank payouts 3 · fiat on/off-ramp 3 · crypto-backed credit 3 · yield 3
+//   Control    10  self-custodial 10 · custodial 5 · not published 0
 //
-// For one country, the same formula uses the tiers offered there (cashback, annual fee, FX fee),
-// and "countries" becomes: confirmed there 12, not confirmed 5. When no card is confirmed in that
-// country, the worldwide country points are kept so the ranking still tells cards apart.
-export const SCORE_WEIGHTS = { rewards: 40, fees: 30, coverage: 20, control: 10 } as const;
+// Rewards and fees are kept apart: cashback always earns rewards points, and every fee charged on purchases
+// costs fees points. For one country, the same formula uses the tiers offered there; when the card does not bill
+// in that country's currency, its FX fee and foreign-only small-purchase fees are added to the basket cost; and
+// "countries" becomes: confirmed there 12, not confirmed 5. When no card is confirmed in that country, the
+// worldwide country points are kept so the ranking still tells cards apart.
+export const SCORE_WEIGHTS = { rewards: 25, fees: 30, coverage: 20, ecosystem: 15, control: 10 } as const;
+
+/** Basket cashback rate that earns full rewards points. */
+export const FULL_REWARDS_PCT = 3.5;
 
 /**
  * The standard month of spending every card is scored on: $1,000 in five $200 buckets, 35 purchases.
@@ -30,7 +37,7 @@ export const BASKET = [
 export const BASKET_USD = BASKET.reduce((s, b) => s + b.usd * b.count, 0); // 1,000
 export const BASKET_PURCHASES = BASKET.reduce((s, b) => s + b.count, 0); // 35
 
-export type ScoreInput = Pick<CardData, 'cashback' | 'fees' | 'tiers' | 'coverage' | 'wallets' | 'forms' | 'custody'>;
+export type ScoreInput = Pick<CardData, 'cashback' | 'fees' | 'tiers' | 'coverage' | 'wallets' | 'forms' | 'custody' | 'ecosystem'>;
 
 /** A country to score for, and whether any card is confirmed there. */
 export type ScorePlace = { country: string; anyConfirmed: boolean };
@@ -88,20 +95,36 @@ export function netRate(c: Pick<CardData, 'cashback' | 'fees' | 'tiers'>): numbe
 }
 
 /**
- * Other transaction costs on the basket, in USD a month, or null when the top-up (funding) fee is not published.
- * Counts the part of a per-purchase % fee larger than the cashback, flat fees on all 35 purchases, the top-up fee,
- * and small-purchase fees on basket purchases below the limit (not ones charged only on foreign purchases).
+ * Other transaction costs on the basket, in USD a month, or null when not published (the top-up fee, or the FX fee
+ * for spending in a currency the card does not bill in). Counts the per-purchase % fee, flat fees on all 35
+ * purchases, the top-up (funding) fee and small-purchase fees on basket purchases below the limit.
+ *
+ * `foreign`: the basket is spent in a currency the card does not bill in, at this FX %. The FX fee then applies to
+ * every purchase too, and so do small-purchase fees charged only on foreign purchases.
  */
-export function basketCosts(c: Pick<CardData, 'fees'>, ratePct: number): number | null {
+export function basketCosts(c: Pick<CardData, 'fees'>, foreign?: { fxPct: number | null } | null): number | null {
   const f = c.fees;
   if (f.topUpPct == null) return null;
-  const uncovered = (Math.max(f.txPct - ratePct, 0) / 100) * BASKET_USD;
-  const flat = f.txFlatUsd * BASKET_PURCHASES;
-  const topUp = (f.topUpPct / 100) * BASKET_USD;
-  const small = f.smallPurchase && !f.smallPurchase.foreignOnly
+  if (foreign && foreign.fxPct == null) return null;
+  const pct = f.txPct + f.topUpPct + (foreign?.fxPct ?? 0);
+  const small = f.smallPurchase && (!f.smallPurchase.foreignOnly || foreign)
     ? BASKET.filter((b) => b.usd < f.smallPurchase!.underUsd).reduce((s, b) => s + b.count * f.smallPurchase!.feeUsd, 0)
     : 0;
-  return uncovered + flat + topUp + small;
+  const usd = (pct / 100) * BASKET_USD + f.txFlatUsd * BASKET_PURCHASES + small;
+  return Math.round(usd * 100) / 100;
+}
+
+/** Points for other transaction costs on the basket ($ a month). */
+export const costPoints = (usd: number | null) =>
+  usd == null ? 0 : usd === 0 ? 8 : usd <= 10 ? 6 : usd <= 20 ? 3 : usd <= 30 ? 1 : 0;
+
+/** Ecosystem and banking points, 3 for each of five features. */
+export function ecosystemPoints(e: CardData['ecosystem']): number {
+  if (!e) return 0;
+  const iban = e.iban === 'named' ? 3 : e.iban === 'shared' ? 2 : 0;
+  const payouts = e.payoutCorridors == null ? 0 : e.payoutCorridors >= 2 ? 3 : e.payoutCorridors === 1 ? 1.5 : 0;
+  const ramps = e.ramps === 'both' ? 3 : e.ramps === 'on' || e.ramps === 'off' ? 1.5 : 0;
+  return iban + payouts + ramps + (e.credit ? 3 : 0) + (e.yield ? 3 : 0);
 }
 
 // Confirmed countries per card, worked out once: the issuer's list, else the five checked markets (the EU counts
@@ -120,16 +143,17 @@ export function confirmedCountries(c: Pick<CardData, 'coverage'>): number {
 export function scoreCard(c: ScoreInput, place?: ScorePlace | null): ScoreBreakdown {
   const terms = termsIn(c, place?.country);
   const rate = basketRate(terms);
-  const net = Math.max(rate - c.fees.txPct, 0);
-  const rewards = Math.min(net / 5, 1) * SCORE_WEIGHTS.rewards;
+  const rewards = Math.min(rate / FULL_REWARDS_PCT, 1) * SCORE_WEIGHTS.rewards;
 
   // Mandatory entry-tier yearly cost plus a one-off fee to get the card (not optional physical card shipping).
   const annual = terms.annualUsd == null ? null : terms.annualUsd + (c.fees.cardFeeUsd ?? 0);
   const annualPts = annual == null ? 0 : annual === 0 ? 10 : annual <= 100 ? 6 : annual <= 300 ? 3 : 0;
   const fx = terms.fxPct;
   const fxPts = fx == null ? 0 : fx === 0 ? 12 : fx <= 1 ? 9 : fx <= 2 ? 5 : 2;
-  const costs = basketCosts(c, rate);
-  const costPts = costs == null ? 0 : costs === 0 ? 8 : costs <= 10 ? 4 : 1;
+  // Worldwide, the basket is spent in the card's own currency. For one country, in that country's currency.
+  const home = place ? homeFx(c, terms.entry, place.country) : null;
+  const costs = basketCosts(c, home && home.pct !== 0 ? { fxPct: home.pct } : null);
+  const costPts = costPoints(costs);
   const fees = annualPts + fxPts + costPts;
 
   const n = confirmedCountries(c);
@@ -144,14 +168,17 @@ export function scoreCard(c: ScoreInput, place?: ScorePlace | null): ScoreBreakd
   const physicalPts = physical ? 3 + (cardCost != null && cardCost < 50 ? 1 : 0) : 0;
   const coverage = countryPts + walletPts + physicalPts;
 
+  const ecosystem = ecosystemPoints(c.ecosystem);
+
   const control = c.custody === 'self-custodial' ? 10 : c.custody === 'custodial' ? 5 : 0;
 
   const round = (x: number) => Math.round(x * 10) / 10;
   return {
-    total: Math.round(rewards + fees + coverage + control),
+    total: Math.round(rewards + fees + coverage + ecosystem + control),
     rewards: round(rewards),
     fees: round(fees),
     coverage: round(coverage),
+    ecosystem: round(ecosystem),
     control: round(control)
   };
 }

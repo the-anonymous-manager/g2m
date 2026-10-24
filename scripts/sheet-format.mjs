@@ -129,6 +129,11 @@ const CARD_COLUMNS = [
   ['EU / EEA', (c) => c.coverage.markets.EU],
   ['Apple Pay', (c) => showBool(c.wallets.applePay)],
   ['Google Pay', (c) => showBool(c.wallets.googlePay)],
+  ['IBAN / bank account', (c) => c.ecosystem?.iban ?? ''],
+  ['Bank payout currencies', (c) => showNum(c.ecosystem?.payoutCorridors)],
+  ['Fiat on/off-ramp', (c) => c.ecosystem?.ramps ?? ''],
+  ['Crypto-backed credit', (c) => showBool(c.ecosystem?.credit)],
+  ['Yield on balance', (c) => showBool(c.ecosystem?.yield)],
   ['Assets', (c) => c.assets.join(', ')],
   ['Perks', (c) => c.perks.join('\n')],
   ['Pros', (c) => c.pros.join('\n')],
@@ -280,6 +285,19 @@ export function tablesToCards(tables) {
     };
   };
 
+  // The five banking features; all empty = no ecosystem data yet (key left out).
+  const ecosystem = (r) => {
+    const word = (col) => str(r.get(col)).toLowerCase() || null;
+    const e = {
+      iban: word('IBAN / bank account'),
+      payoutCorridors: cell('Cards', r, 'Bank payout currencies', num),
+      ramps: word('Fiat on/off-ramp'),
+      credit: cell('Cards', r, 'Crypto-backed credit', bool),
+      yield: cell('Cards', r, 'Yield on balance', bool)
+    };
+    return Object.values(e).every((v) => v == null) ? undefined : e;
+  };
+
   const cards = cardRows.map((r) => {
     const slug = str(r.get('Card ID'));
     const n = (col) => cell('Cards', r, col, num);
@@ -330,6 +348,7 @@ export function tablesToCards(tables) {
         markets: { IN: market('India'), AE: market('UAE'), US: market('US'), GB: market('UK'), EU: market('EU / EEA') },
         countryList: list ? countryList(list) : undefined
       },
+      ecosystem: ecosystem(r),
       wallets: { applePay: b('Apple Pay'), googlePay: b('Google Pay') },
       assets: commas(r.get('Assets')),
       perks: lines(r.get('Perks')),
