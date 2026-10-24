@@ -14,6 +14,7 @@ import { OutboundLink } from '@/components/OutboundLink';
 import { ShareBar } from '@/components/ShareBar';
 import { CountryStanding } from '@/components/CountryStanding';
 import { CountryList } from '@/components/CountryList';
+import { CountryToggle } from '@/components/CountryToggle';
 
 export const dynamicParams = false;
 
@@ -274,17 +275,19 @@ export default async function CardPage({ params }: Props) {
             .{' '}
             {card.coverage.examples.length ? `Includes ${card.coverage.examples.join(', ')}.` : ''}
           </p>
-          <a href="#countries" className="country-jump">
-            {confirmed.length
-              ? `See all ${confirmed.length} ${confirmed.length === 1 ? 'country' : 'countries'} it works in`
-              : 'Check your country'}{' '}
-            <span aria-hidden="true">↓</span>
-          </a>
+          <CountryToggle
+            target="countries"
+            label={
+              confirmed.length
+                ? `See all ${confirmed.length} ${confirmed.length === 1 ? 'country' : 'countries'} it works in`
+                : 'Check your country'
+            }
+          />
         </section>
       </div>
 
-      {/* Every country, by region */}
-      <section id="countries" aria-labelledby="countries-title" className="panel panel-pad stack" style={{ gap: 16, scrollMarginTop: 90 }}>
+      {/* Every country, by region: closed until "See all countries" is clicked */}
+      <section id="countries" hidden aria-labelledby="countries-title" className="panel panel-pad stack" style={{ gap: 16, scrollMarginTop: 90 }}>
         <h2 id="countries-title" className="h3">
           Countries
         </h2>

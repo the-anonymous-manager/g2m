@@ -1603,10 +1603,30 @@ body::before {
 
 /* ---------- Card page: countries ---------- */
 .country-jump {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 40px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
   font-size: 14px;
   font-weight: 600;
   color: var(--accent);
   text-decoration: none;
+  cursor: pointer;
+}
+.country-jump-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.country-jump-arrow[data-open='true'] {
+  transform: rotate(180deg);
+}
+#countries[hidden] {
+  display: none;
 }
 .country-jump:hover {
   text-decoration: underline;

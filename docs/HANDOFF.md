@@ -239,7 +239,8 @@ MetaMask free tier) and per-region card currencies (stored as a union of currenc
 
 ## Card pages: every country by region (24 Oct 2026)
 
-"Where it works" keeps the five checked markets and links to a new full-width "Countries" section: counts (available,
+"Where it works" keeps the five checked markets; its "See all N countries" button opens (and closes again) a
+full-width "Countries" section, closed at first (a link to `#countries` opens it): counts (available,
 not available, not confirmed), the visitor's own country, a "Check a country" search, every available country grouped
 by region (`lib/continents.mjs`, all 250 codes), and the not-available list behind a toggle. Statuses come from
 `availabilityIn` (the issuer's list, else the five markets), the same as rankings.
