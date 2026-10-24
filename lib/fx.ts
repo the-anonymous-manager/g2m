@@ -30,3 +30,30 @@ export function homeFx(card: FxCard, tier: Pick<Tier, 'fxPct'> | null | undefine
   if (currency && byCurrency && currency in byCurrency) return { currency, pct: byCurrency[currency], known: true };
   return { currency, pct: other, known: Boolean(byCurrency) };
 }
+
+/**
+ * Whether the card bills in `currency`, so spending in it is not a foreign purchase on this card (no FX fee and no
+ * foreign-only fees). True for currencies the issuer lists at 0% FX, and for the holder's own currency on cards
+ * billed in it. Unknown (no list) counts as foreign, so a card never looks cheaper for leaving it out.
+ */
+export function billedIn(card: FxCard, currency: string | null | undefined, homeCurrency?: string | null): boolean {
+  if (!currency) return false;
+  if (card.fees.fxHome && currency === homeCurrency) return true;
+  return card.fees.fxByCurrency?.[currency] === 0;
+}
+
+/** FX % on spending in `currency` by someone whose own currency is `homeCurrency`. null = not published. */
+export function fxIn(
+  card: FxCard,
+  tier: Pick<Tier, 'fxPct'> | null | undefined,
+  currency: string | null | undefined,
+  homeCurrency?: string | null
+): number | null {
+  const other = otherFxPct(card, tier);
+  if (other === 0) return 0;
+  if (!currency) return other;
+  if (card.fees.fxHome && currency === homeCurrency) return 0;
+  const byCurrency = card.fees.fxByCurrency;
+  if (byCurrency && currency in byCurrency) return byCurrency[currency];
+  return other;
+}

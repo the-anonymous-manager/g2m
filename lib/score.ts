@@ -2,7 +2,9 @@ import type { CardData, ScoreBreakdown, Tier } from '@/lib/types';
 import { availabilityIn, tierOffered } from '@/lib/regions';
 import { COUNTRY_CODES } from '@/lib/countries.mjs';
 import { monthlyCashback } from '@/lib/calc';
-import { homeFx } from '@/lib/fx';
+import { billedIn, homeFx } from '@/lib/fx';
+import { currencyOf } from '@/lib/currencies.mjs';
+import { BASKET, BASKET_USD, BASKET_PURCHASES } from '@/lib/basket';
 
 // The G2M score (0 to 100). Data-driven and identical for every card: no paid placement.
 // Anything the issuer does not publish scores 0 for that part, so publishing terms is rewarded.
@@ -23,19 +25,9 @@ export const SCORE_WEIGHTS = { rewards: 25, fees: 30, coverage: 20, ecosystem: 1
 /** Basket cashback rate that earns full rewards points. */
 export const FULL_REWARDS_PCT = 3.5;
 
-/**
- * The standard month of spending every card is scored on: $1,000 in five $200 buckets, 35 purchases.
- * Spending bands, caps, per-purchase fees and small-purchase fees are all worked out on it.
- */
-export const BASKET = [
-  { usd: 200, count: 1 },
-  { usd: 100, count: 2 },
-  { usd: 50, count: 4 },
-  { usd: 25, count: 8 },
-  { usd: 10, count: 20 }
-] as const;
-export const BASKET_USD = BASKET.reduce((s, b) => s + b.usd * b.count, 0); // 1,000
-export const BASKET_PURCHASES = BASKET.reduce((s, b) => s + b.count, 0); // 35
+// The standard month of spending every card is scored on: $1,000 in five $200 buckets, 35 purchases.
+// Spending bands, caps, per-purchase fees and small-purchase fees are all worked out on it.
+export { BASKET, BASKET_USD, BASKET_PURCHASES } from '@/lib/basket';
 
 export type ScoreInput = Pick<CardData, 'cashback' | 'fees' | 'tiers' | 'coverage' | 'wallets' | 'forms' | 'custody' | 'ecosystem'>;
 
@@ -151,8 +143,11 @@ export function scoreCard(c: ScoreInput, place?: ScorePlace | null): ScoreBreakd
   const fx = terms.fxPct;
   const fxPts = fx == null ? 0 : fx === 0 ? 12 : fx <= 1 ? 9 : fx <= 2 ? 5 : 2;
   // Worldwide, the basket is spent in the card's own currency. For one country, in that country's currency.
+  // A card that does not bill in that currency charges its FX fee (if any) and its foreign-only fees on every purchase.
   const home = place ? homeFx(c, terms.entry, place.country) : null;
-  const costs = basketCosts(c, home && home.pct !== 0 ? { fxPct: home.pct } : null);
+  const local = place ? currencyOf(place.country) : null;
+  const foreignHere = Boolean(home && home.pct !== 0) || (place != null && !billedIn(c, local, local));
+  const costs = basketCosts(c, home && foreignHere ? { fxPct: home.pct } : null);
   const costPts = costPoints(costs);
   const fees = annualPts + fxPts + costPts;
 

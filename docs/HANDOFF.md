@@ -237,6 +237,35 @@ which moved ranks: Crypto.com 0% to 3% (US non-USD on the lower tiers; #5 to #15
 single FX number does not capture: cross-border fees on USD at foreign merchants (Tuyo, Exa, Avalanche, US Krak,
 MetaMask free tier) and per-region card currencies (stored as a union of currencies).
 
+## Calculator v2: three views, currency split, small-purchase fix (24 Oct 2026)
+
+Bug fixed (Akash's test: `/calculator?country=IN&spend=100&foreign=0&ticket=100` vs `ticket=5`): foreign-only
+small-purchase fees (KAST: $0.10 on non-USD purchases under $25) used the raw "other currencies" share, so someone in
+India paying in rupees on a dollar card paid nothing. Now every foreign-only fee uses the same rule as FX: a purchase
+is foreign unless the card bills in that currency (`billedIn` in `lib/fx.ts`). KAST at $5 purchases: $24 a year
+(240 x $0.10), "You keep" drops by the same $24; at $100 purchases: $0. The score's basket cost uses the same rule.
+
+`/calculator` (all settings in the URL, so any view can be shared):
+- Views (`mode`): best card for me (leaderboard; best tier or `tiers=entry` for entry and free tiers only), compare
+  tiers of one card (`mode=tiers&card=`; side by side plus the monthly spend where each dearer tier pays off, found
+  numerically up to $100,000 a month), one card line by line (`mode=audit&card=&tier=`; yearly, monthly and
+  per-purchase receipt: cashback per band, cap haircut, welcome offer, valuation haircut, plan fee, one-off card fee,
+  FX at home / US dollars online / travel, per-purchase %, flat fee, small-purchase fee, top-up fee, net and yield).
+- Currency split: own currency / US dollars online (`usd`, default 10%) / travel (`travel`, default 10%). Old
+  `foreign=` links still work (as travel).
+- Purchase sizes: balanced mix (default; 20% of spend in each of $200, $100, $50, $25, $10, as the test basket) or
+  one size (`mix=custom&ticket=`; old `ticket=` links switch to one size).
+- Top-up fee grossed up: load = (spend + FX + purchase fees) / (1 - top-up %).
+- Rewards valuation (`value`): face; conservative (cash, stablecoins, BTC, ETH 100%, other tokens 75%, points 50%,
+  payout not published 75%); cash and stablecoins only. Read from "Cashback paid in" (`payoutKind` in `lib/calc.ts`).
+- Card (`form`): virtual or physical (virtual-only cards hidden). Year (`year`): 2 = ongoing (default); 1 adds the
+  one-off card fee (or physical card and shipping) and the welcome rate.
+- Welcome rates: new sheet columns "Intro cashback %" and "Intro offer days" (`cashback.intro`, entry tier only, not
+  scored). Kolo: 2% for 30 days (help.kolo.xyz cashback program). Solayer now bills USD with no FX ("No-FX
+  currencies" USD 0, from its fee page: "USD Transaction Fee $0.15", FX only on international transactions).
+Not modelled yet: per-purchase reward caps (Kolo $1 per purchase), "first 5 small purchases free" (RedotPay), and
+"at or under" vs "under" limits (RedotPay is $1.00 or less; KAST and MEXC are strictly under).
+
 ## Scoring rules v2 (22 Oct 2026, Akash's exact rules)
 
 `lib/score.ts`, explained on /methodology. Changed from version 1:

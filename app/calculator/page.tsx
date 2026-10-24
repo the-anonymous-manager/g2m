@@ -9,7 +9,7 @@ import { Eyebrow } from '@/components/bits';
 export const metadata: Metadata = {
   title: 'Crypto card rewards calculator',
   description:
-    'Enter your monthly spend and see what every crypto card earns you in a year after plan fees, FX fees and per-purchase fees.',
+    'See what every crypto card leaves you with in a year after plan, FX, per-purchase, small-purchase and top-up fees. Compare tiers of one card, or audit one card line by line.',
   alternates: { canonical: '/calculator' }
 };
 
@@ -19,12 +19,9 @@ const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
 
 export default async function CalculatorPage({ searchParams }: Props) {
   const p = await searchParams;
-  const initial = parseCalcInput({
-    ...(one(p.spend) ? { spend: one(p.spend) } : {}),
-    ...(one(p.foreign) ? { foreign: one(p.foreign) } : {}),
-    ...(one(p.ticket) ? { ticket: one(p.ticket) } : {}),
-    ...(one(p.all) ? { all: one(p.all) } : {})
-  });
+  // Every setting lives in the link (mode, spend, currency split, purchase sizes, valuation, card, year, tier...).
+  const keys = ['mode', 'spend', 'usd', 'travel', 'foreign', 'mix', 'ticket', 'value', 'form', 'year', 'tiers', 'all', 'card', 'tier'];
+  const initial = parseCalcInput(Object.fromEntries(keys.map((k) => [k, one(p[k])])));
   // `country=JP`; older links used `market=IN` (the EU was a market, not a country, so it has no default).
   const raw = (one(p.country) ?? one(p.market) ?? '').toUpperCase();
   const country = isCountry(raw) ? raw : '';
@@ -35,8 +32,9 @@ export default async function CalculatorPage({ searchParams }: Props) {
         <Eyebrow>your numbers</Eyebrow>
         <h1 className="h2">Rewards calculator</h1>
         <p className="lead">
-          What each card pays you back in a year, minus plan fees, FX fees and per-purchase fees. Pick where you live: a
-          card billed in your own currency charges no FX fee at home. We pick the best tier for your spend on every card.
+          What each card pays you back in a year, minus every fee: plan, FX, per-purchase, small-purchase and top-up. Pick
+          where you live: a card that bills in your currency charges no FX fee at home. Then compare one card&apos;s tiers,
+          or see one card line by line.
         </p>
       </div>
       <CalculatorClient rows={rows} initial={initial} initialCountry={country} hadCountry={Boolean(country)} />

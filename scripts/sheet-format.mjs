@@ -48,6 +48,15 @@ const showBool = (b) => (b == null ? '' : b ? 'yes' : 'no');
 const optText = (v) => str(v) || undefined;
 const optList = (a) => (a.length ? a : undefined);
 
+// A welcome rate needs both its % and its number of days, e.g. 2 and 30.
+function intro(pctCell, daysCell) {
+  const pct = num(pctCell);
+  const days = num(daysCell);
+  if (pct == null && days == null) return undefined;
+  if (pct == null || days == null) throw new CellError('fill in both "Intro cashback %" and "Intro offer days", or neither');
+  return { pct, days };
+}
+
 // Currencies with no (or a lower) FX fee, e.g. "USD 0; EUR 0.2".
 function showRates(map) {
   return map ? Object.entries(map).map(([cur, p]) => `${cur} ${p}`).join('; ') : '';
@@ -104,6 +113,8 @@ const CARD_COLUMNS = [
   ['Max cashback %', (c) => showNum(c.cashback.maxPct)],
   ['Cashback paid in', (c) => c.cashback.payout ?? ''],
   ['Cashback note', (c) => c.cashback.note ?? ''],
+  ['Intro cashback %', (c) => showNum(c.cashback.intro?.pct ?? null)],
+  ['Intro offer days', (c) => showNum(c.cashback.intro?.days ?? null)],
   ['Annual fee $', (c) => showNum(c.fees.annualUsd)],
   ['FX fee %', (c) => showNum(c.fees.fxPct)],
   ['FX note', (c) => c.fees.fxNote ?? ''],
@@ -320,7 +331,8 @@ export function tablesToCards(tables) {
         basePct: n('Base cashback %'),
         maxPct: n('Max cashback %'),
         payout: str(r.get('Cashback paid in')) || null,
-        note: optText(r.get('Cashback note'))
+        note: optText(r.get('Cashback note')),
+        intro: cell('Cards', r, 'Intro cashback %', (v) => intro(v, r.get('Intro offer days')))
       },
       fees: {
         annualUsd: n('Annual fee $'),
@@ -451,6 +463,7 @@ const FIELD_COLUMNS = {
   slug: 'Card ID', name: 'Name', brand: 'Brand', issuer: 'Issuer (bank)', network: 'Network', type: 'Type',
   forms: 'Forms', custody: 'Custody', metal: 'Card colour', summary: 'Summary',
   'cashback.basePct': 'Base cashback %', 'cashback.maxPct': 'Max cashback %', 'cashback.payout': 'Cashback paid in',
+  'cashback.intro.pct': 'Intro cashback %', 'cashback.intro.days': 'Intro offer days',
   'fees.annualUsd': 'Annual fee $', 'fees.cardFeeUsd': 'Card activation fee $',
   'fees.physicalCardFeeUsd': 'Physical card cost $ (issuance + shipping)', 'fees.fxPct': 'FX fee %', 'fees.fxByCurrency': 'No-FX currencies', 'fees.topUpPct': 'Top-up fee %',
   'fees.txPct': 'Fee on every purchase %', 'fees.txFlatUsd': 'Fee on every purchase $',
