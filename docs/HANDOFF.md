@@ -1,20 +1,44 @@
 # G2M handoff: everything decided so far
 
-Started 22 Oct 2026 at the end of the version 1 build; last updated 24 Oct 2026 during scoring rules v3 (in progress;
-see "Scoring rules v3"). Read this with `CLAUDE.md` before changing anything.
-The owner, Akash, is not a developer: explain in plain words and do the technical steps yourself.
+Started 22 Oct 2026 at the end of the version 1 build; last updated 24 Oct 2026 (pull request #19 merged). Read this
+with `CLAUDE.md` before changing anything. The owner, Akash, is not a developer: explain in plain words and do the
+technical steps yourself.
 
 ## Where things stand (quick summary)
 
-- Live at https://g2m.life (Vercel, from `main`). 26 cards. Work happens on a branch and goes live through a pull
-  request that Akash merges; pushing straight to `main` deploys the site.
+- Live at https://g2m.life (Vercel, from `main`). 26 cards. Work happens on the branch `claude/great-lamport-3kjmvq`
+  and goes live through a pull request that Akash merges; pushing straight to `main` deploys the site. Pull requests
+  #1 to #19 are merged; nothing is waiting.
 - Card data is edited in the Google Sheet "G2M Card data" (see "Card data in a Google Sheet"). An hourly GitHub
-  Action copies it to the site. Claude edits the sheet, not `data/cards.json`, for data changes.
+  Action copies it to the site. Claude edits the sheet, not `data/cards.json`, for data changes, then checks with
+  `node scripts/sheet-sync.mjs --check`.
+- Scoring is v3 (rewards 25, fees 30, coverage 20, banking features 15, control 10), see "Scoring rules v3".
+- Pages and tools: rankings, card pages (score, tier break-even with live staking check, every country by region,
+  banking features, link to the swipe receipt), card finder, rewards calculator (best card / tiers of one card /
+  line by line; one-line wallet summary on top), wallet builder (`/wallet`, best 2-card combo with must-haves), swipe
+  receipt (`/receipt`, three currencies, share picture with @0akash0x and g2m.life), corridor and IBAN finder
+  (`/corridors`), compare, methodology, submit.
+- Live data: token prices (CoinGecko) and exchange rates (open.er-api.com, CoinGecko fallback), cached one hour
+  (`lib/prices.ts`). To see them when testing in a Claude cloud session, build and start with `NODE_USE_ENV_PROXY=1`.
 - Real card pictures come from the sheet's "Card image" column (none added yet).
 - Outreach to card issuers (email, DM, per-card gaps, how to sell the Sponsored spot) is in the Claude Doc
   "G2M card issuer outreach": https://claude.ai/artifact/96NsBhL6naMwqvFJctKpt5
-- Pull requests so far: #1 to #9 merged; #10 (small display bugs, and every country in the finder and calculator)
-  waiting for Akash to merge.
+
+## Next session (agreed with Akash)
+
+1. Step B part 2: "Nomad / Expat mode" on `/cards` and `/finder` ("My passport: A" + "Where I live: B"). Needs new
+   issuer research for all 26 cards, then two new sheet columns: "KYC eligibility rule" (`residency_id` = a local
+   residence permit is enough whatever the passport; `passport_strict` = the passport must be from a supported
+   country; `both`) and "Restricted passports" (ISO codes of blocked nationalities, e.g. US persons, sanctioned
+   lists). Show cards confirmed in B that accept B's residence ID and do not block A's passport, badged "Eligible with
+   <B> residency ID". The same research should fill the corridor finder's gaps: cash-out fees per rail and "Bank
+   account for non-residents" (only COCA is set).
+2. Optional: move hosting from Vercel to Cloudflare Workers (OpenNext adapter) to avoid Vercel Pro. Vercel Hobby is
+   non-commercial only and G2M has referral links and a paid Sponsored spot. Nothing is tied to Vercel: the geo cookie
+   already reads `cf-ipcountry` and Netlify's `x-country`, and the sheet sync runs on GitHub. Plan: add the adapter,
+   test everything on a Cloudflare preview URL (live prices, receipt pictures, hourly refresh), then point g2m.life at
+   Cloudflare and keep Vercel until confirmed. Alternatives: Netlify (free tier allows commercial use), a Hetzner VPS
+   with Coolify (about EUR 5/month, Cloudflare in front for geo).
 
 ## Who it is for
 
@@ -418,13 +442,21 @@ staying on Next 15. Remove it when the site moves to a Next version that ships a
    g2m.life. DNS stays at Hostinger: A `@` 216.198.79.1, CNAME `www` to Vercel, two `_vercel` TXT verification
    records. All email records (Google Workspace MX/SPF/DKIM, Hostinger mail CNAMEs, DMARC) were left untouched.
 2. Settings now default to info@g2m.life and @0akash0x; override them on Vercel only if they change.
-3. Add referral links per card when deals are signed (sheet column "Referral link"). Move Vercel to the Pro plan
-   first (Hobby is non-commercial only); also before the first paid Sponsored booking.
+3. Add referral links per card when deals are signed (sheet column "Referral link"). Before that (and before the
+   first paid Sponsored booking) move off Vercel Hobby, which is non-commercial only: Vercel Pro, or Cloudflare (see
+   "Next session").
 4. Re-check every card within 90 days of its `lastChecked` date (the validator warns).
 5. Run the sheet sync once on GitHub (Actions > Sync cards from Google Sheet > Run workflow) to confirm it works
    there; it was tested locally against the live sheet. The hourly check uses roughly 720 GitHub Actions minutes a
    month (2,000 free on a private repo).
 6. Send the issuer outreach and add the answers (country lists, fees, card pictures) through the sheet.
+7. Data gaps to close with issuers or new research: Coinbase One banking features and rails (its help pages block
+   downloads), Ethena Pay rails (IBAN currency and payout currencies not published), Tria card fee (its pages
+   disagree), ether.fi Core and Crypto.com Level Up prices (not published, so their tier break-evens can't be worked
+   out), most cash-out fees per rail.
+8. Not modelled yet: per-purchase reward caps (Kolo $1 per purchase), "first 5 small purchases free" (RedotPay),
+   "at or under" small-purchase limits (RedotPay $1.00 or less; KAST and MEXC are strictly under), and the
+   assets list (`assets`) is incomplete, so the corridor finder shows unlisted coins as "not stated".
 
 ## Ideas for version 2 (not decided, ask Akash)
 
