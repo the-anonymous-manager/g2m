@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getCard, getCards, getRank, standings } from '@/lib/cards';
 import type { Card, Market, Tier } from '@/lib/types';
+import { toRow } from '@/lib/types';
+import { fiatPerUsd, usdPrices } from '@/lib/prices';
 import { MARKET_LABELS, availabilityIn } from '@/lib/regions';
 import { COUNTRY_CODES } from '@/lib/countries.mjs';
 import { CUSTODY_LABEL, NP, TYPE_LABEL, cashbackLabel, ecosystemFeatures, fmtDate, pct, perPurchaseFee, usd } from '@/lib/format';
@@ -15,6 +17,8 @@ import { ShareBar } from '@/components/ShareBar';
 import { CountryStanding } from '@/components/CountryStanding';
 import { CountryList } from '@/components/CountryList';
 import { CountryToggle } from '@/components/CountryToggle';
+import { TierBreakEven } from '@/components/TierBreakEven';
+import { SwipeReceipt } from '@/components/SwipeReceipt';
 
 export const dynamicParams = false;
 
@@ -94,6 +98,13 @@ export default async function CardPage({ params }: Props) {
   // The card's answer for every country (its own list, else the five checked markets).
   const status = Object.fromEntries(COUNTRY_CODES.map((cc: string) => [cc, availabilityIn(card, cc)]));
   const confirmed = COUNTRY_CODES.filter((cc: string) => status[cc] === 'yes');
+  const row = toRow(card);
+  // Live token prices for staking tiers and exchange rates for the receipt (cached for an hour; null-safe).
+  const [prices, perUsd] = await Promise.all([
+    // Every card's staking tokens in one request, shared by all card pages.
+    usdPrices(all.flatMap((c) => c.tiers.flatMap((t) => (t.stake?.coingeckoId ? [t.stake.coingeckoId] : [])))),
+    fiatPerUsd()
+  ]);
 
   // Alternatives: the best-scored cards that are available in at least one of the same confirmed markets.
   const myMarkets = MARKETS.filter((m) => card.coverage.markets[m] === 'yes');
@@ -314,6 +325,7 @@ export default async function CardPage({ params }: Props) {
         <h2 id="tiers" className="h3">
           Tiers and plans
         </h2>
+        {card.tiers.length > 1 ? <TierBreakEven card={row} prices={prices} /> : null}
         <div className="table-wrap">
           <table className="table" style={{ minWidth: 760 }}>
             <thead>
@@ -355,6 +367,21 @@ export default async function CardPage({ params }: Props) {
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      {/* One purchase, line by line */}
+      <section id="receipt" aria-labelledby="receipt-title" className="stack" style={{ gap: 14, scrollMarginTop: 90 }}>
+        <div className="stack" style={{ gap: 4 }}>
+          <h2 id="receipt-title" className="h3">
+            Real swipe receipt
+          </h2>
+          <p className="muted" style={{ margin: 0, fontSize: 15 }}>
+            What one purchase really costs on {card.name}, with every fee and the cashback.
+          </p>
+        </div>
+        <div className="panel panel-pad">
+          <SwipeReceipt cards={[row]} perUsd={perUsd} />
         </div>
       </section>
 

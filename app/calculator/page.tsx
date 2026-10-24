@@ -4,6 +4,7 @@ import { toRow } from '@/lib/types';
 import { parseCalcInput } from '@/lib/calc';
 import { isCountry } from '@/lib/regions';
 import { CalculatorClient } from '@/components/CalculatorClient';
+import { fiatPerUsd } from '@/lib/prices';
 import { Eyebrow } from '@/components/bits';
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ export default async function CalculatorPage({ searchParams }: Props) {
   const raw = (one(p.country) ?? one(p.market) ?? '').toUpperCase();
   const country = isCountry(raw) ? raw : '';
   const rows = getCards().map(toRow);
+  const perUsd = await fiatPerUsd();
   return (
     <div className="wrap section stack" style={{ gap: 28 }}>
       <div className="stack" style={{ gap: 12 }}>
@@ -37,7 +39,7 @@ export default async function CalculatorPage({ searchParams }: Props) {
           or see one card line by line.
         </p>
       </div>
-      <CalculatorClient rows={rows} initial={initial} initialCountry={country} hadCountry={Boolean(country)} />
+      <CalculatorClient rows={rows} initial={initial} initialCountry={country} hadCountry={Boolean(country)} perUsd={perUsd} />
     </div>
   );
 }

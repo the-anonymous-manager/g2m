@@ -21,10 +21,19 @@ import {
 import { money } from '@/lib/format';
 import { CardArt } from '@/components/CardArt';
 import { ShareBar } from '@/components/ShareBar';
+import { SwipeReceipt } from '@/components/SwipeReceipt';
+import { WalletCombo } from '@/components/WalletCombo';
 import { useRegion } from '@/components/RegionContext';
 import { track } from '@/lib/analytics';
 
-type Props = { rows: CardRow[]; initial: CalcInput; initialCountry: string; hadCountry: boolean };
+type Props = {
+  rows: CardRow[];
+  initial: CalcInput;
+  initialCountry: string;
+  hadCountry: boolean;
+  /** Units of each currency per US dollar, for the swipe receipt. */
+  perUsd: Record<string, number> | null;
+};
 
 const MODES: { id: CalcMode; label: string; short: string }[] = [
   { id: 'best', label: 'Best card for me', short: 'Best card' },
@@ -69,7 +78,7 @@ function Chips<T extends string | number>({
 const numText = (v: string) => v.replace(/[^\d.]/g, '');
 const bad = (text: string, min: number, max: number) => text !== '' && (!Number.isFinite(Number(text)) || Number(text) < min || Number(text) > max);
 
-export function CalculatorClient({ rows, initial, initialCountry, hadCountry }: Props) {
+export function CalculatorClient({ rows, initial, initialCountry, hadCountry, perUsd }: Props) {
   // Raw text for number inputs, so typing never jumps; parsed and clamped values drive the maths.
   const [spendText, setSpendText] = useState(String(initial.spend));
   const [usdText, setUsdText] = useState(String(initial.usd));
@@ -393,7 +402,10 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry }: 
       </form>
 
       {input.mode === 'best' ? (
-        <BestView results={results} input={input} country={country} currency={currency} hiddenVirtual={hiddenVirtual} />
+        <>
+          <BestView results={results} input={input} country={country} currency={currency} hiddenVirtual={hiddenVirtual} />
+          <WalletCombo cards={formOk} input={input} country={country} />
+        </>
       ) : !picked ? (
         <p className="muted">No card is available where you live yet.</p>
       ) : input.mode === 'tiers' ? (
@@ -401,6 +413,24 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry }: 
       ) : (
         <AuditView card={picked} input={input} country={country} currency={currency} />
       )}
+
+      {eligible.length ? (
+        <section className="stack" style={{ gap: 14 }} aria-labelledby="calc-receipt-title">
+          <div className="stack" style={{ gap: 4 }}>
+            <span className="field-label">[ one purchase ]</span>
+            <h2 id="calc-receipt-title" className="h3" style={{ margin: 0 }}>
+              Real swipe receipt
+            </h2>
+          </div>
+          <div className="panel panel-pad">
+            <SwipeReceipt
+              cards={eligible}
+              initialSlug={input.mode === 'best' ? results[0]?.card.slug : picked?.slug}
+              perUsd={perUsd}
+            />
+          </div>
+        </section>
+      ) : null}
 
       <p className="faint" style={{ fontSize: 13, maxWidth: '90ch' }}>
         Missing figures are counted as zero and flagged in the notes. Spending caps, spend bands and small-purchase limits
