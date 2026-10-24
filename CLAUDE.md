@@ -44,6 +44,8 @@ and confirm what changed on the site (not which files moved).
 - Banking features (`ecosystem`; sheet columns "IBAN / bank account" named/shared/none, "Bank payout currencies" a
   number, "Fiat on/off-ramp" both/on/off/none, "Crypto-backed credit" and "Yield on balance" yes/no): issuer sources
   only; empty = not confirmed (scores 0).
+- Bank rails ("Banking rails", `bankRails`): `EUR_SEPA in+out (fee or note); SWIFT out ($25)`; `none` = none offered,
+  empty = not confirmed. "Bank account for non-residents": yes/no/empty. Issuer sources only.
 - Welcome rates ("Intro cashback %" and "Intro offer days", `cashback.intro`): only short published welcome offers on
   the entry tier; the calculator's Year 1 uses them, scores never do.
 - Real card pictures: "Card image" link in the sheet (`image.source`); the sync stores the files in

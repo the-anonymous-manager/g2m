@@ -300,6 +300,11 @@ export default function HomePage() {
             <span className="h3">Real swipe receipt</span>
             <span className="muted">What a coffee or a hotel really costs on a card, fee by fee. Post the receipt on X.</span>
           </Link>
+          <Link href="/corridors" className="panel panel-pad stack" style={{ gap: 10, textDecoration: 'none' }}>
+            <span className="eyebrow">[ off-ramp ]</span>
+            <span className="h3">Corridor and IBAN finder</span>
+            <span className="muted">Move USDC or USDT to a bank: SEPA, ACH, Faster Payments, AED, INR or SWIFT.</span>
+          </Link>
           <Link href="/compare" className="panel panel-pad stack" style={{ gap: 10, textDecoration: 'none' }}>
             <span className="eyebrow">[ side by side ]</span>
             <span className="h3">Compare cards</span>

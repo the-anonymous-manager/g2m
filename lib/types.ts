@@ -37,6 +37,9 @@ export type CardRow = Pick<
   | 'image'
   | 'ecosystem'
   | 'score'
+  | 'bankRails'
+  | 'bankForNonResidents'
+  | 'assets'
   | 'rank'
   | 'perks'
 >;
@@ -59,6 +62,9 @@ export function toRow(c: Card): CardRow {
     image: c.image,
     ecosystem: c.ecosystem,
     score: c.score,
+    bankRails: c.bankRails,
+    bankForNonResidents: c.bankForNonResidents,
+    assets: c.assets,
     rank: c.rank,
     perks: c.perks
   };

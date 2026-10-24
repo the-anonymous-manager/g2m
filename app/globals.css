@@ -1997,3 +1997,15 @@ body::before {
 .wallet-alt-num {
   white-space: nowrap;
 }
+
+/* ---------- Corridor finder ---------- */
+.corridor-fees {
+  font-size: 13px;
+  max-width: 260px;
+}
+@media (max-width: 640px) {
+  .calc-table td.corridor-fees {
+    white-space: normal;
+    text-align: right;
+  }
+}
