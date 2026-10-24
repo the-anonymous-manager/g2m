@@ -1717,7 +1717,7 @@ body::before {
 }
 .swipe-fields {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 140px;
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
 }
 .slip {
@@ -1820,9 +1820,6 @@ body::before {
   }
 }
 @media (max-width: 400px) {
-  .swipe-fields {
-    grid-template-columns: 1fr 110px;
-  }
   .slip {
     padding: 16px;
     font-size: 12px;
@@ -2007,5 +2004,15 @@ body::before {
   .calc-table td.corridor-fees {
     white-space: normal;
     text-align: right;
+  }
+}
+.swipe-currencies {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+@media (max-width: 480px) {
+  .swipe-currencies {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
