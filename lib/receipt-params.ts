@@ -12,6 +12,19 @@ export const ReceiptParamsSchema = z.object({
     .pipe(z.string().regex(/^[A-Z]{3}$/))
     .catch('USD'),
   what: z.string().trim().max(40).catch('Purchase'),
+  // The card's base (billing) currency, and the currency the receipt is shown in.
+  base: z
+    .string()
+    .transform((s) => s.toUpperCase())
+    .pipe(z.string().regex(/^[A-Z]{3}$/))
+    .nullable()
+    .catch(null),
+  show: z
+    .string()
+    .transform((s) => s.toUpperCase())
+    .pipe(z.string().regex(/^[A-Z]{3}$/))
+    .nullable()
+    .catch(null),
   // The sharer's own currency, for cards billed in it.
   home: z
     .string()
@@ -22,7 +35,7 @@ export const ReceiptParamsSchema = z.object({
 });
 export type ReceiptParams = z.infer<typeof ReceiptParamsSchema>;
 
-const DEFAULTS = { card: null, tier: 0, amt: 10, cur: 'USD', what: 'Coffee', home: null };
+const DEFAULTS = { card: null, tier: 0, amt: 10, cur: 'USD', what: 'Coffee', base: null, show: null, home: null };
 
 export function parseReceiptParams(raw: Record<string, string | string[] | undefined>): ReceiptParams {
   const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
@@ -41,6 +54,8 @@ export function receiptQuery(p: ReceiptParams): string {
   q.set('amt', String(p.amt));
   q.set('cur', p.cur);
   q.set('what', p.what);
+  if (p.base) q.set('base', p.base);
+  if (p.show && p.show !== p.cur) q.set('show', p.show);
   if (p.home) q.set('home', p.home);
   return q.toString();
 }

@@ -259,7 +259,9 @@ published). Most cash-out fees and non-resident rules are not published yet: fil
 Akash: the receipt needs its own page with an automatic share picture (G2M's X handle on one side, the site on the
 other), and the 2-card wallet is a headline feature that should weigh more than cashback.
 - `/receipt` (`app/receipt`): the swipe receipt for any card, settings in the link (`card, tier, amt, cur, what,
-  home`; `lib/receipt-params.ts`). Its share preview is `/receipt/image?...` (`app/receipt/image/route.tsx`, 1200 x 630,
+  base, show, home`; `lib/receipt-params.ts`). Three currencies: the card's base currency (`baseCurrencies` in
+  `lib/swipe.ts`: 0% FX currencies, the holder's own on cards billed in it, else the lowest listed), "paid in" (FX and
+  foreign-only fees apply when it differs from the base) and "show receipt in" (all amounts converted). Its share preview is `/receipt/image?...` (`app/receipt/image/route.tsx`, 1200 x 630,
   next/og): the receipt, the real result, `site.twitter` (NEXT_PUBLIC_TWITTER_HANDLE, now @0akash0x) on the left and
   the site on the right. "Download image" saves the same PNG. Card pages link to it (`#receipt`); the calculator no
   longer embeds it.

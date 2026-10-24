@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CardRow } from '@/lib/types';
-import { swipeReceipt } from '@/lib/swipe';
+import { baseCurrencies, swipeReceipt } from '@/lib/swipe';
 import { currencyOf } from '@/lib/currencies.mjs';
 import { useRegion } from '@/components/RegionContext';
 import { track } from '@/lib/analytics';
@@ -61,6 +61,9 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
   const [currency, setCurrency] = useState(fromLink ? initial!.cur : 'USD');
   const [amountText, setAmountText] = useState(String(fromLink ? initial!.amt : 10));
   const [label, setLabel] = useState(fromLink ? initial!.what : 'Coffee');
+  // The card's base (billing) currency, and the receipt's currency (null = same as the shop's).
+  const [base, setBase] = useState<string | null>(fromLink ? initial!.base : null);
+  const [display, setDisplay] = useState<string | null>(fromLink ? initial!.show : null);
   const touched = useRef(fromLink);
 
   // Without a shared link, start in the visitor's own currency once it is known.
@@ -75,7 +78,9 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
   if (!card) return null;
   const tier = card.tiers[Math.min(tierIndex, card.tiers.length - 1)];
   const amount = Math.min(Math.max(Number(amountText) || 0, 0), 1_000_000);
-  const r = swipeReceipt(card, tier, amount, currency, perUsd ?? {}, home);
+  const bases = baseCurrencies(card, home);
+  const r = swipeReceipt(card, tier, amount, currency, perUsd ?? {}, { base, display, homeCurrency: home });
+  const shown = r.display;
   const rate = currency === 'USD' ? 1 : perUsd?.[currency] ?? 1;
 
   const pickPreset = (p: (typeof PRESETS)[number]) => {
@@ -96,6 +101,8 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
     amt: amount,
     cur: currency,
     what: label,
+    base: r.base,
+    show: shown,
     home: home ?? null
   };
   const query = receiptQuery(params);
@@ -108,7 +115,7 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
   const postOnX = () => {
     const headline = r.headlinePct != null ? `"up to ${r.headlinePct}% back"` : 'its rewards';
     const outcome = `${r.netPct >= 0 ? '+' : '−'}${Math.abs(r.netPct).toFixed(2)}%`;
-    const text = `${card.name} advertises ${headline}. My real ${fmt(amount, currency)} ${label.toLowerCase()} swipe: ${outcome} after every fee (${r.net >= 0 ? 'kept' : 'lost'} ${fmt(Math.abs(r.net), currency)}). Receipt:`;
+    const text = `${card.name} advertises ${headline}. My real ${fmt(amount, currency)} ${label.toLowerCase()} swipe on its ${r.base} card: ${outcome} after every fee (${r.net >= 0 ? 'kept' : 'lost'} ${fmt(Math.abs(r.net), shown)}). Receipt:`;
     track('Share', { channel: 'x', what: 'receipt' });
     window.open(`https://x.com/intent/post?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl())}`, '_blank', 'noopener,noreferrer');
   };
@@ -116,43 +123,6 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
   return (
     <div className="swipe">
       <div className="stack swipe-controls" style={{ gap: 14 }}>
-        <div className="chip-row" role="group" aria-label="Quick purchases">
-          {PRESETS.map((p) => (
-            <button key={p.label} type="button" className="chip" aria-pressed={label === p.label} onClick={() => pickPreset(p)}>
-              {p.label} ${p.usd}
-            </button>
-          ))}
-        </div>
-        <div className="swipe-fields">
-          <div className="field">
-            <label className="field-label" htmlFor="sw-amount">
-              Purchase amount
-            </label>
-            <input
-              id="sw-amount"
-              className="input num"
-              inputMode="decimal"
-              value={amountText}
-              onChange={(e) => {
-                setAmountText(e.target.value.replace(/[^\d.]/g, ''));
-                setLabel('Purchase');
-              }}
-            />
-          </div>
-          <div className="field">
-            <label className="field-label" htmlFor="sw-cur">
-              Currency
-            </label>
-            <select id="sw-cur" className="select" value={currency} onChange={(e) => changeCurrency(e.target.value)}>
-              {currencies.map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                  {c === home ? ' (yours)' : ''}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
         {cards.length > 1 ? (
           <div className="field">
             <label className="field-label" htmlFor="sw-card">
@@ -165,6 +135,7 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
               onChange={(e) => {
                 setSlug(e.target.value);
                 setTierIndex(0);
+                setBase(null);
               }}
             >
               {cards.map((c) => (
@@ -189,6 +160,76 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
             </select>
           </div>
         ) : null}
+        <div className="chip-row" role="group" aria-label="Quick purchases">
+          {PRESETS.map((p) => (
+            <button key={p.label} type="button" className="chip" aria-pressed={label === p.label} onClick={() => pickPreset(p)}>
+              {p.label} ${p.usd}
+            </button>
+          ))}
+        </div>
+        <div className="swipe-fields">
+          <div className="field">
+            <label className="field-label" htmlFor="sw-amount">
+              Purchase amount
+            </label>
+            <input
+              id="sw-amount"
+              className="input num"
+              inputMode="decimal"
+              value={amountText}
+              onChange={(e) => {
+                setAmountText(e.target.value.replace(/[^\d.]/g, ''));
+                setLabel('Purchase');
+              }}
+            />
+          </div>
+        </div>
+        <div className="swipe-currencies">
+          <div className="field">
+            <label className="field-label" htmlFor="sw-base">
+              Card&apos;s base currency
+            </label>
+            <select id="sw-base" className="select" value={r.base} onChange={(e) => setBase(e.target.value)} disabled={bases.list.length < 2}>
+              {bases.list.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                  {!bases.known ? ' (assumed)' : ''}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="field">
+            <label className="field-label" htmlFor="sw-cur">
+              Paid in
+            </label>
+            <select id="sw-cur" className="select" value={currency} onChange={(e) => changeCurrency(e.target.value)}>
+              {currencies.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                  {c === home ? ' (yours)' : ''}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="field">
+            <label className="field-label" htmlFor="sw-show">
+              Show receipt in
+            </label>
+            <select id="sw-show" className="select" value={shown} onChange={(e) => setDisplay(e.target.value === currency ? null : e.target.value)}>
+              {currencies.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                  {c === currency ? ' (as paid)' : ''}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <p className="faint" style={{ fontSize: 12, margin: 0 }}>
+          {r.foreign
+            ? `Paying in ${currency} on a ${r.base} card is a foreign purchase: the FX fee and any foreign-only fees apply.`
+            : `Paying in ${r.base}, the card's own currency: no FX fee.`}
+        </p>
         {!perUsd ? (
           <p className="faint" style={{ fontSize: 12, margin: 0 }}>
             Live exchange rates are unavailable right now, so only US dollars are offered.
@@ -202,7 +243,7 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
           <span>{card.name}</span>
         </div>
         <p className="slip-sub">
-          {label} · {tier.name}
+          {label} · {tier.name} · {r.base} card · paid in {currency}
           {currency !== 'USD' ? ` · ≈ $${r.usd.toFixed(2)}` : ''}
         </p>
         <dl className="slip-lines">
@@ -212,18 +253,18 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
                 {l.kind === 'fee' ? '+ ' : l.kind === 'reward' ? '− ' : ''}
                 {l.label}
               </dt>
-              <dd>{fmt(l.amount, currency)}</dd>
+              <dd>{fmt(l.amount, shown)}</dd>
             </div>
           ))}
         </dl>
         <div className="slip-total">
           <div className="slip-line">
             <dt>Paid at the till</dt>
-            <dd>{fmt(r.totalPaid, currency)}</dd>
+            <dd>{fmt(r.totalPaid, shown)}</dd>
           </div>
           <div className="slip-line">
             <dt>Real cost after cashback</dt>
-            <dd>{fmt(r.totalPaid - r.cashback, currency)}</dd>
+            <dd>{fmt(r.totalPaid - r.cashback, shown)}</dd>
           </div>
         </div>
         <div className="slip-result" style={{ color: r.net >= 0 ? 'var(--ok)' : 'var(--bad)' }}>
@@ -231,7 +272,7 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
             {r.netPct >= 0 ? '+' : '−'}
             {Math.abs(r.netPct).toFixed(2)}%
           </b>
-          <span>{r.net >= 0 ? `You keep ${fmt(r.net, currency)}` : `Costs you ${fmt(-r.net, currency)} more`}</span>
+          <span>{r.net >= 0 ? `You keep ${fmt(r.net, shown)}` : `Costs you ${fmt(-r.net, shown)} more`}</span>
         </div>
         {r.headlinePct != null ? <p className="slip-note">Advertised: up to {r.headlinePct}% back</p> : null}
         {r.notes.length ? <p className="slip-note">{r.notes.join(' · ')}</p> : null}

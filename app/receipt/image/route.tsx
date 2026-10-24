@@ -32,7 +32,8 @@ export async function GET(req: Request) {
   const tier = row.tiers[Math.min(p.tier, row.tiers.length - 1)];
   const perUsd = (await fiatPerUsd()) ?? {};
   const cur = p.cur === 'USD' || perUsd[p.cur] ? p.cur : 'USD';
-  const r = swipeReceipt(row, tier, p.amt, cur, perUsd, p.home);
+  const show = p.show && (p.show === 'USD' || perUsd[p.show]) ? p.show : cur;
+  const r = swipeReceipt(row, tier, p.amt, cur, perUsd, { base: p.base, display: show, homeCurrency: p.home });
   const good = r.net >= 0;
   const color = good ? '#6fd39c' : '#f08a80';
 
@@ -59,7 +60,7 @@ export async function GET(req: Request) {
               <span>{card.name.length > 22 ? `${card.name.slice(0, 21)}…` : card.name}</span>
             </div>
             <div style={{ display: 'flex', fontSize: 18, color: '#6b625a', marginTop: 8, marginBottom: 14 }}>
-              {p.what} · {tier.name}
+              {p.what} · {tier.name} · {r.base} card · paid in {cur}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', borderTop: '2px dashed #cdbfb3', paddingTop: 12, gap: 8 }}>
               {r.lines.slice(0, 7).map((l) => (
@@ -68,18 +69,18 @@ export async function GET(req: Request) {
                     {l.kind === 'fee' ? '+ ' : l.kind === 'reward' ? '− ' : ''}
                     {l.label.replace(/\s*\(.*\)$/, '')}
                   </span>
-                  <span>{fmt(l.amount, cur)}</span>
+                  <span>{fmt(l.amount, show)}</span>
                 </div>
               ))}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', borderTop: '2px dashed #cdbfb3', marginTop: 14, paddingTop: 12, gap: 8 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 22, fontWeight: 700 }}>
                 <span>Paid at the till</span>
-                <span>{fmt(r.totalPaid, cur)}</span>
+                <span>{fmt(r.totalPaid, show)}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 22, fontWeight: 700 }}>
                 <span>Real cost after cashback</span>
-                <span>{fmt(r.totalPaid - r.cashback, cur)}</span>
+                <span>{fmt(r.totalPaid - r.cashback, show)}</span>
               </div>
             </div>
           </div>
@@ -94,7 +95,7 @@ export async function GET(req: Request) {
               {Math.abs(r.netPct).toFixed(2)}%
             </div>
             <div style={{ display: 'flex', fontSize: 30, fontWeight: 700 }}>
-              {good ? `You keep ${fmt(r.net, cur)}` : `Costs you ${fmt(-r.net, cur)} more`}
+              {good ? `You keep ${fmt(r.net, show)}` : `Costs you ${fmt(-r.net, show)} more`}
             </div>
             <div style={{ display: 'flex', fontSize: 22, color: '#b8ada3' }}>
               after every fee on a {fmt(p.amt, cur)} {p.what.toLowerCase()}
