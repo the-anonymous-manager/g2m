@@ -290,6 +290,16 @@ export default function HomePage() {
             <span className="h3">Rewards calculator</span>
             <span className="muted">Enter your monthly spend and see what each card earns you after fees in a year.</span>
           </Link>
+          <Link href="/wallet" className="panel panel-pad stack" style={{ gap: 10, textDecoration: 'none' }}>
+            <span className="eyebrow">[ 2-card wallet ]</span>
+            <span className="h3">Wallet builder</span>
+            <span className="muted">The two cards that keep you the most together, with lounges, yield or a bank account if you need them.</span>
+          </Link>
+          <Link href="/receipt" className="panel panel-pad stack" style={{ gap: 10, textDecoration: 'none' }}>
+            <span className="eyebrow">[ one purchase ]</span>
+            <span className="h3">Real swipe receipt</span>
+            <span className="muted">What a coffee or a hotel really costs on a card, fee by fee. Post the receipt on X.</span>
+          </Link>
           <Link href="/compare" className="panel panel-pad stack" style={{ gap: 10, textDecoration: 'none' }}>
             <span className="eyebrow">[ side by side ]</span>
             <span className="h3">Compare cards</span>

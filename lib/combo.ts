@@ -1,27 +1,39 @@
 import type { CardRow } from '@/lib/types';
 import { tierOffered } from '@/lib/regions';
 import { buildSegments, isEntryTier, isOpenTier, tierValue, type CalcInput, type Segment, type TierResult } from '@/lib/calc';
+import { FEATURES, featuresOf, type FeatureKey } from '@/lib/features';
 
 // The best two-card wallet: one card for most spending, a second for the purchases it handles better (small
-// purchases, US dollars, travel). Every pair of cards is tried with a few ways of splitting the spending, each card at
-// its best tier for its share, and both cards' yearly fees are counted in full.
+// purchases, US dollars, travel), and between them every feature the visitor must have (lounges, yield, borrowing,
+// a bank account...). Every pair of cards is tried with several ways of splitting the spending and every tier
+// combination; both cards' yearly fees are counted in full. Ranked by money kept a year.
 
-export type ComboSide = { card: CardRow; result: TierResult; spendYear: number };
+export type ComboSide = { card: CardRow; result: TierResult; spendYear: number; features: Set<FeatureKey> };
 export type Combo = {
   primary: ComboSide;
   second: ComboSide;
   /** Slices of spending that go on the second card. */
   toSecond: Segment[];
   total: number;
-  single: { card: CardRow; result: TierResult };
+  /** Total minus the best single card's (can be negative when a must-have needs the second card). */
   extra: number;
+};
+export type SingleChoice = { card: CardRow; result: TierResult; features: Set<FeatureKey> };
+export type WalletPlan = {
+  combos: Combo[];
+  /** The best single card for money, ignoring must-haves. */
+  single: SingleChoice | null;
+  /** The best single card that has every must-have on its own. */
+  singleCovering: SingleChoice | null;
 };
 
 const sum = (segs: Segment[]) => segs.reduce((s, g) => s + g.spendYear, 0);
+const covers = (have: Set<FeatureKey>, need: FeatureKey[]) => need.every((k) => have.has(k));
 
-export function bestCombo(cards: CardRow[], input: CalcInput, country?: string | null): Combo | null {
+export function planWallet(cards: CardRow[], input: CalcInput, country?: string | null, need: FeatureKey[] = [], limit = 3): WalletPlan {
   const segs = buildSegments(input).filter((g) => g.spendYear > 0);
-  if (cards.length < 2 || !segs.length) return null;
+  const empty: WalletPlan = { combos: [], single: null, singleCovering: null };
+  if (!cards.length || !segs.length) return empty;
 
   const tiersOf = (card: CardRow) =>
     card.tiers
@@ -29,72 +41,90 @@ export function bestCombo(cards: CardRow[], input: CalcInput, country?: string |
       .filter(({ t }) => !country || tierOffered(t, country))
       .filter(({ t, i }) => (input.tiers === 'entry' ? isEntryTier(t, i) : input.all ? !t.comingSoon : isOpenTier(t, i)));
 
-  // Best tier of one card for a set of slices (memoised by card and slice set).
-  const memo = new Map<string, TierResult | null>();
-  const key = (subset: Segment[]) => subset.map((g) => segs.indexOf(g)).join(',');
-  const best = (card: CardRow, subset: Segment[]): TierResult | null => {
-    const k = `${card.slug}|${key(subset)}`;
-    if (memo.has(k)) return memo.get(k)!;
-    let top: TierResult | null = null;
-    for (const { t, i } of tiersOf(card)) {
-      const r = tierValue(card, t, input, i, country, subset);
-      if (!top || r.net > top.net) top = r;
+  // Every allowed tier of one card on a set of slices (memoised by card and slice set).
+  const memo = new Map<string, TierResult[]>();
+  const options = (card: CardRow, subset: Segment[]): TierResult[] => {
+    const k = `${card.slug}|${subset.map((g) => segs.indexOf(g)).join(',')}`;
+    let out = memo.get(k);
+    if (!out) {
+      out = tiersOf(card).map(({ t, i }) => tierValue(card, t, input, i, country, subset));
+      memo.set(k, out);
     }
-    memo.set(k, top);
-    return top;
+    return out;
+  };
+  const feats = new Map<string, Set<FeatureKey>>();
+  const featuresFor = (card: CardRow, r: TierResult) => {
+    const k = `${card.slug}|${r.index}`;
+    let f = feats.get(k);
+    if (!f) feats.set(k, (f = featuresOf(card, r.tier)));
+    return f;
   };
 
-  // The best single card, for comparison.
-  let single: { card: CardRow; result: TierResult } | null = null;
+  // Best single card, overall and with every must-have.
+  let single: SingleChoice | null = null;
+  let singleCovering: SingleChoice | null = null;
   for (const card of cards) {
-    const r = best(card, segs);
-    if (r && (!single || r.net > single.result.net)) single = { card, result: r };
+    for (const r of options(card, segs)) {
+      const f = featuresFor(card, r);
+      if (!single || r.net > single.result.net) single = { card, result: r, features: f };
+      if (covers(f, need) && (!singleCovering || r.net > singleCovering.result.net)) singleCovering = { card, result: r, features: f };
+    }
   }
-  if (!single) return null;
+  if (!single) return empty;
+  if (cards.length < 2) return { combos: [], single, singleCovering };
 
-  // Ways to split: by purchase size, by currency, and both.
+  // Ways to split: by purchase size, by currency, both, and slice by slice (per pair).
   const rules: ((g: Segment) => boolean)[] = [
     (g) => g.size < 25,
     (g) => g.part !== 'home',
     (g) => g.size < 25 || g.part !== 'home',
     (g) => g.part === 'travel',
     (g) => g.part === 'usd',
-    (g) => g.size < 50
+    (g) => g.size < 50,
+    (g) => g.size >= 100
   ];
-  const splits = rules
-    .map((rule) => segs.filter(rule))
-    .filter((b) => b.length > 0 && b.length < segs.length);
+  const splits = rules.map((rule) => segs.filter(rule)).filter((b) => b.length > 0 && b.length < segs.length);
 
-  // Each card's value per slice on its own (no yearly fee), to split a pair slice by slice.
-  const fixedOf = (r: TierResult) => r.fee + r.oneTime;
+  // Each card's value per slice on its own (yearly fee left out), to split a pair slice by slice.
   const marginal = new Map<string, number[]>();
   for (const card of cards) {
-    const full = best(card, segs);
+    const full = options(card, segs).reduce<TierResult | null>((a, r) => (!a || r.net > a.net ? r : a), null);
     if (!full) continue;
-    const t = card.tiers[full.index];
     marginal.set(
       card.slug,
       segs.map((g) => {
-        const r = tierValue(card, t, input, full.index, country, [g]);
-        return r.net + fixedOf(r);
+        const r = tierValue(card, full.tier, input, full.index, country, [g]);
+        return r.net + r.fee + r.oneTime;
       })
     );
   }
 
-  let top: Combo | null = null;
+  // Best combo per pair of cards.
+  const bestPerPair = new Map<string, Combo>();
   const consider = (a: CardRow, b: CardRow, toB: Segment[]) => {
     const toA = segs.filter((g) => !toB.includes(g));
     if (!toA.length || !toB.length) return;
-    const ra = best(a, toA);
-    const rb = best(b, toB);
-    if (!ra || !rb) return;
-    const total = ra.net + rb.net;
-    if (top && total <= top.total) return;
-    const [primary, second, toSecond] =
-      sum(toA) >= sum(toB)
-        ? [{ card: a, result: ra, spendYear: sum(toA) }, { card: b, result: rb, spendYear: sum(toB) }, toB]
-        : [{ card: b, result: rb, spendYear: sum(toB) }, { card: a, result: ra, spendYear: sum(toA) }, toA];
-    top = { primary, second, toSecond, total, single: single!, extra: total - single!.result.net };
+    const pairKey = [a.slug, b.slug].sort().join('+');
+    for (const ra of options(a, toA)) {
+      for (const rb of options(b, toB)) {
+        const fa = featuresFor(a, ra);
+        const fb = featuresFor(b, rb);
+        if (need.length && !covers(new Set([...fa, ...fb]), need)) continue;
+        const total = ra.net + rb.net;
+        const prev = bestPerPair.get(pairKey);
+        if (prev && total <= prev.total) continue;
+        const sideA: ComboSide = { card: a, result: ra, spendYear: sum(toA), features: fa };
+        const sideB: ComboSide = { card: b, result: rb, spendYear: sum(toB), features: fb };
+        const aMain = sideA.spendYear >= sideB.spendYear;
+        bestPerPair.set(pairKey, {
+          primary: aMain ? sideA : sideB,
+          second: aMain ? sideB : sideA,
+          toSecond: aMain ? toB : toA,
+          total,
+          extra: total - single!.result.net
+        });
+      }
+    }
   };
 
   for (let x = 0; x < cards.length; x++) {
@@ -110,8 +140,16 @@ export function bestCombo(cards: CardRow[], input: CalcInput, country?: string |
       }
     }
   }
-  const found = top as Combo | null;
-  return found && found.extra >= 1 ? found : null;
+
+  const combos = [...bestPerPair.values()].sort((p, q) => q.total - p.total).slice(0, limit);
+  return { combos, single, singleCovering };
+}
+
+/** Back-compat: the single best combo when it beats the best single card by $1 or more. */
+export function bestCombo(cards: CardRow[], input: CalcInput, country?: string | null) {
+  const plan = planWallet(cards, input, country, [], 1);
+  const top = plan.combos[0];
+  return top && top.extra >= 1 ? { ...top, single: plan.single! } : null;
 }
 
 const PART_LABEL: Record<Segment['part'], string> = {
@@ -133,12 +171,21 @@ export function describeSlices(toSecond: Segment[], all: Segment[]): string[] {
       continue;
     }
     const max = Math.max(...mine);
-    const contiguous = sizes.filter((z) => z <= max).every((z) => mine.includes(z) || !ofPart.includes(z));
+    const min = Math.min(...mine);
+    const below = sizes.filter((z) => z <= max).every((z) => mine.includes(z) || !ofPart.includes(z));
+    const above = sizes.filter((z) => z >= min).every((z) => mine.includes(z) || !ofPart.includes(z));
     out.push(
-      contiguous
+      below
         ? `purchases of $${max} or less in ${PART_LABEL[part]}`
-        : `${mine.map((z) => `$${z}`).join(', ')} purchases in ${PART_LABEL[part]}`
+        : above
+          ? `purchases of $${min} or more in ${PART_LABEL[part]}`
+          : `${mine.map((z) => `$${z}`).join(', ')} purchases in ${PART_LABEL[part]}`
     );
   }
   return out;
+}
+
+/** Features a combo gives you that the other card does not, for "what each card brings". */
+export function brings(side: ComboSide, other: ComboSide): FeatureKey[] {
+  return FEATURES.map((f) => f.key).filter((k) => side.features.has(k) && !other.features.has(k));
 }

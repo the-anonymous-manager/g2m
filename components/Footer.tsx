@@ -23,6 +23,8 @@ export function Footer({ updated }: { updated: string }) {
             <Link href="/cards">All cards</Link>
             <Link href="/finder">Card finder</Link>
             <Link href="/calculator">Rewards calculator</Link>
+            <Link href="/wallet">Wallet builder</Link>
+            <Link href="/receipt">Swipe receipt</Link>
             <Link href="/compare">Compare</Link>
             <Link href="/methodology">Methodology</Link>
             <Link href="/submit">Submit a card</Link>

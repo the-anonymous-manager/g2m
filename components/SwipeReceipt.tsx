@@ -7,11 +7,15 @@ import { currencyOf } from '@/lib/currencies.mjs';
 import { useRegion } from '@/components/RegionContext';
 import { track } from '@/lib/analytics';
 import { site } from '@/lib/site';
+import { receiptQuery, type ReceiptParams } from '@/lib/receipt-params';
 
 type Props = {
-  /** One card (card page) or several to pick from (calculator). */
+  /** The cards to pick from. */
   cards: CardRow[];
-  initialSlug?: string;
+  /** Settings from a shared link (card, tier, amount, currency, what). */
+  initial?: ReceiptParams;
+  /** Keep the page address in step, so the address bar can be copied as a link to this receipt. */
+  syncUrl?: boolean;
   /** Units of each currency per 1 US dollar. null = live rates unavailable (US dollars only). */
   perUsd: Record<string, number> | null;
 };
@@ -40,7 +44,7 @@ function fmt(n: number, currency: string): string {
 }
 
 // One purchase on one card, as a receipt: price, every fee, the cashback, and what it really cost.
-export function SwipeReceipt({ cards, initialSlug, perUsd }: Props) {
+export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props) {
   const { country } = useRegion();
   const home = currencyOf(country);
   const currencies = useMemo(() => {
@@ -50,37 +54,21 @@ export function SwipeReceipt({ cards, initialSlug, perUsd }: Props) {
     return list;
   }, [perUsd, home]);
 
-  const [slug, setSlug] = useState(initialSlug ?? cards[0]?.slug);
+  const fromLink = Boolean(initial?.card);
+  const [slug, setSlug] = useState(initial?.card ?? cards[0]?.slug);
   const card = cards.find((c) => c.slug === slug) ?? cards[0];
-  const [tierIndex, setTierIndex] = useState(0);
-  const [currency, setCurrency] = useState('USD');
-  const [amountText, setAmountText] = useState('10');
-  const [label, setLabel] = useState('Coffee');
-  const touched = useRef(false);
+  const [tierIndex, setTierIndex] = useState(initial?.tier ?? 0);
+  const [currency, setCurrency] = useState(fromLink ? initial!.cur : 'USD');
+  const [amountText, setAmountText] = useState(String(fromLink ? initial!.amt : 10));
+  const [label, setLabel] = useState(fromLink ? initial!.what : 'Coffee');
+  const touched = useRef(fromLink);
 
-  // Follow the card the page is showing (calculator) and start in the visitor's own currency.
+  // Without a shared link, start in the visitor's own currency once it is known.
   useEffect(() => {
-    if (initialSlug) setSlug(initialSlug);
-  }, [initialSlug]);
-  useEffect(() => {
-    // A shared link sets the receipt: ?amt=840&cur=INR&tier=0&what=Coffee
-    const p = new URLSearchParams(window.location.search);
-    const cur = p.get('cur')?.toUpperCase();
-    if (cur && currencies.includes(cur)) {
-      touched.current = true;
-      setCurrency(cur);
-      if (p.get('amt')) setAmountText(p.get('amt')!.replace(/[^\d.]/g, ''));
-      if (p.get('what')) setLabel(p.get('what')!.slice(0, 40));
-      const t = Number(p.get('tier'));
-      if (Number.isInteger(t) && t >= 0) setTierIndex(t);
-      return;
-    }
-    if (home && currencies.includes(home) && !touched.current) {
-      setCurrency(home);
-      const rate = home === 'USD' ? 1 : perUsd?.[home] ?? 1;
-      setAmountText(String(niceAmount(10 * rate)));
-    }
-    // Run once rates and the visitor's country are known.
+    if (touched.current || !home || !currencies.includes(home)) return;
+    setCurrency(home);
+    const rate = home === 'USD' ? 1 : perUsd?.[home] ?? 1;
+    setAmountText(String(niceAmount(10 * rate)));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [home, currencies.length]);
 
@@ -102,11 +90,21 @@ export function SwipeReceipt({ cards, initialSlug, perUsd }: Props) {
     setAmountText(String(niceAmount(usd * next)));
   };
 
-  const shareUrl = () => {
-    const p = new URLSearchParams({ amt: String(amount), cur: currency, tier: String(card.tiers.indexOf(tier)), what: label });
-    // The card's own page shows the same receipt from these settings.
-    return `${site.url}/cards/${card.slug}?${p.toString()}#receipt`;
+  const params: ReceiptParams = {
+    card: card.slug,
+    tier: card.tiers.indexOf(tier),
+    amt: amount,
+    cur: currency,
+    what: label,
+    home: home ?? null
   };
+  const query = receiptQuery(params);
+  // The receipt page; its share preview is the receipt picture.
+  const shareUrl = () => `${site.url}/receipt?${query}`;
+  useEffect(() => {
+    if (!syncUrl) return;
+    window.history.replaceState(window.history.state, '', `${window.location.pathname}?${query}`);
+  }, [syncUrl, query]);
   const postOnX = () => {
     const headline = r.headlinePct != null ? `"up to ${r.headlinePct}% back"` : 'its rewards';
     const outcome = `${r.netPct >= 0 ? '+' : '−'}${Math.abs(r.netPct).toFixed(2)}%`;
@@ -237,9 +235,14 @@ export function SwipeReceipt({ cards, initialSlug, perUsd }: Props) {
         </div>
         {r.headlinePct != null ? <p className="slip-note">Advertised: up to {r.headlinePct}% back</p> : null}
         {r.notes.length ? <p className="slip-note">{r.notes.join(' · ')}</p> : null}
-        <button type="button" className="btn btn-metal btn-sm slip-share" onClick={postOnX}>
-          Post receipt on X
-        </button>
+        <div className="slip-actions">
+          <button type="button" className="btn btn-metal btn-sm" onClick={postOnX}>
+            Post receipt on X
+          </button>
+          <a className="btn btn-sm" href={`/receipt/image?${query}`} download={`g2m-receipt-${card.slug}.png`} onClick={() => track('Share', { channel: 'image', what: 'receipt' })}>
+            Download image
+          </a>
+        </div>
       </figure>
     </div>
   );
