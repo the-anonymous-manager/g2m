@@ -237,6 +237,23 @@ which moved ranks: Crypto.com 0% to 3% (US non-USD on the lower tiers; #5 to #15
 single FX number does not capture: cross-border fees on USD at foreign merchants (Tuyo, Exa, Avalanche, US Krak,
 MetaMask free tier) and per-region card currencies (stored as a union of currencies).
 
+## Corridor and IBAN finder (24 Oct 2026, step B part 1)
+
+`/corridors` (`app/corridors`, `components/CorridorFinder.tsx`, `lib/corridors.ts`), linked from `/finder`, the home
+tools and the footer: Move [USDC / USDT] to [EUR SEPA / USD ACH / GBP FPS / AED / INR / SWIFT, or any other currency in
+the data], filtered to cards available where the visitor lives. Per card: cash out to a bank on that rail, receive
+from a bank (account in your name / shared from `ecosystem.iban`), rail, fees and notes, non-residents, coin.
+New sheet columns (Cards tab, after "Yield on balance"):
+- "Banking rails" (`bankRails`): `RAIL in|out|in+out (fee or note)` separated by `;`, e.g.
+  `EUR_SEPA in+out (out EUR 1); GBP_FPS out (1.95 GBP); SWIFT in ($30)`. Rail = currency_method (SEPA, ACH, WIRE, FPS,
+  PIX, SPEI, UPI, BANK) or SWIFT. `none` = no bank rails; empty = not confirmed. No `;` inside the brackets.
+- "Bank account for non-residents" (`bankForNonResidents`): yes / no / empty (not published). Only COCA is set (no:
+  IBAN for EEA and UK residents).
+Filled for 24 cards from the 24 Oct issuer research (`docs/research/scoring-v3/fees-eco-*.json`, sources already on
+each card). Not confirmed: Coinbase One (help pages blocked), Ethena Pay (IBAN currency and payout currencies not
+published). Most cash-out fees and non-resident rules are not published yet: fill them during step B research
+(next: #2 Nomad / Expat mode with "KYC eligibility rule" and "Restricted passports").
+
 ## Wallet builder and receipt pages (24 Oct 2026)
 
 Akash: the receipt needs its own page with an automatic share picture (G2M's X handle on one side, the site on the

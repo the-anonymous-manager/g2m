@@ -57,6 +57,29 @@ function intro(pctCell, daysCell) {
   return { pct, days };
 }
 
+// Bank rails, e.g. "EUR_SEPA in+out (free); GBP_FPS out (1.95 GBP); SWIFT in". "none" = the issuer offers none.
+const RAIL_ITEM = /^((?:[A-Z]{3}_[A-Z]+)|SWIFT)\s+(in\+out|in|out)(?:\s*\(([^()]{1,80})\))?$/i;
+function showRails(list) {
+  if (list == null) return '';
+  if (!list.length) return 'none';
+  return list.map((r) => `${r.rail} ${r.in && r.out ? 'in+out' : r.in ? 'in' : 'out'}${r.fee ? ` (${r.fee})` : ''}`).join('; ');
+}
+function rails(v) {
+  const s = str(v);
+  if (!s) return undefined;
+  if (/^none$/i.test(s)) return [];
+  return s
+    .split(';')
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .map((p) => {
+      const m = p.match(RAIL_ITEM);
+      if (!m) throw new CellError(`"${p}" should look like "EUR_SEPA in+out (free)" or "SWIFT out ($25)"`);
+      const dir = m[2].toLowerCase();
+      return { rail: m[1].toUpperCase(), in: dir !== 'out', out: dir !== 'in', ...(m[3] ? { fee: m[3].trim() } : {}) };
+    });
+}
+
 // Currencies with no (or a lower) FX fee, e.g. "USD 0; EUR 0.2".
 function showRates(map) {
   return map ? Object.entries(map).map(([cur, p]) => `${cur} ${p}`).join('; ') : '';
@@ -145,6 +168,8 @@ const CARD_COLUMNS = [
   ['Fiat on/off-ramp', (c) => c.ecosystem?.ramps ?? ''],
   ['Crypto-backed credit', (c) => showBool(c.ecosystem?.credit)],
   ['Yield on balance', (c) => showBool(c.ecosystem?.yield)],
+  ['Banking rails', (c) => showRails(c.bankRails)],
+  ['Bank account for non-residents', (c) => showBool(c.bankForNonResidents ?? null)],
   ['Assets', (c) => c.assets.join(', ')],
   ['Perks', (c) => c.perks.join('\n')],
   ['Pros', (c) => c.pros.join('\n')],
@@ -361,6 +386,8 @@ export function tablesToCards(tables) {
         countryList: list ? countryList(list) : undefined
       },
       ecosystem: ecosystem(r),
+      bankRails: cell('Cards', r, 'Banking rails', rails),
+      bankForNonResidents: b('Bank account for non-residents') ?? undefined,
       wallets: { applePay: b('Apple Pay'), googlePay: b('Google Pay') },
       assets: commas(r.get('Assets')),
       perks: lines(r.get('Perks')),
@@ -464,6 +491,7 @@ const FIELD_COLUMNS = {
   forms: 'Forms', custody: 'Custody', metal: 'Card colour', summary: 'Summary',
   'cashback.basePct': 'Base cashback %', 'cashback.maxPct': 'Max cashback %', 'cashback.payout': 'Cashback paid in',
   'cashback.intro.pct': 'Intro cashback %', 'cashback.intro.days': 'Intro offer days',
+  bankRails: 'Banking rails', bankForNonResidents: 'Bank account for non-residents',
   'fees.annualUsd': 'Annual fee $', 'fees.cardFeeUsd': 'Card activation fee $',
   'fees.physicalCardFeeUsd': 'Physical card cost $ (issuance + shipping)', 'fees.fxPct': 'FX fee %', 'fees.fxByCurrency': 'No-FX currencies', 'fees.topUpPct': 'Top-up fee %',
   'fees.txPct': 'Fee on every purchase %', 'fees.txFlatUsd': 'Fee on every purchase $',
