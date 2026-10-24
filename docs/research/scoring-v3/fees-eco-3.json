@@ -1,0 +1,803 @@
+[
+ {
+  "slug": "exa",
+  "topUpPct": 0,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": null,
+  "iban": "named",
+  "payoutCorridors": 3,
+  "ramps": "both",
+  "credit": true,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Exa Help Center: Exa Card associated fees and costs",
+    "url": "https://help.exactly.app/en/articles/9055779-exa-card-associated-fees-and-costs",
+    "quote": "Every transaction you make with your card in a currency that is not USD has a 1.5% FX fee",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "topUpPct",
+    "label": "Exa Help Center: Are there any gas fees?",
+    "url": "https://help.exactly.app/en/articles/9449561-are-there-any-gas-fees",
+    "quote": "We sponsor every gas fee associated with the Exa App and Exa Card transaction.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Exa Help Center: Exa Card associated fees and costs",
+    "url": "https://help.exactly.app/en/articles/9055779-exa-card-associated-fees-and-costs",
+    "quote": "We may charge an origination fee whenever you make a loan.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Exa homepage",
+    "url": "https://exactly.app/",
+    "quote": "Get your free Visa Signature Exa Credit Card",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Exa Help Center: Is there a physical card?",
+    "url": "https://help.exactly.app/en/articles/10026846-is-there-a-physical-card",
+    "quote": "No, there are no physical cards available at the moment.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Exa Help Center: How to Add Funds to Your Exa App",
+    "url": "https://help.exactly.app/en/articles/14361371-how-to-add-funds-to-your-exa-app",
+    "quote": "Copy your account details from the app to receive USD, arriving as USDC in your Exa App wallet. Send from your own account or a company.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Exa Help Center: Onramping & Offramping Fees & Limits",
+    "url": "https://help.exactly.app/en/articles/14093183-onramping-offramping-fees-limits",
+    "quote": "Account Creation & Maintenance: Fully sponsored — opening and maintaining your Virtual Account is completely free of charge.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Exa Help Center: Send funds",
+    "url": "https://help.exactly.app/en/articles/9056481-send-funds",
+    "quote": "Bank transfers — Pesos, dollars, or euros. Sends to a bank account",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Exa Help Center: Onramping & Offramping Fees & Limits",
+    "url": "https://help.exactly.app/en/articles/14093183-onramping-offramping-fees-limits",
+    "quote": "Offramping (Withdrawals to Bank)",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Exa Help Center: Onramping & Offramping Fees & Limits",
+    "url": "https://help.exactly.app/en/articles/14093183-onramping-offramping-fees-limits",
+    "quote": "Onramping (Deposits to Exa)",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Exa Help Center: USDC Funding",
+    "url": "https://help.exactly.app/en/articles/11731646-usdc-funding",
+    "quote": "Use your assets as collateral to borrow USDC instantly.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Exa Help Center: How does Pay Mode work?",
+    "url": "https://help.exactly.app/en/articles/9465994-how-does-pay-mode-work",
+    "quote": "Installment Plans: split any purchase into up to 9 fixed-rate installments powered by Exactly Protocol.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Exa Help Center: How is the APR displayed in the home screen calculated?",
+    "url": "https://help.exactly.app/en/articles/12633694-how-is-the-apr-displayed-in-the-home-screen-calculated",
+    "quote": "calculated as a weighted average of the APR of the \"Collateral assets\" that you have deposited in your Exa Account",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Exa homepage",
+    "url": "https://exactly.app/",
+    "quote": "Your digital assets grow even while you borrow or pay.",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Fee page lists only a 1.5% FX fee (non-USD) and a loan origination fee: no top-up or per-purchase fee, so 0. Crypto deposits (USDC etc. on OP Mainnet) are free; fiat on-ramps through Bridge are free up to $3,000 / 60 transfers, then ACH 0.4%, SEPA 0.7%, GBP/MXN 1%, US wire 1%. Virtual card only, free; no physical card. Personal USD (ACH/wire) and EUR (SEPA) virtual accounts via Bridge (only own-name or company senders), plus local ARS accounts via Manteca in Argentina; the issuer does not literally say \"in your name\", but deposits from other people are returned. Payouts: Send > Bank transfers \"Pesos, dollars, or euros\" = 3 currencies (USD, EUR via Bridge; pesos via Manteca, region-dependent). Credit: borrow USDC against crypto collateral and pay card purchases in up to 9 fixed-rate installments. Yield: collateral assets earn a variable APR in Exactly Protocol (help article example: USDC 3.21%); no fixed rate published. SURPRISE: brief has fxPct 3, but both issuer help articles (fees page and the brief's own FX source) say 1.5%."
+ },
+ {
+  "slug": "plasma-one",
+  "topUpPct": 0.15,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": 20,
+  "iban": "named",
+  "payoutCorridors": 19,
+  "ramps": "both",
+  "credit": false,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Plasma Support: What are the fees on Plasma One?",
+    "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15506070-what-are-the-fees-on-plasma-one",
+    "quote": "a Plasma fee of 0.15% to 0.75% . These fees are the same on Lite, Core and Platinum.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "topUpPct",
+    "label": "Plasma Support: Which crypto can I deposit to Plasma One?",
+    "url": "https://intercom.help/plasma-6c43763cd799/en/articles/17464448-which-crypto-can-i-deposit-to-plasma-one",
+    "quote": "Plasma fee: between 0.15% and 0.75% of your deposit, depending on the asset",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Plasma Support: What are the fees on Plasma One?",
+    "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15506070-what-are-the-fees-on-plasma-one",
+    "quote": "This article covers all fees on Plasma One, broken down by fee type and tier.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Plasma Support: How does Lite work?",
+    "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15506168-how-does-lite-work",
+    "quote": "This is not a fee — the $10 stays in your balance and you can spend it as soon as your card is activated.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Plasma Support: How does Lite work?",
+    "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15506168-how-does-lite-work",
+    "quote": "In some regions, a $10 card fee applies instead.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Plasma Support: How do I order a physical card?",
+    "url": "https://intercom.help/plasma-6c43763cd799/en/articles/16539579-how-do-i-order-a-physical-card",
+    "quote": "Physical cards are not available for Lite members, so if you want a Physical card you need to upgrade to Core or Platinum.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Plasma Support: How do I order a physical card?",
+    "url": "https://intercom.help/plasma-6c43763cd799/en/articles/16539579-how-do-i-order-a-physical-card",
+    "quote": "Your first physical card is free (shipping not included) on Core (coming soon) and Platinum.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Plasma Support: Where do I find my virtual bank account details?",
+    "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15180615-where-do-i-find-my-virtual-bank-account-details",
+    "quote": "Your USD, EUR, MXN, and BRL accounts use your own legal name.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Plasma Support: What fiat currencies can I use with Plasma One?",
+    "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15180576-what-fiat-currencies-can-i-use-with-plasma-one-for-deposits-and-withdrawals",
+    "quote": "You can withdraw from your Plasma One balance to a bank account in any of the deposit currencies above, plus the following currencies:",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Plasma Support: What fiat currencies can I use with Plasma One?",
+    "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15180576-what-fiat-currencies-can-i-use-with-plasma-one-for-deposits-and-withdrawals",
+    "quote": "When fiat arrives in your account, it's automatically converted to USDT in your wallet.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Plasma Support: What are the fees on Plasma One?",
+    "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15506070-what-are-the-fees-on-plasma-one",
+    "quote": "Offramp fees apply when you withdraw money from your Plasma One account.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Plasma Support: How do I earn on Plasma One?",
+    "url": "https://intercom.help/plasma-6c43763cd799/en/articles/14285221-how-do-i-earn-on-plasma-one",
+    "quote": "Plasma One's Earn feature lets your Cash balance generate yield while it sits in your account.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Plasma Support: How do I earn on Plasma One?",
+    "url": "https://intercom.help/plasma-6c43763cd799/en/articles/14285221-how-do-i-earn-on-plasma-one",
+    "quote": "Yield rates are variable and not guaranteed.",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "topUpPct: crypto deposits carry a Plasma fee of 0.15%-0.75% depending on the asset (plus network/bridge/swap fees; the per-asset rate is only shown in the app), so 0.15 is the lowest published rate, max 0.75. Fiat on-ramps are flat fees on Lite (ACH $1, SEPA/FPS/PIX $0.50, SPEI/Bre-B $1, wire $15). No per-purchase fee in the full fee list (only FX: +1% Plasma markup + ~1% Visa on Lite). Lite card: $10 minimum deposit that stays spendable in most regions (value 0); in some regions a $10 card fee applies instead. Physical card: not available on Lite; Core ($199/yr) first card free + $20 standard delivery (Core physical marked \"coming soon\"); Platinum (100,000 XPL lock) free card + free standard delivery. Virtual accounts: USD, EUR, MXN, BRL in your own legal name; GBP and COP use a business beneficiary name. Payouts: 6 deposit currencies (USD, EUR, GBP, MXN, BRL, COP) + 13 more (CAD, AUD, INR, PHP, IDR, MYR, THB, VND, KRW, TRY, NGN, ZAR, KES) = 19, availability depends on residence. Credit: none found (debit; \"spend credit\" is a non-withdrawable reward balance, not borrowing). Yield: Earn via Veda vaults on Aave, variable rate, no rate published."
+ },
+ {
+  "slug": "kolo",
+  "topUpPct": 0,
+  "txPct": 1,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": null,
+  "iban": "none",
+  "payoutCorridors": 1,
+  "ramps": "off",
+  "credit": false,
+  "yield": false,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Kolo Help Center: Fees & Pricing",
+    "url": "https://help.kolo.xyz/en/articles/13942206-fees-pricing",
+    "quote": "Depositing crypto to your Kolo account is free — there are no fees on incoming transfers, across all supported assets and networks.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Kolo Help Center: Fees & Pricing",
+    "url": "https://help.kolo.xyz/en/articles/13942206-fees-pricing",
+    "quote": "When you make a payment with your Kolo Card, a 1% conversion fee is applied.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txFlatUsd",
+    "label": "Kolo Help Center: Fees & Pricing",
+    "url": "https://help.kolo.xyz/en/articles/13942206-fees-pricing",
+    "quote": "Card issuance — Free",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Kolo Help Center: Fees & Pricing",
+    "url": "https://help.kolo.xyz/en/articles/13942206-fees-pricing",
+    "quote": "To issue a card, you need to top up your account with a minimum amount equivalent to $10 or 10€",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Kolo Help Center: Personal Card Activation",
+    "url": "https://help.kolo.xyz/en/articles/13605256-personal-card-activation",
+    "quote": "The amount you deposited for activation is refunded as a card issue bonus in USD .",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Kolo Help Center: Card Overview",
+    "url": "https://help.kolo.xyz/en/articles/13605242-card-overview",
+    "quote": "All Kolo cards are currently virtual only — there's no plastic card to carry.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Kolo Help Center: EUR IBAN Withdrawals",
+    "url": "https://help.kolo.xyz/en/articles/14048937-eur-iban-withdrawals",
+    "quote": "Personal IBAN for deposits",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Kolo Help Center: EUR IBAN Withdrawals",
+    "url": "https://help.kolo.xyz/en/articles/14048937-eur-iban-withdrawals",
+    "quote": "Payouts are sent as a EUR bank transfer to the recipient's IBAN.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Kolo Help Center: Fees & Pricing",
+    "url": "https://help.kolo.xyz/en/articles/13942206-fees-pricing",
+    "quote": "IBAN (SEPA) withdrawals: a fixed fee of 1 EUR per transfer.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Kolo Help Center: Card Overview",
+    "url": "https://help.kolo.xyz/en/articles/13605242-card-overview",
+    "quote": "Kolo Card is a virtual Visa debit card that lets you spend your crypto balance anywhere Visa is accepted.",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Crypto deposits free. 1% conversion fee on every card payment (crypto/stablecoin to card currency), plus a ~1% slippage buffer that is returned if unused; USD card adds +1% on USD payments at non-US merchants. No small-purchase fee listed. Card activation needs a 10 USDT/USDC/DAI (or 9 EURC/EURI) deposit that is deducted then refunded as a spendable (not withdrawable) card-issue bonus, so no net cost (0). Virtual only; physical cards \"planned for 2027\". IBAN: the IBAN article says \"Personal IBAN for deposits: Not provided\" (no named or shared account; EUR-card holders can top up by card-to-card transfer with 1% FX fee). Payouts: SEPA EUR only (1 EUR fee, separate IBAN verification). Ramps \"off\": sell crypto to a SEPA bank account; no documented in-app crypto purchase with fiat (EUR card card-to-card top-up exists but is not described as buying crypto). No credit, no yield (homepage \"Earn 2% in Bitcoin\" is cashback)."
+ },
+ {
+  "slug": "karta-io",
+  "topUpPct": 0,
+  "txPct": 1.5,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 5,
+  "physicalCardFeeUsd": 99,
+  "iban": "named",
+  "payoutCorridors": 0,
+  "ramps": "on",
+  "credit": false,
+  "yield": false,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Karta Personal Help Center: Are There Any Fees for Using Karta Personal?",
+    "url": "https://intercom.help/karta-personal/en/articles/10511616-are-there-any-fees-for-using-karta-personal",
+    "quote": "Polygon, Base, Optimism, BSC, Arbitrum, Solana, Ethereum Free",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Karta Personal Help Center: Are There Any Fees for Using Karta Personal?",
+    "url": "https://intercom.help/karta-personal/en/articles/10511616-are-there-any-fees-for-using-karta-personal",
+    "quote": "Сard payment fee 1.5%",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Karta Personal Help Center: Are There Any Fees for Using Karta Personal?",
+    "url": "https://intercom.help/karta-personal/en/articles/10511616-are-there-any-fees-for-using-karta-personal",
+    "quote": "Virtual Card issuance 5 USDT instead of 30",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Karta Personal Help Center: FAQ: Preorder Physical Cards",
+    "url": "https://intercom.help/karta-personal/en/articles/13915440-faq-preorder-physical-cards",
+    "quote": "Plastic card: 99 USDT",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Karta Personal Help Center: FAQ: Preorder Physical Cards",
+    "url": "https://intercom.help/karta-personal/en/articles/13915440-faq-preorder-physical-cards",
+    "quote": "The card price does not include shipping. Shipping will be charged separately before dispatch.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Karta Personal Help Center: How to top up via virtual account",
+    "url": "https://intercom.help/karta-personal/en/articles/15272021-how-to-top-up-via-virtual-account",
+    "quote": "You can top up your Karta balance using your personal virtual account details via a bank transfer.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Karta Personal Help Center: What are Virtual Accounts and how do they work?",
+    "url": "https://intercom.help/karta-personal/en/articles/15272772-what-are-virtual-accounts-and-how-do-they-work",
+    "quote": "Depending on the currency and transfer method, different banking details and payment rails may be available, such as ACH, wire transfers, SEPA, PIX, SPEI, and others.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Karta homepage FAQ",
+    "url": "https://karta.io/",
+    "quote": "Bank withdrawals are coming soon — stay tuned!",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Karta Personal Help Center: What fund transfer methods are available?",
+    "url": "https://intercom.help/karta-personal/en/articles/10511647-what-fund-transfer-methods-are-available",
+    "quote": "You can currently send funds to an external crypto wallet .",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Karta Personal Help Center: What fund transfer methods are available?",
+    "url": "https://intercom.help/karta-personal/en/articles/10511647-what-fund-transfer-methods-are-available",
+    "quote": "You can also fund your Karta account via a bank transfer using a Virtual Account.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Karta Personal Help Center: What are the costs for storing stablecoins?",
+    "url": "https://intercom.help/karta-personal/en/articles/10584460-what-are-the-costs-for-storing-stablecoins-in-karta-personal",
+    "quote": "Keeping your stablecoins with Karta Personal is completely free .",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Stablecoin top-ups free on Polygon/Base/Optimism/BSC/Arbitrum/Solana/Ethereum (TRC-20: 5.90 USDT flat). Bank top-ups via personal virtual accounts: ACH 0.30% + 2.50 USDT, SEPA 1% + 2 USDT, SPEI 1%, PIX/COP 1% + 0.50 USDT, SWIFT 0.30% + 37.50, US wire 0.30% + 30. Card payment fee 1.5% on every purchase (+1% Visa on non-USD). Virtual card issuance 5 USDT is listed as an issuance fee (promo \"instead of 30\"), not a top-up, so 5. Physical: plastic 99 USDT pre-order (metal 299 USDT) PLUS shipping that is not yet published (\"charged separately before dispatch\"), so 99 is a floor, not the full cost; first shipments planned Oct 2026. Virtual accounts: \"personal virtual account details\" in USD (ACH/wire/SWIFT), EUR (SEPA), MXN, COP, BRL (PIX temporarily unavailable); issuer does not literally say \"in your name\" but needs proof of address in your full name. Payouts: bank withdrawals \"coming soon\", only crypto withdrawals today = 0; ramps \"on\" only. No credit or yield found. SURPRISE vs brief: the fee page no longer lists bank payouts (brief: \"SEPA 1.5% + EUR 2, SWIFT 1.4% + $2\"); ATM is now 1 USDT + 2.5% (brief: 1.5% + 1 USDT); physical now 99 USDT (brief: from 100)."
+ },
+ {
+  "slug": "tria",
+  "topUpPct": 0,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": null,
+  "physicalCardFeeUsd": 109,
+  "iban": "none",
+  "payoutCorridors": 0,
+  "ramps": "none",
+  "credit": false,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Tria Help Center: What are Tria Cards?",
+    "url": "https://help.tria.so/en/articles/13513481-what-are-tria-cards",
+    "quote": "Every tier enjoys zero deposit fees and zero foreign exchange fees .",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "topUpPct",
+    "label": "Tria Help Center: What are Provider Fees?",
+    "url": "https://help.tria.so/en/articles/14854432-what-are-provider-fees",
+    "quote": "While we do not charge any direct service fees for card deposits at this time, you may notice a Provider Fee during your transaction.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Tria International Card Terms & Important Disclosures",
+    "url": "https://docs.tria.so/card-terms-international",
+    "quote": "Monthly Fee: 0%",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Tria Help Center: Tria Card Membership Renewal FAQ",
+    "url": "https://help.tria.so/en/articles/17595743-tria-card-membership-renewal-faq",
+    "quote": "Pro Tier: $109 / year",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Tria International Card Terms & Important Disclosures",
+    "url": "https://docs.tria.so/card-terms-international",
+    "quote": "Plastic Card: $109",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Tria Help Center: What is Earn on Tria?",
+    "url": "https://help.tria.so/en/articles/13191349-what-is-earn-on-tria",
+    "quote": "Your earnings are based on the displayed APY, with no lock-in or commitment.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Tria Help Center: What are Tria Cards?",
+    "url": "https://help.tria.so/en/articles/13513481-what-are-tria-cards",
+    "quote": "Invest & Earn Access Up to 6%",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Tria Help Center: Tria Wallet",
+    "url": "https://help.tria.so/en/articles/14056526-tria-wallet",
+    "quote": "Any funds you add to your Tria Wallet become accessible to the rest of your Tria ecosystem experience (Cards, Earn, Futures, etc.).",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Tria International Card Terms & Important Disclosures",
+    "url": "https://docs.tria.so/card-terms-international",
+    "quote": "will be required to post Collateral that has Market Value in United States Dollars (“ USD ”) equal to each dollar that is charged to all of your Cards.",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Deposits: help center says zero Tria deposit fees (third-party \"Provider Fee\" for swaps/bridging may apply; lowest with USDC/USDT on L2s). Card Terms (fee disclosure dated 31 Oct 2025) still say \"USDC Settlement/Deposit: Up to 1%\", FX up to 3%, international up to 1%: conflicts with the help center. No per-purchase fee. cardFeeUsd null: conflicting issuer statements. Card Terms list \"Card Issue: Virtual Card $25\" plus \"Annual Fee: Virtual Card $25\"; the renewal FAQ says Lite is $20/year AND that \"free Lite tier\" accounts renew at $0. So the Lite cost is an annual membership whose amount (0, 20 or 25) the issuer gives inconsistently. Physical: plastic card comes with Pro membership, $109/year (Card Terms \"Card Issue: Plastic Card $109\"); shipping cost not stated (batch shipping, address entered in app). No fiat bank account, bank payout or fiat ramp documented in help center (wallet is crypto send/receive/swap only; a renewal FAQ line mentions topping up \"using supported cryptocurrencies or fiat currencies\" without details), so iban none / 0 / ramps none. Credit false: it is a Rain-issued collateralised card with 1:1 collateral, repaid from your linked wallet, i.e. you spend your own crypto, not a credit line. Yield: Tria Earn vaults, variable APY, \"up to 6%\" on Lite (up to 15% on Max), Tria charges no platform fee, vault fees ~0.2-1%/yr + ~20% of profits. ATM fee in Card Terms: up to $2 + 3%."
+ },
+ {
+  "slug": "coca",
+  "topUpPct": 0,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": 5,
+  "iban": "named",
+  "payoutCorridors": 1,
+  "ramps": "both",
+  "credit": false,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "COCA Help: Crypto fees and limits",
+    "url": "https://help.coca.xyz/support/solutions/articles/205000042685-crypto-fees-and-limits",
+    "quote": "we do not charge any additional fees for our services. The only cost you incur is the network fee",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "topUpPct",
+    "label": "COCA Docs: Banking Account overview",
+    "url": "https://docs.coca.xyz/coca/banking-account/overview",
+    "quote": "* Zero Annual Fees * Zero Issue Fees",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "COCA Docs: Banking Account overview",
+    "url": "https://docs.coca.xyz/coca/banking-account/overview",
+    "quote": "* Zero FX Fees on Direct Pairs",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "COCA Docs: COCA Card",
+    "url": "https://docs.coca.xyz/coca/banking-account/coca-card",
+    "quote": "COCA Virtual Card is free for all tiers.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "COCA Docs: COCA Card",
+    "url": "https://docs.coca.xyz/coca/banking-account/coca-card",
+    "quote": "Plastic card is 5$ for Starter, Standard & Standard+ and is free for Premium, Premium+ & Elite users.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "COCA Help: How do I order a COCA card?",
+    "url": "https://help.coca.xyz/support/solutions/articles/205000042704-how-do-i-order-a-coca-card-",
+    "quote": "Make an initial top-up equivalent to €50 to cover delivery and card issuance. The remaining amount will be available as your card balance.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "COCA Docs: IBAN",
+    "url": "https://docs.coca.xyz/coca/banking-account/iban",
+    "quote": "Your COCA account includes a **personal IBAN**",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "COCA Docs: IBAN",
+    "url": "https://docs.coca.xyz/coca/banking-account/iban",
+    "quote": "You can **send and receive money via SEPA bank transfers in EUR**, and USD transfers where available.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "COCA Help: What Bank Accounts Are Available in COCA?",
+    "url": "https://help.coca.xyz/support/solutions/articles/205000059619-what-bank-accounts-are-available-in-coca-",
+    "quote": "only SEPA bank accounts are currently available for use, but it is important to note that ACH accounts will be introduced in the near future",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "COCA Docs: Buy Crypto",
+    "url": "https://docs.coca.xyz/coca/crypto-account/buy-crypto",
+    "quote": "Buy Crypto with Zero COCA Fees",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "COCA Docs: Membership you deserve",
+    "url": "https://docs.coca.xyz/coca/membership-and-rewards/membership-you-deserve",
+    "quote": "| **Starter** | 0 | 1% unlimited | Up to 5% on first $5,000, then 2% |",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "COCA Docs: COCA Card",
+    "url": "https://docs.coca.xyz/coca/banking-account/coca-card",
+    "quote": "The COCA Card is a modern debit card",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "No complete fee schedule is published; values come from the docs \"Fees\" list (zero FX on direct pairs, zero annual, zero issue fees, free ATM up to $200-250) and the help article saying COCA charges no fees beyond network fees, so top-up 0 and per-purchase 0 with moderate confidence. The fee for card top-up by debit/credit card is not stated. Virtual card free. Physical (Starter): $5 card fee; the order guide asks for a EUR 50 initial top-up \"to cover delivery and card issuance\" with the rest left as balance, but the delivery amount is not stated, so 5 may understate the total. Personal IBAN (SEPA, EUR) for residents of EEA + UK; ACH \"in the near future\" (docs say \"USD transfers where available\"). Payouts: SEPA EUR = 1 (card-to-card transfers also exist but go to cards, not bank accounts). Ramps both: in-app Buy via third-party on-ramps with zero COCA fee; EUR out via IBAN from the stablecoin-based Banking Account. Credit false (debit). Yield: Balance APY up to 5% on first $5,000 then 2% on Starter (variable \"up to\"). Physical/ATM figures differ slightly between pages ($200 vs $250 free ATM)."
+ },
+ {
+  "slug": "avici",
+  "topUpPct": 0,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 15,
+  "physicalCardFeeUsd": 50,
+  "iban": "named",
+  "payoutCorridors": 2,
+  "ramps": "both",
+  "credit": true,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Avici Docs: Fees and Limits (cards)",
+    "url": "https://docs.avici.money/getting-started/secured-credit-cards/fees-and-limits",
+    "quote": "No low auth fees, no declined transaction fees (not applicable on ATMs) and no top-up or withdrawal to wallet fees.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Avici Docs: Fees and Limits (cards)",
+    "url": "https://docs.avici.money/getting-started/secured-credit-cards/fees-and-limits",
+    "quote": "Transaction fees– $0",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "smallPurchase",
+    "label": "Avici Docs: Fees and Limits (cards)",
+    "url": "https://docs.avici.money/getting-started/secured-credit-cards/fees-and-limits",
+    "quote": "No low auth fees",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Avici Docs: Fees and Limits (cards)",
+    "url": "https://docs.avici.money/getting-started/secured-credit-cards/fees-and-limits",
+    "quote": "Platinum– First card costs $15. Subsequent cards: $10 one-time fee, no recurring charges.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Avici Docs: Fees and Limits (cards)",
+    "url": "https://docs.avici.money/getting-started/secured-credit-cards/fees-and-limits",
+    "quote": "Platinum– $50 basic card fee, one-time, no recurring charges",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Avici Docs: Fees and Limits (cards)",
+    "url": "https://docs.avici.money/getting-started/secured-credit-cards/fees-and-limits",
+    "quote": "We offer free, untracked delivery for both physical card options.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Avici Docs: Virtual Accounts",
+    "url": "https://docs.avici.money/getting-started/virtual-accounts.md",
+    "quote": "You get **USD & EUR accounts in your name**, powered by banking partners.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Avici Docs: Virtual Accounts fees and limits",
+    "url": "https://docs.avici.money/getting-started/virtual-accounts/fees-and-limits.md",
+    "quote": "| Banking Fee | Sepa Rail | Pay Out (Withdrawal) via Sepa / EUR | 0 EUR |",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Avici Docs: Virtual Accounts fees and limits",
+    "url": "https://docs.avici.money/getting-started/virtual-accounts/fees-and-limits.md",
+    "quote": "| Banking Fee | ACH Rail | Pay Out (Withdrawal) via ACH / USD | 0 USD |",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Avici Docs: Virtual Accounts",
+    "url": "https://docs.avici.money/getting-started/virtual-accounts.md",
+    "quote": "Avici offers Virtual USD and EUR checking accounts that function as **fiat on- and off-ramp channels**",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Avici Docs: Credit Line",
+    "url": "https://docs.avici.money/getting-started/credit-line.md",
+    "quote": "Deposit SOL and borrow USDC or EURC against it",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Avici Docs: Secured Credit Cards",
+    "url": "https://docs.avici.money/getting-started/secured-credit-cards.md",
+    "quote": "User deposits USDC in a Loan Escrow smart contract",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Avici Docs: Stablecoin Yields",
+    "url": "https://docs.avici.money/getting-started/grow/stablecoin-yields.md",
+    "quote": "Earn yield on stablecoins like USDC, USDT, EURC, and more",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Avici Docs: Credit Line",
+    "url": "https://docs.avici.money/getting-started/credit-line.md",
+    "quote": "You earn yield on your deposited SOL the entire time your credit line is open.",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "No top-up, transaction, low-auth or wallet-withdrawal fees; forex markup 0% (Visa may add 0.4-1% cross-border on non-USD). Entry card = virtual Platinum, $15 one-time (non-refundable card purchase; extra cards $10; deleting and recreating a card costs the fee again). Physical Platinum $50 one-time with free untracked delivery (3-4 weeks); priority delivery $15 US / $50 international. Virtual accounts: USD (ACH, wire) and EUR (SEPA) accounts in your name; incoming fiat converts to USDC; payouts 0 fee on ACH and SEPA, $15 wire, $25 SWIFT = 2 currencies (USD, EUR). Credit: the card itself is a \"secured credit card\" where your USDC sits in an escrow contract and spent USDC is liquidated within ~1 week, so on its own that is spending your stablecoins, not borrowing without selling. Marked true because of the separate in-app Credit Line (deposit SOL, borrow USDC/EURC up to 60% LTV, which can then fund the card); homepage still shows a credit-line line marked \"(Coming Soon)\", so confidence is medium. Yield: Grow (stablecoin yields, asset yields, insurance-backed) plus yield on SOL collateral in the Credit Line; rates only shown in-app, not published; card escrow balance itself does not earn. SURPRISE: brief fxPct 1 but issuer says 0% markup (Visa 0.4-1% may apply)."
+ },
+ {
+  "slug": "tuyo",
+  "topUpPct": 0,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": null,
+  "iban": "named",
+  "payoutCorridors": 3,
+  "ramps": "both",
+  "credit": false,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Tuyo FAQ",
+    "url": "https://tuyo.com/faq",
+    "quote": "Bridging tokens and trading between stablecoins are exempt from the volume-based fee; only network fees may apply.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "topUpPct",
+    "label": "Tuyo Card page",
+    "url": "https://tuyo.com/card",
+    "quote": "USD PURCHASES WITHIN THE US",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Tuyo Help: Tuyo Card overview",
+    "url": "https://help.tuyo.com/guides/card.html",
+    "quote": "Up to 2% total (e.g. a non-USD purchase made outside the US)",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Tuyo FAQ",
+    "url": "https://tuyo.com/faq",
+    "quote": "A 1% FX fee applies to purchases in a currency other than USD, and the card provider charges a 1% fee on purchases outside the US.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Tuyo FAQ",
+    "url": "https://tuyo.com/faq",
+    "quote": "Tuyo Card has no issuance, monthly or yearly fee.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Tuyo FAQ",
+    "url": "https://tuyo.com/faq",
+    "quote": "Not yet. A physical card is in the works and will be available soon.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Tuyo Help: Add cash by USD bank transfer",
+    "url": "https://help.tuyo.com/guides/add-cash-usd.html",
+    "quote": "Copy your own account-holder name, routing number, and account number into your sending bank.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Tuyo Help: Bank accounts availability",
+    "url": "https://help.tuyo.com/guides/wire-transfer-availability.html",
+    "quote": "EUR virtual accounts now show the customer’s name, with existing IBANs unchanged.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Tuyo Help: Bank accounts availability",
+    "url": "https://help.tuyo.com/guides/wire-transfer-availability.html",
+    "quote": "Tuyo bank accounts provide deposits, transfers, and local bank details in USD, EUR, and MXN.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Tuyo FAQ",
+    "url": "https://tuyo.com/faq",
+    "quote": "Fiat services like deposits, withdrawals, and account numbers are handled through regulated partners",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Tuyo Card page",
+    "url": "https://tuyo.com/card",
+    "quote": "That’s what $10,000 in Tuyo would be worth by now, at 4.0% APY.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Tuyo FAQ",
+    "url": "https://tuyo.com/faq",
+    "quote": "In the updated app, your eligible dollar balance in Cash can earn interest and remain available to your Tuyo Card.",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "No deposit fee is listed for crypto (send USDC on Base; stablecoin conversions and bridging are exempt from the 0.25% trading fee, network fees only), so 0; bank/card top-ups show a quote in-app (conversion charges not published). Card: no issuance/monthly/yearly fee; USD purchases in the US 0%; non-USD +1% FX and +1% outside the US (up to 2%); none on every purchase, so txPct 0. Virtual only; physical \"coming soon\". Bridge virtual accounts: USD account with your own account-holder name (ACH/domestic wire), EUR IBAN showing the customer name, MXN CLABE. Payouts counted as 3 (USD, EUR, MXN) from \"deposits, transfers ... in USD, EUR, and MXN\" plus Send > Bank account; per-currency withdrawal rails are not spelled out, so medium confidence. Ramps both (fiat in converts to USDC; withdrawals via Bridge). Credit false (debit from USDC balance). Yield: optional Cash interest strategies via third-party lending protocols; card page shows 4.0% APY (highest strategy, variable, not guaranteed) and the balance stays spendable."
+ }
+]

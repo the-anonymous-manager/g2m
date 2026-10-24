@@ -39,6 +39,11 @@ and confirm what changed on the site (not which files moved).
 - `fees.fxByCurrency` (sheet "No-FX currencies", e.g. `USD 0; EUR 0.2`) and `fees.fxHome` ("Billed in your own
   currency") say which spending carries no FX fee; only from issuer sources, else leave empty. `fees.fxPct` stays the
   fee on all other currencies. Country currencies live in `lib/currencies.mjs`.
+- Fees: when the issuer publishes its fees and lists no top-up or per-purchase fee, that fee is 0, not empty. Empty
+  (not published) only when there is no fee list at all, or a fee is said to apply without the amount.
+- Banking features (`ecosystem`; sheet columns "IBAN / bank account" named/shared/none, "Bank payout currencies" a
+  number, "Fiat on/off-ramp" both/on/off/none, "Crypto-backed credit" and "Yield on balance" yes/no): issuer sources
+  only; empty = not confirmed (scores 0).
 - Real card pictures: "Card image" link in the sheet (`image.source`); the sync stores the files in
   `public/card-images/`. Only use issuer press-kit images or ones an issuer sent; never copy from other sites.
 - Referral links go in `links.affiliate`; all "Get the card" buttons use `/go/<slug>`, which picks it up.

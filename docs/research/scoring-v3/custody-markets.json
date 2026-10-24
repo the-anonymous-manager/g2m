@@ -1,0 +1,194 @@
+{
+ "verified": "2026-10-24",
+ "custody": [
+  {
+   "slug": "bitget-wallet",
+   "custody": "custodial",
+   "sources": [
+    {
+     "label": "Bitget Wallet Card page, FAQ",
+     "url": "https://web3.bitget.com/card",
+     "quote": "First, deposit crypto into your Bitget Wallet, then go to the \"Card Top-Up\" page to transfer the desired amount onto your Bitget Wallet Card.",
+     "verified": "2026-10-24"
+    },
+    {
+     "label": "Bitget Wallet Card page, FAQ",
+     "url": "https://web3.bitget.com/card",
+     "quote": "If you lose control of your wallet – for example, by losing your seed phrase – any activated card will still work for spending. However, you won't be able to top up or withdraw from the card",
+     "verified": "2026-10-24"
+    }
+   ],
+   "notes": "Bitget Wallet itself is self-custody, but the card spends from a separate card balance: you top up the card from the wallet, and that card balance keeps working even if you lose your seed phrase, so it is not held by your keys. Bitget does not use the word 'custodial' for the card balance; the verdict rests on these two FAQ answers (FAQ text is in the page's built-in content). Card issuing partner varies by region and is not named on the page."
+  },
+  {
+   "slug": "kast",
+   "custody": "custodial",
+   "sources": [
+    {
+     "label": "KAST Terms and Conditions of Service",
+     "url": "https://www.kast.xyz/en/legal/terms-and-conditions-of-service",
+     "quote": "The Virtual Assets transferred by users into KAST are sold to KAST and thereafter held by a Custodian part of our Partners to ensure the secure management of such assets on behalf of KAST (not for the users).",
+     "verified": "2026-10-24"
+    },
+    {
+     "label": "KAST Terms and Conditions of Service, definitions",
+     "url": "https://www.kast.xyz/en/legal/terms-and-conditions-of-service",
+     "quote": "“Custodian Wallet” means the Virtual Assets wallet provided and hosted by the Custodian",
+     "verified": "2026-10-24"
+    }
+   ],
+   "notes": "Clearly custodial: deposits go into a Custodian Wallet hosted by a partner (terms name BitGo among providers), and the terms say deposited assets are sold to and owned by KAST. Card payments are settled by converting from that Custodian Wallet."
+  },
+  {
+   "slug": "krak",
+   "custody": "custodial",
+   "sources": [
+    {
+     "label": "Kraken Support: Kraken Debit Card FAQ",
+     "url": "https://support.kraken.com/articles/kraken-card-faqs",
+     "quote": "Your Kraken Debit Card, or Krak Card, spends from your Krak Everyday balance.",
+     "verified": "2026-10-24"
+    },
+    {
+     "label": "Kraken Terms of Service (EEA)",
+     "url": "https://www.kraken.com/legal/eea-terms",
+     "quote": "you own the Crypto-assets in your Account and these Crypto-assets are assets held in custody by us for you",
+     "verified": "2026-10-24"
+    }
+   ],
+   "notes": "The card spends from the Krak Everyday balance inside the user's Kraken/Krak account; Kraken's terms say crypto in the account is held in custody by Kraken (fiat sits in a Kraken E-Money Wallet). The custody quote is from the EEA terms; the UK and US terms were not checked separately, but the account model is the same."
+  },
+  {
+   "slug": "mexc",
+   "custody": "custodial",
+   "sources": [
+    {
+     "label": "MEXC Learn: What is the MEXC Global Card",
+     "url": "https://www.mexc.com/learn/article/what-is-the-mexc-global-card-cashback-7-apr-fees-limits-and-how-to-apply/1",
+     "quote": "The card runs on a top-up model. Your trading balance is not spent directly. Funds move to the card in a specific order",
+     "verified": "2026-10-24"
+    },
+    {
+     "label": "MEXC Terms of Use",
+     "url": "https://www.mexc.com/terms",
+     "quote": "MEXC maintains full custody of the assets, funds and User data/information",
+     "verified": "2026-10-24"
+    }
+   ],
+   "notes": "Card is funded from the MEXC exchange account (Spot to Fiat Account, then top-up to the card). MEXC's terms say MEXC holds full custody of user assets and funds. mexc.com blocks plain requests; pages were read with a browser user agent."
+  },
+  {
+   "slug": "jupiter",
+   "custody": "custodial",
+   "sources": [
+    {
+     "label": "Jupiter Docs: Risks & Security",
+     "url": "https://docs.jup.ag/user-docs/global/spend/risks-and-security",
+     "quote": "Jupiter does not take custody of wallet funds. Card balances, QR Pay balances, and remittance funds are managed by the issuing partners.",
+     "verified": "2026-10-24"
+    },
+    {
+     "label": "Jupiter Docs: Jupiter Card, Balance",
+     "url": "https://docs.jup.ag/user-docs/global/spend/jupiter-card",
+     "quote": "DCS-issued card: USDT is converted to USD by the issuer when it arrives",
+     "verified": "2026-10-24"
+    }
+   ],
+   "notes": "You move USDC/USDT out of your Jupiter wallet into a separate Spend balance, which Jupiter says is managed by the issuing partners (Rain or DCS). Nuance: with a Rain-issued card the deposit 'stays on-chain as collateral for the card' and can be sent back to a Solana wallet; with a DCS-issued card (AU, JP, MY, PH, SG, KR, TW, TH, VN) the issuer converts it to USD and withdrawals are not supported. Jupiter never calls the Spend balance self-custodial, so custodial for both."
+  },
+  {
+   "slug": "tangem-pay",
+   "custody": "self-custodial",
+   "sources": [
+    {
+     "label": "Tangem Pay page, FAQ",
+     "url": "https://tangem.com/en/tangem-pay/",
+     "quote": "Your card balance is held in a smart contract account that you control.",
+     "verified": "2026-10-24"
+    },
+    {
+     "label": "Tangem Pay page",
+     "url": "https://tangem.com/en/tangem-pay/",
+     "quote": "Your main assets stay in the non-custodial Tangem Wallet. Tangem Pay is a separate card program issued by Rain, and you can only spend the balance loaded on the card.",
+     "verified": "2026-10-24"
+    }
+   ],
+   "notes": "Borderline, flag for review. Funds leave the Tangem hardware wallet and are loaded onto a separate card balance (Rain-issued program run by Paera LLC). Tangem says that balance is held in a smart contract account the user controls and can be withdrawn to the Tangem Wallet at any time, but it never calls the card balance itself 'non-custodial' (that word is used only for the Tangem Wallet). Same set-up as other Rain collateral cards G2M already lists as self-custodial (e.g. Plasma One, Avalanche). If G2M wants 'self-custodial' to mean funds stay in the user's own wallet until the purchase, this one does not meet that bar; then it should be null rather than custodial."
+  },
+  {
+   "slug": "kolo",
+   "custody": "self-custodial",
+   "sources": [
+    {
+     "label": "Kolo Help: Your Kolo Wallet — How It Works",
+     "url": "https://help.kolo.xyz/en/articles/13890422-your-kolo-wallet-how-it-works",
+     "quote": "Kolo has moved to a non-custodial model. Your Digital Assets now live in a wallet that only you can authorise, instead of being held by Kolo on your behalf.",
+     "verified": "2026-10-24"
+    },
+    {
+     "label": "Kolo Help: Card Overview",
+     "url": "https://help.kolo.xyz/en/articles/13605242-card-overview",
+     "quote": "Conversion happens instantly at the moment of payment. You do not need to pre-sell your balance or maintain a separate USD balance before making a purchase.",
+     "verified": "2026-10-24"
+    }
+   ],
+   "notes": "Recent change (article updated about 3 weeks before 2026-10-24): Kolo's wallet is now MPC; the user holds a key share needed for every transaction and Kolo's share alone cannot sign. The card checks the crypto balance and converts at the moment of payment, with no separate card balance. Caveat: EUR cards can also be topped up by card-to-card transfer to the Kolo card number, and how that fiat balance is held is not stated."
+  }
+ ],
+ "markets": [
+  {
+   "slug": "crypto-com",
+   "IN": "unknown",
+   "AE": "unknown",
+   "sources": [
+    {
+     "label": "Crypto.com Help: Prepaid Mastercard Fees and Limits (Bahrain & select GCC markets)",
+     "url": "https://help.crypto.com/en/articles/9951391-crypto-com-prepaid-mastercard-fees-and-limits-bahrain-select-gcc-markets",
+     "quote": "Crypto.com Prepaid Mastercard Fees and Limits (Bahrain & select GCC markets)",
+     "verified": "2026-10-24"
+    }
+   ],
+   "notes": "No issuer statement found for either. AE: Crypto.com issues a prepaid Mastercard from Bahrain to 'select GCC markets' but never names which; the UAE site (crypto.com/ae) has no cards page (crypto.com/ae/cards returns 404), and no help article names the UAE. IN: no help article mentions India for the card, and crypto.com/in does not exist. The 506 English help articles were checked by title through the sitemap, plus the card collection, the apply article and the restricted-markets article."
+  },
+  {
+   "slug": "jupiter",
+   "IN": "unknown",
+   "sources": [
+    {
+     "label": "Jupiter Docs: Jupiter Card, Supported Countries",
+     "url": "https://docs.jup.ag/user-docs/global/spend/jupiter-card",
+     "quote": "Country not listed? Eligibility is reviewed case by case during KYC, and proof of address is usually required.",
+     "verified": "2026-10-24"
+    }
+   ],
+   "notes": "India is not on Jupiter's list of countries where the card is 'actively offered' (Bangladesh and Pakistan are), but Jupiter says unlisted countries are reviewed case by case, so it is not a clear no. AE is on the list (G2M already shows yes)."
+  },
+  {
+   "slug": "wirex-one",
+   "AE": "yes",
+   "sources": [
+    {
+     "label": "Wirex One Help: Wirex One Card supported countries",
+     "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088412-wirex-one-card-supported-countries",
+     "quote": "Middle East and Central Asia Country Code Azerbaijan AZ Bahrain BH Georgia GE Kazakhstan KZ Oman OM United Arab Emirates AE Uzbekistan UZ",
+     "verified": "2026-10-24"
+    }
+   ],
+   "notes": "The Wirex One card's own list (modified 11 Sep) includes the UAE. Heads-up: G2M's current country source (help.wirexapp.com/article/supported-countries-1189) now returns 404, and this newer Wirex One list differs from the old Wirex app list (it adds e.g. AE, BH, OM, JP, KR, MY, PH, TH, MX and others; India and the US are not listed). The country list may need a refresh from this page."
+  },
+  {
+   "slug": "plasma-one",
+   "IN": "unknown",
+   "AE": "unknown",
+   "sources": [
+    {
+     "label": "Plasma Support: Which countries and US states is Plasma One available in?",
+     "url": "https://intercom.help/plasma-6c43763cd799/en/articles/14703938-which-countries-and-us-states-is-plasma-one-available-in",
+     "quote": "Some countries are blocked at the document level, meaning if your passport or ID was issued by one of these countries, verification may fail by default. However, if you reside in a supported country , you may still be eligible by providing a proof of address",
+     "verified": "2026-10-24"
+    }
+   ],
+   "notes": "IN: yes, the 'blocked by default' note is Plasma's own statement, but it is about ID documents issued by India (listed with China, Vietnam, Nigeria and others), not about living in India. India is not on Plasma's 'Unsupported countries' list (Cuba, Iran, North Korea, Russia, Syria, Ukraine, Venezuela). Plasma does not say whether India is a supported country of residence, so unknown. In practice most Indian residents hold Indian ID and would likely fail by default, but that is not an explicit no. AE: not mentioned anywhere in Plasma's help center; Plasma does not publish its supported-country list ('Availability is determined by our card issuing partner')."
+  }
+ ]
+}

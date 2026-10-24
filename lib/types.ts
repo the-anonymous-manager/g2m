@@ -11,6 +11,7 @@ export type ScoreBreakdown = {
   rewards: number;
   fees: number;
   coverage: number;
+  ecosystem: number;
   control: number;
 };
 
@@ -34,6 +35,7 @@ export type CardRow = Pick<
   | 'wallets'
   | 'metal'
   | 'image'
+  | 'ecosystem'
   | 'score'
   | 'rank'
   | 'perks'
@@ -55,6 +57,7 @@ export function toRow(c: Card): CardRow {
     wallets: c.wallets,
     metal: c.metal,
     image: c.image,
+    ecosystem: c.ecosystem,
     score: c.score,
     rank: c.rank,
     perks: c.perks
