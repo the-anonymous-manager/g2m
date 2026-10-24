@@ -237,6 +237,13 @@ which moved ranks: Crypto.com 0% to 3% (US non-USD on the lower tiers; #5 to #15
 single FX number does not capture: cross-border fees on USD at foreign merchants (Tuyo, Exa, Avalanche, US Krak,
 MetaMask free tier) and per-region card currencies (stored as a union of currencies).
 
+## Card pages: every country by region (24 Oct 2026)
+
+"Where it works" keeps the five checked markets and links to a new full-width "Countries" section: counts (available,
+not available, not confirmed), the visitor's own country, a "Check a country" search, every available country grouped
+by region (`lib/continents.mjs`, all 250 codes), and the not-available list behind a toggle. Statuses come from
+`availabilityIn` (the issuer's list, else the five markets), the same as rankings.
+
 ## Calculator v2: three views, currency split, small-purchase fix (24 Oct 2026)
 
 Bug fixed (Akash's test: `/calculator?country=IN&spend=100&foreign=0&ticket=100` vs `ticket=5`): foreign-only
