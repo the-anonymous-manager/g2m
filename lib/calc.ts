@@ -159,6 +159,24 @@ export function purchasesPerYear(input: Pick<CalcInput, 'spend' | 'mix' | 'ticke
   return BASKET.filter((b) => under == null || b.usd < under).reduce((s, b) => s + (yearSpend * ((b.usd * b.count) / BASKET_USD)) / b.usd, 0);
 }
 
+/** One slice of a year's spending: which currency group, the purchase size, and how much (USD a year). */
+export type Segment = { part: 'home' | 'usd' | 'travel'; size: number; spendYear: number };
+
+/** The year's spending as slices: own currency / US dollars online / travel, times the purchase sizes. */
+export function buildSegments(input: Pick<CalcInput, 'spend' | 'usd' | 'travel' | 'mix' | 'ticket'>): Segment[] {
+  const yearSpend = input.spend * 12;
+  const usd = input.usd / 100;
+  const travel = input.travel / 100;
+  const shares = { home: Math.max(0, 1 - usd - travel), usd, travel };
+  const sizes =
+    input.mix === 'custom'
+      ? [{ size: input.ticket, share: 1 }]
+      : BASKET.map((b) => ({ size: b.usd, share: (b.usd * b.count) / BASKET_USD }));
+  return (['home', 'usd', 'travel'] as const).flatMap((part) =>
+    sizes.map((z) => ({ part, size: z.size, spendYear: yearSpend * shares[part] * z.share }))
+  );
+}
+
 // ---------- One tier's year ----------
 
 export type SpendPart = {
@@ -213,13 +231,23 @@ export type TierResult = {
  * the card's FX fee unless the card bills in it; US-dollar spending is free of FX only on cards billed in dollars;
  * other currencies always pay the card's usual FX fee. Foreign-only fees follow the same rule.
  */
-export function tierValue(card: CardRow, tier: Tier, input: CalcInput, index = 0, country?: string | null): TierResult {
+export function tierValue(
+  card: CardRow,
+  tier: Tier,
+  input: CalcInput,
+  index = 0,
+  country?: string | null,
+  /** Only these slices of spending go on this card (e.g. one card of a two-card wallet). Default: all of it. */
+  only?: Segment[]
+): TierResult {
   const flags: string[] = [];
-  const yearSpend = input.spend * 12;
+  const segs = only ?? buildSegments(input);
+  const yearSpend = segs.reduce((s, g) => s + g.spendYear, 0);
+  const monthSpend = yearSpend / 12;
   const offered = !country || tierOffered(tier, country);
 
   // Rewards
-  const month = cashbackBreakdown(tier, input.spend);
+  const month = cashbackBreakdown(tier, monthSpend);
   if (month.gross == null) flags.push('Cashback rate not published');
   const gross = (month.gross ?? 0) * 12;
   const capCut = gross - (month.capped ?? 0) * 12;
@@ -227,7 +255,7 @@ export function tierValue(card: CardRow, tier: Tier, input: CalcInput, index = 0
   const welcome = card.cashback.intro;
   if (input.year === 1 && welcome && index === 0) {
     const months = Math.min((welcome.days / 365) * 12, 12);
-    const introMonth = Math.min((input.spend * welcome.pct) / 100, tier.capMonthlyUsd ?? Infinity);
+    const introMonth = Math.min((monthSpend * welcome.pct) / 100, tier.capMonthlyUsd ?? Infinity);
     intro = Math.max(0, (introMonth - (month.capped ?? 0)) * months);
   }
   const kind = payoutKind(card.cashback.payout);
@@ -252,34 +280,36 @@ export function tierValue(card: CardRow, tier: Tier, input: CalcInput, index = 0
 
   // FX by currency
   const local = country ? currencyOf(country) : null;
-  const usdShare = input.usd / 100;
-  const travelShare = input.travel / 100;
-  const homeShare = Math.max(0, 1 - usdShare - travelShare);
+  const partSpend = (k: Segment['part']) => segs.filter((g) => g.part === k).reduce((s, g) => s + g.spendYear, 0);
+  const share = (k: Segment['part']) => (yearSpend > 0 ? partSpend(k) / yearSpend : 0);
   const home = country ? homeFx(card, tier, country) : null;
   const other = otherFxPct(card, tier);
   const parts: SpendPart[] = [
     // No country: home spending is in the card's own currency.
-    { key: 'home', share: homeShare, currency: local, fxPct: home ? home.pct : 0, foreign: Boolean(country) && !billedIn(card, local, local), fx: 0 },
-    { key: 'usd', share: usdShare, currency: 'USD', fxPct: fxIn(card, tier, 'USD', local), foreign: !billedIn(card, 'USD', local), fx: 0 },
-    { key: 'travel', share: travelShare, currency: null, fxPct: other, foreign: true, fx: 0 }
+    { key: 'home', share: share('home'), currency: local, fxPct: home ? home.pct : 0, foreign: Boolean(country) && !billedIn(card, local, local), fx: 0 },
+    { key: 'usd', share: share('usd'), currency: 'USD', fxPct: fxIn(card, tier, 'USD', local), foreign: !billedIn(card, 'USD', local), fx: 0 },
+    { key: 'travel', share: share('travel'), currency: null, fxPct: other, foreign: true, fx: 0 }
   ];
-  for (const p of parts) p.fx = (yearSpend * p.share * (p.fxPct ?? 0)) / 100;
+  for (const p of parts) p.fx = (partSpend(p.key) * (p.fxPct ?? 0)) / 100;
   if (parts.some((p) => p.share > 0 && p.fxPct == null)) flags.push('FX fee not published');
-  if (home && !home.known && home.pct && homeShare > 0) {
+  if (home && !home.known && home.pct && share('home') > 0) {
     flags.push(`Billing currency not published, so FX is counted on your ${home.currency ?? 'local'} spending too`);
   }
   const fx = parts.reduce((s, p) => s + p.fx, 0);
 
   // Per-purchase fees
-  const purchases = purchasesPerYear(input);
+  const count = (g: Segment) => (g.size > 0 ? g.spendYear / g.size : 0);
+  const purchases = segs.reduce((s, g) => s + count(g), 0);
   const txPct = (yearSpend * card.fees.txPct) / 100;
   const txFlat = card.fees.txFlatUsd * purchases;
   const sp = card.fees.smallPurchase;
   let smallCount = 0;
   if (sp) {
     // Purchases under the limit, in the currencies the fee applies to (all of them, or only foreign ones).
-    const share = sp.foreignOnly ? parts.filter((p) => p.foreign).reduce((s, p) => s + p.share, 0) : 1;
-    smallCount = purchasesPerYear(input, sp.underUsd) * share;
+    const foreign = new Set(parts.filter((p) => p.foreign).map((p) => p.key));
+    smallCount = segs
+      .filter((g) => g.size < sp.underUsd && (!sp.foreignOnly || foreign.has(g.part)))
+      .reduce((s, g) => s + count(g), 0);
   }
   const small = sp ? sp.feeUsd * smallCount : 0;
 
@@ -389,12 +419,18 @@ export const BREAK_EVEN_LIMIT = 100_000;
  * Each tier against the one before it: the monthly spend where the dearer tier starts to keep you more money, with
  * all other settings unchanged. Found on a $10 grid, then narrowed down to the dollar.
  */
-export function breakEvens(card: CardRow, input: CalcInput, country?: string | null): BreakEven[] {
+export function breakEvens(
+  card: CardRow,
+  input: CalcInput,
+  country?: string | null,
+  /** Compare each tier with the one before it, or every tier with the entry tier. */
+  against: 'previous' | 'entry' = 'previous'
+): BreakEven[] {
   const usable = card.tiers.map((t, i) => ({ t, i })).filter(({ t }) => !t.comingSoon && (!country || tierOffered(t, country)));
   const at = (i: number, spend: number) => tierValue(card, card.tiers[i], { ...input, spend }, i, country).net;
   const out: BreakEven[] = [];
   for (let k = 1; k < usable.length; k++) {
-    const a = usable[k - 1].i;
+    const a = against === 'entry' ? usable[0].i : usable[k - 1].i;
     const b = usable[k].i;
     const ahead = (s: number) => at(b, s) > at(a, s) + 0.005;
     const edge = (lo: number, hi: number, want: boolean) => {

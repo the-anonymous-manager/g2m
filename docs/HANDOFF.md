@@ -237,9 +237,31 @@ which moved ranks: Crypto.com 0% to 3% (US non-USD on the lower tiers; #5 to #15
 single FX number does not capture: cross-border fees on USD at foreign merchants (Tuyo, Exa, Avalanche, US Krak,
 MetaMask free tier) and per-region card currencies (stored as a union of currencies).
 
+## Unique tools, step A (24 Oct 2026)
+
+- Real swipe receipt (`lib/swipe.ts`, `components/SwipeReceipt.tsx`) on `/calculator` and every card page
+  (`#receipt`): presets ($10 coffee, $20 subscription, $50 dinner, $200 flight or hotel, shown in the visitor's own
+  currency) or any amount and currency. Lines: price, per-purchase %, flat fee, small-purchase fee (US-dollar limit;
+  foreign-only applies when the card does not bill in that currency), FX fee (`fxIn`), top-up fee, cashback (entry band
+  rate), paid at the till, real cost, net %. "Post receipt on X" links to `/cards/<slug>?amt=&cur=&tier=&what=#receipt`,
+  which reopens the same receipt. Exchange rates: open.er-api.com, CoinGecko as fallback (`lib/prices.ts`, cached 1h).
+- Tier break-even box above every multi-tier card's Tiers table (`components/TierBreakEven.tsx`): monthly spend where
+  each tier beats the entry tier (`breakEvens(..., 'entry')`, ongoing rates, caps and fees, all spend in the card's
+  currency), plus a staking check for tiers with a stake: live USD value (CoinGecko, one shared request, cached 1h;
+  card pages now refresh hourly), a -25% token drop, and months of extra cashback to earn it back at the visitor's
+  spend (the yearly fee is left out when staking replaces it). CoinGecko IDs added in the sheet: Plasma XPL `plasma`,
+  COCA `coca` (checked: coingecko.com/coins/coca links to coca.xyz).
+- Best 2-card wallet on `/calculator` (best-card view; `lib/combo.ts`): spending is split into slices (own currency /
+  US dollars / travel x purchase sizes, `buildSegments`); every pair of cards is tried with set splits (small
+  purchases, other currencies, both, travel only, US dollars only, under $50) and a slice-by-slice split, each card at
+  its best tier for its share, both yearly fees in full. Shown only when the pair beats the best single card by $1+.
+- Local testing: Node's fetch here ignores the sandbox proxy; build and start with `NODE_USE_ENV_PROXY=1` to see live
+  prices (Vercel needs nothing).
+
 ## Card pages: every country by region (24 Oct 2026)
 
-"Where it works" keeps the five checked markets and links to a new full-width "Countries" section: counts (available,
+"Where it works" keeps the five checked markets; its "See all N countries" button opens (and closes again) a
+full-width "Countries" section, closed at first (a link to `#countries` opens it): counts (available,
 not available, not confirmed), the visitor's own country, a "Check a country" search, every available country grouped
 by region (`lib/continents.mjs`, all 250 codes), and the not-available list behind a toggle. Statuses come from
 `availabilityIn` (the issuer's list, else the five markets), the same as rankings.

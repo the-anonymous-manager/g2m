@@ -1603,10 +1603,30 @@ body::before {
 
 /* ---------- Card page: countries ---------- */
 .country-jump {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 40px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
   font-size: 14px;
   font-weight: 600;
   color: var(--accent);
   text-decoration: none;
+  cursor: pointer;
+}
+.country-jump-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.country-jump-arrow[data-open='true'] {
+  transform: rotate(180deg);
+}
+#countries[hidden] {
+  display: none;
 }
 .country-jump:hover {
   text-decoration: underline;
@@ -1686,4 +1706,192 @@ body::before {
     column-gap: 16px;
     font-size: 14px;
   }
+}
+
+/* ---------- Swipe receipt ---------- */
+.swipe {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+  gap: 24px;
+  align-items: start;
+}
+.swipe-fields {
+  display: grid;
+  grid-template-columns: 1fr 140px;
+  gap: 12px;
+}
+.slip {
+  margin: 0;
+  padding: 20px 22px 18px;
+  border-radius: 18px;
+  border: 1px solid var(--border-strong);
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    var(--metal) border-box;
+  border-color: transparent;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+.slip-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+.slip-sub {
+  margin: 6px 0 12px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.slip-lines,
+.slip-total {
+  margin: 0;
+  padding: 10px 0;
+  border-top: 1px dashed var(--border-strong);
+}
+.slip-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 4px 0;
+}
+.slip-line dt {
+  color: var(--text);
+}
+.slip-line dd {
+  margin: 0;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.slip-fee dd,
+.slip-fee dt {
+  color: var(--bad);
+}
+.slip-reward dd,
+.slip-reward dt {
+  color: var(--ok);
+}
+.slip-total .slip-line {
+  font-weight: 600;
+}
+.slip-result {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0 4px;
+  border-top: 1px dashed var(--border-strong);
+}
+.slip-result b {
+  font-family: var(--font-sans, inherit);
+  font-size: 1.9rem;
+  letter-spacing: -0.02em;
+}
+.slip-result span {
+  text-align: right;
+}
+.slip-note {
+  margin: 6px 0 0;
+  color: var(--faint);
+  font-size: 11.5px;
+}
+.slip-share {
+  margin-top: 14px;
+  width: 100%;
+}
+@media (max-width: 760px) {
+  .swipe {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 400px) {
+  .swipe-fields {
+    grid-template-columns: 1fr 110px;
+  }
+  .slip {
+    padding: 16px;
+    font-size: 12px;
+  }
+}
+
+/* ---------- Tier break-even ---------- */
+.tier-be-list {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.tier-be-stress {
+  color: var(--muted);
+}
+.tier-be-stake-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 16px;
+}
+.tier-be-spend {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+.tier-be-spend .input {
+  width: 110px;
+  min-height: 38px;
+  padding: 6px 10px;
+}
+
+/* ---------- 2-card wallet ---------- */
+.combo-headline {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+.combo-headline b {
+  color: var(--ok);
+}
+.combo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+.combo-side {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface-2);
+}
+.combo-facts,
+.combo-compare {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  margin: 0;
+}
+.combo-facts dt,
+.combo-compare dt {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+}
+.combo-facts dd,
+.combo-compare dd {
+  margin: 2px 0 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
