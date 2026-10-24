@@ -237,6 +237,22 @@ which moved ranks: Crypto.com 0% to 3% (US non-USD on the lower tiers; #5 to #15
 single FX number does not capture: cross-border fees on USD at foreign merchants (Tuyo, Exa, Avalanche, US Krak,
 MetaMask free tier) and per-region card currencies (stored as a union of currencies).
 
+## Wallet builder and receipt pages (24 Oct 2026)
+
+Akash: the receipt needs its own page with an automatic share picture (G2M's X handle on one side, the site on the
+other), and the 2-card wallet is a headline feature that should weigh more than cashback.
+- `/receipt` (`app/receipt`): the swipe receipt for any card, settings in the link (`card, tier, amt, cur, what,
+  home`; `lib/receipt-params.ts`). Its share preview is `/receipt/image?...` (`app/receipt/image/route.tsx`, 1200 x 630,
+  next/og): the receipt, the real result, `site.twitter` (NEXT_PUBLIC_TWITTER_HANDLE, now @0akash0x) on the left and
+  the site on the right. "Download image" saves the same PNG. Card pages link to it (`#receipt`); the calculator no
+  longer embeds it.
+- `/wallet` (`app/wallet`, `components/WalletBuilder.tsx`, `lib/combo.ts` `planWallet`): must-haves (lounges from tier
+  perks, yield, borrowing, bank account, bank payouts, self-custody, physical card, Apple/Google Pay; `lib/features.ts`)
+  that the two cards must cover between them; every pair x splits x tier combinations; top 3 pairs. The answer is
+  compared with the best single card that has every must-have: if no pair beats it, the page says one card does it.
+  In the menu, footer, home tools and sitemap. The calculator shows a one-line summary above its leaderboard that opens
+  the builder with the same settings.
+
 ## Unique tools, step A (24 Oct 2026)
 
 - Real swipe receipt (`lib/swipe.ts`, `components/SwipeReceipt.tsx`) on `/calculator` and every card page

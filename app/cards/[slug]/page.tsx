@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { getCard, getCards, getRank, standings } from '@/lib/cards';
 import type { Card, Market, Tier } from '@/lib/types';
 import { toRow } from '@/lib/types';
-import { fiatPerUsd, usdPrices } from '@/lib/prices';
+import { usdPrices } from '@/lib/prices';
 import { MARKET_LABELS, availabilityIn } from '@/lib/regions';
 import { COUNTRY_CODES } from '@/lib/countries.mjs';
 import { CUSTODY_LABEL, NP, TYPE_LABEL, cashbackLabel, ecosystemFeatures, fmtDate, pct, perPurchaseFee, usd } from '@/lib/format';
@@ -18,7 +18,6 @@ import { CountryStanding } from '@/components/CountryStanding';
 import { CountryList } from '@/components/CountryList';
 import { CountryToggle } from '@/components/CountryToggle';
 import { TierBreakEven } from '@/components/TierBreakEven';
-import { SwipeReceipt } from '@/components/SwipeReceipt';
 
 export const dynamicParams = false;
 
@@ -99,11 +98,10 @@ export default async function CardPage({ params }: Props) {
   const status = Object.fromEntries(COUNTRY_CODES.map((cc: string) => [cc, availabilityIn(card, cc)]));
   const confirmed = COUNTRY_CODES.filter((cc: string) => status[cc] === 'yes');
   const row = toRow(card);
-  // Live token prices for staking tiers and exchange rates for the receipt (cached for an hour; null-safe).
-  const [prices, perUsd] = await Promise.all([
+  // Live token prices for staking tiers (cached for an hour; null-safe).
+  const [prices] = await Promise.all([
     // Every card's staking tokens in one request, shared by all card pages.
-    usdPrices(all.flatMap((c) => c.tiers.flatMap((t) => (t.stake?.coingeckoId ? [t.stake.coingeckoId] : [])))),
-    fiatPerUsd()
+    usdPrices(all.flatMap((c) => c.tiers.flatMap((t) => (t.stake?.coingeckoId ? [t.stake.coingeckoId] : []))))
   ]);
 
   // Alternatives: the best-scored cards that are available in at least one of the same confirmed markets.
@@ -380,9 +378,15 @@ export default async function CardPage({ params }: Props) {
             What one purchase really costs on {card.name}, with every fee and the cashback.
           </p>
         </div>
-        <div className="panel panel-pad">
-          <SwipeReceipt cards={[row]} perUsd={perUsd} />
-        </div>
+        <Link href={`/receipt?card=${card.slug}`} className="wallet-teaser">
+          <span className="field-label">[ swipe receipt ]</span>
+          <span className="wallet-teaser-text">
+            Try a $10 coffee, a $50 dinner or a $200 hotel on {card.name}, in your own currency, and post the receipt on X.
+          </span>
+          <span className="wallet-teaser-cta">
+            Open the receipt <span aria-hidden="true">→</span>
+          </span>
+        </Link>
       </section>
 
       <div className="grid-2">

@@ -21,8 +21,8 @@ import {
 import { money } from '@/lib/format';
 import { CardArt } from '@/components/CardArt';
 import { ShareBar } from '@/components/ShareBar';
-import { SwipeReceipt } from '@/components/SwipeReceipt';
-import { WalletCombo } from '@/components/WalletCombo';
+import { Chips } from '@/components/Chips';
+import { WalletTeaser } from '@/components/WalletTeaser';
 import { useRegion } from '@/components/RegionContext';
 import { track } from '@/lib/analytics';
 
@@ -31,8 +31,6 @@ type Props = {
   initial: CalcInput;
   initialCountry: string;
   hadCountry: boolean;
-  /** Units of each currency per US dollar, for the swipe receipt. */
-  perUsd: Record<string, number> | null;
 };
 
 const MODES: { id: CalcMode; label: string; short: string }[] = [
@@ -50,35 +48,10 @@ const cash = (n: number) => {
 const minus = (n: number) => (n > 0.004 ? `−${cash(n)}` : '$0');
 const keepColor = (n: number) => (n >= 0 ? 'var(--ok)' : 'var(--bad)');
 
-function Chips<T extends string | number>({
-  label,
-  value,
-  options,
-  onChange
-}: {
-  label: string;
-  value: T;
-  options: { value: T; label: string }[];
-  onChange: (v: T) => void;
-}) {
-  return (
-    <div className="field">
-      <span className="field-label">{label}</span>
-      <div className="chip-row" role="group" aria-label={label}>
-        {options.map((o) => (
-          <button key={String(o.value)} type="button" className="chip" aria-pressed={value === o.value} onClick={() => onChange(o.value)}>
-            {o.label}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 const numText = (v: string) => v.replace(/[^\d.]/g, '');
 const bad = (text: string, min: number, max: number) => text !== '' && (!Number.isFinite(Number(text)) || Number(text) < min || Number(text) > max);
 
-export function CalculatorClient({ rows, initial, initialCountry, hadCountry, perUsd }: Props) {
+export function CalculatorClient({ rows, initial, initialCountry, hadCountry }: Props) {
   // Raw text for number inputs, so typing never jumps; parsed and clamped values drive the maths.
   const [spendText, setSpendText] = useState(String(initial.spend));
   const [usdText, setUsdText] = useState(String(initial.usd));
@@ -403,8 +376,8 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry, pe
 
       {input.mode === 'best' ? (
         <>
+          <WalletTeaser cards={formOk} input={input} country={country} />
           <BestView results={results} input={input} country={country} currency={currency} hiddenVirtual={hiddenVirtual} />
-          <WalletCombo cards={formOk} input={input} country={country} />
         </>
       ) : !picked ? (
         <p className="muted">No card is available where you live yet.</p>
@@ -414,28 +387,11 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry, pe
         <AuditView card={picked} input={input} country={country} currency={currency} />
       )}
 
-      {eligible.length ? (
-        <section className="stack" style={{ gap: 14 }} aria-labelledby="calc-receipt-title">
-          <div className="stack" style={{ gap: 4 }}>
-            <span className="field-label">[ one purchase ]</span>
-            <h2 id="calc-receipt-title" className="h3" style={{ margin: 0 }}>
-              Real swipe receipt
-            </h2>
-          </div>
-          <div className="panel panel-pad">
-            <SwipeReceipt
-              cards={eligible}
-              initialSlug={input.mode === 'best' ? results[0]?.card.slug : picked?.slug}
-              perUsd={perUsd}
-            />
-          </div>
-        </section>
-      ) : null}
-
       <p className="faint" style={{ fontSize: 13, maxWidth: '90ch' }}>
         Missing figures are counted as zero and flagged in the notes. Spending caps, spend bands and small-purchase limits
         are applied where the issuer publishes them. Top-up fees are worked out on everything you load, including the money
-        that goes on fees. <Link href="/methodology#calculator">How the calculator works</Link>.
+        that goes on fees. <Link href="/methodology#calculator">How the calculator works</Link>. To see one purchase line by
+        line, try the <Link href="/receipt">swipe receipt</Link>.
       </p>
     </div>
   );
