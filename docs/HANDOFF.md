@@ -1,7 +1,7 @@
 # G2M handoff: everything decided so far
 
-Started 22 Oct 2026 at the end of the version 1 build; last updated 22 Oct 2026 during version 2 (sheet editing,
-real card pictures, bug fixes). Read this with `CLAUDE.md` before changing anything.
+Started 22 Oct 2026 at the end of the version 1 build; last updated 24 Oct 2026 during scoring rules v3 (in progress;
+see "Scoring rules v3"). Read this with `CLAUDE.md` before changing anything.
 The owner, Akash, is not a developer: explain in plain words and do the technical steps yourself.
 
 ## Where things stand (quick summary)
@@ -165,7 +165,8 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
 - Compare (`/compare?c=a,b,c`), Card finder (3 questions, `/finder`), Rewards calculator (`/calculator`, yearly
   value after plan, FX and per-purchase fees), Methodology, Submit a card (prepares an email), 404, sitemap, robots.
 - `/go/<slug>` sends visitors to the card's site with UTM tags, or to `links.affiliate` when one is added.
-- G2M score: rewards 40, fees 30, coverage 20, control 10 (rules v2 below). Unpublished figures score 0.
+- G2M score: rewards 25, fees 30, coverage 20, banking features 15, control 10 (rules v3 below). Unpublished figures
+  score 0.
   Since 22 Oct 2026 rewards use cashback minus any fee charged on every purchase (`fees.txPct`); only the part of
   that fee larger than the cashback, plus flat and small-purchase fees, counts in the fees section. Small-purchase
   fees live in `fees.smallPurchase` (feeUsd, underUsd, foreignOnly) and the calculator applies them at the
@@ -257,6 +258,62 @@ MetaMask free tier) and per-region card currencies (stored as a union of currenc
 Big moves on the first run: MEXC #2 to #15 and Bybit #3 to #21 (no published entry-tier rate), Crypto.com to #25.
 Many cards lose the 8 transaction-cost points only because their top-up fee is not published yet; filling the
 sheet's "Top-up fee %", "Card activation fee $" and "Physical card cost $" columns will move them back.
+
+## Scoring rules v3 (24 Oct 2026, Akash's exact rules) — IN PROGRESS, do not merge yet
+
+The code is done (`lib/score.ts`, /methodology, card pages, compare page, sheet columns). The card data is not
+filled in yet, so every card currently scores 0 for Banking features. Do not merge the pull request until the data
+below is in. Akash will say "start" in a new session to finish it.
+
+Rules (as built):
+- Rewards 25: 25 x min(entry-tier ongoing cashback on the $1,000 basket / 3.5%, 1). Bands and caps apply; intro
+  offers left out; "up to"-only = 0. Fees no longer reduce rewards.
+- Fees 30: annual and card-access 10 (free 10, up to $100 6, up to $300 3, more 0); FX 12 (0% 12, up to 1% 9, up to
+  2% 5, more 2); other transaction costs on the basket 8 ($0 8, up to $10 6, up to $20 3, up to $30 1, more or not
+  published 0). Costs = per-purchase % + top-up % + flat fee x 35 + small-purchase fees. In a country view, when the
+  card does not bill in that country's currency, its FX fee and foreign-only small-purchase fees are added.
+- "No per-purchase fee listed" on a published fee schedule = $0, not "not published". Not published only when there
+  is no fee schedule at all, or a fee is said to apply without the amount. A refundable activation top-up = $0.
+- Coverage 20: countries 12 (unchanged), Apple Pay 2, Google Pay 2, physical card 3 (+1 under $50).
+- Banking features 15 (`ecosystem` in cards.json; sheet columns "IBAN / bank account" (named/shared/none), "Bank
+  payout currencies" (number), "Fiat on/off-ramp" (both/on/off/none), "Crypto-backed credit" and "Yield on balance"
+  (yes/no)): IBAN named 3 / shared 2; payouts 2+ currencies 3 / 1 = 1.5; ramps both 3 / one way 1.5; credit 3;
+  yield 3. Empty = not confirmed = 0.
+- Control 10: self-custodial 10, custodial 5, not published 0.
+
+Research done on 24 Oct 2026 (issuer sources only, with quotes), saved in `docs/research/scoring-v3/`:
+- `custody-markets.json`: custody for Bitget Wallet, KAST, Krak, MEXC, Jupiter (custodial) and Tangem Pay, Kolo
+  (self-custodial); India/UAE checks (Wirex One UAE yes; Crypto.com, Jupiter India, Plasma stay unknown). Wirex's
+  country list moved to https://wirexone.freshdesk.com/support/solutions/articles/76000088412 (old URL is 404):
+  refresh the Wirex country list from it.
+- `country-lists.json`: lists for Kolo, KAST, Coinbase One, Avalanche, Solayer, Bleap, Tangem Pay, Karta, Tuyo.
+  Decisions: Tangem Pay UK/EU stay "unknown" (not "no"); Kolo keep UK and UAE yes, EU becomes unknown (no EEA
+  country named). Keep the Ethena and Tria lists as they are.
+- `fees-eco-2.json` (Krak, MEXC, Jupiter, Avalanche, Solayer, Wirex One, Bleap, Tangem Pay, Ethena Pay) and
+  `fees-eco-3.json` (Exa, Plasma One, Kolo, Karta, Tria, COCA, Avici, Tuyo): top-up, per-purchase, flat and
+  small-purchase fees, card fee, physical card cost and the 5 banking features, each with a source.
+- NOT done: the same fees and banking research for Crypto.com, Bybit, Coinbase One, Bitget Wallet, KAST, RedotPay,
+  ether.fi, MetaMask and Nexo (the helper was stopped before saving).
+
+Corrections the research found (apply with the data):
+- Exa FX 1.5% (site says 3%). Avici FX 0% markup (Visa may add 0.4-1%). Krak FX 0% in the UK/EEA, 1% on the US card.
+- MEXC has no physical card ("Physical cards are not available at this time"): remove physical from its forms.
+- Karta: bank payouts now "coming soon"; ATM 1 USDT + 2.5%; plastic card 99 USDT plus unpublished shipping.
+- Solayer's restricted list includes India, UAE, UK and most EU countries.
+- Tangem Pay physical delivery is now $28.82+ (not $17.44) and its FAQ says physical "is not available yet".
+
+Values to flag to Akash before publishing: Tria card fee (conflicting pages, left empty), Plasma top-up (0.15-0.75%
+by asset; 0.15 used), Karta and COCA physical cost (shipping not published), Avici credit (separate credit line,
+partly "coming soon"), Ethena payout currencies (not published) and Daily Boost counted as yield (Ethena says "not
+yield"), MEXC yield (campaign Earn product), Avalanche FX (1% / 2% / 3% on different pages; keep 3).
+
+Next steps when Akash says "start":
+1. Finish the fees and banking research for the 9 cards above.
+2. Apply all research to the Google Sheet (Cards, Country lists and Sources tabs; sources dated when checked,
+   "Last checked" updated), then check with `node scripts/sheet-sync.mjs --check`.
+3. `npm run validate` and `npm run build`; show Akash the 26-card ranking table (v2 vs v3, with part scores)
+   before marking the pull request ready.
+4. Update the sheet's "How to edit" tab and CLAUDE.md for the 5 banking columns.
 
 ## Security
 

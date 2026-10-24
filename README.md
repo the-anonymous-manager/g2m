@@ -108,7 +108,7 @@ Key fields:
 
 ## How the score works
 
-`lib/score.ts`. Rewards 40, fees 30, coverage 20, control 10, worked out on a standard $1,000 test basket of 35
+`lib/score.ts`. Rewards 25, fees 30, coverage 20, banking features 15, control 10, worked out on a standard $1,000 test basket of 35
 purchases. The same rules for every card; anything not published scores 0 for that part. Explained for visitors at
 `/methodology`.
 

@@ -1,0 +1,950 @@
+[
+ {
+  "slug": "krak",
+  "topUpPct": 0,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": 0,
+  "iban": "named",
+  "payoutCorridors": 3,
+  "ramps": "both",
+  "credit": false,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Krak: Pricing (US, EEA and UK tabs)",
+    "url": "https://krak.app/pricing",
+    "quote": "Crypto Deposits N/A Free",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "topUpPct",
+    "label": "Krak: Pricing (US, EEA and UK tabs)",
+    "url": "https://krak.app/pricing",
+    "quote": "Linked bank transfer (ACH) Free",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Krak: Pricing (US, EEA and UK tabs)",
+    "url": "https://krak.app/pricing",
+    "quote": "When spending local currency (in-store or online) Free",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Krak: Pricing (US, EEA and UK tabs)",
+    "url": "https://krak.app/pricing",
+    "quote": "A variable spread is included for card transactions involving crypto.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txFlatUsd",
+    "label": "Kraken Support: Kraken Debit Card FAQs",
+    "url": "https://support.kraken.com/articles/kraken-card-faqs",
+    "quote": "There are no annual, monthly or transaction fees, and no hidden charges.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Krak: Pricing (US, EEA and UK tabs)",
+    "url": "https://krak.app/pricing",
+    "quote": "Virtual Debit Card Free",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Krak: Pricing (US, EEA and UK tabs)",
+    "url": "https://krak.app/pricing",
+    "quote": "Plastic Debit Card Free; replacement $4.99",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Krak: Salary Match",
+    "url": "https://krak.app/salary-match",
+    "quote": "Share your Krak IBAN account details with your employer.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Krak Support: How your USD account works",
+    "url": "https://support.krak.app/articles/how-your-usd-account-works",
+    "quote": "Your Krak USD account comes with an account number and a routing number so you can receive and send US dollars.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Krak Support: Cash withdrawal options, fees, minimums",
+    "url": "https://support.krak.app/articles/cash-withdrawal-options-fees-minimums-and-processing-times",
+    "quote": "USA only ACH 1 USD Free",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Krak Support: Cash withdrawal options, fees, minimums",
+    "url": "https://support.krak.app/articles/cash-withdrawal-options-fees-minimums-and-processing-times",
+    "quote": "SEPA only* Instant SEPA (Banking Circle) 2 EUR 1 EUR Near-instant****",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Krak Support: Cash withdrawal options, fees, minimums",
+    "url": "https://support.krak.app/articles/cash-withdrawal-options-fees-minimums-and-processing-times",
+    "quote": "UK and Gibraltar* FPS (Banking Circle) 5 GBP 1.95 GBP Near-instant",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Krak: Pricing (US, EEA and UK tabs)",
+    "url": "https://krak.app/pricing",
+    "quote": "Trading Fee: A fixed 1% fee applies to each buy, sell, or conversion.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Kraken Support: Kraken Debit Card FAQs",
+    "url": "https://support.kraken.com/articles/kraken-card-faqs",
+    "quote": "Yes — when you spend crypto from your Everyday balance, it's converted to fiat at the point of sale.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Krak Support: Stablecoin Rewards",
+    "url": "https://support.krak.app/articles/stablecoin-rewards-krak",
+    "quote": "The Stablecoin Rewards rate for USDG is currently 4.00%.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Krak Support: Stablecoin Rewards",
+    "url": "https://support.krak.app/articles/stablecoin-rewards-krak",
+    "quote": "USDG rewards is available where Krak serves clients globally except for the EEA",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Krak: Vaults",
+    "url": "https://krak.app/vaults",
+    "quote": "Balanced Yield 4.2% APY",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Entry card = Krak Card (Krak app; same Everyday account as the Kraken-branded Debit Card, which is UK/EEA only). Card is in the UK, EEA and US. Fees: bank (ACH/SEPA/FPS) and crypto deposits are free; funding by debit card or Apple/Google Pay costs 0.25 + 3.75%. Spending a fiat balance has no fee; spending crypto includes a variable spread that Krak does not quantify. FX: no fee in EEA/UK (Mastercard rate, no markup), but the US Visa card has a 1% FX fee ('We pass on the Visa exchange rate and a 1% fee on debit card transactions'). Plastic card free (replacement 4.99), metal free at >=50,000 30-day average. IBAN: EEA users get a Krak IBAN (Salary Match page); US users get a personal account + routing number, which Krak says is a 'virtual address' into a pooled Citibank FBO account in Payward's name (not a bank account in the user's name); many legacy funding methods still use a shared account plus deposit reference. Payouts: USD (ACH, US), EUR (SEPA), GBP (Faster Payments, UK) on domestic rails; USD/EUR/GBP/CAD/CHF/JPY are also listed via SWIFT 'Worldwide*' with region limits, so up to 6 is possible but 3 is what card users clearly get. Yield: USDG Stablecoin Rewards 4.00% on the Krak balance outside the EEA (USDC 2% in US/CA/AU/UK); EEA users only have opt-in Vaults (4.2%-5.27% APY, Krak keeps 25% of yield). Kraken Borrow exists on Kraken, not tied to the card: debit only."
+ },
+ {
+  "slug": "mexc",
+  "topUpPct": 0,
+  "txPct": 1,
+  "txFlatUsd": 0,
+  "smallPurchase": {
+   "feeUsd": 0.1,
+   "underUsd": 1,
+   "foreignOnly": false
+  },
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": null,
+  "iban": "named",
+  "payoutCorridors": 1,
+  "ramps": "both",
+  "credit": false,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "MEXC Support: Understanding the MEXC Card (updated 2026-10-21)",
+    "url": "https://www.mexc.co/support/article/understanding-the-mexc-card-446453561133852672",
+    "quote": "Top-Up Fee 0 0",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "MEXC Support: Understanding the MEXC Card (updated 2026-10-21)",
+    "url": "https://www.mexc.co/support/article/understanding-the-mexc-card-446453561133852672",
+    "quote": "The MEXC Global Card charges a 1% transaction fee but no crypto conversion fee.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txFlatUsd",
+    "label": "MEXC Support: Understanding the MEXC Card (updated 2026-10-21)",
+    "url": "https://www.mexc.co/support/article/understanding-the-mexc-card-446453561133852672",
+    "quote": "Transaction Fee 0% 1% Crypto Conversion Fee 0% 0%",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "smallPurchase",
+    "label": "MEXC Support: Understanding the MEXC Card (updated 2026-10-21)",
+    "url": "https://www.mexc.co/support/article/understanding-the-mexc-card-446453561133852672",
+    "quote": "Small-Amount Transaction Fee (< 1 USD ) 0.1 USD",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "MEXC Support: Understanding the MEXC Card (updated 2026-10-21)",
+    "url": "https://www.mexc.co/support/article/understanding-the-mexc-card-446453561133852672",
+    "quote": "Virtual Card Issuance Fee 0 0",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "MEXC Card page",
+    "url": "https://www.mexc.co/buy-crypto/mexc-card",
+    "quote": "Card Issuance Fee 20 USD 0 USD",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "MEXC Support: Fiat Deposit via Bank Transfer - SEPA",
+    "url": "https://www.mexc.co/support/article/fiat-deposit-via-bank-transfer-sepa-364723073679663104",
+    "quote": "we will provide you with an IBAN account under the same name through a third-party partner.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "MEXC Support: How to Deposit and Withdraw USD on MEXC",
+    "url": "https://www.mexc.co/support/article/how-to-deposit-and-withdraw-usd-on-mexc-469383446634460160",
+    "quote": "You can also withdraw your USD balance back to your bank account.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "MEXC Support: How to Deposit and Withdraw USD on MEXC",
+    "url": "https://www.mexc.co/support/article/how-to-deposit-and-withdraw-usd-on-mexc-469383446634460160",
+    "quote": "Once your USD deposit is credited, you can purchase cryptocurrencies via Quick Buy or use your funds for trading on the Spot market.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "MEXC Learn: What Is the MEXC Global Card?",
+    "url": "https://www.mexc.co/learn/article/what-is-the-mexc-global-card-cashback-7-apr-fees-limits-and-how-to-apply/1",
+    "quote": "The practical consequence is that the card spends only what you have topped up, rather than drawing directly on your trading balance.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "MEXC Learn: What Is the MEXC Global Card?",
+    "url": "https://www.mexc.co/learn/article/what-is-the-mexc-global-card-cashback-7-apr-fees-limits-and-how-to-apply/1",
+    "quote": "USDT you subscribe to the MEXC Card exclusive Earn product earns a 7% APR , paid in USDT.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "MEXC Card page",
+    "url": "https://www.mexc.co/buy-crypto/mexc-card",
+    "quote": "Physical cards are not available at this time.",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Entry card = MEXC Global Card (virtual Visa, anywhere outside MEXC's application blacklist; US and India are blacklisted). mexc.com returns 403 here, so pages were read on MEXC's own mirror domain mexc.co (same article IDs). Top-up from the Fiat account is free. 1% transaction fee on every Global Card purchase (USD and non-USD; no FX markup on Visa rate); MEXC's Card page still shows 'Service Fee 0%' and the support article says 'Fee rates may be adjusted during the event', so check the app; the 1% is the published standard. The APAC card (TW, PH, TH, VN) now charges 0% transaction fee but Visa rate + 1% cross-border fee. 0.1 USD fee on purchases under 1 USD sits in the Global Card column only. Standard 20 USD issuance fee is currently waived (0). No physical card for either MEXC card (cards-brief says physical in Thailand: MEXC says none). IBAN: EUR SEPA deposits use an IBAN 'under the same name' via a third-party partner (EEA/CH SEPA countries; deposit-side); USD SWIFT deposits go to a shared Bahrain account with a reference code. Payouts: only USD SWIFT withdrawal is documented (1 confirmed); MEXC also advertises 'Global Bank Transfer: buy and sell via local banks' and P2P but lists no currencies, so the true count may be higher. Credit: card is prepaid top-up (MEXC Loans exist but are not linked to the card). Yield: 7% APR on 100-100,000 USDT in the card-holder-exclusive Earn product, campaign rate, manual subscription (not automatic on the card balance)."
+ },
+ {
+  "slug": "jupiter",
+  "topUpPct": 0,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": 13.13,
+  "iban": "named",
+  "payoutCorridors": 15,
+  "ramps": "both",
+  "credit": false,
+  "yield": false,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Jupiter Docs: Fees & Limits",
+    "url": "https://docs.jup.ag/user-docs/global/spend/fees-and-limits",
+    "quote": "No processing fee for USDC or USDT on Solana",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Jupiter Docs: Fees & Limits",
+    "url": "https://docs.jup.ag/user-docs/global/spend/fees-and-limits",
+    "quote": "No fee applies for payments made in USD.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txFlatUsd",
+    "label": "Jupiter Docs: Fees & Limits",
+    "url": "https://docs.jup.ag/user-docs/global/spend/fees-and-limits",
+    "quote": "No fee applies for payments made in USD.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Jupiter Docs: Fees & Limits",
+    "url": "https://docs.jup.ag/user-docs/global/spend/fees-and-limits",
+    "quote": "Annual fee None Claynosaurz virtual card $25",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Jupiter Docs: Jupiter Card",
+    "url": "https://docs.jup.ag/user-docs/global/spend/jupiter-card",
+    "quote": "The card costs $13.13 plus shipping, both charged to your Spend balance, and shipping prices are shown before you confirm.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Jupiter Docs: Remittance",
+    "url": "https://docs.jup.ag/user-docs/global/spend/remittance",
+    "quote": "Once Global ID verification is complete, users receive virtual accounts in USD and EUR. Each account includes standard banking identifiers for its currency.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Jupiter Docs: Remittance",
+    "url": "https://docs.jup.ag/user-docs/global/spend/remittance",
+    "quote": "In addition to SWIFT, users can send local payouts in the following currencies: AED, BRL, CAD, EUR, GBP, IDR, INR, MYR, NGN, PHP, SGD, THB, TRY, USD, VND.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Jupiter Docs: Fees & Limits",
+    "url": "https://docs.jup.ag/user-docs/global/spend/fees-and-limits",
+    "quote": "Bank Transfer sends fiat to a bank account (off-ramp) through Fedwire, ACH, SEPA, SWIFT, or a local payout, depending on the destination.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Jupiter Docs: Remittance",
+    "url": "https://docs.jup.ag/user-docs/global/spend/remittance",
+    "quote": "Incoming transfers received on your virtual accounts fund your Spend balance directly",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Jupiter Docs: Jupiter Card",
+    "url": "https://docs.jup.ag/user-docs/global/spend/jupiter-card",
+    "quote": "Jupiter does not issue credit lines: you can only spend what you have deposited.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Jupiter Docs: Jupiter Card",
+    "url": "https://docs.jup.ag/user-docs/global/spend/jupiter-card",
+    "quote": "Rain-issued card: the USDC and USDT you deposit are credited 1:1. They are not converted, and they stay on-chain as collateral for the card.",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Two issuers: Rain (most countries, incl. US/UAE/LatAm) and DCS (AU, JP, MY, PH, SG, KR, TW, TH, VN). Deposits: USDC/USDT on Solana free (min $3); other networks at least $0.30 (0.02% stablecoins) plus gas. Purchases: no fee in USD; FX 1% (Rain) / 1.8% (DCS) on non-USD. Standard virtual card: no issuance fee listed in the fee table (only the $25 Claynosaurz design); docs say card orders are non-refundable. Physical: $13.13 plus shipping (shipping not published, shown in app; $30 off tracked shipping with >= $1,500 balance, which covers US tracked shipping); physical cards still rolling out (full rollout by end 2026), so 13.13 excludes shipping. Banking (Global Fiat Remittance via Noah): personal USD and EUR virtual accounts (EUR may depend on residence; bank deposits paused in CA, NY, CT, PR); deposits cost e.g. SEPA EUR 0.87 + 0.10%, ACH $2 + 0.05%. Payouts: 15 local-payout currencies plus SWIFT (fees e.g. EUR $1 + 0.10%); Noah restricts some regions (e.g. UK residents: no EUR/USD off-ramp). Only USDC (not USDT) can be cashed out, and DCS-issued card holders cannot withdraw at all yet. No yield on the Spend balance (Jupiter Lend Earn is a separate product, not the card balance)."
+ },
+ {
+  "slug": "avalanche-card",
+  "topUpPct": 0,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": 0,
+  "iban": "none",
+  "payoutCorridors": 0,
+  "ramps": "none",
+  "credit": false,
+  "yield": false,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Avalanche Card: homepage FAQ",
+    "url": "https://www.avalanchecard.com/",
+    "quote": "No gas fees or conversion fees are charged by Avalanche Card*",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Avalanche Card: homepage FAQ (Are there any fees when using my card?)",
+    "url": "https://www.avalanchecard.com/",
+    "quote": "FX Fees: 1% Monthly Account Fee: $0 Virtual Card Issuance: $0 Physical Card: $0 Card Shipping: $0",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txFlatUsd",
+    "label": "Avalanche Card: homepage FAQ (Are there any fees when using my card?)",
+    "url": "https://www.avalanchecard.com/",
+    "quote": "FX Fees: 1% Monthly Account Fee: $0 Virtual Card Issuance: $0 Physical Card: $0 Card Shipping: $0",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Avalanche Card: homepage FAQ",
+    "url": "https://www.avalanchecard.com/",
+    "quote": "Virtual Card Issuance: $0",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Avalanche Card: homepage FAQ",
+    "url": "https://www.avalanchecard.com/",
+    "quote": "Physical Card: $0 Card Shipping: $0",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Avalanche App Terms and Conditions",
+    "url": "https://legal.avalanchecard.com/legal/avalanche-app-terms-conditions-4b62a44e",
+    "quote": "The Avalanche App does not exchange any currency–fiat or crypto.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Avalanche App Terms and Conditions",
+    "url": "https://legal.avalanchecard.com/legal/avalanche-app-terms-conditions-4b62a44e",
+    "quote": "At no point does Rain Liquidity or Issuer trade, swap, or exchange your assets.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Avalanche App Terms and Conditions",
+    "url": "https://legal.avalanchecard.com/legal/avalanche-app-terms-conditions-4b62a44e",
+    "quote": "The Avalanche App does not exchange any currency–fiat or crypto.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Avalanche Card US Card Agreement",
+    "url": "https://legal.avalanchecard.com/legal/avalanche-card-us-card-agreement-bcc089aa",
+    "quote": "A “liquidation event” will occur a) once a day at a period cadence set by Rain Liquidity; b) within 6 hours of each Purchase you make with a Card",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Avalanche Card: homepage FAQ",
+    "url": "https://www.avalanchecard.com/",
+    "quote": "Supports USDC and AVAX for collateral",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Rain-powered card; collateral (USDC, USDT, AVAX, WAVAX) stays in the user's own smart-contract wallet. No top-up/deposit fee by Avalanche Card (network gas only). No per-purchase fee on USD spend. FX conflict worth flagging: homepage FAQ says 'FX Fees: 1%'; the International Card Agreement (effective 2/12/25) says FX up to 3% plus cross-border up to 3%; the US Card Agreement says International Transaction fee 2%. cards-brief has fxPct 3 (from the international agreement). Virtual and physical card and shipping are $0. Credit: legally a 0% APR 'credit card' secured by collateral (non-stables count at up to 50% of value), but Rain liquidates collateral to repay charges once a day or within 6 hours of each purchase, so in practice it is a debit-style spend of your crypto, not a borrow-to-spend line; set false. No yield, no fiat account, no on/off-ramp in the app (rewards are Avax Points only)."
+ },
+ {
+  "slug": "solayer",
+  "topUpPct": 1,
+  "txPct": 0,
+  "txFlatUsd": 0.15,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": 24.99,
+  "iban": "none",
+  "payoutCorridors": 0,
+  "ramps": "none",
+  "credit": false,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Solayer Docs: Solayer Pay fee structure",
+    "url": "https://docs.solayer.org/solayer-pay/fee",
+    "quote": "Top-Up Fee | 1% per top-up transaction",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Solayer Docs: Solayer Pay fee structure",
+    "url": "https://docs.solayer.org/solayer-pay/fee",
+    "quote": "USD Transaction Fee | $0.15 per transaction",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txFlatUsd",
+    "label": "Solayer Docs: Solayer Pay fee structure",
+    "url": "https://docs.solayer.org/solayer-pay/fee",
+    "quote": "USD Transaction Fee | $0.15 per transaction",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txFlatUsd",
+    "label": "Solayer Docs: Solayer Pay fee structure",
+    "url": "https://docs.solayer.org/solayer-pay/fee",
+    "quote": "International Fee | $0.10 + 1.5% per international transaction",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Solayer Docs: Physical Card",
+    "url": "https://docs.solayer.org/solayer-pay/card",
+    "quote": "A one-time $20 account activation fee applies when you set up your Solayer Pay account (covers your virtual card for the first year).",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Solayer Docs: Solayer Pay fee structure",
+    "url": "https://docs.solayer.org/solayer-pay/fee",
+    "quote": "Membership covers card access and maintenance for 12 months. Renew annually to keep your card active.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Solayer Docs: Physical Card",
+    "url": "https://docs.solayer.org/solayer-pay/card",
+    "quote": "The physical card is FREE — you only pay shipping.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Solayer Docs: Physical Card",
+    "url": "https://docs.solayer.org/solayer-pay/card",
+    "quote": "US Express | $24.99 | 2–5 business days, tracked",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Solayer Docs: Solayer Pay overview",
+    "url": "https://docs.solayer.org/solayer-pay/overview",
+    "quote": "Deposit USDC to spend instantly or opt into sUSD",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Solayer Docs: Solayer Pay overview",
+    "url": "https://docs.solayer.org/solayer-pay/overview",
+    "quote": "Deposit USDC to spend instantly or opt into sUSD",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Solayer Docs: Solayer Pay overview",
+    "url": "https://docs.solayer.org/solayer-pay/overview",
+    "quote": "Spend directly from USDC — no pre-conversion",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Solayer Docs: Solayer Pay overview",
+    "url": "https://docs.solayer.org/solayer-pay/overview",
+    "quote": "Spend directly from USDC — no pre-conversion",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Solayer Docs: Solayer Pay overview",
+    "url": "https://docs.solayer.org/solayer-pay/overview",
+    "quote": "Deposit USDC to spend instantly or opt into sUSD — a Treasury-backed stablecoin offering 4–5% yield.",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Solayer's own docs disagree: the dedicated Fee Structure page says top-up 1%, USD purchase $0.15 flat, international $0.10 + 1.5%, and 'issues digital (virtual) cards only'; the FAQ says top-up 0.5% and international $0.10 + 1.75%; the Top Up tutorial says '$0.10 per top-up'; the Physical Card page says physical cards can be ordered now. Values above use the Fee Structure page. txPct 0 means no percentage fee on USD purchases; the flat $0.15 applies to every USD purchase (international purchases pay $0.10 + 1.5% instead). cardFeeUsd: the '$20 one-time account activation fee' is the first year of the $20/year membership (already annualUsd 20), so reported 0 here to avoid double counting; use 20 if the site treats year-one membership as an up-front card fee. Physical: card free, shipping US Express $24.99 or International Express $59.99 (no cheaper option listed). No fiat IBAN, bank payout or fiat on/off-ramp is described in the Solayer Pay docs (funding is USDC from a wallet). Yield: opt-in sUSD at 4-5% (Treasury-backed), not automatic on the card balance. Eligibility surprise: the FAQ restricted list includes India, UAE, UK, Australia, Canada and most EU countries (Austria, Belgium, France, Germany, Italy, Netherlands, Spain, etc.), while cards-brief has IN/AE/GB/EU as 'unknown' and scope 'Global'."
+ },
+ {
+  "slug": "wirex-one",
+  "topUpPct": 0.08,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": null,
+  "iban": "named",
+  "payoutCorridors": 3,
+  "ramps": "both",
+  "credit": true,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Wirex One Help: How to top up via stablecoin deposit",
+    "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088523-how-to-top-up-your-usd-or-eur-account-via-stablecoin-deposit",
+    "quote": "Base — 0.08% fee",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "topUpPct",
+    "label": "Wirex One Help: How to deposit EUR via SEPA",
+    "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088118-how-to-deposit-eur-via-sepa",
+    "quote": "Wirex One does not charge to receive SEPA transfers.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Wirex One Help: Card limits and fees",
+    "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088413-card-limits-and-fees",
+    "quote": "Fees Fee type Amount Foreign transaction fee Free",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Wirex: Stablecoin and crypto card",
+    "url": "https://www.wirexapp.com/stablecoin-and-crypto-card",
+    "quote": "No fees. No limits. Up to 8% back on every purchase",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txFlatUsd",
+    "label": "Wirex One Help: Card limits and fees",
+    "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088413-card-limits-and-fees",
+    "quote": "Fees Fee type Amount Foreign transaction fee Free",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Wirex One Help: Your Wirex One card",
+    "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000089559-your-wirex-one-card",
+    "quote": "Available instantly in the app to all users, for online purchases and digital wallets.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Wirex: Stablecoin and crypto card",
+    "url": "https://www.wirexapp.com/stablecoin-and-crypto-card",
+    "quote": "No monthly fee, no annual charge, no small print. Just the card.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Wirex One Help: How to deposit EUR via SEPA",
+    "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088118-how-to-deposit-eur-via-sepa",
+    "quote": "You'll see your IBAN, BIC/SWIFT, account holder name, and bank details.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Wirex One Help: How to deposit USD via ACH",
+    "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088353-how-to-deposit-usd-via-ach",
+    "quote": "Your account number and routing number are provisioned and displayed after activation.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Wirex One Help: How to send money from your account (USD, EUR, GBP)",
+    "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088334-how-to-send-money-from-your-account-usd-eur-gbp-",
+    "quote": "EUR — SEPA (IBAN + BIC) → How to Send EUR via SEPA USD — ACH (account number + routing number) → How to Send USD via ACH GBP — Faster Payments (account number + sort code)",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Wirex One Help: How to buy and sell crypto",
+    "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088332-how-to-buy-and-sell-crypto",
+    "quote": "buy crypto using your USD, EUR or GBP account, or sell crypto back to fiat, all within Wirex One.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Wirex One Help: Unlock instant liquidity with Wirex Loans",
+    "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088382-unlock-instant-liquidity-with-wirex-loans",
+    "quote": "Access liquidity against your crypto holdings — instantly, with no credit check and no fixed repayment schedule.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Wirex One Help: Unlock instant liquidity with Wirex Loans",
+    "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088382-unlock-instant-liquidity-with-wirex-loans",
+    "quote": "Your funds are credited to your Wirex account instantly and your collateral is locked for the duration of the Credit.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Wirex One: Flexible Savings",
+    "url": "https://www.wirex.one/flexible-savings",
+    "quote": "Earn up to 9.75% APY on your cash and crypto",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Wirex One Help: Your Wirex One card",
+    "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000089559-your-wirex-one-card",
+    "quote": "A plastic card delivered to your door, for in-store and everyday use. Available on the Premium tier and above.",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Entry tier = Base (virtual card only). Wirex One's Terms say 'Applicable fees, limits and charges are published in the Fees and Limits Schedule available at XXX', i.e. the full schedule is not published (placeholder); values come from the help-centre card fee table (only fee listed: FX free) and marketing ('No fees'). Top-up: stablecoin deposits on Base pay 0.08% (USDT example; fee-free allowances on Premium/Elite, none on Private/Bespoke; 0.08% for all before verification); SEPA and ACH deposits are free from Wirex's side; card top-up fee not stated. Physical card needs Premium (portfolio >= $500 with >= 1% in WPAY); Standard (post) or Express (DHL) delivery prices are not published; free delivery only on Private/Bespoke metal; so null. Banking: personal EUR IBAN (activate in app), USD account + routing number (ACH), payouts EUR SEPA, USD ACH, GBP Faster Payments (3). Card markets: the cards-brief scope (35 countries incl. EU/UK/AU, not US) is from the old Wirex list; USD ACH details are offered in the app but US card availability was not checked here. Credit: Wirex Credits borrow against crypto (LTV-based, monthly interest; rates not on the page) and the cash lands in the spendable Wirex account, so borrow-to-spend is possible. Yield: Earn accounts up to 9.75% APY (top tier / fixed term); Base flexible rate not published; earn boosts by tier; Earn is a separate account, not the card balance."
+ },
+ {
+  "slug": "bleap",
+  "topUpPct": 0,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": 0,
+  "iban": "named",
+  "payoutCorridors": 3,
+  "ramps": "both",
+  "credit": false,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Bleap: homepage FAQ",
+    "url": "https://www.bleap.finance/",
+    "quote": "There are no fees for adding, spending, or converting money.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "topUpPct",
+    "label": "Bleap Help: Fee Schedule",
+    "url": "https://help.bleap.finance/en/articles/12097920-fee-schedule",
+    "quote": "SEPA/SEPA Instant 0% 0%",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Bleap Help: Fee Schedule",
+    "url": "https://help.bleap.finance/en/articles/12097920-fee-schedule",
+    "quote": "No fees are charged by Bleap when paying with card.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txFlatUsd",
+    "label": "Bleap Help: Fee Schedule",
+    "url": "https://help.bleap.finance/en/articles/12097920-fee-schedule",
+    "quote": "No fees are charged by Bleap when paying with card.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Bleap: homepage FAQ",
+    "url": "https://www.bleap.finance/",
+    "quote": "Card issuance: Free",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Bleap: Crypto card page",
+    "url": "https://www.bleap.finance/en-us/card/crypto-card",
+    "quote": "No card or maintenance fees. No issuance cost. No monthly fees.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Bleap Help: How can I obtain a physical Bleap card?",
+    "url": "https://help.bleap.finance/en/articles/17213661-how-can-i-obtain-a-physical-bleap-card",
+    "quote": "The physical Bleap card is available exclusively through the referral program.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Bleap Help: Dedicated IBANs",
+    "url": "https://help.bleap.finance/en/articles/15311957-dedicated-ibans",
+    "quote": "Your dedicated IBAN is a personal account number that belongs to you, not Bleap.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Bleap Help: Bank Withdrawals",
+    "url": "https://help.bleap.finance/en/articles/17661424-bank-withdrawals",
+    "quote": "EUR SEPA Instant Up to 5 minutes EUR Standard SEPA Up to 2 business days MXN SPEI",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Bleap Help: Pix Withdrawals",
+    "url": "https://help.bleap.finance/en/articles/17661440-pix-withdrawals",
+    "quote": "You can withdraw money from your Bleap account straight to a Brazilian bank account in Reais (BRL) using Pix.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Bleap Help: Fee Schedule",
+    "url": "https://help.bleap.finance/en/articles/12097920-fee-schedule",
+    "quote": "Bleap doesn't charge any fees when selling (cash out) in the app.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Bleap: Crypto card page",
+    "url": "https://www.bleap.finance/en-us/card/crypto-card",
+    "quote": "The Bleap crypto card is a Mastercard debit card that lets you spend crypto and fiat anywhere Mastercard is accepted.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Bleap: homepage FAQ",
+    "url": "https://www.bleap.finance/",
+    "quote": "Bleap offers a savings feature paying up to 4% APY on USD balances.",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Self-custodial (MPC) Mastercard debit, EEA plus Mexico and Brazil. Funding: SEPA buy fee 0%, crypto deposits free; Bleap's pricing disclosure says a small spread may be built into buy/sell/bridge prices (not quantified), while the homepage says converting is free. No card spend fee, no FX fee, free ATM up to EUR 400/month. Physical card has no issuance cost but is only available through the referral program (a referred friend must sign up, pass KYC and make 3 card payments of EUR 10+), so it is not something anyone can just buy; 0 is the money cost. IBAN: dedicated EUR IBAN in the user's name (EE IBAN issued by Monerium, receiving EURe), rolled out from Q2 2026 (previously a shared IBAN with reference code; outbound still shows Bleap as sender during transition). Payouts: EUR (SEPA), MXN (SPEI), BRL (Pix) = 3, all free from Bleap. Yield: savings vaults up to 4% APY on USD (card page says up to 3.83% AER; not MiCA-protected), ETH staking via Lido up to 2.58%."
+ },
+ {
+  "slug": "tangem-pay",
+  "topUpPct": 0,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": 28.82,
+  "iban": "named",
+  "payoutCorridors": 1,
+  "ramps": "both",
+  "credit": false,
+  "yield": false,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Tangem Pay page FAQ",
+    "url": "https://tangem.com/en/tangem-pay/",
+    "quote": "There are no monthly or transaction fees. Foreign exchange markups apply to purchases in a currency other than USD. Network fees apply when you top up via crypto.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Tangem Pay: Terms, fees and limits (PDF, as of Oct 8, 2026)",
+    "url": "https://tangem.com/docs/en/tangem-visa-tariffs.pdf",
+    "quote": "Transaction fees $0",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txFlatUsd",
+    "label": "Tangem Pay: Terms, fees and limits (PDF, as of Oct 8, 2026)",
+    "url": "https://tangem.com/docs/en/tangem-visa-tariffs.pdf",
+    "quote": "Transaction fees $0",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Tangem Pay page",
+    "url": "https://tangem.com/en/tangem-pay/",
+    "quote": "Free virtual card. No monthly fees.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Tangem Pay: Terms, fees and limits (PDF, as of Oct 8, 2026)",
+    "url": "https://tangem.com/docs/en/tangem-visa-tariffs.pdf",
+    "quote": "$28.82 – $79.944",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Tangem Pay page FAQ",
+    "url": "https://tangem.com/en/tangem-pay/",
+    "quote": "A physical card is not available yet and is planned for a future update.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Tangem Pay page FAQ",
+    "url": "https://tangem.com/en/tangem-pay/",
+    "quote": "Your Tangem Pay account has its own routing number and account number.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "payoutCorridors",
+    "label": "Tangem Pay page (tier comparison)",
+    "url": "https://tangem.com/en/tangem-pay/",
+    "quote": "Offramp via banking details $1 ACH / $11 FedWire",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Tangem Pay page (tier comparison)",
+    "url": "https://tangem.com/en/tangem-pay/",
+    "quote": "Onramp fees via banking details $1 ACH / $10 FedWire",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Tangem Pay page",
+    "url": "https://tangem.com/en/tangem-pay/",
+    "quote": "For everyday spending, funded by your crypto.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Tangem Pay page FAQ",
+    "url": "https://tangem.com/en/tangem-pay/",
+    "quote": "Can I earn interest or rewards on my balance? Tangem Pay does offer cashback on card spending.",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Entry tier = Basic ($0). Rain-issued Visa in the Tangem Wallet app, run by Paera LLC. Crypto top-up (USDC/USDT on Polygon, Base, BNB Chain, Arbitrum, or swap in Tangem Wallet) has no Tangem fee, network fees only; bank top-up is $1 ACH / $10-11 FedWire on Basic (free ACH on Plus). No per-purchase fee; FX = Visa rate + 1.5%. First virtual card free (additional $5, replacement $1). Physical: the tariff PDF lists a delivery fee of $28.82-$79.94 on Basic (address-dependent, shown in app; issuing is otherwise free), but the FAQ says a physical card 'is not available yet'; 28.82 is the minimum. cards-brief says 'Plastic card delivery $17.44 in the US', which the current tariff (Oct 8, 2026) no longer supports. Banking: own USD account + routing number for US bank transfers (ACH/FedWire), availability 'may vary by jurisdiction', so most useful to US residents; payouts USD only (1). Credit: card spends the USDC/USDT balance held in the user's smart-contract account; no credit line. Yield: the FAQ answer to 'Can I earn interest... on my balance?' lists only cashback; a separate 'Yield Mode' in Tangem Wallet is mentioned only as a way to waive the Plus fee ($65,000), with no rate published on these pages."
+ },
+ {
+  "slug": "ethena-pay",
+  "topUpPct": 0,
+  "txPct": 0,
+  "txFlatUsd": 0,
+  "smallPurchase": null,
+  "cardFeeUsd": 0,
+  "physicalCardFeeUsd": null,
+  "iban": "named",
+  "payoutCorridors": null,
+  "ramps": "both",
+  "credit": false,
+  "yield": true,
+  "sources": [
+   {
+    "field": "topUpPct",
+    "label": "Ethena Pay blog: Introducing Ethena Pay",
+    "url": "https://pay.ethena.fi/blog/introducing-ethena-pay",
+    "quote": "Ethena Pay is free to fund in digital dollars. USD and non-USD bank deposits are at market-leading rates, with fiat deposits free and withdrawals at a nominal cost.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txPct",
+    "label": "Ethena Pay: Pricing (effective Sep 1, 2026)",
+    "url": "https://pay.ethena.fi/pricing",
+    "quote": "Domestic purchase fee (transactions in U.S. dollars) None",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "txFlatUsd",
+    "label": "Ethena Pay: Pricing (effective Sep 1, 2026)",
+    "url": "https://pay.ethena.fi/pricing",
+    "quote": "Domestic purchase fee (transactions in U.S. dollars) None",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "cardFeeUsd",
+    "label": "Ethena Pay: Pricing (effective Sep 1, 2026)",
+    "url": "https://pay.ethena.fi/pricing",
+    "quote": "Virtual card issuance Free",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Ethena Pay blog: Introducing Ethena Pay",
+    "url": "https://pay.ethena.fi/blog/introducing-ethena-pay",
+    "quote": "Every Ethena Pay user receives a virtual IBAN alongside a self-custodial digital dollar balance in a single interface",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "iban",
+    "label": "Ethena Pay: homepage FAQ",
+    "url": "https://pay.ethena.fi/",
+    "quote": "Your fiat IBAN is provided through licensed banking partners",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "ramps",
+    "label": "Ethena Pay: Pricing (effective Sep 1, 2026)",
+    "url": "https://pay.ethena.fi/pricing",
+    "quote": "Funding partners (Moonpay / Iron) Fees for onramp and offramp services, currency conversion, and bank transfers, as disclosed by the applicable provider at the time of the transaction.",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "credit",
+    "label": "Ethena Pay: Pricing (footer)",
+    "url": "https://pay.ethena.fi/pricing",
+    "quote": "Ethena Pay does not extend credit, accept deposits, hold customer funds or digital assets",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Ethena Pay: Pricing (3.3 Daily Boost Incentive)",
+    "url": "https://pay.ethena.fi/pricing",
+    "quote": "Standard 5% per annum Up to $5,000",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "yield",
+    "label": "Ethena Pay: Pricing (3.3 Daily Boost Incentive)",
+    "url": "https://pay.ethena.fi/pricing",
+    "quote": "Activity requirement At least one Qualifying Card Transaction per calendar month",
+    "verified": "2026-10-24"
+   },
+   {
+    "field": "physicalCardFeeUsd",
+    "label": "Ethena Pay: homepage",
+    "url": "https://pay.ethena.fi/",
+    "quote": "Generate a virtual card in under a minute.",
+    "verified": "2026-10-24"
+   }
+  ],
+  "notes": "Card is for non-US persons only. Funding in digital dollars and fiat deposits are free from Ethena; Moonpay/Iron on/off-ramp fees are 'as disclosed by the provider' (not published) and the blog says bank withdrawals cost a 'nominal' amount (not quantified). No fee on USD purchases; non-USD purchases pay the card network FX fee (~1%) passed through at cost. Virtual card only; no physical card exists, so physicalCardFeeUsd null. IBAN: confirmed per-user ('Every Ethena Pay user receives a virtual IBAN'; 'Your fiat IBAN is provided through licensed banking partners'), terms name Iron Network UAB / Moonpay as providers; Ethena does not state the currency (EUR implied by 'IBAN') or that it is in the user's own name, so 'named' is the best fit but not stated word for word. payoutCorridors null: 'withdraw to a bank' is supported but the payout currencies are not published, and the pricing page lists 'Wire transfers (outbound)' as not currently offered. Credit: the Spend Card is legally a 'secured product' (0% APR, late fee up to $40) backed by collateral in the user's wallet, but Ethena says it 'does not extend credit' and there is no borrow-to-spend line; false. Yield: 'Daily Boost' is a total rate of 5% a year on Standard (balance up to $5,000), 6% on Pro (to $100,000) and VIP (to $1,000,000), paid daily in USDe, only if you make at least one qualifying card purchase each month; Ethena calls it a discretionary promotional incentive, 'not interest, not yield', and it is not available where a licence would be needed; the homepage headline is '6% APY'. The pay.ethena.fi homepage 'up to 6%' is the Pro/VIP rate, not Standard."
+ }
+]
