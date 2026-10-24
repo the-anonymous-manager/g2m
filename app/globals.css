@@ -1392,3 +1392,211 @@ body::before {
     letter-spacing: 0;
   }
 }
+
+/* ---------- Calculator ---------- */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.range {
+  width: 100%;
+  accent-color: #b9705c;
+}
+.calc-split {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+.calc-split summary {
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.calc-edit {
+  color: var(--accent);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.calc-readonly {
+  display: flex;
+  align-items: center;
+  background: var(--surface-2);
+}
+.calc-table {
+  min-width: 940px;
+}
+.calc-notes {
+  font-size: 13px;
+  max-width: 260px;
+}
+.receipt {
+  min-width: 0;
+}
+.receipt tbody th,
+.receipt tfoot th {
+  text-align: left;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text);
+  white-space: normal;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 14px 12px 20px;
+}
+.receipt tfoot th,
+.receipt tfoot td {
+  font-weight: 700;
+  border-top: 2px solid var(--border-strong);
+  border-bottom: 0;
+}
+.receipt td.num,
+.receipt th[scope='col']:not(:first-child) {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.mode-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.mode-short {
+  display: none;
+}
+
+/* Phones: rows become blocks with labelled numbers, so nothing scrolls sideways. */
+@media (max-width: 640px) {
+  .mode-switch {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .mode-switch .chip {
+    justify-content: center;
+    padding: 8px 6px;
+    font-size: 13px;
+    white-space: normal;
+    text-align: center;
+  }
+  .mode-long {
+    display: none;
+  }
+  .mode-short {
+    display: inline;
+  }
+  .calc-wrap {
+    overflow-x: visible;
+  }
+  .calc-table,
+  .calc-table tbody {
+    display: block;
+    min-width: 0 !important;
+  }
+  .calc-table thead {
+    display: none;
+  }
+  .calc-table tr {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 14px 16px;
+  }
+  .calc-table tr + tr {
+    border-top: 1px solid var(--border);
+  }
+  .calc-table td,
+  .table.calc-table td:first-child,
+  .table.calc-table td:last-child {
+    padding: 0;
+    border: 0;
+  }
+  .calc-table td.rank {
+    display: none;
+  }
+  .calc-table td:not([data-label]) {
+    grid-column: 1 / -1;
+  }
+  .calc-table td[data-label] {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  .calc-table td.calc-notes:empty {
+    display: none;
+  }
+  .calc-table .card-cell {
+    margin-bottom: 4px;
+  }
+  .calc-table td[data-label]::before {
+    content: attr(data-label);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--faint);
+    text-align: left;
+  }
+  .calc-table td.calc-keep {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .calc-table .calc-notes {
+    max-width: none;
+    font-size: 12px;
+  }
+  .receipt thead {
+    display: none;
+  }
+  .receipt,
+  .receipt tbody,
+  .receipt tfoot {
+    display: block;
+  }
+  .receipt tr {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px 10px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .receipt tr th,
+  .receipt tr td,
+  .table.receipt td:last-child {
+    padding: 0;
+    border: 0;
+  }
+  .receipt tr th {
+    grid-column: 1 / -1;
+    font-size: 14px;
+  }
+  .receipt tfoot tr {
+    border-top: 2px solid var(--border-strong);
+    border-bottom: 0;
+  }
+  .receipt td[data-label] {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 14px;
+  }
+  .receipt td[data-label]::before {
+    content: attr(data-label);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--faint);
+  }
+}

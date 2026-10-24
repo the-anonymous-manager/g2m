@@ -163,19 +163,32 @@ export default function MethodologyPage() {
           rankings to see the worldwide list.
         </p>
 
-        <h2>The rewards calculator</h2>
+        <h2 id="calculator">The rewards calculator</h2>
         <p>
-          The calculator uses your monthly spend to work out a year of cashback for every tier of every card, then takes off
-          plan fees, FX fees and per-purchase fees, including small-purchase fees when your typical purchase is below the
-          limit. Monthly caps and spend bands are applied where published. Rewards in tokens or points are counted at face
-          value.
+          The calculator works out a year on every card for your monthly spend: rewards minus the plan fee, FX fees,
+          per-purchase fees, small-purchase fees and top-up fees. It has three views: the best card for you (every card
+          available where you live, at its best tier for your spend or its entry tier only), the tiers of one card side by
+          side with the monthly spend where each dearer tier starts to pay off, and one card line by line.
         </p>
         <p>
-          Pick where you live and we use your country&apos;s currency. Spending at home is free of FX fees only on a card
-          that bills in that currency (most crypto cards bill in US dollars, some also in euros), so someone in the US
-          paying in dollars pays no FX fee, while someone in India paying in rupees on a dollar card pays it on every
-          purchase. When an issuer does not say which currency it bills in, we count the FX fee on all spending. Plans
-          only offered in other countries are left out. The card finder uses the same rules.
+          Your spending is split three ways: your own currency at home, US dollars online, and other currencies when you
+          travel (80%, 10% and 10% to start). A card only charges no FX fee on a currency it bills in (most crypto cards bill
+          in US dollars, some also in euros), so someone in India paying in rupees on a dollar card pays the FX fee on every
+          purchase, and foreign-only fees such as KAST&apos;s small-purchase fee apply too. When an issuer does not say which
+          currency it bills in, we count the FX fee on all spending.
+        </p>
+        <p>
+          Purchase sizes follow the same mix as the test basket ($10 to $200, 20% of spending in each size), or one size of
+          your choice. Small-purchase fees are charged on the purchases below the issuer&apos;s limit. Top-up fees are
+          worked out on everything you load, including the money that goes on fees: load = (spend + fees) ÷ (1 − top-up
+          fee).
+        </p>
+        <p>
+          Year 2 onwards counts yearly fees and ongoing rates only. Year 1 adds the one-off card fee (or the physical card
+          and shipping, if you pick a physical card) and any welcome rate, such as 2% for the first 30 days. Rewards can be
+          counted at face value, conservatively (cash, stablecoins, BTC and ETH at 100%, other tokens at 75%, points at 50%),
+          or as cash and stablecoins only. Spending caps and bands are applied where published. Plans only offered in other
+          countries are left out. The card finder uses the same FX rules.
         </p>
 
         <h2 id="money">How G2M makes money</h2>

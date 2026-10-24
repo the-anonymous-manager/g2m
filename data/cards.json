@@ -500,7 +500,7 @@
     "custody": "self-custodial",
     "summary": "Solana-based USDC card available in 154 countries for a $20 yearly membership. Earns points rather than cashback.",
     "cashback": { "basePct": null, "maxPct": null, "payout": "Points", "note": "Earns points; no cashback rate published." },
-    "fees": { "annualUsd": 20, "fxPct": 1.5, "fxNote": "$0.10 + 1.5% per international transaction.", "topUpPct": 1, "txFlatUsd": 0.15, "cardFeeUsd": 0, "physicalCardFeeUsd": 24.99, "atm": "Supported; fee not published", "other": ["$0.15 per transaction", "1% top-up fee"] },
+    "fees": { "annualUsd": 20, "fxPct": 1.5, "fxNote": "Billed in US dollars: USD purchases pay a flat $0.15 and no FX fee. Other currencies: $0.10 + 1.5% per international transaction.", "fxByCurrency": { "USD": 0 }, "topUpPct": 1, "txFlatUsd": 0.15, "cardFeeUsd": 0, "physicalCardFeeUsd": 24.99, "atm": "Supported; fee not published", "other": ["$0.15 per transaction", "1% top-up fee"] },
     "tiers": [
       { "name": "Membership", "feeUsdYear": 20, "cashbackPct": null }
     ],
@@ -769,7 +769,7 @@
     "forms": ["virtual"],
     "custody": "self-custodial",
     "summary": "Virtual Visa debit card from Kolo that you fund with crypto. Pays 2% back in bitcoin for your first 30 days, then 1%.",
-    "cashback": { "basePct": 1, "maxPct": 2, "payout": "BTC, daily", "note": "2% for the first 30 days after activation, then 1%. Capped at $2 a purchase during the 2% period, $1 a purchase after, and $100 a month. Purchases under $1 earn nothing." },
+    "cashback": { "basePct": 1, "maxPct": 2, "payout": "BTC, daily", "note": "2% for the first 30 days after activation, then 1%. Capped at $2 a purchase during the 2% period, $1 a purchase after, and $100 a month. Purchases under $1 earn nothing.", "intro": { "pct": 2, "days": 30 } },
     "fees": { "annualUsd": 0, "fxPct": 1.35, "fxNote": "USD card: no fee in USD, Visa rate + 1% on other currencies (and +1% on USD at non-US merchants). EUR card: no fee in EUR, +0.55% to +1.35% on other currencies.", "fxByCurrency": { "USD": 0, "EUR": 0 }, "topUpPct": 0, "txPct": 1, "cardFeeUsd": 0, "atm": "USD card only: $1 + 0.65%, up to $500 a withdrawal and 3 a day, at contactless ATMs. No ATM access on the EUR card.", "other": ["1% conversion fee on every card payment", "USD card: extra 1% on USD payments at non-US merchants", "SEPA bank withdrawal: 1 EUR"] },
     "tiers": [
       { "name": "Kolo Card", "feeUsdYear": 0, "cashbackPct": 1, "capMonthlyUsd": 100, "perks": ["2% for the first 30 days"] }
@@ -783,7 +783,7 @@
     "cons": ["1% conversion fee on every purchase cancels out the 1% cashback", "Cashback drops to 1% after 30 days and is capped at $100 a month", "Virtual only until physical cards arrive (planned for 2027)"],
     "links": { "official": "https://kolo.xyz/" },
     "sources": [
-      { "label": "Kolo Help Center: cashback program", "url": "https://help.kolo.xyz/en/articles/13623113-cashback-program", "verified": "2026-10-22" },
+      { "label": "Kolo Help Center: cashback program", "url": "https://help.kolo.xyz/en/articles/13623113-cashback-program", "verified": "2026-10-24" },
       { "label": "Kolo Help Center: fees and pricing", "url": "https://help.kolo.xyz/en/articles/13942206-fees-pricing", "verified": "2026-10-24" },
       { "label": "Kolo Help Center: card overview", "url": "https://help.kolo.xyz/en/articles/13605242-card-overview", "verified": "2026-10-24" },
       { "label": "Kolo Help Center: cash withdrawal", "url": "https://help.kolo.xyz/en/articles/16001482-cash-withdrawal", "verified": "2026-10-22" },
