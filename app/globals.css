@@ -1600,3 +1600,90 @@ body::before {
     color: var(--faint);
   }
 }
+
+/* ---------- Card page: countries ---------- */
+.country-jump {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+.country-jump:hover {
+  text-decoration: underline;
+}
+.country-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+}
+.country-summary .badge {
+  font-size: 13px;
+  padding: 4px 11px;
+}
+.country-mine {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--muted);
+  margin-left: 4px;
+}
+.country-heading {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+}
+.country-group h4 {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  margin: 0 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.country-cols {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  column-count: 4;
+  column-width: 170px;
+  column-gap: 24px;
+  font-size: 15px;
+  line-height: 1.9;
+}
+.country-cols li {
+  break-inside: avoid;
+}
+.country-cols li.is-mine {
+  font-weight: 700;
+  color: var(--ok);
+}
+.country-cols-muted {
+  color: var(--muted);
+  margin-top: 10px;
+}
+.country-more summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+}
+.country-matches {
+  max-width: 420px;
+}
+.country-matches li {
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 640px) {
+  .country-cols {
+    column-count: 2;
+    column-width: auto;
+    column-gap: 16px;
+    font-size: 14px;
+  }
+}

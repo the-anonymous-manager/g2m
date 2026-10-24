@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getCard, getCards, getRank, standings } from '@/lib/cards';
 import type { Card, Market, Tier } from '@/lib/types';
-import { MARKET_LABELS } from '@/lib/regions';
+import { MARKET_LABELS, availabilityIn } from '@/lib/regions';
+import { COUNTRY_CODES } from '@/lib/countries.mjs';
 import { CUSTODY_LABEL, NP, TYPE_LABEL, cashbackLabel, ecosystemFeatures, fmtDate, pct, perPurchaseFee, usd } from '@/lib/format';
 import { SCORE_WEIGHTS } from '@/lib/score';
 import { absoluteUrl, site } from '@/lib/site';
@@ -12,6 +13,7 @@ import { Eyebrow, MarketBadge, ScorePill } from '@/components/bits';
 import { OutboundLink } from '@/components/OutboundLink';
 import { ShareBar } from '@/components/ShareBar';
 import { CountryStanding } from '@/components/CountryStanding';
+import { CountryList } from '@/components/CountryList';
 
 export const dynamicParams = false;
 
@@ -88,6 +90,9 @@ export default async function CardPage({ params }: Props) {
   if (!card) notFound();
   const all = getCards();
   const rank = getRank(card.slug);
+  // The card's answer for every country (its own list, else the five checked markets).
+  const status = Object.fromEntries(COUNTRY_CODES.map((cc: string) => [cc, availabilityIn(card, cc)]));
+  const confirmed = COUNTRY_CODES.filter((cc: string) => status[cc] === 'yes');
 
   // Alternatives: the best-scored cards that are available in at least one of the same confirmed markets.
   const myMarkets = MARKETS.filter((m) => card.coverage.markets[m] === 'yes');
@@ -260,7 +265,7 @@ export default async function CardPage({ params }: Props) {
               </li>
             ))}
           </ul>
-          <p className="muted" style={{ fontSize: 14 }}>
+          <p className="muted" style={{ fontSize: 14, margin: 0 }}>
             {card.coverage.scope}
             {/* Skip the count when the description already says it ("48 countries incl. ..."). */}
             {card.coverage.countries && !card.coverage.scope.includes(String(card.coverage.countries))
@@ -269,8 +274,22 @@ export default async function CardPage({ params }: Props) {
             .{' '}
             {card.coverage.examples.length ? `Includes ${card.coverage.examples.join(', ')}.` : ''}
           </p>
+          <a href="#countries" className="country-jump">
+            {confirmed.length
+              ? `See all ${confirmed.length} ${confirmed.length === 1 ? 'country' : 'countries'} it works in`
+              : 'Check your country'}{' '}
+            <span aria-hidden="true">↓</span>
+          </a>
         </section>
       </div>
+
+      {/* Every country, by region */}
+      <section id="countries" aria-labelledby="countries-title" className="panel panel-pad stack" style={{ gap: 16, scrollMarginTop: 90 }}>
+        <h2 id="countries-title" className="h3">
+          Countries
+        </h2>
+        <CountryList cardName={card.name} status={status} complete={card.coverage.countryList?.others === 'no'} />
+      </section>
 
       {/* Ecosystem and banking */}
       <section aria-labelledby="banking" className="stack" style={{ gap: 14 }}>
