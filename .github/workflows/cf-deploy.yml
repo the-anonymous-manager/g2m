@@ -1,12 +1,12 @@
-# Deploys g2m.life to Cloudflare Workers on every push to this branch (the Cloudflare migration
-# branch, until it's merged into main — see docs/HANDOFF.md). Mirrors how Vercel used to auto-deploy
-# from main: push the code, the site updates on its own, no manual `npm run cf:deploy` needed.
+# Deploys g2m.life to Cloudflare Workers on every push to main — including the hourly sheet-sync
+# commits. Mirrors how Vercel used to auto-deploy from main: push the code, the site updates on its
+# own, no manual `npm run cf:deploy` needed.
 name: Deploy to Cloudflare Workers
 
 on:
   push:
     branches:
-      - claude/great-lamport-3kjmvq
+      - main
   workflow_dispatch:
 
 permissions:
