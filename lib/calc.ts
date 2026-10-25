@@ -129,6 +129,19 @@ export function monthlyCashback(tier: Tier, spend: number): number | null {
   return cashbackBreakdown(tier, spend).capped;
 }
 
+type SmallFee = NonNullable<CardRow['fees']['smallPurchase']>;
+
+/** Whether a purchase of `size` USD pays the small-purchase fee: under the limit, or at or under it when inclusive. */
+export const isSmallPurchase = (sp: Pick<SmallFee, 'underUsd' | 'inclusive'>, size: number) =>
+  sp.inclusive ? size <= sp.underUsd : size < sp.underUsd;
+
+/** Cashback one purchase of `size` USD loses to a per-purchase cap (e.g. Kolo: at most $1 a purchase). */
+export function perPurchaseCut(tier: Tier, maxPerTxUsd: number | null | undefined, size: number): number {
+  if (!maxPerTxUsd) return 0;
+  const pct = tier.cashbackPct ?? tier.bands?.[0]?.pct ?? null;
+  return pct == null ? 0 : Math.max(0, (size * pct) / 100 - maxPerTxUsd);
+}
+
 export type PayoutKind = 'cash' | 'major' | 'token' | 'points' | 'unknown';
 
 /** What rewards are paid in, from the card's "Cashback paid in" text (e.g. "USDC", "BTC, daily", "CRO", "Points"). */
@@ -200,6 +213,8 @@ export type TierResult = {
   gross: number;
   /** Lost to the monthly cap. */
   capCut: number;
+  /** Lost to a per-purchase cap (e.g. at most $1 a purchase). */
+  txCapCut: number;
   /** Extra from a welcome offer (year 1 only). */
   intro: number;
   /** Taken off for rewards paid in tokens or points (valuation setting). */
@@ -250,18 +265,23 @@ export function tierValue(
   const month = cashbackBreakdown(tier, monthSpend);
   if (month.gross == null) flags.push('Cashback rate not published');
   const gross = (month.gross ?? 0) * 12;
-  const capCut = gross - (month.capped ?? 0) * 12;
+  // A per-purchase cap first (on each purchase size), then the monthly cap on what is left.
+  const maxPerTx = card.cashback.maxPerTxUsd;
+  const txCapCut = segs.reduce((s, g) => s + (g.size > 0 ? (g.spendYear / g.size) * perPurchaseCut(tier, maxPerTx, g.size) : 0), 0);
+  const afterTx = Math.max(0, (month.gross ?? 0) - txCapCut / 12);
+  const cappedMonth = month.gross == null ? 0 : tier.capMonthlyUsd != null ? Math.min(afterTx, tier.capMonthlyUsd) : afterTx;
+  const capCut = (afterTx - cappedMonth) * 12;
   let intro = 0;
   const welcome = card.cashback.intro;
   if (input.year === 1 && welcome && index === 0) {
     const months = Math.min((welcome.days / 365) * 12, 12);
     const introMonth = Math.min((monthSpend * welcome.pct) / 100, tier.capMonthlyUsd ?? Infinity);
-    intro = Math.max(0, (introMonth - (month.capped ?? 0)) * months);
+    intro = Math.max(0, (introMonth - cappedMonth) * months);
   }
   const kind = payoutKind(card.cashback.payout);
   const factor = payoutFactor(kind, input.value);
   if (factor < 1 && kind === 'unknown') flags.push('Reward currency not published');
-  const earned = gross - capCut + intro;
+  const earned = gross - txCapCut - capCut + intro;
   const valueCut = earned * (1 - factor);
   const cashback = earned - valueCut;
 
@@ -307,9 +327,11 @@ export function tierValue(
   if (sp) {
     // Purchases under the limit, in the currencies the fee applies to (all of them, or only foreign ones).
     const foreign = new Set(parts.filter((p) => p.foreign).map((p) => p.key));
-    smallCount = segs
-      .filter((g) => g.size < sp.underUsd && (!sp.foreignOnly || foreign.has(g.part)))
+    const counted = segs
+      .filter((g) => isSmallPurchase(sp, g.size) && (!sp.foreignOnly || foreign.has(g.part)))
       .reduce((s, g) => s + count(g), 0);
+    // Some issuers waive the first few small purchases each month (e.g. RedotPay: first 5).
+    smallCount = Math.max(0, counted - (sp.freePerMonth ?? 0) * 12);
   }
   const small = sp ? sp.feeUsd * smallCount : 0;
 
@@ -341,6 +363,7 @@ export function tierValue(
     offered,
     gross,
     capCut,
+    txCapCut,
     intro,
     valueCut,
     cashback,

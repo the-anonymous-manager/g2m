@@ -37,7 +37,7 @@ function niceAmount(x: number): number {
 
 function fmt(n: number, currency: string): string {
   try {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency, maximumFractionDigits: 2, minimumFractionDigits: 2 }).format(n);
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(n);
   } catch {
     return `${n.toFixed(2)} ${currency}`;
   }
@@ -64,6 +64,11 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
   // The card's base (billing) currency, and the receipt's currency (null = same as the shop's).
   const [base, setBase] = useState<string | null>(fromLink ? initial!.base : null);
   const [display, setDisplay] = useState<string | null>(fromLink ? initial!.show : null);
+  // Matching a real app screenshot: which amount was entered, and the amount (in the card's base currency).
+  const [matchMode, setMatchMode] = useState<'cleared' | 'total' | 'rate'>(
+    initial?.total ? 'total' : initial?.rate ? 'rate' : 'cleared'
+  );
+  const [matchText, setMatchText] = useState(String(initial?.cleared ?? initial?.total ?? initial?.rate ?? ''));
   const touched = useRef(fromLink);
 
   // Without a shared link, start in the visitor's own currency once it is known.
@@ -79,7 +84,15 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
   const tier = card.tiers[Math.min(tierIndex, card.tiers.length - 1)];
   const amount = Math.min(Math.max(Number(amountText) || 0, 0), 1_000_000);
   const bases = baseCurrencies(card, home);
-  const r = swipeReceipt(card, tier, amount, currency, perUsd ?? {}, { base, display, homeCurrency: home });
+  const matchValue = Number(matchText) > 0 ? Number(matchText) : null;
+  const r = swipeReceipt(card, tier, amount, currency, perUsd ?? {}, {
+    base,
+    display,
+    homeCurrency: home,
+    cleared: matchMode === 'cleared' ? matchValue : null,
+    total: matchMode === 'total' ? matchValue : null,
+    rate: matchMode === 'rate' ? matchValue : null
+  });
   const shown = r.display;
   const rate = currency === 'USD' ? 1 : perUsd?.[currency] ?? 1;
 
@@ -103,6 +116,9 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
     what: label,
     base: r.base,
     show: shown,
+    cleared: matchMode === 'cleared' ? matchValue : null,
+    total: matchMode === 'total' ? matchValue : null,
+    rate: matchMode === 'rate' ? matchValue : null,
     home: home ?? null
   };
   const query = receiptQuery(params);
@@ -230,6 +246,47 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
             ? `Paying in ${currency} on a ${r.base} card is a foreign purchase: the FX fee and any foreign-only fees apply.`
             : `Paying in ${r.base}, the card's own currency: no FX fee.`}
         </p>
+        <details className="calc-split swipe-match" open={Boolean(matchValue)}>
+          <summary>
+            <span className="field-label">Match a real swipe</span>{' '}
+            <span className="muted">Matching a real app screenshot? Enter the amount it shows.</span>
+          </summary>
+          <div className="stack" style={{ gap: 10, marginTop: 12 }}>
+            <div className="chip-row" role="group" aria-label="What the app shows">
+              {(
+                [
+                  ['cleared', 'Cleared amount (price + FX)'],
+                  ['total', 'Total charged'],
+                  ['rate', 'Exchange rate']
+                ] as const
+              ).map(([k, lbl]) => (
+                <button key={k} type="button" className="chip" aria-pressed={matchMode === k} onClick={() => setMatchMode(k)}>
+                  {lbl}
+                </button>
+              ))}
+            </div>
+            <div className="field">
+              <label className="field-label" htmlFor="sw-match">
+                {matchMode === 'rate' ? `${currency} per 1 ${r.base}` : `Amount in ${r.base}`}
+              </label>
+              <input
+                id="sw-match"
+                className="input num"
+                inputMode="decimal"
+                placeholder={matchMode === 'cleared' ? 'e.g. 19.53' : matchMode === 'total' ? 'e.g. 19.63' : 'e.g. 95.42'}
+                value={matchText}
+                onChange={(e) => setMatchText(e.target.value.replace(/[^\d.]/g, ''))}
+              />
+              <span className="faint" style={{ fontSize: 12 }}>
+                {matchMode === 'cleared'
+                  ? 'The "transaction cleared" amount: price with the FX fee already in the rate. Fixed fees are added on top.'
+                  : matchMode === 'total'
+                    ? 'Everything the app charged for this purchase, fees included.'
+                    : 'The rate before the FX fee. Leave empty to use the live mid-market rate.'}
+              </span>
+            </div>
+          </div>
+        </details>
         {!perUsd ? (
           <p className="faint" style={{ fontSize: 12, margin: 0 }}>
             Live exchange rates are unavailable right now, so only US dollars are offered.
@@ -247,15 +304,27 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
           {currency !== 'USD' ? ` · ≈ $${r.usd.toFixed(2)}` : ''}
         </p>
         <dl className="slip-lines">
-          {r.lines.map((l) => (
+          {r.lines.flatMap((l) => [
             <div key={l.key} className={`slip-line slip-${l.kind}`}>
               <dt>
                 {l.kind === 'fee' ? '+ ' : l.kind === 'reward' ? '− ' : ''}
                 {l.label}
               </dt>
               <dd>{fmt(l.amount, shown)}</dd>
-            </div>
-          ))}
+            </div>,
+            // Card apps show price + FX as one "cleared" amount, with the FX fee hidden in the rate.
+            ...(l.key === 'fx'
+              ? [
+                  <div key="cleared" className="slip-line slip-cleared">
+                    <dt>= Cleared amount (price + FX)</dt>
+                    <dd>
+                      {fmt(r.cleared, shown)}
+                      {shown !== r.base ? ` · ${fmt(r.clearedBase, r.base)}` : ''}
+                    </dd>
+                  </div>
+                ]
+              : [])
+          ])}
         </dl>
         <div className="slip-total">
           <div className="slip-line">
@@ -264,7 +333,7 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
           </div>
           <div className="slip-line">
             <dt>Real cost after cashback</dt>
-            <dd>{fmt(r.totalPaid - r.cashback, shown)}</dd>
+            <dd>{fmt(Math.round((r.totalPaid - r.cashback) * 100) / 100, shown)}</dd>
           </div>
         </div>
         <div className="slip-result" style={{ color: r.net >= 0 ? 'var(--ok)' : 'var(--bad)' }}>
@@ -275,6 +344,13 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
           <span>{r.net >= 0 ? `You keep ${fmt(r.net, shown)}` : `Costs you ${fmt(-r.net, shown)} more`}</span>
         </div>
         {r.headlinePct != null ? <p className="slip-note">Advertised: up to {r.headlinePct}% back</p> : null}
+        {r.mode !== 'live' ? (
+          <p className="slip-note">
+            Matched to your app{r.impliedRate ? ` · 1 ${r.base} = ${fmt(r.impliedRate, currency)} before FX` : ''}
+          </p>
+        ) : r.foreign ? (
+          <p className="slip-note">Live mid-market rate. Your card&apos;s rate on the day can differ by a few cents: match your app above.</p>
+        ) : null}
         {r.notes.length ? <p className="slip-note">{r.notes.join(' · ')}</p> : null}
         <div className="slip-actions">
           <button type="button" className="btn btn-metal btn-sm" onClick={postOnX}>

@@ -14,7 +14,9 @@ import {
   type Filters,
   type SortKey
 } from '@/lib/table';
-import { COUNTRIES, availabilityIn, countryName } from '@/lib/regions';
+import { availabilityIn, countryName } from '@/lib/regions';
+import { nomadFit } from '@/lib/nomad';
+import { NomadBadge, NomadBar } from '@/components/NomadBar';
 import { rankIn } from '@/lib/score';
 import { CUSTODY_LABEL, NP, pct, usd } from '@/lib/format';
 import { CardArt } from '@/components/CardArt';
@@ -113,6 +115,17 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
     <div className="stack" style={{ gap: 18 }}>
       {/* Filters */}
       <div className="panel panel-pad stack" style={{ gap: 16 }}>
+        <NomadBar
+          idPrefix="f"
+          passport={f.passport}
+          home={f.country}
+          myCountry={myCountry}
+          onPassport={(v) => set('passport', v)}
+          onHome={(v) => {
+            setAutoCountry(false);
+            set('country', v);
+          }}
+        />
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'flex-end' }}>
           <div className="field" style={{ flex: '2 1 260px' }}>
             <label className="field-label" htmlFor="f-q">
@@ -129,28 +142,6 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
                 autoComplete="off"
               />
             </div>
-          </div>
-          <div className="field" style={{ flex: '1 1 170px' }}>
-            <label className="field-label" htmlFor="f-market">
-              Where you live
-            </label>
-            <select
-              id="f-market"
-              className="select"
-              value={f.country}
-              onChange={(e) => {
-                setAutoCountry(false);
-                set('country', e.target.value);
-              }}
-            >
-              <option value="">All countries</option>
-              {COUNTRIES.map((c) => (
-                <option key={c.code} value={c.code}>
-                  {c.name}
-                  {c.code === myCountry ? ' (your location)' : ''}
-                </option>
-              ))}
-            </select>
           </div>
           <div className="field" style={{ flex: '1 1 160px' }}>
             <label className="field-label" htmlFor="f-custody">
@@ -311,7 +302,10 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
                       </td>
                       <td>
                         {f.country ? (
-                          <MarketBadge value={availabilityIn(c, f.country)} where={place} />
+                          <div className="stack" style={{ gap: 4, alignItems: 'flex-start' }}>
+                            <MarketBadge value={availabilityIn(c, f.country)} where={place} />
+                            <NomadBadge fit={nomadFit(c, f.passport, f.country)} />
+                          </div>
                         ) : (
                           <span className="num" title={c.coverage.scope}>
                             {c.coverage.countries ?? '—'}
@@ -388,6 +382,7 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
                       </dd>
                     </div>
                   </dl>
+                  <NomadBadge fit={nomadFit(c, f.passport, f.country)} />
                   <label className="check" style={{ fontSize: 13 }}>
                     <input
                       type="checkbox"

@@ -50,8 +50,8 @@ export type CorridorMatch = {
   /** You can cash out to a bank on this rail. */
   cashOut: boolean;
   fees: string[];
-  /** Our asset lists are incomplete, so a coin not on a card's list is "not stated", never "no". */
-  coin: 'listed' | 'not stated';
+  /** On the card's list of supported coins; "no" when the list is known and leaves it out; "not stated" with no list. */
+  coin: 'listed' | 'no' | 'not stated';
 };
 
 /** Cards that support a destination, cash-out first, then named accounts, then the G2M score. */
@@ -68,7 +68,7 @@ export function corridorMatches(cards: CardRow[], dest: string, coin: 'USDC' | '
       receive: anyIn ? (iban === 'named' ? 'named' : iban === 'shared' ? 'shared' : 'account') : null,
       cashOut: rails.some((r) => r.out),
       fees: rails.filter((r) => r.fee).map((r) => `${railLabel(r.rail)}: ${r.fee}`),
-      coin: card.assets.includes(coin) ? 'listed' : 'not stated'
+      coin: card.assets.includes(coin) ? 'listed' : card.assets.length ? 'no' : 'not stated'
     });
   }
   const rank = (m: CorridorMatch) => (m.cashOut ? 2 : 0) + (m.receive === 'named' ? 1 : 0);

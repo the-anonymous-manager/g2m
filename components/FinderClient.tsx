@@ -3,13 +3,14 @@
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import type { CardRow } from '@/lib/types';
-import { COUNTRIES, isCountry } from '@/lib/regions';
+import { COUNTRIES, countryName, isCountry } from '@/lib/regions';
 import { recommend, type FinderAnswers, type Hold, type Priority } from '@/lib/finder';
 import { CardArt } from '@/components/CardArt';
 import { ScorePill } from '@/components/bits';
 import { OutboundLink } from '@/components/OutboundLink';
 import { ShareBar } from '@/components/ShareBar';
 import { useRegion } from '@/components/RegionContext';
+import { NomadBadge } from '@/components/NomadBar';
 import { track } from '@/lib/analytics';
 
 type Option<T> = { value: T; label: string; hint?: string };
@@ -26,7 +27,7 @@ const Q_PRIORITY: Option<Priority>[] = [
   { value: 'perks', label: 'Premium perks' }
 ];
 
-type Draft = { country: string | null; hold: Hold | null; priority: Priority | null };
+type Draft = { country: string | null; hold: Hold | null; priority: Priority | null; passport?: string };
 
 export function FinderClient({ rows, initial }: { rows: CardRow[]; initial: FinderAnswers | null }) {
   const [a, setA] = useState<Draft>(initial ?? { country: null, hold: null, priority: null });
@@ -38,15 +39,16 @@ export function FinderClient({ rows, initial }: { rows: CardRow[]; initial: Find
   }, [ready, myCountry, initial]);
 
   const done = a.country && a.hold && a.priority;
-  const answers = done ? (a as FinderAnswers) : null;
-  const picks = useMemo(() => (answers ? recommend(rows, answers) : []), [rows, answers]);
+  const passport = a.passport && a.passport !== a.country && a.country !== 'ALL' ? a.passport : '';
+  const answers = done ? ({ ...(a as FinderAnswers), passport: passport || undefined } as FinderAnswers) : null;
+  const picks = useMemo(() => (answers ? recommend(rows, answers) : []), [rows, answers?.country, answers?.hold, answers?.priority, answers?.passport]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!answers) return;
-    const qs = `m=${answers.country}&h=${answers.hold}&p=${answers.priority}`;
+    const qs = `m=${answers.country}&h=${answers.hold}&p=${answers.priority}${answers.passport ? `&pp=${answers.passport}` : ''}`;
     window.history.replaceState(window.history.state, '', `${window.location.pathname}?${qs}`);
-    track('Finder', { country: answers.country, hold: answers.hold, priority: answers.priority });
-  }, [answers?.country, answers?.hold, answers?.priority]); // eslint-disable-line react-hooks/exhaustive-deps
+    track('Finder', { country: answers.country, hold: answers.hold, priority: answers.priority, nomad: answers.passport ? 'yes' : 'no' });
+  }, [answers?.country, answers?.hold, answers?.priority, answers?.passport]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const Question = <T extends string>({
     n,
@@ -126,6 +128,33 @@ export function FinderClient({ rows, initial }: { rows: CardRow[]; initial: Find
           <span className="faint" style={{ fontSize: 13 }}>
             We leave out cards not offered there, and count FX fees on your everyday spending in your own currency.
           </span>
+          {a.country && a.country !== 'ALL' ? (
+            <div className="nomad-bar" data-on={passport ? 'true' : 'false'} style={{ maxWidth: 560, gridTemplateColumns: 'minmax(0, 1fr)' }}>
+              <div className="field">
+                <label className="field-label" htmlFor="finder-passport">
+                  My passport
+                </label>
+                <select
+                  id="finder-passport"
+                  className="select"
+                  value={a.passport ?? ''}
+                  onChange={(e) => setA({ ...a, passport: isCountry(e.target.value) ? e.target.value : undefined })}
+                >
+                  <option value="">Same as where I live</option>
+                  {COUNTRIES.map((c) => (
+                    <option key={c.code} value={c.code}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <p className="nomad-hint faint">
+                {passport
+                  ? `Only cards that accept a passport from ${countryName(passport)}, or a residence ID from ${countryName(a.country)}.`
+                  : 'Living abroad? Pick your passport to leave out cards whose ID checks you cannot pass.'}
+              </p>
+            </div>
+          ) : null}
         </fieldset>
         {Question({ n: 2, title: 'Where do you want to keep your crypto?', name: 'hold', options: Q_HOLD, value: a.hold, onPick: (v) => setA({ ...a, hold: v }) })}
         {Question({ n: 3, title: 'What matters most?', name: 'priority', options: Q_PRIORITY, value: a.priority, onPick: (v) => setA({ ...a, priority: v }) })}
@@ -167,6 +196,7 @@ export function FinderClient({ rows, initial }: { rows: CardRow[]; initial: Find
                       </Link>
                       <ScorePill value={p.card.score.total} />
                     </div>
+                    <NomadBadge fit={p.nomad} />
                     <ul className="list-plain" style={{ gap: 4 }}>
                       {p.reasons.map((r) => (
                         <li key={r} style={{ fontSize: 15 }}>

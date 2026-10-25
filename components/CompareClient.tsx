@@ -125,7 +125,12 @@ export function CompareClient({ rows, initial }: { rows: CardRow[]; initial: str
         <p className="muted">Pick a card above to start comparing.</p>
       ) : (
         <div className="table-wrap">
-          <div role="table" aria-label="Card comparison" style={{ minWidth: 170 + chosen.length * 220 }}>
+          <div
+            role="table"
+            aria-label="Card comparison"
+            className="cmp-table"
+            style={{ minWidth: 170 + chosen.length * 220, ['--cmp-n' as string]: Math.max(chosen.length, 1) }}
+          >
             <div role="row" className="cmp-row cmp-head" style={{ gridTemplateColumns: columns }}>
               <div role="columnheader" className="cmp-label">
                 <span className="sr-only">Detail</span>

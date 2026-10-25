@@ -3,13 +3,17 @@ import { availabilityIn, countryName, isCountry } from '@/lib/regions';
 import { cashbackLabel, pct } from '@/lib/format';
 import { netRate, rankIn } from '@/lib/score';
 import { homeFx } from '@/lib/fx';
+import { nomadFit, type NomadFit } from '@/lib/nomad';
 
 export type Hold = 'self' | 'exchange' | 'any';
 export type Priority = 'cashback' | 'fees' | 'travel' | 'perks';
-/** country: where the visitor lives (ISO code), or 'ALL' when they would rather not say. */
-export type FinderAnswers = { country: string; hold: Hold; priority: Priority };
+/**
+ * country: where the visitor lives (ISO code), or 'ALL' when they would rather not say. passport: the passport they
+ * hold when it is from another country (nomad mode).
+ */
+export type FinderAnswers = { country: string; hold: Hold; priority: Priority; passport?: string };
 
-export type Pick = { card: CardRow; fit: number; reasons: string[]; caution: string | null };
+export type Pick = { card: CardRow; fit: number; reasons: string[]; caution: string | null; nomad: NomadFit | null };
 
 const allPerks = (c: CardRow) => Array.from(new Set([...c.perks, ...c.tiers.flatMap((t) => t.perks)]));
 const hasLounge = (c: CardRow) => allPerks(c).some((p) => /lounge/i.test(p));
@@ -27,7 +31,8 @@ export function parseAnswers(p: Record<string, string | string[] | undefined>): 
   const hold = h === 'self' || h === 'exchange' || h === 'any' ? h : null;
   const priority = pr === 'cashback' || pr === 'fees' || pr === 'travel' || pr === 'perks' ? pr : null;
   if (!country || !hold || !priority) return null;
-  return { country, hold, priority };
+  const pp = one('pp').toUpperCase();
+  return { country, hold, priority, ...(isCountry(pp) && pp !== country ? { passport: pp } : {}) };
 }
 
 /**
@@ -40,6 +45,9 @@ export function recommend(cards: CardRow[], a: FinderAnswers, count = 3): Pick[]
   const pool = here ? rankIn(cards, here) : cards;
   const picks: Pick[] = [];
   for (const c of pool) {
+    // Nomad mode: leave out cards whose ID rules the passport cannot pass.
+    const nomad = here ? nomadFit(c, a.passport ?? '', here) : null;
+    if (nomad && !nomad.ok) continue;
     const reasons: string[] = [];
     let caution: string | null = null;
     let fit = c.score.total * 0.4;
@@ -102,7 +110,7 @@ export function recommend(cards: CardRow[], a: FinderAnswers, count = 3): Pick[]
     }
 
     if (!reasons.length) reasons.push(`G2M score ${c.score.total}`);
-    picks.push({ card: c, fit, reasons: reasons.slice(0, 3), caution });
+    picks.push({ card: c, fit, reasons: reasons.slice(0, 3), caution, nomad });
   }
   return picks.sort((x, y) => y.fit - x.fit || y.card.score.total - x.card.score.total).slice(0, count);
 }

@@ -2016,3 +2016,153 @@ body::before {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+.slip-cleared {
+  padding: 0 0 4px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.slip-cleared dt {
+  color: var(--muted);
+}
+
+/* Nomad / expat mode: My passport + Where I live */
+.nomad-bar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 6px 12px;
+  align-items: end;
+  padding: 14px 16px;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+}
+.nomad-bar[data-on='true'] {
+  border-style: solid;
+  border-color: var(--accent);
+}
+.nomad-bar .field {
+  min-width: 0;
+}
+.nomad-plus {
+  font-family: 'Roboto Mono', ui-monospace, monospace;
+  font-size: 18px;
+  padding-bottom: 10px;
+  color: var(--faint);
+}
+.nomad-hint {
+  grid-column: 1 / -1;
+  margin: 2px 0 0;
+  font-size: 13px;
+}
+.nomad-badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1.35;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.nomad-ok {
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+.nomad-warn {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+.nomad-no {
+  background: var(--bad-soft);
+  color: var(--bad);
+}
+@media (max-width: 560px) {
+  .nomad-bar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .nomad-plus {
+    display: none;
+  }
+}
+
+/* Phone: tables that stack into one block per row (tiers on the card page) and the compare grid without
+   sideways scrolling. */
+@media (max-width: 720px) {
+  .stack-wrap {
+    overflow-x: visible;
+  }
+  .stack-table,
+  .stack-table tbody {
+    display: block;
+    min-width: 0 !important;
+  }
+  .stack-table thead {
+    display: none;
+  }
+  .stack-table tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+    padding: 14px 16px;
+  }
+  .stack-table tr + tr {
+    border-top: 1px solid var(--border);
+  }
+  .stack-table td,
+  .table.stack-table td:first-child,
+  .table.stack-table td:last-child {
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+  .stack-table td[data-label] {
+    display: grid;
+    grid-template-columns: minmax(84px, 38%) minmax(0, 1fr);
+    gap: 10px;
+    align-items: baseline;
+    text-align: right;
+    overflow-wrap: anywhere;
+  }
+  .stack-table td[data-label]::before {
+    content: attr(data-label);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--faint);
+    text-align: left;
+  }
+
+  .cmp-table {
+    min-width: 0 !important;
+  }
+  .cmp-row {
+    grid-template-columns: repeat(var(--cmp-n, 2), minmax(0, 1fr)) !important;
+  }
+  .cmp-label {
+    grid-column: 1 / -1;
+    position: static;
+    padding: 12px 12px 0;
+    background: transparent;
+  }
+  .cmp-head .cmp-label {
+    display: none;
+  }
+  .cmp-cell {
+    padding: 6px 12px 12px;
+    font-size: 14px;
+  }
+  .cmp-head .cmp-cell {
+    padding-block: 14px;
+  }
+  .cmp-head .card-art {
+    width: 100% !important;
+    max-width: 150px;
+  }
+  .cmp-cell .btn {
+    white-space: normal;
+    max-width: 100%;
+  }
+  .cmp-row:has(.cmp-label .sr-only):not(.cmp-head) .cmp-label {
+    display: none;
+  }
+}
