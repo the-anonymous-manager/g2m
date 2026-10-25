@@ -497,11 +497,10 @@ staying on Next 15. Remove it when the site moves to a Next version that ships a
 ## Ideas for version 2 (not decided, ask Akash)
 
 Done so far: edit card data from a Google Sheet, real card pictures, small bug sweep, every country in the finder
-and calculator with FX at home.
+and calculator with FX at home, phone-friendly tiers and Compare tables, live USD value of staking requirements
+(tier break-even).
 
-- Add the radar cards above, then grow towards 50+ cards.
-- Phone-friendly tiers and Compare tables.
-- Show the live USD value of staking requirements (each tier's `stake.coingeckoId` is already stored for this).
+- Add the radar cards above (PEXX, Fizen, Infini, Cashi, WasabiCard, Kite), then grow towards 50+ cards.
 - "X vs Y" comparison pages for SEO, and short guides (custodial vs self-custodial, how card fees work).
 - A changelog of fee and cashback changes per card, which also feeds his X posts.
 - Email sign-up for card updates.
