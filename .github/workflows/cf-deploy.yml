@@ -1,12 +1,17 @@
-# Deploys g2m.life to Cloudflare Workers on every push to main — including the hourly sheet-sync
-# commits. Mirrors how Vercel used to auto-deploy from main: push the code, the site updates on its
-# own, no manual `npm run cf:deploy` needed.
+# Deploys g2m.life to Cloudflare Workers on every push to main. Mirrors how Vercel used to
+# auto-deploy from main: push the code, the site updates on its own, no manual `npm run cf:deploy`
+# needed. Also fires after the hourly sheet-sync workflow finishes: GitHub does not let a push made
+# with the sheet-sync workflow's own token trigger another workflow's `on: push` (an anti-loop
+# safeguard), so sheet-sync's commits need this separate `workflow_run` trigger to reach the site.
 name: Deploy to Cloudflare Workers
 
 on:
   push:
     branches:
       - main
+  workflow_run:
+    workflows: ['Sync cards from Google Sheet']
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -19,10 +24,13 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
       - uses: actions/setup-node@v4
         with:
