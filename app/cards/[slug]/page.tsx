@@ -25,11 +25,9 @@ const KYC_LABEL = {
   both: 'Passport country and home country must both be supported'
 } as const;
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return getCards().map((c) => ({ slug: c.slug }));
-}
+// Rendered fresh on every request rather than statically prerendered (ISR): this uses live token prices
+// (lib/prices.ts), and a host with no incremental-cache storage configured can't serve a stale/revalidating build.
+export const dynamic = 'force-dynamic';
 
 type Props = { params: Promise<{ slug: string }> };
 

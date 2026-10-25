@@ -1,16 +1,24 @@
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
 import { ImageResponse } from 'next/og';
 import { getCard, getCards, getRank } from '@/lib/cards';
 import { cashbackLabel, pct, usd } from '@/lib/format';
-import { METAL_BG, OG_SIZE, OgLogo, ROSE, ogFonts } from '@/lib/og';
+import { METAL_BG, OG_SIZE, OgLogo, ROSE, ogFontsRuntime } from '@/lib/og';
+import { absoluteUrl } from '@/lib/site';
 
 export const size = OG_SIZE;
 export const contentType = 'image/png';
 export const alt = 'G2M card score';
+// A metadata route doesn't inherit its page's segment config, so this needs its own force-dynamic: rendered fresh
+// on every request rather than prerendered, matching app/cards/[slug]/page.tsx.
+export const dynamic = 'force-dynamic';
 
-export function generateStaticParams() {
-  return getCards().map((c) => ({ slug: c.slug }));
+async function photoDataUrl(url: string): Promise<string | null> {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    return `data:image/png;base64,${Buffer.from(await res.arrayBuffer()).toString('base64')}`;
+  } catch {
+    return null;
+  }
 }
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
@@ -21,10 +29,10 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     return new ImageResponse(<div style={{ display: 'flex', width: '100%', height: '100%', background: '#0a0a0c' }} />, size);
   }
   const darkCard = card.metal === 'black' || card.metal === 'gunmetal';
-  // The card's real picture, as the PNG the sheet sync saves next to the WebP versions.
-  const photo = card.image
-    ? `data:image/png;base64,${readFileSync(join(process.cwd(), 'public', card.image.file.replace(/\.webp$/, '.png'))).toString('base64')}`
-    : null;
+  // The card's real picture, as the PNG the sheet sync saves next to the WebP versions. Fetched from the site's own
+  // public URL rather than read off disk: this route renders per request, including on hosts with no filesystem at
+  // request time.
+  const photo = card.image ? await photoDataUrl(absoluteUrl(card.image.file.replace(/\.webp$/, '.png'))) : null;
   const facts = [
     { k: 'Cashback', v: cashbackLabel(card.cashback.basePct, card.cashback.maxPct) },
     { k: 'Annual fee', v: usd(card.fees.annualUsd) },
@@ -115,6 +123,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         </div>
       </div>
     ),
-    { ...size, fonts: await ogFonts() }
+    { ...size, fonts: await ogFontsRuntime() }
   );
 }

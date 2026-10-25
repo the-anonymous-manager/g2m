@@ -28,8 +28,9 @@ const BROWSE = [
 
 const MARKETS: Market[] = ['US', 'GB', 'EU'];
 
-// Re-check hourly so a sponsorship starts and ends on its dates without a new deploy.
-export const revalidate = 3600;
+// Rendered fresh on every request (not cached/ISR) so a sponsorship starts and ends on its dates without a new
+// deploy, and so the page works the same on hosts with no incremental-cache storage configured.
+export const dynamic = 'force-dynamic';
 
 function confirmedIn(cards: Card[], m: Market) {
   return cards.filter((c) => c.coverage.markets[m] === 'yes');

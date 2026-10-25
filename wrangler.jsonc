@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // The worker's name on Cloudflare — becomes <name>.<your-subdomain>.workers.dev before a custom domain is attached.
+  "name": "g2m",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-10-25",
+  // Required by OpenNext's Cloudflare adapter (Next.js' server code expects some Node.js built-ins).
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

@@ -1,10 +1,13 @@
 import { ImageResponse } from 'next/og';
 import { getCards } from '@/lib/cards';
-import { METAL_BG, OG_SIZE, OgLogo, ROSE, ogFonts } from '@/lib/og';
+import { METAL_BG, OG_SIZE, OgLogo, ROSE, ogFontsRuntime } from '@/lib/og';
 
 export const size = OG_SIZE;
 export const contentType = 'image/png';
 export const alt = 'G2M · Spend your bags better. The crypto card directory.';
+// A metadata route doesn't inherit its page's segment config, so this needs its own force-dynamic: rendered fresh
+// on every request rather than prerendered, matching app/page.tsx.
+export const dynamic = 'force-dynamic';
 
 export default async function Image() {
   const n = getCards().length;
@@ -56,6 +59,6 @@ export default async function Image() {
         </div>
       </div>
     ),
-    { ...size, fonts: await ogFonts() }
+    { ...size, fonts: await ogFontsRuntime() }
   );
 }

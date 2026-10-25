@@ -40,8 +40,11 @@ referral fees make the site commercial. No other hosting or database is needed.
 
 Every push to the main branch redeploys the site.
 
-> Other hosts (Netlify, Cloudflare, a VPS) also work. Region detection reads `x-vercel-ip-country`,
-> `cf-ipcountry` or `x-country`; without any of them the site falls back to the visitor's timezone.
+> Other hosts also work. Region detection reads `x-vercel-ip-country`, `cf-ipcountry` or `x-country`; without any
+> of them the site falls back to the visitor's timezone. A move to Cloudflare Workers is in progress (free, and
+> avoids the Vercel Pro requirement above) — see "Cloudflare Workers migration" in `docs/HANDOFF.md`. Once that's
+> live, deploy with `npm run cf:deploy` (needs `wrangler login` or a `CLOUDFLARE_API_TOKEN`), or just push to
+> `main` if it's wired to auto-deploy from GitHub the same way Vercel is.
 
 ## Settings (environment variables)
 

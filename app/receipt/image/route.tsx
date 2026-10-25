@@ -4,7 +4,7 @@ import { toRow } from '@/lib/types';
 import { swipeReceipt } from '@/lib/swipe';
 import { fiatPerUsd } from '@/lib/prices';
 import { parseReceiptParams } from '@/lib/receipt-params';
-import { OG_SIZE, OgLogo, ROSE, ogFonts } from '@/lib/og';
+import { OG_SIZE, OgLogo, ROSE, ogFontsRuntime } from '@/lib/og';
 import { site } from '@/lib/site';
 
 // The shareable receipt picture (1200 x 630): the swipe line by line, the real result, G2M's X handle on one side and
@@ -21,7 +21,7 @@ function fmt(n: number, currency: string): string {
 export async function GET(req: Request) {
   const p = parseReceiptParams(Object.fromEntries(new URL(req.url).searchParams));
   const card = p.card ? getCard(p.card) : null;
-  const fonts = await ogFonts();
+  const fonts = await ogFontsRuntime();
   const handle = site.twitter.startsWith('@') ? site.twitter : `@${site.twitter}`;
   const domain = site.url.replace(/^https?:\/\//, '');
 

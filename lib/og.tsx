@@ -1,5 +1,4 @@
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { INTER_BOLD_BASE64, INTER_REGULAR_BASE64 } from '@/lib/og-fonts.generated';
 
 // Shared pieces for the social preview images (1200×630), drawn with next/og.
 export const OG_SIZE = { width: 1200, height: 630 };
@@ -28,16 +27,18 @@ export function OgLogo({ size = 64 }: { size?: number }) {
   );
 }
 
-/** Inter (OFL) for the share images, bundled in assets/fonts so builds never depend on a font host. */
-export async function ogFonts() {
-  const dir = join(process.cwd(), 'assets', 'fonts');
-  const [regular, bold] = await Promise.all([
-    readFile(join(dir, 'Inter-Regular.otf')),
-    readFile(join(dir, 'InterDisplay-Bold.otf'))
-  ]);
+/**
+ * Inter (OFL) for the share images. The og-image routes all render per request (`force-dynamic`), including on
+ * hosts with no real filesystem at request time (Cloudflare Workers), where neither `node:fs` nor
+ * `fetch(new URL(..., import.meta.url))` can reach the font files: the first needs a disk, the second needs the
+ * framework's own dev/Vercel-only handling of that relative asset URL, which the Workers runtime doesn't have.
+ * Embedding the bytes as base64 (lib/og-fonts.generated.ts, from scripts/generate-og-fonts.mjs) sidesteps both:
+ * by the time a request comes in, they are already in memory, on any host.
+ */
+export async function ogFontsRuntime() {
   return [
-    { name: 'Inter', data: regular, weight: 400 as const, style: 'normal' as const },
-    { name: 'Inter', data: bold, weight: 700 as const, style: 'normal' as const },
-    { name: 'Inter', data: bold, weight: 800 as const, style: 'normal' as const }
+    { name: 'Inter', data: Buffer.from(INTER_REGULAR_BASE64, 'base64'), weight: 400 as const, style: 'normal' as const },
+    { name: 'Inter', data: Buffer.from(INTER_BOLD_BASE64, 'base64'), weight: 700 as const, style: 'normal' as const },
+    { name: 'Inter', data: Buffer.from(INTER_BOLD_BASE64, 'base64'), weight: 800 as const, style: 'normal' as const }
   ];
 }

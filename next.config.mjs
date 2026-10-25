@@ -2,8 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  // Fonts used by the social share images (read from disk at render time).
-  outputFileTracingIncludes: { '/**/opengraph-image': ['./assets/fonts/**'] },
   async headers() {
     return [
       {
