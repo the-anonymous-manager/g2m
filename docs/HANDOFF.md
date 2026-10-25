@@ -84,6 +84,11 @@ technical steps yourself.
   cashback by loyalty tier (0.5% to 2% in NEXO, caps $50 to $200), personal IBAN, SEPA / FPS / SWIFT / ACH / Fedwire
   rails, 5-year validity. Nexo moves from 20th to 12th. Their coin list is still unnamed ("70+ cryptocurrencies").
   The per-purchase label now reads "at or under" and "first 5 a month free" where that applies.
+- Card picture rule (25 Oct 2026, after the first five looked wrong): send the card flat and upright, landscape, front
+  only. The site already tilts cards for effect, so a photo that is already tilted ends up twice as crooked, and an
+  upright (portrait) card shows tiny in the list. Ethena Pay's and Bleap's tilted photos were straightened
+  (`ethena-pay-flat.png`, `bleap-flat.png`) and RedotPay's upright card was laid sideways (`redotpay-landscape.png`) so
+  the logo still reads. Keep the originals you straighten in `public/card-originals/` and link them from the sheet.
 - Phone: the tiers table on card pages stacks into one block per tier, and the compare table puts each row's label
   above the card values, so neither scrolls sideways at 375 px.
 

@@ -265,7 +265,7 @@
     ],
     "lastChecked": "2026-10-25",
     "metal": "rose",
-    "image": { "source": "https://g2m.life/card-originals/redotpay.png", "file": "/card-images/redotpay-5d9622a3.webp" }
+    "image": { "source": "https://g2m.life/card-originals/redotpay-landscape.png", "file": "/card-images/redotpay-cf3b6834.webp" }
   },
   {
     "slug": "etherfi",
@@ -718,7 +718,7 @@
     ],
     "lastChecked": "2026-10-25",
     "metal": "black",
-    "image": { "source": "https://g2m.life/card-originals/bleap.png", "file": "/card-images/bleap-7b683bba.webp" }
+    "image": { "source": "https://g2m.life/card-originals/bleap-flat.png", "file": "/card-images/bleap-7d0969e3.webp" }
   },
   {
     "slug": "tangem-pay",
@@ -792,7 +792,7 @@
     ],
     "lastChecked": "2026-10-25",
     "metal": "gold",
-    "image": { "source": "https://g2m.life/card-originals/ethena-pay.webp", "file": "/card-images/ethena-pay-4006a375.webp" }
+    "image": { "source": "https://g2m.life/card-originals/ethena-pay-flat.png", "file": "/card-images/ethena-pay-1976e765.webp" }
   },
   {
     "slug": "exa",
