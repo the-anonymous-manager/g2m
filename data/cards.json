@@ -182,7 +182,7 @@
     "network": "Visa",
     "type": "credit",
     "forms": ["virtual", "physical"],
-    "custody": "custodial",
+    "custody": "both",
     "summary": "Stablecoin card built for global spenders, with USD cashback on every tier and KAST Points on top for Premium and Private members.",
     "cashback": { "basePct": 1.5, "maxPct": 3, "payout": "USD plus KAST Points", "note": "Standard pays 1.5% on the first $2,000 each month. Premium adds 1% in points, Private adds 2%." },
     "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "Billed in US dollars. Up to 2% on non-USD purchases; up to 3% foreign transaction fee.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "smallPurchase": { "feeUsd": 0.1, "underUsd": 25, "foreignOnly": true }, "cardFeeUsd": 0, "physicalCardFeeUsd": 40, "atm": "$3 + 2%; up to $250 per withdrawal", "other": ["Standard card shipping $40", "Extra virtual cards $2 each"] },
