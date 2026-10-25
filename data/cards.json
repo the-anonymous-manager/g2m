@@ -464,7 +464,8 @@
       { "label": "Krak Support: Cryptocurrencies available on Krak", "url": "https://support.krak.app/articles/cryptocurrencies-available-on-krak", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "black"
+    "metal": "black",
+    "image": { "source": "https://g2m.life/card-originals/krak.png", "file": "/card-images/krak-517ef3c9.webp" }
   },
   {
     "slug": "mexc",
@@ -588,7 +589,8 @@
       { "label": "Avalanche Card US Card Agreement", "url": "https://legal.avalanchecard.com/legal/avalanche-card-us-card-agreement-bcc089aa", "verified": "2026-10-24" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "rose"
+    "metal": "rose",
+    "image": { "source": "https://g2m.life/card-originals/avalanche-card.png", "file": "/card-images/avalanche-card-5862e75d.webp" }
   },
   {
     "slug": "solayer",
@@ -763,7 +765,8 @@
       { "label": "Tangem Help Center: Getting Started & KYC", "url": "https://tangem.com/en/help-center/tangem-pay-getting-started-kyc/", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "silver"
+    "metal": "silver",
+    "image": { "source": "https://g2m.life/card-originals/tangem-pay.png", "file": "/card-images/tangem-pay-dfc057bf.webp" }
   },
   {
     "slug": "ethena-pay",
@@ -988,7 +991,8 @@
       { "label": "Karta Personal Help Center: What stablecoins can I use to top up my account?", "url": "https://intercom.help/karta-personal/en/articles/10460873-what-stablecoins-can-i-use-to-top-up-my-account", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "gunmetal"
+    "metal": "gunmetal",
+    "image": { "source": "https://g2m.life/card-originals/karta-io.png", "file": "/card-images/karta-io-39be2b64.webp" }
   },
   {
     "slug": "tria",

@@ -20,8 +20,9 @@ technical steps yourself.
   (`/corridors`), compare, methodology, submit.
 - Live data: token prices (CoinGecko) and exchange rates (open.er-api.com, CoinGecko fallback), cached one hour
   (`lib/prices.ts`). To see them when testing in a Claude cloud session, build and start with `NODE_USE_ENV_PROXY=1`.
-- Real card pictures come from the sheet's "Card image" column: Bitget Wallet, RedotPay, ether.fi, Bleap and Ethena
-  Pay have one (25 Oct 2026, pictures Akash sent). The other cards still show the metal art.
+- Real card pictures come from the sheet's "Card image" column: all 26 cards have one (25 Oct 2026, pictures Akash
+  sent). Originals are in `public/card-originals/`; renders that were not card-shaped were fitted to 1.586, tilted
+  or framed photos were cut out and straightened (Krak, Karta, Avalanche, Tangem Pay, Bleap, Ethena Pay).
 - Outreach to card issuers (email, DM, per-card gaps, how to sell the Sponsored spot) is in the Claude Doc
   "G2M card issuer outreach": https://claude.ai/artifact/96NsBhL6naMwqvFJctKpt5
 
