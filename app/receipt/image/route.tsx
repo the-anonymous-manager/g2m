@@ -33,7 +33,7 @@ export async function GET(req: Request) {
   const perUsd = (await fiatPerUsd()) ?? {};
   const cur = p.cur === 'USD' || perUsd[p.cur] ? p.cur : 'USD';
   const show = p.show && (p.show === 'USD' || perUsd[p.show]) ? p.show : cur;
-  const r = swipeReceipt(row, tier, p.amt, cur, perUsd, { base: p.base, display: show, homeCurrency: p.home });
+  const r = swipeReceipt(row, tier, p.amt, cur, perUsd, { base: p.base, display: show, homeCurrency: p.home, cleared: p.cleared, total: p.total, rate: p.rate });
   const good = r.net >= 0;
   const color = good ? '#6fd39c' : '#f08a80';
 
@@ -63,15 +63,24 @@ export async function GET(req: Request) {
               {p.what} · {tier.name} · {r.base} card · paid in {cur}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', borderTop: '2px dashed #cdbfb3', paddingTop: 12, gap: 8 }}>
-              {r.lines.slice(0, 7).map((l) => (
+              {r.lines.slice(0, 7).flatMap((l) => [
                 <div key={l.key} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 21, color: l.kind === 'fee' ? '#a3322a' : l.kind === 'reward' ? '#1f6b45' : '#1a1714' }}>
                   <span style={{ display: 'flex', maxWidth: 360 }}>
                     {l.kind === 'fee' ? '+ ' : l.kind === 'reward' ? '− ' : ''}
                     {l.label.replace(/\s*\(.*\)$/, '')}
                   </span>
                   <span>{fmt(l.amount, show)}</span>
-                </div>
-              ))}
+                </div>,
+                // Card apps show price + FX as one "cleared" amount.
+                ...(l.key === 'fx'
+                  ? [
+                      <div key="cleared" style={{ display: 'flex', justifyContent: 'space-between', fontSize: 17, color: '#6b625a', marginTop: -4 }}>
+                        <span>= Cleared (price + FX)</span>
+                        <span>{fmt(r.cleared, show)}</span>
+                      </div>
+                    ]
+                  : [])
+              ])}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', borderTop: '2px dashed #cdbfb3', marginTop: 14, paddingTop: 12, gap: 8 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 22, fontWeight: 700 }}>

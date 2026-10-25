@@ -285,7 +285,14 @@ other), and the 2-card wallet is a headline feature that should weigh more than 
 - `/receipt` (`app/receipt`): the swipe receipt for any card, settings in the link (`card, tier, amt, cur, what,
   base, show, home`; `lib/receipt-params.ts`). Three currencies: the card's base currency (`baseCurrencies` in
   `lib/swipe.ts`: 0% FX currencies, the holder's own on cards billed in it, else the lowest listed), "paid in" (FX and
-  foreign-only fees apply when it differs from the base) and "show receipt in" (all amounts converted). Its share preview is `/receipt/image?...` (`app/receipt/image/route.tsx`, 1200 x 630,
+  foreign-only fees apply when it differs from the base) and "show receipt in" (all amounts converted).
+  Exact matching (25 Oct 2026, Akash's real KAST swipe: INR 1,827 = $19.53 cleared + $0.10 low-value fee = $19.63,
+  cashback $0.29): everything is worked out in the card's base currency, each line is rounded to the cent and the
+  totals are sums of the rounded lines. A "= Cleared amount (price + FX)" sub-line shows what card apps call the
+  transaction amount (FX hidden in the rate). "Match a real swipe" takes the app's cleared amount (`cleared=`), total
+  charged (`total=`) or exchange rate (`rate=`, shop currency per 1 base, before FX) and works the price back from it:
+  cleared 19.53 / 1.02 = $19.15 + FX $0.38 + $0.10 = $19.63. Empty = live mid-market rate (can differ from the card
+  network's rate on the day by a few cents). Cashback is now on the cleared amount (price + FX), as card apps do. Its share preview is `/receipt/image?...` (`app/receipt/image/route.tsx`, 1200 x 630,
   next/og): the receipt, the real result, `site.twitter` (NEXT_PUBLIC_TWITTER_HANDLE, now @0akash0x) on the left and
   the site on the right. "Download image" saves the same PNG. Card pages link to it (`#receipt`); the calculator no
   longer embeds it.
