@@ -65,11 +65,11 @@ export function recommend(cards: CardRow[], a: FinderAnswers, count = 3): Pick[]
     const home = here ? homeFx(c, null, here) : null;
 
     if (a.hold === 'self') {
-      if (c.custody === 'self-custodial') {
+      if (c.custody === 'self-custodial' || c.custody === 'both') {
         fit += 15;
         reasons.push('You keep control of your funds');
       } else if (c.custody === 'custodial') fit -= 15;
-    } else if (a.hold === 'exchange' && c.custody === 'custodial') {
+    } else if (a.hold === 'exchange' && (c.custody === 'custodial' || c.custody === 'both')) {
       fit += 4;
     }
 

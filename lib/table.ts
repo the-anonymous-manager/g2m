@@ -86,8 +86,8 @@ export function filterRows(rows: CardRow[], f: Filters): CardRow[] {
   return rows.filter((c) => {
     if (q && !`${c.name} ${c.brand} ${c.coverage.scope}`.toLowerCase().includes(q)) return false;
     if (f.net && !c.network.toLowerCase().includes(f.net)) return false;
-    if (f.custody === 'self' && c.custody !== 'self-custodial') return false;
-    if (f.custody === 'custodial' && c.custody !== 'custodial') return false;
+    if (f.custody === 'self' && c.custody !== 'self-custodial' && c.custody !== 'both') return false;
+    if (f.custody === 'custodial' && c.custody !== 'custodial' && c.custody !== 'both') return false;
     if (f.country) {
       const a = availabilityIn(c, f.country);
       if (a === 'no' || (f.strict && a !== 'yes')) return false;

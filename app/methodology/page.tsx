@@ -37,7 +37,7 @@ const PARTS = [
   {
     name: 'Control',
     max: SCORE_WEIGHTS.control,
-    how: 'Who holds your funds while you spend. Self-custodial cards score 10, custodial cards 5, and cards that do not say score 0.'
+    how: 'Who holds your funds while you spend. Self-custodial cards score 10, cards that let you choose custodial or self-custodial also score 10, custodial-only cards score 5, and cards that do not say score 0.'
   }
 ];
 

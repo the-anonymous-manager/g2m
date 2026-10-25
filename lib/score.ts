@@ -172,7 +172,7 @@ export function scoreCard(c: ScoreInput, place?: ScorePlace | null): ScoreBreakd
 
   const ecosystem = ecosystemPoints(c.ecosystem);
 
-  const control = c.custody === 'self-custodial' ? 10 : c.custody === 'custodial' ? 5 : 0;
+  const control = c.custody === 'self-custodial' || c.custody === 'both' ? 10 : c.custody === 'custodial' ? 5 : 0;
 
   const round = (x: number) => Math.round(x * 10) / 10;
   return {

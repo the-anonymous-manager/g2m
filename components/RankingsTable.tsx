@@ -296,7 +296,7 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
                       <td className="num">{usd(c.fees.annualUsd, '—')}</td>
                       <td className="num">{pct(c.fees.fxPct, '—')}</td>
                       <td>
-                        <span className={`badge ${c.custody === 'self-custodial' ? 'badge-accent' : 'badge-unknown'}`}>
+                        <span className={`badge ${c.custody === 'self-custodial' || c.custody === 'both' ? 'badge-accent' : 'badge-unknown'}`}>
                           {CUSTODY_LABEL[c.custody]}
                         </span>
                       </td>

@@ -69,7 +69,7 @@ export default function HomePage() {
   // The Featured spot: a booked sponsor while its dates run, otherwise the top-ranked card.
   const sponsor = getSponsor();
   const featured = sponsor ?? cards[0];
-  const selfCustodial = cards.filter((c) => c.custody === 'self-custodial').length;
+  const selfCustodial = cards.filter((c) => c.custody === 'self-custodial' || c.custody === 'both').length;
   const noFee = cards.filter((c) => c.fees.annualUsd === 0).length;
 
   return (

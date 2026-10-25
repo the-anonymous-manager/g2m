@@ -153,7 +153,7 @@ export default async function CardPage({ params }: Props) {
               <span className="badge badge-accent">#{rank} of {all.length}</span>
               <span className="badge badge-unknown">{card.network}</span>
               <span className="badge badge-unknown">{TYPE_LABEL[card.type]}</span>
-              <span className={`badge ${card.custody === 'self-custodial' ? 'badge-accent' : 'badge-unknown'}`}>
+              <span className={`badge ${card.custody === 'self-custodial' || card.custody === 'both' ? 'badge-accent' : 'badge-unknown'}`}>
                 {CUSTODY_LABEL[card.custody]}
               </span>
             </div>

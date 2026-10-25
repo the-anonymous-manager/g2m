@@ -49,6 +49,7 @@ export function fmtDate(iso: string): string {
 export const CUSTODY_LABEL = {
   'self-custodial': 'Self-custodial',
   custodial: 'Custodial',
+  both: 'Custodial or self-custodial',
   unknown: 'Not published'
 } as const;
 
