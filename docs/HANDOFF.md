@@ -66,6 +66,12 @@ technical steps yourself.
   (USDT, USDC, EURC, EURS).
 - Corridor finder: a coin shows "No" when the card's coin list is known and leaves it out, "Not stated" only when
   the card has no coin list.
+- ether.fi (Akash's link, 25 Oct): membership levels from its help pages. Core is free; Luxe $199/yr (or 5K points
+  a month, $15K in Liquid, 30K ETHFI staked); Pinnacle $999/yr (or 25K points, $100K Liquid, 150K ETHFI); VIP can't be
+  bought ($500K Liquid or 500K ETHFI). Cashback is now banded by monthly spend (Core 3% to $2K, 1% to $3K, then 0.5%;
+  Luxe 3% to $10K, 1% to $20K; Pinnacle 3% to $50K, 1% to $80K; VIP 4% to $50K, rate above not published, so counted
+  as 0). Paid in ETHFI. Free ATM withdrawals, card prices and Category Cashback per level updated. The tier
+  break-even now works for ether.fi (Luxe beats Core from about $2,800 a month).
 - Phone: the tiers table on card pages stacks into one block per tier, and the compare table puts each row's label
   above the card values, so neither scrolls sideways at 375 px.
 
@@ -488,8 +494,7 @@ staying on Next 15. Remove it when the site moves to a Next version that ships a
 6. Send the issuer outreach and add the answers (country lists, fees, card pictures) through the sheet.
 7. Data gaps to close with issuers or new research: Coinbase One banking features and rails (its help pages block
    downloads), Ethena Pay rails (IBAN currency and payout currencies not published), Tria card fee (its pages
-   disagree), ether.fi Core and Crypto.com Level Up prices (not published, so their tier break-evens can't be worked
-   out), cash-out fees that are only shown in the app (RedotPay, Bitget Wallet, Wirex One, Bybit, Nexo, most ether.fi
+   disagree), the Crypto.com Level Up price (not published, so its tier break-even can't be worked out), cash-out fees that are only shown in the app (RedotPay, Bitget Wallet, Wirex One, Bybit, Nexo, most ether.fi
    local rails), KYC rules not published (Krak, Exa, Avici, Kolo, Tuyo, MetaMask, Crypto.com, Coinbase One, Tangem).
 8. Coin lists (`assets`) are still empty for Coinbase One (paid off in US dollars, no stablecoins) and Nexo (its
    card page says "stablecoins" without naming them), so those show "Not stated" in the corridor finder.
@@ -497,11 +502,10 @@ staying on Next 15. Remove it when the site moves to a Next version that ships a
 ## Ideas for version 2 (not decided, ask Akash)
 
 Done so far: edit card data from a Google Sheet, real card pictures, small bug sweep, every country in the finder
-and calculator with FX at home.
+and calculator with FX at home, phone-friendly tiers and Compare tables, live USD value of staking requirements
+(tier break-even).
 
-- Add the radar cards above, then grow towards 50+ cards.
-- Phone-friendly tiers and Compare tables.
-- Show the live USD value of staking requirements (each tier's `stake.coingeckoId` is already stored for this).
+- Add the radar cards above (PEXX, Fizen, Infini, Cashi, WasabiCard, Kite), then grow towards 50+ cards.
 - "X vs Y" comparison pages for SEO, and short guides (custodial vs self-custodial, how card fees work).
 - A changelog of fee and cashback changes per card, which also feeds his X posts.
 - Email sign-up for card updates.

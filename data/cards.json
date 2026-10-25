@@ -273,13 +273,13 @@
     "forms": ["virtual", "physical"],
     "custody": "self-custodial",
     "summary": "Self-custodial Visa card paying 3% back on every tier, with airport lounge access and Visa Signature perks.",
-    "cashback": { "basePct": 3, "maxPct": 4, "payout": null, "note": "3% on Core, Luxe and Pinnacle; 4% on VIP. Monthly payout caps run from $60 (Core) to $2,000 (VIP)." },
-    "fees": { "annualUsd": null, "fxPct": 0.5, "fxNote": "No FX fee on USD or EUR purchases (EUR in beta). Other currencies: about 1% network rate plus 0.5% (Core), 0.25% (Luxe) or nothing (Pinnacle, VIP).", "fxByCurrency": { "USD": 0, "EUR": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "atm": "$500 per withdrawal; 10 free a month on Pinnacle and VIP", "other": ["Physical card $50 (Core) or $100 (Luxe, Pinnacle)", "Virtual card $10"] },
+    "cashback": { "basePct": 3, "maxPct": 4, "payout": "ETHFI", "note": "3% on the first $2,000 a month (Core), $10,000 (Luxe) or $50,000 (Pinnacle), then 1%, then 0.5%. VIP: 4% on the first $50,000 a month (the rate above is not published). Lower 3% limits on purchases settled in euros. Paid in ETHFI after a 7-day lock." },
+    "fees": { "annualUsd": null, "fxPct": 0.5, "fxNote": "No FX fee on USD or EUR purchases (EUR in beta). Other currencies: about 1% network rate plus 0.5% (Core), 0.25% (Luxe) or nothing (Pinnacle, VIP).", "fxByCurrency": { "USD": 0, "EUR": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "atm": "Free: 10 a month on Core and Luxe, unlimited on Pinnacle and VIP. Up to $5,000 per withdrawal, 5 a day", "other": ["Virtual cards: 1 free on Core, 2 on Luxe, 10 on Pinnacle, unlimited on VIP. In 14 countries (e.g. Mexico, Nigeria, the Philippines) the first one costs $10 on Core", "Physical card free on Core (shipping extra); metal card free on Luxe and up, shipping included"] },
     "tiers": [
-      { "name": "Core", "feeUsdYear": null, "cashbackPct": 3, "capMonthlyUsd": 60, "fxPct": 0.5, "perks": ["Airport lounge access", "Baggage protection", "Price protection"] },
-      { "name": "Luxe", "feeUsdYear": 199, "feeNote": "Or hold 5K points, $15K in Liquid, or 30K ETHFI staked", "cashbackPct": 3, "capMonthlyUsd": 300, "fxPct": 0.25, "requirement": "$199/year, 5K points, $15K Liquid deposit or 30K ETHFI staked", "stake": { "token": "ETHFI", "amount": 30000, "coingeckoId": "ether-fi" }, "perks": ["Airport lounge access", "Concierge"] },
-      { "name": "Pinnacle", "feeUsdYear": null, "cashbackPct": 3, "capMonthlyUsd": 1500, "fxPct": 0, "requirement": "Not published", "perks": ["Airport lounge access", "10 free ATM withdrawals a month"] },
-      { "name": "VIP", "feeUsdYear": null, "cashbackPct": 4, "capMonthlyUsd": 2000, "fxPct": 0, "requirement": "Not published", "perks": ["Airport lounge access", "Free card issuance"] }
+      { "name": "Core", "feeUsdYear": 0, "cashbackPct": 3, "bands": [ { "uptoUsd": 2000, "pct": 3 }, { "uptoUsd": 3000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "fxPct": 0.5, "requirement": "Free for everyone", "perks": ["Airport lounge benefit", "Visa concierge", "Purchase and price protection", "10 free ATM withdrawals a month", "1 free virtual card"] },
+      { "name": "Luxe", "feeUsdYear": 199, "feeNote": "Or 5K points a month, $15K in Liquid, or 30K ETHFI staked", "cashbackPct": 3, "bands": [ { "uptoUsd": 10000, "pct": 3 }, { "uptoUsd": 20000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "fxPct": 0.25, "requirement": "$199/year, 5K points a month, $15K in Liquid or 30K ETHFI staked", "stake": { "token": "ETHFI", "amount": 30000, "coingeckoId": "ether-fi" }, "perks": ["10% Category Cashback on subscriptions, up to $10 a month", "Free metal card, shipping included", "10 free ATM withdrawals a month", "Airport lounge benefit", "Visa concierge"] },
+      { "name": "Pinnacle", "feeUsdYear": 999, "feeNote": "Or 25K points a month, $100K in Liquid, or 150K ETHFI staked", "cashbackPct": 3, "bands": [ { "uptoUsd": 50000, "pct": 3 }, { "uptoUsd": 80000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "fxPct": 0, "requirement": "$999/year, 25K points a month, $100K in Liquid or 150K ETHFI staked", "stake": { "token": "ETHFI", "amount": 150000, "coingeckoId": "ether-fi" }, "perks": ["20% Category Cashback on subscriptions, up to $20 a month", "Unlimited free ATM withdrawals", "Free metal card, express shipping", "Dedicated account manager team", "25% back on airport fast track, up to $25 a year"] },
+      { "name": "VIP", "feeUsdYear": 0, "feeNote": "No fee and can't be bought; needs $500K in Liquid or 500K ETHFI staked", "cashbackPct": 4, "capMonthlyUsd": 2000, "fxPct": 0, "requirement": "$500K in Liquid or 500K ETHFI staked", "stake": { "token": "ETHFI", "amount": 500000, "coingeckoId": "ether-fi" }, "perks": ["30% Category Cashback on subscriptions, up to $30 a month", "Unlimited free ATM withdrawals", "Free gold metal card, express shipping", "Executive support", "25% back on airport fast track, up to $50 a year"] }
     ],
     "coverage": { "countries": 91, "scope": "Global (91 countries)", "examples": ["United Arab Emirates", "Argentina", "Austria", "Australia"], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AD", "AE", "AG", "AO", "AR", "AT", "AU", "BB", "BD", "BE", "BG", "BH", "BO", "BR", "BS", "BZ", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DM", "DO", "EC", "ES", "FR", "GB", "GG", "GI", "GR", "GT", "GY", "HK", "HN", "HR", "HU", "ID", "IE", "IM", "IS", "IT", "JE", "JP", "KN", "KR", "KY", "LC", "LI", "LT", "LU", "LV", "MC", "MT", "MV", "MX", "MY", "NG", "NO", "NZ", "OM", "PA", "PE", "PH", "PL", "PR", "PT", "PW", "PY", "RO", "SA", "SC", "SE", "SG", "SI", "SK", "SR", "SV", "TC", "TH", "TT", "TW", "US", "UY", "VC", "VG", "VU", "ZA"], "others": "no" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 27, "ramps": "both", "credit": true, "yield": true },
@@ -289,8 +289,8 @@
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
     "perks": ["Airport lounge access on every tier", "Visa Signature benefits"],
-    "pros": ["3% back even on the entry tier", "Self-custodial with lounge access"],
-    "cons": ["Core cashback is capped at $60 a month", "Card issuance fees of $50 to $100"],
+    "pros": ["3% back even on the free Core tier", "Self-custodial with lounge access", "Free physical card; metal card from Luxe"],
+    "cons": ["Core pays 3% only on the first $2,000 a month, then 1% and 0.5%", "Higher tiers cost $199 or $999 a year, or a large ETHFI stake or deposit"],
     "links": { "official": "https://www.ether.fi/" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/ether.fi", "verified": "2026-08-30" },
@@ -299,14 +299,20 @@
       { "label": "ether.fi Help: Fund Your Vault with Crypto", "url": "https://help.ether.fi/en/articles/637846-fund-your-vault-with-crypto", "verified": "2026-10-24" },
       { "label": "ether.fi Help: Bank Transfers - FAQs", "url": "https://help.ether.fi/en/articles/758758-bank-transfers-faqs", "verified": "2026-10-25" },
       { "label": "ether.fi Help: How Borrow Works", "url": "https://help.ether.fi/en/articles/764754-how-borrow-works", "verified": "2026-10-24" },
-      { "label": "ether.fi Help: Why is there a $10 fee for my first virtual Cash card?", "url": "https://help.ether.fi/en/articles/833743-why-is-there-a-10-fee-for-my-first-virtual-cash-card", "verified": "2026-10-24" },
+      { "label": "ether.fi Help: Why is there a $10 fee for my first virtual Cash card?", "url": "https://help.ether.fi/en/articles/833743-why-is-there-a-10-fee-for-my-first-virtual-cash-card", "verified": "2026-10-25" },
       { "label": "ether.fi Help: Send and Receive GBP via FPS", "url": "https://help.ether.fi/en/articles/601603-send-and-receive-gbp-via-fps", "verified": "2026-10-24" },
       { "label": "ether.fi Help: Supported Payment Methods (Deposits & Withdrawals)", "url": "https://help.ether.fi/en/articles/759961-supported-payment-methods-deposits-withdrawals", "verified": "2026-10-25" },
       { "label": "ether.fi Help: Send and Receive EUR via SEPA Bank Transfers", "url": "https://help.ether.fi/en/articles/586168-send-and-receive-eur-via-sepa-bank-transfers", "verified": "2026-10-25" },
       { "label": "ether.fi Help: Applying with a Chinese Passport", "url": "https://help.ether.fi/en/articles/865620-applying-with-a-chinese-passport", "verified": "2026-10-25" },
       { "label": "ether.fi Help: KYC Process and Requirements", "url": "https://help.ether.fi/en/articles/269731-kyc-process-and-requirements", "verified": "2026-10-25" },
       { "label": "ether.fi Help: In which countries are bank transfers available?", "url": "https://help.ether.fi/en/articles/860025-in-which-countries-are-bank-transfers-available", "verified": "2026-10-25" },
-      { "label": "ether.fi Help: Supported assets and networks for your Vault with Cash", "url": "https://help.ether.fi/en/articles/758804-supported-assets-and-networks-for-your-vault-with-cash", "verified": "2026-10-25" }
+      { "label": "ether.fi Help: Supported assets and networks for your Vault with Cash", "url": "https://help.ether.fi/en/articles/758804-supported-assets-and-networks-for-your-vault-with-cash", "verified": "2026-10-25" },
+      { "label": "ether.fi Help: How do Membership levels work?", "url": "https://help.ether.fi/en/articles/303625-how-do-membership-levels-work", "verified": "2026-10-25" },
+      { "label": "ether.fi Help: Membership level benefits", "url": "https://help.ether.fi/en/articles/776152-membership-level-benefits", "verified": "2026-10-25" },
+      { "label": "ether.fi Help: How does cashback work?", "url": "https://help.ether.fi/en/articles/262374-how-does-cashback-work", "verified": "2026-10-25" },
+      { "label": "ether.fi Help: How does Category Cashback work?", "url": "https://help.ether.fi/en/articles/823083-how-does-category-cashback-work", "verified": "2026-10-25" },
+      { "label": "ether.fi Help: Why purchase a Membership upgrade?", "url": "https://help.ether.fi/en/articles/846487-why-purchase-a-membership-upgrade", "verified": "2026-10-25" },
+      { "label": "ether.fi Help: ATM withdrawal limits for personal Cash cards", "url": "https://help.ether.fi/en/articles/303623-what-are-the-atm-withdrawal-limits-for-personal-cash-cards", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
     "metal": "silver"
