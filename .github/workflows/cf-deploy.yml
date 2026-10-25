@@ -1,0 +1,67 @@
+# Deploys g2m.life to Cloudflare Workers on every push to this branch (the Cloudflare migration
+# branch, until it's merged into main — see docs/HANDOFF.md). Mirrors how Vercel used to auto-deploy
+# from main: push the code, the site updates on its own, no manual `npm run cf:deploy` needed.
+name: Deploy to Cloudflare Workers
+
+on:
+  push:
+    branches:
+      - claude/great-lamport-3kjmvq
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: cf-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install
+        run: npm ci
+
+      - name: Deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: npm run cf:deploy
+
+      - name: Close the problem report
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for n in $(gh issue list --label cf-deploy --state open --json number --jq '.[].number'); do
+            gh issue close "$n" --comment "The next deploy went through. g2m.life is up to date."
+          done
+
+      - name: Report the problem
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          {
+            echo "The latest push did **not** go live on g2m.life. The site still shows the previous version."
+            echo
+            echo "Details are in the run log: $RUN_URL"
+            echo
+            echo "This closes itself once a deploy succeeds again."
+          } > issue.md
+          gh label create cf-deploy --color B76E79 --description "Cloudflare deploy problems" --force
+          n=$(gh issue list --label cf-deploy --state open --json number --jq '.[0].number')
+          if [ -n "$n" ]; then
+            gh issue edit "$n" --body-file issue.md
+          else
+            gh issue create --title "Deploy to g2m.life failed" --label cf-deploy --body-file issue.md
+          fi
