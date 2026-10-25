@@ -680,7 +680,8 @@
       { "label": "Wirex One Help: How to receive crypto", "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088117-how-to-receive-crypto", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "silver"
+    "metal": "silver",
+    "image": { "source": "https://g2m.life/card-originals/wirex-one.png", "file": "/card-images/wirex-one-2a27e71f.webp" }
   },
   {
     "slug": "bleap",
@@ -943,7 +944,8 @@
       { "label": "Kolo Terms of Use (PDF)", "url": "https://kolo.xyz/legal-pdf/kolo/terms-of-use", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "gold"
+    "metal": "gold",
+    "image": { "source": "https://g2m.life/card-originals/kolo.png", "file": "/card-images/kolo-64ab5c7f.webp" }
   },
   {
     "slug": "karta-io",
@@ -1080,7 +1082,8 @@
       { "label": "COCA Docs: Buy Crypto", "url": "https://docs.coca.xyz/coca/crypto-account/buy-crypto", "verified": "2026-10-24" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "rose"
+    "metal": "rose",
+    "image": { "source": "https://g2m.life/card-originals/coca.png", "file": "/card-images/coca-c187374f.webp" }
   },
   {
     "slug": "avici",
