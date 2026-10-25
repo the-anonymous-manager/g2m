@@ -202,7 +202,7 @@
     "perks": ["Concierge on every tier"],
     "pros": ["USD cashback, not a volatile token", "Free top-ups and no card spend fee in USD"],
     "cons": ["Standard cashback stops after $2,000 a month", "Up to 2% FX plus a $40 shipping fee"],
-    "links": { "official": "https://www.kast.xyz/" },
+    "links": { "official": "https://www.kast.xyz/", "affiliate": "https://app.kast.xyz/referral/EZRQ0A3I" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/kast-card", "verified": "2026-08-30" },
       { "label": "KAST Cardholder Agreement (Non-US)", "url": "https://www.kast.xyz/legal/ra-card-terms-non-us", "verified": "2026-10-25" },
