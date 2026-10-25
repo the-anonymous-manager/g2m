@@ -49,8 +49,8 @@ technical steps yourself.
 - New Cards columns: "KYC eligibility rule" (`kycRule`: residency_id / passport_strict / both / empty) and
   "Restricted passports" (`restrictedPassports`: `US; IR`, `none`, empty), after "Bank account for non-residents".
   Researched on issuer pages for all 26 cards (quotes checked against the pages). 14 cards have a rule (9
-  residency_id, 5 both); the other 12 publish none. US citizens are blocked on the Rain / Third National cards (Exa, Tria, Avici,
-  Karta, Avalanche, KAST non-US) and Ethena Pay.
+  residency_id, 5 both); the other 12 publish none. US citizens are blocked where the card terms make you confirm you are not a US
+  citizen (Exa, Tria, Avici, Karta, Avalanche, KAST non-US) and on Ethena Pay.
 - Same research filled cash-out fees per rail, "Bank account for non-residents" (now 17 cards), USDC/USDT in
   `assets`, and rail fixes (e.g. KAST wire and SWIFT payouts, ether.fi SWIFT payouts and Fedwire, Jupiter payouts,
   Avici wire and SWIFT deposits, Plasma Fedwire).
