@@ -453,7 +453,7 @@
       { "name": "Thailand Premier", "feeUsdYear": 0, "cashbackPct": 6, "capMonthlyUsd": 300, "fxPct": 1, "requirement": "Thailand residents; tier criteria not published", "countries": ["TH"] },
       { "name": "Thailand Elite", "feeUsdYear": 0, "cashbackPct": 10, "capMonthlyUsd": 800, "fxPct": 1, "requirement": "Thailand residents; tier criteria not published", "countries": ["TH"] }
     ],
-    "coverage": { "countries": 110, "scope": "Global virtual card in 110 countries; a separate card for Thailand", "examples": ["United Arab Emirates", "Argentina", "Azerbaijan", "Thailand"], "markets": { "IN": "no", "AE": "yes", "US": "no", "GB": "yes", "EU": "yes" }, "countryList": { "yes": [], "no": ["AF", "AL", "AM", "AQ", "BA", "BI", "BQ", "BV", "BY", "CD", "CF", "CN", "CU", "CW", "CY", "ET", "GN", "GS", "GT", "GW", "HM", "HT", "ID", "IN", "IQ", "IR", "KG", "KN", "KP", "LB", "LY", "MA", "MD", "ME", "ML", "MM", "NE", "NI", "NP", "PN", "RS", "RU", "SD", "SO", "SS", "SX", "SY", "TF", "TJ", "TN", "TR", "UA", "UM", "US", "VE", "VU", "YE", "ZW"], "unclear": ["AU", "CH", "SA", "ZA"], "others": "yes" } },
+    "coverage": { "countries": 110, "scope": "Global virtual card in 110 countries; a separate card for Thailand", "examples": ["United Arab Emirates", "Argentina", "Azerbaijan", "Thailand"], "markets": { "IN": "no", "AE": "yes", "US": "no", "GB": "no", "EU": "yes" }, "countryList": { "yes": [], "no": ["AF", "AL", "AM", "AQ", "BA", "BI", "BQ", "BV", "BY", "CA", "CD", "CF", "CN", "CU", "CW", "CY", "ET", "GB", "GN", "GS", "GT", "GW", "HK", "HM", "HT", "ID", "IN", "IQ", "IR", "KG", "KN", "KP", "KZ", "LB", "LY", "MA", "MD", "ME", "ML", "MM", "MY", "NE", "NI", "NP", "PN", "RS", "RU", "SD", "SG", "SO", "SS", "SX", "SY", "TF", "TJ", "TN", "TR", "UA", "UM", "US", "VE", "VU", "YE", "ZW"], "unclear": ["AU", "CH", "SA", "ZA"], "others": "yes" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 1, "ramps": "both", "credit": false, "yield": true },
     "bankRails": [ { "rail": "EUR_SEPA", "in": true, "out": false }, { "rail": "SWIFT", "in": true, "out": true, "fee": "USD, shared account, deposits free, out fee shown when you withdraw" } ],
     "bankForNonResidents": true,
@@ -478,7 +478,7 @@
       { "label": "MEXC Terms of Use", "url": "https://www.mexc.com/terms", "verified": "2026-10-24" },
       { "label": "MEXC Help: What Documents Do I Need for KYC Verification? (2026-03-28)", "url": "https://www.mexc.co/announcements/article/17827791519719", "verified": "2026-10-25" },
       { "label": "MEXC Learn: MEXC Card supported countries, restricted regions and KYC", "url": "https://www.mexc.co/learn/article/mexc-card-supported-countries-restricted-regions-what-kyc-actually-requires/1", "verified": "2026-10-25" },
-      { "label": "MEXC Terms of Use", "url": "https://www.mexc.co/terms", "verified": "2026-10-25" }
+      { "label": "MEXC User Agreement: Prohibited Jurisdictions (13 Oct 2026)", "url": "https://www.mexc.co/terms", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
     "metal": "gunmetal"
@@ -572,7 +572,7 @@
     "tiers": [
       { "name": "Membership", "feeUsdYear": 20, "cashbackPct": null }
     ],
-    "coverage": { "countries": 154, "scope": "Worldwide except 95 restricted countries, incl. India, the UAE, the UK and most of the EU", "examples": ["Argentina", "Armenia", "Angola", "Aruba"], "markets": { "IN": "no", "AE": "no", "US": "yes", "GB": "no", "EU": "yes" }, "countryList": { "yes": [], "no": ["AD", "AE", "AF", "AL", "AT", "AU", "BA", "BE", "BF", "BG", "BI", "BY", "CA", "CD", "CF", "CH", "CN", "CU", "CY", "CZ", "DE", "DK", "EE", "EH", "ER", "ES", "FI", "FR", "GB", "GE", "GN", "GR", "GW", "HR", "HT", "HU", "ID", "IE", "IL", "IN", "IQ", "IR", "IS", "IT", "JM", "JO", "KH", "KP", "KR", "LA", "LB", "LR", "LT", "LU", "LV", "LY", "MA", "MC", "MD", "ME", "ML", "MM", "MT", "MY", "MZ", "NG", "NI", "NL", "NO", "NP", "NZ", "PL", "PS", "PT", "PW", "QA", "RO", "RS", "RU", "SD", "SE", "SK", "SM", "SO", "SY", "TH", "TR", "UA", "UG", "VE", "VN", "VU", "XK", "YE", "ZA"], "unclear": ["EG"], "others": "yes" } },
+    "coverage": { "countries": 154, "scope": "Worldwide except 95 restricted countries, incl. India, the UAE, the UK and most of the EU", "examples": ["Argentina", "Armenia", "Angola", "Aruba"], "markets": { "IN": "no", "AE": "no", "US": "yes", "GB": "no", "EU": "no" }, "countryList": { "yes": [], "no": ["AD", "AE", "AF", "AL", "AT", "AU", "BA", "BE", "BF", "BG", "BI", "BY", "CA", "CD", "CF", "CH", "CN", "CU", "CY", "CZ", "DE", "DK", "EE", "EH", "ER", "ES", "FI", "FR", "GB", "GE", "GN", "GR", "GW", "HR", "HT", "HU", "ID", "IE", "IL", "IN", "IQ", "IR", "IS", "IT", "JM", "JO", "KH", "KP", "KR", "LA", "LB", "LR", "LT", "LU", "LV", "LY", "MA", "MC", "MD", "ME", "ML", "MM", "MT", "MY", "MZ", "NG", "NI", "NL", "NO", "NP", "NZ", "PL", "PS", "PT", "PW", "QA", "RO", "RS", "RU", "SD", "SE", "SK", "SM", "SO", "SY", "TH", "TR", "UA", "UG", "VE", "VN", "VU", "XK", "YE", "ZA"], "unclear": ["EG"], "others": "yes" } },
     "ecosystem": { "iban": "none", "payoutCorridors": 0, "ramps": "none", "credit": false, "yield": true },
     "bankRails": [],
     "kycRule": "both",
@@ -783,7 +783,7 @@
       { "name": "Global", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 1.5, "exceptCountries": ["US"] },
       { "name": "United States", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 1, "countries": ["US"] }
     ],
-    "coverage": { "countries": 211, "scope": "211 countries incl. the UAE, India and Latin America", "examples": ["United Arab Emirates", "India", "Argentina", "Australia"], "markets": { "IN": "yes", "AE": "yes", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AD", "AE", "AG", "AI", "AL", "AM", "AO", "AQ", "AR", "AS", "AT", "AU", "AW", "AX", "AZ", "BA", "BB", "BE", "BF", "BH", "BJ", "BL", "BM", "BN", "BO", "BQ", "BR", "BS", "BT", "BV", "BW", "BZ", "CA", "CC", "CG", "CH", "CI", "CK", "CL", "CM", "CO", "CR", "CV", "CW", "CX", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "EH", "ES", "FI", "FJ", "FK", "FM", "FO", "FR", "GA", "GB", "GD", "GE", "GF", "GG", "GH", "GI", "GL", "GM", "GN", "GP", "GQ", "GR", "GS", "GT", "GU", "GY", "HK", "HM", "HN", "HU", "ID", "IE", "IM", "IN", "IO", "IS", "IT", "JE", "JM", "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KR", "KW", "KY", "KZ", "LA", "LC", "LI", "LK", "LS", "LT", "LU", "LV", "MA", "MC", "MD", "ME", "MF", "MG", "MH", "MK", "MN", "MO", "MP", "MQ", "MR", "MS", "MT", "MU", "MV", "MW", "MX", "MY", "MZ", "NA", "NC", "NE", "NF", "NL", "NO", "NR", "NU", "NZ", "OM", "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM", "PN", "PR", "PS", "PT", "PW", "PY", "QA", "RE", "RO", "RS", "SA", "SB", "SC", "SE", "SG", "SH", "SI", "SJ", "SK", "SM", "SN", "SR", "ST", "SV", "SX", "SZ", "TC", "TD", "TF", "TG", "TH", "TJ", "TK", "TL", "TM", "TN", "TO", "TT", "TV", "TW", "TZ", "UG", "UM", "US", "UY", "UZ", "VA", "VC", "VG", "VI", "VN", "VU", "WF", "WS", "YT", "ZA", "ZM"], "unclear": ["BD", "BG", "CN", "ET", "HR", "IL", "NG", "NP", "TR"], "others": "no" } },
+    "coverage": { "countries": 46, "scope": "45 countries plus 31 US states, incl. the UAE, Latin America and parts of Asia and Africa", "examples": ["United Arab Emirates", "Mexico", "Argentina", "Singapore"], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "no", "EU": "no" }, "countryList": { "yes": ["AE", "AG", "AR", "AU", "BB", "BO", "BR", "BS", "BZ", "CI", "CO", "CR", "DO", "EC", "GD", "GH", "GT", "GY", "HK", "HN", "JP", "KE", "KN", "KY", "LC", "MA", "MX", "MY", "NZ", "PA", "PE", "PH", "PK", "PY", "SG", "SN", "SR", "SV", "TC", "TT", "UG", "US", "UY", "VC", "ZA", "ZM"], "no": ["BD", "BY", "CN", "CU", "IL", "IN", "IQ", "IR", "KP", "MM", "NI", "NP", "RU", "SY", "TR", "UA", "VE", "VN"], "unclear": ["NG"], "others": "no" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 3, "ramps": "both", "credit": true, "yield": true },
     "bankRails": [ { "rail": "USD_ACH", "in": true, "out": true, "fee": "free to $3,000 or 60 transfers in and out, then 0.4%" }, { "rail": "USD_WIRE", "in": true, "out": true, "fee": "1%, in after the free allowance" }, { "rail": "EUR_SEPA", "in": true, "out": true, "fee": "free to $3,000 or 60 transfers in and out, then 0.7%" }, { "rail": "ARS_BANK", "in": true, "out": true, "fee": "no separate fee, cost is in the exchange rate" } ],
     "bankForNonResidents": true,
@@ -796,8 +796,6 @@
     "links": { "official": "https://exactly.app/" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/exa-card", "verified": "2026-08-29" },
-      { "label": "cryptocards.so: India guide", "url": "https://www.cryptocards.so/en/crypto-cards/india", "verified": "2026-10-20" },
-      { "label": "Exa on X: \"Exa is available to users around the world\" (17 Oct 2026) (country list compiled by Card Map)", "url": "https://x.com/Exa_App/status/2111418552167096620", "verified": "2026-10-20" },
       { "label": "Exa Help Center: Currency conversion rate for purchases with Exa Card that are not in USD", "url": "https://help.exactly.app/en/articles/10102554-currency-conversion-rate-for-purchases-with-exa-card-that-are-not-in-usd", "verified": "2026-10-22" },
       { "label": "Exa Help Center: Exa Card associated fees and costs", "url": "https://help.exactly.app/en/articles/9055779-exa-card-associated-fees-and-costs", "verified": "2026-10-24" },
       { "label": "Exa Help Center: Are there any gas fees?", "url": "https://help.exactly.app/en/articles/9449561-are-there-any-gas-fees", "verified": "2026-10-24" },
@@ -809,7 +807,7 @@
       { "label": "Exa Help Center: USDC Funding", "url": "https://help.exactly.app/en/articles/11731646-usdc-funding", "verified": "2026-10-24" },
       { "label": "Exa Help Center: How does Pay Mode work?", "url": "https://help.exactly.app/en/articles/9465994-how-does-pay-mode-work", "verified": "2026-10-24" },
       { "label": "Exa Help Center: How is the APR displayed in the home screen calculated?", "url": "https://help.exactly.app/en/articles/12633694-how-is-the-apr-displayed-in-the-home-screen-calculated", "verified": "2026-10-24" },
-      { "label": "Exa Help Center: Card availability and usage", "url": "https://help.exactly.app/en/articles/8979641-card-availability-and-usage", "verified": "2026-10-25" },
+      { "label": "Exa Help Center: Card availability and usage (country and US state lists, 21 Sep 2026)", "url": "https://help.exactly.app/en/articles/8979641-card-availability-and-usage", "verified": "2026-10-25" },
       { "label": "Exa Help Center: Exa Card terms and conditions", "url": "https://help.exactly.app/en/articles/10707672-exa-card-terms-and-conditions", "verified": "2026-10-25" },
       { "label": "Exa Help Center: Exa Card Terms for US citizens", "url": "https://help.exactly.app/en/articles/11384293-exa-card-terms-for-us-citizens", "verified": "2026-10-25" },
       { "label": "Exa Help Center: Bridge terms and conditions", "url": "https://help.exactly.app/en/articles/13862897-bridge-terms-and-conditions", "verified": "2026-10-25" },
@@ -1024,7 +1022,7 @@
     "bankForNonResidents": false,
     "kycRule": "residency_id",
     "wallets": { "applePay": true, "googlePay": true },
-    "assets": [],
+    "assets": ["USDT", "USDC", "EURC", "EURS"],
     "perks": ["Yield on your card balance (variable)"],
     "pros": ["1% with no tokens needed", "Up to 8% on higher tiers", "Free ATM withdrawals up to $250 a month"],
     "cons": ["Higher tiers need you to hold COCA tokens", "FX fee not published", "Not offered in the US"],
@@ -1037,7 +1035,7 @@
       { "label": "COCA Help Center: How do I order a COCA card? (updated 12 Oct 2026), confirmed with the COCA team (country list compiled by Card Map)", "url": "https://help.coca.xyz/support/solutions/articles/205000042704", "verified": "2026-10-19" },
       { "label": "COCA Help: Crypto fees and limits", "url": "https://help.coca.xyz/support/solutions/articles/205000042685-crypto-fees-and-limits", "verified": "2026-10-24" },
       { "label": "COCA Docs: Banking Account overview", "url": "https://docs.coca.xyz/coca/banking-account/overview", "verified": "2026-10-25" },
-      { "label": "COCA Help: How do I order a COCA card?", "url": "https://help.coca.xyz/support/solutions/articles/205000042704-how-do-i-order-a-coca-card-", "verified": "2026-10-24" },
+      { "label": "COCA Help: How do I order a COCA card? (country list and top-up stablecoins, 12 Oct 2026)", "url": "https://help.coca.xyz/support/solutions/articles/205000042704-how-do-i-order-a-coca-card-", "verified": "2026-10-25" },
       { "label": "COCA Docs: IBAN", "url": "https://docs.coca.xyz/coca/banking-account/iban", "verified": "2026-10-24" },
       { "label": "COCA Help: What Bank Accounts Are Available in COCA?", "url": "https://help.coca.xyz/support/solutions/articles/205000059619-what-bank-accounts-are-available-in-coca-", "verified": "2026-10-25" },
       { "label": "COCA Docs: Buy Crypto", "url": "https://docs.coca.xyz/coca/crypto-account/buy-crypto", "verified": "2026-10-24" }

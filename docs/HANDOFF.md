@@ -32,11 +32,8 @@ technical steps yourself.
    test everything on a Cloudflare preview URL (live prices, receipt pictures, hourly refresh), then point g2m.life at
    Cloudflare and keep Vercel until confirmed. Alternatives: Netlify (free tier allows commercial use), a Hetzner VPS
    with Coolify (about EUR 5/month, Cloudflare in front for geo).
-2. Coverage problems the 25 Oct research found (not changed yet, ask Akash): Exa's own "Card availability and usage"
-   page (21 Sep 2026) lists India and 17 others as ineligible and gives a closed list of about 46 countries plus 31 US
-   states (data says IN yes, 211 countries); COCA's list of 54 residence countries does not name the UAE (data: AE
-   yes); MEXC's Terms of Use list the UK as prohibited (data: GB yes); Solayer blocks residents or citizens of 26 of 27
-   EU states (data: EU yes); Avici virtual accounts are prohibited in India, Pakistan, Bangladesh and Canada.
+2. Crypto.com's `assets` list holds only CRO, so the corridor finder now says "No" for USDC and USDT on it. Its
+   top-up coin list is only in the app; confirm it with Crypto.com and add the stablecoins if they are accepted.
 
 ## Nomad / expat mode and per-purchase limits (25 Oct 2026, step B part 2, pull request #21)
 
@@ -60,6 +57,15 @@ technical steps yourself.
   (`smallPurchase.inclusive`, RedotPay "$1.00 or less") and "Free small purchases a month" (`freePerMonth`, RedotPay 5).
   Used in the 35-purchase scoring basket (Kolo's $200 purchase earns $1), the calculator ("Lost to the per-purchase
   cap" line) and the receipt.
+- Coverage fixes from the same research (Akash's go-ahead): Exa now uses its own card page (21 Sep 2026): 45 countries
+  plus 31 US states, closed list, India, the UK and the EEA not offered (was 211 countries from an X post). MEXC: its
+  User Agreement (13 Oct 2026) excludes residents of the UK, Singapore, Malaysia, Hong Kong, Kazakhstan, Belarus and
+  Canada, so UK is now "no". Solayer: EU / EEA is now "no" (only Slovenia and Liechtenstein are open); the validator
+  allows EU "no" while fewer than half of the EEA countries are open. COCA: kept UAE "yes", because its newest card
+  article (12 Oct 2026) names the UAE (the older docs list says "which include"); added its top-up stablecoins
+  (USDT, USDC, EURC, EURS).
+- Corridor finder: a coin shows "No" when the card's coin list is known and leaves it out, "Not stated" only when
+  the card has no coin list.
 - Phone: the tiers table on card pages stacks into one block per tier, and the compare table puts each row's label
   above the card values, so neither scrolls sideways at 375 px.
 
@@ -485,8 +491,8 @@ staying on Next 15. Remove it when the site moves to a Next version that ships a
    disagree), ether.fi Core and Crypto.com Level Up prices (not published, so their tier break-evens can't be worked
    out), cash-out fees that are only shown in the app (RedotPay, Bitget Wallet, Wirex One, Bybit, Nexo, most ether.fi
    local rails), KYC rules not published (Krak, Exa, Avici, Kolo, Tuyo, MetaMask, Crypto.com, Coinbase One, Tangem).
-8. The corridor finder can't say "no" for a coin: `assets` only lists what is supported, so a coin the issuer says
-   it does not take (Exa and Tuyo USDT, MEXC USDC) still shows "not stated".
+8. Coin lists (`assets`) are still empty for Coinbase One (paid off in US dollars, no stablecoins) and Nexo (its
+   card page says "stablecoins" without naming them), so those show "Not stated" in the corridor finder.
 
 ## Ideas for version 2 (not decided, ask Akash)
 

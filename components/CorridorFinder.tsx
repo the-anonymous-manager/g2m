@@ -163,7 +163,7 @@ export function CorridorFinder({ rows, initialCoin, initialTo, initialCountry, h
                     )}
                   </td>
                   <td data-label={coin}>
-                    {m.coin === 'listed' ? 'Supported' : <span className="faint">Not stated</span>}
+                    {m.coin === 'listed' ? 'Supported' : m.coin === 'no' ? 'No' : <span className="faint">Not stated</span>}
                   </td>
                 </tr>
               ))}
