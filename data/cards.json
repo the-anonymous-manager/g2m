@@ -49,7 +49,8 @@
       { "label": "Crypto.com Help: How do I fund my Crypto.com Prepaid Visa Card (US)?", "url": "https://help.crypto.com/en/articles/3131878", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "gunmetal"
+    "metal": "gunmetal",
+    "image": { "source": "https://g2m.life/card-originals/crypto-com.webp", "file": "/card-images/crypto-com-d9046a8f.webp" }
   },
   {
     "slug": "bybit",
@@ -92,7 +93,8 @@
       { "label": "Bybit EU Help: FAQ - Fiat Withdrawal", "url": "https://www.bybit.eu/en-EU/help-center/article/FAQ-Fiat-Withdrawal", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "black"
+    "metal": "black",
+    "image": { "source": "https://g2m.life/card-originals/bybit.png", "file": "/card-images/bybit-543ce936.webp" }
   },
   {
     "slug": "coinbase-one",
@@ -124,7 +126,8 @@
       { "label": "Coinbase Help: Payment methods for US customers (ACH in and out, free; set by the owner, page blocks automated reading)", "url": "https://help.coinbase.com/en/coinbase/getting-started/getting-started-with-coinbase/payment-methods-for-us-customers", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "silver"
+    "metal": "silver",
+    "image": { "source": "https://g2m.life/card-originals/coinbase-one.webp", "file": "/card-images/coinbase-one-01779548.webp" }
   },
   {
     "slug": "bitget-wallet",
@@ -214,7 +217,8 @@
       { "label": "KAST Concierge: KAST Brazil entity update, CPF, and new Terms & Conditions", "url": "https://concierge.kast.xyz/hc/en-us/articles/17407295584399-KAST-Brazil-entity-update-CPF-and-new-Terms-Conditions", "verified": "2026-10-24" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "black"
+    "metal": "black",
+    "image": { "source": "https://g2m.life/card-originals/kast.webp", "file": "/card-images/kast-ea0f8ee9.webp" }
   },
   {
     "slug": "redotpay",
@@ -359,7 +363,8 @@
       { "label": "MetaMask Help: Get started with MetaMask Card", "url": "https://support.metamask.io/trade/metamask-card/getting-started-with-card/", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "gold"
+    "metal": "gold",
+    "image": { "source": "https://g2m.life/card-originals/metamask.png", "file": "/card-images/metamask-9ce45bb0.webp" }
   },
   {
     "slug": "nexo",
@@ -412,7 +417,8 @@
       { "label": "Nexo Help: Nexo Savings (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/nexo-savings", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "gunmetal"
+    "metal": "gunmetal",
+    "image": { "source": "https://g2m.life/card-originals/nexo.webp", "file": "/card-images/nexo-ee91231a.webp" }
   },
   {
     "slug": "krak",
@@ -458,7 +464,8 @@
       { "label": "Krak Support: Cryptocurrencies available on Krak", "url": "https://support.krak.app/articles/cryptocurrencies-available-on-krak", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "black"
+    "metal": "black",
+    "image": { "source": "https://g2m.life/card-originals/krak.png", "file": "/card-images/krak-517ef3c9.webp" }
   },
   {
     "slug": "mexc",
@@ -506,7 +513,8 @@
       { "label": "MEXC User Agreement: Prohibited Jurisdictions (13 Oct 2026)", "url": "https://www.mexc.co/terms", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "gunmetal"
+    "metal": "gunmetal",
+    "image": { "source": "https://g2m.life/card-originals/mexc.png", "file": "/card-images/mexc-32c9e8e8.webp" }
   },
   {
     "slug": "jupiter",
@@ -544,7 +552,8 @@
       { "label": "Jupiter Docs: Risks & Security", "url": "https://docs.jup.ag/user-docs/global/spend/risks-and-security", "verified": "2026-10-24" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "rose"
+    "metal": "rose",
+    "image": { "source": "https://g2m.life/card-originals/jupiter.png", "file": "/card-images/jupiter-16f17db8.webp" }
   },
   {
     "slug": "avalanche-card",
@@ -580,7 +589,8 @@
       { "label": "Avalanche Card US Card Agreement", "url": "https://legal.avalanchecard.com/legal/avalanche-card-us-card-agreement-bcc089aa", "verified": "2026-10-24" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "rose"
+    "metal": "rose",
+    "image": { "source": "https://g2m.life/card-originals/avalanche-card.png", "file": "/card-images/avalanche-card-5862e75d.webp" }
   },
   {
     "slug": "solayer",
@@ -618,7 +628,8 @@
       { "label": "Solayer Docs: KYC Guide", "url": "https://docs.solayer.org/solayer-pay/tutorials/kyc", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "gunmetal"
+    "metal": "gunmetal",
+    "image": { "source": "https://g2m.life/card-originals/solayer.png", "file": "/card-images/solayer-287fd11b.webp" }
   },
   {
     "slug": "wirex-one",
@@ -671,7 +682,8 @@
       { "label": "Wirex One Help: How to receive crypto", "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088117-how-to-receive-crypto", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "silver"
+    "metal": "silver",
+    "image": { "source": "https://g2m.life/card-originals/wirex-one.png", "file": "/card-images/wirex-one-2a27e71f.webp" }
   },
   {
     "slug": "bleap",
@@ -753,7 +765,8 @@
       { "label": "Tangem Help Center: Getting Started & KYC", "url": "https://tangem.com/en/help-center/tangem-pay-getting-started-kyc/", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "silver"
+    "metal": "silver",
+    "image": { "source": "https://g2m.life/card-originals/tangem-pay.png", "file": "/card-images/tangem-pay-dfc057bf.webp" }
   },
   {
     "slug": "ethena-pay",
@@ -841,7 +854,8 @@
       { "label": "Exa Help Center: What should I do if I sent an unsupported asset (like USDT) to my Exa wallet?", "url": "https://help.exactly.app/en/articles/11431146-what-should-i-do-if-i-sent-an-unsupported-asset-like-usdt-to-my-exa-wallet", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "rose"
+    "metal": "rose",
+    "image": { "source": "https://g2m.life/card-originals/exa.webp", "file": "/card-images/exa-1108d908.webp" }
   },
   {
     "slug": "plasma-one",
@@ -890,7 +904,8 @@
       { "label": "Plasma Support: How do I withdraw fiat to my bank account?", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15180677-how-do-i-withdraw-fiat-to-my-bank-account", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "silver"
+    "metal": "silver",
+    "image": { "source": "https://g2m.life/card-originals/plasma-one.png", "file": "/card-images/plasma-one-235674a2.webp" }
   },
   {
     "slug": "kolo",
@@ -932,7 +947,8 @@
       { "label": "Kolo Terms of Use (PDF)", "url": "https://kolo.xyz/legal-pdf/kolo/terms-of-use", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "gold"
+    "metal": "gold",
+    "image": { "source": "https://g2m.life/card-originals/kolo.png", "file": "/card-images/kolo-64ab5c7f.webp" }
   },
   {
     "slug": "karta-io",
@@ -975,7 +991,8 @@
       { "label": "Karta Personal Help Center: What stablecoins can I use to top up my account?", "url": "https://intercom.help/karta-personal/en/articles/10460873-what-stablecoins-can-i-use-to-top-up-my-account", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "gunmetal"
+    "metal": "gunmetal",
+    "image": { "source": "https://g2m.life/card-originals/karta-io.png", "file": "/card-images/karta-io-39be2b64.webp" }
   },
   {
     "slug": "tria",
@@ -1021,7 +1038,8 @@
       { "label": "Tria Help Center: Tria Card Top Up Guide", "url": "https://help.tria.so/en/articles/14056654-tria-card-top-up-guide", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "black"
+    "metal": "black",
+    "image": { "source": "https://g2m.life/card-originals/tria.png", "file": "/card-images/tria-c57fc51e.webp" }
   },
   {
     "slug": "coca",
@@ -1068,7 +1086,8 @@
       { "label": "COCA Docs: Buy Crypto", "url": "https://docs.coca.xyz/coca/crypto-account/buy-crypto", "verified": "2026-10-24" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "rose"
+    "metal": "rose",
+    "image": { "source": "https://g2m.life/card-originals/coca.png", "file": "/card-images/coca-c187374f.webp" }
   },
   {
     "slug": "avici",
@@ -1117,7 +1136,8 @@
       { "label": "Avici Docs: Virtual Accounts - Blockchains, Currencies and Payment Rails", "url": "https://docs.avici.money/getting-started/virtual-accounts/blockchains-currencies-and-payment-rails", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "champagne"
+    "metal": "champagne",
+    "image": { "source": "https://g2m.life/card-originals/avici.png", "file": "/card-images/avici-c57f64db.webp" }
   },
   {
     "slug": "tuyo",
@@ -1158,6 +1178,7 @@
       { "label": "Tuyo Help: Add cash with crypto", "url": "https://help.tuyo.com/guides/add-cash-crypto.html", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "champagne"
+    "metal": "champagne",
+    "image": { "source": "https://g2m.life/card-originals/tuyo.png", "file": "/card-images/tuyo-324f9f42.webp" }
   }
 ]
