@@ -46,6 +46,12 @@ and confirm what changed on the site (not which files moved).
   only; empty = not confirmed (scores 0).
 - Bank rails ("Banking rails", `bankRails`): `EUR_SEPA in+out (fee or note); SWIFT out ($25)`; `none` = none offered,
   empty = not confirmed. "Bank account for non-residents": yes/no/empty. Issuer sources only.
+- ID rules for nomad mode ("KYC eligibility rule", `kycRule`: `residency_id` / `passport_strict` / `both` / empty;
+  "Restricted passports", `restrictedPassports`: `US; IR`, `none` = nationality does not matter, empty = not published).
+  Issuer sources only. `/cards` and `/finder` use them with "My passport" + "Where I live" (`lib/nomad.ts`).
+- Per-purchase limits: "Max cashback per purchase $" (`cashback.maxPerTxUsd`, e.g. Kolo 1); "Small purchase limit
+  included" (`fees.smallPurchase.inclusive`: yes = "$1.00 or less", empty = "under $1"); "Free small purchases a month"
+  (`fees.smallPurchase.freePerMonth`). Scores, calculator and receipt all use them.
 - Welcome rates ("Intro cashback %" and "Intro offer days", `cashback.intro`): only short published welcome offers on
   the entry tier; the calculator's Year 1 uses them, scores never do.
 - Real card pictures: "Card image" link in the sheet (`image.source`); the sync stores the files in

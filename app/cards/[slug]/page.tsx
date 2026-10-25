@@ -324,8 +324,8 @@ export default async function CardPage({ params }: Props) {
           Tiers and plans
         </h2>
         {card.tiers.length > 1 ? <TierBreakEven card={row} prices={prices} /> : null}
-        <div className="table-wrap">
-          <table className="table" style={{ minWidth: 760 }}>
+        <div className="table-wrap stack-wrap">
+          <table className="table stack-table" style={{ minWidth: 760 }}>
             <thead>
               <tr>
                 <th scope="col">Tier</th>
@@ -348,7 +348,7 @@ export default async function CardPage({ params }: Props) {
                       </span>
                     ) : null}
                   </td>
-                  <td className="num">
+                  <td className="num" data-label="Cost per year">
                     {usd(t.feeUsdYear)}
                     {t.feeNote ? (
                       <span className="faint" style={{ display: 'block', fontSize: 12 }}>
@@ -356,11 +356,11 @@ export default async function CardPage({ params }: Props) {
                       </span>
                     ) : null}
                   </td>
-                  <td className="num">{tierCashback(t)}</td>
-                  <td className="num">{t.capMonthlyUsd != null ? usd(t.capMonthlyUsd) : '—'}</td>
-                  <td className="num">{pct(t.fxPct ?? card.fees.fxPct)}</td>
-                  <td style={{ fontSize: 14 }}>{t.requirement ?? (t.feeUsdYear === 0 ? 'Free to join' : '—')}</td>
-                  <td style={{ fontSize: 14 }}>{t.perks.length ? t.perks.join(' · ') : '—'}</td>
+                  <td className="num" data-label="Cashback">{tierCashback(t)}</td>
+                  <td className="num" data-label="Monthly cap">{t.capMonthlyUsd != null ? usd(t.capMonthlyUsd) : '—'}</td>
+                  <td className="num" data-label="FX fee">{pct(t.fxPct ?? card.fees.fxPct)}</td>
+                  <td style={{ fontSize: 14 }} data-label="How to get it">{t.requirement ?? (t.feeUsdYear === 0 ? 'Free to join' : '—')}</td>
+                  <td style={{ fontSize: 14 }} data-label="Perks">{t.perks.length ? t.perks.join(' · ') : '—'}</td>
                 </tr>
               ))}
             </tbody>

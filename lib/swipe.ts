@@ -1,5 +1,6 @@
 import type { CardRow, Tier } from '@/lib/types';
 import { otherFxPct } from '@/lib/fx';
+import { isSmallPurchase } from '@/lib/calc';
 
 // One purchase on one card, line by line: what the shop charges, every fee the card adds, the cashback, and what the
 // purchase really costs. Three currencies: the card's base (billing) currency, the currency the shop charges in, and
@@ -127,7 +128,7 @@ export function swipeReceipt(
   const sp = card.fees.smallPurchase;
   const flatB = card.fees.txFlatUsd * baseRate;
   const smallB = sp ? sp.feeUsd * baseRate : 0;
-  const smallApplies = (priceB: number) => Boolean(sp && priceB / baseRate < sp.underUsd && (!sp.foreignOnly || foreign));
+  const smallApplies = (priceB: number) => Boolean(sp && isSmallPurchase(sp, priceB / baseRate) && (!sp.foreignOnly || foreign));
 
   // The price in the base currency.
   let mode: SwipeResult['mode'] = 'live';
@@ -194,19 +195,31 @@ export function swipeReceipt(
   if (small > 0 && sp) {
     lines.push({
       key: 'small',
-      label: `Small-purchase fee (${usdText(sp.feeUsd)} under ${usdText(sp.underUsd)}${sp.foreignOnly ? ', foreign purchases' : ''})`,
+      label: `Small-purchase fee (${usdText(sp.feeUsd)} ${sp.inclusive ? 'at or under' : 'under'} ${usdText(sp.underUsd)}${sp.foreignOnly ? ', foreign purchases' : ''})`,
       amount: small,
       kind: 'fee'
     });
   }
+  if (small > 0 && sp?.freePerMonth) notes.push(`The first ${sp.freePerMonth} small purchases each month are free; this receipt assumes you have used them`);
   if (topUp > 0) lines.push({ key: 'topup', label: `Top-up fee (${load}% of what you load)`, amount: topUp, kind: 'fee' });
   const fees = r(lines.filter((l) => l.kind === 'fee').reduce((s, l) => s + l.amount, 0));
 
   // Cashback on the amount the card is charged (price + FX), like card apps.
   const ratePct = tierRate(tier);
   if (ratePct == null) notes.push('Cashback rate not published');
-  const cashback = r((cleared * (ratePct ?? 0)) / 100);
-  lines.push({ key: 'cashback', label: `Cashback (${ratePct ?? 0}%${card.cashback.payout ? ` in ${card.cashback.payout}` : ''})`, amount: cashback, kind: 'reward' });
+  // A per-purchase cap (e.g. Kolo: at most $1 a purchase), converted to the receipt currency.
+  const maxTx = card.cashback.maxPerTxUsd;
+  const capD = maxTx ? inDisplay(maxTx * baseRate) : Infinity;
+  const uncapped = (cleared * (ratePct ?? 0)) / 100;
+  const cashback = r(Math.min(uncapped, capD));
+  const capped = uncapped > capD;
+  lines.push({
+    key: 'cashback',
+    label: `Cashback (${ratePct ?? 0}%${capped ? `, capped at ${usdText(maxTx!)} a purchase` : ''}${card.cashback.payout ? ` in ${card.cashback.payout}` : ''})`,
+    amount: cashback,
+    kind: 'reward'
+  });
+  if (maxTx && !capped) notes.push(`Cashback is capped at ${usdText(maxTx)} a purchase`);
   if (tier.capMonthlyUsd != null) notes.push(`Cashback stops at $${tier.capMonthlyUsd} a month`);
 
   const totalPaid = r(price + fees);

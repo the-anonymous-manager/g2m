@@ -57,6 +57,17 @@ function intro(pctCell, daysCell) {
   return { pct, days };
 }
 
+// Blocked nationalities, e.g. "US; KP; IR". "none" = none; empty = not published.
+function passports(v) {
+  const s = str(v);
+  if (!s) return undefined;
+  if (/^none$/i.test(s)) return [];
+  return s
+    .split(/[;,]/)
+    .map((p) => p.trim().toUpperCase())
+    .filter(Boolean);
+}
+
 // Bank rails, e.g. "EUR_SEPA in+out (free); GBP_FPS out (1.95 GBP); SWIFT in". "none" = the issuer offers none.
 const RAIL_ITEM = /^((?:[A-Z]{3}_[A-Z]+)|SWIFT)\s+(in\+out|in|out)(?:\s*\(([^()]{1,80})\))?$/i;
 function showRails(list) {
@@ -138,6 +149,7 @@ const CARD_COLUMNS = [
   ['Cashback note', (c) => c.cashback.note ?? ''],
   ['Intro cashback %', (c) => showNum(c.cashback.intro?.pct ?? null)],
   ['Intro offer days', (c) => showNum(c.cashback.intro?.days ?? null)],
+  ['Max cashback per purchase $', (c) => showNum(c.cashback.maxPerTxUsd ?? null)],
   ['Annual fee $', (c) => showNum(c.fees.annualUsd)],
   ['FX fee %', (c) => showNum(c.fees.fxPct)],
   ['FX note', (c) => c.fees.fxNote ?? ''],
@@ -149,6 +161,8 @@ const CARD_COLUMNS = [
   ['Small-purchase fee $', (c) => showNum(c.fees.smallPurchase?.feeUsd)],
   ['Small purchase = under $', (c) => showNum(c.fees.smallPurchase?.underUsd)],
   ['Small-purchase fee foreign only', (c) => (c.fees.smallPurchase ? showBool(c.fees.smallPurchase.foreignOnly) : '')],
+  ['Small purchase limit included', (c) => (c.fees.smallPurchase ? showBool(c.fees.smallPurchase.inclusive) : '')],
+  ['Free small purchases a month', (c) => (c.fees.smallPurchase?.freePerMonth ? String(c.fees.smallPurchase.freePerMonth) : '')],
   ['Card activation fee $', (c) => showNum(c.fees.cardFeeUsd)],
   ['Physical card cost $ (issuance + shipping)', (c) => showNum(c.fees.physicalCardFeeUsd)],
   ['ATM', (c) => c.fees.atm ?? ''],
@@ -170,6 +184,8 @@ const CARD_COLUMNS = [
   ['Yield on balance', (c) => showBool(c.ecosystem?.yield)],
   ['Banking rails', (c) => showRails(c.bankRails)],
   ['Bank account for non-residents', (c) => showBool(c.bankForNonResidents ?? null)],
+  ['KYC eligibility rule', (c) => c.kycRule ?? ''],
+  ['Restricted passports', (c) => (c.restrictedPassports == null ? '' : c.restrictedPassports.length ? c.restrictedPassports.join('; ') : 'none')],
   ['Assets', (c) => c.assets.join(', ')],
   ['Perks', (c) => c.perks.join('\n')],
   ['Pros', (c) => c.pros.join('\n')],
@@ -357,7 +373,8 @@ export function tablesToCards(tables) {
         maxPct: n('Max cashback %'),
         payout: str(r.get('Cashback paid in')) || null,
         note: optText(r.get('Cashback note')),
-        intro: cell('Cards', r, 'Intro cashback %', (v) => intro(v, r.get('Intro offer days')))
+        intro: cell('Cards', r, 'Intro cashback %', (v) => intro(v, r.get('Intro offer days'))),
+        maxPerTxUsd: n('Max cashback per purchase $') ?? undefined
       },
       fees: {
         annualUsd: n('Annual fee $'),
@@ -370,7 +387,13 @@ export function tablesToCards(tables) {
         txFlatUsd: n('Fee on every purchase $') || undefined,
         smallPurchase:
           smallFee != null || smallUnder != null
-            ? { feeUsd: smallFee, underUsd: smallUnder, foreignOnly: b('Small-purchase fee foreign only') ?? false }
+            ? {
+                feeUsd: smallFee,
+                underUsd: smallUnder,
+                foreignOnly: b('Small-purchase fee foreign only') ?? false,
+                ...(b('Small purchase limit included') ? { inclusive: true } : {}),
+                ...(n('Free small purchases a month') ? { freePerMonth: n('Free small purchases a month') } : {})
+              }
             : undefined,
         cardFeeUsd: n('Card activation fee $') ?? undefined,
         physicalCardFeeUsd: n('Physical card cost $ (issuance + shipping)') ?? undefined,
@@ -388,6 +411,8 @@ export function tablesToCards(tables) {
       ecosystem: ecosystem(r),
       bankRails: cell('Cards', r, 'Banking rails', rails),
       bankForNonResidents: b('Bank account for non-residents') ?? undefined,
+      kycRule: str(r.get('KYC eligibility rule')).toLowerCase() || undefined,
+      restrictedPassports: cell('Cards', r, 'Restricted passports', passports),
       wallets: { applePay: b('Apple Pay'), googlePay: b('Google Pay') },
       assets: commas(r.get('Assets')),
       perks: lines(r.get('Perks')),
@@ -492,6 +517,8 @@ const FIELD_COLUMNS = {
   'cashback.basePct': 'Base cashback %', 'cashback.maxPct': 'Max cashback %', 'cashback.payout': 'Cashback paid in',
   'cashback.intro.pct': 'Intro cashback %', 'cashback.intro.days': 'Intro offer days',
   bankRails: 'Banking rails', bankForNonResidents: 'Bank account for non-residents',
+  kycRule: 'KYC eligibility rule', restrictedPassports: 'Restricted passports', 'cashback.maxPerTxUsd': 'Max cashback per purchase $',
+  'fees.smallPurchase.freePerMonth': 'Free small purchases a month',
   'fees.annualUsd': 'Annual fee $', 'fees.cardFeeUsd': 'Card activation fee $',
   'fees.physicalCardFeeUsd': 'Physical card cost $ (issuance + shipping)', 'fees.fxPct': 'FX fee %', 'fees.fxByCurrency': 'No-FX currencies', 'fees.topUpPct': 'Top-up fee %',
   'fees.txPct': 'Fee on every purchase %', 'fees.txFlatUsd': 'Fee on every purchase $',

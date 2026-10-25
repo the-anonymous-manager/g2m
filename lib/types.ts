@@ -39,6 +39,8 @@ export type CardRow = Pick<
   | 'score'
   | 'bankRails'
   | 'bankForNonResidents'
+  | 'kycRule'
+  | 'restrictedPassports'
   | 'assets'
   | 'rank'
   | 'perks'
@@ -64,6 +66,8 @@ export function toRow(c: Card): CardRow {
     score: c.score,
     bankRails: c.bankRails,
     bankForNonResidents: c.bankForNonResidents,
+    kycRule: c.kycRule,
+    restrictedPassports: c.restrictedPassports,
     assets: c.assets,
     rank: c.rank,
     perks: c.perks

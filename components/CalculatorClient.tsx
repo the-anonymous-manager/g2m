@@ -618,6 +618,7 @@ function AuditView({ card, input, country, currency }: { card: CardRow; input: C
       amount: b.amount,
       sign: 1 as const
     })),
+    { label: 'Lost to the per-purchase cap', amount: r.txCapCut, sign: -1, skip: r.txCapCut < 0.005 },
     { label: 'Lost to the monthly cap', amount: r.capCut, sign: -1, skip: r.capCut < 0.005 },
     { label: `Welcome offer (${card.cashback.intro?.pct}% for ${card.cashback.intro?.days} days)`, amount: r.intro, sign: 1, skip: r.intro < 0.005 },
     { label: `Valuation: rewards paid in ${card.cashback.payout ?? 'a currency not published'}`, amount: r.valueCut, sign: -1, skip: r.valueCut < 0.005 },

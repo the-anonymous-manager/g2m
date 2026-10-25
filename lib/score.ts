@@ -1,7 +1,7 @@
 import type { CardData, ScoreBreakdown, Tier } from '@/lib/types';
 import { availabilityIn, tierOffered } from '@/lib/regions';
 import { COUNTRY_CODES } from '@/lib/countries.mjs';
-import { monthlyCashback } from '@/lib/calc';
+import { cashbackBreakdown, isSmallPurchase, perPurchaseCut } from '@/lib/calc';
 import { billedIn, homeFx } from '@/lib/fx';
 import { currencyOf } from '@/lib/currencies.mjs';
 import { BASKET, BASKET_USD, BASKET_PURCHASES } from '@/lib/basket';
@@ -70,15 +70,19 @@ export function termsIn(c: Pick<CardData, 'cashback' | 'fees' | 'tiers'>, countr
  * Cashback rate (%) on the $1,000 basket from the entry tier: its spending bands and monthly cap apply.
  * No verified entry rate (only an "up to" headline rate) means 0.
  */
-function basketRate(terms: Terms): number {
+function basketRate(terms: Terms, maxPerTxUsd?: number | null): number {
   if (terms.basePct == null) return 0;
   const tier = terms.entry?.bands?.length ? terms.entry : ({ ...terms.entry, bands: undefined, cashbackPct: terms.basePct } as Tier);
-  return ((monthlyCashback(tier, BASKET_USD) ?? 0) / BASKET_USD) * 100;
+  // A per-purchase cap first (e.g. Kolo's $1 caps the $200 purchase), then the monthly cap.
+  const cut = BASKET.reduce((s, b) => s + b.count * perPurchaseCut(tier, maxPerTxUsd, b.usd), 0);
+  let month = Math.max(0, (cashbackBreakdown(tier, BASKET_USD).gross ?? 0) - cut);
+  if (tier.capMonthlyUsd != null) month = Math.min(month, tier.capMonthlyUsd);
+  return (month / BASKET_USD) * 100;
 }
 
 /** The entry-tier cashback rate on the basket, before per-purchase fees. */
 export function typicalRate(c: Pick<CardData, 'cashback' | 'fees' | 'tiers'>): number {
-  return basketRate(termsIn(c));
+  return basketRate(termsIn(c), c.cashback.maxPerTxUsd);
 }
 
 /** What you keep: the basket cashback rate minus any fee charged on every purchase. */
@@ -99,9 +103,12 @@ export function basketCosts(c: Pick<CardData, 'fees'>, foreign?: { fxPct: number
   if (f.topUpPct == null) return null;
   if (foreign && foreign.fxPct == null) return null;
   const pct = f.txPct + f.topUpPct + (foreign?.fxPct ?? 0);
-  const small = f.smallPurchase && (!f.smallPurchase.foreignOnly || foreign)
-    ? BASKET.filter((b) => b.usd < f.smallPurchase!.underUsd).reduce((s, b) => s + b.count * f.smallPurchase!.feeUsd, 0)
-    : 0;
+  const sp = f.smallPurchase;
+  // Basket purchases under the limit (or at it, when inclusive), less any free ones each month.
+  const small =
+    sp && (!sp.foreignOnly || foreign)
+      ? Math.max(0, BASKET.filter((b) => isSmallPurchase(sp, b.usd)).reduce((s, b) => s + b.count, 0) - (sp.freePerMonth ?? 0)) * sp.feeUsd
+      : 0;
   const usd = (pct / 100) * BASKET_USD + f.txFlatUsd * BASKET_PURCHASES + small;
   return Math.round(usd * 100) / 100;
 }
@@ -134,7 +141,7 @@ export function confirmedCountries(c: Pick<CardData, 'coverage'>): number {
 /** The G2M score worldwide, or for one country when `place` is given. */
 export function scoreCard(c: ScoreInput, place?: ScorePlace | null): ScoreBreakdown {
   const terms = termsIn(c, place?.country);
-  const rate = basketRate(terms);
+  const rate = basketRate(terms, c.cashback.maxPerTxUsd);
   const rewards = Math.min(rate / FULL_REWARDS_PCT, 1) * SCORE_WEIGHTS.rewards;
 
   // Mandatory entry-tier yearly cost plus a one-off fee to get the card (not optional physical card shipping).
