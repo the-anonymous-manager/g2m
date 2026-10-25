@@ -5,7 +5,7 @@ import { getCard, getCards, getRank, standings } from '@/lib/cards';
 import type { Card, Market, Tier } from '@/lib/types';
 import { toRow } from '@/lib/types';
 import { usdPrices } from '@/lib/prices';
-import { MARKET_LABELS, availabilityIn } from '@/lib/regions';
+import { MARKET_LABELS, availabilityIn, countryName } from '@/lib/regions';
 import { COUNTRY_CODES } from '@/lib/countries.mjs';
 import { CUSTODY_LABEL, NP, TYPE_LABEL, cashbackLabel, ecosystemFeatures, fmtDate, pct, perPurchaseFee, usd } from '@/lib/format';
 import { SCORE_WEIGHTS } from '@/lib/score';
@@ -18,6 +18,12 @@ import { CountryStanding } from '@/components/CountryStanding';
 import { CountryList } from '@/components/CountryList';
 import { CountryToggle } from '@/components/CountryToggle';
 import { TierBreakEven } from '@/components/TierBreakEven';
+
+const KYC_LABEL = {
+  residency_id: 'A residence permit or local ID where you live is accepted',
+  passport_strict: 'Your passport country must be supported',
+  both: 'Passport country and home country must both be supported'
+} as const;
 
 export const dynamicParams = false;
 
@@ -315,6 +321,22 @@ export default async function CardPage({ params }: Props) {
               <dd style={{ color: f.on ? undefined : 'var(--faint)' }}>{f.value}</dd>
             </div>
           ))}
+          <div className="fact">
+            <dt>ID check for people living abroad</dt>
+            <dd style={{ color: card.kycRule ? undefined : 'var(--faint)' }}>
+              {card.kycRule ? KYC_LABEL[card.kycRule] : 'Not published'}
+            </dd>
+          </div>
+          <div className="fact">
+            <dt>Citizens turned away</dt>
+            <dd style={{ color: card.restrictedPassports?.length ? undefined : 'var(--faint)' }}>
+              {card.restrictedPassports == null
+                ? 'Not published'
+                : card.restrictedPassports.length
+                  ? card.restrictedPassports.map(countryName).join(', ')
+                  : 'None (nationality does not matter)'}
+            </dd>
+          </div>
         </dl>
       </section>
 
