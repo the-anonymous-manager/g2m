@@ -12,5 +12,11 @@
   },
   "observability": {
     "enabled": true
+  },
+  // Generating a share-preview image (next/og) is CPU-heavier than a normal page request and tripped the
+  // free plan's 10ms CPU-time cap (homepage opengraph-image route returned 503). Paid plans only bill for
+  // CPU time actually used, so a generous ceiling here costs nothing and just removes that cap.
+  "limits": {
+    "cpu_ms": 50000
   }
 }
