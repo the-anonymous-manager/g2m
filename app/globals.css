@@ -818,8 +818,8 @@ body::before {
   white-space: nowrap;
 }
 .card-art.sm {
-  width: 58px;
-  border-radius: 6px;
+  width: 76px;
+  border-radius: 7px;
 }
 .card-art.sm .card-art-inner {
   display: none;
