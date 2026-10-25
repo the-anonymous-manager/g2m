@@ -636,7 +636,7 @@ function AuditView({ card, input, country, currency }: { card: CardRow; input: C
     { label: `Flat fee per purchase (${cash(card.fees.txFlatUsd)} × ${Math.round(swipes)})`, amount: r.txFlat, sign: -1, skip: !card.fees.txFlatUsd },
     {
       label: card.fees.smallPurchase
-        ? `Small-purchase fee (${cash(card.fees.smallPurchase.feeUsd)} under ${money(card.fees.smallPurchase.underUsd)}${card.fees.smallPurchase.foreignOnly ? ', foreign purchases only' : ''} × ${Math.round(r.smallCount)})`
+        ? `Small-purchase fee (${cash(card.fees.smallPurchase.feeUsd)} ${card.fees.smallPurchase.inclusive ? 'at or under' : 'under'} ${money(card.fees.smallPurchase.underUsd)}${card.fees.smallPurchase.foreignOnly ? ', foreign purchases only' : ''}${card.fees.smallPurchase.freePerMonth ? `, first ${card.fees.smallPurchase.freePerMonth} a month free` : ''} × ${Math.round(r.smallCount)})`
         : 'Small-purchase fee (none listed)',
       amount: r.small,
       sign: -1

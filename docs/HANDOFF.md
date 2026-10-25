@@ -20,7 +20,8 @@ technical steps yourself.
   (`/corridors`), compare, methodology, submit.
 - Live data: token prices (CoinGecko) and exchange rates (open.er-api.com, CoinGecko fallback), cached one hour
   (`lib/prices.ts`). To see them when testing in a Claude cloud session, build and start with `NODE_USE_ENV_PROXY=1`.
-- Real card pictures come from the sheet's "Card image" column (none added yet).
+- Real card pictures come from the sheet's "Card image" column: Bitget Wallet, RedotPay, ether.fi, Bleap and Ethena
+  Pay have one (25 Oct 2026, pictures Akash sent). The other cards still show the metal art.
 - Outreach to card issuers (email, DM, per-card gaps, how to sell the Sponsored spot) is in the Claude Doc
   "G2M card issuer outreach": https://claude.ai/artifact/96NsBhL6naMwqvFJctKpt5
 
@@ -72,6 +73,17 @@ technical steps yourself.
   Luxe 3% to $10K, 1% to $20K; Pinnacle 3% to $50K, 1% to $80K; VIP 4% to $50K, rate above not published, so counted
   as 0). Paid in ETHFI. Free ATM withdrawals, card prices and Category Cashback per level updated. The tier
   break-even now works for ether.fi (Luxe beats Core from about $2,800 a month).
+- Card pictures and issuer replies (25 Oct 2026): Akash sent pictures for Bitget Wallet, RedotPay, ether.fi, Bleap and
+  Ethena Pay. Originals are in `public/card-originals/` and the sheet's "Card image" links point to
+  `https://g2m.life/card-originals/<file>`, so they work once the pull request is merged and deployed (a sync run
+  before that stops with a "link answered 404" issue that closes by itself). RedotPay's photo had white corners and
+  Bleap's a dark backdrop; both were cleaned first (`redotpay.png`, `bleap.png`). RedotPay's team replied: fees, ATM
+  limits, 3-year validity, Apple Pay confirmed; Google Pay not citable, so it is now "not confirmed" (it came from
+  DefiLlama before), which costs RedotPay 2 points; the reply names no restricted passports or banking features.
+  Nexo's team replied: eligibility is by residence, not nationality (kycRule residency_id, no restricted passports),
+  cashback by loyalty tier (0.5% to 2% in NEXO, caps $50 to $200), personal IBAN, SEPA / FPS / SWIFT / ACH / Fedwire
+  rails, 5-year validity. Nexo moves from 20th to 12th. Their coin list is still unnamed ("70+ cryptocurrencies").
+  The per-purchase label now reads "at or under" and "first 5 a month free" where that applies.
 - Phone: the tiers table on card pages stacks into one block per tier, and the compare table puts each row's label
   above the card values, so neither scrolls sideways at 375 px.
 

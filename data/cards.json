@@ -168,7 +168,8 @@
       { "label": "Bitget Wallet Help: Top-up FAQ (Europe, Africa, and LATAM)", "url": "https://web3.bitget.com/helpCenter/281", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "champagne"
+    "metal": "champagne",
+    "image": { "source": "https://g2m.life/card-originals/bitget-wallet.webp", "file": "/card-images/bitget-wallet-2c1c2ddc.webp" }
   },
   {
     "slug": "kast",
@@ -226,7 +227,7 @@
     "custody": "custodial",
     "summary": "One of the most widely available crypto cards, covering 200+ countries with no annual fee. Best for access, not rewards.",
     "cashback": { "basePct": null, "maxPct": null, "payout": "Points", "note": "No cashback rate published; the card earns points. $5 welcome bonus." },
-    "fees": { "annualUsd": 0, "fxPct": 1.2, "fxNote": "New cards are billed in US dollars (some older cards in HKD). 1.2% on purchases in other currencies.", "fxByCurrency": { "USD": 0, "HKD": 0 }, "topUpPct": 0, "txPct": 1, "smallPurchase": { "feeUsd": 0.2, "underUsd": 1, "foreignOnly": false, "inclusive": true, "freePerMonth": 5 }, "cardFeeUsd": 10, "physicalCardFeeUsd": 100, "atm": "2% up to $10,000 a month, 3% above", "other": ["Physical card $100", "Virtual card $10", "1% crypto conversion", "$0.50 per declined transaction after 3 a month"] },
+    "fees": { "annualUsd": 0, "fxPct": 1.2, "fxNote": "New cards are billed in US dollars (some older cards in HKD). 1.2% on purchases in other currencies.", "fxByCurrency": { "USD": 0, "HKD": 0 }, "topUpPct": 0, "txPct": 1, "smallPurchase": { "feeUsd": 0.2, "underUsd": 1, "foreignOnly": false, "inclusive": true, "freePerMonth": 5 }, "cardFeeUsd": 10, "physicalCardFeeUsd": 100, "atm": "USD card: 2% up to $10,000 a month, 3% above. HKD card: 2%. Up to 3 a day and 30 a month ($3,750 a day, $50,000 a month on the USD card)", "other": ["Physical card $100", "Virtual card $10", "1% crypto conversion", "$0.50 per declined transaction after 3 a month", "Special merchants 1.5% (min $0.50) after 3 a month", "Cards are valid for 3 years"] },
     "tiers": [
       { "name": "Virtual card", "feeUsdYear": 0, "feeNote": "$10 one-off issuance", "cashbackPct": null },
       { "name": "Physical card", "feeUsdYear": 0, "feeNote": "$100 one-off issuance", "cashbackPct": null }
@@ -236,10 +237,10 @@
     "bankRails": [ { "rail": "SWIFT", "in": true, "out": true, "fee": "USD, no deposit fee" }, { "rail": "EUR_SEPA", "in": true, "out": true, "fee": "no deposit fee" }, { "rail": "GBP_FPS", "in": true, "out": true, "fee": "no deposit fee" }, { "rail": "BRL_PIX", "in": false, "out": true }, { "rail": "MXN_SPEI", "in": false, "out": true }, { "rail": "BDT_BANK", "in": false, "out": true } ],
     "kycRule": "both",
     "restrictedPassports": ["AF", "AL", "BA", "BF", "BI", "BQ", "BV", "BY", "CD", "CF", "CN", "CU", "CW", "ER", "ET", "GW", "HR", "HT", "IQ", "IR", "KP", "LB", "LR", "LY", "ME", "MK", "ML", "MM", "NI", "RS", "RU", "SD", "SI", "SO", "SS", "SX", "SY", "UA", "US", "VE", "XK", "YE", "ZW"],
-    "wallets": { "applePay": true, "googlePay": true },
+    "wallets": { "applePay": true, "googlePay": null },
     "assets": ["USDT", "USDC", "BTC", "ETH", "SOL", "BNB", "TRX", "XRP", "SUI"],
     "perks": ["Points rewards"],
-    "pros": ["Available in 201 countries", "No annual fee, Apple Pay and Google Pay"],
+    "pros": ["Available in 201 countries", "No annual or monthly fee, Apple Pay"],
     "cons": ["No published cashback", "$100 physical card and 1% conversion fee"],
     "links": { "official": "https://www.redotpay.com/" },
     "sources": [
@@ -258,10 +259,13 @@
       { "label": "RedotPay Help: How to Fix Identity Verification Issues", "url": "https://helpcenter.redotpay.com/en/articles/10339262-how-to-fix-identity-verification-issues", "verified": "2026-10-25" },
       { "label": "RedotPay Help: Unsupported Countries/Regions", "url": "https://helpcenter.redotpay.com/en/articles/10339263-unsupported-countries-regions", "verified": "2026-10-25" },
       { "label": "RedotPay Help: Which Countries and Regions Can Open a Personal Funding Account", "url": "https://helpcenter.redotpay.com/en/articles/11990956-which-countries-and-regions-can-open-a-personal-funding-account", "verified": "2026-10-25" },
-      { "label": "RedotPay Help: RedotPay Services and Features", "url": "https://helpcenter.redotpay.com/en/articles/11070044-redotpay-services-and-features", "verified": "2026-10-25" }
+      { "label": "RedotPay Help: RedotPay Services and Features", "url": "https://helpcenter.redotpay.com/en/articles/11070044-redotpay-services-and-features", "verified": "2026-10-25" },
+      { "label": "RedotPay team, reply to G2M (25 Oct 2026): fees, ATM limits, card validity, Apple Pay; cites the RedotPay Help Center", "url": "https://helpcenter.redotpay.com/", "verified": "2026-10-25" },
+      { "label": "RedotPay Terms (cited by the RedotPay team)", "url": "https://www.redotpay.com/terms/general/", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "rose"
+    "metal": "rose",
+    "image": { "source": "https://g2m.life/card-originals/redotpay.png", "file": "/card-images/redotpay-5d9622a3.webp" }
   },
   {
     "slug": "etherfi",
@@ -315,7 +319,8 @@
       { "label": "ether.fi Help: ATM withdrawal limits for personal Cash cards", "url": "https://help.ether.fi/en/articles/303623-what-are-the-atm-withdrawal-limits-for-personal-cash-cards", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "silver"
+    "metal": "silver",
+    "image": { "source": "https://g2m.life/card-originals/etherfi.avif", "file": "/card-images/etherfi-771a2daf.webp" }
   },
   {
     "slug": "metamask",
@@ -366,21 +371,25 @@
     "forms": ["virtual", "physical"],
     "custody": "custodial",
     "summary": "Dual-mode Mastercard: spend against your crypto in credit mode or from your balance in debit mode, with up to 2% back.",
-    "cashback": { "basePct": null, "maxPct": 2, "payout": "NEXO or BTC", "note": "Up to 2% in credit mode, capped at $50 a month. Needs a portfolio of at least $5,000." },
-    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "0.2% on EEA, UK and Swiss currencies, 2% on others (0.7% and 2.5% at weekends). No currency is free of FX fees.", "fxByCurrency": { "EUR": 0.2, "GBP": 0.2, "CHF": 0.2, "CZK": 0.2, "DKK": 0.2, "HUF": 0.2, "PLN": 0.2, "RON": 0.2, "SEK": 0.2, "ISK": 0.2, "NOK": 0.2 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 0, "atm": "Free monthly allowance from €200 (Base) to €2,000 (Platinum)", "other": ["Replacement card 15 EUR/GBP/USD"] },
+    "cashback": { "basePct": 0.5, "maxPct": 2, "payout": "NEXO or BTC", "note": "Credit Mode purchases only: 0.5% (Base), 0.7% (Silver), 1% (Gold) or 2% (Platinum) in NEXO, or 0.1% to 0.5% in BTC. Monthly caps $50 to $200. The Loyalty Program needs a $5,000 portfolio." },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "0.2% on EEA, UK and Swiss currencies, 2% on others (0.7% and 2.5% at weekends). No currency is free of FX fees.", "fxByCurrency": { "EUR": 0.2, "GBP": 0.2, "CHF": 0.2, "CZK": 0.2, "DKK": 0.2, "HUF": 0.2, "PLN": 0.2, "RON": 0.2, "SEK": 0.2, "ISK": 0.2, "NOK": 0.2 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 0, "atm": "Free up to $150 (Base), $300 (Silver), $600 (Gold) or $2,000 (Platinum) a month, then 2% (min $1.99)", "other": ["First physical card free; replacement $15 / EUR 15 / GBP 15", "Weekend FX surcharge +0.5%", "Cards are valid for 5 years"] },
     "tiers": [
-      { "name": "Credit mode (top loyalty tier)", "feeUsdYear": 0, "cashbackPct": 2, "capMonthlyUsd": 50, "requirement": "Portfolio of at least $5,000; the top rate needs a higher loyalty tier" }
+      { "name": "Base", "feeUsdYear": 0, "cashbackPct": 0.5, "capMonthlyUsd": 50, "requirement": "Portfolio of at least $5,000", "perks": ["Free ATM withdrawals up to $150 a month"] },
+      { "name": "Silver", "feeUsdYear": 0, "cashbackPct": 0.7, "capMonthlyUsd": 100, "requirement": "$5,000+ portfolio, 1% of it in NEXO", "perks": ["Free ATM withdrawals up to $300 a month"] },
+      { "name": "Gold", "feeUsdYear": 0, "cashbackPct": 1, "capMonthlyUsd": 150, "requirement": "$5,000+ portfolio, 5% of it in NEXO", "perks": ["Free ATM withdrawals up to $600 a month"] },
+      { "name": "Platinum", "feeUsdYear": 0, "cashbackPct": 2, "capMonthlyUsd": 200, "requirement": "$5,000+ portfolio, 10% of it in NEXO", "perks": ["Free ATM withdrawals up to $2,000 a month"] }
     ],
     "coverage": { "countries": 34, "scope": "EEA, UK, Argentina, Brazil and Mexico", "examples": ["United Kingdom", "Germany", "Argentina", "Brazil", "Mexico"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AD", "AR", "AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MC", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK"], "others": "unknown" } },
-    "ecosystem": { "iban": null, "payoutCorridors": 3, "ramps": "both", "credit": true, "yield": true },
-    "bankRails": [ { "rail": "EUR_SEPA", "in": true, "out": true }, { "rail": "GBP_FPS", "in": true, "out": true }, { "rail": "SWIFT", "in": true, "out": true, "fee": "USD" } ],
+    "ecosystem": { "iban": "named", "payoutCorridors": 3, "ramps": "both", "credit": true, "yield": true },
+    "bankRails": [ { "rail": "EUR_SEPA", "in": true, "out": true, "fee": "SEPA and SEPA Instant, personal IBAN" }, { "rail": "GBP_FPS", "in": true, "out": true }, { "rail": "SWIFT", "in": true, "out": true, "fee": "USD" }, { "rail": "USD_ACH", "in": true, "out": true, "fee": "select regions" }, { "rail": "USD_WIRE", "in": true, "out": true, "fee": "Fedwire" } ],
     "bankForNonResidents": true,
-    "kycRule": "both",
+    "kycRule": "residency_id",
+    "restrictedPassports": [],
     "wallets": { "applePay": true, "googlePay": true },
     "assets": [],
-    "perks": ["Credit mode: spend without selling your crypto"],
+    "perks": ["Credit mode: spend without selling your crypto", "Personal EUR IBAN, GBP and USD accounts"],
     "pros": ["Very low FX on European currencies", "Free ATM allowance on every tier"],
-    "cons": ["Cashback capped at $50 a month", "Needs a $5,000 portfolio for rewards"],
+    "cons": ["Cashback only in Credit Mode, capped at $50 to $200 a month", "Needs a $5,000 portfolio for rewards"],
     "links": { "official": "https://nexo.com/" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/nexo-card", "verified": "2026-09-01" },
@@ -390,7 +399,17 @@
       { "label": "Nexo: Earn crypto page", "url": "https://nexo.com/earn-crypto", "verified": "2026-10-24" },
       { "label": "Nexo: Home page", "url": "https://nexo.com/", "verified": "2026-10-24" },
       { "label": "Nexo: Earn Tether (USDT) page", "url": "https://nexo.com/earn-crypto/usdt", "verified": "2026-10-24" },
-      { "label": "Nexo Blog: Nexo introduces industry-first Personal USD Accounts (Nov 25, 2024)", "url": "https://nexo.com/blog/nexo-introduces-industry-first-personal-usd-accounts", "verified": "2026-10-25" }
+      { "label": "Nexo Blog: Nexo introduces industry-first Personal USD Accounts (Nov 25, 2024)", "url": "https://nexo.com/blog/nexo-introduces-industry-first-personal-usd-accounts", "verified": "2026-10-25" },
+      { "label": "Nexo team, reply to G2M (25 Oct 2026): eligibility by residence not nationality, fees, cashback by tier, IBAN and rails", "url": "https://support.nexo.com/en/articles/nexo-card", "verified": "2026-10-25" },
+      { "label": "Nexo Help: Who can order the Nexo Card (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/who-can-order-the-nexo-card", "verified": "2026-10-25" },
+      { "label": "Nexo Help: Requirements for getting a Nexo Card (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/what-are-the-requirements-for-getting-a-nexo-card", "verified": "2026-10-25" },
+      { "label": "Nexo Help: Nexo Card fees and limits (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/nexo-card-fees-and-limits", "verified": "2026-10-25" },
+      { "label": "Nexo Help: ATM withdrawals with the Nexo Card (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/atm-withdrawals-with-the-nexo-card", "verified": "2026-10-25" },
+      { "label": "Nexo Help: Nexo Card cashback (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/nexo-card-cashback", "verified": "2026-10-25" },
+      { "label": "Nexo Help: Nexo Loyalty Program (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/nexo-loyalty-program", "verified": "2026-10-25" },
+      { "label": "Nexo Help: How to transfer funds to Nexo (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/how-to-transfer-funds-to-nexo", "verified": "2026-10-25" },
+      { "label": "Nexo Help: Nexo Credit Line (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/nexo-credit-line", "verified": "2026-10-25" },
+      { "label": "Nexo Help: Nexo Savings (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/nexo-savings", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
     "metal": "gunmetal"
@@ -698,7 +717,8 @@
       { "label": "Bleap Help: How does the Bleap debit card use wallet balances", "url": "https://help.bleap.finance/en/articles/15820587-how-does-the-bleap-debit-card-use-wallet-balances-for-payments", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "black"
+    "metal": "black",
+    "image": { "source": "https://g2m.life/card-originals/bleap.png", "file": "/card-images/bleap-7b683bba.webp" }
   },
   {
     "slug": "tangem-pay",
@@ -771,7 +791,8 @@
       { "label": "Ethena Pay Terms of Use", "url": "https://pay.ethena.fi/terms", "verified": "2026-10-25" }
     ],
     "lastChecked": "2026-10-25",
-    "metal": "gold"
+    "metal": "gold",
+    "image": { "source": "https://g2m.life/card-originals/ethena-pay.webp", "file": "/card-images/ethena-pay-4006a375.webp" }
   },
   {
     "slug": "exa",

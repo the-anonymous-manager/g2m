@@ -27,7 +27,9 @@ export function perPurchaseFee(f: Pick<CardData['fees'], 'txPct' | 'txFlatUsd' |
   const parts = [
     f.txPct ? pct(f.txPct) : null,
     f.txFlatUsd ? `$${f.txFlatUsd}` : null,
-    small ? `${usd(small.feeUsd)} under ${usd(small.underUsd)}${small.foreignOnly ? ' (non-USD)' : ''}` : null
+    small
+      ? `${usd(small.feeUsd)} ${small.inclusive ? 'at or under' : 'under'} ${usd(small.underUsd)}${small.foreignOnly ? ' (non-USD)' : ''}${small.freePerMonth ? `, first ${small.freePerMonth} a month free` : ''}`
+      : null
   ];
   return parts.filter(Boolean).join(' + ') || 'None listed';
 }
