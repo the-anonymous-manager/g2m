@@ -1,6 +1,6 @@
 # G2M handoff: everything decided so far
 
-Started 22 Oct 2026 at the end of the version 1 build; last updated 24 Oct 2026 (pull request #19 merged). Read this
+Started 22 Oct 2026 at the end of the version 1 build; last updated 25 Oct 2026 (pull request #21: receipt matching, nomad mode, per-purchase caps). Read this
 with `CLAUDE.md` before changing anything. The owner, Akash, is not a developer: explain in plain words and do the
 technical steps yourself.
 
@@ -8,7 +8,7 @@ technical steps yourself.
 
 - Live at https://g2m.life (Vercel, from `main`). 26 cards. Work happens on the branch `claude/great-lamport-3kjmvq`
   and goes live through a pull request that Akash merges; pushing straight to `main` deploys the site. Pull requests
-  #1 to #19 are merged; nothing is waiting.
+  #1 to #20 are merged; #21 (receipt matching plus nomad mode) is waiting for Akash.
 - Card data is edited in the Google Sheet "G2M Card data" (see "Card data in a Google Sheet"). An hourly GitHub
   Action copies it to the site. Claude edits the sheet, not `data/cards.json`, for data changes, then checks with
   `node scripts/sheet-sync.mjs --check`.
@@ -26,19 +26,42 @@ technical steps yourself.
 
 ## Next session (agreed with Akash)
 
-1. Step B part 2: "Nomad / Expat mode" on `/cards` and `/finder` ("My passport: A" + "Where I live: B"). Needs new
-   issuer research for all 26 cards, then two new sheet columns: "KYC eligibility rule" (`residency_id` = a local
-   residence permit is enough whatever the passport; `passport_strict` = the passport must be from a supported
-   country; `both`) and "Restricted passports" (ISO codes of blocked nationalities, e.g. US persons, sanctioned
-   lists). Show cards confirmed in B that accept B's residence ID and do not block A's passport, badged "Eligible with
-   <B> residency ID". The same research should fill the corridor finder's gaps: cash-out fees per rail and "Bank
-   account for non-residents" (only COCA is set).
-2. Optional: move hosting from Vercel to Cloudflare Workers (OpenNext adapter) to avoid Vercel Pro. Vercel Hobby is
+1. Optional: move hosting from Vercel to Cloudflare Workers (OpenNext adapter) to avoid Vercel Pro. Vercel Hobby is
    non-commercial only and G2M has referral links and a paid Sponsored spot. Nothing is tied to Vercel: the geo cookie
    already reads `cf-ipcountry` and Netlify's `x-country`, and the sheet sync runs on GitHub. Plan: add the adapter,
    test everything on a Cloudflare preview URL (live prices, receipt pictures, hourly refresh), then point g2m.life at
    Cloudflare and keep Vercel until confirmed. Alternatives: Netlify (free tier allows commercial use), a Hetzner VPS
    with Coolify (about EUR 5/month, Cloudflare in front for geo).
+2. Coverage problems the 25 Oct research found (not changed yet, ask Akash): Exa's own "Card availability and usage"
+   page (21 Sep 2026) lists India and 17 others as ineligible and gives a closed list of about 46 countries plus 31 US
+   states (data says IN yes, 211 countries); COCA's list of 54 residence countries does not name the UAE (data: AE
+   yes); MEXC's Terms of Use list the UK as prohibited (data: GB yes); Solayer blocks residents or citizens of 26 of 27
+   EU states (data: EU yes); Avici virtual accounts are prohibited in India, Pakistan, Bangladesh and Canada.
+
+## Nomad / expat mode and per-purchase limits (25 Oct 2026, step B part 2, pull request #21)
+
+- `/cards` and `/finder` have "My passport" + "Where I live" (`components/NomadBar.tsx`, `lib/nomad.ts`, URL
+  `passport=` on /cards, `pp=` on /finder). A card shows when it is offered where you live, your passport is not on
+  its blocked list, and either it accepts a residence ID there (`residency_id`) or it supports your passport country.
+  Badges: "Eligible with <B> residency ID", "Takes passports from <A>", "Needs a supported passport — check <A> with
+  the issuer", or "Residency rule not published — check with issuer". Card pages show "ID check for people living
+  abroad" and "Citizens turned away".
+- New Cards columns: "KYC eligibility rule" (`kycRule`: residency_id / passport_strict / both / empty) and
+  "Restricted passports" (`restrictedPassports`: `US; IR`, `none`, empty), after "Bank account for non-residents".
+  Researched on issuer pages for all 26 cards (quotes checked against the pages). 14 cards have a rule (9
+  residency_id, 5 both); the other 12 publish none. US citizens are blocked on the Rain / Third National cards (Exa, Tria, Avici,
+  Karta, Avalanche, KAST non-US) and Ethena Pay.
+- Same research filled cash-out fees per rail, "Bank account for non-residents" (now 17 cards), USDC/USDT in
+  `assets`, and rail fixes (e.g. KAST wire and SWIFT payouts, ether.fi SWIFT payouts and Fedwire, Jupiter payouts,
+  Avici wire and SWIFT deposits, Plasma Fedwire).
+- Coinbase One: owner-set banking features (ramps both, no IBAN, `USD_ACH in+out ($0)`), as its help pages block
+  automated reading. Ethena Pay and MEXC yield and Avici credit kept as they were (owner's ruling).
+- "Max cashback per purchase $" (`cashback.maxPerTxUsd`, Kolo 1), "Small purchase limit included"
+  (`smallPurchase.inclusive`, RedotPay "$1.00 or less") and "Free small purchases a month" (`freePerMonth`, RedotPay 5).
+  Used in the 35-purchase scoring basket (Kolo's $200 purchase earns $1), the calculator ("Lost to the per-purchase
+  cap" line) and the receipt.
+- Phone: the tiers table on card pages stacks into one block per tier, and the compare table puts each row's label
+  above the card values, so neither scrolls sideways at 375 px.
 
 ## Who it is for
 
@@ -460,10 +483,10 @@ staying on Next 15. Remove it when the site moves to a Next version that ships a
 7. Data gaps to close with issuers or new research: Coinbase One banking features and rails (its help pages block
    downloads), Ethena Pay rails (IBAN currency and payout currencies not published), Tria card fee (its pages
    disagree), ether.fi Core and Crypto.com Level Up prices (not published, so their tier break-evens can't be worked
-   out), most cash-out fees per rail.
-8. Not modelled yet: per-purchase reward caps (Kolo $1 per purchase), "first 5 small purchases free" (RedotPay),
-   "at or under" small-purchase limits (RedotPay $1.00 or less; KAST and MEXC are strictly under), and the
-   assets list (`assets`) is incomplete, so the corridor finder shows unlisted coins as "not stated".
+   out), cash-out fees that are only shown in the app (RedotPay, Bitget Wallet, Wirex One, Bybit, Nexo, most ether.fi
+   local rails), KYC rules not published (Krak, Exa, Avici, Kolo, Tuyo, MetaMask, Crypto.com, Coinbase One, Tangem).
+8. The corridor finder can't say "no" for a coin: `assets` only lists what is supported, so a coin the issuer says
+   it does not take (Exa and Tuyo USDT, MEXC USDC) still shows "not stated".
 
 ## Ideas for version 2 (not decided, ask Akash)
 
