@@ -1,5 +1,5 @@
 import type { CardRow } from '@/lib/types';
-import { availabilityIn, countryName, isCountry } from '@/lib/regions';
+import { REGIONS, availabilityIn, availabilityInRegion, countryName, isCountry, isRegion, type Region } from '@/lib/regions';
 import { nomadFit } from '@/lib/nomad';
 
 // Table engine: multi-column sorting + filters, all serialisable to the URL
@@ -14,6 +14,7 @@ export type Filters = {
   net: '' | 'visa' | 'mastercard' | 'amex';
   custody: '' | 'self' | 'custodial';
   country: string; // ISO code, '' = all countries
+  region: Region | ''; // a group of countries (EU / EEA, Asia); only when no country is set
   passport: string; // ISO code of the passport held, '' = same as where you live
   strict: boolean; // true: only "yes" in the country; false: also "unknown"
   nofee: boolean;
@@ -31,6 +32,7 @@ export const DEFAULT_FILTERS: Filters = {
   net: '',
   custody: '',
   country: '',
+  region: '',
   passport: '',
   strict: false,
   nofee: false,
@@ -92,6 +94,9 @@ export function filterRows(rows: CardRow[], f: Filters): CardRow[] {
       const a = availabilityIn(c, f.country);
       if (a === 'no' || (f.strict && a !== 'yes')) return false;
       if (nomadFit(c, f.passport, f.country)?.ok === false) return false;
+    } else if (f.region) {
+      const a = availabilityInRegion(c, f.region);
+      if (a === 'no' || (f.strict && a !== 'yes')) return false;
     }
     if (f.nofee && c.fees.annualUsd !== 0) return false;
     if (f.physical && !c.forms.some((x) => x === 'physical' || x === 'metal')) return false;
@@ -136,11 +141,13 @@ export function parseFilters(p: ParamSource): Filters {
   // `market` is the older name of the parameter; links using it keep working.
   const country = (read(p, 'country') || read(p, 'market')).toUpperCase();
   const min = Number(read(p, 'min'));
+  const region = read(p, 'region').toUpperCase();
   return {
     q: read(p, 'q').slice(0, 80),
     net: net === 'visa' || net === 'mastercard' || net === 'amex' ? net : '',
     custody: custody === 'self' || custody === 'custodial' ? custody : '',
     country: isCountry(country) ? country : '',
+    region: !isCountry(country) && isRegion(region) ? region : '',
     passport: isCountry(read(p, 'passport').toUpperCase()) ? read(p, 'passport').toUpperCase() : '',
     strict: read(p, 'strict') === '1',
     nofee: read(p, 'nofee') === '1',
@@ -158,6 +165,7 @@ export function serializeFilters(f: Filters): string {
   if (f.net) p.set('net', f.net);
   if (f.custody) p.set('custody', f.custody);
   if (f.country) p.set('country', f.country);
+  else if (f.region) p.set('region', f.region);
   if (f.passport) p.set('passport', f.passport);
   if (f.strict) p.set('strict', '1');
   if (f.nofee) p.set('nofee', '1');
@@ -174,6 +182,7 @@ export function describeFilters(f: Filters, countryLabel?: string): string {
   const parts: string[] = [];
   // Without strict, the list also holds cards whose issuer has not confirmed the country.
   if (f.country) parts.push(`${f.strict ? 'confirmed in' : 'for'} ${countryLabel ?? f.country}`);
+  else if (f.region) parts.push(`${f.strict ? 'confirmed in' : 'for'} ${REGIONS[f.region].label}`);
   if (f.passport && f.country && f.passport !== f.country) parts.push(`with a passport from ${countryName(f.passport)}`);
   if (f.custody === 'self') parts.push('self-custodial');
   if (f.custody === 'custodial') parts.push('custodial');

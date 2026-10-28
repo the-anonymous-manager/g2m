@@ -6,9 +6,12 @@ technical steps yourself.
 
 ## Where things stand (quick summary)
 
-- Live at https://g2m.life (Vercel, from `main`). 26 cards. Work happens on the branch `claude/great-lamport-3kjmvq`
-  and goes live through a pull request that Akash merges; pushing straight to `main` deploys the site. Pull requests
-  #1 to #20 are merged; #21 (receipt matching plus nomad mode) is waiting for Akash.
+- Live at https://g2m.life on Cloudflare Workers (since 25 Oct 2026; Vercel is no longer serving the site). 26 cards.
+  Every push to `main` deploys through `.github/workflows/cf-deploy.yml` (also after each sheet sync, via
+  `workflow_run`, because a sync's own push can't trigger another workflow). Work happens on the branch
+  `claude/great-lamport-3kjmvq` and goes live through a pull request that Akash merges.
+- 28 Oct 2026 pull request (see "Calculator, finder and navigation upgrades"): compare tiers across up to 3 cards,
+  live stake values, five-question finder, Back button, wider rankings, region links.
 - Card data is edited in the Google Sheet "G2M Card data" (see "Card data in a Google Sheet"). An hourly GitHub
   Action copies it to the site. Claude edits the sheet, not `data/cards.json`, for data changes, then checks with
   `node scripts/sheet-sync.mjs --check`.
@@ -450,6 +453,27 @@ is foreign unless the card bills in that currency (`billedIn` in `lib/fx.ts`). K
   currencies" USD 0, from its fee page: "USD Transaction Fee $0.15", FX only on international transactions).
 Not modelled yet: per-purchase reward caps (Kolo $1 per purchase), "first 5 small purchases free" (RedotPay), and
 "at or under" vs "under" limits (RedotPay is $1.00 or less; KAST and MEXC are strictly under).
+
+## Calculator, finder and navigation upgrades (28 Oct 2026, Akash's test of the live pages)
+
+- `/calculator?mode=tiers` is now "Compare tiers": one card, or up to three (`cards=coca,tria,etherfi`; old `card=coca`
+  links still work). With several cards the first column is card + tier, rows sort by "You keep / yr" (or "Group by
+  card"), and the winning tier across all of them is highlighted ("Best"). Break-even points are listed per card.
+- Duplicate note fixed: COCA's requirement ("Hold 300 COCA") and its stake were both written as notes. Now a stake
+  that the requirement already names is not repeated (`stakeFlag` in `lib/calc.ts`). The page fetches live CoinGecko
+  prices (`usdPrices`, cached 1h) and shows each stake's value: "Needs: Hold 300 COCA (~$288)" in Notes and
+  "Stake ~$288" under "Free" ("Or stake" when staking replaces a yearly fee, e.g. ether.fi Luxe, Plasma Core).
+- `/finder` has five questions: 3 is multi-choice (chosen priorities are averaged, so two never weigh double); 4 is
+  how you use the card (Apple/Google Pay, physical card, credit, yield, or no preference); 5 is fees and banking
+  (free tiers only = $0 fee and no token stake on the entry tier; open to paid or staking tiers; IBAN or bank
+  payouts). Link params `m, h, p, u, f, pp` (`p=cashback,travel`, `u=none`, `f=free,bank`); three-answer links still
+  open (no preference on 4 and 5). Reasons list what the visitor asked for first.
+- `← Back` on card pages and `/compare`: goes back to the previous g2m page in the tab (filters and calculator settings
+  kept), else to `/cards` (`components/BackButton.tsx`; `NavMemory` in the root layout remembers this per tab).
+- Rankings use a wider layout (`wrap-wide`, 1,400px) so every column, including Compare, fits from 1,280px screens.
+- Homepage "All cards for EU / EEA" and "Asia" now open `/cards?region=EU` / `region=ASIA` instead of the visitor's
+  own country. Region rules match the homepage counts: the EU uses the card's EU / EEA answer, Asia is "yes" when the
+  card is confirmed in at least one Asian country (`availabilityInRegion` in `lib/regions.ts`).
 
 ## Scoring rules v2 (22 Oct 2026, Akash's exact rules)
 

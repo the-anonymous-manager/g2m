@@ -18,6 +18,7 @@ import { CountryStanding } from '@/components/CountryStanding';
 import { CountryList } from '@/components/CountryList';
 import { CountryToggle } from '@/components/CountryToggle';
 import { TierBreakEven } from '@/components/TierBreakEven';
+import { BackButton } from '@/components/BackButton';
 
 const KYC_LABEL = {
   residency_id: 'A residence permit or local ID where you live is accepted',
@@ -138,12 +139,15 @@ export default async function CardPage({ params }: Props) {
     <article className="wrap section stack" style={{ gap: 40 }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(card)) }} />
 
-      <nav aria-label="Breadcrumb" className="faint" style={{ fontSize: 14 }}>
-        <Link href="/cards" style={{ textDecoration: 'none' }}>
-          Rankings
-        </Link>{' '}
-        / <span aria-current="page">{card.name}</span>
-      </nav>
+      <div className="back-row">
+        <BackButton fallback="/cards" />
+        <nav aria-label="Breadcrumb" className="faint" style={{ fontSize: 14 }}>
+          <Link href="/cards" style={{ textDecoration: 'none' }}>
+            Rankings
+          </Link>{' '}
+          / <span aria-current="page">{card.name}</span>
+        </nav>
+      </div>
 
       {/* Hero */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 40, alignItems: 'center' }}>

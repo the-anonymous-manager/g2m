@@ -3,6 +3,7 @@ import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Analytics } from '@/components/Analytics';
+import { NavMemory } from '@/components/BackButton';
 import { RegionProvider } from '@/components/RegionContext';
 import { themeInitScript } from '@/components/ThemeToggle';
 import { MotionRoot, motionInitScript } from '@/components/motion/MotionRoot';
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer updated={lastUpdated()} />
         </RegionProvider>
         <MotionRoot />
+        <NavMemory />
         <Analytics />
       </body>
     </html>
