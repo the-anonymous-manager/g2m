@@ -1217,42 +1217,6 @@
     "metal": "gunmetal"
   },
   {
-    "slug": "pionex-dogpay",
-    "name": "Pionex DogPay Card",
-    "brand": "Pionex DogPay",
-    "issuer": null,
-    "network": "Mastercard",
-    "type": "debit",
-    "forms": ["virtual"],
-    "custody": "custodial",
-    "summary": "Pionex's current Mastercard, issued as the DogPay Card: free, but a 3.5% fee on every purchase against 0.1% cashback. An invite-only Gold version pays up to 5%.",
-    "cashback": { "basePct": 0.1, "maxPct": 5, "payout": "USDT", "note": "Pionex's Mastercard cashback page says 0.1% to 1%; its DogPay Card and Gold Card pages say 0.1% on the regular card." },
-    "fees": { "annualUsd": 0, "fxPct": 0, "fxNote": "No separate FX fee: the 3.5% fee on every purchase applies in any currency.", "topUpPct": 0, "txPct": 3.5, "smallPurchase": { "feeUsd": 0.2, "underUsd": 5, "foreignOnly": false, "inclusive": true, "freePerMonth": 1 }, "cardFeeUsd": 0, "atm": "Not supported (virtual card only)", "other": ["Failed payment: 0.5 USDT after the first free one each month", "Mastercard holds about 4.5% extra when you pay, released afterwards", "The DogPay Card page lists the small-purchase fee as under $1; the Mastercard fee page (updated 19 Oct 2026) says $5 or less"] },
-    "tiers": [
-      { "name": "Regular", "feeUsdYear": 0, "cashbackPct": 0.1, "requirement": "KYC level 2 and account assets above the amount shown when you apply", "perks": ["5% a year on your card balance, paid hourly in USDT"] },
-      { "name": "Gold", "feeUsdYear": 0, "feeNote": "One-time 100 USDT card fee (50 USDT in the pre-order)", "cashbackPct": null, "bands": [ { "uptoUsd": 4000, "pct": 5 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "Invitation only; not for people who already hold a Pionex card", "perks": ["Up to 5% a year on your card balance"] }
-    ],
-    "coverage": { "countries": null, "scope": "Most countries; not the US, UK, Canada, France, the Netherlands, Japan, Singapore, Hong Kong or mainland China", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "no", "GB": "no", "EU": "unknown" }, "countryList": { "yes": [], "no": ["AF", "CA", "CD", "CF", "CN", "CU", "FR", "GB", "GU", "HK", "IR", "JP", "KP", "LB", "LY", "NL", "PR", "SD", "SG", "SO", "SS", "US", "VE", "YE", "ZW"], "others": "unknown" } },
-    "ecosystem": { "iban": "none", "payoutCorridors": null, "ramps": "on", "credit": null, "yield": true },
-    "wallets": { "applePay": true, "googlePay": true },
-    "assets": ["USDT"],
-    "perks": ["5% a year on the card balance", "Apple Pay and Google Pay"],
-    "pros": ["No annual or card fee", "5% a year on your card balance", "Gold card pays up to 5% back (invite only)"],
-    "cons": ["3.5% fee on every purchase", "0.1% cashback on the regular card", "USDT only; virtual only"],
-    "links": { "official": "https://pay.pionex.com/en/" },
-    "sources": [
-      { "label": "Pionex: DogPay Card", "url": "https://help.pionex.com/en/articles/16147782-pionex-dogpay-card", "verified": "2026-10-28" },
-      { "label": "Pionex: Mastercard fees schedule", "url": "https://help.pionex.com/en/articles/14616395-mastercard-fees-schedule", "verified": "2026-10-28" },
-      { "label": "Pionex: Mastercard cashback program guidelines", "url": "https://help.pionex.com/en/articles/15418063-mastercard-global-cashback-program-guidelines", "verified": "2026-10-28" },
-      { "label": "Pionex Gold Card: eligibility, pricing and cashback", "url": "https://help.pionex.com/en/articles/16926500-pionex-gold-card-eligibility-pricing-cashback-faq", "verified": "2026-10-28" },
-      { "label": "Pionex Card feature overview (Apple Pay, Google Pay)", "url": "https://help.pionex.com/en/articles/14616373-pionex-card-feature-overview", "verified": "2026-10-28" },
-      { "label": "Pionex: unsupported countries and regions", "url": "https://help.pionex.com/en/articles/14607876-list-of-unsupported-countries-regions-phone-numbers-kyc-verification", "verified": "2026-10-28" }
-    ],
-    "lastChecked": "2026-10-28",
-    "addedOn": "2026-10-28",
-    "metal": "champagne"
-  },
-  {
     "slug": "dogpay",
     "name": "DogPay Card",
     "brand": "DogPay",
