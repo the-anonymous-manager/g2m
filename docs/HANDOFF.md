@@ -272,7 +272,7 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
 ## What version 1 does
 
 - Home: headline, search, Featured spot, top 5 for the visitor's country (its last column is that country, or a
-  country count when unknown), browse chips, region panels (the visitor's country, US, UK, EU / EEA, Asia), links
+  country count when unknown), region panels (browse chips removed 28 Oct at Akash's request) (the visitor's country, US, UK, EU / EEA, Asia), links
   to the tools.
 - Rankings (`/cards`): sort by any column incl. # (overall rank; shift-click for a second sort), filters for region, custody, network,
   minimum cashback, no annual fee, physical, metal, lounge. Every view has its own URL, with "Post on X" and
@@ -508,6 +508,24 @@ Not modelled yet: per-purchase reward caps (Kolo $1 per purchase), "first 5 smal
   Pinnacle (-$279)"): it says what you keep and names a better tier of the same card with a "See all tiers" link.
   When every shown tier loses money it says none pays off and which loses the least.
 
+## SEO step 1: "X vs Y" comparison pages (28 Oct 2026)
+
+- Akash's top v2 priority is SEO. Step 1: a page for every pair of cards at `/compare/<a>-vs-<b>` (card IDs in
+  alphabetical order; the other order redirects with a 308; unknown or same card = 404). 26 cards = 325 pages, all in
+  the sitemap. Built from the card data only (`lib/versus.ts` addresses, `lib/verdict.ts` wording), so a sheet edit
+  updates every page that uses the card. Nothing to write by hand.
+- Each page: title and description with both cards' score, cashback, annual fee and FX fee; a one-paragraph summary
+  (who scores higher, "Pick A for ...; pick B for ..."); "The short answer" (score, entry-tier cashback, annual fee,
+  FX fee, countries, custody); the same side-by-side table as /compare (rows now in `components/compareRows.tsx`);
+  five questions with FAQPage structured data; links to five more matchups per card.
+- Country wording: a card without a complete country list (`countryList.others` not `no`) is described as "does not
+  publish a full country list (N confirmed so far)" rather than losing "229 against 2".
+- Links in: card pages ("Compare <card> with": nearest-ranked cards plus the top 3), /compare ("Popular comparisons":
+  every pair of the top 7, and a "Full A vs B page" button when two cards are picked).
+- Same day: the home page "Browse by" chips were removed (Akash: not needed).
+- Next SEO steps: guides (best card by country, no-FX-fee cards, self-custodial explained), then Google Search Console
+  (add g2m.life and submit /sitemap.xml).
+
 ## Scoring rules v2 (22 Oct 2026, Akash's exact rules)
 
 `lib/score.ts`, explained on /methodology. Changed from version 1:
@@ -618,6 +636,6 @@ and calculator with FX at home, phone-friendly tiers and Compare tables, live US
 (tier break-even).
 
 - Add the radar cards above (PEXX, Fizen, Infini, Cashi, WasabiCard, Kite), then grow towards 50+ cards.
-- "X vs Y" comparison pages for SEO, and short guides (custodial vs self-custodial, how card fees work).
+- Short guides for SEO (custodial vs self-custodial, how card fees work). "X vs Y" pages are done (see above).
 - A changelog of fee and cashback changes per card, which also feeds his X posts.
 - Email sign-up for card updates.

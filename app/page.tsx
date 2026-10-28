@@ -14,19 +14,6 @@ import { site } from '@/lib/site';
 import { CardArt } from '@/components/CardArt';
 import { ArrowIcon, Eyebrow, MarketBadge, ScorePill, SearchIcon } from '@/components/bits';
 
-const BROWSE = [
-  { label: 'No annual fee', href: '/cards?nofee=1' },
-  { label: 'Self-custodial', href: '/cards?custody=self' },
-  { label: 'Lounge access', href: '/cards?lounge=1' },
-  { label: 'Metal cards', href: '/cards?metal=1' },
-  { label: '2%+ cashback', href: '/cards?min=2' },
-  { label: 'Lowest FX fee', href: '/cards?sort=fx:asc' },
-  { label: 'US', href: '/cards?country=US' },
-  { label: 'UK', href: '/cards?country=GB' },
-  { label: 'India', href: '/cards?country=IN' },
-  { label: 'UAE', href: '/cards?country=AE' }
-];
-
 const MARKETS: Market[] = ['US', 'GB', 'EU'];
 
 // Rendered fresh on every request (not cached/ISR) so a sponsorship starts and ends on its dates without a new
@@ -217,20 +204,6 @@ export default function HomePage() {
           </Link>
         </div>
         <HomeLeaderboard rows={rows} />
-      </section>
-
-      {/* Browse */}
-      <section className="wrap section-tight stack" style={{ gap: 14 }} aria-labelledby="browse">
-        <h2 id="browse" className="eyebrow">
-          [ browse by ]
-        </h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-          {BROWSE.map((b) => (
-            <Link key={b.href} href={b.href} className="chip">
-              {b.label}
-            </Link>
-          ))}
-        </div>
       </section>
 
       {/* Markets */}

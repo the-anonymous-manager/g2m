@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { getCards } from '@/lib/cards';
 import { toRow } from '@/lib/types';
 import { CompareClient } from '@/components/CompareClient';
@@ -6,6 +7,7 @@ import { Eyebrow } from '@/components/bits';
 import { BackButton } from '@/components/BackButton';
 import { PICK } from '@/lib/tierpick';
 import { usdPrices } from '@/lib/prices';
+import { allPairs, versusPath } from '@/lib/versus';
 
 export const metadata: Metadata = {
   title: 'Compare crypto cards',
@@ -42,6 +44,20 @@ export default async function ComparePage({ searchParams }: Props) {
         </p>
       </div>
       <CompareClient rows={rows} initial={initial} prices={prices} />
+      <section className="stack" style={{ gap: 14 }} aria-labelledby="popular">
+        <h2 id="popular" className="h3">
+          Popular comparisons
+        </h2>
+        <ul className="vs-links vs-links-cols">
+          {allPairs(cards.slice(0, 7)).map(([a, b]) => (
+            <li key={`${a.slug}-${b.slug}`}>
+              <Link href={versusPath(a.slug, b.slug)}>
+                {a.name} vs {b.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 }
