@@ -563,6 +563,10 @@ Not modelled yet: per-purchase reward caps (Kolo $1 per purchase), "first 5 smal
 Same day, Akash removed the Pionex DogPay Card (rows deleted from the sheet); the notes on it below are kept for
 reference. Live cards: `pionex` and `dogpay`.
 
+Deploy bug found then: after a sheet sync, cf-deploy checked out `workflow_run.head_sha` (the commit the sync
+started from), so sheet edits only reached the site with the next code push. It now checks out `github.sha` (newest
+commit on main). Earlier "live after the hourly sync" checks were really waiting on a PR merge.
+
 Added through the Google Sheet (Cards, Tiers, Country lists, Sources rows), from issuer pages only:
 - **Pionex Visa Card** (`pionex`): free, 1% fee on every purchase (USD too, so FX 0 and txPct 1), 1% cashback,
   5% APY on the card balance, small-purchase 0.2 USDT at $5 or less (first one a month free), virtual only (physical
