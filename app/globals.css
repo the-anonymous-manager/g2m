@@ -190,6 +190,10 @@ textarea {
   padding-left: max(20px, env(safe-area-inset-left, 0px));
   padding-right: max(20px, env(safe-area-inset-right, 0px));
 }
+/* Wide tables (the full rankings): room for every column on a laptop screen. */
+.wrap.wrap-wide {
+  max-width: 1400px;
+}
 
 .stack {
   display: flex;
@@ -432,6 +436,26 @@ body::before {
 .btn[disabled] {
   opacity: 0.5;
   cursor: not-allowed;
+}
+/* Long answer labels (finder) wrap onto two lines on a phone instead of running off the screen. */
+.chip.chip-wrap {
+  white-space: normal;
+  text-align: left;
+  border-radius: 18px;
+  max-width: 100%;
+}
+.back-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.back-btn {
+  align-self: flex-start;
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border-strong));
+}
+.back-btn:hover {
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
 }
 .icon-btn {
   display: inline-flex;
@@ -1434,6 +1458,26 @@ body::before {
 .calc-notes {
   font-size: 13px;
   max-width: 260px;
+}
+.calc-stake {
+  display: block;
+  margin-top: 2px;
+}
+.calc-card-pick {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.calc-card-pick .select {
+  flex: 1;
+  min-width: 0;
+}
+.calc-win td {
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+.calc-win-badge {
+  margin-left: 8px;
+  vertical-align: middle;
 }
 .receipt {
   min-width: 0;

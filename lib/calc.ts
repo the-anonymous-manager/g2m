@@ -9,6 +9,8 @@ import { BASKET, BASKET_USD } from '@/lib/basket';
 // can never break the page: anything invalid falls back to a sensible default.
 export const CALC_MODES = ['best', 'tiers', 'audit'] as const;
 export type CalcMode = (typeof CALC_MODES)[number];
+export const MAX_TIER_CARDS = 3;
+const SLUG = /^[a-z0-9-]{1,60}$/;
 
 const flag = z
   .union([z.boolean(), z.string()])
@@ -34,6 +36,11 @@ export const CalcInputSchema = z.object({
   tiers: z.enum(['best', 'entry']).catch('best'),
   all: flag,
   card: z.string().regex(/^[a-z0-9-]{1,60}$/).nullable().catch(null),
+  // Compare tiers: up to three cards side by side (`cards=coca,tria,etherfi`). `card` alone still works.
+  cards: z
+    .union([z.string(), z.array(z.string())])
+    .transform((v) => [...new Set((Array.isArray(v) ? v : v.split(',')).map((s) => s.trim()).filter((s) => SLUG.test(s)))].slice(0, MAX_TIER_CARDS))
+    .catch([]),
   tier: z.coerce.number().int().min(0).max(50).catch(0)
 });
 
@@ -51,6 +58,7 @@ export const DEFAULT_INPUT: CalcInput = {
   tiers: 'best',
   all: false,
   card: null,
+  cards: [],
   tier: 0
 };
 
@@ -86,7 +94,8 @@ export function calcParams(input: CalcInput, country: string): URLSearchParams {
   if (input.year !== 2) p.set('year', String(input.year));
   if (input.mode === 'best' && input.tiers !== 'best') p.set('tiers', input.tiers);
   if (input.mode === 'best' && input.all) p.set('all', '1');
-  if (input.mode !== 'best' && input.card) p.set('card', input.card);
+  if (input.mode === 'tiers' && input.cards.length > 1) p.set('cards', input.cards.join(','));
+  else if (input.mode !== 'best' && input.card) p.set('card', input.card);
   if (input.mode === 'audit') p.set('tier', String(input.tier));
   return p;
 }
@@ -239,7 +248,18 @@ export type TierResult = {
   yieldPct: number;
   purchases: number;
   flags: string[];
+  /** Which note in `flags` describes the tier's token stake (for its live USD value). -1 = none. */
+  stakeFlag: number;
 };
+
+/** Live USD value of a tier's token stake. null when there is no stake, no amount or no price. */
+export function stakeUsd(tier: Tier, prices: Record<string, number>): number | null {
+  const s = tier.stake;
+  const p = s?.coingeckoId ? prices[s.coingeckoId] : undefined;
+  return s && s.amount != null && p != null ? s.amount * p : null;
+}
+
+const mentions = (text: string, token: string) => new RegExp(`\\b${token.replace(/[^A-Za-z0-9]/g, '')}\\b`, 'i').test(text);
 
 /**
  * One tier's year for this spending profile. With `country`, spending at home is in that country's currency and pays
@@ -346,14 +366,19 @@ export function tierValue(
   const net = cashback - fee - oneTime - fx - tx;
 
   const req = tier.requirement?.trim();
+  let stakeFlag = -1;
   if (req && !req.startsWith('$')) {
     if (/^not published$/i.test(req)) flags.push('How to qualify is not published');
-    else if (index === 0) flags.push(req);
-    else flags.push(`Needs: ${req}`);
+    else {
+      flags.push(index === 0 ? req : `Needs: ${req}`);
+      // "Hold 300 COCA" already says what to stake: don't repeat it as a second note.
+      if (tier.stake && mentions(req, tier.stake.token)) stakeFlag = flags.length - 1;
+    }
   }
-  if (tier.stake) {
+  if (tier.stake && stakeFlag < 0) {
     const amount = tier.stake.amount != null ? tier.stake.amount.toLocaleString('en-US') : 'some';
     flags.push(`${req?.startsWith('$') ? 'Or hold' : 'Hold'} ${amount} ${tier.stake.token}`);
+    stakeFlag = flags.length - 1;
   }
   if (!offered && country) flags.push('Not offered where you live');
 
@@ -381,7 +406,8 @@ export function tierValue(
     net,
     yieldPct: yearSpend > 0 ? (net / yearSpend) * 100 : 0,
     purchases,
-    flags
+    flags,
+    stakeFlag
   };
 }
 

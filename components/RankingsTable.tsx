@@ -14,7 +14,7 @@ import {
   type Filters,
   type SortKey
 } from '@/lib/table';
-import { availabilityIn, countryName } from '@/lib/regions';
+import { REGIONS, availabilityIn, availabilityInRegion, confirmedCountriesIn, countryName } from '@/lib/regions';
 import { nomadFit } from '@/lib/nomad';
 import { NomadBadge, NomadBar } from '@/components/NomadBar';
 import { rankIn } from '@/lib/score';
@@ -85,8 +85,14 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
   };
 
   const place = f.country ? countryName(f.country) : undefined;
+  const region = !f.country && f.region ? f.region : null;
+  const regionLabel = region ? REGIONS[region].label : undefined;
   const description = describeFilters(f, place);
-  const confirmed = f.country ? ranked.filter((c) => availabilityIn(c, f.country) === 'yes').length : 0;
+  const confirmed = f.country
+    ? ranked.filter((c) => availabilityIn(c, f.country) === 'yes').length
+    : region
+      ? ranked.filter((c) => availabilityInRegion(c, region) === 'yes').length
+      : 0;
   const isDefault = serializeFilters(f) === serializeFilters(DEFAULT_FILTERS);
 
   const sortHead = (k: SortKey, label?: string, style?: React.CSSProperties) => {
@@ -123,7 +129,7 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
           onPassport={(v) => set('passport', v)}
           onHome={(v) => {
             setAutoCountry(false);
-            set('country', v);
+            setF((prev) => ({ ...prev, country: v, region: '' }));
           }}
         />
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'flex-end' }}>
@@ -204,10 +210,16 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
           <button type="button" className="chip" aria-pressed={f.lounge} onClick={() => set('lounge', !f.lounge)}>
             Lounge access
           </button>
-          {f.country ? (
+          {regionLabel ? (
+            <button type="button" className="chip is-on" aria-pressed="true" onClick={() => set('region', '')} title="Show every region">
+              {regionLabel} <span aria-hidden="true">×</span>
+              <span className="sr-only">(remove region)</span>
+            </button>
+          ) : null}
+          {f.country || regionLabel ? (
             <label className="check" style={{ marginLeft: 4 }}>
               <input type="checkbox" checked={f.strict} onChange={(e) => set('strict', e.target.checked)} />
-              Only cards confirmed in {place}
+              Only cards confirmed in {place ?? regionLabel}
             </label>
           ) : null}
           {!isDefault ? (
@@ -221,7 +233,7 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
       <div className="pager">
         <p className="muted" aria-live="polite">
           <b style={{ color: 'var(--text)' }}>{visible.length}</b> of {rows.length} cards · {description}
-          {f.country && !f.strict ? ` (${confirmed} confirmed)` : ''}
+          {(f.country || region) && !f.strict ? ` (${confirmed} confirmed)` : ''}
           {f.country && confirmed === 0 && visible.length ? (
             <>
               <br />
@@ -256,7 +268,7 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
                   {sortHead('annual')}
                   {sortHead('fx')}
                   <th scope="col">Custody</th>
-                  {f.country ? <th scope="col">In {place}</th> : sortHead('countries')}
+                  {f.country ? <th scope="col">In {place}</th> : region ? <th scope="col">In {regionLabel}</th> : sortHead('countries')}
                   <th scope="col">
                     <span className="sr-only">Compare</span>
                   </th>
@@ -306,6 +318,8 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
                             <MarketBadge value={availabilityIn(c, f.country)} where={place} />
                             <NomadBadge fit={nomadFit(c, f.passport, f.country)} />
                           </div>
+                        ) : region ? (
+                          <RegionBadge card={c} region={region} />
                         ) : (
                           <span className="num" title={c.coverage.scope}>
                             {c.coverage.countries ?? '—'}
@@ -372,10 +386,12 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
                       <dd>{pct(c.fees.fxPct, '—')}</dd>
                     </div>
                     <div>
-                      <dt>{f.country ? `In ${place}` : 'Countries'}</dt>
+                      <dt>{f.country ? `In ${place}` : region ? `In ${regionLabel}` : 'Countries'}</dt>
                       <dd>
                         {f.country ? (
                           <MarketBadge value={availabilityIn(c, f.country)} short />
+                        ) : region ? (
+                          <RegionBadge card={c} region={region} short />
                         ) : (
                           c.coverage.countries ?? '—'
                         )}
@@ -429,6 +445,21 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
             </Link>
           </div>
         </div>
+      ) : null}
+    </div>
+  );
+}
+
+/** Available in a region: the badge, and for Asia how many of its countries are confirmed. */
+function RegionBadge({ card, region, short }: { card: CardRow; region: keyof typeof REGIONS; short?: boolean }) {
+  const n = region === 'ASIA' ? confirmedCountriesIn(card, region) : 0;
+  return (
+    <div className="stack" style={{ gap: 4, alignItems: 'flex-start' }}>
+      <MarketBadge value={availabilityInRegion(card, region)} where={REGIONS[region].label} short={short} />
+      {n ? (
+        <span className="faint" style={{ fontSize: 12 }}>
+          {n} {n === 1 ? 'country' : 'countries'}
+        </span>
       ) : null}
     </div>
   );

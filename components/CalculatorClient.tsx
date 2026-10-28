@@ -7,18 +7,20 @@ import { COUNTRIES, availabilityIn, countryName, isCountry } from '@/lib/regions
 import { currencyOf } from '@/lib/currencies.mjs';
 import {
   BREAK_EVEN_LIMIT,
+  MAX_TIER_CARDS,
   breakEvens,
   calcParams,
   hasPhysical,
   parseCalcInput,
   payoutKind,
   rankByValue,
+  stakeUsd,
   tierValue,
   type CalcInput,
   type CalcMode,
   type TierResult
 } from '@/lib/calc';
-import { money } from '@/lib/format';
+import { approxUsd, money } from '@/lib/format';
 import { CardArt } from '@/components/CardArt';
 import { ShareBar } from '@/components/ShareBar';
 import { Chips } from '@/components/Chips';
@@ -31,13 +33,49 @@ type Props = {
   initial: CalcInput;
   initialCountry: string;
   hadCountry: boolean;
+  /** Live USD prices by CoinGecko id, for staking tiers. Missing = unavailable. */
+  prices: Record<string, number>;
 };
+
+type Prices = Record<string, number>;
 
 const MODES: { id: CalcMode; label: string; short: string }[] = [
   { id: 'best', label: 'Best card for me', short: 'Best card' },
-  { id: 'tiers', label: 'Compare tiers of one card', short: 'Compare tiers' },
+  { id: 'tiers', label: 'Compare tiers', short: 'Compare tiers' },
   { id: 'audit', label: 'One card, line by line', short: 'Line by line' }
 ];
+
+/** The notes for one tier, with the live USD value of its token stake added to the note that names it. */
+const notesOf = (r: TierResult, prices: Prices) =>
+  r.flags
+    .map((f, i) => {
+      if (i !== r.stakeFlag) return f;
+      const v = stakeUsd(r.tier, prices);
+      return v != null ? `${f} (${approxUsd(v)})` : f;
+    })
+    .join(' · ');
+
+/** "Or stake" when staking is an alternative to the yearly fee ("$199 a year, or lock 20,000 XPL"), else "Stake". */
+const stakeWord = (t: TierResult['tier']) => (t.requirement?.trim().startsWith('$') ? 'Or stake' : 'Stake');
+
+/** "Free", "$199 a year" or "Price not published", plus the stake's live value when the tier needs one. */
+function TierPrice({ r, prices }: { r: TierResult; prices: Prices }) {
+  const t = r.tier;
+  const v = stakeUsd(t, prices);
+  return (
+    <>
+      <span className="faint" style={{ fontSize: 13 }}>
+        {t.feeUsdYear == null ? 'Price not published' : t.feeUsdYear ? `${money(t.feeUsdYear)} a year` : 'Free'}
+        {t.comingSoon ? ' · coming soon' : ''}
+      </span>
+      {v != null ? (
+        <span className="faint calc-stake" style={{ fontSize: 12 }} title={`${t.stake!.amount!.toLocaleString('en-US')} ${t.stake!.token} at today's price`}>
+          {stakeWord(t)} {approxUsd(v)}
+        </span>
+      ) : null}
+    </>
+  );
+}
 
 /** Dollars with cents for small amounts, whole dollars from $100. */
 const cash = (n: number) => {
@@ -51,7 +89,7 @@ const keepColor = (n: number) => (n >= 0 ? 'var(--ok)' : 'var(--bad)');
 const numText = (v: string) => v.replace(/[^\d.]/g, '');
 const bad = (text: string, min: number, max: number) => text !== '' && (!Number.isFinite(Number(text)) || Number(text) < min || Number(text) > max);
 
-export function CalculatorClient({ rows, initial, initialCountry, hadCountry }: Props) {
+export function CalculatorClient({ rows, initial, initialCountry, hadCountry, prices }: Props) {
   // Raw text for number inputs, so typing never jumps; parsed and clamped values drive the maths.
   const [spendText, setSpendText] = useState(String(initial.spend));
   const [usdText, setUsdText] = useState(String(initial.usd));
@@ -66,6 +104,7 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry }: 
     tiers: initial.tiers,
     all: initial.all,
     card: initial.card,
+    cards: initial.cards,
     tier: initial.tier
   });
   const set = <K extends keyof typeof opts>(k: K, v: (typeof opts)[K]) => setOpts((o) => ({ ...o, [k]: v }));
@@ -94,20 +133,33 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry }: 
 
   // The card for the tier and audit views: the one in the link, else the top card here.
   const picked = useMemo(
-    () => eligible.find((r) => r.slug === input.card) ?? results[0]?.card ?? eligible[0] ?? null,
-    [eligible, input.card, results]
+    () => eligible.find((r) => r.slug === (input.card ?? input.cards[0])) ?? results[0]?.card ?? eligible[0] ?? null,
+    [eligible, input.card, input.cards, results]
   );
+  // Compare tiers: up to three cards. Without `cards=`, the one card above (old `card=` links keep working).
+  const tierCards = useMemo(() => {
+    const list = input.cards.map((s) => eligible.find((r) => r.slug === s)).filter((r): r is CardRow => Boolean(r));
+    return list.length ? list : picked ? [picked] : [];
+  }, [input.cards, eligible, picked]);
 
   useEffect(() => {
     if (first.current) {
       first.current = false;
       return;
     }
-    const p = calcParams({ ...input, card: input.mode === 'best' ? null : (picked?.slug ?? null) }, country);
-    window.history.replaceState(window.history.state, '', `${window.location.pathname}?${p.toString()}`);
+    const p = calcParams(
+      {
+        ...input,
+        card: input.mode === 'best' ? null : input.mode === 'tiers' ? (tierCards[0]?.slug ?? null) : (picked?.slug ?? null),
+        cards: input.mode === 'tiers' ? tierCards.map((c) => c.slug) : []
+      },
+      country
+    );
+    // Readable lists in the link: cards=coca,tria rather than coca%2Ctria.
+    window.history.replaceState(window.history.state, '', `${window.location.pathname}?${p.toString().replace(/%2C/g, ',')}`);
     const t = setTimeout(() => track('Calculator', { spend: input.spend, country: country || 'ALL', mode: input.mode }), 800);
     return () => clearTimeout(t);
-  }, [input, country, picked]);
+  }, [input, country, picked, tierCards]);
 
   const spendErr = bad(spendText, 0, 1_000_000);
   const usdErr = bad(usdText, 0, 100);
@@ -121,14 +173,25 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry }: 
     const best = card ? rankByValue([card], { ...input, all: true }, country || null)[0] : null;
     setOpts((o) => ({ ...o, card: slug, tier: best ? best.index : 0 }));
   };
+  // Compare tiers: change, add or remove one of the (up to three) cards.
+  const setTierCards = (list: string[]) => setOpts((o) => ({ ...o, cards: list, card: list[0] ?? o.card }));
+  const tierSlugs = tierCards.map((c) => c.slug);
+  const setTierCard = (i: number, slug: string) => setTierCards(tierSlugs.map((s, j) => (j === i ? slug : s)));
+  const removeTierCard = (i: number) => setTierCards(tierSlugs.filter((_, j) => j !== i));
+  const addTierCard = () => {
+    const next = results.find((r) => !tierSlugs.includes(r.card.slug))?.card ?? eligible.find((r) => !tierSlugs.includes(r.slug));
+    if (next) setTierCards([...tierSlugs, next.slug]);
+  };
   const switchMode = (mode: CalcMode) => {
     setOpts((o) => {
       const next = { ...o, mode };
       // Coming from the leaderboard: keep looking at the top card and its best tier.
-      if (mode !== 'best' && !o.card && results[0]) {
+      if (mode !== 'best' && !o.card && !o.cards.length && results[0]) {
         next.card = results[0].card.slug;
         next.tier = results[0].index;
       }
+      // Line by line shows one card: the first of the compared ones.
+      if (mode === 'audit' && o.cards.length) next.card = o.cards[0];
       return next;
     });
   };
@@ -340,6 +403,40 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry }: 
               </label>
             ) : null}
           </div>
+        ) : input.mode === 'tiers' ? (
+          <div className="calc-grid">
+            {tierCards.map((c, i) => (
+              <div className="field" key={i}>
+                <label className="field-label" htmlFor={`c-card-${i}`}>
+                  {tierCards.length > 1 ? `Card ${i + 1}` : 'Card'}
+                </label>
+                <div className="calc-card-pick">
+                  <select id={`c-card-${i}`} className="select" value={c.slug} onChange={(e) => setTierCard(i, e.target.value)}>
+                    {eligible.map((r) => (
+                      <option key={r.slug} value={r.slug} disabled={r.slug !== c.slug && tierSlugs.includes(r.slug)}>
+                        {r.name}
+                      </option>
+                    ))}
+                  </select>
+                  {tierCards.length > 1 ? (
+                    <button type="button" className="btn btn-sm" onClick={() => removeTierCard(i)} aria-label={`Remove ${c.name}`}>
+                      ×
+                    </button>
+                  ) : null}
+                </div>
+              </div>
+            ))}
+            {tierCards.length < MAX_TIER_CARDS && eligible.length > tierCards.length ? (
+              <div className="field" style={{ alignSelf: 'end' }}>
+                <button type="button" className="btn" onClick={addTierCard}>
+                  + Add a {tierCards.length === 1 ? 'second' : 'third'} card
+                </button>
+                <span className="faint" style={{ fontSize: 12 }}>
+                  Compare tiers across up to {MAX_TIER_CARDS} cards
+                </span>
+              </div>
+            ) : null}
+          </div>
         ) : (
           <div className="calc-grid">
             <div className="field">
@@ -377,14 +474,14 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry }: 
       {input.mode === 'best' ? (
         <>
           <WalletTeaser cards={formOk} input={input} country={country} />
-          <BestView results={results} input={input} country={country} currency={currency} hiddenVirtual={hiddenVirtual} />
+          <BestView results={results} input={input} country={country} currency={currency} hiddenVirtual={hiddenVirtual} prices={prices} />
         </>
       ) : !picked ? (
         <p className="muted">No card is available where you live yet.</p>
       ) : input.mode === 'tiers' ? (
-        <TiersView card={picked} input={input} country={country} />
+        <TiersView cards={tierCards} input={input} country={country} prices={prices} />
       ) : (
-        <AuditView card={picked} input={input} country={country} currency={currency} />
+        <AuditView card={picked} input={input} country={country} currency={currency} prices={prices} />
       )}
 
       <p className="faint" style={{ fontSize: 13, maxWidth: '90ch' }}>
@@ -404,13 +501,15 @@ function BestView({
   input,
   country,
   currency,
-  hiddenVirtual
+  hiddenVirtual,
+  prices
 }: {
   results: (TierResult & { card: CardRow })[];
   input: CalcInput;
   country: string;
   currency: string | null;
   hiddenVirtual: number;
+  prices: Prices;
 }) {
   return (
     <>
@@ -459,6 +558,7 @@ function BestView({
                 </td>
                 <td className="num" data-label="Plan and card fees">
                   {minus(r.fee + r.oneTime)}
+                  <StakeLine r={r} prices={prices} />
                 </td>
                 <td className="num" data-label="FX cost">
                   {minus(r.fx)}
@@ -469,7 +569,7 @@ function BestView({
                 <td className="num calc-keep" data-label="You keep" style={{ color: keepColor(r.net) }}>
                   {cash(r.net)}
                 </td>
-                <td className="muted calc-notes">{r.flags.length ? r.flags.join(' · ') : null}</td>
+                <td className="muted calc-notes">{r.flags.length ? notesOf(r, prices) : null}</td>
               </tr>
             ))}
           </tbody>
@@ -479,35 +579,74 @@ function BestView({
   );
 }
 
+/** A muted "Stake ~$X" line under a fee, for tiers that need a token stake. */
+function StakeLine({ r, prices }: { r: TierResult; prices: Prices }) {
+  const v = stakeUsd(r.tier, prices);
+  return v != null ? (
+    <span className="faint calc-stake" style={{ fontSize: 12 }}>
+      {stakeWord(r.tier)} {approxUsd(v)}
+    </span>
+  ) : null;
+}
+
 // ---------- Mode 2 ----------
 
-function TiersView({ card, input, country }: { card: CardRow; input: CalcInput; country: string }) {
-  const tiers = useMemo(() => card.tiers.map((t, i) => tierValue(card, t, input, i, country || null)), [card, input, country]);
-  const pairs = useMemo(() => breakEvens(card, input, country || null), [card, input, country]);
-  const best = tiers.filter((t) => t.offered && !t.tier.comingSoon).sort((a, b) => b.net - a.net)[0];
-  const priced = (t: TierResult) => t.tier.feeUsdYear != null;
-  const name = (t: TierResult) => `${t.tier.name} (${t.tier.feeUsdYear == null ? 'price not published' : t.tier.feeUsdYear ? `${money(t.tier.feeUsdYear)}/yr` : 'free'})`;
+type TierRow = { card: CardRow; r: TierResult };
+
+function TiersView({ cards, input, country, prices }: { cards: CardRow[]; input: CalcInput; country: string; prices: Prices }) {
+  const multi = cards.length > 1;
+  const [order, setOrder] = useState<'keep' | 'card'>('keep');
+  const all = useMemo<TierRow[]>(
+    () => cards.flatMap((card) => card.tiers.map((t, i) => ({ card, r: tierValue(card, t, input, i, country || null) }))),
+    [cards, input, country]
+  );
+  const best = all.filter(({ r }) => r.offered && !r.tier.comingSoon).sort((a, b) => b.r.net - a.r.net)[0];
+  const shown = multi && order === 'keep' ? [...all].sort((a, b) => b.r.net - a.r.net) : all;
+  const isBest = (x: TierRow) => best != null && x.card.slug === best.card.slug && x.r.index === best.r.index;
+  const names = cards.map((c) => c.name);
+  const title = multi ? `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}` : cards[0].name;
 
   return (
     <>
       <div className="pager">
         <p className="muted" style={{ margin: 0 }}>
-          {card.name} tiers at <b style={{ color: 'var(--text)' }}>{money(input.spend)}</b> a month
+          {multi ? `Tiers of ${title}` : `${title} tiers`} at <b style={{ color: 'var(--text)' }}>{money(input.spend)}</b> a month
           {best ? (
             <>
               {' '}
-              · best for you: <b style={{ color: 'var(--text)' }}>{best.tier.name}</b>
+              · best for you:{' '}
+              <b style={{ color: 'var(--text)' }}>
+                {multi ? `${best.card.name} · ` : ''}
+                {best.r.tier.name}
+              </b>{' '}
+              ({cash(best.r.net)} a year)
             </>
           ) : null}
         </p>
-        <ShareBar text={`Which ${card.name} tier pays off at ${money(input.spend)}/month · G2M calculator`} />
+        <ShareBar
+          text={
+            multi
+              ? `${names.join(' vs ')}: which tier pays off at ${money(input.spend)}/month · G2M calculator`
+              : `Which ${title} tier pays off at ${money(input.spend)}/month · G2M calculator`
+          }
+        />
       </div>
+      {multi ? (
+        <div className="chip-row" role="group" aria-label="Order of the tiers">
+          <button type="button" className="chip" aria-pressed={order === 'keep'} onClick={() => setOrder('keep')}>
+            Sort by what you keep
+          </button>
+          <button type="button" className="chip" aria-pressed={order === 'card'} onClick={() => setOrder('card')}>
+            Group by card
+          </button>
+        </div>
+      ) : null}
       <div className="table-wrap calc-wrap">
         <table className="table calc-table">
-          <caption className="sr-only">{card.name} tiers side by side</caption>
+          <caption className="sr-only">{multi ? `Tiers of ${title} side by side` : `${title} tiers side by side`}</caption>
           <thead>
             <tr>
-              <th scope="col">Tier</th>
+              <th scope="col">{multi ? 'Card · tier' : 'Tier'}</th>
               <th scope="col">Rewards / yr</th>
               <th scope="col">Plan and card fees / yr</th>
               <th scope="col">FX cost / yr</th>
@@ -517,35 +656,53 @@ function TiersView({ card, input, country }: { card: CardRow; input: CalcInput; 
             </tr>
           </thead>
           <tbody>
-            {tiers.map((t) => (
-              <tr key={t.tier.name}>
-                <td>
-                  <div className="stack" style={{ gap: 2 }}>
-                    <b>{t.tier.name}</b>
-                    <span className="faint" style={{ fontSize: 13 }}>
-                      {t.tier.feeUsdYear == null ? 'Price not published' : t.tier.feeUsdYear ? `${money(t.tier.feeUsdYear)} a year` : 'Free'}
-                      {t.tier.comingSoon ? ' · coming soon' : ''}
-                    </span>
-                  </div>
-                </td>
-                <td className="num" data-label="Rewards">
-                  {cash(t.cashback)}
-                </td>
-                <td className="num" data-label="Plan and card fees">
-                  {minus(t.fee + t.oneTime)}
-                </td>
-                <td className="num" data-label="FX cost">
-                  {minus(t.fx)}
-                </td>
-                <td className="num" data-label="Purchase fees">
-                  {minus(t.tx)}
-                </td>
-                <td className="num calc-keep" data-label="You keep" style={{ color: keepColor(t.net) }}>
-                  {cash(t.net)}
-                </td>
-                <td className="muted calc-notes">{t.flags.length ? t.flags.join(' · ') : null}</td>
-              </tr>
-            ))}
+            {shown.map((x) => {
+              const { card, r: t } = x;
+              const win = isBest(x);
+              return (
+                <tr key={`${card.slug}-${t.index}`} className={win ? 'calc-win' : undefined}>
+                  <td>
+                    {multi ? (
+                      <div className="card-cell">
+                        <CardArt card={card} size="sm" />
+                        <div className="stack" style={{ gap: 2 }}>
+                          <Link href={`/cards/${card.slug}`}>{card.name}</Link>
+                          <b style={{ fontSize: 14 }}>
+                            {t.tier.name}
+                            {win ? <span className="badge badge-accent calc-win-badge">Best</span> : null}
+                          </b>
+                          <TierPrice r={t} prices={prices} />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="stack" style={{ gap: 2 }}>
+                        <b>
+                          {t.tier.name}
+                          {win ? <span className="badge badge-accent calc-win-badge">Best</span> : null}
+                        </b>
+                        <TierPrice r={t} prices={prices} />
+                      </div>
+                    )}
+                  </td>
+                  <td className="num" data-label="Rewards">
+                    {cash(t.cashback)}
+                  </td>
+                  <td className="num" data-label="Plan and card fees">
+                    {minus(t.fee + t.oneTime)}
+                  </td>
+                  <td className="num" data-label="FX cost">
+                    {minus(t.fx)}
+                  </td>
+                  <td className="num" data-label="Purchase fees">
+                    {minus(t.tx)}
+                  </td>
+                  <td className="num calc-keep" data-label="You keep" style={{ color: keepColor(t.net) }}>
+                    {cash(t.net)}
+                  </td>
+                  <td className="muted calc-notes">{t.flags.length ? notesOf(t, prices) : null}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -553,13 +710,54 @@ function TiersView({ card, input, country }: { card: CardRow; input: CalcInput; 
         <h2 id="be-title" className="h3" style={{ margin: 0, fontSize: 20 }}>
           Break-even points
         </h2>
-        {pairs.length === 0 ? (
-          <p className="muted" style={{ margin: 0 }}>
-            {card.name} has one tier {country ? `open in ${countryName(country)}` : ''}, so there is nothing to compare.
-          </p>
-        ) : (
-          <ul className="stack" style={{ gap: 8, margin: 0, paddingLeft: 18 }}>
-            {pairs.map((p) => (
+        {cards.map((card) => (
+          <BreakEvenList key={card.slug} card={card} input={input} country={country} prices={prices} heading={multi} />
+        ))}
+        <p className="faint" style={{ fontSize: 12, margin: 0 }}>
+          Worked out with all your other settings unchanged, between tiers of the same card. Staking or lockups a tier
+          needs are not counted as a cost; their value today is shown next to them.
+        </p>
+      </section>
+    </>
+  );
+}
+
+function BreakEvenList({
+  card,
+  input,
+  country,
+  prices,
+  heading
+}: {
+  card: CardRow;
+  input: CalcInput;
+  country: string;
+  prices: Prices;
+  heading: boolean;
+}) {
+  const pairs = useMemo(() => breakEvens(card, input, country || null), [card, input, country]);
+  const priced = (t: TierResult) => t.tier.feeUsdYear != null;
+  const name = (t: TierResult) => `${t.tier.name} (${t.tier.feeUsdYear == null ? 'price not published' : t.tier.feeUsdYear ? `${money(t.tier.feeUsdYear)}/yr` : 'free'})`;
+  return (
+    <div className="stack" style={{ gap: 6 }}>
+      {heading ? (
+        <h3 className="field-label" style={{ margin: 0 }}>
+          {card.name}
+        </h3>
+      ) : null}
+      {pairs.length === 0 ? (
+        <p className="muted" style={{ margin: 0 }}>
+          {card.name} has one tier{country ? ` open in ${countryName(country)}` : ''}, so there is nothing to compare.
+        </p>
+      ) : (
+        <ul className="stack" style={{ gap: 8, margin: 0, paddingLeft: 18 }}>
+          {pairs.map((p) => {
+            // What the dearer tier needs (a requirement or a stake), with the stake's value today.
+            const needs = p.to.flags.map((f, i) => ({ f, i })).filter(({ f }) => /^(Needs|Hold|Or hold)/.test(f));
+            const stake = needs.length
+              ? notesOf({ ...p.to, flags: needs.map((n) => n.f), stakeFlag: needs.findIndex((n) => n.i === p.to.stakeFlag) }, prices)
+              : null;
+            return (
               <li key={p.to.tier.name}>
                 {!priced(p.from) || !priced(p.to) ? (
                   <>
@@ -580,24 +778,31 @@ function TiersView({ card, input, country }: { card: CardRow; input: CalcInput; 
                     {p.until != null ? `, until ${money(p.until)} a month` : ''}.
                   </>
                 )}
-                {p.to.flags.some((f) => f.startsWith('Needs') || f.startsWith('Hold') || f.startsWith('Or hold')) ? (
-                  <span className="faint"> {p.to.flags.filter((f) => /^(Needs|Hold|Or hold)/.test(f)).join(' · ')}.</span>
-                ) : null}
+                {stake ? <span className="faint"> {stake}.</span> : null}
               </li>
-            ))}
-          </ul>
-        )}
-        <p className="faint" style={{ fontSize: 12, margin: 0 }}>
-          Worked out with all your other settings unchanged. Staking or lockups a tier needs are not counted as a cost.
-        </p>
-      </section>
-    </>
+            );
+          })}
+        </ul>
+      )}
+    </div>
   );
 }
 
 // ---------- Mode 3 ----------
 
-function AuditView({ card, input, country, currency }: { card: CardRow; input: CalcInput; country: string; currency: string | null }) {
+function AuditView({
+  card,
+  input,
+  country,
+  currency,
+  prices
+}: {
+  card: CardRow;
+  input: CalcInput;
+  country: string;
+  currency: string | null;
+  prices: Prices;
+}) {
   const index = Math.min(input.tier, card.tiers.length - 1);
   const r = useMemo(() => tierValue(card, card.tiers[index], input, index, country || null), [card, index, input, country]);
   const swipes = r.purchases;
@@ -720,7 +925,7 @@ function AuditView({ card, input, country, currency }: { card: CardRow; input: C
       </div>
       {r.flags.length ? (
         <p className="muted" style={{ fontSize: 14, margin: 0 }}>
-          Notes: {r.flags.join(' · ')}
+          Notes: {notesOf(r, prices)}
         </p>
       ) : null}
     </>

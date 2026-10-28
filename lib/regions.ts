@@ -1,5 +1,5 @@
 import type { Availability, CardData, Market, Tier } from '@/lib/types';
-import { COUNTRY_NAMES, EEA, isCountry } from '@/lib/countries.mjs';
+import { ASIA, COUNTRY_NAMES, EEA, isCountry } from '@/lib/countries.mjs';
 
 export { isCountry };
 
@@ -72,6 +72,28 @@ export function availabilityIn(card: Pick<CardData, 'coverage'>, cc: string): Av
   const market = countryToMarket(cc);
   return market ? card.coverage.markets[market] : 'unknown';
 }
+
+/** Regions the rankings can show (homepage panels link to them): more than one country, so not a "where I live". */
+export const REGIONS = {
+  EU: { label: 'EU / EEA', codes: EEA as readonly string[] },
+  ASIA: { label: 'Asia', codes: ASIA as readonly string[] }
+} as const;
+export type Region = keyof typeof REGIONS;
+export const isRegion = (v: unknown): v is Region => v === 'EU' || v === 'ASIA';
+
+/**
+ * Can someone in this region get the card? The EU uses the card's EU / EEA answer (as the homepage panel does);
+ * Asia is "yes" when the card is confirmed in at least one Asian country, "no" when it is ruled out in all of them.
+ */
+export function availabilityInRegion(card: Pick<CardData, 'coverage'>, region: Region): Availability {
+  if (region === 'EU') return card.coverage.markets.EU;
+  const all = REGIONS[region].codes.map((cc) => availabilityIn(card, cc));
+  return all.includes('yes') ? 'yes' : all.every((a) => a === 'no') ? 'no' : 'unknown';
+}
+
+/** How many of a region's countries the card is confirmed in. */
+export const confirmedCountriesIn = (card: Pick<CardData, 'coverage'>, region: Region) =>
+  REGIONS[region].codes.filter((cc) => availabilityIn(card, cc) === 'yes').length;
 
 const placeMatches = (places: string[] | undefined, cc: string) =>
   Boolean(places?.some((p) => p === cc || (p === 'EEA' && EEA_SET.has(cc))));

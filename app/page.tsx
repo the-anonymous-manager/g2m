@@ -44,8 +44,8 @@ function regionPanels(cards: Card[]): MarketPanel[] {
     return {
       key: m,
       title: MARKET_LABELS[m],
-      // The EU is not one country, so its link opens the full list; the visitor's own country is picked there.
-      href: m === 'EU' ? '/cards' : `/cards?country=${m}`,
+      // The EU is a group of countries: its link opens the rankings for the whole region.
+      href: m === 'EU' ? '/cards?region=EU' : `/cards?country=${m}`,
       count: list.length,
       cards: list.slice(0, 3).map((c) => ({ row: toRow(c) }))
     };
@@ -56,7 +56,7 @@ function regionPanels(cards: Card[]): MarketPanel[] {
   panels.push({
     key: 'ASIA',
     title: 'Asia',
-    href: '/cards',
+    href: '/cards?region=ASIA',
     count: asia.length,
     cards: asia.slice(0, 3).map(({ c, n }) => ({ row: toRow(c), note: `${n} ${n === 1 ? 'country' : 'countries'} in Asia` }))
   });
@@ -282,7 +282,7 @@ export default function HomePage() {
         </h2>
         <div className="grid-3">
           <Link href="/finder" className="panel panel-pad stack" style={{ gap: 10, textDecoration: 'none' }}>
-            <span className="eyebrow">[ 3 questions ]</span>
+            <span className="eyebrow">[ 5 questions ]</span>
             <span className="h3">Card finder</span>
             <span className="muted">Tell us where you live and what matters to you. Get three cards that fit.</span>
           </Link>

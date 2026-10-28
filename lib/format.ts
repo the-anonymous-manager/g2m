@@ -21,6 +21,11 @@ export function money(n: number): string {
   return `${n < 0 ? '−' : ''}$${s}`;
 }
 
+/** An approximate live value: "~$1,234", or "~$12.50" under $100. */
+export function approxUsd(n: number): string {
+  return `~${n >= 100 ? money(n) : `$${n.toFixed(2)}`}`;
+}
+
 /** Every per-purchase cost as one label: percentage, flat fee and any small-purchase fee. */
 export function perPurchaseFee(f: Pick<CardData['fees'], 'txPct' | 'txFlatUsd' | 'smallPurchase'>): string {
   const small = f.smallPurchase;

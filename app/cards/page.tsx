@@ -21,7 +21,7 @@ export default async function CardsPage({ searchParams }: Props) {
   const cards = getCards();
   const rows = cards.map(toRow);
   return (
-    <div className="wrap section stack" style={{ gap: 28 }}>
+    <div className="wrap wrap-wide section stack" style={{ gap: 28 }}>
       <div className="stack" style={{ gap: 12 }}>
         <Eyebrow>leaderboard</Eyebrow>
         <h1 className="h2">Crypto card rankings</h1>
@@ -30,7 +30,7 @@ export default async function CardsPage({ searchParams }: Props) {
           you can actually get. Last checked {fmtDate(lastUpdated())}.
         </p>
       </div>
-      <RankingsTable rows={rows} initial={initial} hadMarketParam={Boolean(initial.country)} />
+      <RankingsTable rows={rows} initial={initial} hadMarketParam={Boolean(initial.country || initial.region)} />
     </div>
   );
 }

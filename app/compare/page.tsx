@@ -3,6 +3,7 @@ import { getCards } from '@/lib/cards';
 import { toRow } from '@/lib/types';
 import { CompareClient } from '@/components/CompareClient';
 import { Eyebrow } from '@/components/bits';
+import { BackButton } from '@/components/BackButton';
 
 export const metadata: Metadata = {
   title: 'Compare crypto cards',
@@ -23,6 +24,9 @@ export default async function ComparePage({ searchParams }: Props) {
   return (
     <div className="wrap section stack" style={{ gap: 28 }}>
       <div className="stack" style={{ gap: 12 }}>
+        <div className="back-row">
+          <BackButton fallback="/cards" />
+        </div>
         <Eyebrow>side by side</Eyebrow>
         <h1 className="h2">Compare crypto cards</h1>
         <p className="lead">Pick up to three cards. The best value in each row is highlighted.</p>
