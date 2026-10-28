@@ -1225,9 +1225,9 @@
     "type": "prepaid",
     "forms": ["virtual", "physical"],
     "custody": "custodial",
-    "summary": "A stablecoin card from the DogPay app, with a personal USD bank account. Free to start, but DogPay does not publish its purchase or FX fees on its website.",
+    "summary": "A stablecoin Visa card from the DogPay app, with a personal USD bank account. 1% + $0.30 on every purchase (1.5% + $0.30 at non-US merchants) and no cashback.",
     "cashback": { "basePct": null, "maxPct": null, "payout": null, "note": "No cashback published." },
-    "fees": { "annualUsd": 0, "fxPct": null, "fxNote": "Not published: DogPay says to check card fees in the app.", "topUpPct": 1, "cardFeeUsd": 10, "atm": "Physical card at supported ATMs; fee not published", "other": ["Purchase fees are shown in the app, not on the website", "Virtual card $10 each; paid plans include 1 to 3 free", "Card top-up 1% (0.8%, 0.5% or 0.3% on paid plans)", "Bank account opening $100 (Basic), $80 (Premium), $50 (Platinum), free (Ultra)", "Bank deposit $35, withdrawal $15 (the website lists $35 for withdrawals)", "Swap fee 1% (lower on paid plans)"] },
+    "fees": { "annualUsd": 0, "fxPct": 0.5, "fxNote": "No currency conversion fee, but purchases at non-US merchants cost 1.5% + $0.30 instead of 1% + $0.30; shown here as a 0.5% FX fee. Billed in US dollars.", "fxByCurrency": { "USD": 0 }, "topUpPct": 1, "txPct": 1, "txFlatUsd": 0.3, "cardFeeUsd": 10, "atm": "Physical card at supported ATMs; fee not published", "other": ["Purchase fees from the DogPay app (not published on the website): US merchants 1% + $0.30, others 1.5% + $0.30", "Refund 2%; chargeback $0.50", "Virtual card $10 each; paid plans include 1 to 3 free", "Card top-up 1% (0.8%, 0.5% or 0.3% on paid plans)", "Bank account opening $100 (Basic), $80 (Premium), $50 (Platinum), free (Ultra)", "Bank deposit $35, withdrawal $15 (the website lists $35 for withdrawals)", "Swap fee 1% (lower on paid plans)"] },
     "tiers": [
       { "name": "Basic", "feeUsdYear": 0, "cashbackPct": null, "perks": ["Card top-up fee 1%", "$10 per virtual card", "Up to 2 cards", "Bank account opening $100"] },
       { "name": "Premium", "feeUsdYear": 58.8, "feeNote": "$4.90 a month", "cashbackPct": null, "perks": ["Card top-up fee 0.8%", "First virtual card free, then $10", "Up to 5 cards", "Bank account opening $80", "Priority access and event perks"] },
@@ -1241,14 +1241,15 @@
     "assets": ["USDT"],
     "perks": ["Personal USD account (ACH, Fedwire, SWIFT)", "6% a year on stablecoins (Earn)"],
     "pros": ["Personal USD bank account", "Virtual and physical cards", "No monthly fee on the Basic plan"],
-    "cons": ["Purchase and FX fees not published on the website", "No cashback", "1% top-up fee on the free plan"],
+    "cons": ["1% + $0.30 on every purchase (1.5% + $0.30 outside the US)", "No cashback", "1% top-up fee on the free plan"],
     "links": { "official": "https://dogpay.com/us/cards" },
     "sources": [
       { "label": "DogPay personal pricing", "url": "https://dogpay.com/us/pricing/personal", "verified": "2026-10-28" },
       { "label": "DogPay Cards", "url": "https://dogpay.com/us/cards", "verified": "2026-10-28" },
       { "label": "DogPay iBank personal USD account", "url": "https://dogpay.com/us/digital-bank", "verified": "2026-10-28" },
       { "label": "DogPay card program terms", "url": "https://dogpay.com/us/card-program-terms", "verified": "2026-10-28" },
-      { "label": "DogPay app: Member Center plan benefits and Supported Apps (screens from Akash)", "url": "https://dogpay.com/us/pricing/personal", "verified": "2026-10-28" }
+      { "label": "DogPay app: Member Center plan benefits and Supported Apps (screens from Akash)", "url": "https://dogpay.com/us/pricing/personal", "verified": "2026-10-28" },
+      { "label": "DogPay app: Virtual Card fees (create-card screen, from Akash)", "url": "https://dogpay.com/us/cards", "verified": "2026-10-28" }
     ],
     "lastChecked": "2026-10-28",
     "addedOn": "2026-10-28",
