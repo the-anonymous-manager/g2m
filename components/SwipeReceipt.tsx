@@ -8,6 +8,7 @@ import { useRegion } from '@/components/RegionContext';
 import { track } from '@/lib/analytics';
 import { site } from '@/lib/site';
 import { receiptQuery, type ReceiptParams } from '@/lib/receipt-params';
+import { tierPrice } from '@/lib/tierpick';
 
 type Props = {
   /** The cards to pick from. */
@@ -162,20 +163,31 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
             </select>
           </div>
         ) : null}
-        {card.tiers.length > 1 ? (
-          <div className="field">
-            <label className="field-label" htmlFor="sw-tier">
-              Tier
-            </label>
-            <select id="sw-tier" className="select" value={card.tiers.indexOf(tier)} onChange={(e) => setTierIndex(Number(e.target.value))}>
-              {card.tiers.map((t, i) => (
-                <option key={t.name} value={i}>
-                  {t.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        ) : null}
+        {/* Always shown, so it is clear which tier the receipt uses even when a card has only one. */}
+        <div className="field">
+          <label className="field-label" htmlFor="sw-tier">
+            Tier
+          </label>
+          <select
+            id="sw-tier"
+            className="select"
+            value={card.tiers.indexOf(tier)}
+            onChange={(e) => setTierIndex(Number(e.target.value))}
+            disabled={card.tiers.length < 2}
+          >
+            {card.tiers.map((t, i) => (
+              <option key={t.name} value={i}>
+                {t.name} · {tierPrice(t)}
+                {t.comingSoon ? ' · coming soon' : ''}
+              </option>
+            ))}
+          </select>
+          {card.tiers.length < 2 ? (
+            <span className="faint" style={{ fontSize: 12 }}>
+              {card.name} has one tier.
+            </span>
+          ) : null}
+        </div>
         <div className="chip-row" role="group" aria-label="Quick purchases">
           {PRESETS.map((p) => (
             <button key={p.label} type="button" className="chip" aria-pressed={label === p.label} onClick={() => pickPreset(p)}>
@@ -356,7 +368,7 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
           <button type="button" className="btn btn-metal btn-sm" onClick={postOnX}>
             Post receipt on X
           </button>
-          <a className="btn btn-sm" href={`/receipt/image?${query}`} download={`g2m-receipt-${card.slug}.png`} onClick={() => track('Share', { channel: 'image', what: 'receipt' })}>
+          <a className="btn btn-sm" href={`/receipt/image?${query}&size=tall`} download={`g2m-receipt-${card.slug}.png`} onClick={() => track('Share', { channel: 'image', what: 'receipt' })}>
             Download image
           </a>
         </div>

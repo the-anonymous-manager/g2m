@@ -546,6 +546,18 @@ Not modelled yet: per-purchase reward caps (Kolo $1 per purchase), "first 5 smal
 - India has no country guide: no card on G2M has confirmed India yet (19 say no, 7 have not said). It appears on its
   own once 5 cards confirm it. Same for any other country.
 
+## Receipt picture, receipt tier, tiers of one card side by side (28 Oct 2026)
+
+- Receipt "Download image" now gives a tall 1080 x 1350 picture (`/receipt/image?...&size=tall`): X cropped the wide
+  1200 x 630 one to near-squares in posts with two pictures. Link previews stay wide. The footer sits 84px up so X's
+  trim in two-picture posts does not clip it.
+- The receipt's tier picker is always shown, with each tier's price, and greyed out with "has one tier" when a card
+  has only one (Solayer has a single "Membership" tier in our data, so Akash saw no picker).
+- /compare and the calculator's Compare tiers take the same card more than once with different tiers
+  (`c=ethena-pay:standard,ethena-pay:pro,ethena-pay:vip`); picking a card that is already in a slot starts on its next
+  tier. /compare with one multi-tier card shows "Compare its N tiers side by side"; with one card in every slot the
+  card-level rows and tier presets are hidden (they would repeat).
+
 ## Scoring rules v2 (22 Oct 2026, Akash's exact rules)
 
 `lib/score.ts`, explained on /methodology. Changed from version 1:
