@@ -293,7 +293,11 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   its real score and rank, clicks tagged
   utm_campaign=sponsored), otherwise the top-ranked card. The home page re-checks hourly, so bookings start and end
   on their dates without a deploy. Move Vercel to Pro before the first paid booking (Hobby is non-commercial).
-- Plausible analytics events when `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` is set.
+- Plausible analytics events when `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` is set. Turned on 28 Oct 2026: Akash's Plausible
+  account for g2m.life, domain and script URL set as plain (non-secret) env vars in `cf-deploy.yml`'s Deploy step
+  (`NEXT_PUBLIC_PLAUSIBLE_DOMAIN`, `NEXT_PUBLIC_PLAUSIBLE_SRC`), since Next bakes `NEXT_PUBLIC_*` vars in at build
+  time. Events already wired in: Outbound (card + placement), Compare add/open, Share, Theme, Region, Submit,
+  Calculator/Finder/Wallet/Corridor use (debounced). View at plausible.io once logged in.
 
 Tested before handoff: every route, light and dark, desktop and phone widths (no sideways scrolling), filters,
 compare, finder, calculator input checks, theme memory, share images, and a clean `npm ci && npm run build`.
