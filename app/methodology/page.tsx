@@ -198,6 +198,11 @@ export default function MethodologyPage() {
           for a fixed period. When no one has booked it, it shows the top-ranked card.
         </p>
         <p>
+          The three &ldquo;Our picks&rdquo; on the home page work the same way: each one is either chosen by G2M (marked Our
+          pick), a paid placement for a fixed period (marked Sponsored), or, when nothing is booked, filled in automatically
+          with the top-ranked card, the best card with no annual fee and the best self-custodial card.
+        </p>
+        <p>
           Neither a referral nor a sponsorship ever changes a card&apos;s score, rank or position in the rankings, and cards
           without either are ranked exactly the same way.
         </p>

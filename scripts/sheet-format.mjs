@@ -1,4 +1,4 @@
-// Converts card data between the G2M Google Sheet and data/cards.json + data/sponsor.json.
+// Converts card data between the G2M Google Sheet and data/cards.json + data/sponsor.json + data/picks.json.
 // Plain Node, no dependencies, so the hourly sync can check for changes before installing anything.
 //
 // The sheet has one tab per kind of row. A card's tiers, sources and country list point at it by its
@@ -7,7 +7,7 @@
 
 import { createHash } from 'node:crypto';
 
-export const TABS = ['Cards', 'Tiers', 'Country lists', 'Sources', 'Sponsor'];
+export const TABS = ['Cards', 'Tiers', 'Country lists', 'Sources', 'Sponsor', 'Picks'];
 
 /** Where the site keeps a card's downloaded picture. Named after the link, so a new link means a new file. */
 export const imageFile = (slug, source) =>
@@ -230,11 +230,14 @@ const SOURCE_COLUMNS = [
 ];
 
 const SPONSOR_COLUMNS = ['Card ID', 'Start', 'End'];
+// Home page "Our picks": Type is "Our pick" or "Sponsored"; dates are needed for Sponsored, optional otherwise.
+const PICK_COLUMNS = ['Slot', 'Card ID', 'Type', 'Why (one line)', 'Start', 'End'];
+const PICK_TYPE = { pick: 'Our pick', sponsored: 'Sponsored' };
 
 // ---------- cards.json -> sheet ----------
 
 /** @returns {Record<string, string[][]>} each tab as rows of cells, header row first */
-export function cardsToTables(cards, sponsor) {
+export function cardsToTables(cards, sponsor, picks = []) {
   const head = (cols) => cols.map(([h]) => h);
   return {
     Cards: [head(CARD_COLUMNS), ...cards.map((c) => CARD_COLUMNS.map(([, get]) => get(c)))],
@@ -244,7 +247,8 @@ export function cardsToTables(cards, sponsor) {
       ...cards.filter((c) => c.coverage.countryList).map((c) => LIST_COLUMNS.map(([, get]) => get(c)))
     ],
     Sources: [head(SOURCE_COLUMNS), ...cards.flatMap((c) => c.sources.map((s) => SOURCE_COLUMNS.map(([, get]) => get(c, s))))],
-    Sponsor: [SPONSOR_COLUMNS, [sponsor.slug ?? '', sponsor.start ?? '', sponsor.end ?? '']]
+    Sponsor: [SPONSOR_COLUMNS, [sponsor.slug ?? '', sponsor.start ?? '', sponsor.end ?? '']],
+    Picks: [PICK_COLUMNS, ...picks.map((p) => [String(p.slot), p.slug, PICK_TYPE[p.type], p.note ?? '', p.start ?? '', p.end ?? ''])]
   };
 }
 
@@ -303,6 +307,7 @@ export function tablesToCards(tables) {
   const listRows = owned('Country lists', read('Country lists', LIST_COLUMNS.map(([h]) => h)));
   const sourceRows = owned('Sources', read('Sources', SOURCE_COLUMNS.map(([h]) => h)));
   const sponsorRows = read('Sponsor', SPONSOR_COLUMNS);
+  const pickRows = owned('Picks', read('Picks', PICK_COLUMNS));
 
   const tier = (r) => {
     const n = (col) => cell('Tiers', r, col, num);
@@ -436,7 +441,16 @@ export function tablesToCards(tables) {
   };
   if (sponsor.slug && !slugs.has(sponsor.slug)) errors.push(`Sponsor: no card with Card ID "${sponsor.slug}" on the Cards tab.`);
 
-  return errors.length ? { cards: null, sponsor: null, errors } : { cards: prune(cards), sponsor, errors };
+  const picks = pickRows.map((r) => {
+    const slot = Number(str(r.get('Slot')));
+    if (![1, 2, 3].includes(slot)) errors.push(`Picks row ${r.row}, column "Slot": use 1, 2 or 3.`);
+    const kind = str(r.get('Type')).toLowerCase();
+    const type = kind === 'sponsored' ? 'sponsored' : kind === '' || kind === 'our pick' || kind === 'pick' ? 'pick' : null;
+    if (!type) errors.push(`Picks row ${r.row}, column "Type": use "Our pick" or "Sponsored".`);
+    return { slot, slug: str(r.get('Card ID')), type: type ?? 'pick', note: optText(r.get('Why (one line)')) ?? null, start: str(r.get('Start')) || null, end: str(r.get('End')) || null };
+  });
+
+  return errors.length ? { cards: null, sponsor: null, picks: null, errors } : { cards: prune(cards), sponsor, picks, errors };
 }
 
 // Drop undefined keys so the JSON matches the hand-written file.
@@ -508,6 +522,7 @@ export function formatCards(cards) {
 }
 
 export const formatSponsor = (s) => JSON.stringify(s, null, 2) + '\n';
+export const formatPicks = (p) => JSON.stringify(p, null, 2) + '\n';
 
 // ---------- Plain-words validation messages ----------
 

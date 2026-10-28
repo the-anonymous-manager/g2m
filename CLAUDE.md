@@ -62,6 +62,9 @@ and confirm what changed on the site (not which files moved).
 - Run `npm run validate` and fix every error before committing.
 - Sponsored spot: book it in the sheet's Sponsor tab (Card ID, Start, End as YYYY-MM-DD; empty = none), which the
   sync writes to `data/sponsor.json`. It is always labelled Sponsored and never changes a score or rank.
+- Our picks (home page, 3 slots): the sheet's Picks tab (Slot 1-3, Card ID, Type "Our pick"/"Sponsored", Why, Start,
+  End; Sponsored needs both dates), synced to `data/picks.json` (`lib/picks.ts`). Empty slots fill themselves (top
+  ranked, best no annual fee, best self-custodial). Sponsored is always labelled and never changes a score or rank.
 
 ## Brand
 

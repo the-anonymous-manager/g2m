@@ -6,7 +6,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { SponsorSchema, validateCards } from '../lib/card-schema.mjs';
+import { PicksSchema, SponsorSchema, validateCards } from '../lib/card-schema.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const file = join(root, 'data', 'cards.json');
@@ -58,5 +58,24 @@ try {
 } catch (err) {
   sponsorOk = false;
   console.error(`✖ Could not read data/sponsor.json: ${err.message}`);
+}
+// data/picks.json books the three "Our picks" slots on the home page (empty slots fill themselves).
+try {
+  const picks = PicksSchema.safeParse(JSON.parse(readFileSync(join(root, 'data', 'picks.json'), 'utf8')));
+  if (!picks.success) {
+    sponsorOk = false;
+    console.error(`✖ data/picks.json: ${picks.error.issues.map((i) => i.message).join('; ')}`);
+  } else {
+    const unknown = picks.data.filter((p) => !valid.some((c) => c.slug === p.slug));
+    if (unknown.length) {
+      sponsorOk = false;
+      console.error(`✖ data/picks.json: no valid card with slug ${unknown.map((p) => `"${p.slug}"`).join(', ')}`);
+    } else if (picks.data.length) {
+      console.log(`✔ Picks: ${picks.data.map((p) => `slot ${p.slot} ${p.slug} (${p.type})`).join(', ')}`);
+    }
+  }
+} catch (err) {
+  sponsorOk = false;
+  console.error(`✖ Could not read data/picks.json: ${err.message}`);
 }
 process.exit(errors.length || !sponsorOk ? 1 : 0);

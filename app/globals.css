@@ -444,6 +444,18 @@ body::before {
   border-radius: 18px;
   max-width: 100%;
 }
+/* A button that reads like a text link. */
+.link-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
 .back-row {
   display: flex;
   align-items: center;
@@ -597,6 +609,46 @@ body::before {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 16px;
+}
+/* ---------- Our picks (home page) ---------- */
+.pick-card {
+  gap: 14px;
+}
+.pick-card[data-kind='sponsored'] {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+.pick-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.pick-art {
+  display: block;
+  max-width: 280px;
+}
+.pick-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+.pick-facts dt {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+}
+.pick-facts dd {
+  margin: 2px 0 0;
+  font-weight: 600;
+}
+.pick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
 }
 .grid-2 {
   display: grid;
