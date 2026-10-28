@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getCards, getRank, lastUpdated } from '@/lib/cards';
 import { getSponsor } from '@/lib/sponsor';
+import { getPicks } from '@/lib/picks';
 import { OutboundLink } from '@/components/OutboundLink';
 import { HomeLeaderboard } from '@/components/HomeLeaderboard';
 import { GlyphField } from '@/components/motion/GlyphField';
@@ -68,6 +69,8 @@ export default function HomePage() {
   const rows = cards.map(toRow);
   // The Featured spot: a booked sponsor while its dates run, otherwise the top-ranked card.
   const sponsor = getSponsor();
+  const picks = getPicks(cards);
+  const anyFeatured = picks.some((p) => p.kind === 'featured');
   const featured = sponsor ?? cards[0];
   const selfCustodial = cards.filter((c) => c.custody === 'self-custodial' || c.custody === 'both').length;
   const noFee = cards.filter((c) => c.fees.annualUsd === 0).length;
@@ -112,11 +115,11 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          <aside className="hero-feature" data-tilt aria-label={sponsor ? 'Sponsored card' : 'Top-ranked card'}>
+          <aside className="hero-feature" data-tilt aria-label={sponsor ? 'Featured card (sponsored)' : 'Top-ranked card'}>
             <CardArt card={featured} />
             <div className="panel panel-pad hero-feature-panel">
               <div className="hero-feature-head">
-                <Eyebrow>{sponsor ? 'sponsored' : 'top ranked'}</Eyebrow>
+                <Eyebrow>{sponsor ? 'featured' : 'top ranked'}</Eyebrow>
                 <span className="mono faint" style={{ fontSize: 12 }}>
                   #{getRank(featured.slug)} of {cards.length} worldwide
                 </span>
@@ -156,13 +159,13 @@ export default function HomePage() {
               <p className="faint" style={{ fontSize: 13, margin: 0 }}>
                 {sponsor ? (
                   <>
-                    Paid placement. It never changes a card&apos;s score or rank.{' '}
+                    Sponsored. It never changes a card&apos;s score or rank.{' '}
                     <Link href="/methodology#money">How G2M makes money</Link>
                   </>
                 ) : (
                   <>
                     The highest G2M score worldwide right now. Card issuers can{' '}
-                    <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Sponsored spot on G2M')}`}>
+                    <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Featured spot on G2M')}`}>
                       book this spot
                     </a>{' '}
                     as a labelled sponsor.
@@ -243,6 +246,78 @@ export default function HomePage() {
           </p>
         </div>
         <MarketPanels rows={rows} panels={regionPanels(cards)} />
+      </section>
+
+      {/* Our picks: three slots, each an editorial pick or a labelled sponsorship (data/picks.json), else automatic. */}
+      <section className="wrap section stack" style={{ gap: 20 }} aria-labelledby="picks">
+        <div className="stack" style={{ gap: 8 }}>
+          <Eyebrow>our picks</Eyebrow>
+          <h2 id="picks" className="h2">
+            Three cards worth a look
+          </h2>
+        </div>
+        <div className="grid-3 picks-grid">
+          {picks.map((p) => (
+            <article key={p.slot} className="panel panel-pad stack pick-card" data-kind={p.kind}>
+              <div className="pick-head">
+                <span className={`badge ${p.kind === 'featured' ? 'badge-warn' : p.kind === 'new' ? 'badge-yes' : 'badge-accent'}`}>{p.label}</span>
+                <ScorePill value={p.card.score.total} />
+              </div>
+              <Link href={`/cards/${p.card.slug}`} className="pick-art" aria-label={p.card.name}>
+                <CardArt card={p.card} />
+              </Link>
+              <h3 className="h3" style={{ margin: 0 }}>
+                <Link href={`/cards/${p.card.slug}`} style={{ textDecoration: 'none' }}>
+                  {p.card.name}
+                </Link>
+              </h3>
+              {p.note ? (
+                <p className="muted" style={{ margin: 0 }}>
+                  {p.note}
+                </p>
+              ) : null}
+              {p.kind === 'featured' ? <p className="faint pick-paid">Sponsored. It never changes the score or rank.</p> : null}
+              <dl className="pick-facts">
+                <div>
+                  <dt>Cashback</dt>
+                  <dd>{cashbackLabel(p.card.cashback.basePct, p.card.cashback.maxPct)}</dd>
+                </div>
+                <div>
+                  <dt>Annual fee</dt>
+                  <dd>{usd(p.card.fees.annualUsd)}</dd>
+                </div>
+                <div>
+                  <dt>FX fee</dt>
+                  <dd>{pct(p.card.fees.fxPct)}</dd>
+                </div>
+              </dl>
+              <div className="pick-actions">
+                <OutboundLink
+                  slug={p.card.slug}
+                  name={p.card.name}
+                  placement={`pick-${p.slot}`}
+                  campaign={p.kind === 'featured' ? 'sponsored' : undefined}
+                  className="btn btn-metal btn-sm"
+                >
+                  Get the card
+                </OutboundLink>
+                <Link href={`/cards/${p.card.slug}`} className="btn btn-sm">
+                  Read the review
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+        <p className="faint" style={{ fontSize: 13, margin: 0 }}>
+          {anyFeatured ? (
+            <>
+              Featured cards marked Sponsored are paid for; that never changes a card&apos;s score or rank.{' '}
+              <Link href="/methodology#money">How G2M makes money</Link>.{' '}
+            </>
+          ) : null}
+          Card issuers can{' '}
+          <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Featured pick on G2M')}`}>book one of these spots</a>.
+        </p>
       </section>
 
       {/* How we judge */}

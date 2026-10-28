@@ -61,7 +61,14 @@ and confirm what changed on the site (not which files moved).
   a card's position because of a referral deal.
 - Run `npm run validate` and fix every error before committing.
 - Sponsored spot: book it in the sheet's Sponsor tab (Card ID, Start, End as YYYY-MM-DD; empty = none), which the
-  sync writes to `data/sponsor.json`. It is always labelled Sponsored and never changes a score or rank.
+  sync writes to `data/sponsor.json`. It is labelled Featured with a visible "Sponsored" note (paid placements
+  must always be disclosed) and never changes a score or rank.
+- Our picks (home page, 3 slots): the sheet's Picks tab (Slot 1-3, Card ID, Type "Our pick"/"Featured", Why, Start,
+  End; Featured = paid, needs both dates, shows "Sponsored"), synced to `data/picks.json` (`lib/picks.ts`).
+  Unbooked slots show cards listed in the last 30 days as "New on G2M", then the automatic picks (top ranked, best no
+  annual fee, best self-custodial). Never changes a score or rank.
+- New cards: nothing to date. The sync sets `addedOn` to the day a Card ID first reaches the site and keeps it after
+  (no sheet column). Without a sheet, set `addedOn` (YYYY-MM-DD) in `data/cards.json` when listing a card.
 
 ## Brand
 

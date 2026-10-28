@@ -543,7 +543,7 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry, pr
       ) : !picked ? (
         <p className="muted">No card is available where you live yet.</p>
       ) : input.mode === 'tiers' ? (
-        <TiersView picks={tierPicks} input={input} country={country} prices={prices} />
+        <TiersView picks={tierPicks} input={input} country={country} prices={prices} onPickTier={setPickTier} />
       ) : (
         <AuditView card={picked} input={input} country={country} currency={currency} prices={prices} />
       )}
@@ -657,7 +657,19 @@ function StakeLine({ r, prices }: { r: TierResult; prices: Prices }) {
 
 type TierRow = { card: CardRow; r: TierResult };
 
-function TiersView({ picks, input, country, prices }: { picks: TierPickRow[]; input: CalcInput; country: string; prices: Prices }) {
+function TiersView({
+  picks,
+  input,
+  country,
+  prices,
+  onPickTier
+}: {
+  picks: TierPickRow[];
+  input: CalcInput;
+  country: string;
+  prices: Prices;
+  onPickTier?: (pick: number, tier: number | null) => void;
+}) {
   const cards = picks.map((p) => p.card);
   const multi = cards.length > 1;
   const [order, setOrder] = useState<'keep' | 'card'>('keep');
@@ -667,9 +679,21 @@ function TiersView({ picks, input, country, prices }: { picks: TierPickRow[]; in
     () => picks.flatMap((p) => indexes(p).map((i) => ({ card: p.card, r: tierValue(p.card, p.card.tiers[i], input, i, country || null) }))),
     [picks, input, country] // eslint-disable-line react-hooks/exhaustive-deps
   );
-  const best = all.filter(({ r }) => r.offered && !r.tier.comingSoon).sort((a, b) => b.r.net - a.r.net)[0];
+  // With one tier on screen there is nothing to compare: no "best", just what it keeps you.
+  const single = all.length === 1;
+  const best = single ? undefined : all.filter(({ r }) => r.offered && !r.tier.comingSoon).sort((a, b) => b.r.net - a.r.net)[0];
   const shown = multi && order === 'keep' ? [...all].sort((a, b) => b.r.net - a.r.net) : all;
   const isBest = (x: TierRow) => best != null && x.card.slug === best.card.slug && x.r.index === best.r.index;
+  // One tier picked: a tier of the same card that keeps you more at this spend, if any.
+  const better = useMemo(() => {
+    if (!single || picks[0]?.tier == null) return null;
+    const { card } = picks[0];
+    const alt = card.tiers
+      .map((t, i) => tierValue(card, t, input, i, country || null))
+      .filter((r) => r.offered && !r.tier.comingSoon && r.index !== picks[0].tier)
+      .sort((a, b) => b.net - a.net)[0];
+    return alt && alt.net > all[0].r.net + 0.5 ? alt : null;
+  }, [single, picks, input, country, all]);
   // "KAST Premium" when one tier of a card is picked, "KAST Card" when all of them are.
   const names = picks.map((p) => (p.tier == null ? p.card.name : `${p.card.brand} ${p.card.tiers[p.tier].name}`));
   const title = multi ? `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}` : names[0];
@@ -682,7 +706,21 @@ function TiersView({ picks, input, country, prices }: { picks: TierPickRow[]; in
       <div className="pager">
         <p className="muted" style={{ margin: 0 }}>
           {oneTierEach ? title : multi ? `Tiers of ${title}` : `${title} tiers`} at <b style={{ color: 'var(--text)' }}>{money(input.spend)}</b> a month
-          {best ? (
+          {single ? (
+            <>
+              : you keep{' '}
+              <b style={{ color: keepColor(all[0].r.net) }}>{cash(all[0].r.net)}</b> a year
+              {better && onPickTier ? (
+                <>
+                  . {all[0].card.brand} <b style={{ color: 'var(--text)' }}>{better.tier.name}</b> keeps you{' '}
+                  <b style={{ color: keepColor(better.net) }}>{cash(better.net)}</b>.{' '}
+                  <button type="button" className="link-btn" onClick={() => onPickTier(0, null)}>
+                    See all {all[0].card.brand} tiers
+                  </button>
+                </>
+              ) : null}
+            </>
+          ) : best && best.r.net >= 0 ? (
             <>
               {' '}
               · best for you:{' '}
@@ -692,13 +730,25 @@ function TiersView({ picks, input, country, prices }: { picks: TierPickRow[]; in
               </b>{' '}
               ({cash(best.r.net)} a year)
             </>
+          ) : best ? (
+            <>
+              {' '}
+              · none of these pays off at this spend;{' '}
+              <b style={{ color: 'var(--text)' }}>
+                {multi ? `${best.card.brand} ` : ''}
+                {best.r.tier.name}
+              </b>{' '}
+              loses the least ({cash(best.r.net)} a year)
+            </>
           ) : null}
         </p>
         <ShareBar
           text={
             multi
               ? `${names.join(' vs ')}: which pays off at ${money(input.spend)}/month · G2M calculator`
-              : `Which ${title} tier pays off at ${money(input.spend)}/month · G2M calculator`
+              : single
+                ? `${title}: what it really keeps you at ${money(input.spend)}/month · G2M calculator`
+                : `Which ${title} tier pays off at ${money(input.spend)}/month · G2M calculator`
           }
         />
       </div>

@@ -490,6 +490,24 @@ Not modelled yet: per-purchase reward caps (Kolo $1 per purchase), "first 5 smal
   CoinGecko ids) when CoinGecko does not answer, and logs failures. Optional `COINGECKO_API_KEY` (CoinGecko demo plan,
   10,000 calls a month) as a Worker secret: Workers & Pages → g2m → Settings → Variables and Secrets.
 
+## Our picks on the home page (28 Oct 2026)
+
+- Akash wanted a three-card "Our picks" section (between the region panels and "How cards are judged") whose spots
+  can be sold. The sheet has a new Picks tab (tab id 1960518401 in `data/sheet.json`): Slot (1-3), Card ID, Type (Our
+  pick / Sponsored, dropdowns), Why (one line), Start, End. The sync writes `data/picks.json` (`PicksSchema`); the
+  first booking per slot whose dates include today shows (`lib/picks.ts`). Sponsored needs both dates, is labelled
+  Sponsored, uses `campaign=sponsored` on its Get-the-card link and never changes a score or rank. Empty slots fill
+  themselves: 1 top ranked, 2 best with no annual fee, 3 best self-custodial (no card twice). The methodology's "How
+  G2M makes money" explains it. The separate hero Featured spot (Sponsor tab) is unchanged.
+- Same day, Akash: call paid spots "Featured", not "Sponsored" (sheet Type "Featured"; "Sponsored" still accepted;
+  internally `type: 'sponsored'`, link `campaign=sponsored`). Both the hero spot and paid picks keep a visible
+  "Sponsored" note under the Featured badge, because paid listings must be disclosed (FTC / ASA / ASCI). New cards: no date to type
+  (Akash); the sync sets `addedOn` the day a Card ID first reaches the site and carries it over. A card added in the
+  last 30 days takes an unbooked slot as "New on G2M" ("Just added to G2M.", newest first) before the automatic picks.
+- Calculator fix: with a single tier on screen the summary no longer says "best for you" (it read "best for you:
+  Pinnacle (-$279)"): it says what you keep and names a better tier of the same card with a "See all tiers" link.
+  When every shown tier loses money it says none pays off and which loses the least.
+
 ## Scoring rules v2 (22 Oct 2026, Akash's exact rules)
 
 `lib/score.ts`, explained on /methodology. Changed from version 1:
