@@ -1227,16 +1227,16 @@
     "custody": "custodial",
     "summary": "A stablecoin card from the DogPay app, with a personal USD bank account. Free to start, but DogPay does not publish its purchase or FX fees on its website.",
     "cashback": { "basePct": null, "maxPct": null, "payout": null, "note": "No cashback published." },
-    "fees": { "annualUsd": 0, "fxPct": null, "fxNote": "Not published: DogPay says to check card fees in the app.", "topUpPct": 1, "cardFeeUsd": 10, "atm": "Physical card at supported ATMs; fee not published", "other": ["Purchase fees are shown in the app, not on the website", "Card top-up 1% (0.8%, 0.5% or 0.3% on paid plans)", "Bank deposit or withdrawal $35", "Swap fee 1% (lower on paid plans)"] },
+    "fees": { "annualUsd": 0, "fxPct": null, "fxNote": "Not published: DogPay says to check card fees in the app.", "topUpPct": 1, "cardFeeUsd": 10, "atm": "Physical card at supported ATMs; fee not published", "other": ["Purchase fees are shown in the app, not on the website", "Virtual card $10 each; paid plans include 1 to 3 free", "Card top-up 1% (0.8%, 0.5% or 0.3% on paid plans)", "Bank account opening $100 (Basic), $80 (Premium), $50 (Platinum), free (Ultra)", "Bank deposit $35, withdrawal $15 (the website lists $35 for withdrawals)", "Swap fee 1% (lower on paid plans)"] },
     "tiers": [
-      { "name": "Basic", "feeUsdYear": 0, "cashbackPct": null, "perks": ["Card top-up fee 1%", "$10 per virtual card", "Up to 2 cards"] },
-      { "name": "Premium", "feeUsdYear": 58.8, "feeNote": "$4.90 a month", "cashbackPct": null, "perks": ["Card top-up fee 0.8%", "First virtual card free", "Up to 5 cards"] },
-      { "name": "Platinum", "feeUsdYear": 118.8, "feeNote": "$9.90 a month", "cashbackPct": null, "perks": ["Card top-up fee 0.5%", "Two virtual cards free", "Up to 10 cards"] },
-      { "name": "Ultra", "feeUsdYear": 358.8, "feeNote": "$29.90 a month", "cashbackPct": null, "perks": ["Card top-up fee 0.3%", "Three virtual cards free", "Up to 20 cards", "Custom card design"] }
+      { "name": "Basic", "feeUsdYear": 0, "cashbackPct": null, "perks": ["Card top-up fee 1%", "$10 per virtual card", "Up to 2 cards", "Bank account opening $100"] },
+      { "name": "Premium", "feeUsdYear": 58.8, "feeNote": "$4.90 a month", "cashbackPct": null, "perks": ["Card top-up fee 0.8%", "First virtual card free, then $10", "Up to 5 cards", "Bank account opening $80", "Priority access and event perks"] },
+      { "name": "Platinum", "feeUsdYear": 118.8, "feeNote": "$9.90 a month", "cashbackPct": null, "perks": ["Card top-up fee 0.5%", "Two virtual cards free, then $10", "Up to 10 cards", "Bank account opening $50", "Holiday card designs", "VIP concierge"] },
+      { "name": "Ultra", "feeUsdYear": 358.8, "feeNote": "$29.90 a month", "cashbackPct": null, "perks": ["Card top-up fee 0.3%", "Three virtual cards free, then $10", "Up to 20 cards", "Free bank account opening", "Custom card design", "24/7 premium support"] }
     ],
     "coverage": { "countries": null, "scope": "Depends on your region and identity checks; no country list published", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 1, "ramps": "off", "credit": null, "yield": true },
-    "bankRails": [ { "rail": "USD_ACH", "in": true, "out": true, "fee": "$35" }, { "rail": "USD_FEDWIRE", "in": true, "out": true, "fee": "$35" }, { "rail": "SWIFT", "in": true, "out": true, "fee": "$35" } ],
+    "bankRails": [ { "rail": "USD_ACH", "in": true, "out": true, "fee": "in $35, out $15" }, { "rail": "USD_FEDWIRE", "in": true, "out": true, "fee": "in $35, out $15" }, { "rail": "SWIFT", "in": true, "out": true, "fee": "in $35, out $15" } ],
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDT"],
     "perks": ["Personal USD account (ACH, Fedwire, SWIFT)", "6% a year on stablecoins (Earn)"],
@@ -1247,7 +1247,8 @@
       { "label": "DogPay personal pricing", "url": "https://dogpay.com/us/pricing/personal", "verified": "2026-10-28" },
       { "label": "DogPay Cards", "url": "https://dogpay.com/us/cards", "verified": "2026-10-28" },
       { "label": "DogPay iBank personal USD account", "url": "https://dogpay.com/us/digital-bank", "verified": "2026-10-28" },
-      { "label": "DogPay card program terms", "url": "https://dogpay.com/us/card-program-terms", "verified": "2026-10-28" }
+      { "label": "DogPay card program terms", "url": "https://dogpay.com/us/card-program-terms", "verified": "2026-10-28" },
+      { "label": "DogPay app: Member Center plan benefits and Supported Apps (screens from Akash)", "url": "https://dogpay.com/us/pricing/personal", "verified": "2026-10-28" }
     ],
     "lastChecked": "2026-10-28",
     "addedOn": "2026-10-28",
