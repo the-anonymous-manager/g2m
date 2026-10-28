@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { getCards, lastUpdated } from '@/lib/cards';
 import { absoluteUrl } from '@/lib/site';
 import { allPairs, versusPath } from '@/lib/versus';
+import { FEES_GUIDE, TOPICS, countryGuidePath, countryGuides } from '@/lib/guides';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const updated = new Date(`${lastUpdated()}T00:00:00Z`);
@@ -24,5 +25,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'weekly' as const,
     priority: 0.5
   }));
-  return [...pages, ...cards, ...pairs];
+  // Guides: the hub, the topic guides and one per country with a guide.
+  const guides = ['/guides', `/guides/${FEES_GUIDE.slug}`, ...TOPICS.map((t) => `/guides/${t.slug}`), ...countryGuides().map((g) => countryGuidePath(g.cc))].map(
+    (p) => ({ url: absoluteUrl(p), lastModified: updated, changeFrequency: 'weekly' as const, priority: 0.7 })
+  );
+  return [...pages, ...cards, ...guides, ...pairs];
 }

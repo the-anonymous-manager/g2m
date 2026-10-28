@@ -10,6 +10,7 @@ export const NAV = [
   { href: '/calculator', label: 'Rewards calculator' },
   { href: '/wallet', label: 'Wallet builder' },
   { href: '/compare', label: 'Compare' },
+  { href: '/guides', label: 'Guides' },
   { href: '/methodology', label: 'Methodology' }
 ] as const;
 

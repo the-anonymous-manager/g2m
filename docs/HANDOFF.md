@@ -523,8 +523,24 @@ Not modelled yet: per-purchase reward caps (Kolo $1 per purchase), "first 5 smal
 - Links in: card pages ("Compare <card> with": nearest-ranked cards plus the top 3), /compare ("Popular comparisons":
   every pair of the top 7, and a "Full A vs B page" button when two cards are picked).
 - Same day: the home page "Browse by" chips were removed (Akash: not needed).
-- Next SEO steps: guides (best card by country, no-FX-fee cards, self-custodial explained), then Google Search Console
-  (add g2m.life and submit /sitemap.xml).
+- Next SEO steps: guides (done, see step 2), then Google Search Console (add g2m.life and submit /sitemap.xml).
+
+## SEO step 2: guides (28 Oct 2026)
+
+- `/guides` hub (in the menu and footer) with three kinds of guide, all built from the card data (`lib/guides.ts`):
+  - Country guides at `/guides/best-crypto-cards/<country>` (e.g. `united-arab-emirates`): every country where at
+    least 5 cards are confirmed (`MIN_CONFIRMED`; 181 countries today). Cards confirmed there, ranked with the G2M
+    score for that country, the FX fee on spending in its own currency (`homeFx`), an "At a glance" list (no FX fee,
+    no annual fee, self-custodial, how many have not confirmed the country) and four questions.
+  - Topic guides at `/guides/<slug>`: no FX fee, no annual fee, self-custodial (with custodial vs self-custodial
+    explained), with a bank account (IBAN), metal, lounge access. Each has a short explanation (no card facts), the
+    ranked list, "What to check before you pick" and questions.
+  - "Crypto card fees explained": each fee with live counts and ranges from the data, plus a table of every card's
+    fees on the $1,000 test basket in its own currency and in another currency.
+- Each page has a search title and description, FAQPage, ItemList and breadcrumb structured data, and is in the
+  sitemap (189 guide pages).
+- India has no country guide: no card on G2M has confirmed India yet (19 say no, 7 have not said). It appears on its
+  own once 5 cards confirm it. Same for any other country.
 
 ## Scoring rules v2 (22 Oct 2026, Akash's exact rules)
 
@@ -636,6 +652,6 @@ and calculator with FX at home, phone-friendly tiers and Compare tables, live US
 (tier break-even).
 
 - Add the radar cards above (PEXX, Fizen, Infini, Cashi, WasabiCard, Kite), then grow towards 50+ cards.
-- Short guides for SEO (custodial vs self-custodial, how card fees work). "X vs Y" pages are done (see above).
+- SEO: "X vs Y" pages and guides are done (see above). Next: Google Search Console, and more explainers if wanted.
 - A changelog of fee and cashback changes per card, which also feeds his X posts.
 - Email sign-up for card updates.

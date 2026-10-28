@@ -2312,3 +2312,60 @@ body::before {
   margin-bottom: 6px;
   break-inside: avoid;
 }
+
+/* Guides */
+.guide-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.guide-item {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 18px;
+}
+.guide-num {
+  font-size: 13px;
+  color: var(--faint);
+  min-width: 18px;
+  padding-top: 4px;
+}
+.guide-art {
+  flex: 0 0 auto;
+}
+.guide-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.guide-facts {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.guide-links {
+  margin: 0;
+  padding-left: 18px;
+  columns: 3 220px;
+  column-gap: 32px;
+}
+.guide-links li {
+  margin-bottom: 6px;
+  break-inside: avoid;
+}
+@media (max-width: 640px) {
+  .guide-item {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .guide-art {
+    order: -1;
+  }
+  .guide-body {
+    flex-basis: 100%;
+  }
+  .guide-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
