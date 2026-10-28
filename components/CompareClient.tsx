@@ -50,16 +50,16 @@ const tierRows = (prices: Record<string, number>): TierRow[] => [
   }
 ];
 
-function bestTier(slots: Slot[], row: TierRow): Set<string> {
-  const picked = slots.filter((s): s is Slot & { tier: number } => s.tier != null);
-  if (!row.value || !row.better || picked.length < 2) return new Set();
-  const vals = picked
-    .map((s) => ({ slug: s.card.slug, v: row.value!(s.card, s.card.tiers[s.tier]) }))
-    .filter((x): x is { slug: string; v: number } => x.v != null);
+/** The slots (by position) with the best value in a tier row. */
+function bestTier(slots: Slot[], row: TierRow): Set<number> {
+  if (!row.value || !row.better) return new Set();
+  const vals = slots
+    .map((s, i) => ({ i, v: s.tier == null ? null : row.value!(s.card, s.card.tiers[s.tier]) }))
+    .filter((x): x is { i: number; v: number } => x.v != null);
   if (vals.length < 2) return new Set();
   const target = row.better === 'high' ? Math.max(...vals.map((x) => x.v)) : Math.min(...vals.map((x) => x.v));
   if (vals.every((x) => x.v === target)) return new Set();
-  return new Set(vals.filter((x) => x.v === target).map((x) => x.slug));
+  return new Set(vals.filter((x) => x.v === target).map((x) => x.i));
 }
 
 const entryOf = (s: Slot) => pickText({ slug: s.card.slug, tier: s.tier == null ? null : tierSlug(s.card.tiers[s.tier].name) });
@@ -71,9 +71,11 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
       .map(parsePick)
       .map((p) => {
         const card = rows.find((r) => r.slug === p.slug);
-        if (!card || seen.has(card.slug)) return null;
-        seen.add(card.slug);
-        return { card, tier: tierIndex(card, p.tier) };
+        if (!card) return null;
+        const slot = { card, tier: tierIndex(card, p.tier) };
+        if (seen.has(entryOf(slot))) return null;
+        seen.add(entryOf(slot));
+        return slot;
       })
       .filter((s): s is Slot => Boolean(s))
       .slice(0, SLOTS);
@@ -100,14 +102,23 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
       const next = [...prev];
       const card = rows.find((r) => r.slug === slug);
       if (!card) next.splice(i, 1);
-      // A new card follows the tier choice of the others ("Next tier up" stays next tier up).
-      else next[i] = { card, tier: preset ? presetIndex(card, preset) : null };
+      else {
+        // The same card again: its first tier not on screen yet, so you can line up its tiers.
+        const taken = new Set(next.filter((x, j) => j !== i && x.card.slug === card.slug).map((x) => x.tier));
+        const free = card.tiers.findIndex((_, k) => !taken.has(k));
+        // A new card follows the tier choice of the others ("Next tier up" stays next tier up).
+        next[i] = { card, tier: taken.size ? (free >= 0 ? free : null) : preset ? presetIndex(card, preset) : null };
+      }
       const seen = new Set<string>();
-      return next.filter((s) => !seen.has(s.card.slug) && Boolean(seen.add(s.card.slug)));
+      return next.filter((s) => !seen.has(entryOf(s)) && Boolean(seen.add(entryOf(s))));
     });
   };
   const setTier = (i: number, tier: number | null) => setSlotsState((prev) => prev.map((s, j) => (j === i ? { ...s, tier } : s)));
   const applyPreset = (p: TierPreset) => setSlotsState((prev) => prev.map((s) => ({ ...s, tier: presetIndex(s.card, p) })));
+  // One card's tiers side by side: up to three of them, entry tier first.
+  const lineUpTiers = (card: CardRow) => setSlotsState(card.tiers.slice(0, SLOTS).map((_, k) => ({ card, tier: k })));
+  const sameCard = slots.length > 1 && slots.every((s) => s.card.slug === slots[0].card.slug);
+  const tiersOf = slots.length === 1 && slots[0].card.tiers.length > 1 ? slots[0].card : null;
 
   const pickers = Array.from({ length: Math.min(SLOTS, chosen.length + 1) }, (_, i) => i);
   const columns = `minmax(130px, 170px) repeat(${Math.max(chosen.length, 1)}, minmax(210px, 1fr))`;
@@ -127,7 +138,7 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
                 <select id={`slot-${i}`} className="select" value={s?.card.slug ?? ''} onChange={(e) => setSlot(i, e.target.value)}>
                   <option value="">{s ? 'Remove this card' : 'Add a card'}</option>
                   {rows.map((r) => (
-                    <option key={r.slug} value={r.slug} disabled={chosen.some((c) => c.slug === r.slug) && s?.card.slug !== r.slug}>
+                    <option key={r.slug} value={r.slug}>
                       {r.name}
                     </option>
                   ))}
@@ -157,14 +168,31 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
             );
           })}
         </div>
-        <TierPresets cards={chosen} value={preset} onPick={applyPreset} allLabel="Card overview" />
+        {tiersOf ? (
+          <div className="stack" style={{ gap: 8 }}>
+            <span className="field-label">Tiers side by side</span>
+            <div>
+              <button type="button" className="btn btn-sm" onClick={() => lineUpTiers(tiersOf)}>
+                Compare {tiersOf.tiers.length > SLOTS ? `${SLOTS} of its ${tiersOf.tiers.length}` : `its ${tiersOf.tiers.length}`} tiers side
+                by side: {tiersOf.tiers.slice(0, SLOTS).map((t) => t.name).join(' · ')}
+              </button>
+            </div>
+          </div>
+        ) : null}
+        {sameCard ? (
+          <p className="faint" style={{ fontSize: 13, margin: 0 }}>
+            {slots[0].card.name}, tier by tier. Change a tier above, or pick another card in any slot.
+          </p>
+        ) : (
+          <TierPresets cards={chosen} value={preset} onPick={applyPreset} allLabel="Card overview" />
+        )}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
           {chosen.length >= 1 ? (
             <Link href={`/calculator?mode=tiers&cards=${slots.map(entryOf).join(',')}`} className="btn btn-sm">
               What {chosen.length > 1 ? 'these keep' : 'this keeps'} you a year →
             </Link>
           ) : null}
-          {chosen.length === 2 ? (
+          {chosen.length === 2 && chosen[0].slug !== chosen[1].slug ? (
             <Link href={versusPath(chosen[0].slug, chosen[1].slug)} className="btn btn-sm">
               Full {chosen[0].brand} vs {chosen[1].brand} page
             </Link>
@@ -187,8 +215,8 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
               <div role="columnheader" className="cmp-label">
                 <span className="sr-only">Detail</span>
               </div>
-              {slots.map(({ card: c, tier }) => (
-                <div role="columnheader" key={c.slug} className="cmp-cell stack" style={{ gap: 12 }}>
+              {slots.map(({ card: c, tier }, i) => (
+                <div role="columnheader" key={i} className="cmp-cell stack" style={{ gap: 12 }}>
                   <CardArt card={c} width={150} />
                   <Link href={`/cards/${c.slug}`} style={{ fontWeight: 700, fontSize: 17, textDecoration: 'none' }}>
                     {c.name}
@@ -211,8 +239,8 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
                   <div role="rowheader" className="cmp-label">
                     The tier picked
                   </div>
-                  {slots.map(({ card: c, tier }) => (
-                    <div role="cell" key={c.slug} className="cmp-cell">
+                  {slots.map(({ card: c, tier }, i) => (
+                    <div role="cell" key={i} className="cmp-cell">
                       {tier != null ? <b>{c.tiers[tier].name}</b> : <span className="faint">Pick a tier above</span>}
                     </div>
                   ))}
@@ -224,36 +252,38 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
                       <div role="rowheader" className="cmp-label">
                         {row.label}
                       </div>
-                      {slots.map(({ card: c, tier }) => (
-                        <div role="cell" key={c.slug} className={`cmp-cell ${winners.has(c.slug) ? 'cmp-best' : ''}`}>
+                      {slots.map(({ card: c, tier }, i) => (
+                        <div role="cell" key={i} className={`cmp-cell ${winners.has(i) ? 'cmp-best' : ''}`}>
                           {tier != null ? row.render(c, c.tiers[tier]) : <span className="faint">—</span>}
-                          {winners.has(c.slug) ? <span className="sr-only"> (best)</span> : null}
+                          {winners.has(i) ? <span className="sr-only"> (best)</span> : null}
                         </div>
                       ))}
                     </div>
                   );
                 })}
+                {sameCard ? null : (
                 <div role="row" className="cmp-row cmp-section" style={{ gridTemplateColumns: columns }}>
                   <div role="rowheader" className="cmp-label">
                     The card
                   </div>
-                  {slots.map(({ card: c }) => (
-                    <div role="cell" key={c.slug} className="cmp-cell faint">
+                  {slots.map((_, i) => (
+                    <div role="cell" key={i} className="cmp-cell faint">
                       Every tier
                     </div>
                   ))}
                 </div>
+                )}
               </>
             ) : null}
-            {ROWS.map((row) => {
+            {sameCard ? null : ROWS.map((row) => {
               const winners = best(chosen, row);
               return (
                 <div role="row" key={row.label} className="cmp-row" style={{ gridTemplateColumns: columns }}>
                   <div role="rowheader" className="cmp-label">
                     {row.label}
                   </div>
-                  {chosen.map((c) => (
-                    <div role="cell" key={c.slug} className={`cmp-cell ${winners.has(c.slug) ? 'cmp-best' : ''}`}>
+                  {chosen.map((c, i) => (
+                    <div role="cell" key={i} className={`cmp-cell ${winners.has(c.slug) ? 'cmp-best' : ''}`}>
                       {row.render(c)}
                       {winners.has(c.slug) ? <span className="sr-only"> (best)</span> : null}
                     </div>
@@ -265,8 +295,8 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
               <div role="rowheader" className="cmp-label">
                 <span className="sr-only">Apply</span>
               </div>
-              {chosen.map((c) => (
-                <div role="cell" key={c.slug} className="cmp-cell">
+              {chosen.map((c, i) => (
+                <div role="cell" key={i} className="cmp-cell">
                   <OutboundLink slug={c.slug} name={c.brand} placement="compare" className="btn btn-metal btn-sm">
                     Get {c.brand}
                   </OutboundLink>

@@ -546,6 +546,39 @@ Not modelled yet: per-purchase reward caps (Kolo $1 per purchase), "first 5 smal
 - India has no country guide: no card on G2M has confirmed India yet (19 say no, 7 have not said). It appears on its
   own once 5 cards confirm it. Same for any other country.
 
+## Receipt picture, receipt tier, tiers of one card side by side (28 Oct 2026)
+
+- Receipt "Download image" now gives a tall 1080 x 1350 picture (`/receipt/image?...&size=tall`): X cropped the wide
+  1200 x 630 one to near-squares in posts with two pictures. Link previews stay wide. The footer sits 84px up so X's
+  trim in two-picture posts does not clip it.
+- The receipt's tier picker is always shown, with each tier's price, and greyed out with "has one tier" when a card
+  has only one (Solayer has a single "Membership" tier in our data, so Akash saw no picker).
+- /compare and the calculator's Compare tiers take the same card more than once with different tiers
+  (`c=ethena-pay:standard,ethena-pay:pro,ethena-pay:vip`); picking a card that is already in a slot starts on its next
+  tier. /compare with one multi-tier card shows "Compare its N tiers side by side"; with one card in every slot the
+  card-level rows and tier presets are hidden (they would repeat).
+
+## Cards added: Pionex and DogPay (28 Oct 2026)
+
+Added through the Google Sheet (Cards, Tiers, Country lists, Sources rows), from issuer pages only:
+- **Pionex Visa Card** (`pionex`): free, 1% fee on every purchase (USD too, so FX 0 and txPct 1), 1% cashback,
+  5% APY on the card balance, small-purchase 0.2 USDT at $5 or less (first one a month free), virtual only (physical
+  closed). Source: help.pionex.com fee and cashback articles.
+- **Pionex DogPay Card** (`pionex-dogpay`): Pionex's current Mastercard, issued as the DogPay Card. 3.5% on every
+  purchase, 0.1% cashback (Regular tier); an invite-only Gold tier (one-time 100 USDT) pays 5% on the first $4,000 a
+  month, then 1%. Pionex's pages disagree on the regular cashback (0.1% vs "0.1% to 1%") and the small-purchase limit
+  ($1 vs $5); noted on the card. Separate card from the Visa because the purchase fee is card-level.
+- Which of the two you get depends on your KYC country, and Pionex does not publish that split. Both share Pionex's
+  unsupported list (US, UK, Canada, France, Netherlands, Japan, Singapore, Hong Kong, China and sanctioned
+  countries); every other country is "not confirmed".
+- **DogPay Card** (`dogpay`, DogPay's own app): personal plans Basic free / Premium $4.90 / Platinum $9.90 / Ultra
+  $29.90 a month, card top-up 1% / 0.8% / 0.5% / 0.3% (tier top-up rates are in the tier perks; the card-level
+  top-up is Basic's 1%), $10 virtual card on Basic. DogPay's site does not publish a purchase or FX fee ("check in the
+  app"), so FX is "Not published" and the third-party figures (1.5% + $0.30, 3.5%) were not used. No country list
+  published. Personal USD account (ACH, Fedwire, SWIFT, $35 in or out).
+- Fetching issuer pages: WebFetch could not resolve some hosts in this cloud session, but plain `curl` through the
+  proxy works (help.pionex.com, intercom.help, dogpay.com). Do not spoof a browser user agent.
+
 ## Scoring rules v2 (22 Oct 2026, Akash's exact rules)
 
 `lib/score.ts`, explained on /methodology. Changed from version 1:

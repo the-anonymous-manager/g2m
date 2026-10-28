@@ -37,14 +37,15 @@ export const CalcInputSchema = z.object({
   all: flag,
   card: z.string().regex(/^[a-z0-9-]{1,60}$/).nullable().catch(null),
   // Compare tiers: up to three cards side by side (`cards=coca,tria,etherfi`), each with every tier or one tier picked by
-  // its real name (`cards=kast:premium,tria:pro,etherfi:luxe`). `card` alone still works. One entry per card.
+  // its real name (`cards=kast:premium,tria:pro,etherfi:luxe`). `card` alone still works. The same card can come back
+  // with another tier (`cards=kast:standard,kast:premium`); an exact repeat is dropped.
   cards: z
     .union([z.string(), z.array(z.string())])
     .transform((v) => {
       const seen = new Set<string>();
       return (Array.isArray(v) ? v : v.split(','))
         .map((s) => s.trim().toLowerCase())
-        .filter((s) => PICK.test(s) && !seen.has(s.split(':')[0]) && Boolean(seen.add(s.split(':')[0])))
+        .filter((s) => PICK.test(s) && !seen.has(s) && Boolean(seen.add(s)))
         .slice(0, MAX_TIER_CARDS);
     })
     .catch([]),

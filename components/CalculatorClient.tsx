@@ -159,13 +159,15 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry, pr
   // Compare tiers: up to three cards, each with every tier or one tier. Without `cards=`, the one card above (old
   // `card=` links keep working).
   const tierPicks = useMemo<TierPickRow[]>(() => {
+    // The same card can be picked more than once, with a different tier each time.
+    const seen = new Set<string>();
     const list = input.cards
       .map(parsePick)
       .map((p) => {
         const card = eligible.find((r) => r.slug === p.slug);
         return card ? { card, tier: tierIndex(card, p.tier) } : null;
       })
-      .filter((x): x is TierPickRow => Boolean(x));
+      .filter((x): x is TierPickRow => Boolean(x) && !seen.has(entryOf(x!)) && Boolean(seen.add(entryOf(x!))));
     return list.length ? list : picked ? [{ card: picked, tier: null }] : [];
   }, [input.cards, eligible, picked]);
   const tierCards = tierPicks.map((p) => p.card);
@@ -214,7 +216,12 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry, pr
   const tierFor = (card: CardRow) => (preset ? presetIndex(card, preset, country || null) : null);
   const setTierCard = (i: number, slug: string) => {
     const card = eligible.find((r) => r.slug === slug);
-    if (card) setPicks(tierPicks.map((p, j) => (j === i ? { card, tier: tierFor(card) } : p)));
+    if (!card) return;
+    // The same card again: its first tier not picked yet, so its tiers line up side by side.
+    const taken = new Set(tierPicks.filter((p, j) => j !== i && p.card.slug === slug).map((p) => p.tier));
+    const free = card.tiers.findIndex((_, k) => !taken.has(k));
+    const tier = taken.size ? (free >= 0 ? free : null) : tierFor(card);
+    setPicks(tierPicks.map((p, j) => (j === i ? { card, tier } : p)));
   };
   const setPickTier = (i: number, tier: number | null) => setPicks(tierPicks.map((p, j) => (j === i ? { ...p, tier } : p)));
   const removeTierCard = (i: number) => setPicks(tierPicks.filter((_, j) => j !== i));
@@ -458,7 +465,7 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry, pr
                 <div className="calc-card-pick">
                   <select id={`c-card-${i}`} className="select" value={c.slug} onChange={(e) => setTierCard(i, e.target.value)}>
                     {eligible.map((r) => (
-                      <option key={r.slug} value={r.slug} disabled={r.slug !== c.slug && tierSlugs.includes(r.slug)}>
+                      <option key={r.slug} value={r.slug}>
                         {r.name}
                       </option>
                     ))}
@@ -676,7 +683,15 @@ function TiersView({
   // Each card's picked tier, or all its tiers.
   const indexes = (p: TierPickRow) => (p.tier == null ? p.card.tiers.map((_, i) => i) : [p.tier]);
   const all = useMemo<TierRow[]>(
-    () => picks.flatMap((p) => indexes(p).map((i) => ({ card: p.card, r: tierValue(p.card, p.card.tiers[i], input, i, country || null) }))),
+    () => {
+      // A tier shown once, even when the same card is picked twice (all its tiers, and one of them).
+      const seen = new Set<string>();
+      return picks.flatMap((p) =>
+        indexes(p)
+          .filter((i) => !seen.has(`${p.card.slug}-${i}`) && Boolean(seen.add(`${p.card.slug}-${i}`)))
+          .map((i) => ({ card: p.card, r: tierValue(p.card, p.card.tiers[i], input, i, country || null) }))
+      );
+    },
     [picks, input, country] // eslint-disable-line react-hooks/exhaustive-deps
   );
   // With one tier on screen there is nothing to compare: no "best", just what it keeps you.
