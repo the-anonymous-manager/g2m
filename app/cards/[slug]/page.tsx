@@ -7,7 +7,7 @@ import { toRow } from '@/lib/types';
 import { usdPrices } from '@/lib/prices';
 import { MARKET_LABELS, availabilityIn, countryName } from '@/lib/regions';
 import { COUNTRY_CODES } from '@/lib/countries.mjs';
-import { CUSTODY_LABEL, NP, TYPE_LABEL, cashbackLabel, ecosystemFeatures, fmtDate, pct, perPurchaseFee, usd } from '@/lib/format';
+import { CUSTODY_LABEL, NP, TYPE_LABEL, cashbackLabel, ecosystemFeatures, fmtDate, pct, perPurchaseFee, tierCashback, usd } from '@/lib/format';
 import { SCORE_WEIGHTS } from '@/lib/score';
 import { absoluteUrl, site } from '@/lib/site';
 import { CardArt } from '@/components/CardArt';
@@ -49,19 +49,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const MARKETS: Market[] = ['IN', 'AE', 'US', 'GB', 'EU'];
-
-function tierCashback(t: Tier): string {
-  if (t.bands && t.bands.length) {
-    return t.bands
-      .map((b, i) => {
-        const from = i === 0 ? 0 : t.bands![i - 1].uptoUsd ?? 0;
-        if (b.uptoUsd == null) return `${pct(b.pct)} above $${from.toLocaleString('en-US')}`;
-        return `${pct(b.pct)} up to $${b.uptoUsd.toLocaleString('en-US')}/mo`;
-      })
-      .join(', ');
-  }
-  return pct(t.cashbackPct);
-}
 
 function jsonLd(card: Card) {
   const url = absoluteUrl(`/cards/${card.slug}`);

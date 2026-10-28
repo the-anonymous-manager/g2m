@@ -475,6 +475,21 @@ Not modelled yet: per-purchase reward caps (Kolo $1 per purchase), "first 5 smal
   own country. Region rules match the homepage counts: the EU uses the card's EU / EEA answer, Asia is "yes" when the
   card is confirmed in at least one Asian country (`availabilityInRegion` in `lib/regions.ts`).
 
+### Follow-up: one tier per card, live prices on Cloudflare (28 Oct 2026)
+
+- Akash wanted to compare one tier of each card, e.g. the tier above the free one on KAST, Tria and ether.fi. Both
+  "Compare tiers" (`/calculator?mode=tiers`) and `/compare` now have a tier dropdown per card (real tier names) and
+  presets: All tiers (Compare: "Card overview") / Entry / Next tier up / Top tier, each listing the tiers it picks
+  ("Next tier up · Premium · Pro · Luxe"; tiers not offered where the visitor lives are skipped). Links use the tier's
+  name: `cards=kast:premium,tria:pro,etherfi:luxe` and `/compare?c=kast:premium,...` (`lib/tierpick.ts`); plain slugs
+  still work. The calculator adds "Which one pays off at your spend" (best of the shown tiers at $250 to $10,000 a
+  month); `/compare` adds tier rows (price, cashback, cap, FX, how to qualify, stake value today, perks, countries).
+  The two pages link to each other with the same picks.
+- Live stake values were empty on Cloudflare: `lib/prices.ts` relied on Next's fetch cache, which has no storage on
+  Workers. It now caches itself (memory, plus Cloudflare's edge cache), uses DefiLlama (`coins.llama.fi`, same
+  CoinGecko ids) when CoinGecko does not answer, and logs failures. Optional `COINGECKO_API_KEY` (CoinGecko demo plan,
+  10,000 calls a month) as a Worker secret: Workers & Pages → g2m → Settings → Variables and Secrets.
+
 ## Scoring rules v2 (22 Oct 2026, Akash's exact rules)
 
 `lib/score.ts`, explained on /methodology. Changed from version 1:

@@ -2,9 +2,12 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import type { CardRow, Market } from '@/lib/types';
-import { MARKET_LABELS } from '@/lib/regions';
-import { CUSTODY_LABEL, NP, TYPE_LABEL, cashbackLabel, ecosystemFeatures, pct, perPurchaseFee, usd } from '@/lib/format';
+import type { CardRow, Market, Tier } from '@/lib/types';
+import { MARKET_LABELS, countryName } from '@/lib/regions';
+import { CUSTODY_LABEL, NP, TYPE_LABEL, approxUsd, cashbackLabel, ecosystemFeatures, pct, perPurchaseFee, tierCashback, usd } from '@/lib/format';
+import { stakeUsd } from '@/lib/calc';
+import { currentPreset, parsePick, pickText, presetIndex, tierIndex, tierPrice, tierSlug, type TierPreset } from '@/lib/tierpick';
+import { TierPresets } from '@/components/TierPresets';
 import { CardArt } from '@/components/CardArt';
 import { MarketBadge, ScorePill } from '@/components/bits';
 import { OutboundLink } from '@/components/OutboundLink';
@@ -68,10 +71,68 @@ function best(cards: CardRow[], row: Row): Set<string> {
   return new Set(vals.filter((x) => x.v === target).map((x) => x.slug));
 }
 
-export function CompareClient({ rows, initial }: { rows: CardRow[]; initial: string[] }) {
-  const [slots, setSlots] = useState<string[]>(() => {
-    const valid = initial.filter((s) => rows.some((r) => r.slug === s)).slice(0, SLOTS);
-    return valid.length ? valid : rows.slice(0, 2).map((r) => r.slug);
+type Slot = { card: CardRow; tier: number | null };
+type TierRow = {
+  label: string;
+  render: (c: CardRow, t: Tier) => React.ReactNode;
+  value?: (c: CardRow, t: Tier) => number | null;
+  better?: 'high' | 'low';
+};
+
+const firstRate = (t: Tier) => t.cashbackPct ?? t.bands?.[0]?.pct ?? null;
+
+/** Rows about the tier picked for each card (shown once at least one card has a tier picked). */
+const tierRows = (prices: Record<string, number>): TierRow[] => [
+  { label: 'Yearly price', render: (_c, t) => tierPrice(t), value: (_c, t) => t.feeUsdYear, better: 'low' },
+  { label: 'Cashback on this tier', render: (_c, t) => tierCashback(t), value: (_c, t) => firstRate(t), better: 'high' },
+  { label: 'Monthly cashback cap', render: (_c, t) => (t.capMonthlyUsd != null ? `${usd(t.capMonthlyUsd)} a month` : 'None published') },
+  { label: 'FX fee on this tier', render: (c, t) => pct(t.fxPct ?? c.fees.fxPct), value: (c, t) => t.fxPct ?? c.fees.fxPct, better: 'low' },
+  { label: 'To qualify', render: (_c, t) => t.requirement ?? (t.stake ? '—' : 'Open to everyone') },
+  {
+    label: 'Stake value today',
+    render: (_c, t) => {
+      if (!t.stake) return 'No stake';
+      const v = stakeUsd(t, prices);
+      const amount = t.stake.amount != null ? t.stake.amount.toLocaleString('en-US') : 'Some';
+      return `${amount} ${t.stake.token}${v != null ? ` (${approxUsd(v)})` : ''}`;
+    }
+  },
+  { label: 'Tier perks', render: (_c, t) => (t.perks.length ? t.perks.join(' · ') : '—') },
+  {
+    label: 'Offered in',
+    render: (_c, t) =>
+      t.countries ? t.countries.map((cc) => (cc === 'EEA' ? 'EEA' : countryName(cc))).join(', ') : t.exceptCountries ? `Everywhere but ${t.exceptCountries.join(', ')}` : 'Wherever the card is'
+  }
+];
+
+function bestTier(slots: Slot[], row: TierRow): Set<string> {
+  const picked = slots.filter((s): s is Slot & { tier: number } => s.tier != null);
+  if (!row.value || !row.better || picked.length < 2) return new Set();
+  const vals = picked
+    .map((s) => ({ slug: s.card.slug, v: row.value!(s.card, s.card.tiers[s.tier]) }))
+    .filter((x): x is { slug: string; v: number } => x.v != null);
+  if (vals.length < 2) return new Set();
+  const target = row.better === 'high' ? Math.max(...vals.map((x) => x.v)) : Math.min(...vals.map((x) => x.v));
+  if (vals.every((x) => x.v === target)) return new Set();
+  return new Set(vals.filter((x) => x.v === target).map((x) => x.slug));
+}
+
+const entryOf = (s: Slot) => pickText({ slug: s.card.slug, tier: s.tier == null ? null : tierSlug(s.card.tiers[s.tier].name) });
+
+export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; initial: string[]; prices: Record<string, number> }) {
+  const [slots, setSlotsState] = useState<Slot[]>(() => {
+    const seen = new Set<string>();
+    const valid = initial
+      .map(parsePick)
+      .map((p) => {
+        const card = rows.find((r) => r.slug === p.slug);
+        if (!card || seen.has(card.slug)) return null;
+        seen.add(card.slug);
+        return { card, tier: tierIndex(card, p.tier) };
+      })
+      .filter((s): s is Slot => Boolean(s))
+      .slice(0, SLOTS);
+    return valid.length ? valid : rows.slice(0, 2).map((card) => ({ card, tier: null }));
   });
   const first = useRef(true);
 
@@ -80,45 +141,86 @@ export function CompareClient({ rows, initial }: { rows: CardRow[]; initial: str
       first.current = false;
       return;
     }
-    const url = `${window.location.pathname}${slots.length ? `?c=${slots.join(',')}` : ''}`;
+    const url = `${window.location.pathname}${slots.length ? `?c=${slots.map(entryOf).join(',')}` : ''}`;
     window.history.replaceState(window.history.state, '', url);
   }, [slots]);
 
-  const chosen = useMemo(() => slots.map((s) => rows.find((r) => r.slug === s)).filter((c): c is CardRow => Boolean(c)), [slots, rows]);
+  const chosen = slots.map((s) => s.card);
+  const preset = currentPreset(slots);
+  const anyTier = slots.some((s) => s.tier != null);
+  const TIER_ROWS = useMemo(() => tierRows(prices), [prices]);
 
   const setSlot = (i: number, slug: string) => {
-    setSlots((prev) => {
+    setSlotsState((prev) => {
       const next = [...prev];
-      if (!slug) next.splice(i, 1);
-      else next[i] = slug;
-      return Array.from(new Set(next.filter(Boolean)));
+      const card = rows.find((r) => r.slug === slug);
+      if (!card) next.splice(i, 1);
+      // A new card follows the tier choice of the others ("Next tier up" stays next tier up).
+      else next[i] = { card, tier: preset ? presetIndex(card, preset) : null };
+      const seen = new Set<string>();
+      return next.filter((s) => !seen.has(s.card.slug) && Boolean(seen.add(s.card.slug)));
     });
   };
+  const setTier = (i: number, tier: number | null) => setSlotsState((prev) => prev.map((s, j) => (j === i ? { ...s, tier } : s)));
+  const applyPreset = (p: TierPreset) => setSlotsState((prev) => prev.map((s) => ({ ...s, tier: presetIndex(s.card, p) })));
 
   const pickers = Array.from({ length: Math.min(SLOTS, chosen.length + 1) }, (_, i) => i);
   const columns = `minmax(130px, 170px) repeat(${Math.max(chosen.length, 1)}, minmax(210px, 1fr))`;
+  const shareName = (s: Slot) => (s.tier == null ? s.card.brand : `${s.card.brand} ${s.card.tiers[s.tier].name}`);
 
   return (
     <div className="stack" style={{ gap: 20 }}>
-      <div className="panel panel-pad" style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'flex-end' }}>
-        {pickers.map((i) => (
-          <div className="field" key={i} style={{ flex: '1 1 200px' }}>
-            <label className="field-label" htmlFor={`slot-${i}`}>
-              Card {i + 1}
-            </label>
-            <select id={`slot-${i}`} className="select" value={slots[i] ?? ''} onChange={(e) => setSlot(i, e.target.value)}>
-              <option value="">{slots[i] ? 'Remove this card' : 'Add a card'}</option>
-              {rows.map((r) => (
-                <option key={r.slug} value={r.slug} disabled={slots.includes(r.slug) && slots[i] !== r.slug}>
-                  {r.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        ))}
-        {chosen.length >= 2 ? (
-          <ShareBar text={`${chosen.map((c) => c.brand).join(' vs ')}: crypto cards compared on G2M`} />
-        ) : null}
+      <div className="panel panel-pad stack" style={{ gap: 16 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'flex-start' }}>
+          {pickers.map((i) => {
+            const s = slots[i];
+            return (
+              <div className="field" key={i} style={{ flex: '1 1 200px' }}>
+                <label className="field-label" htmlFor={`slot-${i}`}>
+                  Card {i + 1}
+                </label>
+                <select id={`slot-${i}`} className="select" value={s?.card.slug ?? ''} onChange={(e) => setSlot(i, e.target.value)}>
+                  <option value="">{s ? 'Remove this card' : 'Add a card'}</option>
+                  {rows.map((r) => (
+                    <option key={r.slug} value={r.slug} disabled={chosen.some((c) => c.slug === r.slug) && s?.card.slug !== r.slug}>
+                      {r.name}
+                    </option>
+                  ))}
+                </select>
+                {s ? (
+                  <>
+                    <label className="sr-only" htmlFor={`slot-tier-${i}`}>
+                      {s.card.name} tier
+                    </label>
+                    <select
+                      id={`slot-tier-${i}`}
+                      className="select"
+                      value={s.tier == null ? '' : String(s.tier)}
+                      onChange={(e) => setTier(i, e.target.value === '' ? null : Number(e.target.value))}
+                    >
+                      <option value="">Card overview ({s.card.tiers.length} {s.card.tiers.length === 1 ? 'tier' : 'tiers'})</option>
+                      {s.card.tiers.map((t, k) => (
+                        <option key={t.name} value={k}>
+                          {t.name} · {tierPrice(t)}
+                          {t.comingSoon ? ' · coming soon' : ''}
+                        </option>
+                      ))}
+                    </select>
+                  </>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+        <TierPresets cards={chosen} value={preset} onPick={applyPreset} allLabel="Card overview" />
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
+          {chosen.length >= 1 ? (
+            <Link href={`/calculator?mode=tiers&cards=${slots.map(entryOf).join(',')}`} className="btn btn-sm">
+              What {chosen.length > 1 ? 'these keep' : 'this keeps'} you a year →
+            </Link>
+          ) : null}
+          {chosen.length >= 2 ? <ShareBar text={`${slots.map(shareName).join(' vs ')}: crypto cards compared on G2M`} /> : null}
+        </div>
       </div>
 
       {chosen.length === 0 ? (
@@ -135,18 +237,64 @@ export function CompareClient({ rows, initial }: { rows: CardRow[]; initial: str
               <div role="columnheader" className="cmp-label">
                 <span className="sr-only">Detail</span>
               </div>
-              {chosen.map((c) => (
+              {slots.map(({ card: c, tier }) => (
                 <div role="columnheader" key={c.slug} className="cmp-cell stack" style={{ gap: 12 }}>
                   <CardArt card={c} width={150} />
                   <Link href={`/cards/${c.slug}`} style={{ fontWeight: 700, fontSize: 17, textDecoration: 'none' }}>
                     {c.name}
                   </Link>
-                  <span className="faint" style={{ fontSize: 14 }}>
-                    {cashbackLabel(c.cashback.basePct, c.cashback.maxPct)} back
-                  </span>
+                  {tier != null ? (
+                    <span className="badge badge-accent" style={{ alignSelf: 'flex-start' }}>
+                      {c.tiers[tier].name} · {tierPrice(c.tiers[tier])}
+                    </span>
+                  ) : (
+                    <span className="faint" style={{ fontSize: 14 }}>
+                      {cashbackLabel(c.cashback.basePct, c.cashback.maxPct)} back
+                    </span>
+                  )}
                 </div>
               ))}
             </div>
+            {anyTier ? (
+              <>
+                <div role="row" className="cmp-row cmp-section" style={{ gridTemplateColumns: columns }}>
+                  <div role="rowheader" className="cmp-label">
+                    The tier picked
+                  </div>
+                  {slots.map(({ card: c, tier }) => (
+                    <div role="cell" key={c.slug} className="cmp-cell">
+                      {tier != null ? <b>{c.tiers[tier].name}</b> : <span className="faint">Pick a tier above</span>}
+                    </div>
+                  ))}
+                </div>
+                {TIER_ROWS.map((row) => {
+                  const winners = bestTier(slots, row);
+                  return (
+                    <div role="row" key={row.label} className="cmp-row" style={{ gridTemplateColumns: columns }}>
+                      <div role="rowheader" className="cmp-label">
+                        {row.label}
+                      </div>
+                      {slots.map(({ card: c, tier }) => (
+                        <div role="cell" key={c.slug} className={`cmp-cell ${winners.has(c.slug) ? 'cmp-best' : ''}`}>
+                          {tier != null ? row.render(c, c.tiers[tier]) : <span className="faint">—</span>}
+                          {winners.has(c.slug) ? <span className="sr-only"> (best)</span> : null}
+                        </div>
+                      ))}
+                    </div>
+                  );
+                })}
+                <div role="row" className="cmp-row cmp-section" style={{ gridTemplateColumns: columns }}>
+                  <div role="rowheader" className="cmp-label">
+                    The card
+                  </div>
+                  {slots.map(({ card: c }) => (
+                    <div role="cell" key={c.slug} className="cmp-cell faint">
+                      Every tier
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : null}
             {ROWS.map((row) => {
               const winners = best(chosen, row);
               return (
@@ -179,7 +327,8 @@ export function CompareClient({ rows, initial }: { rows: CardRow[]; initial: str
         </div>
       )}
       <p className="faint" style={{ fontSize: 13 }}>
-        Highlighted values are the best among the cards shown. “Not published” means the issuer does not state it.
+        Highlighted values are the best among the cards shown. “Not published” means the issuer does not state it. Stake
+        values use today&apos;s token price.
       </p>
     </div>
   );

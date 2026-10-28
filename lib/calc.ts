@@ -4,13 +4,13 @@ import { tierOffered } from '@/lib/regions';
 import { billedIn, fxIn, homeFx, otherFxPct } from '@/lib/fx';
 import { currencyOf } from '@/lib/currencies.mjs';
 import { BASKET, BASKET_USD } from '@/lib/basket';
+import { PICK } from '@/lib/tierpick';
 
 // Calculator inputs are validated and clamped, so bad URL params or typed values
 // can never break the page: anything invalid falls back to a sensible default.
 export const CALC_MODES = ['best', 'tiers', 'audit'] as const;
 export type CalcMode = (typeof CALC_MODES)[number];
 export const MAX_TIER_CARDS = 3;
-const SLUG = /^[a-z0-9-]{1,60}$/;
 
 const flag = z
   .union([z.boolean(), z.string()])
@@ -36,10 +36,17 @@ export const CalcInputSchema = z.object({
   tiers: z.enum(['best', 'entry']).catch('best'),
   all: flag,
   card: z.string().regex(/^[a-z0-9-]{1,60}$/).nullable().catch(null),
-  // Compare tiers: up to three cards side by side (`cards=coca,tria,etherfi`). `card` alone still works.
+  // Compare tiers: up to three cards side by side (`cards=coca,tria,etherfi`), each with every tier or one tier picked by
+  // its real name (`cards=kast:premium,tria:pro,etherfi:luxe`). `card` alone still works. One entry per card.
   cards: z
     .union([z.string(), z.array(z.string())])
-    .transform((v) => [...new Set((Array.isArray(v) ? v : v.split(',')).map((s) => s.trim()).filter((s) => SLUG.test(s)))].slice(0, MAX_TIER_CARDS))
+    .transform((v) => {
+      const seen = new Set<string>();
+      return (Array.isArray(v) ? v : v.split(','))
+        .map((s) => s.trim().toLowerCase())
+        .filter((s) => PICK.test(s) && !seen.has(s.split(':')[0]) && Boolean(seen.add(s.split(':')[0])))
+        .slice(0, MAX_TIER_CARDS);
+    })
     .catch([]),
   tier: z.coerce.number().int().min(0).max(50).catch(0)
 });
@@ -94,7 +101,7 @@ export function calcParams(input: CalcInput, country: string): URLSearchParams {
   if (input.year !== 2) p.set('year', String(input.year));
   if (input.mode === 'best' && input.tiers !== 'best') p.set('tiers', input.tiers);
   if (input.mode === 'best' && input.all) p.set('all', '1');
-  if (input.mode === 'tiers' && input.cards.length > 1) p.set('cards', input.cards.join(','));
+  if (input.mode === 'tiers' && (input.cards.length > 1 || input.cards.some((c) => c.includes(':')))) p.set('cards', input.cards.join(','));
   else if (input.mode !== 'best' && input.card) p.set('card', input.card);
   if (input.mode === 'audit') p.set('tier', String(input.tier));
   return p;

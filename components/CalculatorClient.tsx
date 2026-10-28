@@ -21,10 +21,23 @@ import {
   type TierResult
 } from '@/lib/calc';
 import { approxUsd, money } from '@/lib/format';
+import {
+  PRESET_LABEL,
+  currentPreset,
+  parsePick,
+  pickText,
+  presetIndex,
+  presetNames,
+  tierIndex,
+  tierPrice,
+  tierSlug,
+  type TierPreset
+} from '@/lib/tierpick';
 import { CardArt } from '@/components/CardArt';
 import { ShareBar } from '@/components/ShareBar';
 import { Chips } from '@/components/Chips';
 import { WalletTeaser } from '@/components/WalletTeaser';
+import { TierPresets } from '@/components/TierPresets';
 import { useRegion } from '@/components/RegionContext';
 import { track } from '@/lib/analytics';
 
@@ -38,6 +51,9 @@ type Props = {
 };
 
 type Prices = Record<string, number>;
+/** One compared card, with every tier (null) or one tier (its index). */
+type TierPickRow = { card: CardRow; tier: number | null };
+const entryOf = (p: TierPickRow) => pickText({ slug: p.card.slug, tier: p.tier == null ? null : tierSlug(p.card.tiers[p.tier].name) });
 
 const MODES: { id: CalcMode; label: string; short: string }[] = [
   { id: 'best', label: 'Best card for me', short: 'Best card' },
@@ -133,14 +149,26 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry, pr
 
   // The card for the tier and audit views: the one in the link, else the top card here.
   const picked = useMemo(
-    () => eligible.find((r) => r.slug === (input.card ?? input.cards[0])) ?? results[0]?.card ?? eligible[0] ?? null,
+    () =>
+      eligible.find((r) => r.slug === (input.card ?? (input.cards[0] ? parsePick(input.cards[0]).slug : null))) ??
+      results[0]?.card ??
+      eligible[0] ??
+      null,
     [eligible, input.card, input.cards, results]
   );
-  // Compare tiers: up to three cards. Without `cards=`, the one card above (old `card=` links keep working).
-  const tierCards = useMemo(() => {
-    const list = input.cards.map((s) => eligible.find((r) => r.slug === s)).filter((r): r is CardRow => Boolean(r));
-    return list.length ? list : picked ? [picked] : [];
+  // Compare tiers: up to three cards, each with every tier or one tier. Without `cards=`, the one card above (old
+  // `card=` links keep working).
+  const tierPicks = useMemo<TierPickRow[]>(() => {
+    const list = input.cards
+      .map(parsePick)
+      .map((p) => {
+        const card = eligible.find((r) => r.slug === p.slug);
+        return card ? { card, tier: tierIndex(card, p.tier) } : null;
+      })
+      .filter((x): x is TierPickRow => Boolean(x));
+    return list.length ? list : picked ? [{ card: picked, tier: null }] : [];
   }, [input.cards, eligible, picked]);
+  const tierCards = tierPicks.map((p) => p.card);
 
   useEffect(() => {
     if (first.current) {
@@ -151,15 +179,19 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry, pr
       {
         ...input,
         card: input.mode === 'best' ? null : input.mode === 'tiers' ? (tierCards[0]?.slug ?? null) : (picked?.slug ?? null),
-        cards: input.mode === 'tiers' ? tierCards.map((c) => c.slug) : []
+        cards: input.mode === 'tiers' ? tierPicks.map(entryOf) : []
       },
       country
     );
-    // Readable lists in the link: cards=coca,tria rather than coca%2Ctria.
-    window.history.replaceState(window.history.state, '', `${window.location.pathname}?${p.toString().replace(/%2C/g, ',')}`);
+    // Readable lists in the link: cards=kast:premium,tria:pro rather than kast%3Apremium%2Ctria%3Apro.
+    window.history.replaceState(
+      window.history.state,
+      '',
+      `${window.location.pathname}?${p.toString().replace(/%2C/g, ',').replace(/%3A/g, ':')}`
+    );
     const t = setTimeout(() => track('Calculator', { spend: input.spend, country: country || 'ALL', mode: input.mode }), 800);
     return () => clearTimeout(t);
-  }, [input, country, picked, tierCards]);
+  }, [input, country, picked, tierPicks]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const spendErr = bad(spendText, 0, 1_000_000);
   const usdErr = bad(usdText, 0, 100);
@@ -173,15 +205,24 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry, pr
     const best = card ? rankByValue([card], { ...input, all: true }, country || null)[0] : null;
     setOpts((o) => ({ ...o, card: slug, tier: best ? best.index : 0 }));
   };
-  // Compare tiers: change, add or remove one of the (up to three) cards.
-  const setTierCards = (list: string[]) => setOpts((o) => ({ ...o, cards: list, card: list[0] ?? o.card }));
+  // Compare tiers: change, add or remove one of the (up to three) cards, or the tier shown for each.
+  const setPicks = (list: TierPickRow[]) =>
+    setOpts((o) => ({ ...o, cards: list.map(entryOf), card: list[0]?.card.slug ?? o.card }));
   const tierSlugs = tierCards.map((c) => c.slug);
-  const setTierCard = (i: number, slug: string) => setTierCards(tierSlugs.map((s, j) => (j === i ? slug : s)));
-  const removeTierCard = (i: number) => setTierCards(tierSlugs.filter((_, j) => j !== i));
+  const preset = currentPreset(tierPicks, country || null);
+  // A new card follows the tier choice of the others ("Next tier up" stays next tier up).
+  const tierFor = (card: CardRow) => (preset ? presetIndex(card, preset, country || null) : null);
+  const setTierCard = (i: number, slug: string) => {
+    const card = eligible.find((r) => r.slug === slug);
+    if (card) setPicks(tierPicks.map((p, j) => (j === i ? { card, tier: tierFor(card) } : p)));
+  };
+  const setPickTier = (i: number, tier: number | null) => setPicks(tierPicks.map((p, j) => (j === i ? { ...p, tier } : p)));
+  const removeTierCard = (i: number) => setPicks(tierPicks.filter((_, j) => j !== i));
   const addTierCard = () => {
     const next = results.find((r) => !tierSlugs.includes(r.card.slug))?.card ?? eligible.find((r) => !tierSlugs.includes(r.slug));
-    if (next) setTierCards([...tierSlugs, next.slug]);
+    if (next) setPicks([...tierPicks, { card: next, tier: tierFor(next) }]);
   };
+  const applyPreset = (p: TierPreset) => setPicks(tierPicks.map((x) => ({ ...x, tier: presetIndex(x.card, p, country || null) })));
   const switchMode = (mode: CalcMode) => {
     setOpts((o) => {
       const next = { ...o, mode };
@@ -190,8 +231,11 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry, pr
         next.card = results[0].card.slug;
         next.tier = results[0].index;
       }
-      // Line by line shows one card: the first of the compared ones.
-      if (mode === 'audit' && o.cards.length) next.card = o.cards[0];
+      // Line by line shows one card: the first of the compared ones, on its picked tier.
+      if (mode === 'audit' && tierPicks[0]) {
+        next.card = tierPicks[0].card.slug;
+        if (tierPicks[0].tier != null) next.tier = tierPicks[0].tier;
+      }
       return next;
     });
   };
@@ -404,8 +448,9 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry, pr
             ) : null}
           </div>
         ) : input.mode === 'tiers' ? (
+          <div className="stack" style={{ gap: 16 }}>
           <div className="calc-grid">
-            {tierCards.map((c, i) => (
+            {tierPicks.map(({ card: c, tier }, i) => (
               <div className="field" key={i}>
                 <label className="field-label" htmlFor={`c-card-${i}`}>
                   {tierCards.length > 1 ? `Card ${i + 1}` : 'Card'}
@@ -424,6 +469,23 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry, pr
                     </button>
                   ) : null}
                 </div>
+                <label className="sr-only" htmlFor={`c-tier-${i}`}>
+                  {c.name} tier
+                </label>
+                <select
+                  id={`c-tier-${i}`}
+                  className="select"
+                  value={tier == null ? '' : String(tier)}
+                  onChange={(e) => setPickTier(i, e.target.value === '' ? null : Number(e.target.value))}
+                >
+                  <option value="">All {c.tiers.length} tiers</option>
+                  {c.tiers.map((t, k) => (
+                    <option key={t.name} value={k}>
+                      {t.name} · {tierPrice(t)}
+                      {t.comingSoon ? ' · coming soon' : ''}
+                    </option>
+                  ))}
+                </select>
               </div>
             ))}
             {tierCards.length < MAX_TIER_CARDS && eligible.length > tierCards.length ? (
@@ -436,6 +498,8 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry, pr
                 </span>
               </div>
             ) : null}
+          </div>
+          <TierPresets cards={tierCards} value={preset} onPick={applyPreset} country={country || null} />
           </div>
         ) : (
           <div className="calc-grid">
@@ -479,7 +543,7 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry, pr
       ) : !picked ? (
         <p className="muted">No card is available where you live yet.</p>
       ) : input.mode === 'tiers' ? (
-        <TiersView cards={tierCards} input={input} country={country} prices={prices} />
+        <TiersView picks={tierPicks} input={input} country={country} prices={prices} />
       ) : (
         <AuditView card={picked} input={input} country={country} currency={currency} prices={prices} />
       )}
@@ -593,30 +657,37 @@ function StakeLine({ r, prices }: { r: TierResult; prices: Prices }) {
 
 type TierRow = { card: CardRow; r: TierResult };
 
-function TiersView({ cards, input, country, prices }: { cards: CardRow[]; input: CalcInput; country: string; prices: Prices }) {
+function TiersView({ picks, input, country, prices }: { picks: TierPickRow[]; input: CalcInput; country: string; prices: Prices }) {
+  const cards = picks.map((p) => p.card);
   const multi = cards.length > 1;
   const [order, setOrder] = useState<'keep' | 'card'>('keep');
+  // Each card's picked tier, or all its tiers.
+  const indexes = (p: TierPickRow) => (p.tier == null ? p.card.tiers.map((_, i) => i) : [p.tier]);
   const all = useMemo<TierRow[]>(
-    () => cards.flatMap((card) => card.tiers.map((t, i) => ({ card, r: tierValue(card, t, input, i, country || null) }))),
-    [cards, input, country]
+    () => picks.flatMap((p) => indexes(p).map((i) => ({ card: p.card, r: tierValue(p.card, p.card.tiers[i], input, i, country || null) }))),
+    [picks, input, country] // eslint-disable-line react-hooks/exhaustive-deps
   );
   const best = all.filter(({ r }) => r.offered && !r.tier.comingSoon).sort((a, b) => b.r.net - a.r.net)[0];
   const shown = multi && order === 'keep' ? [...all].sort((a, b) => b.r.net - a.r.net) : all;
   const isBest = (x: TierRow) => best != null && x.card.slug === best.card.slug && x.r.index === best.r.index;
-  const names = cards.map((c) => c.name);
-  const title = multi ? `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}` : cards[0].name;
+  // "KAST Premium" when one tier of a card is picked, "KAST Card" when all of them are.
+  const names = picks.map((p) => (p.tier == null ? p.card.name : `${p.card.brand} ${p.card.tiers[p.tier].name}`));
+  const title = multi ? `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}` : names[0];
+  const oneTierEach = picks.every((p) => p.tier != null);
+  const allTiers = picks.filter((p) => p.tier == null && p.card.tiers.length > 1);
+  const compareHref = `/compare?c=${picks.map(entryOf).join(',')}`;
 
   return (
     <>
       <div className="pager">
         <p className="muted" style={{ margin: 0 }}>
-          {multi ? `Tiers of ${title}` : `${title} tiers`} at <b style={{ color: 'var(--text)' }}>{money(input.spend)}</b> a month
+          {oneTierEach ? title : multi ? `Tiers of ${title}` : `${title} tiers`} at <b style={{ color: 'var(--text)' }}>{money(input.spend)}</b> a month
           {best ? (
             <>
               {' '}
               · best for you:{' '}
               <b style={{ color: 'var(--text)' }}>
-                {multi ? `${best.card.name} · ` : ''}
+                {multi ? `${best.card.brand} ` : ''}
                 {best.r.tier.name}
               </b>{' '}
               ({cash(best.r.net)} a year)
@@ -626,7 +697,7 @@ function TiersView({ cards, input, country, prices }: { cards: CardRow[]; input:
         <ShareBar
           text={
             multi
-              ? `${names.join(' vs ')}: which tier pays off at ${money(input.spend)}/month · G2M calculator`
+              ? `${names.join(' vs ')}: which pays off at ${money(input.spend)}/month · G2M calculator`
               : `Which ${title} tier pays off at ${money(input.spend)}/month · G2M calculator`
           }
         />
@@ -706,19 +777,65 @@ function TiersView({ cards, input, country, prices }: { cards: CardRow[]; input:
           </tbody>
         </table>
       </div>
+      {(multi && all.length > 1) || allTiers.length ? (
       <section className="panel panel-pad stack" style={{ gap: 10 }} aria-labelledby="be-title">
         <h2 id="be-title" className="h3" style={{ margin: 0, fontSize: 20 }}>
-          Break-even points
+          {multi ? 'Which one pays off at your spend' : 'Break-even points'}
         </h2>
-        {cards.map((card) => (
+        {multi && all.length > 1 ? <WinnerBySpend rows={all} input={input} country={country} /> : null}
+        {allTiers.map(({ card }) => (
           <BreakEvenList key={card.slug} card={card} input={input} country={country} prices={prices} heading={multi} />
         ))}
         <p className="faint" style={{ fontSize: 12, margin: 0 }}>
-          Worked out with all your other settings unchanged, between tiers of the same card. Staking or lockups a tier
-          needs are not counted as a cost; their value today is shown next to them.
+          Worked out with all your other settings unchanged. Staking or lockups a tier needs are not counted as a cost;
+          their value today is shown next to them.{' '}
+          {multi ? <Link href={compareHref}>Compare these side by side: perks, caps and how to qualify</Link> : null}
         </p>
       </section>
+      ) : null}
     </>
+  );
+}
+
+const SPEND_STEPS = [250, 500, 1000, 2000, 3000, 5000, 10000];
+
+/** The tier that keeps you the most at a range of monthly spends, among the rows shown (offered tiers only). */
+function WinnerBySpend({ rows, input, country }: { rows: TierRow[]; input: CalcInput; country: string }) {
+  const steps = useMemo(
+    () =>
+      SPEND_STEPS.map((spend) => {
+        const ranked = rows
+          .filter(({ r }) => r.offered && !r.tier.comingSoon)
+          .map(({ card, r }) => ({ card, tier: r.tier, net: tierValue(card, r.tier, { ...input, spend }, r.index, country || null).net }))
+          .sort((a, b) => b.net - a.net);
+        return { spend, win: ranked[0] ?? null };
+      }),
+    [rows, input, country]
+  );
+  return (
+    <div className="table-wrap">
+      <table className="table calc-steps">
+        <caption className="sr-only">The best of the tiers shown at each monthly spend</caption>
+        <thead>
+          <tr>
+            <th scope="col">Monthly spend</th>
+            <th scope="col">Best tier</th>
+            <th scope="col">You keep / yr</th>
+          </tr>
+        </thead>
+        <tbody>
+          {steps.map(({ spend, win }) => (
+            <tr key={spend} className={spend === input.spend ? 'calc-win' : undefined}>
+              <td className="num">{money(spend)}</td>
+              <td>{win ? `${win.card.brand} ${win.tier.name}` : '—'}</td>
+              <td className="num" style={{ color: win ? keepColor(win.net) : undefined }}>
+                {win ? cash(win.net) : '—'}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

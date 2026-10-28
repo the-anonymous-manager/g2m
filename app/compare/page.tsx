@@ -4,10 +4,13 @@ import { toRow } from '@/lib/types';
 import { CompareClient } from '@/components/CompareClient';
 import { Eyebrow } from '@/components/bits';
 import { BackButton } from '@/components/BackButton';
+import { PICK } from '@/lib/tierpick';
+import { usdPrices } from '@/lib/prices';
 
 export const metadata: Metadata = {
   title: 'Compare crypto cards',
-  description: 'Compare up to three crypto cards side by side: cashback, annual fee, FX fee, custody, countries and perks.',
+  description:
+    'Compare up to three crypto cards side by side, or one tier of each: cashback, annual fee, FX fee, caps, staking, custody, countries and perks.',
   alternates: { canonical: '/compare' }
 };
 
@@ -16,11 +19,15 @@ type Props = { searchParams: Promise<Record<string, string | string[] | undefine
 export default async function ComparePage({ searchParams }: Props) {
   const params = await searchParams;
   const raw = Array.isArray(params.c) ? params.c[0] : params.c;
+  // `c=kast,tria`, or one tier per card by its real name: `c=kast:premium,tria:pro,etherfi:luxe`.
   const initial = (raw ?? '')
     .split(',')
     .map((s) => s.trim().toLowerCase())
-    .filter((s) => /^[a-z0-9-]+$/.test(s));
-  const rows = getCards().map(toRow);
+    .filter((s) => PICK.test(s));
+  const cards = getCards();
+  const rows = cards.map(toRow);
+  // Live USD value of staking tiers (cached an hour; empty when unavailable).
+  const prices = await usdPrices(cards.flatMap((c) => c.tiers.flatMap((t) => (t.stake?.coingeckoId ? [t.stake.coingeckoId] : []))));
   return (
     <div className="wrap section stack" style={{ gap: 28 }}>
       <div className="stack" style={{ gap: 12 }}>
@@ -29,9 +36,12 @@ export default async function ComparePage({ searchParams }: Props) {
         </div>
         <Eyebrow>side by side</Eyebrow>
         <h1 className="h2">Compare crypto cards</h1>
-        <p className="lead">Pick up to three cards. The best value in each row is highlighted.</p>
+        <p className="lead">
+          Pick up to three cards, and a tier of each if you like (say the next tier up from the free one). The best value in
+          each row is highlighted.
+        </p>
       </div>
-      <CompareClient rows={rows} initial={initial} />
+      <CompareClient rows={rows} initial={initial} prices={prices} />
     </div>
   );
 }

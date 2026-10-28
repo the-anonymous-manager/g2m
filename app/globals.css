@@ -1246,6 +1246,22 @@ body::before {
   font-weight: 650;
   color: var(--text);
 }
+/* "The tier picked" / "The card" divider rows. */
+.cmp-section,
+.cmp-section .cmp-label {
+  background: var(--surface-2);
+}
+.cmp-section .cmp-label {
+  color: var(--accent);
+  font-weight: 600;
+}
+.tier-preset-names {
+  opacity: 0.7;
+  font-weight: 400;
+}
+.calc-steps {
+  min-width: 0;
+}
 
 /* ---------- Motion ---------- */
 /* Everything here is opt-in: the `motion` class is only set when the visitor has not asked for reduced
