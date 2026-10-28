@@ -27,6 +27,7 @@ export function Footer({ updated }: { updated: string }) {
             <Link href="/receipt">Swipe receipt</Link>
             <Link href="/corridors">Corridor finder</Link>
             <Link href="/compare">Compare</Link>
+            <Link href="/guides">Guides</Link>
             <Link href="/methodology">Methodology</Link>
             <Link href="/submit">Submit a card</Link>
             {site.twitter ? (
