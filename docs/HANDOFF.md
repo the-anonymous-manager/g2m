@@ -560,6 +560,9 @@ Not modelled yet: per-purchase reward caps (Kolo $1 per purchase), "first 5 smal
 
 ## Cards added: Pionex and DogPay (28 Oct 2026)
 
+Same day, Akash removed the Pionex DogPay Card (rows deleted from the sheet); the notes on it below are kept for
+reference. Live cards: `pionex` and `dogpay`.
+
 Added through the Google Sheet (Cards, Tiers, Country lists, Sources rows), from issuer pages only:
 - **Pionex Visa Card** (`pionex`): free, 1% fee on every purchase (USD too, so FX 0 and txPct 1), 1% cashback,
   5% APY on the card balance, small-purchase 0.2 USDT at $5 or less (first one a month free), virtual only (physical

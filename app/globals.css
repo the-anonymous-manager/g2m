@@ -758,8 +758,11 @@ body::before {
 .table tbody tr:last-child td {
   border-bottom: 0;
 }
-.table tbody tr:hover td {
-  background: var(--surface-2);
+/* Only with a mouse: on touch screens a tapped row stays "hovered", which left stray tinted stripes on phones. */
+@media (hover: hover) {
+  .table tbody tr:hover td {
+    background: var(--surface-2);
+  }
 }
 .table th:first-child,
 .table td:first-child {
