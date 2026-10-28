@@ -1180,5 +1180,113 @@
     "lastChecked": "2026-10-25",
     "metal": "champagne",
     "image": { "source": "https://g2m.life/card-originals/tuyo.png", "file": "/card-images/tuyo-324f9f42.webp" }
+  },
+  {
+    "slug": "pionex",
+    "name": "Pionex Visa Card",
+    "brand": "Pionex",
+    "issuer": null,
+    "network": "Visa",
+    "type": "debit",
+    "forms": ["virtual"],
+    "custody": "custodial",
+    "summary": "A free USDT card from the Pionex exchange: 1% cashback offsets its 1% fee on every purchase, and the card balance earns 5% a year.",
+    "cashback": { "basePct": 1, "maxPct": 1, "payout": "USDT", "note": "Extra cashback at partners such as Trip.com and Klook when you book through Pionex. No cashback on ATM withdrawals or a few excluded merchants." },
+    "fees": { "annualUsd": 0, "fxPct": 0, "fxNote": "No separate FX fee: the 1% fee on every purchase applies in any currency, at the Visa exchange rate.", "topUpPct": 0, "txPct": 1, "smallPurchase": { "feeUsd": 0.2, "underUsd": 5, "foreignOnly": false, "inclusive": true, "freePerMonth": 1 }, "cardFeeUsd": 0, "atm": "2% (physical card only; physical cards are not open to new applicants)", "other": ["Failed payment: 0.5 USDT after the first free one each month (free for timeouts and maintenance)", "The 1% fee is refunded only on a \"Payment Reversal\""] },
+    "tiers": [
+      { "name": "Visa", "feeUsdYear": 0, "cashbackPct": 1, "requirement": "KYC level 2 and account assets above the amount shown when you apply", "perks": ["5% a year on your card balance, paid hourly in USDT", "Extra cashback at partner merchants through Pionex links"] }
+    ],
+    "coverage": { "countries": null, "scope": "Most countries; not the US, UK, Canada, France, the Netherlands, Japan, Singapore, Hong Kong or mainland China", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "no", "GB": "no", "EU": "unknown" }, "countryList": { "yes": [], "no": ["AF", "CA", "CD", "CF", "CN", "CU", "FR", "GB", "GU", "HK", "IR", "JP", "KP", "LB", "LY", "NL", "PR", "SD", "SG", "SO", "SS", "US", "VE", "YE", "ZW"], "others": "unknown" } },
+    "ecosystem": { "iban": "none", "payoutCorridors": null, "ramps": "on", "credit": null, "yield": true },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["USDT"],
+    "perks": ["5% a year on the card balance", "Apple Pay and Google Pay"],
+    "pros": ["1% cashback offsets the 1% purchase fee", "No annual or card fee", "5% a year on your card balance"],
+    "cons": ["1% fee on every purchase, USD included", "USDT only", "Visa or Mastercard depends on your KYC country; not the US, UK, France or Japan"],
+    "links": { "official": "https://pay.pionex.com/en/" },
+    "sources": [
+      { "label": "Pionex: Visa Card fees schedule", "url": "https://help.pionex.com/en/articles/14616381-visa-card-fees-schedule", "verified": "2026-10-28" },
+      { "label": "Pionex Card global cashback program guidelines", "url": "https://help.pionex.com/en/articles/14616369-pionex-card-global-cashback-program-guidelines", "verified": "2026-10-28" },
+      { "label": "Pionex: how to apply for the Pionex Card", "url": "https://help.pionex.com/en/articles/14616377-how-to-apply-for-pionex-card", "verified": "2026-10-28" },
+      { "label": "Pionex Card feature overview (Apple Pay, Google Pay)", "url": "https://help.pionex.com/en/articles/14616373-pionex-card-feature-overview", "verified": "2026-10-28" },
+      { "label": "Pionex Card ultimate guide (5% APY, partner cashback)", "url": "https://help.pionex.com/en/articles/14616392-pionex-card-ultimate-guide-spending-crypto-assets-in-the-real-world", "verified": "2026-10-28" },
+      { "label": "Pionex: unsupported countries and regions", "url": "https://help.pionex.com/en/articles/14607876-list-of-unsupported-countries-regions-phone-numbers-kyc-verification", "verified": "2026-10-28" }
+    ],
+    "lastChecked": "2026-10-28",
+    "addedOn": "2026-10-28",
+    "metal": "gunmetal"
+  },
+  {
+    "slug": "pionex-dogpay",
+    "name": "Pionex DogPay Card",
+    "brand": "Pionex DogPay",
+    "issuer": null,
+    "network": "Mastercard",
+    "type": "debit",
+    "forms": ["virtual"],
+    "custody": "custodial",
+    "summary": "Pionex's current Mastercard, issued as the DogPay Card: free, but a 3.5% fee on every purchase against 0.1% cashback. An invite-only Gold version pays up to 5%.",
+    "cashback": { "basePct": 0.1, "maxPct": 5, "payout": "USDT", "note": "Pionex's Mastercard cashback page says 0.1% to 1%; its DogPay Card and Gold Card pages say 0.1% on the regular card." },
+    "fees": { "annualUsd": 0, "fxPct": 0, "fxNote": "No separate FX fee: the 3.5% fee on every purchase applies in any currency.", "topUpPct": 0, "txPct": 3.5, "smallPurchase": { "feeUsd": 0.2, "underUsd": 5, "foreignOnly": false, "inclusive": true, "freePerMonth": 1 }, "cardFeeUsd": 0, "atm": "Not supported (virtual card only)", "other": ["Failed payment: 0.5 USDT after the first free one each month", "Mastercard holds about 4.5% extra when you pay, released afterwards", "The DogPay Card page lists the small-purchase fee as under $1; the Mastercard fee page (updated 19 Oct 2026) says $5 or less"] },
+    "tiers": [
+      { "name": "Regular", "feeUsdYear": 0, "cashbackPct": 0.1, "requirement": "KYC level 2 and account assets above the amount shown when you apply", "perks": ["5% a year on your card balance, paid hourly in USDT"] },
+      { "name": "Gold", "feeUsdYear": 0, "feeNote": "One-time 100 USDT card fee (50 USDT in the pre-order)", "cashbackPct": null, "bands": [ { "uptoUsd": 4000, "pct": 5 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "Invitation only; not for people who already hold a Pionex card", "perks": ["Up to 5% a year on your card balance"] }
+    ],
+    "coverage": { "countries": null, "scope": "Most countries; not the US, UK, Canada, France, the Netherlands, Japan, Singapore, Hong Kong or mainland China", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "no", "GB": "no", "EU": "unknown" }, "countryList": { "yes": [], "no": ["AF", "CA", "CD", "CF", "CN", "CU", "FR", "GB", "GU", "HK", "IR", "JP", "KP", "LB", "LY", "NL", "PR", "SD", "SG", "SO", "SS", "US", "VE", "YE", "ZW"], "others": "unknown" } },
+    "ecosystem": { "iban": "none", "payoutCorridors": null, "ramps": "on", "credit": null, "yield": true },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["USDT"],
+    "perks": ["5% a year on the card balance", "Apple Pay and Google Pay"],
+    "pros": ["No annual or card fee", "5% a year on your card balance", "Gold card pays up to 5% back (invite only)"],
+    "cons": ["3.5% fee on every purchase", "0.1% cashback on the regular card", "USDT only; virtual only"],
+    "links": { "official": "https://pay.pionex.com/en/" },
+    "sources": [
+      { "label": "Pionex: DogPay Card", "url": "https://help.pionex.com/en/articles/16147782-pionex-dogpay-card", "verified": "2026-10-28" },
+      { "label": "Pionex: Mastercard fees schedule", "url": "https://help.pionex.com/en/articles/14616395-mastercard-fees-schedule", "verified": "2026-10-28" },
+      { "label": "Pionex: Mastercard cashback program guidelines", "url": "https://help.pionex.com/en/articles/15418063-mastercard-global-cashback-program-guidelines", "verified": "2026-10-28" },
+      { "label": "Pionex Gold Card: eligibility, pricing and cashback", "url": "https://help.pionex.com/en/articles/16926500-pionex-gold-card-eligibility-pricing-cashback-faq", "verified": "2026-10-28" },
+      { "label": "Pionex Card feature overview (Apple Pay, Google Pay)", "url": "https://help.pionex.com/en/articles/14616373-pionex-card-feature-overview", "verified": "2026-10-28" },
+      { "label": "Pionex: unsupported countries and regions", "url": "https://help.pionex.com/en/articles/14607876-list-of-unsupported-countries-regions-phone-numbers-kyc-verification", "verified": "2026-10-28" }
+    ],
+    "lastChecked": "2026-10-28",
+    "addedOn": "2026-10-28",
+    "metal": "champagne"
+  },
+  {
+    "slug": "dogpay",
+    "name": "DogPay Card",
+    "brand": "DogPay",
+    "issuer": null,
+    "network": "Visa / Mastercard",
+    "type": "prepaid",
+    "forms": ["virtual", "physical"],
+    "custody": "custodial",
+    "summary": "A stablecoin card from the DogPay app, with a personal USD bank account. Free to start, but DogPay does not publish its purchase or FX fees on its website.",
+    "cashback": { "basePct": null, "maxPct": null, "payout": null, "note": "No cashback published." },
+    "fees": { "annualUsd": 0, "fxPct": null, "fxNote": "Not published: DogPay says to check card fees in the app.", "topUpPct": 1, "cardFeeUsd": 10, "atm": "Physical card at supported ATMs; fee not published", "other": ["Purchase fees are shown in the app, not on the website", "Card top-up 1% (0.8%, 0.5% or 0.3% on paid plans)", "Bank deposit or withdrawal $35", "Swap fee 1% (lower on paid plans)"] },
+    "tiers": [
+      { "name": "Basic", "feeUsdYear": 0, "cashbackPct": null, "perks": ["Card top-up fee 1%", "$10 per virtual card", "Up to 2 cards"] },
+      { "name": "Premium", "feeUsdYear": 58.8, "feeNote": "$4.90 a month", "cashbackPct": null, "perks": ["Card top-up fee 0.8%", "First virtual card free", "Up to 5 cards"] },
+      { "name": "Platinum", "feeUsdYear": 118.8, "feeNote": "$9.90 a month", "cashbackPct": null, "perks": ["Card top-up fee 0.5%", "Two virtual cards free", "Up to 10 cards"] },
+      { "name": "Ultra", "feeUsdYear": 358.8, "feeNote": "$29.90 a month", "cashbackPct": null, "perks": ["Card top-up fee 0.3%", "Three virtual cards free", "Up to 20 cards", "Custom card design"] }
+    ],
+    "coverage": { "countries": null, "scope": "Depends on your region and identity checks; no country list published", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
+    "ecosystem": { "iban": "named", "payoutCorridors": 1, "ramps": "off", "credit": null, "yield": true },
+    "bankRails": [ { "rail": "USD_ACH", "in": true, "out": true, "fee": "$35" }, { "rail": "USD_FEDWIRE", "in": true, "out": true, "fee": "$35" }, { "rail": "SWIFT", "in": true, "out": true, "fee": "$35" } ],
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["USDT"],
+    "perks": ["Personal USD account (ACH, Fedwire, SWIFT)", "6% a year on stablecoins (Earn)"],
+    "pros": ["Personal USD bank account", "Virtual and physical cards", "No monthly fee on the Basic plan"],
+    "cons": ["Purchase and FX fees not published on the website", "No cashback", "1% top-up fee on the free plan"],
+    "links": { "official": "https://dogpay.com/us/cards" },
+    "sources": [
+      { "label": "DogPay personal pricing", "url": "https://dogpay.com/us/pricing/personal", "verified": "2026-10-28" },
+      { "label": "DogPay Cards", "url": "https://dogpay.com/us/cards", "verified": "2026-10-28" },
+      { "label": "DogPay iBank personal USD account", "url": "https://dogpay.com/us/digital-bank", "verified": "2026-10-28" },
+      { "label": "DogPay card program terms", "url": "https://dogpay.com/us/card-program-terms", "verified": "2026-10-28" }
+    ],
+    "lastChecked": "2026-10-28",
+    "addedOn": "2026-10-28",
+    "metal": "gold"
   }
 ]
