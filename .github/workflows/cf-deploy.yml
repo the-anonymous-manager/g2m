@@ -30,7 +30,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          # github.sha is the newest commit on main for every trigger, including the sheet sync's own commit. (The sync
+          # run's head_sha is the commit it started from, so building that left sheet edits off the site until the next
+          # code push.)
+          ref: ${{ github.sha }}
 
       - uses: actions/setup-node@v4
         with:
