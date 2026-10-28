@@ -2282,3 +2282,33 @@ body::before {
     display: none;
   }
 }
+
+/* "X vs Y" comparison pages */
+.vs-art {
+  display: flex;
+  justify-content: center;
+}
+.vs-points {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  line-height: 1.55;
+}
+.vs-links {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.vs-links-cols {
+  display: block;
+  columns: 3 260px;
+  column-gap: 32px;
+}
+.vs-links-cols li {
+  margin-bottom: 6px;
+  break-inside: avoid;
+}

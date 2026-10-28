@@ -19,6 +19,7 @@ import { CountryList } from '@/components/CountryList';
 import { CountryToggle } from '@/components/CountryToggle';
 import { TierBreakEven } from '@/components/TierBreakEven';
 import { BackButton } from '@/components/BackButton';
+import { versusPath } from '@/lib/versus';
 
 const KYC_LABEL = {
   residency_id: 'A residence permit or local ID where you live is accepted',
@@ -102,6 +103,14 @@ export default async function CardPage({ params }: Props) {
     .filter((c) => c.slug !== card.slug)
     .filter((c) => !myMarkets.length || myMarkets.some((m) => c.coverage.markets[m] !== 'no'))
     .slice(0, 3);
+
+  // Head-to-head pages: the cards ranked nearest to this one, then the top of the rankings.
+  const others = all.filter((c) => c.slug !== card.slug);
+  const matchups = [...others]
+    .sort((x, y) => Math.abs(x.rank - rank) - Math.abs(y.rank - rank) || x.rank - y.rank)
+    .slice(0, 6);
+  for (const c of others.slice(0, 3)) if (!matchups.includes(c)) matchups.push(c);
+  matchups.sort((x, y) => x.rank - y.rank);
 
   const breakdown = [
     { label: 'Rewards', value: card.score.rewards, max: SCORE_WEIGHTS.rewards },
@@ -485,6 +494,20 @@ export default async function CardPage({ params }: Props) {
           </a>{' '}
           before you apply. Spotted something out of date? <Link href={`/submit?card=${card.slug}`}>Tell us</Link>.
         </p>
+      </section>
+
+      {/* Head-to-head pages */}
+      <section className="stack" style={{ gap: 14 }} aria-labelledby="versus">
+        <h2 id="versus" className="h3">
+          Compare {card.name} with
+        </h2>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+          {matchups.map((m) => (
+            <Link key={m.slug} href={versusPath(card.slug, m.slug)} className="chip">
+              {card.brand} vs {m.brand}
+            </Link>
+          ))}
+        </div>
       </section>
 
       {/* Alternatives */}
