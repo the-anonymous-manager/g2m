@@ -56,6 +56,7 @@ Copy `.env.example` to `.env.local` for local use, or add them in Vercel.
 | `NEXT_PUBLIC_CONTACT_EMAIL` | Where "Submit a card" messages go, default `info@g2m.life` |
 | `NEXT_PUBLIC_TWITTER_HANDLE` | Your X handle, default `@0akash0x`. Adds an X link and Twitter card tags |
 | `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | Turns on Plausible analytics for that domain (no cookies) |
+| `NEXT_PUBLIC_PLAUSIBLE_SRC` | Custom Plausible script URL, from your Plausible account's "Installation" screen (optional) |
 | `COINGECKO_API_KEY` | CoinGecko demo key for live staking-token prices. On Cloudflare: a Worker secret (Workers & Pages → g2m → Settings → Variables and Secrets). Optional: DefiLlama is the backup |
 
 ## Edit cards in the Google Sheet
