@@ -230,9 +230,10 @@ const SOURCE_COLUMNS = [
 ];
 
 const SPONSOR_COLUMNS = ['Card ID', 'Start', 'End'];
-// Home page "Our picks": Type is "Our pick" or "Sponsored"; dates are needed for Sponsored, optional otherwise.
+// Home page "Our picks": Type is "Our pick" or "Featured" (paid; "Sponsored" also accepted); dates are needed for
+// Featured, optional otherwise.
 const PICK_COLUMNS = ['Slot', 'Card ID', 'Type', 'Why (one line)', 'Start', 'End'];
-const PICK_TYPE = { pick: 'Our pick', sponsored: 'Sponsored' };
+const PICK_TYPE = { pick: 'Our pick', sponsored: 'Featured' };
 
 // ---------- cards.json -> sheet ----------
 
@@ -259,8 +260,13 @@ export function cardsToTables(cards, sponsor, picks = []) {
  * messages naming the tab, row and column, and `cards` is null when there are any.
  * @param {Record<string, string[][]>} tables
  */
-export function tablesToCards(tables) {
+/**
+ * `previous` (the cards now on the site) carries over each card's addedOn, the day it was first listed: a card that
+ * is not on the site yet gets `today`, so it shows as "New on G2M" with nobody typing a date.
+ */
+export function tablesToCards(tables, previous = null, today = null) {
   const errors = [];
+  const listed = new Map((previous ?? []).map((c) => [c.slug, c.addedOn]));
 
   // Rows as objects keyed by header, skipping blank rows; remembers the sheet row number for messages.
   const read = (tab, cols) => {
@@ -428,6 +434,7 @@ export function tablesToCards(tables) {
         .filter((s) => str(s.get('Card ID')) === slug)
         .map((s) => ({ label: str(s.get('Label')), url: str(s.get('Link')), verified: optText(s.get('Verified on')) })),
       lastChecked: str(r.get('Last checked')),
+      addedOn: previous ? (listed.has(slug) ? listed.get(slug) : (today ?? undefined)) : undefined,
       metal: str(r.get('Card colour')).toLowerCase(),
       image: str(r.get('Card image')) ? { source: str(r.get('Card image')), file: imageFile(slug, str(r.get('Card image'))) } : undefined
     };
@@ -445,8 +452,8 @@ export function tablesToCards(tables) {
     const slot = Number(str(r.get('Slot')));
     if (![1, 2, 3].includes(slot)) errors.push(`Picks row ${r.row}, column "Slot": use 1, 2 or 3.`);
     const kind = str(r.get('Type')).toLowerCase();
-    const type = kind === 'sponsored' ? 'sponsored' : kind === '' || kind === 'our pick' || kind === 'pick' ? 'pick' : null;
-    if (!type) errors.push(`Picks row ${r.row}, column "Type": use "Our pick" or "Sponsored".`);
+    const type = kind === 'featured' || kind === 'sponsored' ? 'sponsored' : kind === '' || kind === 'our pick' || kind === 'pick' ? 'pick' : null;
+    if (!type) errors.push(`Picks row ${r.row}, column "Type": use "Our pick" or "Featured".`);
     return { slot, slug: str(r.get('Card ID')), type: type ?? 'pick', note: optText(r.get('Why (one line)')) ?? null, start: str(r.get('Start')) || null, end: str(r.get('End')) || null };
   });
 

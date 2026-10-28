@@ -70,7 +70,8 @@ in sheet terms (tab, card, column). It closes itself when a later run succeeds.
 - The sheet must be shared as "Anyone with the link can view" (the action reads it without signing in).
 - Tabs: Cards (one row per card), Tiers, Country lists, Sources (rows point at a card by its Card ID), Sponsor, Picks.
 - Picks: the three "Our picks" cards on the home page, one row per booking (Slot 1-3, Card ID, Type "Our pick" or
-  "Sponsored", Why, Start, End). Sponsored needs both dates; a slot with nothing booked today fills itself.
+  "Featured", Why, Start, End). Featured is a paid placement: it needs both dates and shows a "Sponsored" note. A
+  slot with nothing booked today shows a card added to the sheet in the last 30 days (no date needed), else fills itself.
 - Empty cell = not published. Lists in one cell: one item per line; country codes, forms and assets with commas.
 - Tier cashback that changes with spend: `2.5% up to $10000; 2%`.
 - Cells are plain text, so `2026-10-22` and `1.5%` stay exactly as typed. Text starting with `+` or `=` still needs

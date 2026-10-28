@@ -67,7 +67,9 @@ try {
   fail([e.message]);
 }
 
-const { cards, sponsor, picks, errors } = tablesToCards(tables);
+// Cards not on the site yet get today's date as addedOn ("New on G2M" on the home page for 30 days).
+const listed = JSON.parse(readFileSync(path('data', 'cards.json'), 'utf8'));
+const { cards, sponsor, picks, errors } = tablesToCards(tables, listed, new Date().toISOString().slice(0, 10));
 if (errors.length) fail(errors);
 
 const nextCards = formatCards(cards);
@@ -88,7 +90,7 @@ const changed =
 output('changed', String(changed));
 
 // Which cards changed, for the commit message.
-const before = JSON.parse(readFileSync(path('data', 'cards.json'), 'utf8'));
+const before = listed;
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const names = [
   ...cards.filter((c) => !same(c, before.find((b) => b.slug === c.slug))).map((c) => c.name),

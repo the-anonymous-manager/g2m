@@ -70,7 +70,7 @@ export default function HomePage() {
   // The Featured spot: a booked sponsor while its dates run, otherwise the top-ranked card.
   const sponsor = getSponsor();
   const picks = getPicks(cards);
-  const anySponsored = picks.some((p) => p.kind === 'sponsored');
+  const anyFeatured = picks.some((p) => p.kind === 'featured');
   const featured = sponsor ?? cards[0];
   const selfCustodial = cards.filter((c) => c.custody === 'self-custodial' || c.custody === 'both').length;
   const noFee = cards.filter((c) => c.fees.annualUsd === 0).length;
@@ -115,11 +115,11 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          <aside className="hero-feature" data-tilt aria-label={sponsor ? 'Sponsored card' : 'Top-ranked card'}>
+          <aside className="hero-feature" data-tilt aria-label={sponsor ? 'Featured card (sponsored)' : 'Top-ranked card'}>
             <CardArt card={featured} />
             <div className="panel panel-pad hero-feature-panel">
               <div className="hero-feature-head">
-                <Eyebrow>{sponsor ? 'sponsored' : 'top ranked'}</Eyebrow>
+                <Eyebrow>{sponsor ? 'featured' : 'top ranked'}</Eyebrow>
                 <span className="mono faint" style={{ fontSize: 12 }}>
                   #{getRank(featured.slug)} of {cards.length} worldwide
                 </span>
@@ -159,13 +159,13 @@ export default function HomePage() {
               <p className="faint" style={{ fontSize: 13, margin: 0 }}>
                 {sponsor ? (
                   <>
-                    Paid placement. It never changes a card&apos;s score or rank.{' '}
+                    Sponsored. It never changes a card&apos;s score or rank.{' '}
                     <Link href="/methodology#money">How G2M makes money</Link>
                   </>
                 ) : (
                   <>
                     The highest G2M score worldwide right now. Card issuers can{' '}
-                    <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Sponsored spot on G2M')}`}>
+                    <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Featured spot on G2M')}`}>
                       book this spot
                     </a>{' '}
                     as a labelled sponsor.
@@ -260,7 +260,7 @@ export default function HomePage() {
           {picks.map((p) => (
             <article key={p.slot} className="panel panel-pad stack pick-card" data-kind={p.kind}>
               <div className="pick-head">
-                <span className={`badge ${p.kind === 'sponsored' ? 'badge-warn' : 'badge-accent'}`}>{p.label}</span>
+                <span className={`badge ${p.kind === 'featured' ? 'badge-warn' : p.kind === 'new' ? 'badge-yes' : 'badge-accent'}`}>{p.label}</span>
                 <ScorePill value={p.card.score.total} />
               </div>
               <Link href={`/cards/${p.card.slug}`} className="pick-art" aria-label={p.card.name}>
@@ -276,6 +276,7 @@ export default function HomePage() {
                   {p.note}
                 </p>
               ) : null}
+              {p.kind === 'featured' ? <p className="faint pick-paid">Sponsored. It never changes the score or rank.</p> : null}
               <dl className="pick-facts">
                 <div>
                   <dt>Cashback</dt>
@@ -295,7 +296,7 @@ export default function HomePage() {
                   slug={p.card.slug}
                   name={p.card.name}
                   placement={`pick-${p.slot}`}
-                  campaign={p.kind === 'sponsored' ? 'sponsored' : undefined}
+                  campaign={p.kind === 'featured' ? 'sponsored' : undefined}
                   className="btn btn-metal btn-sm"
                 >
                   Get the card
@@ -308,14 +309,14 @@ export default function HomePage() {
           ))}
         </div>
         <p className="faint" style={{ fontSize: 13, margin: 0 }}>
-          {anySponsored ? (
+          {anyFeatured ? (
             <>
-              Cards marked Sponsored are paid placements; they never change a card&apos;s score or rank.{' '}
+              Featured cards marked Sponsored are paid for; that never changes a card&apos;s score or rank.{' '}
               <Link href="/methodology#money">How G2M makes money</Link>.{' '}
             </>
           ) : null}
           Card issuers can{' '}
-          <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Sponsored pick on G2M')}`}>book one of these spots</a>.
+          <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Featured pick on G2M')}`}>book one of these spots</a>.
         </p>
       </section>
 

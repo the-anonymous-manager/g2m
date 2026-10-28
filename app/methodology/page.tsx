@@ -194,13 +194,15 @@ export default function MethodologyPage() {
         <h2 id="money">How G2M makes money</h2>
         <p>
           Some “Get the card” buttons may use referral links, and card issuers can pay for the Featured spot at the top
-          of the home page. That spot is always labelled Sponsored, shows the card&apos;s real G2M score and rank, and runs
+          of the home page. That spot is labelled Featured with a &ldquo;Sponsored&rdquo; note, shows the card&apos;s real G2M
+          score and rank, and runs
           for a fixed period. When no one has booked it, it shows the top-ranked card.
         </p>
         <p>
           The three &ldquo;Our picks&rdquo; on the home page work the same way: each one is either chosen by G2M (marked Our
-          pick), a paid placement for a fixed period (marked Sponsored), or, when nothing is booked, filled in automatically
-          with the top-ranked card, the best card with no annual fee and the best self-custodial card.
+          pick), a paid placement for a fixed period (marked Featured, with a &ldquo;Sponsored&rdquo; note), a card we added
+          in the last 30 days (marked New on G2M), or, when none of those applies, filled in automatically with the top-ranked
+          card, the best card with no annual fee and the best self-custodial card.
         </p>
         <p>
           Neither a referral nor a sponsorship ever changes a card&apos;s score, rank or position in the rankings, and cards

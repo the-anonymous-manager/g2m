@@ -627,6 +627,10 @@ body::before {
   display: block;
   max-width: 280px;
 }
+.pick-paid {
+  font-size: 12px;
+  margin: -6px 0 0;
+}
 .pick-facts {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

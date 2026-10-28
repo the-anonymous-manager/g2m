@@ -14,7 +14,10 @@ const sponsorText = readFileSync(join(root, 'data', 'sponsor.json'), 'utf8');
 const picksText = readFileSync(join(root, 'data', 'picks.json'), 'utf8');
 const tables = cardsToTables(JSON.parse(cardsText), JSON.parse(sponsorText), JSON.parse(picksText));
 
-const back = tablesToCards(Object.fromEntries(Object.entries(tables).map(([k, v]) => [k, parseCsv(toCsv(v))])));
+const back = tablesToCards(
+  Object.fromEntries(Object.entries(tables).map(([k, v]) => [k, parseCsv(toCsv(v))])),
+  JSON.parse(cardsText)
+);
 if (back.errors.length || formatCards(back.cards) !== cardsText || formatSponsor(back.sponsor) !== sponsorText || formatPicks(back.picks) !== picksText) {
   console.error('✖ The data does not survive a trip through the sheet unchanged:', back.errors.join('; ') || 'output differs');
   process.exit(1);
