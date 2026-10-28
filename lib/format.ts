@@ -1,4 +1,4 @@
-import type { CardData } from '@/lib/types';
+import type { CardData, Tier } from '@/lib/types';
 
 export const NP = 'Not published';
 
@@ -19,6 +19,20 @@ export function money(n: number): string {
   const abs = Math.abs(n);
   const s = abs >= 1000 ? Math.round(abs).toLocaleString('en-US') : abs.toFixed(0);
   return `${n < 0 ? '−' : ''}$${s}`;
+}
+
+/** A tier's cashback: "2%", or its spend bands, e.g. "4% up to $1,750/mo, 1% above $1,750". */
+export function tierCashback(t: Pick<Tier, 'bands' | 'cashbackPct'>): string {
+  if (t.bands && t.bands.length) {
+    return t.bands
+      .map((b, i) => {
+        const from = i === 0 ? 0 : (t.bands![i - 1].uptoUsd ?? 0);
+        if (b.uptoUsd == null) return `${pct(b.pct)} above $${from.toLocaleString('en-US')}`;
+        return `${pct(b.pct)} up to $${b.uptoUsd.toLocaleString('en-US')}/mo`;
+      })
+      .join(', ');
+  }
+  return pct(t.cashbackPct);
 }
 
 /** An approximate live value: "~$1,234", or "~$12.50" under $100. */
