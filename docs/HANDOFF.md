@@ -527,7 +527,7 @@ Not modelled yet: per-purchase reward caps (Kolo $1 per purchase), "first 5 smal
 
 ## SEO step 2: guides (28 Oct 2026)
 
-- `/guides` hub (in the menu and footer) with three kinds of guide, all built from the card data (`lib/guides.ts`):
+- `/guides` hub (footer link only; Akash took it out of the top menu) with three kinds of guide, all built from the card data (`lib/guides.ts`):
   - Country guides at `/guides/best-crypto-cards/<country>` (e.g. `united-arab-emirates`): every country where at
     least 5 cards are confirmed (`MIN_CONFIRMED`; 181 countries today). Cards confirmed there, ranked with the G2M
     score for that country, the FX fee on spending in its own currency (`homeFx`), an "At a glance" list (no FX fee,
