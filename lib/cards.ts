@@ -27,6 +27,26 @@ export function getCard(slug: string): Card | undefined {
   return cards.find((c) => c.slug === slug);
 }
 
+/**
+ * The card a broken address most likely meant, or null. Links cut off by email apps arrive as e.g.
+ * "/cards/ethena-pa=" (a line break marked with "="): keep the part up to the first character a card ID
+ * can't have, then accept it if it is the start of exactly one card ID.
+ */
+export function guessCard(raw: string): Card | null {
+  let s = raw;
+  try {
+    s = decodeURIComponent(raw);
+  } catch {
+    // keep it as it came
+  }
+  const start = s.toLowerCase().match(/^[a-z0-9-]*/)![0].replace(/-+$/, '');
+  if (start.length < 2) return null;
+  const exact = getCard(start);
+  if (exact) return exact;
+  const matches = cards.filter((c) => c.slug.startsWith(start));
+  return matches.length === 1 ? matches[0] : null;
+}
+
 export function getRank(slug: string): number {
   return cards.findIndex((c) => c.slug === slug) + 1;
 }
