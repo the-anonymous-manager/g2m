@@ -130,6 +130,7 @@ is nothing for the Worker to persist between requests.
   upright (portrait) card shows tiny in the list. Ethena Pay's and Bleap's tilted photos were straightened
   (`ethena-pay-flat.png`, `bleap-flat.png`) and RedotPay's upright card was laid sideways (`redotpay-landscape.png`) so
   the logo still reads. Keep the originals you straighten in `public/card-originals/` and link them from the sheet.
+  Solid's card is a vertical design; laid flat, VISA goes on the right like the other cards (`solid-visa-right.webp`).
 - Phone: the tiers table on card pages stacks into one block per tier, and the compare table puts each row's label
   above the card values, so neither scrolls sideways at 375 px.
 
