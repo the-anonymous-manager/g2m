@@ -885,7 +885,7 @@
     "perks": ["Earn on your balance until you spend it (variable rate)", "Free USDT transfers on Plasma"],
     "pros": ["2% back on the free tier, up to 4% on Platinum", "Self-custodial: Plasma does not hold your funds", "No FX fee on Platinum"],
     "cons": ["Lite drops to 0.1% after $500 a month", "Cashback is paid in XPL, so its value moves with the token", "Indian ID documents are blocked by default at sign-up"],
-    "links": { "official": "https://www.plasma.org/" },
+    "links": { "official": "https://www.plasma.org/", "affiliate": "https://plasma.org/download/F7VZFW" },
     "sources": [
       { "label": "Plasma Help Center: fees on Plasma One", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15506070-what-are-the-fees-on-plasma-one", "verified": "2026-10-25" },
       { "label": "Plasma Help Center: cashback rates and spend bands by tier", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15506768-cashback-rates-and-spend-bands-by-tier", "verified": "2026-10-22" },
@@ -1163,7 +1163,7 @@
     "perks": ["Some purchases made free at random", "Interest on your USD balance (variable)", "Daily limit up to $200,000"],
     "pros": ["No issuance, monthly or yearly fee", "0% on USD purchases in the US", "Self-custodial"],
     "cons": ["Up to 2% on non-USD or non-US purchases", "No cashback rate", "Virtual only for now; not offered in the UK"],
-    "links": { "official": "https://tuyo.com/" },
+    "links": { "official": "https://tuyo.com/", "affiliate": "https://get.tuyo.com/code/0akash0x" },
     "sources": [
       { "label": "Tuyo: card fees and limits", "url": "https://tuyo.com/card", "verified": "2026-10-24" },
       { "label": "Tuyo: FAQ", "url": "https://tuyo.com/faq", "verified": "2026-10-24" },
