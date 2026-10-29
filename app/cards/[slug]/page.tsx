@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { getCard, getCards, getRank, standings } from '@/lib/cards';
+import { notFound, permanentRedirect } from 'next/navigation';
+import { getCard, getCards, getRank, guessCard, standings } from '@/lib/cards';
 import type { Card, Market, Tier } from '@/lib/types';
 import { toRow } from '@/lib/types';
 import { usdPrices } from '@/lib/prices';
@@ -84,7 +84,12 @@ function jsonLd(card: Card) {
 export default async function CardPage({ params }: Props) {
   const { slug } = await params;
   const card = getCard(slug);
-  if (!card) notFound();
+  if (!card) {
+    // A cut-off or mistyped link (e.g. "ethena-pa=" from an email) goes to the one card it can mean.
+    const guess = guessCard(slug);
+    if (guess) permanentRedirect(`/cards/${guess.slug}`);
+    notFound();
+  }
   const all = getCards();
   const rank = getRank(card.slug);
   // The card's answer for every country (its own list, else the five checked markets).
