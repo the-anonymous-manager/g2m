@@ -246,7 +246,7 @@
     "perks": ["Points rewards"],
     "pros": ["Available in 201 countries", "No annual or monthly fee, Apple Pay"],
     "cons": ["No published cashback", "$100 physical card and 1% conversion fee"],
-    "links": { "official": "https://www.redotpay.com/" },
+    "links": { "official": "https://www.redotpay.com/", "affiliate": "https://url.hk/a/t44py2" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/redotpay-card", "verified": "2026-08-30" },
       { "label": "RedotPay Help Center: Card Issuance Restrictions (country list compiled by Card Map)", "url": "https://helpcenter.redotpay.com/en/articles/14254838-card-issuance-restrictions", "verified": "2026-10-25" },
@@ -299,7 +299,7 @@
     "perks": ["Airport lounge access on every tier", "Visa Signature benefits"],
     "pros": ["3% back even on the free Core tier", "Self-custodial with lounge access", "Free physical card; metal card from Luxe"],
     "cons": ["Core pays 3% only on the first $2,000 a month, then 1% and 0.5%", "Higher tiers cost $199 or $999 a year, or a large ETHFI stake or deposit"],
-    "links": { "official": "https://www.ether.fi/" },
+    "links": { "official": "https://www.ether.fi/", "affiliate": "https://www.ether.fi/app/cash/referral?ref_code=gwei2merchant" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/ether.fi", "verified": "2026-08-30" },
       { "label": "ether.fi Help Center: In which countries is the Cash card available? (country list compiled by Card Map)", "url": "https://help.ether.fi/en/articles/758780-in-which-countries-is-the-cash-card-available", "verified": "2026-10-03" },
@@ -1021,7 +1021,7 @@
     "perks": ["Price protection up to $2,000", "Purchase protection up to $10,000", "Spend up to $1M a day on Pro and Max"],
     "pros": ["No FX or deposit fees on any tier", "1.5% on the entry tier, up to 6% on Max", "Lounge access on Pro and Max"],
     "cons": ["Every tier has a yearly fee: $20 Lite, $109 Pro, $250 Max", "Higher rates stop after $1,000 to $2,000 a month (0.5% after that on Lite)"],
-    "links": { "official": "https://tria.so/" },
+    "links": { "official": "https://tria.so/", "affiliate": "https://app.tria.so/?accessCode=YFXSXC5574" },
     "sources": [
       { "label": "Tria Help Center: What are Tria Cards?", "url": "https://intercom.help/tria/en/articles/13513481-what-are-tria-cards", "verified": "2026-10-22" },
       { "label": "Tria app: Lite, Pro and Max membership screens", "url": "https://tria.so/", "verified": "2026-10-22" },
