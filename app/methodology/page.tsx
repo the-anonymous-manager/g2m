@@ -213,8 +213,8 @@ export default function MethodologyPage() {
         <p>
           G2M counts page views, &ldquo;Get the card&rdquo; clicks and how the tools are used (for example which cards are
           compared), with the country and the kind of device. It uses no tracking cookies, stores no IP addresses and no
-          personal details, and shares nothing with ad networks. A visitor is a code that changes every day, so visits
-          can&apos;t be linked over time. The numbers only show which cards and pages people find useful.
+          personal details, and shares nothing with ad networks. A visitor is an anonymous code that is renewed every
+          month, so visits can&apos;t be linked beyond that. The numbers only show which cards and pages people find useful.
         </p>
 
         <h2>Found a mistake?</h2>

@@ -59,11 +59,13 @@ function ensureSchema(db: D1) {
     .batch([
       db.prepare(
         `CREATE TABLE IF NOT EXISTS ev (ts INTEGER NOT NULL, day TEXT NOT NULL, name TEXT NOT NULL, path TEXT, card TEXT,
-          place TEXT, props TEXT, source TEXT, ref TEXT, country TEXT, device TEXT, vid TEXT)`
+          place TEXT, props TEXT, source TEXT, ref TEXT, country TEXT, device TEXT, vid TEXT, mid TEXT)`
       ),
       db.prepare('CREATE INDEX IF NOT EXISTS ev_day ON ev (day, name)'),
       db.prepare('CREATE TABLE IF NOT EXISTS daily (day TEXT, metric TEXT, key TEXT, n INTEGER, PRIMARY KEY (day, metric, key))')
     ])
+    // Tables made before the monthly visitor code (mid) existed get the column; "duplicate column" means it is there.
+    .then(() => db.prepare('ALTER TABLE ev ADD COLUMN mid TEXT').run().catch(() => {}))
     .catch((e) => {
       schema = null;
       throw e;
@@ -125,8 +127,11 @@ async function sha(text: string) {
 
 const salt = () => process.env.ANALYTICS_SALT || process.env.STATS_PASSWORD || 'g2m';
 
-/** Same person on the same day = same code; it cannot be turned back into an IP, and it changes at midnight UTC. */
-const visitorOf = (day: string, ip: string, ua: string) => sha(`${day}|${ip}|${ua}|${salt()}`).then((h) => h.slice(0, 16));
+/**
+ * Anonymous visitor codes; neither can be turned back into an IP. `vid`: same person, same day (changes at midnight
+ * UTC), for visitors per day. `mid`: same person, same calendar month, for unique visitors over a range.
+ */
+const visitorOf = (period: string, ip: string, ua: string) => sha(`${period}|${ip}|${ua}|${salt()}`).then((h) => h.slice(0, 16));
 
 /** Login cookie value: a hash of the password, never the password itself. */
 export const statsToken = (password: string) => sha(`stats|${password}|g2m`);
@@ -157,7 +162,7 @@ export async function record(req: Request, hit: Hit) {
     const sameSite = !refHost && Boolean(hit.ref) && hit.ref!.includes(ownHost);
     const source = hit.landing && !sameSite ? sourceOf(refHost, clip(hit.utm, 40)) : null;
     await db
-      .prepare('INSERT INTO ev (ts, day, name, path, card, place, props, source, ref, country, device, vid) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)')
+      .prepare('INSERT INTO ev (ts, day, name, path, card, place, props, source, ref, country, device, vid, mid) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)')
       .bind(
         now.getTime(),
         day,
@@ -170,7 +175,8 @@ export async function record(req: Request, hit: Hit) {
         refHost,
         /^[A-Z]{2}$/.test(country) && country !== 'XX' ? country : null,
         deviceOf(ua),
-        await visitorOf(day, ip, ua)
+        await visitorOf(day, ip, ua),
+        await visitorOf(day.slice(0, 7), ip, ua)
       )
       .run();
     if (Math.random() < 0.005) await tidy(db, day);
