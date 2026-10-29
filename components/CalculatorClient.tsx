@@ -39,7 +39,7 @@ import { Chips } from '@/components/Chips';
 import { WalletTeaser } from '@/components/WalletTeaser';
 import { TierPresets } from '@/components/TierPresets';
 import { useRegion } from '@/components/RegionContext';
-import { track } from '@/lib/analytics';
+import { spendBand, track } from '@/lib/analytics';
 
 type Props = {
   rows: CardRow[];
@@ -191,7 +191,12 @@ export function CalculatorClient({ rows, initial, initialCountry, hadCountry, pr
       '',
       `${window.location.pathname}?${p.toString().replace(/%2C/g, ',').replace(/%3A/g, ':')}`
     );
-    const t = setTimeout(() => track('Calculator', { spend: input.spend, country: country || 'ALL', mode: input.mode }), 800);
+    const t = setTimeout(() => track('Calculator', {
+          spend: spendBand(input.spend),
+          country: country || 'ALL',
+          mode: input.mode,
+          cards: input.mode === 'best' ? 'best' : input.mode === 'tiers' ? tierPicks.map(entryOf).join(',') : (picked?.slug ?? '')
+        }), 800);
     return () => clearTimeout(t);
   }, [input, country, picked, tierPicks]); // eslint-disable-line react-hooks/exhaustive-deps
 

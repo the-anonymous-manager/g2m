@@ -209,6 +209,14 @@ export default function MethodologyPage() {
           without either are ranked exactly the same way.
         </p>
 
+        <h2 id="privacy">What G2M counts</h2>
+        <p>
+          G2M counts page views, &ldquo;Get the card&rdquo; clicks and how the tools are used (for example which cards are
+          compared), with the country and the kind of device. It uses no tracking cookies, stores no IP addresses and no
+          personal details, and shares nothing with ad networks. A visitor is a code that changes every day, so visits
+          can&apos;t be linked over time. The numbers only show which cards and pages people find useful.
+        </p>
+
         <h2>Found a mistake?</h2>
         <p>
           Card terms change all the time. If something is out of date, <Link href="/submit">send us a correction</Link> and

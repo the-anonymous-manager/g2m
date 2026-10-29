@@ -13,7 +13,7 @@ import { CardArt } from '@/components/CardArt';
 import { Chips } from '@/components/Chips';
 import { ShareBar } from '@/components/ShareBar';
 import { useRegion } from '@/components/RegionContext';
-import { track } from '@/lib/analytics';
+import { spendBand, track } from '@/lib/analytics';
 
 type Props = { rows: CardRow[]; initial: CalcInput; initialNeed: FeatureKey[]; initialCountry: string; hadCountry: boolean };
 
@@ -98,7 +98,7 @@ export function WalletBuilder({ rows, initial, initialNeed, initialCountry, hadC
     const p = calcParams({ ...input, mode: 'best' }, country);
     if (need.length) p.set('need', need.join(','));
     window.history.replaceState(window.history.state, '', `${window.location.pathname}?${p.toString()}`);
-    const t = setTimeout(() => track('Wallet', { spend: input.spend, country: country || 'ALL', need: need.join(',') || 'none' }), 800);
+    const t = setTimeout(() => track('Wallet', { spend: spendBand(input.spend), country: country || 'ALL', need: need.join(',') || 'none' }), 800);
     return () => clearTimeout(t);
   }, [input, country, need]);
 

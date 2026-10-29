@@ -13,6 +13,7 @@ import { ROWS, best } from '@/components/compareRows';
 import { OutboundLink } from '@/components/OutboundLink';
 import { ShareBar } from '@/components/ShareBar';
 import { versusPath } from '@/lib/versus';
+import { track } from '@/lib/analytics';
 
 const SLOTS = 3;
 
@@ -91,6 +92,14 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
     const url = `${window.location.pathname}${slots.length ? `?c=${slots.map(entryOf).join(',')}` : ''}`;
     window.history.replaceState(window.history.state, '', url);
   }, [slots]);
+
+  // Which cards people compare, once the choice settles (also the set a link opened with).
+  const compared = slots.map(entryOf).join(',');
+  useEffect(() => {
+    if (slots.length < 2) return;
+    const t = setTimeout(() => track('Compare', { cards: compared, n: slots.length }), 1500);
+    return () => clearTimeout(t);
+  }, [compared]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const chosen = slots.map((s) => s.card);
   const preset = currentPreset(slots);

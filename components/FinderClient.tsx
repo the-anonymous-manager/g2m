@@ -81,7 +81,8 @@ export function FinderClient({ rows, initial }: { rows: CardRow[]; initial: Find
       priority: answers.priorities.join('+'),
       use: answers.uses.join('+') || 'none',
       money: answers.money.join('+'),
-      nomad: answers.passport ? 'yes' : 'no'
+      nomad: answers.passport ? 'yes' : 'no',
+      picks: picks.map((p) => p.card.slug).join(',')
     });
   }, [key]); // eslint-disable-line react-hooks/exhaustive-deps
 

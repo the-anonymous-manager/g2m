@@ -300,8 +300,15 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   time. Events already wired in: Outbound (card + placement), Compare add/open, Share, Theme, Region, Submit,
   Calculator/Finder/Wallet/Corridor use (debounced). View at plausible.io once logged in.
   Switched off 29 Oct 2026 (Plausible is paid after its 30-day trial): the env vars were removed from
-  `cf-deploy.yml`, so the site loads no analytics script. Replacement planned: G2M's own free, cookie-free
-  analytics on Cloudflare D1 with a private stats page, and Akash's own devices excluded.
+  `cf-deploy.yml`, so the site loads no analytics script.
+- G2M's own analytics (29 Oct 2026), replacing Plausible, free: Cloudflare D1 database `g2m-analytics` (binding `DB`),
+  read at g2m.life/stats with the `STATS_PASSWORD` Worker secret. Records page views (with source on the landing page,
+  country, device), every "Get the card" click on the server in `/go/[slug]` (card, spot via `?p=`, sponsored, referral,
+  country), tool use (calculator with spend bands, compare sets, finder answers + top picks, rankings filters, wallet,
+  corridors, shares, region, theme, submit) and 404s. No visitor cookies or IPs: a visitor is a daily-changing hash.
+  Bots skipped by user agent. Akash's devices are excluded by the `g2m_ignore` cookie, set when logging in to /stats
+  or with "Don't count this device"; it lasts ~400 days and is renewed at each login (logins last 30 days). Rows older
+  than 400 days roll into daily totals (`daily` table). Methodology has a "What G2M counts" section.
 
 Tested before handoff: every route, light and dark, desktop and phone widths (no sideways scrolling), filters,
 compare, finder, calculator input checks, theme memory, share images, and a clean `npm ci && npm run build`.

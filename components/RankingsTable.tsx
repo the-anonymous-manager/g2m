@@ -58,6 +58,10 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
     const qs = serializeFilters(autoCountry ? { ...f, country: '' } : f);
     const url = `${window.location.pathname}${qs ? `?${qs}` : ''}`;
     window.history.replaceState(window.history.state, '', url);
+    // Filters and sorting people use (the search box only once typing stops).
+    if (!qs) return; // back to the default view (or only the automatic country): nothing chosen
+    const t = setTimeout(() => track('Rankings', { view: qs.slice(0, 120) }), 1500);
+    return () => clearTimeout(t);
   }, [f, autoCountry]);
 
   // In a country view every card is scored and ranked for that country.
