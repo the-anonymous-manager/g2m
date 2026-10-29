@@ -155,7 +155,7 @@
     "perks": [],
     "pros": ["No annual or top-up fee", "2% base back is high for a free card"],
     "cons": ["1.7% FX on non-USD spend"],
-    "links": { "official": "https://web3.bitget.com/" },
+    "links": { "official": "https://web3.bitget.com/", "affiliate": "https://web3.bitget.com/share/3a7VKO?inviteCode=GWEI2MERCHANT" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/bitget-wallet", "verified": "2026-08-30" },
       { "label": "Bitget: Bitget Wallet Card eligible countries", "url": "https://www.bitget.com/support/articles/12560603890043", "verified": "2026-10-22" },
@@ -246,7 +246,7 @@
     "perks": ["Points rewards"],
     "pros": ["Available in 201 countries", "No annual or monthly fee, Apple Pay"],
     "cons": ["No published cashback", "$100 physical card and 1% conversion fee"],
-    "links": { "official": "https://www.redotpay.com/", "affiliate": "https://url.hk/a/t44py2" },
+    "links": { "official": "https://www.redotpay.com/", "affiliate": "https://url.hk/i/en/hy90b" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/redotpay-card", "verified": "2026-08-30" },
       { "label": "RedotPay Help Center: Card Issuance Restrictions (country list compiled by Card Map)", "url": "https://helpcenter.redotpay.com/en/articles/14254838-card-issuance-restrictions", "verified": "2026-10-25" },
@@ -395,7 +395,7 @@
     "perks": ["Credit mode: spend without selling your crypto", "Personal EUR IBAN, GBP and USD accounts"],
     "pros": ["Very low FX on European currencies", "Free ATM allowance on every tier"],
     "cons": ["Cashback only in Credit Mode, capped at $50 to $200 a month", "Needs a $5,000 portfolio for rewards"],
-    "links": { "official": "https://nexo.com/" },
+    "links": { "official": "https://nexo.com/", "affiliate": "https://nexo.com/ref/imwig0fvpw?src=ios-link" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/nexo-card", "verified": "2026-09-01" },
       { "label": "Nexo Support: Who can order the Nexo Card (country list compiled by Card Map)", "url": "https://support.nexo.com/article/who-can-order-the-nexo-card", "verified": "2026-10-03" },
@@ -1281,7 +1281,7 @@
     "perks": ["Visa Platinum benefits: purchase and price protection, extended warranty", "Yield on savings, and borrowing against them"],
     "pros": ["3% cashback in USDC with no card fees", "No fee on US-dollar purchases", "Self-custodial: your funds stay in your own wallet"],
     "cons": ["Cashback capped at $50 a month on the free tier", "1.5% on non-USD purchases", "Virtual only; not available in India"],
-    "links": { "official": "https://www.solid.xyz/" },
+    "links": { "official": "https://www.solid.xyz/", "affiliate": "https://www.solid.xyz/refer?ref=GEK07" },
     "sources": [
       { "label": "Solid: fees and limits overview", "url": "https://support.solid.xyz/en/articles/13885984-understanding-solid-s-fees", "verified": "2026-10-29" },
       { "label": "Solid: what is the Solid Card", "url": "https://support.solid.xyz/en/articles/13185531-what-is-the-solid-card", "verified": "2026-10-29" },
