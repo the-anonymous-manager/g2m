@@ -16,7 +16,7 @@
     {
       "binding": "DB",
       "database_name": "g2m-analytics",
-      "database_id": "REPLACE_WITH_DATABASE_ID"
+      "database_id": "1d0d3397-caa3-4819-881e-f1fc401f1624"
     }
   ],
   "observability": {
