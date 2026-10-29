@@ -52,6 +52,10 @@ export const EVENT_LABELS: Record<string, string> = {
   Wallet: 'Wallet builder'
 };
 
+// Unique visitors over a range use the monthly code (rows from before it existed fall back to the daily one).
+// A person counts once per calendar month: someone who comes back next month counts again.
+const U = 'COALESCE(mid, vid)';
+
 const all = async (db: D1, sql: string, ...args: unknown[]) => (await db.prepare(sql).bind(...args).all<Row>()).results;
 
 export async function report(db: D1, days: number) {
@@ -63,7 +67,7 @@ export async function report(db: D1, days: number) {
     await Promise.all([
       db
         .prepare(
-          `SELECT SUM(name = 'pageview') AS views, COUNT(DISTINCT CASE WHEN name = 'pageview' THEN vid END) AS visitors,
+          `SELECT SUM(name = 'pageview') AS views, COUNT(DISTINCT CASE WHEN name = 'pageview' THEN ${U} END) AS visitors,
              SUM(name = 'Outbound') AS clicks FROM ev WHERE day >= ?`
         )
         .bind(from)
@@ -76,14 +80,14 @@ export async function report(db: D1, days: number) {
       ),
       all(
         db,
-        `SELECT card, COUNT(*) AS clicks, SUM(json_extract(props, '$.sponsored') = 1) AS sponsored, COUNT(DISTINCT vid) AS people,
-             COUNT(DISTINCT CASE WHEN place = 'card-hero' THEN vid END) AS from_page
+        `SELECT card, COUNT(*) AS clicks, SUM(json_extract(props, '$.sponsored') = 1) AS sponsored, COUNT(DISTINCT ${U}) AS people,
+             COUNT(DISTINCT CASE WHEN place = 'card-hero' THEN ${U} END) AS from_page
            FROM ev WHERE name = 'Outbound' AND day >= ? GROUP BY card ORDER BY clicks DESC`,
         from
       ),
       all(
         db,
-        `SELECT substr(path, 8) AS card, COUNT(*) AS views, COUNT(DISTINCT vid) AS visitors FROM ev
+        `SELECT substr(path, 8) AS card, COUNT(*) AS views, COUNT(DISTINCT ${U}) AS visitors FROM ev
            WHERE name = 'pageview' AND path LIKE '/cards/%' AND day >= ? GROUP BY path`,
         from
       ),
@@ -95,13 +99,13 @@ export async function report(db: D1, days: number) {
       ),
       all(
         db,
-        `SELECT path, COUNT(*) AS views, COUNT(DISTINCT vid) AS visitors FROM ev WHERE name = 'pageview' AND day >= ?
+        `SELECT path, COUNT(*) AS views, COUNT(DISTINCT ${U}) AS visitors FROM ev WHERE name = 'pageview' AND day >= ?
            GROUP BY path ORDER BY views DESC LIMIT 40`,
         from
       ),
       all(
         db,
-        `SELECT source, COUNT(*) AS visits, COUNT(DISTINCT vid) AS visitors FROM ev
+        `SELECT source, COUNT(*) AS visits, COUNT(DISTINCT ${U}) AS visitors FROM ev
            WHERE name = 'pageview' AND source IS NOT NULL AND day >= ? GROUP BY source ORDER BY visits DESC LIMIT 30`,
         from
       ),
@@ -113,18 +117,18 @@ export async function report(db: D1, days: number) {
       ),
       all(
         db,
-        `SELECT country, COUNT(DISTINCT vid) AS visitors, COUNT(*) AS views FROM ev WHERE name = 'pageview' AND day >= ?
+        `SELECT country, COUNT(DISTINCT ${U}) AS visitors, COUNT(*) AS views FROM ev WHERE name = 'pageview' AND day >= ?
            GROUP BY country ORDER BY visitors DESC LIMIT 40`,
         from
       ),
       all(
         db,
-        `SELECT device, COUNT(DISTINCT vid) AS visitors FROM ev WHERE name = 'pageview' AND day >= ? GROUP BY device ORDER BY visitors DESC`,
+        `SELECT device, COUNT(DISTINCT ${U}) AS visitors FROM ev WHERE name = 'pageview' AND day >= ? GROUP BY device ORDER BY visitors DESC`,
         from
       ),
       all(
         db,
-        `SELECT name, COUNT(*) AS n, COUNT(DISTINCT vid) AS people FROM ev WHERE name NOT IN ('pageview', 'Outbound', '404') AND day >= ?
+        `SELECT name, COUNT(*) AS n, COUNT(DISTINCT ${U}) AS people FROM ev WHERE name NOT IN ('pageview', 'Outbound', '404') AND day >= ?
            GROUP BY name ORDER BY n DESC`,
         from
       ),

@@ -138,7 +138,7 @@ middleware.ts        stores the visitor's country for region defaults
 ## Analytics (g2m.life/stats)
 
 G2M counts its own visits in a Cloudflare D1 database (binding `DB` in `wrangler.jsonc`, database `g2m-analytics`;
-the tables create themselves). No cookies for visitors, no IP addresses stored. Page views and tool use are sent by
+the tables create themselves). No cookies for visitors, no IP addresses stored (unique visitors use an anonymous code renewed monthly). Page views and tool use are sent by
 the browser to `/api/v` (`components/PageTracker.tsx`, `lib/analytics.ts`); "Get the card" clicks are recorded on
 the server in `/go/[slug]`, so ad blockers can't hide them. Bots are skipped. Read it all at `/stats` (password
 `STATS_PASSWORD`), with CSV downloads. Logging in, or "Don't count this device", stops that device from being counted.

@@ -83,7 +83,7 @@ function Dashboard({ data, days, counted }: { data: Report; days: number; counte
       <div className="stats">
         <div className="stat">
           <b>{n(t.visitors)}</b>
-          <span className="faint">visitors</span>
+          <span className="faint">unique visitors</span>
         </div>
         <div className="stat">
           <b>{n(t.views)}</b>
@@ -98,8 +98,13 @@ function Dashboard({ data, days, counted }: { data: Report; days: number; counte
           <span className="faint">clicks per 100 visitors</span>
         </div>
       </div>
+      <p className="faint" style={{ fontSize: 14, marginTop: -16 }}>
+        Unique visitors: each person once, however many times they come back. A visitor is an anonymous code (no cookies)
+        that is renewed each calendar month, so someone who returns next month counts again, and a phone that switches
+        networks can count twice.
+      </p>
 
-      <Section title="Day by day" note="Light bars: visitors. Dark marks inside: Get the card clicks. Hover or tap a day for its numbers.">
+      <Section title="Day by day" note="Light bars: unique visitors that day. Dark marks inside: Get the card clicks. Hover or tap a day for its numbers.">
         <Daily rows={data.daily} />
       </Section>
 

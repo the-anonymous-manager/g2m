@@ -305,7 +305,8 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   read at g2m.life/stats with the `STATS_PASSWORD` Worker secret. Records page views (with source on the landing page,
   country, device), every "Get the card" click on the server in `/go/[slug]` (card, spot via `?p=`, sponsored, referral,
   country), tool use (calculator with spend bands, compare sets, finder answers + top picks, rankings filters, wallet,
-  corridors, shares, region, theme, submit) and 404s. No visitor cookies or IPs: a visitor is a daily-changing hash.
+  corridors, shares, region, theme, submit) and 404s. No visitor cookies or IPs: a visitor is a hash that changes daily (`vid`, visitors per day) plus one that
+  changes monthly (`mid`, unique visitors over a range; a person counts once per calendar month).
   Bots skipped by user agent. Akash's devices are excluded by the `g2m_ignore` cookie, set when logging in to /stats
   or with "Don't count this device"; it lasts ~400 days and is renewed at each login (logins last 30 days). Rows older
   than 400 days roll into daily totals (`daily` table). Methodology has a "What G2M counts" section.
