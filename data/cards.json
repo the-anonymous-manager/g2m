@@ -1214,7 +1214,8 @@
     ],
     "lastChecked": "2026-10-28",
     "addedOn": "2026-10-28",
-    "metal": "gunmetal"
+    "metal": "gunmetal",
+    "image": { "source": "https://g2m.life/card-originals/pionex.webp", "file": "/card-images/pionex-e4a16f40.webp" }
   },
   {
     "slug": "dogpay",
@@ -1253,7 +1254,8 @@
     ],
     "lastChecked": "2026-10-28",
     "addedOn": "2026-10-28",
-    "metal": "gold"
+    "metal": "gold",
+    "image": { "source": "https://g2m.life/card-originals/dogpay.webp", "file": "/card-images/dogpay-c4c811ef.webp" }
   },
   {
     "slug": "solid",
@@ -1288,7 +1290,8 @@
     ],
     "lastChecked": "2026-10-29",
     "addedOn": "2026-10-29",
-    "metal": "champagne"
+    "metal": "champagne",
+    "image": { "source": "https://g2m.life/card-originals/solid.webp", "file": "/card-images/solid-3344ad54.webp" }
   },
   {
     "slug": "cashi",
@@ -1300,10 +1303,10 @@
     "forms": ["virtual"],
     "custody": "custodial",
     "summary": "A stablecoin Visa from Cashi with category cashback: 3% on subscriptions, 2% online and 1% on travel, each capped. No fee in US dollars, 1% on other currencies.",
-    "cashback": { "basePct": 0, "maxPct": 3, "payout": "Spending credit", "note": "Only on eligible categories: 3% on one monthly subscription charge per merchant, 2% online (up to $10 a month per selected shop, plus $10 across other shops), 1% on travel (up to $20 a month). Paid as spending credit for the card, not withdrawable." },
-    "fees": { "annualUsd": null, "fxPct": 1, "fxNote": "No Cashi fee on US-dollar purchases; 1% conversion fee when a merchant charges in another currency.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "atm": null, "other": ["Card and account fees are not listed on the website; the terms say fees are shown in the app", "Deposits and transfers: no Cashi fee, network fee only"] },
+    "cashback": { "basePct": 0, "maxPct": 3, "payout": "Spending credit", "note": "Only on eligible categories: 3% on one monthly charge per service (Amazon Prime, Google One, Canva, Uber One; not via the Apple App Store); 2% on online shopping, on the first $500 a month at each named store plus $500 a month across other eligible online stores; 1% on travel, up to $20 cashback a month and $2,000 per booking. No cashback on in-person purchases outside travel. Paid as spending credit for the card: never expires, not withdrawable." },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "No Cashi fee on US-dollar purchases; 1% conversion fee when a merchant charges in another currency.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "atm": null, "other": ["Card activation $5, returned straight away as $5 spending credit (needs $5 in your balance)", "No monthly or inactivity fee", "Dispute $50 (asking the merchant for a refund is free)", "Wrong-deposit recovery $10, only if recovered", "Cash deposits and sends: fee shown in the app; crypto deposits and sends: network fee only", "Daily spending limit you set, up to $50,000"] },
     "tiers": [
-      { "name": "Cashi Card", "feeUsdYear": null, "cashbackPct": 0, "perks": ["3% on subscriptions, 2% online, 1% travel (capped)"] }
+      { "name": "Cashi Card", "feeUsdYear": 0, "cashbackPct": 0, "perks": ["3% on subscriptions, 2% online, 1% travel (capped)"] }
     ],
     "coverage": { "countries": null, "scope": "App in 100+ countries; Cashi does not publish a card country list", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 20, "ramps": "both", "credit": null, "yield": null },
@@ -1316,11 +1319,14 @@
     "sources": [
       { "label": "Cashi homepage and FAQ (fees, cashback, Google Pay)", "url": "https://cashi.com/", "verified": "2026-10-29" },
       { "label": "Cashi terms and cashback schedule", "url": "https://cashi.com/terms", "verified": "2026-10-29" },
-      { "label": "Cashi blog: launch of the global card (100+ countries)", "url": "https://cashi.com/blog/cashi-launches-global-card-turning-stablecoins-into-everyday-spending-money", "verified": "2026-10-29" }
+      { "label": "Cashi blog: launch of the global card (100+ countries)", "url": "https://cashi.com/blog/cashi-launches-global-card-turning-stablecoins-into-everyday-spending-money", "verified": "2026-10-29" },
+      { "label": "Cashi Help: Cashi card fees & limits (text from Akash)", "url": "https://help.cashi.com/en/articles/14524303-cashi-card-fees-limits", "verified": "2026-10-29" },
+      { "label": "Cashi Help: How 3-2-1 Cashi cashback works (text from Akash)", "url": "https://help.cashi.com/en/articles/15653216-how-3-2-1-cashi-cashback-works", "verified": "2026-10-29" }
     ],
     "lastChecked": "2026-10-29",
     "addedOn": "2026-10-29",
-    "metal": "rose"
+    "metal": "rose",
+    "image": { "source": "https://g2m.life/card-originals/cashi.webp", "file": "/card-images/cashi-e42703b6.webp" }
   },
   {
     "slug": "kite",
