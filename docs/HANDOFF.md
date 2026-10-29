@@ -299,6 +299,9 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   (`NEXT_PUBLIC_PLAUSIBLE_DOMAIN`, `NEXT_PUBLIC_PLAUSIBLE_SRC`), since Next bakes `NEXT_PUBLIC_*` vars in at build
   time. Events already wired in: Outbound (card + placement), Compare add/open, Share, Theme, Region, Submit,
   Calculator/Finder/Wallet/Corridor use (debounced). View at plausible.io once logged in.
+  Switched off 29 Oct 2026 (Plausible is paid after its 30-day trial): the env vars were removed from
+  `cf-deploy.yml`, so the site loads no analytics script. Replacement planned: G2M's own free, cookie-free
+  analytics on Cloudflare D1 with a private stats page, and Akash's own devices excluded.
 
 Tested before handoff: every route, light and dark, desktop and phone widths (no sideways scrolling), filters,
 compare, finder, calculator input checks, theme memory, share images, and a clean `npm ci && npm run build`.
