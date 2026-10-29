@@ -907,8 +907,8 @@ body::before {
 .card-art.sm .card-art-inner {
   display: none;
 }
-/* A real card picture: no metal behind it, and the picture fills the card shape. An upright card is
-   fitted inside on a transparent background, so the shadow follows the picture, not the box. */
+/* A real card picture: no metal behind it, and the picture fills the card shape. (An upright picture is
+   fitted inside on a transparent background; lay it flat instead, see HANDOFF "Card picture rule".) */
 .card-art.photo {
   background: none;
   border-color: transparent;
@@ -926,8 +926,11 @@ body::before {
   object-fit: cover;
   border-radius: inherit;
 }
+/* box-shadow, not filter: drop-shadow. On a tilted card (card pages rotate it) iPhone Safari paints a
+   drop-shadow as a grey rectangle the size of the tilted card's bounding box. The picture fills the
+   card shape (border-radius above), so a box-shadow follows its rounded corners. */
 .card-art.photo:not(.sm) img {
-  filter: drop-shadow(0 18px 28px rgba(20, 12, 8, 0.28));
+  box-shadow: 0 18px 28px rgba(20, 12, 8, 0.28);
 }
 
 /* ---------- Hero ---------- */
