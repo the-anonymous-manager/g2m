@@ -3,6 +3,7 @@ import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Analytics } from '@/components/Analytics';
+import { PageTracker } from '@/components/PageTracker';
 import { NavMemory } from '@/components/BackButton';
 import { RegionProvider } from '@/components/RegionContext';
 import { themeInitScript } from '@/components/ThemeToggle';
@@ -71,6 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MotionRoot />
         <NavMemory />
         <Analytics />
+        <PageTracker />
       </body>
     </html>
   );

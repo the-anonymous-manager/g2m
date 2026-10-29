@@ -57,6 +57,7 @@ Copy `.env.example` to `.env.local` for local use, or add them in Vercel.
 | `NEXT_PUBLIC_TWITTER_HANDLE` | Your X handle, default `@0akash0x`. Adds an X link and Twitter card tags |
 | `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | Turns on Plausible analytics for that domain (no cookies) |
 | `NEXT_PUBLIC_PLAUSIBLE_SRC` | Custom Plausible script URL, from your Plausible account's "Installation" screen (optional) |
+| `STATS_PASSWORD` | Password for the private stats page at `/stats`. On Cloudflare: a Worker secret (same place as below) |
 | `COINGECKO_API_KEY` | CoinGecko demo key for live staking-token prices. On Cloudflare: a Worker secret (Workers & Pages → g2m → Settings → Variables and Secrets). Optional: DefiLlama is the backup |
 
 ## Edit cards in the Google Sheet
@@ -134,7 +135,15 @@ public/brand/        logo files (SVG, PNG, X avatar)
 middleware.ts        stores the visitor's country for region defaults
 ```
 
-Analytics events (Plausible or any tool listening to the `g2m:track` browser event): Outbound, Compare add,
-Compare open, Share, Finder, Calculator, Region, Theme, Submit.
+## Analytics (g2m.life/stats)
+
+G2M counts its own visits in a Cloudflare D1 database (binding `DB` in `wrangler.jsonc`, database `g2m-analytics`;
+the tables create themselves). No cookies for visitors, no IP addresses stored. Page views and tool use are sent by
+the browser to `/api/v` (`components/PageTracker.tsx`, `lib/analytics.ts`); "Get the card" clicks are recorded on
+the server in `/go/[slug]`, so ad blockers can't hide them. Bots are skipped. Read it all at `/stats` (password
+`STATS_PASSWORD`), with CSV downloads. Logging in, or "Don't count this device", stops that device from being counted.
+
+Events: pageview, 404, Outbound (server), Calculator, Compare, Compare add, Compare open, Corridor, Finder, Rankings,
+Region, Share, Submit, Theme, Wallet. New event names must be added to the list in `app/api/v/route.ts`.
 
 Not financial advice. Card terms change often; keep `lastChecked` current.

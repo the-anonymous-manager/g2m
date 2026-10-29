@@ -23,5 +23,5 @@ export function middleware(req: NextRequest) {
 
 export const config = {
   // Pages only: skip static files, images, the API-style /go redirects and metadata files.
-  matcher: ['/((?!_next/|go/|favicon|icon|apple-icon|opengraph-image|robots.txt|sitemap.xml|.*\\..*).*)']
+  matcher: ['/((?!_next/|go/|api/|favicon|icon|apple-icon|opengraph-image|robots.txt|sitemap.xml|.*\\..*).*)']
 };

@@ -2375,3 +2375,69 @@ body::before {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* ---------- Private /stats page ---------- */
+.st-table {
+  min-width: 0;
+  font-size: 14px;
+}
+.st-table td:first-child {
+  position: relative;
+  max-width: 420px;
+  overflow-wrap: anywhere;
+}
+.st-bar {
+  position: absolute;
+  inset: 6px auto 6px 0;
+  border-radius: 0 6px 6px 0;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  pointer-events: none;
+}
+.st-label {
+  position: relative;
+}
+.st-tag {
+  margin-left: 8px;
+  font-size: 11px;
+  vertical-align: middle;
+}
+.st-days {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 140px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+}
+.st-day {
+  position: relative;
+  flex: 1 1 0;
+  max-width: 48px;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  min-width: 1px;
+}
+.st-day span {
+  width: 100%;
+  border-radius: 3px 3px 0 0;
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+}
+.st-day b {
+  position: absolute;
+  left: 30%;
+  right: 30%;
+  bottom: 0;
+  min-height: 2px;
+  border-radius: 2px 2px 0 0;
+  background: var(--accent);
+}
+.st-ok {
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.chip[aria-current='page'] {
+  border-color: var(--accent);
+  color: var(--accent);
+}

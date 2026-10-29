@@ -1,10 +1,9 @@
 'use client';
 
-import { track } from '@/lib/analytics';
 import { ArrowIcon } from '@/components/bits';
 
-// Every "Get the card" button goes through /go/[slug], which adds UTM tags and,
-// when you add one in cards.json, swaps in your referral link.
+// Every "Get the card" button goes through /go/[slug], which adds UTM tags, swaps in your referral link
+// when the card has one, and records the click for /stats (?p= = where on the site it was clicked).
 export function OutboundLink({
   slug,
   name,
@@ -23,11 +22,10 @@ export function OutboundLink({
 }) {
   return (
     <a
-      href={`/go/${slug}${campaign ? `?c=${campaign}` : ''}`}
+      href={`/go/${slug}?p=${encodeURIComponent(placement)}${campaign ? `&c=${campaign}` : ''}`}
       target="_blank"
       rel="nofollow sponsored noopener"
       className={className}
-      onClick={() => track('Outbound', { card: slug, placement })}
     >
       {children ?? <>Get the {name}</>}
       <ArrowIcon />

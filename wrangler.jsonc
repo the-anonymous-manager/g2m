@@ -10,6 +10,15 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
+  // G2M's own analytics (lib/stats): page views and "Get the card" clicks, read on the private /stats page.
+  // Created in the Cloudflare dashboard (Workers & Pages → D1). The tables create themselves on first use.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "g2m-analytics",
+      "database_id": "REPLACE_WITH_DATABASE_ID"
+    }
+  ],
   "observability": {
     "enabled": true
   },
