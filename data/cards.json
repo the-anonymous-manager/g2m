@@ -1338,18 +1338,18 @@
     "forms": ["virtual"],
     "custody": "self-custodial",
     "summary": "A prepaid USD Visa from the Kite wallet app, for nine Asia-Pacific countries: free card, 0.53% to load it, 1.8% on non-USD spending.",
-    "cashback": { "basePct": 0, "maxPct": null, "payout": null, "note": "No standard cashback. Time-limited 5% offers at selected merchants (Grab, Travala, AI and streaming subscriptions) until 30 Nov 2026, and a spend-based welcome reward of up to $200." },
+    "cashback": { "basePct": 0, "maxPct": 5, "payout": "USD", "note": "No cashback on everyday spending. Until 30 Nov 2026: 5% back on Grab, Travala travel bookings, iShopChangi, Starlink, and one monthly charge per service for Netflix, YouTube Premium, Prime Video, Spotify, eligible AI tools (e.g. ChatGPT Plus, Claude Pro) and Figma, LinkedIn, X or Telegram Premium. No cap. Also 5% on some crypto event tickets (up to $200) and 50% off the first QR payment (up to $10). Paid in USD to the card after each month, once 30 days have passed. Plus a spend-based welcome reward of up to $200." },
     "fees": { "annualUsd": 0, "fxPct": 1.8, "fxNote": "Spending in USD is free; 1.8% on other currencies. Money on the card is held in USD.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0.53, "cardFeeUsd": 0, "atm": "Coming soon", "other": ["Card replacement free", "Limits: $50,000 or 50 purchases a day; $990,000 a year"] },
     "tiers": [
-      { "name": "Kite Card", "feeUsdYear": 0, "cashbackPct": 0, "perks": ["Time-limited 5% offers at selected merchants"] }
+      { "name": "Kite Card", "feeUsdYear": 0, "cashbackPct": 0, "perks": ["5% back on Grab, Travala, streaming, AI and creator subscriptions and Starlink until 30 Nov 2026 (no cap)"] }
     ],
     "coverage": { "countries": 9, "scope": "Nine countries in Asia-Pacific", "examples": ["Singapore", "Japan", "Australia", "Philippines"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "no", "EU": "no" }, "countryList": { "yes": ["AU", "JP", "KR", "MY", "PH", "SG", "TH", "TW", "VN"], "others": "no" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 17, "ramps": "both", "credit": null, "yield": null },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
     "perks": ["Non-custodial Kite wallet", "USD account to receive ACH and wires", "Cash out to banks in 17 countries"],
-    "pros": ["No card fees; free US-dollar spending", "Apple Pay and Google Pay", "Non-custodial wallet with local cash-out"],
-    "cons": ["0.53% to load the card and 1.8% on non-USD spending", "No standard cashback", "Only nine countries; money on the card is a prepaid USD balance"],
+    "pros": ["No card fees; free US-dollar spending", "5% back on Grab, travel, streaming and AI subscriptions until 30 Nov 2026", "Apple Pay and Google Pay", "Non-custodial wallet with local cash-out"],
+    "cons": ["0.53% to load the card and 1.8% on non-USD spending", "No cashback on everyday spending; the 5% offers end 30 Nov 2026", "Only nine countries; money on the card is a prepaid USD balance"],
     "links": { "official": "https://www.kiteapp.xyz/spend" },
     "sources": [
       { "label": "Kite: Spend (fees and countries)", "url": "https://www.kiteapp.xyz/spend", "verified": "2026-10-29" },
@@ -1357,7 +1357,10 @@
       { "label": "Kite Help: getting your Kite card (eligibility)", "url": "https://www.kiteapp.xyz/help/getting-your-kite-card-what-it-is-eligibility", "verified": "2026-10-29" },
       { "label": "Kite: offers", "url": "https://www.kiteapp.xyz/offers", "verified": "2026-10-29" },
       { "label": "Kite: on and off ramp countries", "url": "https://www.kiteapp.xyz/on-off-ramp", "verified": "2026-10-29" },
-      { "label": "Kite: USD account", "url": "https://www.kiteapp.xyz/global-usd-and-euro-account", "verified": "2026-10-29" }
+      { "label": "Kite: USD account", "url": "https://www.kiteapp.xyz/global-usd-and-euro-account", "verified": "2026-10-29" },
+      { "label": "Kite: offers and rewards terms (30-day pending, paid per offer terms)", "url": "https://www.kiteapp.xyz/offer-reward-terms", "verified": "2026-10-29" },
+      { "label": "Kite offer: 5% back on Grab (no cap, paid in USD to the card)", "url": "https://www.kiteapp.xyz/offers/grab", "verified": "2026-10-29" },
+      { "label": "Kite offer: 5% back on AI subscriptions (no cap)", "url": "https://www.kiteapp.xyz/offers/ai-subscriptions", "verified": "2026-10-29" }
     ],
     "lastChecked": "2026-10-29",
     "addedOn": "2026-10-29",
