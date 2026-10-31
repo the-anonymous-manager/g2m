@@ -1387,6 +1387,7 @@
     ],
     "coverage": { "countries": null, "scope": "Worldwide except Hong Kong and sanctioned countries; in the US only the Virtual card (online)", "examples": ["United States", "United Kingdom", "India", "Germany"], "markets": { "IN": "yes", "AE": "yes", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": [], "no": ["HK"], "unclear": ["CU", "IR", "KP", "SY"], "others": "yes" } },
     "ecosystem": { "iban": null, "payoutCorridors": null, "ramps": null, "credit": false, "yield": false },
+    "noIdCheck": "Virtual card",
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["SOL", "USDC", "USDT", "EURC", "USDG", "ETH", "BTC", "LTC", "BNB", "POL", "AVAX", "HYPE", "JITO", "SOLC"],
     "perks": ["No ID check needed for the Virtual card", "Physical Platinum card with Apple Pay and Google Pay", "Top up from 13 networks, incl. Bitcoin, Solana and Tron", "SOLC staking: free cards and cashback"],
@@ -1402,6 +1403,46 @@
     ],
     "lastChecked": "2026-10-31",
     "addedOn": "2026-10-31",
-    "metal": "black"
+    "metal": "black",
+    "image": { "source": "https://g2m.life/card-originals/solcard.webp", "file": "/card-images/solcard-7c9036b7.webp" }
+  },
+  {
+    "slug": "laso",
+    "name": "Laso Finance Card",
+    "brand": "Laso Finance",
+    "issuer": null,
+    "network": "Visa",
+    "type": "prepaid",
+    "forms": ["virtual"],
+    "custody": "custodial",
+    "summary": "Single-load prepaid Visa cards bought with stablecoins and no ID check: free for US merchants, 3.8% for the card that works worldwide. Cards expire after 6 months.",
+    "cashback": { "basePct": 0, "maxPct": null, "payout": null, "note": "No cashback." },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "International card: about 2% on purchases in other currencies; US-dollar purchases have no FX fee. The US card is for US merchants only.", "fxByCurrency": { "USD": 0 }, "topUpPct": 3.8, "cardFeeUsd": 0, "atm": null, "other": ["Card purchase fee 3.8% on the international card ($100 to $1,000), 0% on the US card ($5 to $1,000) and the Canadian card", "No monthly, per-purchase or decline fees", "Single-load cards expire 6 months after issue; any balance left is lost", "Reloadable card (ID check): 0% to top up, $5 to $10,000", "Payouts: debit card 4.8% (min $1.50), Venmo or PayPal 4.9% (min $1.50), bank payment 0.25% (min $1.50)"] },
+    "tiers": [
+      { "name": "International card", "feeUsdYear": 0, "cashbackPct": 0, "fxPct": 2, "requirement": "No ID check; one load of $100 to $1,000", "perks": ["Works with merchants worldwide", "3.8% card purchase fee", "Expires after 6 months"] },
+      { "name": "US card", "feeUsdYear": 0, "cashbackPct": 0, "fxPct": 0, "requirement": "No ID check; one load of $5 to $1,000; US merchants and US shipping only", "perks": ["No card purchase fee", "Google Pay and Samsung Pay", "Expires after 6 months"] },
+      { "name": "Reloadable card", "feeUsdYear": 0, "cashbackPct": 0, "requirement": "Laso identity verification", "perks": ["Top up from $5 to $10,000 with no fee", "Many cards from one balance", "Withdraw unspent balance as USDC on Base"] }
+    ],
+    "coverage": { "countries": null, "scope": "US card for US merchants; international card for merchants worldwide, no published country list", "examples": ["United States"], "markets": { "IN": "unknown", "AE": "unknown", "US": "yes", "GB": "unknown", "EU": "unknown" } },
+    "ecosystem": { "iban": null, "payoutCorridors": null, "ramps": "off", "credit": false, "yield": null },
+    "noIdCheck": "US and international cards",
+    "wallets": { "applePay": null, "googlePay": true },
+    "assets": ["USDC", "USDT", "DAI"],
+    "perks": ["No ID check for the US and international cards", "Cards issued in seconds", "Gift cards for 3,000+ brands; Venmo, PayPal and debit card payouts", "AI agents can order cards through its API"],
+    "pros": ["No ID check and no bank account needed", "US card has no fees at all", "Pay out to Venmo, PayPal or a debit card"],
+    "cons": ["Single-load cards expire after 6 months and leftover balance is lost", "International card: 3.8% to buy plus about 2% FX", "No cashback; Apple Pay not confirmed"],
+    "links": { "official": "https://laso.finance/" },
+    "sources": [
+      { "label": "Laso Finance: products, fees and FAQ (full reference; card network Visa confirmed by G2M from the card)", "url": "https://laso.finance/llms-full.txt", "verified": "2026-10-31" },
+      { "label": "Laso Finance: live pricing per product (card fees, limits)", "url": "https://laso.finance/get-pricing", "verified": "2026-10-31" },
+      { "label": "Laso Finance: where each product can be used", "url": "https://laso.finance/get-supported-countries", "verified": "2026-10-31" },
+      { "label": "Laso Finance guide: international prepaid card (expiry, billing)", "url": "https://docs.laso.finance/guides/international-prepaid-card", "verified": "2026-10-31" },
+      { "label": "Laso Finance guide: reloadable card (ID check, top-ups, withdrawals)", "url": "https://docs.laso.finance/guides/reloadable-card", "verified": "2026-10-31" },
+      { "label": "Laso Finance: home page (Google Pay, FinCEN-registered MSB)", "url": "https://laso.finance/", "verified": "2026-10-31" }
+    ],
+    "lastChecked": "2026-10-31",
+    "addedOn": "2026-10-31",
+    "metal": "black",
+    "image": { "source": "https://g2m.life/card-originals/laso.png", "file": "/card-images/laso-555569de.webp" }
   }
 ]
