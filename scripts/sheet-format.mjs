@@ -230,7 +230,8 @@ const SOURCE_COLUMNS = [
   ['Verified on', (c, s) => s.verified ?? '']
 ];
 
-const SPONSOR_COLUMNS = ['Card ID', 'Start', 'End'];
+// The home page's top spot: Type is "Featured" (paid; needs both dates; empty also means Featured) or "Our pick".
+const SPONSOR_COLUMNS = ['Card ID', 'Start', 'End', 'Type'];
 // Home page "Our picks": Type is "Our pick" or "Featured" (paid; "Sponsored" also accepted); dates are needed for
 // Featured, optional otherwise.
 const PICK_COLUMNS = ['Slot', 'Card ID', 'Type', 'Why (one line)', 'Start', 'End'];
@@ -249,7 +250,7 @@ export function cardsToTables(cards, sponsor, picks = []) {
       ...cards.filter((c) => c.coverage.countryList).map((c) => LIST_COLUMNS.map(([, get]) => get(c)))
     ],
     Sources: [head(SOURCE_COLUMNS), ...cards.flatMap((c) => c.sources.map((s) => SOURCE_COLUMNS.map(([, get]) => get(c, s))))],
-    Sponsor: [SPONSOR_COLUMNS, [sponsor.slug ?? '', sponsor.start ?? '', sponsor.end ?? '']],
+    Sponsor: [SPONSOR_COLUMNS, [sponsor.slug ?? '', sponsor.start ?? '', sponsor.end ?? '', sponsor.slug ? PICK_TYPE[sponsor.type ?? 'sponsored'] : '']],
     Picks: [PICK_COLUMNS, ...picks.map((p) => [String(p.slot), p.slug, PICK_TYPE[p.type], p.note ?? '', p.start ?? '', p.end ?? ''])]
   };
 }
@@ -443,12 +444,19 @@ export function tablesToCards(tables, previous = null, today = null) {
   });
 
   const s = sponsorRows[0];
+  const sponsorKind = s ? str(s.get('Type')).toLowerCase() : '';
+  const sponsorType =
+    sponsorKind === '' || sponsorKind === 'featured' || sponsorKind === 'sponsored' ? 'sponsored' : sponsorKind === 'our pick' || sponsorKind === 'pick' ? 'pick' : null;
+  if (!sponsorType) errors.push('Sponsor, column "Type": use "Featured" (paid) or "Our pick".');
   const sponsor = {
     slug: s ? str(s.get('Card ID')) || null : null,
     start: s ? str(s.get('Start')) || null : null,
-    end: s ? str(s.get('End')) || null : null
+    end: s ? str(s.get('End')) || null : null,
+    type: sponsorType ?? 'sponsored'
   };
   if (sponsor.slug && !slugs.has(sponsor.slug)) errors.push(`Sponsor: no card with Card ID "${sponsor.slug}" on the Cards tab.`);
+  if (sponsor.slug && sponsor.type === 'sponsored' && (!sponsor.start || !sponsor.end))
+    errors.push('Sponsor: a paid (Featured) booking needs both a Start and an End date. For your own choice, set Type to "Our pick".');
 
   const picks = pickRows.map((r) => {
     const slot = Number(str(r.get('Slot')));

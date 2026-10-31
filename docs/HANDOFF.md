@@ -314,6 +314,10 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   needs no identity verification (SolCard: `Virtual card`). Card page badge, rankings filter (`?noid=1`) and a compare
   row. Score unchanged. SolCard added the same day (Virtual 5% top-up + $10/card, no ID; Platinum KYC, no top-up fee,
   not in the US; cashback only via SOLC staking tiers).
+- Home page top spot, 31 Oct 2026: Akash said no one had paid, so KAST's "Featured · Sponsored" booking was removed
+  (it was mislabelled as paid). The Sponsor tab now has a Type column: "Featured" (paid, both dates, "Sponsored"
+  note) or "Our pick" (his own choice, no dates needed, note "nobody paid for this spot"). Solid is set as Our pick;
+  the three Our picks are COCA, ether.fi and Plasma One (Picks tab, no dates).
 
 Tested before handoff: every route, light and dark, desktop and phone widths (no sideways scrolling), filters,
 compare, finder, calculator input checks, theme memory, share images, and a clean `npm ci && npm run build`.

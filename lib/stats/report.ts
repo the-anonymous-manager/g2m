@@ -22,7 +22,8 @@ export type Row = Record<string, string | number | null>;
 // Where on the site a "Get the card" button sits (OutboundLink placement).
 const PLACES: [RegExp, string][] = [
   [/^hero-sponsored$/, 'Home: Featured (sponsored)'],
-  [/^hero-top$/, 'Home: Featured'],
+  [/^hero-top$/, 'Home: top spot (top ranked)'],
+  [/^hero-pick$/, 'Home: top spot (our pick)'],
   [/^pick-(\d)$/, 'Home: Our picks slot $1'],
   [/^card-hero$/, 'Card page'],
   [/^compare$/, 'Compare'],
