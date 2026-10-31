@@ -658,7 +658,7 @@
     "perks": ["No locked funds required"],
     "pros": ["0% FX on every tier", "Up to 8% back on top tiers"],
     "cons": ["Base tier pays only 0.5%", "Upper-tier requirements not published"],
-    "links": { "official": "https://wirexapp.com/" },
+    "links": { "official": "https://wirexapp.com/", "affiliate": "https://wirex.onelink.me/gi8H/referral?deep_link_sub1=referral_code:0x50Bc147B516f35725b947D395C0320d0af25CD3e" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/wirex-one", "verified": "2026-08-29" },
       { "label": "Wirex One Help: How to top up via stablecoin deposit", "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088523-how-to-top-up-your-usd-or-eur-account-via-stablecoin-deposit", "verified": "2026-10-25" },
