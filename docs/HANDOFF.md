@@ -316,7 +316,7 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   not in the US; cashback only via SOLC staking tiers).
 - Home page top spot, 31 Oct 2026: Akash said no one had paid, so KAST's "Featured · Sponsored" booking was removed
   (it was mislabelled as paid). The Sponsor tab now has a Type column: "Featured" (paid, both dates, "Sponsored"
-  note) or "Our pick" (his own choice, no dates needed, note "nobody paid for this spot"). Solid is set as Our pick;
+  note) or "Our pick" (his own choice, no dates needed, note "Our pick, chosen by G2M."). Solid is set as Our pick;
   the three Our picks are COCA, ether.fi and Plasma One (Picks tab, no dates).
 
 Tested before handoff: every route, light and dark, desktop and phone widths (no sideways scrolling), filters,
