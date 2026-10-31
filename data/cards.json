@@ -1071,7 +1071,7 @@
     "perks": ["Yield on your card balance (variable)"],
     "pros": ["1% with no tokens needed", "Up to 8% on higher tiers", "Free ATM withdrawals up to $250 a month"],
     "cons": ["Higher tiers need you to hold COCA tokens", "FX fee not published", "Not offered in the US"],
-    "links": { "official": "https://www.coca.xyz/" },
+    "links": { "official": "https://www.coca.xyz/", "affiliate": "https://coca.sjv.io/c/8068794/4117922/47661" },
     "sources": [
       { "label": "COCA docs: membership tiers", "url": "https://docs.coca.xyz/coca/membership-and-rewards/membership-you-deserve", "verified": "2026-10-24" },
       { "label": "COCA docs: COCA Card fees and limits", "url": "https://docs.coca.xyz/coca/banking-account/coca-card", "verified": "2026-10-24" },
@@ -1366,5 +1366,42 @@
     "addedOn": "2026-10-29",
     "metal": "silver",
     "image": { "source": "https://g2m.life/card-originals/kite.png", "file": "/card-images/kite-d251244c.webp" }
+  },
+  {
+    "slug": "solcard",
+    "name": "SolCard",
+    "brand": "SolCard",
+    "issuer": null,
+    "network": "Visa / Mastercard",
+    "type": "prepaid",
+    "forms": ["virtual", "physical"],
+    "custody": "custodial",
+    "summary": "A prepaid crypto card topped up from 13 networks: a Virtual card with no ID check (5% to load plus $10 per card) or a Platinum card with ID check and no load fee. Cashback only for large SOLC stakers.",
+    "cashback": { "basePct": 0, "maxPct": 1.25, "payout": "USDT or USDC", "note": "No cashback on the card itself. Staking SOLC (no lock): 250,000 SOLC (Signature) gives 1% on crypto deposits you then spend, up to $125 a month; 1,000,000 SOLC (Private) gives 1.25% on crypto deposits and 1% on stablecoin deposits you spend, up to $500 a month. Stablecoin deposits earn nothing at Signature. Credited as you spend, claimable after 7 days ($10 minimum), paid in USDT or USDC to your Solana wallet; lost if your stake drops below the tier first. Rewards expire 90 days after they are credited." },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "1-2% on the Virtual card and 0-1.5% on Platinum when spending in other currencies (SolCard publishes ranges). The card balance is in US dollars, so US-dollar spending has no FX fee.", "fxByCurrency": { "USD": 0 }, "topUpPct": 5, "cardFeeUsd": 10, "atm": null, "other": ["Top-up fee 5% on the Virtual card, 0% on Platinum (charged on the amount you send)", "$10 issuance fee for each new Virtual card; the Platinum card's price is not published", "No monthly or annual fee", "Virtual card spending limit $10,000 a month; Platinum no limit", "Withdrawing the card balance back to crypto is free from 10,000 SOLC staked"] },
+    "tiers": [
+      { "name": "Virtual", "feeUsdYear": 0, "cashbackPct": 0, "fxPct": 2, "requirement": "Email sign-up, no ID check", "perks": ["Online only, no Apple Pay or Google Pay", "5% top-up fee plus $10 per new card", "Up to $10,000 a month"] },
+      { "name": "Platinum", "feeUsdYear": 0, "feeNote": "No annual fee; the card's issuance price is shown at checkout, not published", "cashbackPct": 0, "fxPct": 1.5, "requirement": "Identity verification (not available in the US)", "perks": ["Physical card with Apple Pay and Google Pay", "No top-up fee", "No monthly spending limit", "Priority support"], "exceptCountries": ["US"] },
+      { "name": "Signature", "feeUsdYear": 0, "feeNote": "No fee; stake 250,000 SOLC, unstake anytime", "cashbackPct": 1, "capMonthlyUsd": 125, "requirement": "Stake 250,000 SOLC (no lock)", "stake": { "token": "SOLC", "amount": 250000, "coingeckoId": "solcard" }, "perks": ["1% on crypto (not stablecoin) deposits you spend, up to $125 a month", "10 free cards a year", "No fee to withdraw to crypto"] },
+      { "name": "Private", "feeUsdYear": 0, "feeNote": "No fee; stake 1,000,000 SOLC, unstake anytime", "cashbackPct": 1.25, "capMonthlyUsd": 500, "requirement": "Stake 1,000,000 SOLC (no lock)", "stake": { "token": "SOLC", "amount": 1000000, "coingeckoId": "solcard" }, "perks": ["1.25% on crypto and 1% on stablecoin deposits you spend, up to $500 a month", "Unlimited free cards (15 active)", "Dedicated support"] }
+    ],
+    "coverage": { "countries": null, "scope": "Worldwide except Hong Kong and sanctioned countries; in the US only the Virtual card (online)", "examples": ["United States", "United Kingdom", "India", "Germany"], "markets": { "IN": "yes", "AE": "yes", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": [], "no": ["HK"], "unclear": ["CU", "IR", "KP", "SY"], "others": "yes" } },
+    "ecosystem": { "iban": null, "payoutCorridors": null, "ramps": null, "credit": false, "yield": false },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["SOL", "USDC", "USDT", "EURC", "USDG", "ETH", "BTC", "LTC", "BNB", "POL", "AVAX", "HYPE", "JITO", "SOLC"],
+    "perks": ["No ID check needed for the Virtual card", "Physical Platinum card with Apple Pay and Google Pay", "Top up from 13 networks, incl. Bitcoin, Solana and Tron", "SOLC staking: free cards and cashback"],
+    "pros": ["Virtual card with no ID check, works in the US", "Platinum: no top-up fee and no spending limit", "Top up with BTC, SOL, ETH, stablecoins and more"],
+    "cons": ["Virtual card: 5% top-up fee plus $10 per card, online only", "Cashback only for large SOLC stakers (250,000+)", "Platinum is not available in the US and its price is not published"],
+    "links": { "official": "https://www.solcard.cc/" },
+    "sources": [
+      { "label": "SolCard: fees, limits, networks and deposits (schedule of 15 Aug 2026)", "url": "https://www.solcard.cc/fees", "verified": "2026-10-31" },
+      { "label": "SolCard: Virtual vs Platinum card comparison", "url": "https://www.solcard.cc/product", "verified": "2026-10-31" },
+      { "label": "SolCard: SOLC staking tiers and card rewards", "url": "https://www.solcard.cc/staking", "verified": "2026-10-31" },
+      { "label": "SolCard: card agreement (Hong Kong and sanctions restrictions, cashback expiry)", "url": "https://www.solcard.cc/terms", "verified": "2026-10-31" },
+      { "label": "SolCard: crypto debit card for the US (Virtual only, Platinum not in the US)", "url": "https://www.solcard.cc/crypto-debit-card-usa", "verified": "2026-10-31" }
+    ],
+    "lastChecked": "2026-10-31",
+    "addedOn": "2026-10-31",
+    "metal": "black"
   }
 ]
