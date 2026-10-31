@@ -1243,7 +1243,7 @@
     "perks": ["Personal USD account (ACH, Fedwire, SWIFT)", "6% a year on stablecoins (Earn)"],
     "pros": ["Personal USD bank account", "Virtual and physical cards", "No monthly fee on the Basic plan"],
     "cons": ["1% + $0.30 on every purchase (1.5% + $0.30 outside the US)", "No cashback", "1% top-up fee on the free plan"],
-    "links": { "official": "https://dogpay.com/us/cards" },
+    "links": { "official": "https://dogpay.com/us/cards", "affiliate": "https://dogpay.com/us/register?reffercode=22288949" },
     "sources": [
       { "label": "DogPay personal pricing", "url": "https://dogpay.com/us/pricing/personal", "verified": "2026-10-28" },
       { "label": "DogPay Cards", "url": "https://dogpay.com/us/cards", "verified": "2026-10-28" },
