@@ -54,11 +54,13 @@ function regionPanels(cards: Card[]): MarketPanel[] {
 export default function HomePage() {
   const cards = getCards();
   const rows = cards.map(toRow);
-  // The Featured spot: a booked sponsor while its dates run, otherwise the top-ranked card.
-  const sponsor = getSponsor();
+  // The top spot: a paid booking while its dates run (labelled Sponsored), or G2M's own pick, else the top-ranked card.
+  const booked = getSponsor();
+  const sponsor = booked?.paid ? booked.card : null;
+  const ourPick = booked && !booked.paid ? booked.card : null;
   const picks = getPicks(cards);
   const anyFeatured = picks.some((p) => p.kind === 'featured');
-  const featured = sponsor ?? cards[0];
+  const featured = booked?.card ?? cards[0];
   const selfCustodial = cards.filter((c) => c.custody === 'self-custodial' || c.custody === 'both').length;
   const noFee = cards.filter((c) => c.fees.annualUsd === 0).length;
 
@@ -102,11 +104,11 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          <aside className="hero-feature" data-tilt aria-label={sponsor ? 'Featured card (sponsored)' : 'Top-ranked card'}>
+          <aside className="hero-feature" data-tilt aria-label={sponsor ? 'Featured card (sponsored)' : ourPick ? 'Our pick' : 'Top-ranked card'}>
             <CardArt card={featured} />
             <div className="panel panel-pad hero-feature-panel">
               <div className="hero-feature-head">
-                <Eyebrow>{sponsor ? 'featured' : 'top ranked'}</Eyebrow>
+                <Eyebrow>{sponsor ? 'featured' : ourPick ? 'our pick' : 'top ranked'}</Eyebrow>
                 <span className="mono faint" style={{ fontSize: 12 }}>
                   #{getRank(featured.slug)} of {cards.length} worldwide
                 </span>
@@ -133,7 +135,7 @@ export default function HomePage() {
                 <OutboundLink
                   slug={featured.slug}
                   name={featured.name}
-                  placement={sponsor ? 'hero-sponsored' : 'hero-top'}
+                  placement={sponsor ? 'hero-sponsored' : ourPick ? 'hero-pick' : 'hero-top'}
                   campaign={sponsor ? 'sponsored' : undefined}
                   className="btn btn-metal btn-sm"
                 >
@@ -147,6 +149,11 @@ export default function HomePage() {
                 {sponsor ? (
                   <>
                     Sponsored. It never changes a card&apos;s score or rank.{' '}
+                    <Link href="/methodology#money">How G2M makes money</Link>
+                  </>
+                ) : ourPick ? (
+                  <>
+                    Our pick, chosen by G2M; nobody paid for this spot. Rankings use the same rules for every card.{' '}
                     <Link href="/methodology#money">How G2M makes money</Link>
                   </>
                 ) : (
