@@ -27,6 +27,10 @@ export const ROWS: Row[] = [
   { label: 'Network', render: (c) => c.network },
   { label: 'Card type', render: (c) => TYPE_LABEL[c.type] },
   { label: 'Custody', render: (c) => CUSTODY_LABEL[c.custody] },
+  {
+    label: 'No ID check',
+    render: (c) => (c.noIdCheck ? (c.noIdCheck.toLowerCase() === 'yes' ? 'Yes' : `Yes: ${c.noIdCheck}`) : 'ID needed or not stated')
+  },
   { label: 'Formats', render: (c) => <span style={{ textTransform: 'capitalize' }}>{c.forms.join(', ')}</span> },
   {
     label: 'Apple / Google Pay',

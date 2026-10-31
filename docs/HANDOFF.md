@@ -310,6 +310,10 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   Bots skipped by user agent. Akash's devices are excluded by the `g2m_ignore` cookie, set when logging in to /stats
   or with "Don't count this device"; it lasts ~400 days and is renewed at each login (logins last 30 days). Rows older
   than 400 days roll into daily totals (`daily` table). Methodology has a "What G2M counts" section.
+- "No ID check" (31 Oct 2026): new last column on the Cards tab (`noIdCheck`): `yes` or the name of the option that
+  needs no identity verification (SolCard: `Virtual card`). Card page badge, rankings filter (`?noid=1`) and a compare
+  row. Score unchanged. SolCard added the same day (Virtual 5% top-up + $10/card, no ID; Platinum KYC, no top-up fee,
+  not in the US; cashback only via SOLC staking tiers).
 
 Tested before handoff: every route, light and dark, desktop and phone widths (no sideways scrolling), filters,
 compare, finder, calculator input checks, theme memory, share images, and a clean `npm ci && npm run build`.

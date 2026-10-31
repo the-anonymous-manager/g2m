@@ -161,6 +161,11 @@ export default async function CardPage({ params }: Props) {
               <span className={`badge ${card.custody === 'self-custodial' || card.custody === 'both' ? 'badge-accent' : 'badge-unknown'}`}>
                 {CUSTODY_LABEL[card.custody]}
               </span>
+              {card.noIdCheck ? (
+                <span className="badge badge-accent" title="Per the issuer: no identity verification (KYC) needed">
+                  No ID check{card.noIdCheck.toLowerCase() === 'yes' ? '' : `: ${card.noIdCheck}`}
+                </span>
+              ) : null}
             </div>
             <h1 className="h2" style={{ fontSize: 'clamp(2rem, 4.4vw, 3.2rem)' }}>
               {card.name}

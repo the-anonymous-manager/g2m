@@ -214,6 +214,9 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
           <button type="button" className="chip" aria-pressed={f.lounge} onClick={() => set('lounge', !f.lounge)}>
             Lounge access
           </button>
+          <button type="button" className="chip" aria-pressed={f.noid} onClick={() => set('noid', !f.noid)}>
+            No ID check
+          </button>
           {regionLabel ? (
             <button type="button" className="chip is-on" aria-pressed="true" onClick={() => set('region', '')} title="Show every region">
               {regionLabel} <span aria-hidden="true">×</span>
