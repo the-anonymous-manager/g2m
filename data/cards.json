@@ -1350,7 +1350,7 @@
     "perks": ["Non-custodial Kite wallet", "USD account to receive ACH and wires", "Cash out to banks in 17 countries"],
     "pros": ["No card fees; free US-dollar spending", "5% back on Grab, travel, streaming and AI subscriptions until 30 Nov 2026", "Apple Pay and Google Pay", "Non-custodial wallet with local cash-out"],
     "cons": ["0.53% to load the card and 1.8% on non-USD spending", "No cashback on everyday spending; the 5% offers end 30 Nov 2026", "Only nine countries; money on the card is a prepaid USD balance"],
-    "links": { "official": "https://www.kiteapp.xyz/spend" },
+    "links": { "official": "https://www.kiteapp.xyz/spend", "affiliate": "https://kiteapp.onelink.me/gtNZ?pid=user_referral&c=referral_program&deep_link_value=signup&deep_link_sub2=NF656X" },
     "sources": [
       { "label": "Kite: Spend (fees and countries)", "url": "https://www.kiteapp.xyz/spend", "verified": "2026-10-29" },
       { "label": "Kite Help: Kite Card fees & limits", "url": "https://www.kiteapp.xyz/help/kite-card-fees-limits", "verified": "2026-10-29" },
