@@ -49,6 +49,9 @@ and confirm what changed on the site (not which files moved).
 - ID rules for nomad mode ("KYC eligibility rule", `kycRule`: `residency_id` / `passport_strict` / `both` / empty;
   "Restricted passports", `restrictedPassports`: `US; IR`, `none` = nationality does not matter, empty = not published).
   Issuer sources only. `/cards` and `/finder` use them with "My passport" + "Where I live" (`lib/nomad.ts`).
+- "No ID check" (`noIdCheck`, last column): what you can get with no identity verification at all, per the issuer:
+  `yes` = the whole card, else the option's name (e.g. SolCard `Virtual card`); empty = ID needed or not stated.
+  Shows a badge on the card page, a "No ID check" rankings filter and a compare row. Never changes the score.
 - Per-purchase limits: "Max cashback per purchase $" (`cashback.maxPerTxUsd`, e.g. Kolo 1); "Small purchase limit
   included" (`fees.smallPurchase.inclusive`: yes = "$1.00 or less", empty = "under $1"); "Free small purchases a month"
   (`fees.smallPurchase.freePerMonth`). Scores, calculator and receipt all use them.
