@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "slot": 1,
+    "slug": "coca",
+    "type": "pick",
+    "note": "Self-custodial, no annual fee: 1% back to start, up to 8% for COCA holders.",
+    "start": null,
+    "end": null
+  },
+  {
+    "slot": 2,
+    "slug": "etherfi",
+    "type": "pick",
+    "note": "3% back even on the free tier, self-custodial, with lounge access.",
+    "start": null,
+    "end": null
+  },
+  {
+    "slot": 3,
+    "slug": "plasma-one",
+    "type": "pick",
+    "note": "2% back with no annual fee, up to 4%, and you keep your own funds.",
+    "start": null,
+    "end": null
+  }
+]
