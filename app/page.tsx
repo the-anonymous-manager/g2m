@@ -152,10 +152,7 @@ export default function HomePage() {
                     <Link href="/methodology#money">How G2M makes money</Link>
                   </>
                 ) : ourPick ? (
-                  <>
-                    Our pick, chosen by G2M; nobody paid for this spot. Rankings use the same rules for every card.{' '}
-                    <Link href="/methodology#money">How G2M makes money</Link>
-                  </>
+                  'Our pick, chosen by G2M.'
                 ) : (
                   <>
                     The highest G2M score worldwide right now. Card issuers can{' '}
