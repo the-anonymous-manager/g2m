@@ -63,7 +63,8 @@ function Section({ title, note, children }: { title: string; note?: string; chil
 
 function Daily({ rows }: { rows: Report['daily'] }) {
   if (!rows.length) return <p className="faint" style={{ fontSize: 14 }}>Nothing yet.</p>;
-  const max = Math.max(1, ...rows.map((r) => Number(r.visitors)));
+  // One scale for both, so a day with more clicks than visitors stays inside the chart.
+  const max = Math.max(1, ...rows.flatMap((r) => [Number(r.visitors), Number(r.clicks)]));
   return (
     <div className="st-days" role="img" aria-label="Visitors per day">
       {rows.map((r) => (
