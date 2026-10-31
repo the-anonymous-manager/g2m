@@ -1393,7 +1393,7 @@
     "perks": ["No ID check needed for the Virtual card", "Physical Platinum card with Apple Pay and Google Pay", "Top up from 13 networks, incl. Bitcoin, Solana and Tron", "SOLC staking: free cards and cashback"],
     "pros": ["Virtual card with no ID check, works in the US", "Platinum: no top-up fee and no spending limit", "Top up with BTC, SOL, ETH, stablecoins and more"],
     "cons": ["Virtual card: 5% top-up fee plus $10 per card, online only", "Cashback only for large SOLC stakers (250,000+)", "Platinum is not available in the US and its price is not published"],
-    "links": { "official": "https://www.solcard.cc/" },
+    "links": { "official": "https://www.solcard.cc/", "affiliate": "https://solcard.cc/r/gwei2merchant" },
     "sources": [
       { "label": "SolCard: fees, limits, networks and deposits (schedule of 15 Aug 2026)", "url": "https://www.solcard.cc/fees", "verified": "2026-10-31" },
       { "label": "SolCard: Virtual vs Platinum card comparison", "url": "https://www.solcard.cc/product", "verified": "2026-10-31" },
