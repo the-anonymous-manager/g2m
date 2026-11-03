@@ -1034,6 +1034,7 @@
     "bankRails": [],
     "kycRule": "residency_id",
     "restrictedPassports": ["US"],
+    "signupBonus": "$10 when you sign up and activate your Tria card",
     "referralCode": "YFXSXC5574",
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
@@ -1054,7 +1055,8 @@
       { "label": "Tria Help Center: KYC (Know Your Customer)", "url": "https://help.tria.so/en/articles/14034407-kyc-know-your-customer", "verified": "2026-10-25" },
       { "label": "Tria Help Center: KYC Document Requirements", "url": "https://help.tria.so/en/articles/14035336-kyc-document-requirements", "verified": "2026-10-25" },
       { "label": "Tria Card Terms (USA)", "url": "https://docs.tria.so/card-terms-us", "verified": "2026-10-25" },
-      { "label": "Tria Help Center: Tria Card Top Up Guide", "url": "https://help.tria.so/en/articles/14056654-tria-card-top-up-guide", "verified": "2026-10-25" }
+      { "label": "Tria Help Center: Tria Card Top Up Guide", "url": "https://help.tria.so/en/articles/14056654-tria-card-top-up-guide", "verified": "2026-10-25" },
+      { "label": "Tria app: sign-up offer, $10 after sign-up and card activation (checked in the app by G2M)", "url": "https://www.tria.so/", "verified": "2026-11-04" }
     ],
     "lastChecked": "2026-10-25",
     "metal": "black",
