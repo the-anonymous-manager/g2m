@@ -318,6 +318,14 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   (it was mislabelled as paid). The Sponsor tab now has a Type column: "Featured" (paid, both dates, "Sponsored"
   note) or "Our pick" (his own choice, no dates needed, note "Our pick, chosen by G2M."). Solid is set as Our pick;
   the three Our picks are COCA, ether.fi and Plasma One (Picks tab, no dates).
+- Sign-up bonuses (3 Nov 2026), inspired by cardifycrypto.com's "sign-up bonus" per card: two last Cards columns,
+  "Sign-up bonus" (issuer's own terms only, what the person joining through G2M's link gets) and "Referral code".
+  Card page box with a Copy button, a line on home tiles, a "Sign-up bonus" rankings filter (?bonus=1), compare row.
+  Confirmed on issuer pages: Solid ($25 FUSE, $150 at 3+ merchants in 30 days), Plasma One ($10 spend credit,
+  $100 at 2+ merchants in 14 days), Nexo (NEXO tokens by tier within 45 days). Kite and Bitget Wallet pay only the
+  referrer; ether.fi has no running offer; the rest have no issuer-published friend bonus (only third-party claims).
+- Stats (3 Nov 2026): total visits (landings, repeat visits count) next to unique visitors; "people who clicked";
+  per card "From its page" click count and click rate as "people of visitors (%)".
 
 Tested before handoff: every route, light and dark, desktop and phone widths (no sideways scrolling), filters,
 compare, finder, calculator input checks, theme memory, share images, and a clean `npm ci && npm run build`.

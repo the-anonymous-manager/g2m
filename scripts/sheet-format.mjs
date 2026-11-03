@@ -193,7 +193,9 @@ const CARD_COLUMNS = [
   ['Official link', (c) => c.links.official],
   ['Referral link', (c) => c.links.affiliate ?? ''],
   ['Last checked', (c) => c.lastChecked],
-  ['No ID check', (c) => c.noIdCheck ?? '']
+  ['No ID check', (c) => c.noIdCheck ?? ''],
+  ['Sign-up bonus', (c) => c.signupBonus ?? ''],
+  ['Referral code', (c) => c.referralCode ?? '']
 ];
 
 const TIER_COLUMNS = [
@@ -427,6 +429,8 @@ export function tablesToCards(tables, previous = null, today = null) {
       kycRule: str(r.get('KYC eligibility rule')).toLowerCase() || undefined,
       restrictedPassports: cell('Cards', r, 'Restricted passports', passports),
       noIdCheck: optText(r.get('No ID check')),
+      signupBonus: optText(r.get('Sign-up bonus')),
+      referralCode: optText(r.get('Referral code')),
       wallets: { applePay: b('Apple Pay'), googlePay: b('Google Pay') },
       assets: commas(r.get('Assets')),
       perks: lines(r.get('Perks')),
@@ -549,7 +553,7 @@ const FIELD_COLUMNS = {
   'cashback.basePct': 'Base cashback %', 'cashback.maxPct': 'Max cashback %', 'cashback.payout': 'Cashback paid in',
   'cashback.intro.pct': 'Intro cashback %', 'cashback.intro.days': 'Intro offer days',
   bankRails: 'Banking rails', bankForNonResidents: 'Bank account for non-residents',
-  kycRule: 'KYC eligibility rule', restrictedPassports: 'Restricted passports', noIdCheck: 'No ID check', 'cashback.maxPerTxUsd': 'Max cashback per purchase $',
+  kycRule: 'KYC eligibility rule', restrictedPassports: 'Restricted passports', noIdCheck: 'No ID check', signupBonus: 'Sign-up bonus', referralCode: 'Referral code', 'cashback.maxPerTxUsd': 'Max cashback per purchase $',
   'fees.smallPurchase.freePerMonth': 'Free small purchases a month',
   'fees.annualUsd': 'Annual fee $', 'fees.cardFeeUsd': 'Card activation fee $',
   'fees.physicalCardFeeUsd': 'Physical card cost $ (issuance + shipping)', 'fees.fxPct': 'FX fee %', 'fees.fxByCurrency': 'No-FX currencies', 'fees.topUpPct': 'Top-up fee %',

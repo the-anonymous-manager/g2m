@@ -84,6 +84,8 @@ in sheet terms (tab, card, column). It closes itself when a later run succeeds.
   spending only when the card does not bill in that currency. Empty = not published, so FX is counted on all spending.
 - "No ID check" (last column): `yes` when the whole card needs no identity verification, or the name of the option
   that doesn't (e.g. `Virtual card`); empty when an ID check is needed or the issuer doesn't say.
+- "Sign-up bonus" and "Referral code" (last columns): the bonus a person gets for joining through G2M's referral link,
+  in the issuer's own terms, and the code to type in the app. Only for cards with a referral link.
 - Card pictures: paste a link in "Card image" (Cards tab). The sync downloads it once (Google Drive and Dropbox
   share links work), trims a plain border, and saves `public/card-images/<slug>-<hash>.webp` (1000 x 631),
   `-sm.webp` (184 x 116) and `.png` (for share images). Card-shaped pictures fill the card; upright ones are fitted

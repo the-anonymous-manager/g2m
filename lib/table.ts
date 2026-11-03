@@ -22,6 +22,7 @@ export type Filters = {
   metal: boolean;
   lounge: boolean;
   noid: boolean; // only cards with an option that needs no ID check
+  bonus: boolean; // only cards with a sign-up bonus through G2M's link
   min: number; // minimum typical cashback %
   sort: SortRule[];
 };
@@ -41,6 +42,7 @@ export const DEFAULT_FILTERS: Filters = {
   metal: false,
   lounge: false,
   noid: false,
+  bonus: false,
   min: 0,
   sort: DEFAULT_SORT
 };
@@ -105,6 +107,7 @@ export function filterRows(rows: CardRow[], f: Filters): CardRow[] {
     if (f.metal && !c.forms.includes('metal')) return false;
     if (f.lounge && !hasLounge(c)) return false;
     if (f.noid && !c.noIdCheck) return false;
+    if (f.bonus && !c.signupBonus) return false;
     if (f.min > 0 && (typical(c) ?? 0) < f.min) return false;
     return true;
   });
@@ -158,6 +161,7 @@ export function parseFilters(p: ParamSource): Filters {
     metal: read(p, 'metal') === '1',
     lounge: read(p, 'lounge') === '1',
     noid: read(p, 'noid') === '1',
+    bonus: read(p, 'bonus') === '1',
     min: Number.isFinite(min) && min > 0 && min <= 20 ? min : 0,
     sort: sort.length ? sort : DEFAULT_SORT
   };
@@ -177,6 +181,7 @@ export function serializeFilters(f: Filters): string {
   if (f.metal) p.set('metal', '1');
   if (f.lounge) p.set('lounge', '1');
   if (f.noid) p.set('noid', '1');
+  if (f.bonus) p.set('bonus', '1');
   if (f.min) p.set('min', String(f.min));
   const sort = f.sort.map((r) => `${r.key}:${r.dir}`).join(',');
   if (sort !== 'rank:asc') p.set('sort', sort);
@@ -194,6 +199,7 @@ export function describeFilters(f: Filters, countryLabel?: string): string {
   if (f.nofee) parts.push('no annual fee');
   if (f.lounge) parts.push('with lounge access');
   if (f.noid) parts.push('with no ID check');
+  if (f.bonus) parts.push('with a sign-up bonus');
   if (f.metal) parts.push('metal');
   if (f.net) parts.push(f.net === 'amex' ? 'Amex' : f.net === 'visa' ? 'Visa' : 'Mastercard');
   if (f.min) parts.push(`${f.min}%+ cashback`);

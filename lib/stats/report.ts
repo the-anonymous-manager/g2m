@@ -69,20 +69,22 @@ export async function report(db: D1, days: number) {
       db
         .prepare(
           `SELECT SUM(name = 'pageview') AS views, COUNT(DISTINCT CASE WHEN name = 'pageview' THEN ${U} END) AS visitors,
-             SUM(name = 'Outbound') AS clicks FROM ev WHERE day >= ?`
+             SUM(name = 'pageview' AND source IS NOT NULL) AS visits, SUM(name = 'Outbound') AS clicks,
+             COUNT(DISTINCT CASE WHEN name = 'Outbound' THEN ${U} END) AS clickers FROM ev WHERE day >= ?`
         )
         .bind(from)
         .first<Row>(),
       all(
         db,
         `SELECT day, SUM(name = 'pageview') AS views, COUNT(DISTINCT CASE WHEN name = 'pageview' THEN vid END) AS visitors,
-           SUM(name = 'Outbound') AS clicks FROM ev WHERE day >= ? GROUP BY day ORDER BY day`,
+           SUM(name = 'pageview' AND source IS NOT NULL) AS visits, SUM(name = 'Outbound') AS clicks
+           FROM ev WHERE day >= ? GROUP BY day ORDER BY day`,
         from
       ),
       all(
         db,
         `SELECT card, COUNT(*) AS clicks, SUM(json_extract(props, '$.sponsored') = 1) AS sponsored, COUNT(DISTINCT ${U}) AS people,
-             COUNT(DISTINCT CASE WHEN place = 'card-hero' THEN ${U} END) AS from_page
+             COUNT(DISTINCT CASE WHEN place = 'card-hero' THEN ${U} END) AS from_page, SUM(place = 'card-hero') AS from_page_clicks
            FROM ev WHERE name = 'Outbound' AND day >= ? GROUP BY card ORDER BY clicks DESC`,
         from
       ),
@@ -167,6 +169,8 @@ export async function report(db: D1, days: number) {
         people: Number(c?.people ?? 0),
         views: Number(v?.views ?? 0),
         visitors,
+        fromPage: Number(c?.from_page_clicks ?? 0), // clicks on the card's own page
+        fromPagePeople: Number(c?.from_page ?? 0), // people behind them, for the click rate
         rate: visitors ? Math.round((Number(c?.from_page ?? 0) / visitors) * 1000) / 10 : null
       };
     })
@@ -188,7 +192,7 @@ export async function report(db: D1, days: number) {
   const days_: Row[] = [];
   for (let d = Date.parse(from); d <= Date.now(); d += 86_400_000) {
     const day = new Date(d).toISOString().slice(0, 10);
-    days_.push(byDay.get(day) ?? { day, views: 0, visitors: 0, clicks: 0 });
+    days_.push(byDay.get(day) ?? { day, views: 0, visitors: 0, visits: 0, clicks: 0 });
   }
 
   return {
@@ -196,7 +200,9 @@ export async function report(db: D1, days: number) {
     totals: {
       views: Number(totals?.views ?? 0),
       visitors: Number(totals?.visitors ?? 0),
-      clicks: Number(totals?.clicks ?? 0)
+      visits: Number(totals?.visits ?? 0),
+      clicks: Number(totals?.clicks ?? 0),
+      clickers: Number(totals?.clickers ?? 0)
     },
     daily: days_,
     cards,

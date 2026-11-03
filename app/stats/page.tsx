@@ -68,7 +68,7 @@ function Daily({ rows }: { rows: Report['daily'] }) {
   return (
     <div className="st-days" role="img" aria-label="Visitors per day">
       {rows.map((r) => (
-        <div key={String(r.day)} className="st-day" title={`${r.day}: ${n(r.visitors)} visitors, ${n(r.views)} page views, ${n(r.clicks)} clicks`}>
+        <div key={String(r.day)} className="st-day" title={`${r.day}: ${n(r.visits)} visits, ${n(r.visitors)} unique visitors, ${n(r.views)} page views, ${n(r.clicks)} clicks`}>
           <span style={{ height: `${(Number(r.visitors) / max) * 100}%` }} />
           {Number(r.clicks) ? <b style={{ height: `${(Number(r.clicks) / max) * 100}%` }} /> : null}
         </div>
@@ -83,6 +83,10 @@ function Dashboard({ data, days, counted }: { data: Report; days: number; counte
     <>
       <div className="stats">
         <div className="stat">
+          <b>{n(t.visits)}</b>
+          <span className="faint">total visits</span>
+        </div>
+        <div className="stat">
           <b>{n(t.visitors)}</b>
           <span className="faint">unique visitors</span>
         </div>
@@ -95,14 +99,17 @@ function Dashboard({ data, days, counted }: { data: Report; days: number; counte
           <span className="faint">&ldquo;Get the card&rdquo; clicks</span>
         </div>
         <div className="stat">
-          <b>{t.visitors ? `${Math.round((t.clicks / t.visitors) * 1000) / 10}` : '0'}</b>
-          <span className="faint">clicks per 100 visitors</span>
+          <b>{n(t.clickers)}</b>
+          <span className="faint">
+            people who clicked{t.visitors ? ` (${Math.round((t.clickers / t.visitors) * 1000) / 10}% of visitors)` : ''}
+          </span>
         </div>
       </div>
       <p className="faint" style={{ fontSize: 14, marginTop: -16 }}>
-        Unique visitors: each person once, however many times they come back. A visitor is an anonymous code (no cookies)
-        that is renewed each calendar month, so someone who returns next month counts again, and a phone that switches
-        networks can count twice.
+        Total visits: every time someone comes to the site, so a person who comes back three times counts three times.
+        Unique visitors: each person once, however many times they come back (an anonymous code, no cookies, renewed each
+        calendar month, so someone who returns next month counts again). Clicks are counted on G2M&apos;s server, so ad
+        blockers can&apos;t hide them, while visits are counted in the browser, where some ad blockers hide them.
       </p>
 
       <Section title="Day by day" note="Light bars: unique visitors that day. Dark marks inside: Get the card clicks. Hover or tap a day for its numbers.">
@@ -111,20 +118,21 @@ function Dashboard({ data, days, counted }: { data: Report; days: number; counte
 
       <Section
         title="Get the card, per card"
-        note="Clicks are counted on G2M's server, so ad blockers can't hide them. Click rate: people who read the card page and pressed its Get the card button."
+        note="Clicks: every press of a Get the card button for that card, anywhere on the site. From its page: presses on the card's own page. Click rate: people who read the card page and pressed its button, out of everyone who read it (people, so someone clicking twice counts once)."
       >
         <BarTable
-          head={['Card', 'Clicks', 'Sponsored', 'People', 'Page views', 'Click rate']}
+          head={['Card', 'Clicks', 'From its page', 'Sponsored', 'People', 'Page views', 'Click rate']}
           rows={data.cards.map((c) => [
             <>
               <Link href={`/cards/${c.slug}`}>{c.name}</Link>
               {c.referral ? <span className="badge badge-accent st-tag">referral</span> : null}
             </>,
             c.clicks,
+            c.fromPage,
             c.sponsored,
             c.people,
             c.views,
-            c.rate == null ? '–' : `${c.rate}%`
+            c.rate == null ? '–' : `${n(c.fromPagePeople)} of ${n(c.visitors)} (${c.rate}%)`
           ])}
         />
       </Section>

@@ -42,6 +42,8 @@ export type CardRow = Pick<
   | 'kycRule'
   | 'restrictedPassports'
   | 'noIdCheck'
+  | 'signupBonus'
+  | 'referralCode'
   | 'assets'
   | 'rank'
   | 'perks'
@@ -70,6 +72,8 @@ export function toRow(c: Card): CardRow {
     kycRule: c.kycRule,
     restrictedPassports: c.restrictedPassports,
     noIdCheck: c.noIdCheck,
+    signupBonus: c.links.affiliate ? c.signupBonus : undefined,
+    referralCode: c.links.affiliate ? c.referralCode : undefined,
     assets: c.assets,
     rank: c.rank,
     perks: c.perks
