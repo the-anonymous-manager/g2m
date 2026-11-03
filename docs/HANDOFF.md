@@ -324,6 +324,11 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   Confirmed on issuer pages: Solid ($25 FUSE, $150 at 3+ merchants in 30 days), Plasma One ($10 spend credit,
   $100 at 2+ merchants in 14 days), Nexo (NEXO tokens by tier within 45 days). Kite and Bitget Wallet pay only the
   referrer; ether.fi has no running offer; the rest have no issuer-published friend bonus (only third-party claims).
+- COCA tracking rule (3 Nov 2026, from COCA's affiliate team): the "Get the card" button must send people through the
+  Impact tracking link (`links.affiliate`), which lands on coca.xyz/join-coca (email check) and only then the app
+  store. Never swap in a direct App Store / Google Play link: attribution is lost. Checked: /go/coca -> coca.sjv.io
+  (Impact) -> coca.xyz/join-coca, with G2M's utm tags and Impact's `im_ref` both carried through. November welcome
+  offer (8% on first 3 purchases, until 30 Nov) is in the Sign-up bonus cell; reminder set to remove it on 1 Dec.
 - Stats (3 Nov 2026): total visits (landings, repeat visits count) next to unique visitors; "people who clicked";
   per card "From its page" click count and click rate as "people of visitors (%)".
 
