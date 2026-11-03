@@ -1083,6 +1083,7 @@
     "bankRails": [ { "rail": "EUR_SEPA", "in": true, "out": true, "fee": "EEA and UK residents" } ],
     "bankForNonResidents": false,
     "kycRule": "residency_id",
+    "signupBonus": "8% cashback on your first 3 eligible card purchases, if you register in November 2026, complete KYC, fund the card and buy by 30 Nov 2026. No code needed",
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDT", "USDC", "EURC", "EURS"],
     "perks": ["Yield on your card balance (variable)"],
@@ -1100,7 +1101,8 @@
       { "label": "COCA Help: How do I order a COCA card? (country list and top-up stablecoins, 12 Oct 2026)", "url": "https://help.coca.xyz/support/solutions/articles/205000042704-how-do-i-order-a-coca-card-", "verified": "2026-10-25" },
       { "label": "COCA Docs: IBAN", "url": "https://docs.coca.xyz/coca/banking-account/iban", "verified": "2026-10-24" },
       { "label": "COCA Help: What Bank Accounts Are Available in COCA?", "url": "https://help.coca.xyz/support/solutions/articles/205000059619-what-bank-accounts-are-available-in-coca-", "verified": "2026-10-25" },
-      { "label": "COCA Docs: Buy Crypto", "url": "https://docs.coca.xyz/coca/crypto-account/buy-crypto", "verified": "2026-10-24" }
+      { "label": "COCA Docs: Buy Crypto", "url": "https://docs.coca.xyz/coca/crypto-account/buy-crypto", "verified": "2026-10-24" },
+      { "label": "COCA affiliate team, 2 Nov 2026: November Welcome Cashback Drop, 8% on a new user's first 3 eligible purchases (offer ends 30 Nov 2026)", "url": "https://www.coca.xyz/", "verified": "2026-11-03" }
     ],
     "lastChecked": "2026-10-25",
     "metal": "rose",
