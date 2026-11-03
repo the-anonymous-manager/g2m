@@ -247,6 +247,7 @@
     "bankRails": [ { "rail": "SWIFT", "in": true, "out": true, "fee": "USD, no deposit fee" }, { "rail": "EUR_SEPA", "in": true, "out": true, "fee": "no deposit fee" }, { "rail": "GBP_FPS", "in": true, "out": true, "fee": "no deposit fee" }, { "rail": "BRL_PIX", "in": false, "out": true }, { "rail": "MXN_SPEI", "in": false, "out": true }, { "rail": "BDT_BANK", "in": false, "out": true } ],
     "kycRule": "both",
     "restrictedPassports": ["AF", "AL", "BA", "BF", "BI", "BQ", "BV", "BY", "CD", "CF", "CN", "CU", "CW", "ER", "ET", "GW", "HR", "HT", "IQ", "IR", "KP", "LB", "LR", "LY", "ME", "MK", "ML", "MM", "NI", "RS", "RU", "SD", "SI", "SO", "SS", "SX", "SY", "UA", "US", "VE", "XK", "YE", "ZW"],
+    "signupBonus": "3% cashback on all purchases, from your first purchase (the same rate as the free Core tier)",
     "wallets": { "applePay": true, "googlePay": null },
     "assets": ["USDT", "USDC", "BTC", "ETH", "SOL", "BNB", "TRX", "XRP", "SUI"],
     "perks": ["Points rewards"],
@@ -327,7 +328,8 @@
       { "label": "ether.fi Help: How does cashback work?", "url": "https://help.ether.fi/en/articles/262374-how-does-cashback-work", "verified": "2026-10-25" },
       { "label": "ether.fi Help: How does Category Cashback work?", "url": "https://help.ether.fi/en/articles/823083-how-does-category-cashback-work", "verified": "2026-10-25" },
       { "label": "ether.fi Help: Why purchase a Membership upgrade?", "url": "https://help.ether.fi/en/articles/846487-why-purchase-a-membership-upgrade", "verified": "2026-10-25" },
-      { "label": "ether.fi Help: ATM withdrawal limits for personal Cash cards", "url": "https://help.ether.fi/en/articles/303623-what-are-the-atm-withdrawal-limits-for-personal-cash-cards", "verified": "2026-10-25" }
+      { "label": "ether.fi Help: ATM withdrawal limits for personal Cash cards", "url": "https://help.ether.fi/en/articles/303623-what-are-the-atm-withdrawal-limits-for-personal-cash-cards", "verified": "2026-10-25" },
+      { "label": "ether.fi app: referral offer, 3% cashback on all purchases (checked in the app by G2M)", "url": "https://www.ether.fi/app/cash/referral", "verified": "2026-11-03" }
     ],
     "lastChecked": "2026-10-25",
     "metal": "silver",
