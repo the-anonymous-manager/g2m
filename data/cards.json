@@ -414,7 +414,8 @@
       { "label": "Nexo Help: Nexo Loyalty Program (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/nexo-loyalty-program", "verified": "2026-10-25" },
       { "label": "Nexo Help: How to transfer funds to Nexo (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/how-to-transfer-funds-to-nexo", "verified": "2026-10-25" },
       { "label": "Nexo Help: Nexo Credit Line (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/nexo-credit-line", "verified": "2026-10-25" },
-      { "label": "Nexo Help: Nexo Savings (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/nexo-savings", "verified": "2026-10-25" }
+      { "label": "Nexo Help: Nexo Savings (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/nexo-savings", "verified": "2026-10-25" },
+      { "label": "Nexo: referral rewards for invited friends (45-day window, NEXO Token rewards by tier)", "url": "https://nexo.com/ref/imwig0fvpw", "verified": "2026-11-03" }
     ],
     "lastChecked": "2026-10-25",
     "metal": "gunmetal",
@@ -901,7 +902,8 @@
       { "label": "Plasma Support: How do I earn on Plasma One?", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/14285221-how-do-i-earn-on-plasma-one", "verified": "2026-10-24" },
       { "label": "Plasma Support: What documents do I need for identity verification?", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/14285201-what-documents-do-i-need-for-identity-verification", "verified": "2026-10-25" },
       { "label": "Plasma Support: Which countries does Plasma One support for fiat deposits and withdrawals?", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15180607-which-countries-does-plasma-one-support-for-fiat-deposits-and-withdrawals", "verified": "2026-10-25" },
-      { "label": "Plasma Support: How do I withdraw fiat to my bank account?", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15180677-how-do-i-withdraw-fiat-to-my-bank-account", "verified": "2026-10-25" }
+      { "label": "Plasma Support: How do I withdraw fiat to my bank account?", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15180677-how-do-i-withdraw-fiat-to-my-bank-account", "verified": "2026-10-25" },
+      { "label": "Plasma One Help: the $10 referral bonus (ongoing, $100 at 2+ merchants in 14 days)", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15926373-how-do-i-get-the-10-referral-bonus", "verified": "2026-11-03" }
     ],
     "lastChecked": "2026-10-25",
     "metal": "silver",
@@ -1286,7 +1288,8 @@
       { "label": "Solid: fees and limits overview", "url": "https://support.solid.xyz/en/articles/13885984-understanding-solid-s-fees", "verified": "2026-10-29" },
       { "label": "Solid: what is the Solid Card", "url": "https://support.solid.xyz/en/articles/13185531-what-is-the-solid-card", "verified": "2026-10-29" },
       { "label": "Solid: where the Solid Card is available", "url": "https://support.solid.xyz/en/articles/12899017-where-the-solid-card-is-available", "verified": "2026-10-29" },
-      { "label": "Solid blog: cashback is now in USDC (tiers and caps)", "url": "https://www.solid.xyz/post/cashback-is-now-in-usdc-and-it-earns-yield", "verified": "2026-10-29" }
+      { "label": "Solid blog: cashback is now in USDC (tiers and caps)", "url": "https://www.solid.xyz/post/cashback-is-now-in-usdc-and-it-earns-yield", "verified": "2026-10-29" },
+      { "label": "Solid blog: referral rewards, $25 in FUSE each (terms from 8 Sep 2026)", "url": "https://www.solid.xyz/post/referral-rewards-25-fuse", "verified": "2026-11-03" }
     ],
     "lastChecked": "2026-10-29",
     "addedOn": "2026-10-29",
@@ -1337,9 +1340,9 @@
     "type": "prepaid",
     "forms": ["virtual"],
     "custody": "self-custodial",
-    "summary": "A prepaid USD Visa from the Kite wallet app, for nine Asia-Pacific countries: free card, 0.53% to load it, 1.8% on non-USD spending.",
+    "summary": "A prepaid USD Visa from the Kite wallet app, for nine Asia-Pacific countries: free card, free to load, 1.8% on non-USD spending.",
     "cashback": { "basePct": 0, "maxPct": 5, "payout": "USD", "note": "No cashback on everyday spending. Until 30 Nov 2026: 5% back on Grab, Travala travel bookings, iShopChangi, Starlink, and one monthly charge per service for Netflix, YouTube Premium, Prime Video, Spotify, eligible AI tools (e.g. ChatGPT Plus, Claude Pro) and Figma, LinkedIn, X or Telegram Premium. No cap. Also 5% on some crypto event tickets (up to $200) and 50% off the first QR payment (up to $10). Paid in USD to the card after each month, once 30 days have passed. Plus a spend-based welcome reward of up to $200." },
-    "fees": { "annualUsd": 0, "fxPct": 1.8, "fxNote": "Spending in USD is free; 1.8% on other currencies. Money on the card is held in USD.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0.53, "cardFeeUsd": 0, "atm": "Coming soon", "other": ["Card replacement free", "Limits: $50,000 or 50 purchases a day; $990,000 a year"] },
+    "fees": { "annualUsd": 0, "fxPct": 1.8, "fxNote": "Spending in USD is free; 1.8% on other currencies. Money on the card is held in USD.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "atm": "Coming soon", "other": ["Card replacement free", "Limits: $50,000 or 50 purchases a day; $990,000 a year"] },
     "tiers": [
       { "name": "Kite Card", "feeUsdYear": 0, "cashbackPct": 0, "perks": ["5% back on Grab, Travala, streaming, AI and creator subscriptions and Starlink until 30 Nov 2026 (no cap)"] }
     ],
@@ -1348,12 +1351,12 @@
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
     "perks": ["Non-custodial Kite wallet", "USD account to receive ACH and wires", "Cash out to banks in 17 countries"],
-    "pros": ["No card fees; free US-dollar spending", "5% back on Grab, travel, streaming and AI subscriptions until 30 Nov 2026", "Apple Pay and Google Pay", "Non-custodial wallet with local cash-out"],
-    "cons": ["0.53% to load the card and 1.8% on non-USD spending", "No cashback on everyday spending; the 5% offers end 30 Nov 2026", "Only nine countries; money on the card is a prepaid USD balance"],
+    "pros": ["No card fees, free to load with USDT or USDC, free US-dollar spending", "5% back on Grab, travel, streaming and AI subscriptions until 30 Nov 2026", "Apple Pay and Google Pay", "Non-custodial wallet with local cash-out"],
+    "cons": ["1.8% on non-USD spending", "No cashback on everyday spending; the 5% offers end 30 Nov 2026", "Only nine countries; money on the card is a prepaid USD balance"],
     "links": { "official": "https://www.kiteapp.xyz/spend", "affiliate": "https://kiteapp.onelink.me/gtNZ?pid=user_referral&c=referral_program&deep_link_value=signup&deep_link_sub2=NF656X" },
     "sources": [
-      { "label": "Kite: Spend (fees and countries)", "url": "https://www.kiteapp.xyz/spend", "verified": "2026-10-29" },
-      { "label": "Kite Help: Kite Card fees & limits", "url": "https://www.kiteapp.xyz/help/kite-card-fees-limits", "verified": "2026-10-29" },
+      { "label": "Kite: Spend (fees and countries)", "url": "https://www.kiteapp.xyz/spend", "verified": "2026-11-03" },
+      { "label": "Kite Help: Kite Card fees & limits", "url": "https://www.kiteapp.xyz/help/kite-card-fees-limits", "verified": "2026-11-03" },
       { "label": "Kite Help: getting your Kite card (eligibility)", "url": "https://www.kiteapp.xyz/help/getting-your-kite-card-what-it-is-eligibility", "verified": "2026-10-29" },
       { "label": "Kite: offers", "url": "https://www.kiteapp.xyz/offers", "verified": "2026-10-29" },
       { "label": "Kite: on and off ramp countries", "url": "https://www.kiteapp.xyz/on-off-ramp", "verified": "2026-10-29" },
@@ -1362,7 +1365,7 @@
       { "label": "Kite offer: 5% back on Grab (no cap, paid in USD to the card)", "url": "https://www.kiteapp.xyz/offers/grab", "verified": "2026-10-29" },
       { "label": "Kite offer: 5% back on AI subscriptions (no cap)", "url": "https://www.kiteapp.xyz/offers/ai-subscriptions", "verified": "2026-10-29" }
     ],
-    "lastChecked": "2026-10-29",
+    "lastChecked": "2026-11-03",
     "addedOn": "2026-10-29",
     "metal": "silver",
     "image": { "source": "https://g2m.life/card-originals/kite.png", "file": "/card-images/kite-d251244c.webp" }
