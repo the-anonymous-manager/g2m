@@ -247,6 +247,7 @@
     "bankRails": [ { "rail": "SWIFT", "in": true, "out": true, "fee": "USD, no deposit fee" }, { "rail": "EUR_SEPA", "in": true, "out": true, "fee": "no deposit fee" }, { "rail": "GBP_FPS", "in": true, "out": true, "fee": "no deposit fee" }, { "rail": "BRL_PIX", "in": false, "out": true }, { "rail": "MXN_SPEI", "in": false, "out": true }, { "rail": "BDT_BANK", "in": false, "out": true } ],
     "kycRule": "both",
     "restrictedPassports": ["AF", "AL", "BA", "BF", "BI", "BQ", "BV", "BY", "CD", "CF", "CN", "CU", "CW", "ER", "ET", "GW", "HR", "HT", "IQ", "IR", "KP", "LB", "LR", "LY", "ME", "MK", "ML", "MM", "NI", "RS", "RU", "SD", "SI", "SO", "SS", "SX", "SY", "UA", "US", "VE", "XK", "YE", "ZW"],
+    "signupBonus": "$5 spend credit for new users who join through G2M's link; the conditions are shown in the RedotPay app",
     "wallets": { "applePay": true, "googlePay": null },
     "assets": ["USDT", "USDC", "BTC", "ETH", "SOL", "BNB", "TRX", "XRP", "SUI"],
     "perks": ["Points rewards"],
@@ -271,7 +272,8 @@
       { "label": "RedotPay Help: Which Countries and Regions Can Open a Personal Funding Account", "url": "https://helpcenter.redotpay.com/en/articles/11990956-which-countries-and-regions-can-open-a-personal-funding-account", "verified": "2026-10-25" },
       { "label": "RedotPay Help: RedotPay Services and Features", "url": "https://helpcenter.redotpay.com/en/articles/11070044-redotpay-services-and-features", "verified": "2026-10-25" },
       { "label": "RedotPay team, reply to G2M (25 Oct 2026): fees, ATM limits, card validity, Apple Pay; cites the RedotPay Help Center", "url": "https://helpcenter.redotpay.com/", "verified": "2026-10-25" },
-      { "label": "RedotPay Terms (cited by the RedotPay team)", "url": "https://www.redotpay.com/terms/general/", "verified": "2026-10-25" }
+      { "label": "RedotPay Terms (cited by the RedotPay team)", "url": "https://www.redotpay.com/terms/general/", "verified": "2026-10-25" },
+      { "label": "RedotPay app: referral offer, $5 spend credit for new users (checked in the app by G2M)", "url": "https://www.redotpay.com/", "verified": "2026-11-04" }
     ],
     "lastChecked": "2026-10-25",
     "metal": "rose",
