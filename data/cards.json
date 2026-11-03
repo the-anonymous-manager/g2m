@@ -552,18 +552,21 @@
     "bankForNonResidents": true,
     "kycRule": "residency_id",
     "restrictedPassports": [],
+    "signupBonus": "$20 after you complete KYC, activate the card and spend $1,000 within 30 days of activation (paid into your Rewards balance in USDC)",
+    "referralCode": "RZAXA73M",
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
     "perks": ["Works on Arbitrum, Base, Solana and Sui"],
     "pros": ["2% back in USDC with no annual fee", "Cheap physical card"],
     "cons": ["Cashback capped at $100 a month", "4% needs ongoing referrals"],
-    "links": { "official": "https://jup.ag/" },
+    "links": { "official": "https://jup.ag/", "affiliate": "https://jupiter.go.link/a7ppe" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/jupiter", "verified": "2026-10-01" },
       { "label": "Jupiter docs: Jupiter Card supported regions (country list compiled by Card Map)", "url": "https://docs.jup.ag/user-docs/global/spend/jupiter-card", "verified": "2026-10-25" },
       { "label": "Jupiter Docs: Fees & Limits", "url": "https://docs.jup.ag/user-docs/global/spend/fees-and-limits", "verified": "2026-10-25" },
       { "label": "Jupiter Docs: Remittance", "url": "https://docs.jup.ag/user-docs/global/spend/remittance", "verified": "2026-10-25" },
-      { "label": "Jupiter Docs: Risks & Security", "url": "https://docs.jup.ag/user-docs/global/spend/risks-and-security", "verified": "2026-10-24" }
+      { "label": "Jupiter Docs: Risks & Security", "url": "https://docs.jup.ag/user-docs/global/spend/risks-and-security", "verified": "2026-10-24" },
+      { "label": "Jupiter docs: Rewards & Referrals (friend gets $20 after $1,000 spend within 30 days of card activation; where to enter a code)", "url": "https://docs.jup.ag/user-docs/global/spend/rewards-and-referrals", "verified": "2026-11-04" }
     ],
     "lastChecked": "2026-10-25",
     "metal": "rose",
