@@ -60,6 +60,11 @@ and confirm what changed on the site (not which files moved).
 - Real card pictures: "Card image" link in the sheet (`image.source`); the sync stores the files in
   `public/card-images/`. Only use issuer press-kit images or ones an issuer sent; never copy from other sites.
 - Referral links go in `links.affiliate`; all "Get the card" buttons use `/go/<slug>`, which picks it up.
+- "Sign-up bonus" (`signupBonus`) and "Referral code" (`referralCode`), the last two Cards columns: what someone gets
+  for joining through G2M's link, in the issuer's own published terms (amount, spend needed, time limit), with a
+  source row; and the code to type in the app. Both need a referral link. Shown in a box on the card page, a line on
+  the home page tiles, a "Sign-up bonus" rankings filter and a compare row. Never changes a score or rank. Bonuses
+  only the referrer gets (e.g. "you get $5 when your friend spends $50") don't count.
 - Scores and ranks are computed (`lib/score.ts`). Never edit a rank or score by hand, and never change
   a card's position because of a referral deal.
 - Run `npm run validate` and fix every error before committing.

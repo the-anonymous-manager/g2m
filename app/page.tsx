@@ -131,6 +131,11 @@ export default function HomePage() {
                   <dd>{pct(featured.fees.fxPct)}</dd>
                 </div>
               </dl>
+              {featured.links.affiliate && featured.signupBonus ? (
+                <p className="bonus-line">
+                  <strong>Sign-up bonus:</strong> {featured.signupBonus}
+                </p>
+              ) : null}
               <div className="hero-feature-actions">
                 <OutboundLink
                   slug={featured.slug}
@@ -268,6 +273,11 @@ export default function HomePage() {
                   <dd>{pct(p.card.fees.fxPct)}</dd>
                 </div>
               </dl>
+              {p.card.links.affiliate && p.card.signupBonus ? (
+                <p className="bonus-line">
+                  <strong>Sign-up bonus:</strong> {p.card.signupBonus}
+                </p>
+              ) : null}
               <div className="pick-actions">
                 <OutboundLink
                   slug={p.card.slug}

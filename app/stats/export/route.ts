@@ -22,8 +22,8 @@ export async function GET(req: NextRequest) {
   if (kind === 'cards') {
     const data = await report(db, days);
     body = csv([
-      ['Card', 'Card ID', 'Referral link', 'Get the card clicks', 'Sponsored clicks', 'People who clicked', 'Card page views', 'Card page visitors', 'Click rate %'],
-      ...data.cards.map((c) => [c.name, c.slug, c.referral ? 'yes' : 'no', c.clicks, c.sponsored, c.people, c.views, c.visitors, c.rate ?? ''])
+      ['Card', 'Card ID', 'Referral link', 'Get the card clicks', 'Sponsored clicks', 'People who clicked', 'Card page views', 'Card page visitors', 'Clicks from its page', 'Click rate %'],
+      ...data.cards.map((c) => [c.name, c.slug, c.referral ? 'yes' : 'no', c.clicks, c.sponsored, c.people, c.views, c.visitors, c.fromPage, c.rate ?? ''])
     ]);
   } else {
     const { results } = await db

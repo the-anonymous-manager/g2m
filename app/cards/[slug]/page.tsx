@@ -14,6 +14,7 @@ import { CardArt } from '@/components/CardArt';
 import { Eyebrow, MarketBadge, ScorePill } from '@/components/bits';
 import { OutboundLink } from '@/components/OutboundLink';
 import { ShareBar } from '@/components/ShareBar';
+import { ReferralBox } from '@/components/ReferralBox';
 import { CountryStanding } from '@/components/CountryStanding';
 import { CountryList } from '@/components/CountryList';
 import { CountryToggle } from '@/components/CountryToggle';
@@ -179,6 +180,9 @@ export default async function CardPage({ params }: Props) {
                 Compare
               </Link>
             </div>
+            {card.links.affiliate ? (
+              <ReferralBox slug={card.slug} brand={card.brand} bonus={card.signupBonus} code={card.referralCode} />
+            ) : null}
             <ShareBar
               text={`${card.name}: G2M score ${card.score.total}/100, ${cashbackLabel(card.cashback.basePct, card.cashback.maxPct)} back`}
               label="Share this card"

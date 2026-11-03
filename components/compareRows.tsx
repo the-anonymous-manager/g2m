@@ -27,6 +27,7 @@ export const ROWS: Row[] = [
   { label: 'Network', render: (c) => c.network },
   { label: 'Card type', render: (c) => TYPE_LABEL[c.type] },
   { label: 'Custody', render: (c) => CUSTODY_LABEL[c.custody] },
+  { label: 'Sign-up bonus (G2M link)', render: (c) => c.signupBonus ?? 'None published' },
   {
     label: 'No ID check',
     render: (c) => (c.noIdCheck ? (c.noIdCheck.toLowerCase() === 'yes' ? 'Yes' : `Yes: ${c.noIdCheck}`) : 'ID needed or not stated')
