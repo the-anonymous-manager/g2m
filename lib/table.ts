@@ -194,7 +194,7 @@ export function describeFilters(f: Filters, countryLabel?: string): string {
   if (f.country) parts.push(`${f.strict ? 'confirmed in' : 'for'} ${countryLabel ?? f.country}`);
   else if (f.region) parts.push(`${f.strict ? 'confirmed in' : 'for'} ${REGIONS[f.region].label}`);
   if (f.passport && f.country && f.passport !== f.country) parts.push(`with a passport from ${countryName(f.passport)}`);
-  if (f.custody === 'self') parts.push('self-custodial');
+  if (f.custody === 'self') parts.push('non-custodial');
   if (f.custody === 'custodial') parts.push('custodial');
   if (f.nofee) parts.push('no annual fee');
   if (f.lounge) parts.push('with lounge access');

@@ -91,18 +91,18 @@ export const TOPICS: Topic[] = [
     rankings: '/cards?nofee=1'
   },
   {
-    slug: 'self-custodial-crypto-cards',
-    title: 'Self-custodial crypto cards',
-    description: 'Crypto cards that let you keep control of your funds until you spend, ranked by the G2M score, plus custodial vs self-custodial explained.',
+    slug: 'non-custodial-crypto-cards',
+    title: 'Non-custodial crypto cards',
+    description: 'Crypto cards that let you keep control of your funds until you spend, ranked by the G2M score, plus custodial vs non-custodial explained.',
     intro: [
-      'With a custodial card, the company holds your crypto in its own account and you hold a balance with it, much like a bank or an exchange. With a self-custodial card, the funds stay in a wallet you control and only leave it when you pay.',
-      'Self-custodial means the company cannot freeze or lose the funds you have not spent yet, but you are responsible for your wallet and its recovery phrase. Some cards let you choose either way.'
+      'With a custodial card, the company holds your crypto in its own account and you hold a balance with it, much like a bank or an exchange. With a non-custodial card, the funds stay in a wallet you control and only leave it when you pay.',
+      'Non-custodial means the company cannot freeze or lose the funds you have not spent yet, but you are responsible for your wallet and its recovery phrase. Some cards let you choose either way.'
     ],
     match: (c) => c.custody === 'self-custodial' || c.custody === 'both',
     tips: [
-      'Keep your recovery phrase safe: with a self-custodial wallet nobody can reset it for you.',
+      'Keep your recovery phrase safe: with a non-custodial wallet nobody can reset it for you.',
       'Check which networks and tokens the card spends from, and the cost of moving funds there.',
-      'Most cards still ask for an identity check (KYC), self-custodial or not.'
+      'Most cards still ask for an identity check (KYC), non-custodial or not.'
     ],
     rankings: '/cards?custody=self'
   },

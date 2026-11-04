@@ -324,6 +324,9 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   Confirmed on issuer pages: Solid ($25 FUSE, $150 at 3+ merchants in 30 days), Plasma One ($10 spend credit,
   $100 at 2+ merchants in 14 days), Nexo (NEXO tokens by tier within 45 days). Kite and Bitget Wallet pay only the
   referrer; ether.fi has no running offer; the rest have no issuer-published friend bonus (only third-party claims).
+- Wording (4 Nov 2026): visitors see "non-custodial", never "self-custodial" (labels, filters, home stat, picks, guide,
+  methodology, card text). The guide moved to /guides/non-custodial-crypto-cards (old address redirects). The sheet's
+  Custody value is still `self-custodial` internally. The score's "control" points are unchanged.
 - COCA tracking rule (3 Nov 2026, from COCA's affiliate team): the "Get the card" button must send people through the
   Impact tracking link (`links.affiliate`), which lands on coca.xyz/join-coca (email check) and only then the app
   store. Never swap in a direct App Store / Google Play link: attribution is lost. Checked: /go/coca -> coca.sjv.io

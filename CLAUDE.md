@@ -75,7 +75,7 @@ and confirm what changed on the site (not which files moved).
 - Our picks (home page, 3 slots): the sheet's Picks tab (Slot 1-3, Card ID, Type "Our pick"/"Featured", Why, Start,
   End; Featured = paid, needs both dates, shows "Sponsored"), synced to `data/picks.json` (`lib/picks.ts`).
   Unbooked slots show cards listed in the last 30 days as "New on G2M", then the automatic picks (top ranked, best no
-  annual fee, best self-custodial). Never changes a score or rank.
+  annual fee, best non-custodial). Never changes a score or rank.
 - New cards: nothing to date. The sync sets `addedOn` to the day a Card ID first reaches the site and keeps it after
   (no sheet column). Without a sheet, set `addedOn` (YYYY-MM-DD) in `data/cards.json` when listing a card.
 
@@ -85,6 +85,8 @@ and confirm what changed on the site (not which files moved).
 - Fonts: Inter Tight (UI), Roboto Mono (labels and data).
 - Logo: "Coin x Card" mark in `components/Logo.tsx`; files in `public/brand/`.
 - Copy style: plain, short sentences, no hype, no "#1" claims.
+- Say "non-custodial", never "self-custodial", to visitors (Akash's call, 4 Nov 2026). The sheet's Custody column still
+  holds the internal value `self-custodial`; it is shown as "Non-custodial". Write "non-custodial" in summaries, pros and notes.
 
 ## Map
 

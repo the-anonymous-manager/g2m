@@ -18,7 +18,7 @@ type Option<T> = { value: T; label: string; hint?: string };
 const TOTAL = 5;
 
 const Q_HOLD: Option<Hold>[] = [
-  { value: 'self', label: 'In my own wallet', hint: 'Self-custodial: you keep the keys' },
+  { value: 'self', label: 'In my own wallet', hint: 'Non-custodial: you keep the keys' },
   { value: 'exchange', label: 'On an exchange is fine', hint: 'Custodial: easier, the issuer holds funds' },
   { value: 'any', label: 'No preference' }
 ];

@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'Crypto card guides',
   description:
-    'Plain guides to crypto cards: the best cards by country, cards with no FX fee or no annual fee, self-custodial cards, cards with an IBAN, and every fee explained.',
+    'Plain guides to crypto cards: the best cards by country, cards with no FX fee or no annual fee, non-custodial cards, cards with an IBAN, and every fee explained.',
   alternates: { canonical: '/guides' }
 };
 

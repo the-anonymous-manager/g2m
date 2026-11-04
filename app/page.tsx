@@ -182,7 +182,7 @@ export default function HomePage() {
           </div>
           <div className="stat">
             <b data-count>{selfCustodial}</b>
-            <span>Self-custodial</span>
+            <span>Non-custodial</span>
           </div>
           <div className="stat">
             <b data-count>{noFee}</b>

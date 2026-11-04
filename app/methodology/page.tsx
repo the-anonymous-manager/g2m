@@ -37,7 +37,7 @@ const PARTS = [
   {
     name: 'Control',
     max: SCORE_WEIGHTS.control,
-    how: 'Who holds your funds while you spend. Self-custodial cards score 10, cards that let you choose custodial or self-custodial also score 10, custodial-only cards score 5, and cards that do not say score 0.'
+    how: 'Who holds your funds while you spend. Non-custodial cards score 10, cards that let you choose custodial or non-custodial also score 10, custodial-only cards score 5, and cards that do not say score 0.'
   }
 ];
 
@@ -202,7 +202,7 @@ export default function MethodologyPage() {
           The three &ldquo;Our picks&rdquo; on the home page work the same way: each one is either chosen by G2M (marked Our
           pick), a paid placement for a fixed period (marked Featured, with a &ldquo;Sponsored&rdquo; note), a card we added
           in the last 30 days (marked New on G2M), or, when none of those applies, filled in automatically with the top-ranked
-          card, the best card with no annual fee and the best self-custodial card.
+          card, the best card with no annual fee and the best non-custodial card.
         </p>
         <p>
           Neither a referral nor a sponsorship ever changes a card&apos;s score, rank or position in the rankings, and cards

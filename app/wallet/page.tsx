@@ -10,7 +10,7 @@ import { Eyebrow } from '@/components/bits';
 export const metadata: Metadata = {
   title: 'Crypto card wallet builder: the best 2-card combo',
   description:
-    'Find the two crypto cards that keep you the most money together, with the features you need: lounge access, yield, borrowing, a bank account or self-custody.',
+    'Find the two crypto cards that keep you the most money together, with the features you need: lounge access, yield, borrowing, a bank account or a non-custodial wallet.',
   alternates: { canonical: '/wallet' }
 };
 

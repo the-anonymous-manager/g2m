@@ -164,7 +164,7 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
               onChange={(e) => set('custody', e.target.value as Filters['custody'])}
             >
               <option value="">Any</option>
-              <option value="self">Self-custodial</option>
+              <option value="self">Non-custodial</option>
               <option value="custodial">Custodial</option>
             </select>
           </div>

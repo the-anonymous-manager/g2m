@@ -13,7 +13,7 @@ import { BASKET, BASKET_USD, BASKET_PURCHASES } from '@/lib/basket';
 //   Fees       30  annual and card-access costs 10 · FX fee 12 · other transaction costs on the basket 8
 //   Coverage   20  confirmed countries 12 · Apple Pay 2 · Google Pay 2 · physical card 3 (+1 under $50)
 //   Ecosystem  15  bank account 3 · bank payouts 3 · fiat on/off-ramp 3 · crypto-backed credit 3 · yield 3
-//   Control    10  self-custodial 10 · custodial 5 · not published 0
+//   Control    10  non-custodial (stored as "self-custodial") 10 · custodial 5 · not published 0
 //
 // Rewards and fees are kept apart: cashback always earns rewards points, and every fee charged on purchases
 // costs fees points. For one country, the same formula uses the tiers offered there; when the card does not bill
