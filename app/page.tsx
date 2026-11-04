@@ -111,6 +111,11 @@ export default function HomePage() {
   const featured = booked?.card ?? cards[0];
   const selfCustodial = cards.filter((c) => c.custody === 'self-custodial' || c.custody === 'both').length;
   const noFee = cards.filter((c) => c.fees.annualUsd === 0).length;
+  // The three cards listed most recently (addedOn is set by the sheet sync on the day a card first appears).
+  const newest = cards
+    .filter((c) => c.addedOn)
+    .sort((a, b) => b.addedOn!.localeCompare(a.addedOn!) || a.rank - b.rank)
+    .slice(0, 3);
 
   return (
     <>
@@ -249,6 +254,43 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* New on G2M: the three latest cards */}
+      {newest.length ? (
+        <section className="wrap section-tight stack" style={{ gap: 14 }} aria-labelledby="new">
+          <div className="pager" style={{ alignItems: 'flex-end' }}>
+            <div className="stack" style={{ gap: 8 }}>
+              <Eyebrow>just added</Eyebrow>
+              <h2 id="new" className="h3" style={{ margin: 0 }}>
+                New on G2M
+              </h2>
+            </div>
+            <Link href="/cards" className="muted" style={{ fontSize: 15 }}>
+              See all {cards.length} cards
+            </Link>
+          </div>
+          <div className="grid-3">
+            {newest.map((c) => (
+              <Link key={c.slug} href={`/cards/${c.slug}`} className="panel new-card">
+                <span className="new-card-art">
+                  <CardArt card={c} width={96} />
+                </span>
+                <span className="stack" style={{ gap: 4, minWidth: 0 }}>
+                  <span className="new-card-name">{c.name}</span>
+                  <span className="faint mono" style={{ fontSize: 12 }}>
+                    Added {fmtDate(c.addedOn!)}
+                  </span>
+                  <span className="muted" style={{ fontSize: 14 }}>
+                    {cashbackLabel(c.cashback.basePct, c.cashback.maxPct)} back ·{' '}
+                    {c.fees.annualUsd === 0 ? 'no annual fee' : c.fees.annualUsd == null ? 'fee not published' : `${usd(c.fees.annualUsd)} a year`}
+                  </span>
+                </span>
+                <ScorePill value={c.score.total} showBar={false} />
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       {/* Leaderboard preview */}
       <section className="wrap section stack" style={{ gap: 20 }} aria-labelledby="top">

@@ -338,6 +338,9 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
 - Wording (4 Nov 2026): visitors see "non-custodial", never "self-custodial" (labels, filters, home stat, picks, guide,
   methodology, card text). The guide moved to /guides/non-custodial-crypto-cards (old address redirects). The sheet's
   Custody value is still `self-custodial` internally. The score's "control" points are unchanged.
+- Home "New on G2M" (4 Nov 2026, Akash): a strip between the stats and the leaderboard with the 3 most recently
+  listed cards (by `addedOn`, newest first, ties by rank), each linking to its review with the date added, cashback,
+  annual fee and score. Updates itself when the sync lists a new card; hidden if no card has an `addedOn`.
 - More SEO pages (4 Nov 2026, Akash: "increase the seo pages"): a "Best X alternatives" page per card at
   `/cards/[slug]/alternatives` (top 10 by score not ruled out in the card's confirmed markets, the card's cons as
   "why look for an alternative", where each beats it from the "X vs Y" verdict, FAQ + ItemList data; linked from the
