@@ -338,6 +338,13 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
 - Wording (4 Nov 2026): visitors see "non-custodial", never "self-custodial" (labels, filters, home stat, picks, guide,
   methodology, card text). The guide moved to /guides/non-custodial-crypto-cards (old address redirects). The sheet's
   Custody value is still `self-custodial` internally. The score's "control" points are unchanged.
+- New cards (4 Nov 2026), Akash's request: Infini (row 35; Pro/Lite/Max tiers from infini.money/en/pricing, 1.5%
+  cashback from 1 Nov, no country list), Hyperbeat Pay (row 36; cashback from its 5 Aug 2026 blog post, paid in WHYPE;
+  no published fee schedule, so FX and annual fee are empty and it ranks last) and XPlace (row 37; plans and caps from
+  docs.x.place; FX: help centre says Visa 1% + a tier fee, card terms say 0%, so FX left empty except Platinum 0%).
+  Pictures in `public/card-originals/`: Infini Max (sent by Akash), Hyperbeat and XPlace from their own sites. GMGN is
+  not added: gmgn.ai blocks automated reads and no GMGN page publishes the card's terms; waiting for Akash's in-app
+  screenshots of fees and cashback (his card picture shows his real last 4 digits, so crop them before using it).
 - COCA tracking rule (3 Nov 2026, from COCA's affiliate team): the "Get the card" button must send people through the
   Impact tracking link (`links.affiliate`), which lands on coca.xyz/join-coca (email check) and only then the app
   store. Never swap in a direct App Store / Google Play link: attribution is lost. Checked: /go/coca -> coca.sjv.io
