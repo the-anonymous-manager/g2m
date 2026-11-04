@@ -25,7 +25,7 @@ export const FEATURES: Feature[] = [
     has: (c) => c.ecosystem?.iban === 'named' || c.ecosystem?.iban === 'shared'
   },
   { key: 'payout', label: 'Send money to a bank', short: 'Bank payouts', has: (c) => (c.ecosystem?.payoutCorridors ?? 0) >= 1 },
-  { key: 'selfCustody', label: 'Self-custody', short: 'Self-custody', has: (c) => c.custody === 'self-custodial' || c.custody === 'both' },
+  { key: 'selfCustody', label: 'Non-custodial', short: 'Non-custodial', has: (c) => c.custody === 'self-custodial' || c.custody === 'both' },
   { key: 'physical', label: 'Physical card', short: 'Physical card', has: (c) => c.forms.includes('physical') || c.forms.includes('metal') },
   { key: 'mobilePay', label: 'Apple Pay or Google Pay', short: 'Apple/Google Pay', has: (c) => Boolean(c.wallets.applePay || c.wallets.googlePay) }
 ];

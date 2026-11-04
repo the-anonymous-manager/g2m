@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getCards, getRank, lastUpdated } from '@/lib/cards';
 import { getSponsor } from '@/lib/sponsor';
@@ -19,6 +20,53 @@ const MARKETS: Market[] = ['US', 'GB', 'EU'];
 // Rendered fresh on every request (not cached/ISR) so a sponsorship starts and ends on its dates without a new
 // deploy, and so the page works the same on hosts with no incremental-cache storage configured.
 export const dynamic = 'force-dynamic';
+
+// The words people search for ("best crypto cards 2026") in the title, which search results show.
+export function generateMetadata(): Metadata {
+  const year = new Date().getUTCFullYear();
+  const n = getCards().length;
+  return {
+    title: { absolute: `Best Crypto Cards ${year}: Fees, Cashback & Rewards Compared · ${site.name}` },
+    description: `Compare ${n} crypto cards side by side: cashback, annual and FX fees, where each card works, sign-up bonuses and no-KYC options. Every card ranked by the same rules.`
+  };
+}
+
+/** What the site is, for search engines: the site with its card search, who runs it, and the top of the ranking. */
+function homeJsonLd(cards: Card[]) {
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: site.name,
+      alternateName: site.expansion,
+      url: site.url,
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: { '@type': 'EntryPoint', urlTemplate: `${site.url}/cards?q={search_term_string}` },
+        'query-input': 'required name=search_term_string'
+      }
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: site.name,
+      url: site.url,
+      logo: `${site.url}/brand/g2m-mark-512.png`,
+      ...(site.twitter ? { sameAs: [`https://x.com/${site.twitter.replace(/^@/, '')}`] } : {})
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Top crypto cards by G2M score',
+      itemListElement: cards.slice(0, 10).map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: c.name,
+        url: `${site.url}/cards/${c.slug}`
+      }))
+    }
+  ];
+}
 
 function confirmedIn(cards: Card[], m: Market) {
   return cards.filter((c) => c.coverage.markets[m] === 'yes');
@@ -66,13 +114,16 @@ export default function HomePage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd(cards)) }} />
       {/* Hero */}
       <div className="hero-shell">
         <GlyphField />
         <section className="wrap hero">
           <div className="hero-copy">
-            <Eyebrow>the crypto card directory</Eyebrow>
-            <h1 className="h1">
+            <h1 className="eyebrow" style={{ margin: 0 }}>
+              [ Best crypto cards of {new Date().getUTCFullYear()}, compared ]
+            </h1>
+            <p className="h1" style={{ margin: 0 }}>
               <span className="line">Spend your</span>
               <br />
               <span className="line">
@@ -80,7 +131,7 @@ export default function HomePage() {
                   bags better.
                 </span>
               </span>
-            </h1>
+            </p>
             <p className="lead">
               {site.subline} Every crypto card ranked on rewards, fees and where it actually works, so you can pick the one
               that pays you back.
@@ -182,7 +233,7 @@ export default function HomePage() {
           </div>
           <div className="stat">
             <b data-count>{selfCustodial}</b>
-            <span>Self-custodial</span>
+            <span>Non-custodial</span>
           </div>
           <div className="stat">
             <b data-count>{noFee}</b>

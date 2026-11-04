@@ -2,6 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // The guide formerly called "self-custodial" is now "non-custodial": keep the old address working.
+  async redirects() {
+    return [{ source: '/guides/self-custodial-crypto-cards', destination: '/guides/non-custodial-crypto-cards', permanent: true }];
+  },
   async headers() {
     return [
       {

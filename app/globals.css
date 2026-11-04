@@ -2489,3 +2489,17 @@ body::before {
   color: var(--accent);
   font-weight: 600;
 }
+
+/* ---------- Card page: questions ---------- */
+.faq-list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+}
+.faq-list dt {
+  font-weight: 600;
+}
+.faq-list dd {
+  margin: 4px 0 0;
+  color: var(--muted);
+}

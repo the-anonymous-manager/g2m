@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const card = getCard(slug);
   if (!card) return {};
   const cb = cashbackLabel(card.cashback.basePct, card.cashback.maxPct);
-  const title = `${card.name} review: fees, cashback and countries`;
+  const title = `${card.name} Review ${new Date().getUTCFullYear()}: Fees, Cashback & Countries`;
   const description = `${card.name}: ${cb} back, ${usd(card.fees.annualUsd)} annual fee, ${pct(card.fees.fxPct)} FX fee. G2M score ${card.score.total}/100. ${card.summary}`;
   return {
     title,
@@ -51,6 +51,78 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const MARKETS: Market[] = ['IN', 'AE', 'US', 'GB', 'EU'];
+
+/**
+ * Plain questions people search for, answered only from published card data (a question is skipped when the issuer
+ * does not say). Shown on the page and sent to search engines as FAQPage data; the two must match.
+ */
+function faqs(card: Card): { q: string; a: string }[] {
+  const out: { q: string; a: string }[] = [];
+  const n = card.name;
+  const fee = card.fees.annualUsd;
+  if (fee != null) {
+    out.push({
+      q: `Does the ${n} have an annual fee?`,
+      a: fee === 0 ? 'No. The entry tier has no annual fee.' : `Yes: ${usd(fee)} a year on the entry tier.`
+    });
+  }
+  const { basePct, maxPct, payout } = card.cashback;
+  if (basePct != null || maxPct != null) {
+    const none = !basePct && !maxPct;
+    out.push({
+      q: `How much cashback does the ${n} pay?`,
+      a: none ? 'No standard cashback.' : `${cashbackLabel(basePct, maxPct)} back${payout ? `, paid in ${payout}` : ''}.`
+    });
+  }
+  const fx = card.fees.fxPct;
+  if (fx != null) {
+    const free = Object.entries(card.fees.fxByCurrency ?? {})
+      .filter(([, v]) => v === 0)
+      .map(([k]) => k);
+    out.push({
+      q: `What is the ${n}'s FX fee?`,
+      a:
+        fx === 0
+          ? 'No FX fee: 0% when you pay in another currency.'
+          : `${pct(fx)} on purchases in other currencies${free.length ? `, and no FX fee on ${free.join(' and ')} purchases` : ''}.`
+    });
+  }
+  if (card.custody !== 'unknown') {
+    out.push({
+      q: `Is the ${n} custodial or non-custodial?`,
+      a:
+        card.custody === 'custodial'
+          ? 'Custodial: the company holds your funds while you spend.'
+          : card.custody === 'both'
+            ? 'You can choose: keep funds with the company, or in a wallet you control.'
+            : 'Non-custodial: your funds stay in a wallet you control until you pay.'
+    });
+  }
+  const yes = MARKETS.filter((m) => card.coverage.markets[m] === 'yes').map((m) => MARKET_LABELS[m]);
+  const no = MARKETS.filter((m) => card.coverage.markets[m] === 'no').map((m) => MARKET_LABELS[m]);
+  if (card.coverage.scope || yes.length || no.length) {
+    out.push({
+      q: `Where can I get the ${n}?`,
+      a: [
+        card.coverage.scope ? `${card.coverage.scope}.` : '',
+        yes.length ? `Confirmed in ${yes.join(', ')}.` : '',
+        no.length ? `Not available in ${no.join(', ')}.` : ''
+      ]
+        .filter(Boolean)
+        .join(' ')
+    });
+  }
+  if (card.noIdCheck) {
+    out.push({
+      q: `Can I get the ${n} without an ID check (KYC)?`,
+      a: card.noIdCheck.toLowerCase() === 'yes' ? 'Yes, according to the issuer.' : `Yes, the ${card.noIdCheck}, according to the issuer.`
+    });
+  }
+  if (card.links.affiliate && card.signupBonus) {
+    out.push({ q: `Is there a sign-up bonus for the ${n}?`, a: `Yes, through G2M's link: ${card.signupBonus}.` });
+  }
+  return out;
+}
 
 function jsonLd(card: Card) {
   const url = absoluteUrl(`/cards/${card.slug}`);
@@ -70,6 +142,33 @@ function jsonLd(card: Card) {
       feesAndCommissionsSpecification: `Annual fee: ${usd(card.fees.annualUsd)}. FX fee: ${pct(card.fees.fxPct)}.`,
       areaServed: card.coverage.scope
     },
+    {
+      // An editorial review: G2M's score as the rating, out of 100.
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: card.name,
+      description: card.summary,
+      url,
+      category: 'Crypto card',
+      brand: { '@type': 'Brand', name: card.brand },
+      ...(card.image ? { image: absoluteUrl(card.image.file.replace(/\.webp$/, '.png')) } : {}),
+      review: {
+        '@type': 'Review',
+        author: { '@type': 'Organization', name: site.name, url: site.url },
+        datePublished: card.lastChecked,
+        reviewBody: card.summary,
+        reviewRating: { '@type': 'Rating', ratingValue: card.score.total, bestRating: 100, worstRating: 0 }
+      }
+    },
+    ...(faqs(card).length
+      ? [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: faqs(card).map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }))
+          }
+        ]
+      : []),
     {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
@@ -482,6 +581,23 @@ export default async function CardPage({ params }: Props) {
                 <dd style={{ fontSize: 15, fontWeight: 500 }}>{card.issuer}</dd>
               </div>
             ) : null}
+          </dl>
+        </section>
+      ) : null}
+
+      {/* Questions (the same text is sent as FAQPage data) */}
+      {faqs(card).length ? (
+        <section className="stack" style={{ gap: 14 }} aria-labelledby="faq">
+          <h2 id="faq" className="h3">
+            Questions about the {card.name}
+          </h2>
+          <dl className="faq-list">
+            {faqs(card).map((f) => (
+              <div key={f.q}>
+                <dt>{f.q}</dt>
+                <dd>{f.a}</dd>
+              </div>
+            ))}
           </dl>
         </section>
       ) : null}

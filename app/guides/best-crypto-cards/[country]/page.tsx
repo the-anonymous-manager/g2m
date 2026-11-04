@@ -66,7 +66,7 @@ export default async function CountryGuidePage({ params }: Props) {
       a: noFee.length ? `${names(noFee)}.` : `None of the cards confirmed in ${name} has a free entry tier.`
     },
     {
-      q: `Is there a self-custodial crypto card in ${name}?`,
+      q: `Is there a non-custodial crypto card in ${name}?`,
       a: selfCustody.length
         ? `Yes: ${names(selfCustody)} ${selfCustody.length === 1 ? 'lets' : 'let'} you keep control of your funds until you spend.`
         : `Not among the cards confirmed in ${name} so far.`
@@ -126,7 +126,7 @@ export default async function CountryGuidePage({ params }: Props) {
           <li>{faq[1].a}</li>
           <li>No annual fee: {noFee.length ? `${names(noFee)}.` : 'none of the confirmed cards.'}</li>
           <li>
-            Keep control of your funds (self-custodial): {selfCustody.length ? `${names(selfCustody)}.` : 'none of the confirmed cards so far.'}
+            Keep control of your funds (non-custodial): {selfCustody.length ? `${names(selfCustody)}.` : 'none of the confirmed cards so far.'}
           </li>
           {g.unconfirmed ? (
             <li>

@@ -23,7 +23,7 @@ const AUTO: { label: string; note: (c: Card) => string; match: (c: Card) => bool
   { label: 'Top ranked', note: (c) => `The highest G2M score right now: ${c.score.total}.`, match: () => true },
   { label: 'Best with no annual fee', note: () => 'The best-scored card that costs nothing a year.', match: (c) => c.fees.annualUsd === 0 },
   {
-    label: 'Best self-custodial',
+    label: 'Best non-custodial',
     note: () => 'The best-scored card where you keep control of your funds.',
     match: (c) => c.custody === 'self-custodial' || c.custody === 'both'
   }
