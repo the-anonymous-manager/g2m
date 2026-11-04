@@ -284,6 +284,11 @@ export default function HomePage() {
                     {cashbackLabel(c.cashback.basePct, c.cashback.maxPct)} back ·{' '}
                     {c.fees.annualUsd === 0 ? 'no annual fee' : c.fees.annualUsd == null ? 'fee not published' : `${usd(c.fees.annualUsd)} a year`}
                   </span>
+                  {c.links.affiliate && c.signupBonus ? (
+                    <span className="bonus-line">
+                      <strong>Sign-up bonus:</strong> {c.signupBonus}
+                    </span>
+                  ) : null}
                 </span>
                 <ScorePill value={c.score.total} showBar={false} />
               </Link>
