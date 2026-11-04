@@ -46,9 +46,9 @@ const saveHome = (v: string | null) => {
   }
 };
 
-type Props = { rows: CardRow[]; initial: Filters; hadMarketParam: boolean };
+type Props = { rows: CardRow[]; initial: Filters; hadMarketParam: boolean; allCountries?: boolean };
 
-export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
+export function RankingsTable({ rows, initial, hadMarketParam, allCountries = false }: Props) {
   const [f, setF] = useState<Filters>(initial);
   const [picked, setPicked] = useState<string[]>([]);
   const { country: myCountry, ready } = useRegion();
@@ -82,13 +82,17 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
     }
     // A detected country stays out of the URL, so a shared link follows each reader's own location.
     const qs = serializeFilters(autoCountry ? { ...f, country: '' } : f);
-    const url = `${window.location.pathname}${qs ? `?${qs}` : ''}`;
+    // Opened as "all countries" (?country=all): keep saying so while no country is picked, so a reload or the
+    // back button shows the same worldwide list instead of the detected country.
+    const keepAll = allCountries && !f.country && !f.region;
+    const shown = keepAll ? [qs, 'country=all'].filter(Boolean).join('&') : qs;
+    const url = `${window.location.pathname}${shown ? `?${shown}` : ''}`;
     window.history.replaceState(window.history.state, '', url);
     // Filters and sorting people use (the search box only once typing stops).
     if (!qs) return; // back to the default view (or only the automatic country): nothing chosen
     const t = setTimeout(() => track('Rankings', { view: qs.slice(0, 120) }), 1500);
     return () => clearTimeout(t);
-  }, [f, autoCountry]);
+  }, [f, autoCountry, allCountries]);
 
   // In a country view every card is scored and ranked for that country.
   const ranked = useMemo(() => (f.country ? rankIn(rows, f.country) : rows), [rows, f.country]);

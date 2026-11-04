@@ -152,7 +152,7 @@ export default function HomePage() {
               </button>
             </form>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 24px' }}>
-              <Link href="/cards" style={{ padding: '10px 0', fontWeight: 600, textUnderlineOffset: 4 }}>
+              <Link href="/cards?country=all" style={{ padding: '10px 0', fontWeight: 600, textUnderlineOffset: 4 }}>
                 See all {cards.length} cards
               </Link>
               <Link href="/finder" style={{ padding: '10px 0', fontWeight: 600, textUnderlineOffset: 4 }}>
@@ -265,7 +265,7 @@ export default function HomePage() {
                 New on G2M
               </h2>
             </div>
-            <Link href="/cards" className="muted" style={{ fontSize: 15 }}>
+            <Link href="/cards?country=all" className="muted" style={{ fontSize: 15 }}>
               See all {cards.length} cards
             </Link>
           </div>

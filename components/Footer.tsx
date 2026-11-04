@@ -20,7 +20,7 @@ export function Footer({ updated }: { updated: string }) {
             </p>
           </div>
           <nav aria-label="Footer" className="footer-links">
-            <Link href="/cards">All cards</Link>
+            <Link href="/cards?country=all">All cards</Link>
             <Link href="/finder">Card finder</Link>
             <Link href="/calculator">Rewards calculator</Link>
             <Link href="/wallet">Wallet builder</Link>

@@ -338,6 +338,10 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
 - Wording (4 Nov 2026): visitors see "non-custodial", never "self-custodial" (labels, filters, home stat, picks, guide,
   methodology, card text). The guide moved to /guides/non-custodial-crypto-cards (old address redirects). The sheet's
   Custody value is still `self-custodial` internally. The score's "control" points are unchanged.
+- "See all cards" (4 Nov 2026, Akash): the home "See all N cards" links and the footer "All cards" go to
+  `/cards?country=all`, which shows every card worldwide instead of switching to the visitor's detected country;
+  `country=all` stays in the address while no country is picked, so reload and Back keep the worldwide list.
+  Plain `/cards` (menu "Rankings", "Full rankings") still defaults to the visitor's country.
 - Home "New on G2M" (4 Nov 2026, Akash): a strip between the stats and the leaderboard with the 3 most recently
   listed cards (by `addedOn`, newest first, ties by rank), each linking to its review with the date added, cashback, sign-up bonus (when there is a referral link),
   annual fee and score. Updates itself when the sync lists a new card; hidden if no card has an `addedOn`.
