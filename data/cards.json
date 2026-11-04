@@ -546,7 +546,7 @@
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 2, "capMonthlyUsd": 100 },
       { "name": "Referral boost", "feeUsdYear": 0, "cashbackPct": 4, "capMonthlyUsd": 100, "requirement": "2 qualifying referrals in the previous month" }
     ],
-    "coverage": { "countries": 52, "scope": "Asia-Pacific, the Gulf and Latin America", "examples": ["United Arab Emirates", "Singapore", "Japan", "Argentina", "Brazil"], "markets": { "IN": "unknown", "AE": "yes", "US": "yes", "GB": "unknown", "EU": "unknown" }, "countryList": { "yes": ["AE", "AG", "AR", "AU", "BB", "BO", "BR", "BS", "BZ", "CI", "CO", "CR", "DM", "DO", "EC", "EG", "GD", "GH", "GT", "GY", "HN", "JP", "KE", "KN", "KR", "KY", "LC", "MA", "MX", "MY", "NZ", "PA", "PE", "PH", "PK", "PY", "SG", "SN", "SR", "SV", "TC", "TH", "TT", "TW", "UG", "US", "UY", "VC", "VN", "ZA", "ZM"], "unclear": ["BD", "NG"], "others": "unknown" } },
+    "coverage": { "countries": 52, "scope": "Asia-Pacific, the Gulf and Latin America", "examples": ["United Arab Emirates", "Singapore", "Japan", "Argentina", "Brazil"], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "unknown", "EU": "unknown" }, "countryList": { "yes": ["AE", "AG", "AR", "AU", "BB", "BO", "BR", "BS", "BZ", "CI", "CO", "CR", "DM", "DO", "EC", "EG", "GD", "GH", "GT", "GY", "HN", "JP", "KE", "KN", "KR", "KY", "LC", "MA", "MX", "MY", "NZ", "PA", "PE", "PH", "PK", "PY", "SG", "SN", "SR", "SV", "TC", "TH", "TT", "TW", "UG", "US", "UY", "VC", "VN", "ZA", "ZM"], "no": ["IN"], "unclear": ["BD", "NG"], "others": "unknown" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 15, "ramps": "both", "credit": false, "yield": false },
     "bankRails": [ { "rail": "USD_ACH", "in": true, "out": true, "fee": "$2 + 0.05%" }, { "rail": "EUR_SEPA", "in": true, "out": true, "fee": "in EUR 0.87 + 0.10%, out $1 + 0.10%" }, { "rail": "SWIFT", "in": true, "out": true, "fee": "USD only, $30 + 0.05%" }, { "rail": "USD_WIRE", "in": true, "out": true, "fee": "$20 + 0.05%" } ],
     "bankForNonResidents": true,
@@ -566,9 +566,10 @@
       { "label": "Jupiter Docs: Fees & Limits", "url": "https://docs.jup.ag/user-docs/global/spend/fees-and-limits", "verified": "2026-10-25" },
       { "label": "Jupiter Docs: Remittance", "url": "https://docs.jup.ag/user-docs/global/spend/remittance", "verified": "2026-10-25" },
       { "label": "Jupiter Docs: Risks & Security", "url": "https://docs.jup.ag/user-docs/global/spend/risks-and-security", "verified": "2026-10-24" },
-      { "label": "Jupiter docs: Rewards & Referrals (friend gets $20 after $1,000 spend within 30 days of card activation; where to enter a code)", "url": "https://docs.jup.ag/user-docs/global/spend/rewards-and-referrals", "verified": "2026-11-04" }
+      { "label": "Jupiter docs: Rewards & Referrals (friend gets $20 after $1,000 spend within 30 days of card activation; where to enter a code)", "url": "https://docs.jup.ag/user-docs/global/spend/rewards-and-referrals", "verified": "2026-11-04" },
+      { "label": "Jupiter app: card not offered to residents of India (checked in the app by G2M)", "url": "https://jup.ag/", "verified": "2026-11-04" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-04",
     "metal": "rose",
     "image": { "source": "https://g2m.life/card-originals/jupiter.png", "file": "/card-images/jupiter-16f17db8.webp" }
   },
