@@ -90,7 +90,7 @@ and confirm what changed on the site (not which files moved).
 
 ## Map
 
-- `app/` pages: home, `/cards`, `/cards/[slug]`, `/compare`, `/compare/[pair]` ("a-vs-b" SEO pages, `lib/verdict.ts`), `/guides` (country and topic guides, `lib/guides.ts`), `/finder`, `/calculator`, `/methodology`, `/submit`
+- `app/` pages: home, `/cards`, `/cards/[slug]`, `/cards/[slug]/alternatives` (`lib/alternatives.ts`), `/compare`, `/compare/[pair]` ("a-vs-b" SEO pages, `lib/verdict.ts`), `/guides` (country and topic guides, `lib/guides.ts`), `/finder`, `/calculator`, `/methodology`, `/submit`
 - `app/go/[slug]` outbound redirect with UTM tags
 - `components/` UI, `lib/` logic (score, table engine, calculator, finder, regions), `middleware.ts` geo cookie
 - `components/motion/` hero glyph field, scroll reveals, tilt; all off under reduced motion (no custom cursor)

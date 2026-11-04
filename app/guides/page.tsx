@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { FEES_GUIDE, TOPICS, countryGuidePath, countryGuides, topicCards } from '@/lib/guides';
+import { getCards } from '@/lib/cards';
+import { alternativesPath } from '@/lib/alternatives';
 import { Eyebrow } from '@/components/bits';
 
 // Rendered on request like the card pages (no incremental cache on the host); the data is bundled, so it is cheap.
@@ -9,7 +11,7 @@ export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'Crypto card guides',
   description:
-    'Plain guides to crypto cards: the best cards by country, cards with no FX fee or no annual fee, non-custodial cards, cards with an IBAN, and every fee explained.',
+    'Plain guides to crypto cards: the best cards by country, cards with no FX fee or no annual fee, Apple Pay, USDT and USDC cards, crypto credit cards, alternatives to every card, and every fee explained.',
   alternates: { canonical: '/guides' }
 };
 
@@ -45,6 +47,24 @@ export default function GuidesPage() {
             </span>
           </Link>
         </div>
+      </section>
+
+      <section id="alternatives" aria-labelledby="alternatives-title" className="stack" style={{ gap: 14, scrollMarginTop: 90 }}>
+        <h2 id="alternatives-title" className="h3">
+          Alternatives to every card
+        </h2>
+        <p className="muted" style={{ margin: 0 }}>
+          The best-scored cards to consider instead of each one, with where each beats it.
+        </p>
+        <ul className="guide-links">
+          {[...getCards()]
+            .sort((a, b) => a.brand.localeCompare(b.brand))
+            .map((c) => (
+              <li key={c.slug}>
+                <Link href={alternativesPath(c.slug)}>{c.brand} alternatives</Link>
+              </li>
+            ))}
+        </ul>
       </section>
 
       <section id="countries" aria-labelledby="countries-title" className="stack" style={{ gap: 14, scrollMarginTop: 90 }}>

@@ -184,6 +184,189 @@ export const TOPICS: Topic[] = [
       'Pick the card for its fees and cashback first; a bonus is paid once, fees are paid every month.'
     ],
     rankings: '/cards?bonus=1'
+  },
+  {
+    slug: 'crypto-cards-with-apple-pay',
+    title: 'Crypto cards with Apple Pay',
+    description: 'Every crypto card on G2M you can add to Apple Pay, ranked by the G2M score, with cashback, annual fee and FX fee.',
+    intro: [
+      'With Apple Pay you add the card to the Wallet app and pay by tapping your iPhone or Apple Watch, in shops and in apps, without carrying the card itself. A virtual card is often enough.',
+      'Apple Pay support is listed only when the issuer confirms it. It can also depend on the country: Apple Pay itself does not work everywhere.'
+    ],
+    match: (c) => c.wallets.applePay === true,
+    tips: [
+      'Check that Apple Pay works in your country, not only that the card supports it.',
+      'Some cards add Apple Pay only on certain tiers or card types.',
+      'Tapping your phone counts as a normal card purchase: the same FX and per-purchase fees apply.'
+    ]
+  },
+  {
+    slug: 'crypto-cards-with-google-pay',
+    title: 'Crypto cards with Google Pay',
+    description: 'Every crypto card on G2M you can add to Google Pay (Google Wallet), ranked by the G2M score.',
+    intro: [
+      'With Google Pay (Google Wallet) you add the card to an Android phone or watch and pay by tapping it, in shops and online, without the plastic card.',
+      'Google Pay support is listed only when the issuer confirms it, and Google Pay itself is not offered in every country.'
+    ],
+    match: (c) => c.wallets.googlePay === true,
+    tips: [
+      'Check that Google Pay works in your country, not only that the card supports it.',
+      'Some cards add Google Pay only on certain tiers or card types.',
+      'Paying with your phone costs the same as paying with the card: the FX and per-purchase fees still apply.'
+    ]
+  },
+  {
+    slug: 'crypto-credit-cards',
+    title: 'Crypto credit cards (spend without selling)',
+    description: 'Crypto cards that let you borrow against your crypto and spend without selling it, ranked by the G2M score.',
+    intro: [
+      'Most crypto cards are debit or prepaid: you spend money you already hold, and paying with crypto counts as selling it. The cards here offer credit instead, usually a loan backed by the crypto you deposit, so you can spend while keeping your coins.',
+      'Borrowing against crypto has a cost and a risk: interest on what you borrow, and if the price of your collateral falls far enough, part of it can be sold (liquidated) to repay the loan.'
+    ],
+    match: (c) => c.ecosystem?.credit === true || c.type === 'credit',
+    tips: [
+      'Check the interest rate on what you borrow and when it has to be repaid.',
+      'Check how much you can borrow against each coin (the loan-to-value) and when liquidation starts.',
+      'A card can call itself a credit card and still need you to deposit funds first.'
+    ]
+  },
+  {
+    slug: 'usdt-crypto-cards',
+    title: 'USDT cards: spend Tether with a crypto card',
+    description: 'Crypto cards you can top up or spend with USDT (Tether), ranked by the G2M score, with fees and where each one works.',
+    intro: [
+      'USDT (Tether) is the most used stablecoin: a token meant to stay worth one US dollar. These cards accept USDT, either to load the card or to spend straight from your balance.',
+      'Check which network the card takes USDT on (for example Tron, Ethereum or Solana): sending on the wrong network can lose the funds, and network fees differ a lot.'
+    ],
+    match: (c) => c.assets.some((a) => a.toUpperCase() === 'USDT'),
+    tips: [
+      'Check the supported networks and the deposit fee for each one.',
+      'Look at the top-up fee: some cards charge a percentage to turn USDT into card balance.',
+      'Most cards bill in US dollars, so spending in another currency adds the FX fee.'
+    ]
+  },
+  {
+    slug: 'usdc-crypto-cards',
+    title: 'USDC cards: spend USDC with a crypto card',
+    description: 'Crypto cards you can top up or spend with USDC, ranked by the G2M score, with cashback, fees and where each one works.',
+    intro: [
+      'USDC is a stablecoin issued by Circle, meant to stay worth one US dollar. These cards accept USDC, either to load the card or to spend straight from your balance or wallet.',
+      'Check which network the card takes USDC on (for example Solana, Base or Ethereum): network fees differ, and sending on the wrong network can lose the funds.'
+    ],
+    match: (c) => c.assets.some((a) => a.toUpperCase() === 'USDC'),
+    tips: [
+      'Check the supported networks and what each costs to deposit.',
+      'Look at the top-up fee and whether the card keeps your USDC on-chain or converts it.',
+      'Most cards bill in US dollars, so spending in another currency adds the FX fee.'
+    ]
+  },
+  {
+    slug: 'crypto-visa-cards',
+    title: 'Crypto Visa cards',
+    description: 'Every crypto card on G2M that runs on Visa, ranked by the G2M score, with cashback, annual fee and FX fee.',
+    intro: [
+      'These crypto cards run on the Visa network, so they work wherever Visa is accepted, in shops, online and at most ATMs. Visa or Mastercard makes little difference at the till; the issuer sets the fees and the cashback.',
+      'Some Visa crypto cards are Visa Signature or Platinum, which can add benefits such as purchase protection or concierge, usually on higher tiers.'
+    ],
+    match: (c) => c.network.includes('Visa'),
+    tips: [
+      'Compare the issuer’s fees: the network does not set them.',
+      'Check which tier comes with Visa Signature or Platinum benefits.',
+      'Check that the card is confirmed where you live before you apply.'
+    ],
+    rankings: '/cards?net=visa'
+  },
+  {
+    slug: 'crypto-mastercard-cards',
+    title: 'Crypto Mastercard cards',
+    description: 'Every crypto card on G2M that runs on Mastercard, ranked by the G2M score, with cashback, annual fee and FX fee.',
+    intro: [
+      'These crypto cards run on the Mastercard network, so they work wherever Mastercard is accepted, in shops, online and at most ATMs. The issuer, not the network, sets the fees and the cashback.',
+      'A few issuers offer both a Visa and a Mastercard version, sometimes as different card types with different fees.'
+    ],
+    match: (c) => c.network.includes('Mastercard'),
+    tips: [
+      'Compare the issuer’s fees: the network does not set them.',
+      'If a card comes on both networks, check which version you get where you live.',
+      'Check that the card is confirmed where you live before you apply.'
+    ],
+    rankings: '/cards?net=mastercard'
+  },
+  {
+    slug: 'virtual-crypto-cards',
+    title: 'Virtual crypto cards',
+    description: 'Crypto cards that come as a virtual card you can use online and with Apple Pay or Google Pay right away, ranked by the G2M score.',
+    intro: [
+      'A virtual card is a card number you get in the app, usually within minutes. You can use it online straight away, and in shops if you add it to Apple Pay or Google Pay.',
+      'Many issuers give a virtual card first and a physical card later, sometimes for a fee or only on higher tiers.'
+    ],
+    match: (c) => c.forms.includes('virtual'),
+    tips: [
+      'Check whether the virtual card works with Apple Pay or Google Pay where you live.',
+      'Check the cost of each extra virtual card, if you want one per subscription.',
+      'Some merchants (hotels, car rental) prefer a physical card.'
+    ]
+  },
+  {
+    slug: 'high-cashback-crypto-cards',
+    title: 'Crypto cards with 2% or more cashback',
+    description: 'Crypto cards that pay 2% or more cashback on everyday spending on their entry tier, ranked by the G2M score.',
+    intro: [
+      'These cards pay at least 2% back on everyday purchases on their entry tier, the one you get without paying for a plan or staking a token. Rates on higher tiers are often higher still.',
+      'Cashback is often paid in a token rather than cash, and many cards cap it each month. A high rate with a low cap can earn less than a lower rate without one.'
+    ],
+    match: (c) => (c.cashback.basePct ?? 0) >= 2,
+    tips: [
+      'Check the monthly cap and any spending bands where the rate drops.',
+      'Check what the cashback is paid in: a token’s price can fall.',
+      'Fees can cancel cashback out: use the rewards calculator to see what you keep.'
+    ],
+    rankings: '/cards?sort=cashback:desc'
+  },
+  {
+    slug: 'crypto-cards-with-yield',
+    title: 'Crypto cards that pay yield on your balance',
+    description: 'Crypto cards whose app pays interest or yield on the money you have not spent yet, ranked by the G2M score.',
+    intro: [
+      'Some crypto card apps pay a yield on your unspent balance, often on stablecoins, so money waiting to be spent earns something.',
+      'Yield is not a bank deposit rate: it usually comes from lending or on-chain strategies, it changes over time, and it is not protected by deposit insurance.'
+    ],
+    match: (c) => c.ecosystem?.yield === true,
+    tips: [
+      'Check where the yield comes from and whether the rate is fixed or changes.',
+      'Check whether you can spend or withdraw the balance at any time.',
+      'Some cards pay the higher rates only on higher tiers or up to a cap.'
+    ]
+  },
+  {
+    slug: 'bitcoin-crypto-cards',
+    title: 'Bitcoin cards: spend BTC with a crypto card',
+    description: 'Crypto cards that accept Bitcoin (BTC) to load, spend or borrow against, ranked by the G2M score.',
+    intro: [
+      'These cards accept Bitcoin: some sell it for you when you pay or top up, others let you borrow against it and keep it.',
+      'Paying with Bitcoin usually counts as selling it, which can matter for tax where you live. Borrowing against it avoids the sale but brings interest and liquidation risk.'
+    ],
+    match: (c) => c.assets.some((a) => /BTC/i.test(a)),
+    tips: [
+      'Check whether the card sells your BTC at each purchase or lends against it.',
+      'Check the conversion fee or spread on turning BTC into card balance.',
+      'Check which Bitcoin network or wrapped version the card accepts.'
+    ]
+  },
+  {
+    slug: 'no-fx-fee-crypto-cards-in-euros',
+    title: 'Crypto cards with no FX fee in euros',
+    description: 'Crypto cards that charge no FX fee when you pay in euros, ranked by the G2M score: useful if you live in or travel to the eurozone.',
+    intro: [
+      'Most crypto cards bill in US dollars, so every purchase in euros costs an FX fee. The cards here publish no FX fee on euro spending, either because they bill in euros or because they hold a euro balance.',
+      'Spending in other currencies can still carry an FX fee on these cards.'
+    ],
+    match: (c) => c.fees.fxByCurrency?.EUR === 0,
+    tips: [
+      'Check the FX fee on currencies other than the euro if you travel.',
+      'Check whether you need a euro balance on the card for the free rate.',
+      'Check that the card is confirmed in your country before you apply.'
+    ]
   }
 ];
 

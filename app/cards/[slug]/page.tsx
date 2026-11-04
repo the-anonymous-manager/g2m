@@ -21,6 +21,7 @@ import { CountryToggle } from '@/components/CountryToggle';
 import { TierBreakEven } from '@/components/TierBreakEven';
 import { BackButton } from '@/components/BackButton';
 import { versusPath } from '@/lib/versus';
+import { alternativesPath, alternativesTo } from '@/lib/alternatives';
 
 const KYC_LABEL = {
   residency_id: 'A residence permit or local ID where you live is accepted',
@@ -203,11 +204,7 @@ export default async function CardPage({ params }: Props) {
   ]);
 
   // Alternatives: the best-scored cards that are available in at least one of the same confirmed markets.
-  const myMarkets = MARKETS.filter((m) => card.coverage.markets[m] === 'yes');
-  const alternatives = all
-    .filter((c) => c.slug !== card.slug)
-    .filter((c) => !myMarkets.length || myMarkets.some((m) => c.coverage.markets[m] !== 'no'))
-    .slice(0, 3);
+  const alternatives = alternativesTo(card, all, 3);
 
   // Head-to-head pages: the cards ranked nearest to this one, then the top of the rankings.
   const others = all.filter((c) => c.slug !== card.slug);
@@ -647,8 +644,8 @@ export default async function CardPage({ params }: Props) {
             <h2 id="alts" className="h3">
               Also worth a look
             </h2>
-            <Link href="/cards" className="muted" style={{ fontSize: 15 }}>
-              See all cards
+            <Link href={alternativesPath(card.slug)} className="muted" style={{ fontSize: 15 }}>
+              All {card.brand} alternatives
             </Link>
           </div>
           <div className="grid-3">

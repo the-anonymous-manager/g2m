@@ -3,6 +3,7 @@ import { getCards, lastUpdated } from '@/lib/cards';
 import { absoluteUrl } from '@/lib/site';
 import { allPairs, versusPath } from '@/lib/versus';
 import { FEES_GUIDE, TOPICS, countryGuidePath, countryGuides } from '@/lib/guides';
+import { alternativesPath } from '@/lib/alternatives';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const updated = new Date(`${lastUpdated()}T00:00:00Z`);
@@ -18,6 +19,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'weekly' as const,
     priority: 0.8
   }));
+  // "Best X alternatives", one per card.
+  const alternatives = getCards().map((c) => ({
+    url: absoluteUrl(alternativesPath(c.slug)),
+    lastModified: updated,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7
+  }));
   // Every "X vs Y" page, dated by the older of the two cards' checks.
   const pairs = allPairs(getCards()).map(([a, b]) => ({
     url: absoluteUrl(versusPath(a.slug, b.slug)),
@@ -29,5 +37,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const guides = ['/guides', `/guides/${FEES_GUIDE.slug}`, ...TOPICS.map((t) => `/guides/${t.slug}`), ...countryGuides().map((g) => countryGuidePath(g.cc))].map(
     (p) => ({ url: absoluteUrl(p), lastModified: updated, changeFrequency: 'weekly' as const, priority: 0.7 })
   );
-  return [...pages, ...cards, ...guides, ...pairs];
+  return [...pages, ...cards, ...alternatives, ...guides, ...pairs];
 }

@@ -131,7 +131,7 @@ export function versusPoints(a: Card, b: Card, total: number): Point[] {
   return points;
 }
 
-const WIN_WORDS: Record<string, string> = {
+export const WIN_WORDS: Record<string, string> = {
   cashback: 'cashback',
   annual: 'a lower annual fee',
   fx: 'a lower FX fee',
