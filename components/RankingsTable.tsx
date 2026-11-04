@@ -14,7 +14,7 @@ import {
   type Filters,
   type SortKey
 } from '@/lib/table';
-import { REGIONS, availabilityIn, availabilityInRegion, confirmedCountriesIn, countryName } from '@/lib/regions';
+import { REGIONS, availabilityIn, availabilityInRegion, confirmedCountriesIn, countryName, isCountry } from '@/lib/regions';
 import { nomadFit } from '@/lib/nomad';
 import { NomadBadge, NomadBar } from '@/components/NomadBar';
 import { rankIn } from '@/lib/score';
@@ -27,6 +27,25 @@ import { track } from '@/lib/analytics';
 
 const MAX_COMPARE = 3;
 
+// The viewer's own "Where I live" choice ("ALL" = all countries), kept for this visit so going back to the
+// rankings, or opening them again, does not put the detected country back over it.
+const HOME_KEY = 'g2m_rankings_home';
+const savedHome = () => {
+  try {
+    return sessionStorage.getItem(HOME_KEY);
+  } catch {
+    return null;
+  }
+};
+const saveHome = (v: string | null) => {
+  try {
+    if (v == null) sessionStorage.removeItem(HOME_KEY);
+    else sessionStorage.setItem(HOME_KEY, v);
+  } catch {
+    // private mode or blocked storage: the choice just lasts until the page changes
+  }
+};
+
 type Props = { rows: CardRow[]; initial: Filters; hadMarketParam: boolean };
 
 export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
@@ -38,10 +57,17 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
   // True while the country filter is the one we detected, not one the viewer picked.
   const [autoCountry, setAutoCountry] = useState(false);
 
-  // Default the country filter to the viewer's country once, unless the link already set one.
+  // Default the country filter to the viewer's country once, unless the link already set one or the viewer chose
+  // a place earlier in this visit (which wins, "All countries" included).
   useEffect(() => {
     if (!ready || appliedRegion.current || hadMarketParam) return;
     appliedRegion.current = true;
+    const saved = savedHome();
+    if (saved === 'ALL') return;
+    if (saved && isCountry(saved)) {
+      setF((prev) => ({ ...prev, country: saved }));
+      return;
+    }
     if (myCountry) {
       setF((prev) => ({ ...prev, country: myCountry }));
       setAutoCountry(true);
@@ -133,6 +159,7 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
           onPassport={(v) => set('passport', v)}
           onHome={(v) => {
             setAutoCountry(false);
+            saveHome(v || 'ALL');
             setF((prev) => ({ ...prev, country: v, region: '' }));
           }}
         />
@@ -233,7 +260,10 @@ export function RankingsTable({ rows, initial, hadMarketParam }: Props) {
             </label>
           ) : null}
           {!isDefault ? (
-            <button type="button" className="btn btn-sm" style={{ marginLeft: 'auto' }} onClick={() => setF(DEFAULT_FILTERS)}>
+            <button type="button" className="btn btn-sm" style={{ marginLeft: 'auto' }} onClick={() => {
+                saveHome(null);
+                setF(DEFAULT_FILTERS);
+              }}>
               Reset filters
             </button>
           ) : null}
