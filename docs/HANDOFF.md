@@ -332,6 +332,9 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   and a visible "Questions about…" section built only from published data, sent as FAQPage. New guides:
   /guides/no-kyc-crypto-cards and /guides/crypto-card-sign-up-bonuses. Not code: Search Console, backlinks, more cards,
   an About page, other languages (see the SEO plan given to Akash).
+- One address (4 Nov 2026): www.g2m.life served a full copy of the site, and Search Console showed Google had chosen
+  https://www.g2m.life/ as the main address of the home page ("URL is not on Google" for g2m.life/). next.config.mjs
+  now forwards every www page permanently (308) to the same page on g2m.life, filters and query strings kept.
 - Wording (4 Nov 2026): visitors see "non-custodial", never "self-custodial" (labels, filters, home stat, picks, guide,
   methodology, card text). The guide moved to /guides/non-custodial-crypto-cards (old address redirects). The sheet's
   Custody value is still `self-custodial` internally. The score's "control" points are unchanged.
