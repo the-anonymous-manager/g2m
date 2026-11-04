@@ -4,7 +4,12 @@ const nextConfig = {
   poweredByHeader: false,
   // The guide formerly called "self-custodial" is now "non-custodial": keep the old address working.
   async redirects() {
-    return [{ source: '/guides/self-custodial-crypto-cards', destination: '/guides/non-custodial-crypto-cards', permanent: true }];
+    return [
+      // One address for the whole site: www.g2m.life was serving a full copy, and Google picked it as the main
+      // address for the home page. Every www page now forwards permanently to the same page on g2m.life.
+      { source: '/:path*', has: [{ type: 'host', value: 'www.g2m.life' }], destination: 'https://g2m.life/:path*', permanent: true },
+      { source: '/guides/self-custodial-crypto-cards', destination: '/guides/non-custodial-crypto-cards', permanent: true }
+    ];
   },
   async headers() {
     return [
