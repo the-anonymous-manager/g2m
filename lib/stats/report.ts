@@ -30,6 +30,7 @@ const PLACES: [RegExp, string][] = [
   [/^versus$/, 'A vs B page'],
   [/^finder-(\d)$/, 'Card finder result $1'],
   [/^guide-(.+)$/, 'Guide: $1'],
+  [/^alternatives-(.+)$/, 'Alternatives to $1'],
   [/^unknown$/, 'Link opened directly']
 ];
 export function placeLabel(p: string | null) {

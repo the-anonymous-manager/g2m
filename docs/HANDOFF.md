@@ -338,6 +338,12 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
 - Wording (4 Nov 2026): visitors see "non-custodial", never "self-custodial" (labels, filters, home stat, picks, guide,
   methodology, card text). The guide moved to /guides/non-custodial-crypto-cards (old address redirects). The sheet's
   Custody value is still `self-custodial` internally. The score's "control" points are unchanged.
+- More SEO pages (4 Nov 2026, Akash: "increase the seo pages"): a "Best X alternatives" page per card at
+  `/cards/[slug]/alternatives` (top 10 by score not ruled out in the card's confirmed markets, the card's cons as
+  "why look for an alternative", where each beats it from the "X vs Y" verdict, FAQ + ItemList data; linked from the
+  card page and a new section on /guides), and 11 more topic guides in `lib/guides.ts`: Apple Pay, Google Pay,
+  crypto credit cards, USDT, USDC, Visa, Mastercard, virtual cards, 2%+ cashback, yield, Bitcoin, no FX fee in euros.
+  All built from the card data. Sitemap now about 956 addresses.
 - New cards (4 Nov 2026), Akash's request: Infini (row 35; Pro/Lite/Max tiers from infini.money/en/pricing, 1.5%
   cashback from 1 Nov, no country list), Hyperbeat Pay (row 36; cashback from its 5 Aug 2026 blog post, paid in WHYPE;
   no published fee schedule, so FX and annual fee are empty and it ranks last) and XPlace (row 37; plans and caps from

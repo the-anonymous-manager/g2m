@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import type { Card } from '@/lib/types';
 import { CUSTODY_LABEL, cashbackLabel, pct, usd } from '@/lib/format';
 import { CardArt } from '@/components/CardArt';
@@ -13,12 +14,15 @@ export function GuideList({
   cards,
   placement,
   fx,
-  fxLabel = 'FX fee'
+  fxLabel = 'FX fee',
+  note
 }: {
   cards: Card[];
   placement: string;
   fx?: (c: Card) => string;
   fxLabel?: string;
+  /** An extra line under each card's facts (e.g. how it compares with another card). */
+  note?: (c: Card) => ReactNode;
 }) {
   return (
     <ol className="guide-list">
@@ -55,6 +59,11 @@ export function GuideList({
                 <dd>{CUSTODY_LABEL[c.custody]}</dd>
               </div>
             </dl>
+            {note ? (
+              <p className="muted" style={{ margin: 0, fontSize: 15 }}>
+                {note(c)}
+              </p>
+            ) : null}
             <div className="pick-actions">
               <OutboundLink slug={c.slug} name={c.brand} placement={placement} className="btn btn-metal btn-sm">
                 Get {c.brand}
