@@ -324,6 +324,14 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   Confirmed on issuer pages: Solid ($25 FUSE, $150 at 3+ merchants in 30 days), Plasma One ($10 spend credit,
   $100 at 2+ merchants in 14 days), Nexo (NEXO tokens by tier within 45 days). Kite and Bitget Wallet pay only the
   referrer; ether.fi has no running offer; the rest have no issuer-published friend bonus (only third-party claims).
+- SEO step 3 (4 Nov 2026), after comparing with cryptocards.so (ranks for "crypto cards"; 130 cards x 8 languages,
+  Product+Review+FAQ data on every card page, no-KYC and country landing pages):
+  home title "Best Crypto Cards {year}: Fees, Cashback & Rewards Compared", its h1 is the small label above the tagline
+  (tagline now a <p class="h1">, looks the same), WebSite+SearchAction, Organization and top-10 ItemList data.
+  Card pages: "{Card} Review {year}" titles, Product data with G2M's score as an editorial review rating (out of 100),
+  and a visible "Questions about…" section built only from published data, sent as FAQPage. New guides:
+  /guides/no-kyc-crypto-cards and /guides/crypto-card-sign-up-bonuses. Not code: Search Console, backlinks, more cards,
+  an About page, other languages (see the SEO plan given to Akash).
 - Wording (4 Nov 2026): visitors see "non-custodial", never "self-custodial" (labels, filters, home stat, picks, guide,
   methodology, card text). The guide moved to /guides/non-custodial-crypto-cards (old address redirects). The sheet's
   Custody value is still `self-custodial` internally. The score's "control" points are unchanged.

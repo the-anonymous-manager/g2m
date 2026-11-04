@@ -152,6 +152,38 @@ export const TOPICS: Topic[] = [
       'Lounge perks change often; confirm on the issuer’s site before you apply.'
     ],
     rankings: '/cards?lounge=1'
+  },
+  {
+    slug: 'no-kyc-crypto-cards',
+    title: 'No-KYC crypto cards (no ID check)',
+    description: 'Crypto cards you can get without an identity check (KYC), or with a card option that needs none, ranked by the G2M score.',
+    intro: [
+      'Most crypto cards ask for an identity check (KYC) before you can use them: a photo of your ID and sometimes a selfie or proof of address. A few let you get a card, or one card option, with only an email or a wallet.',
+      'Cards without an ID check usually cost more to load, have lower spending limits or expire after a while. They are listed here only when the issuer itself says no ID check is needed.'
+    ],
+    match: (c) => Boolean(c.noIdCheck),
+    tips: [
+      'Check which card option needs no ID check: often only a virtual card or a lower-limit tier.',
+      'Look at the loading fee and the spending limit, which are often higher and lower than on verified cards.',
+      'The issuer can still ask for ID later, for example above a limit or when you withdraw.'
+    ],
+    rankings: '/cards?noid=1'
+  },
+  {
+    slug: 'crypto-card-sign-up-bonuses',
+    title: 'Crypto card sign-up bonuses',
+    description: 'Every crypto card on G2M with a sign-up bonus for joining through G2M’s link, with the spend and time limit to get it, ranked by the G2M score.',
+    intro: [
+      'Many crypto cards pay new users a bonus for joining through a referral link: spend credit, cashback on the first purchases, or a token reward once you spend a set amount within a set number of days.',
+      'The bonuses here are the ones each issuer publishes for people who join through G2M’s link. G2M may earn a referral fee too; it never changes a card’s score or rank.'
+    ],
+    match: (c) => Boolean(c.links.affiliate && c.signupBonus),
+    tips: [
+      'Read the spend you need and the deadline: a bonus that needs $1,000 in 30 days is only worth it if you spend that anyway.',
+      'Check how it is paid: spend credit and tokens are not the same as cash.',
+      'Pick the card for its fees and cashback first; a bonus is paid once, fees are paid every month.'
+    ],
+    rankings: '/cards?bonus=1'
   }
 ];
 
