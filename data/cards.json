@@ -1076,7 +1076,7 @@
     "custody": "self-custodial",
     "summary": "Self-custodial Visa debit card from COCA. Cashback runs from 1% to 8% depending on how many COCA tokens you hold.",
     "cashback": { "basePct": 1, "maxPct": 8, "payout": "Stablecoins, monthly", "note": "Starter: 1% with no limit. Standard to Elite: 3% to 8% up to a monthly spend limit of $1,000 to $10,000, then 1%." },
-    "fees": { "annualUsd": 0, "fxPct": null, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 5, "atm": "Free up to $250 a month, then 2%", "other": ["Plastic card: $5 on Starter, Standard and Standard+; free on higher tiers"] },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "No FX fee on direct pairs: spending in EUR or US dollars (COCA's docs: zero FX fees on direct pairs). 2% on other currencies (as shown in the COCA app).", "fxByCurrency": { "USD": 0, "EUR": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 5, "atm": "Free up to $250 a month, then 2%", "other": ["Plastic card: $5 on Starter, Standard and Standard+; free on higher tiers"] },
     "tiers": [
       { "name": "Starter", "feeUsdYear": 0, "cashbackPct": 1 },
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 3, "bands": [ { "uptoUsd": 1000, "pct": 3 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "Hold 300 COCA", "stake": { "token": "COCA", "amount": 300, "coingeckoId": "coca" }, "perks": ["50% back on 1 subscription"] },
@@ -1109,9 +1109,10 @@
       { "label": "COCA Docs: IBAN", "url": "https://docs.coca.xyz/coca/banking-account/iban", "verified": "2026-10-24" },
       { "label": "COCA Help: What Bank Accounts Are Available in COCA?", "url": "https://help.coca.xyz/support/solutions/articles/205000059619-what-bank-accounts-are-available-in-coca-", "verified": "2026-10-25" },
       { "label": "COCA Docs: Buy Crypto", "url": "https://docs.coca.xyz/coca/crypto-account/buy-crypto", "verified": "2026-10-24" },
-      { "label": "COCA affiliate team, 2 Nov 2026: November Welcome Cashback Drop, 8% on a new user's first 3 eligible purchases (offer ends 30 Nov 2026)", "url": "https://www.coca.xyz/", "verified": "2026-11-03" }
+      { "label": "COCA affiliate team, 2 Nov 2026: November Welcome Cashback Drop, 8% on a new user's first 3 eligible purchases (offer ends 30 Nov 2026)", "url": "https://www.coca.xyz/", "verified": "2026-11-03" },
+      { "label": "COCA docs: COCA Card fees (zero FX fees on direct pairs); 2% on other currencies as shown in the COCA app", "url": "https://docs.coca.xyz/coca/banking-account/coca-card", "verified": "2026-11-04" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-04",
     "metal": "rose",
     "image": { "source": "https://g2m.life/card-originals/coca.png", "file": "/card-images/coca-c187374f.webp" }
   },
