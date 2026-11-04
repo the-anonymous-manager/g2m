@@ -2503,3 +2503,30 @@ body::before {
   margin: 4px 0 0;
   color: var(--muted);
 }
+
+/* ---------- Home: New on G2M ---------- */
+.new-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: inherit;
+}
+.new-card:hover {
+  border-color: var(--border-strong);
+}
+.new-card-art {
+  flex: none;
+  display: flex;
+}
+.new-card-name {
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.new-card > .score {
+  margin-left: auto;
+  flex: none;
+}
