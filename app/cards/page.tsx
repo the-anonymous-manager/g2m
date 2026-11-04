@@ -18,6 +18,9 @@ type Props = { searchParams: Promise<Record<string, string | string[] | undefine
 export default async function CardsPage({ searchParams }: Props) {
   const params = await searchParams;
   const initial = parseFilters(params);
+  // `?country=all` (the "See all cards" links): every card worldwide, without switching to the visitor's country.
+  const raw = params.country ?? params.market;
+  const allCountries = String(Array.isArray(raw) ? raw[0] : (raw ?? '')).toLowerCase() === 'all';
   const cards = getCards();
   const rows = cards.map(toRow);
   return (
@@ -30,7 +33,12 @@ export default async function CardsPage({ searchParams }: Props) {
           you can actually get. Last checked {fmtDate(lastUpdated())}.
         </p>
       </div>
-      <RankingsTable rows={rows} initial={initial} hadMarketParam={Boolean(initial.country || initial.region)} />
+      <RankingsTable
+        rows={rows}
+        initial={initial}
+        hadMarketParam={Boolean(initial.country || initial.region) || allCountries}
+        allCountries={allCountries}
+      />
     </div>
   );
 }
