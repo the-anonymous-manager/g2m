@@ -3,7 +3,7 @@
     "slot": 1,
     "slug": "coca",
     "type": "pick",
-    "note": "Self-custodial, no annual fee: 1% back to start, up to 8% for COCA holders.",
+    "note": "Non-custodial, no annual fee: 1% back to start, up to 8% for COCA holders.",
     "start": null,
     "end": null
   },
@@ -11,7 +11,7 @@
     "slot": 2,
     "slug": "etherfi",
     "type": "pick",
-    "note": "3% back even on the free tier, self-custodial, with lounge access.",
+    "note": "3% back even on the free tier, non-custodial, with lounge access.",
     "start": null,
     "end": null
   },

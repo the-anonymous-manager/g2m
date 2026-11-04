@@ -288,7 +288,7 @@
     "type": "credit",
     "forms": ["virtual", "physical"],
     "custody": "self-custodial",
-    "summary": "Self-custodial Visa card paying 3% back on every tier, with airport lounge access and Visa Signature perks.",
+    "summary": "Non-custodial Visa card paying 3% back on every tier, with airport lounge access and Visa Signature perks.",
     "cashback": { "basePct": 3, "maxPct": 4, "payout": "ETHFI", "note": "3% on the first $2,000 a month (Core), $10,000 (Luxe) or $50,000 (Pinnacle), then 1%, then 0.5%. VIP: 4% on the first $50,000 a month (the rate above is not published). Lower 3% limits on purchases settled in euros. Paid in ETHFI after a 7-day lock." },
     "fees": { "annualUsd": 0, "fxPct": 0.5, "fxNote": "No FX fee on USD or EUR purchases (EUR in beta). Other currencies: about 1% network rate plus 0.5% (Core), 0.25% (Luxe) or nothing (Pinnacle, VIP).", "fxByCurrency": { "USD": 0, "EUR": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "atm": "Free: 10 a month on Core and Luxe, unlimited on Pinnacle and VIP. Up to $5,000 per withdrawal, 5 a day", "other": ["Virtual cards: 1 free on Core, 2 on Luxe, 10 on Pinnacle, unlimited on VIP. In 14 countries (e.g. Mexico, Nigeria, the Philippines) the first one costs $10 on Core", "Physical card free on Core (shipping extra); metal card free on Luxe and up, shipping included"] },
     "tiers": [
@@ -307,7 +307,7 @@
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
     "perks": ["Airport lounge access on every tier", "Visa Signature benefits"],
-    "pros": ["3% back even on the free Core tier", "Self-custodial with lounge access", "Free physical card; metal card from Luxe"],
+    "pros": ["3% back even on the free Core tier", "Non-custodial with lounge access", "Free physical card; metal card from Luxe"],
     "cons": ["Core pays 3% only on the first $2,000 a month, then 1% and 0.5%", "Higher tiers cost $199 or $999 a year, or a large ETHFI stake or deposit"],
     "links": { "official": "https://www.ether.fi/", "affiliate": "https://www.ether.fi/app/cash/referral?ref_code=gwei2merchant" },
     "sources": [
@@ -359,7 +359,7 @@
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT", "EURe", "GBPe"],
     "perks": ["Works on Base, Linea, Monad and Solana"],
-    "pros": ["Self-custodial, spends from your own wallet", "Metal tier has 0% FX"],
+    "pros": ["Non-custodial, spends from your own wallet", "Metal tier has 0% FX"],
     "cons": ["Only 1% back", "Metal costs $199 a year", "New sign-ups paused in the US and UK"],
     "links": { "official": "https://metamask.io/" },
     "sources": [
@@ -581,7 +581,7 @@
     "type": "mixed",
     "forms": ["virtual", "physical"],
     "custody": "self-custodial",
-    "summary": "Self-custodial Visa card from the Avalanche ecosystem with no card fees, earning Avax Points instead of cashback.",
+    "summary": "Non-custodial Visa card from the Avalanche ecosystem with no card fees, earning Avax Points instead of cashback.",
     "cashback": { "basePct": null, "maxPct": null, "payout": "Avax Points", "note": "Earns Avax Points with travel portal redemptions; no cashback rate published." },
     "fees": { "annualUsd": 0, "fxPct": 3, "fxNote": "Billed in US dollars. International card: up to 3% on non-USD purchases plus a cross-border fee of up to 3%. US card agreement: 2% on foreign-currency purchases and purchases outside the US.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 0, "atm": "Not published", "other": ["No shipping, account or card fees"] },
     "tiers": [
@@ -595,7 +595,7 @@
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["AVAX", "USDC", "USDT"],
     "perks": ["Avax Points", "Travel portal redemptions"],
-    "pros": ["No card, shipping or account fees", "Self-custodial"],
+    "pros": ["No card, shipping or account fees", "Non-custodial"],
     "cons": ["No cashback rate", "Up to 3% FX outside the US"],
     "links": { "official": "https://www.avax.network/" },
     "sources": [
@@ -657,7 +657,7 @@
     "type": "debit",
     "forms": ["virtual", "physical"],
     "custody": "self-custodial",
-    "summary": "Self-custodial Visa card with zero FX fees and five tiers paying 0.5% up to 8% back in USD.",
+    "summary": "Non-custodial Visa card with zero FX fees and five tiers paying 0.5% up to 8% back in USD.",
     "cashback": { "basePct": 0.5, "maxPct": 8, "payout": "USD", "note": "Base 0.5%, Premium 1%, Elite 3%, Private 5%, Bespoke 8%. Tier requirements not published." },
     "fees": { "annualUsd": 0, "fxPct": 0, "topUpPct": 0.08, "cardFeeUsd": 0, "atm": "Premium tier and above", "other": [] },
     "tiers": [
@@ -711,7 +711,7 @@
     "type": "debit",
     "forms": ["virtual", "physical"],
     "custody": "self-custodial",
-    "summary": "Self-custodial Mastercard for Europe with 0% FX, free ATM cash up to €400 a month and category cashback up to 20% on subscriptions.",
+    "summary": "Non-custodial Mastercard for Europe with 0% FX, free ATM cash up to €400 a month and category cashback up to 20% on subscriptions.",
     "cashback": { "basePct": 1, "maxPct": 20, "payout": "USDC", "note": "1% base, 2% restaurants and supermarkets, 3% rides and food delivery, up to 20% on small subscriptions. A fair-usage limit applies." },
     "fees": { "annualUsd": 0, "fxPct": 0, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 0, "atm": "Free up to €400 a month, then 2%", "other": [] },
     "tiers": [
@@ -833,7 +833,7 @@
     "type": "mixed",
     "forms": ["virtual"],
     "custody": "self-custodial",
-    "summary": "Self-custodial virtual Visa from Exactly, paid from USDC, with Visa purchase-protection perks and listed availability in India.",
+    "summary": "Non-custodial virtual Visa from Exactly, paid from USDC, with Visa purchase-protection perks and listed availability in India.",
     "cashback": { "basePct": 1, "maxPct": 1, "payout": null, "note": "1% per cryptocards.so; DefiLlama does not publish a rate." },
     "fees": { "annualUsd": 0, "fxPct": 1.5, "fxNote": "Billed in US dollars. Global card: 1.5% on non-USD purchases, plus up to 1.5% cross-border. US card: 1%.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "atm": "$1 + 0.65% per withdrawal; up to $250 each", "other": [] },
     "tiers": [
@@ -848,7 +848,7 @@
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC"],
     "perks": ["Concierge", "Extended warranty", "Purchase protection"],
-    "pros": ["Available in India and the UAE", "Self-custodial with Visa protections"],
+    "pros": ["Available in India and the UAE", "Non-custodial with Visa protections"],
     "cons": ["Up to 3% FX outside the US", "Virtual card only"],
     "links": { "official": "https://exactly.app/" },
     "sources": [
@@ -883,7 +883,7 @@
     "type": "spend",
     "forms": ["virtual", "physical"],
     "custody": "self-custodial",
-    "summary": "Self-custodial Visa from Plasma that spends USDT, with cashback paid in XPL. The free Lite tier pays 2% on your first $500 a month.",
+    "summary": "Non-custodial Visa from Plasma that spends USDT, with cashback paid in XPL. The free Lite tier pays 2% on your first $500 a month.",
     "cashback": { "basePct": 2, "maxPct": 4, "payout": "XPL, weekly", "note": "Lite: 2% on the first $500 a month, then 0.1%. Core: 3% stepping down to 0.25%. Platinum: 4% stepping down to 1%. AI merchants and partner airlines earn up to 10% on higher tiers." },
     "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "Billed in US dollars. Lite: 1% Plasma markup plus about 1% Visa FX. Core: 0.5% plus about 1%. Platinum: no FX fee.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0.15, "cardFeeUsd": 0, "physicalCardFeeUsd": 20, "atm": "$2 + 2% per USD withdrawal; physical card only, up to $1,000 a withdrawal and 3 a day", "other": ["Crypto deposits: 0.15% to 0.75% Plasma fee plus network fees"] },
     "tiers": [
@@ -902,7 +902,7 @@
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDT", "USDC"],
     "perks": ["Earn on your balance until you spend it (variable rate)", "Free USDT transfers on Plasma"],
-    "pros": ["2% back on the free tier, up to 4% on Platinum", "Self-custodial: Plasma does not hold your funds", "No FX fee on Platinum"],
+    "pros": ["2% back on the free tier, up to 4% on Platinum", "Non-custodial: Plasma does not hold your funds", "No FX fee on Platinum"],
     "cons": ["Lite drops to 0.1% after $500 a month", "Cashback is paid in XPL, so its value moves with the token", "Indian ID documents are blocked by default at sign-up"],
     "links": { "official": "https://www.plasma.org/", "affiliate": "https://plasma.org/download/F7VZFW" },
     "sources": [
@@ -995,7 +995,7 @@
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDT", "USDC"],
     "perks": ["Visa Signature", "Fiat top-ups by ACH, SEPA, SWIFT, PIX and SPEI"],
-    "pros": ["Free crypto top-ups on eight networks", "Virtual card for a one-time 5 USDT", "Self-custody wallet"],
+    "pros": ["Free crypto top-ups on eight networks", "Virtual card for a one-time 5 USDT", "Non-custodial wallet"],
     "cons": ["1.5% fee on every card payment", "No cashback on your own spending", "Country list not published"],
     "links": { "official": "https://karta.io/" },
     "sources": [
@@ -1024,7 +1024,7 @@
     "type": "spend",
     "forms": ["virtual", "physical", "metal"],
     "custody": "self-custodial",
-    "summary": "Self-custodial Visa from Tria that spends from 1,000+ tokens, with cashback from 1.5% to 6% depending on your membership.",
+    "summary": "Non-custodial Visa from Tria that spends from 1,000+ tokens, with cashback from 1.5% to 6% depending on your membership.",
     "cashback": { "basePct": 1.5, "maxPct": 6, "payout": null, "note": "Lite: 1.5% on the first $1,000 a month, then 0.5%. Pro: 4.5% on the first $1,000, then 1%. Max: 6% on the first $2,000, then 1%." },
     "fees": { "annualUsd": 20, "fxPct": 0, "fxNote": "Billed in US dollars. Tria charges no FX fee of its own; its help center says fees vary by region and card type, and the card terms allow Visa FX of up to 3%.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "physicalCardFeeUsd": 109, "atm": "Pro and Max: up to $750 a day, fee not published. No ATM access on Lite.", "other": [] },
     "tiers": [
@@ -1074,7 +1074,7 @@
     "type": "debit",
     "forms": ["virtual", "physical"],
     "custody": "self-custodial",
-    "summary": "Self-custodial Visa debit card from COCA. Cashback runs from 1% to 8% depending on how many COCA tokens you hold.",
+    "summary": "Non-custodial Visa debit card from COCA. Cashback runs from 1% to 8% depending on how many COCA tokens you hold.",
     "cashback": { "basePct": 1, "maxPct": 8, "payout": "Stablecoins, monthly", "note": "Starter: 1% with no limit. Standard to Elite: 3% to 8% up to a monthly spend limit of $1,000 to $10,000, then 1%." },
     "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "No FX fee on direct pairs: spending in EUR or US dollars (COCA's docs: zero FX fees on direct pairs). 2% on other currencies (as shown in the COCA app).", "fxByCurrency": { "USD": 0, "EUR": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 5, "atm": "Free up to $250 a month, then 2%", "other": ["Plastic card: $5 on Starter, Standard and Standard+; free on higher tiers"] },
     "tiers": [
@@ -1140,7 +1140,7 @@
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
     "perks": ["No transaction, top-up or wallet withdrawal fees"],
-    "pros": ["No Avici FX markup and $0 transaction fees", "Available in the UAE and 31 US states", "Self-custodial: only your wallet can withdraw"],
+    "pros": ["No Avici FX markup and $0 transaction fees", "Available in the UAE and 31 US states", "Non-custodial: only your wallet can withdraw"],
     "cons": ["No cashback", "Not available to residents of India", "Not available in the UK or EU"],
     "links": { "official": "https://avici.money/" },
     "sources": [
@@ -1175,7 +1175,7 @@
     "type": "spend",
     "forms": ["virtual"],
     "custody": "self-custodial",
-    "summary": "Self-custodial virtual Visa from Tuyo that spends USDC. No card fees, and no fee on US dollar purchases in the US.",
+    "summary": "Non-custodial virtual Visa from Tuyo that spends USDC. No card fees, and no fee on US dollar purchases in the US.",
     "cashback": { "basePct": null, "maxPct": null, "payout": null, "note": "No cashback rate. Instead, some purchases are made free at random (\"Buy Now, Pay Maybe\")." },
     "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "0% on USD purchases in the US. 1% FX fee on non-USD purchases plus 1% on purchases outside the US; up to 2% combined.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "atm": "Up to $250 a withdrawal incl. the ATM surcharge, 3 attempts a day; Tuyo fee not published", "other": ["Trades: 0.25% (stablecoin swaps and bridging exempt)"] },
     "tiers": [
@@ -1189,7 +1189,7 @@
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC"],
     "perks": ["Some purchases made free at random", "Interest on your USD balance (variable)", "Daily limit up to $200,000"],
-    "pros": ["No issuance, monthly or yearly fee", "0% on USD purchases in the US", "Self-custodial"],
+    "pros": ["No issuance, monthly or yearly fee", "0% on USD purchases in the US", "Non-custodial"],
     "cons": ["Up to 2% on non-USD or non-US purchases", "No cashback rate", "Virtual only for now; not offered in the UK"],
     "links": { "official": "https://tuyo.com/", "affiliate": "https://get.tuyo.com/code/0akash0x" },
     "sources": [
@@ -1295,7 +1295,7 @@
     "type": "debit",
     "forms": ["virtual"],
     "custody": "self-custodial",
-    "summary": "A free self-custodial Visa from the Solid savings app: 3% cashback in USDC (up to $50 a month), no fee on US-dollar spending and 1.5% on other currencies.",
+    "summary": "A free non-custodial Visa from the Solid savings app: 3% cashback in USDC (up to $50 a month), no fee on US-dollar spending and 1.5% on other currencies.",
     "cashback": { "basePct": 3, "maxPct": 5, "payout": "USDC", "note": "Credited 14 days after the purchase settles, into Savings where it earns yield. Cashback is capped at $50 a month on Core, $100 on Prime and $200 on Ultra." },
     "fees": { "annualUsd": 0, "fxPct": 1.5, "fxNote": "1.5% built into the exchange rate on non-USD purchases (1% card provider + 0.5% Solid). USD purchases are free, even at merchants abroad. Wirex-issued cards can pay euro purchases from a EUR balance with no FX fee.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "atm": null, "other": ["Bank deposit 0.5% (0.25% on Prime, free on Ultra)", "Swaps 0.5% (0.25% on Prime, free on Ultra)", "US account details $10 one-time", "Bank withdrawal free (a tiered fee is planned)"] },
     "tiers": [
@@ -1310,7 +1310,7 @@
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
     "perks": ["Visa Platinum benefits: purchase and price protection, extended warranty", "Yield on savings, and borrowing against them"],
-    "pros": ["3% cashback in USDC with no card fees", "No fee on US-dollar purchases", "Self-custodial: your funds stay in your own wallet"],
+    "pros": ["3% cashback in USDC with no card fees", "No fee on US-dollar purchases", "Non-custodial: your funds stay in your own wallet"],
     "cons": ["Cashback capped at $50 a month on the free tier", "1.5% on non-USD purchases", "Virtual only; not available in India"],
     "links": { "official": "https://www.solid.xyz/", "affiliate": "https://www.solid.xyz/refer?ref=GEK07" },
     "sources": [
