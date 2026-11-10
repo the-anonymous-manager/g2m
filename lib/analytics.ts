@@ -14,9 +14,12 @@ declare global {
 /** True on devices the owner marked "don't count" on /stats. */
 export const ignored = () => typeof document !== 'undefined' && /(?:^|;\s*)g2m_ignore=1/.test(document.cookie);
 
+/** Browsers driven by a script (testing tools, many crawlers) say so; they are not visitors. */
+const scripted = () => typeof navigator !== 'undefined' && navigator.webdriver === true;
+
 /** Sends one hit without slowing the page; survives the page being closed or left. */
 export function send(name: string, extra: { props?: Props; ref?: string; utm?: string | null; landing?: boolean } = {}) {
-  if (typeof window === 'undefined' || ignored()) return;
+  if (typeof window === 'undefined' || ignored() || scripted()) return;
   const body = JSON.stringify({
     n: name,
     p: window.location.pathname,
@@ -34,9 +37,16 @@ export function send(name: string, extra: { props?: Props; ref?: string; utm?: s
   }
 }
 
+// What was already sent from this page, so dragging a slider back and forth or re-ticking a filter counts once.
+const sent = new Set<string>();
+
 export function track(event: string, props: Props = {}): void {
   if (typeof window === 'undefined') return;
   try {
+    const key = `${window.location.pathname}|${event}|${JSON.stringify(props)}`;
+    if (sent.has(key)) return;
+    if (sent.size > 500) sent.clear();
+    sent.add(key);
     send(event, { props });
     window.plausible?.(event, { props });
     window.dispatchEvent(new CustomEvent('g2m:track', { detail: { event, props } }));

@@ -2530,3 +2530,16 @@ body::before {
   margin-left: auto;
   flex: none;
 }
+
+/* ---------- Stats: change against the period before ---------- */
+.st-delta {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+}
+.st-up {
+  color: var(--ok);
+}
+.st-down {
+  color: var(--bad);
+}

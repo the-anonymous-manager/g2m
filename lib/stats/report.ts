@@ -48,11 +48,27 @@ export const EVENT_LABELS: Record<string, string> = {
   Finder: 'Card finder (finished)',
   Rankings: 'Rankings: filters and sorting',
   Region: 'Changed country',
+  Search: 'Searched the rankings',
   Share: 'Shares',
   Submit: '"Submit a card" sent',
   Theme: 'Dark / light mode',
   Wallet: 'Wallet builder'
 };
+
+// The kind of page a path is, for "views by kind of page" (SQL CASE, first match wins).
+const KIND = `CASE
+  WHEN path = '/' THEN 'Home'
+  WHEN path = '/cards' THEN 'Rankings'
+  WHEN path LIKE '/cards/%/alternatives' THEN 'Alternatives pages'
+  WHEN path LIKE '/cards/%' THEN 'Card reviews'
+  WHEN path LIKE '/compare/%' THEN 'X vs Y pages'
+  WHEN path LIKE '/guides/best-crypto-cards/%' THEN 'Country guides'
+  WHEN path LIKE '/guides%' THEN 'Topic guides'
+  WHEN path IN ('/finder', '/calculator', '/wallet', '/receipt', '/corridors', '/compare') THEN 'Tools'
+  ELSE 'Other pages' END`;
+
+/** First day of the period of the same length just before this one. */
+export const previousStart = (days: number) => new Date(Date.now() - (2 * days - 1) * 86_400_000).toISOString().slice(0, 10);
 
 // Unique visitors over a range use the monthly code (rows from before it existed fall back to the daily one).
 // A person counts once per calendar month: someone who comes back next month counts again.
@@ -65,7 +81,8 @@ export async function report(db: D1, days: number) {
   const names = new Map(getCards().map((c) => [c.slug, c.name]));
   const affiliate = new Set(getCards().filter((c) => c.links.affiliate).map((c) => c.slug));
 
-  const [totals, daily, byCard, cardViews, byPlace, clickCountries, pages, sources, refs, countries, devices, tools, details, broken] =
+  const prevFrom = previousStart(days);
+  const [totals, daily, byCard, cardViews, byPlace, clickCountries, pages, sources, refs, countries, devices, tools, details, broken, before, landings, kinds, searches, auto] =
     await Promise.all([
       db
         .prepare(
@@ -132,14 +149,14 @@ export async function report(db: D1, days: number) {
       ),
       all(
         db,
-        `SELECT name, COUNT(*) AS n, COUNT(DISTINCT ${U}) AS people FROM ev WHERE name NOT IN ('pageview', 'Outbound', '404') AND day >= ?
+        `SELECT name, COUNT(*) AS n, COUNT(DISTINCT ${U}) AS people FROM ev WHERE name NOT IN ('pageview', 'Outbound', '404') AND name NOT LIKE 'auto:%' AND day >= ?
            GROUP BY name ORDER BY n DESC`,
         from
       ),
       all(
         db,
-        `SELECT ev.name AS name, j.key AS k, CAST(j.value AS TEXT) AS v, COUNT(*) AS n FROM ev, json_each(ev.props) AS j
-           WHERE ev.name NOT IN ('pageview', 'Outbound', '404') AND ev.props IS NOT NULL AND ev.day >= ?
+        `SELECT ev.name AS name, j.key AS k, CAST(j.value AS TEXT) AS v, COUNT(DISTINCT COALESCE(ev.mid, ev.vid)) AS n FROM ev, json_each(ev.props) AS j
+           WHERE ev.name NOT IN ('pageview', 'Outbound', '404', 'Search') AND ev.name NOT LIKE 'auto:%' AND ev.props IS NOT NULL AND ev.day >= ?
            GROUP BY 1, 2, 3 ORDER BY n DESC LIMIT 3000`,
         from
       ),
@@ -147,7 +164,42 @@ export async function report(db: D1, days: number) {
         db,
         `SELECT path, COUNT(*) AS n, MAX(ref) AS ref FROM ev WHERE name = '404' AND day >= ? GROUP BY path ORDER BY n DESC LIMIT 40`,
         from
-      )
+      ),
+      // The same totals for the period just before, to show up or down.
+      db
+        .prepare(
+          `SELECT SUM(name = 'pageview') AS views, COUNT(DISTINCT CASE WHEN name = 'pageview' THEN ${U} END) AS visitors,
+             SUM(name = 'pageview' AND source IS NOT NULL) AS visits, SUM(name = 'Outbound') AS clicks,
+             COUNT(DISTINCT CASE WHEN name = 'Outbound' THEN ${U} END) AS clickers,
+             (SELECT MIN(day) FROM ev) AS first FROM ev WHERE day >= ? AND day < ?`
+        )
+        .bind(prevFrom, from)
+        .first<Row>(),
+      // The page a visit starts on, and where those visits came from most.
+      all(
+        db,
+        `SELECT path, COUNT(*) AS visits, COUNT(DISTINCT ${U}) AS visitors,
+             (SELECT s.source FROM ev s WHERE s.name = 'pageview' AND s.source IS NOT NULL AND s.day >= ?1 AND s.path = ev.path
+               GROUP BY s.source ORDER BY COUNT(*) DESC LIMIT 1) AS top
+           FROM ev WHERE name = 'pageview' AND source IS NOT NULL AND day >= ?1 GROUP BY path ORDER BY visits DESC LIMIT 25`,
+        from
+      ),
+      all(
+        db,
+        `SELECT ${KIND} AS kind, COUNT(*) AS views, COUNT(DISTINCT ${U}) AS visitors, SUM(source IS NOT NULL) AS landings,
+             SUM(source IN ('Google', 'Bing', 'DuckDuckGo', 'Brave Search', 'Other search')) AS search
+           FROM ev WHERE name = 'pageview' AND day >= ? GROUP BY kind ORDER BY views DESC`,
+        from
+      ),
+      // Searches typed in the rankings, with the fewest cards found for each (0 = nothing matched).
+      all(
+        db,
+        `SELECT json_extract(props, '$.q') AS q, COUNT(DISTINCT ${U}) AS people, MIN(json_extract(props, '$.found')) AS found
+           FROM ev WHERE name = 'Search' AND day >= ? GROUP BY q ORDER BY (found > 0), people DESC, q LIMIT 40`,
+        from
+      ),
+      // Hits kept out of every number above: crawlers and scripts (see isAutomated in lib/stats/server.ts).
+      all(db, `SELECT name, COUNT(*) AS n FROM ev WHERE name LIKE 'auto:%' AND day >= ? GROUP BY name ORDER BY n DESC`, from)
     ]);
 
   // Per card: clicks next to how often its page was read. The click rate is the share of people who read the
@@ -205,6 +257,21 @@ export async function report(db: D1, days: number) {
       clicks: Number(totals?.clicks ?? 0),
       clickers: Number(totals?.clickers ?? 0)
     },
+    // The period just before, or null when the site has no data that far back (nothing fair to compare with).
+    before:
+      before?.first && String(before.first) <= prevFrom
+        ? {
+            views: Number(before.views ?? 0),
+            visitors: Number(before.visitors ?? 0),
+            visits: Number(before.visits ?? 0),
+            clicks: Number(before.clicks ?? 0),
+            clickers: Number(before.clickers ?? 0)
+          }
+        : null,
+    landings: landings.map((r) => ({ path: String(r.path), visits: Number(r.visits), visitors: Number(r.visitors), top: r.top ? String(r.top) : '' })),
+    kinds: kinds.map((r) => ({ kind: String(r.kind), views: Number(r.views), visitors: Number(r.visitors), landings: Number(r.landings ?? 0), search: Number(r.search ?? 0) })),
+    searches: searches.map((r) => ({ q: String(r.q ?? ''), people: Number(r.people), found: Number(r.found ?? 0) })).filter((r) => r.q),
+    auto: auto.map((r) => ({ name: String(r.name).slice(5), n: Number(r.n) })),
     daily: days_,
     cards,
     byPlace: byPlace.map((r) => ({ place: placeLabel(r.place as string | null), clicks: Number(r.clicks) })),

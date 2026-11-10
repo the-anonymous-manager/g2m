@@ -33,11 +33,13 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ slug
     target.searchParams.set('utm_content', slug);
   }
 
-  // The page the button was on (same-site Referer), else "direct" for a /go link opened on its own.
+  // The page the button was on (same-site Referer), else "direct" for a /go link opened on its own. Whether the hit
+  // counts as a click at all is decided in record(): crawlers that open every link are kept apart ("auto:Outbound").
   let from = 'direct';
   try {
     const ref = new URL(req.headers.get('referer') ?? '');
-    if (ref.host === req.nextUrl.host) from = ref.pathname;
+    // Same-origin by the browser's own word also counts (behind a proxy the two host names can differ).
+    if (ref.host === req.nextUrl.host || req.headers.get('sec-fetch-site') === 'same-origin') from = ref.pathname;
   } catch {
     // no or foreign referrer
   }
@@ -47,7 +49,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ slug
       path: from,
       card: slug,
       place: (req.nextUrl.searchParams.get('p') ?? 'unknown').slice(0, 60),
-      props: { sponsored, referral: Boolean(card.links.affiliate) }
+      props: { sponsored, referral: Boolean(card.links.affiliate), v: 2 }
     })
   );
 

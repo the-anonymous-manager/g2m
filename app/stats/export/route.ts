@@ -27,11 +27,13 @@ export async function GET(req: NextRequest) {
     ]);
   } else {
     const { results } = await db
-      .prepare('SELECT ts, name, path, card, place, props, source, ref, country, device FROM ev WHERE day >= ? ORDER BY ts LIMIT 200000')
+      .prepare('SELECT ts, name, path, card, place, props, source, ref, country, device, vid FROM ev WHERE day >= ? ORDER BY ts LIMIT 200000')
       .bind(startDay(days))
       .all<Record<string, unknown>>();
     body = csv([
-      ['Time (UTC)', 'Event', 'Page', 'Card', 'Spot', 'Details', 'Source', 'Referring site', 'Country', 'Device'],
+      // Visitor: the anonymous code for one person on one day, so one person's pages and clicks can be followed.
+      // Events starting "auto:" are crawlers and scripts, left out of the numbers on /stats.
+      ['Time (UTC)', 'Event', 'Page', 'Card', 'Spot', 'Details', 'Source', 'Referring site', 'Country', 'Device', 'Visitor'],
       ...results.map((r) => [
         new Date(Number(r.ts)).toISOString().replace('T', ' ').slice(0, 19),
         r.name,
@@ -42,7 +44,8 @@ export async function GET(req: NextRequest) {
         r.source,
         r.ref,
         r.country,
-        r.device
+        r.device,
+        r.vid ? String(r.vid).slice(0, 8) : ''
       ])
     ]);
   }
