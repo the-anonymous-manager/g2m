@@ -338,6 +338,18 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
 - Wording (4 Nov 2026): visitors see "non-custodial", never "self-custodial" (labels, filters, home stat, picks, guide,
   methodology, card text). The guide moved to /guides/non-custodial-crypto-cards (old address redirects). The sheet's
   Custody value is still `self-custodial` internally. The score's "control" points are unchanged.
+- Site audit (10 Nov 2026, Akash: "check whole website, stats page, bugs, competitors"). Crawled all 959 sitemap
+  pages (no broken links, no error pages) and swept 28 page types at 1440, 390 and 320 px. Fixed: (1) 888 pages
+  (vs, guides, country guides, alternatives) had no share picture and card pages showed the small X card, because a
+  page that sets its own `openGraph`/`twitter` drops the site-wide ones: all pages now use `shareMeta()` in
+  `lib/site.ts`; (2) card-page search descriptions were up to 304 characters and read "Not published annual fee":
+  now facts first, 160 characters at most; (3) `.grid-2` overflowed 320 px phones; (4) the /stats 12-month chart
+  overflowed phones: ranges over 100 days are drawn one bar per week. Not fixed, proposed to Akash: shorter
+  "X vs Y" titles (all 630 are over 60 characters), an India guide (only SolCard is confirmed there, so India has no
+  country guide), an About page, more cards (competitors list 52 to 137), edge caching (first response 0.3 to 2.9 s),
+  and more /stats views (previous period, landing pages, page types, searches with no result, clicks on cards
+  without a referral link: 18 of 36 cards have none). The Cloudflare token in the cloud session cannot read the D1
+  stats database, so real numbers need Akash's CSV export.
 - "See all cards" (4 Nov 2026, Akash): the home "See all N cards" links and the footer "All cards" go to
   `/cards?country=all`, which shows every card worldwide instead of switching to the visitor's detected country;
   `country=all` stays in the address while no country is picked, so reload and Back keep the worldwide list.

@@ -9,7 +9,7 @@ import { MARKET_LABELS, availabilityIn, countryName } from '@/lib/regions';
 import { COUNTRY_CODES } from '@/lib/countries.mjs';
 import { CUSTODY_LABEL, NP, TYPE_LABEL, cashbackLabel, ecosystemFeatures, fmtDate, pct, perPurchaseFee, tierCashback, usd } from '@/lib/format';
 import { SCORE_WEIGHTS } from '@/lib/score';
-import { absoluteUrl, site } from '@/lib/site';
+import { absoluteUrl, site, shareMeta } from '@/lib/site';
 import { CardArt } from '@/components/CardArt';
 import { Eyebrow, MarketBadge, ScorePill } from '@/components/bits';
 import { OutboundLink } from '@/components/OutboundLink';
@@ -41,13 +41,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!card) return {};
   const cb = cashbackLabel(card.cashback.basePct, card.cashback.maxPct);
   const title = `${card.name} Review ${new Date().getUTCFullYear()}: Fees, Cashback & Countries`;
-  const description = `${card.name}: ${cb} back, ${usd(card.fees.annualUsd)} annual fee, ${pct(card.fees.fxPct)} FX fee. G2M score ${card.score.total}/100. ${card.summary}`;
+  // Search results show about 155 characters: the facts first, then the summary only when it still fits whole.
+  const fee = card.fees.annualUsd;
+  const none = !card.cashback.basePct && !card.cashback.maxPct;
+  const facts = `${card.name}: ${card.cashback.basePct == null && card.cashback.maxPct == null ? 'cashback not published' : none ? 'no cashback' : `${cb.toLowerCase()} cashback`}, ${
+    fee == null ? 'annual fee not published' : fee === 0 ? 'no annual fee' : `${usd(fee)} a year`
+  }, ${card.fees.fxPct == null ? 'FX fee not published' : card.fees.fxPct === 0 ? 'no FX fee' : `${pct(card.fees.fxPct)} FX fee`}. G2M score ${card.score.total}/100.`;
+  const description = `${facts} ${card.summary}`.length <= 160 ? `${facts} ${card.summary}` : `${facts} Fees, tiers, countries and sources, checked ${fmtDate(card.lastChecked)}.`;
   return {
     title,
     description,
     alternates: { canonical: `/cards/${card.slug}` },
-    openGraph: { title: `${card.name} · G2M score ${card.score.total}`, description, url: absoluteUrl(`/cards/${card.slug}`) },
-    twitter: { title: `${card.name} · G2M score ${card.score.total}`, description }
+    ...shareMeta(`${card.name} · G2M score ${card.score.total}`, description, `/cards/${card.slug}`, null)
   };
 }
 

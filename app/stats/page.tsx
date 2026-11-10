@@ -61,14 +61,26 @@ function Section({ title, note, children }: { title: string; note?: string; chil
   );
 }
 
-function Daily({ rows }: { rows: Report['daily'] }) {
-  if (!rows.length) return <p className="faint" style={{ fontSize: 14 }}>Nothing yet.</p>;
+/** Long ranges are shown week by week (one bar per 7 days), so the chart still fits a phone screen. */
+function byWeek(rows: Report['daily']): Report['daily'] {
+  const out: Report['daily'] = [];
+  for (let i = 0; i < rows.length; i += 7) {
+    const week = rows.slice(i, i + 7);
+    const sum = (k: string) => week.reduce((n, r) => n + Number(r[k] ?? 0), 0);
+    out.push({ day: `Week of ${week[0].day}`, views: sum('views'), visitors: sum('visitors'), visits: sum('visits'), clicks: sum('clicks') });
+  }
+  return out;
+}
+
+function Daily({ rows: days }: { rows: Report['daily'] }) {
+  if (!days.length) return <p className="faint" style={{ fontSize: 14 }}>Nothing yet.</p>;
+  const rows = days.length > 100 ? byWeek(days) : days;
   // One scale for both, so a day with more clicks than visitors stays inside the chart.
   const max = Math.max(1, ...rows.flatMap((r) => [Number(r.visitors), Number(r.clicks)]));
   return (
-    <div className="st-days" role="img" aria-label="Visitors per day">
+    <div className="st-days" role="img" aria-label={days.length > 100 ? 'Visitors per week' : 'Visitors per day'}>
       {rows.map((r) => (
-        <div key={String(r.day)} className="st-day" title={`${r.day}: ${n(r.visits)} visits, ${n(r.visitors)} unique visitors, ${n(r.views)} page views, ${n(r.clicks)} clicks`}>
+        <div key={String(r.day)} className="st-day" title={`${r.day}: ${n(r.visits)} visits, ${n(r.visitors)} ${days.length > 100 ? 'visitors (each day counted)' : 'unique visitors'}, ${n(r.views)} page views, ${n(r.clicks)} clicks`}>
           <span style={{ height: `${(Number(r.visitors) / max) * 100}%` }} />
           {Number(r.clicks) ? <b style={{ height: `${(Number(r.clicks) / max) * 100}%` }} /> : null}
         </div>
@@ -112,7 +124,11 @@ function Dashboard({ data, days, counted }: { data: Report; days: number; counte
         blockers can&apos;t hide them, while visits are counted in the browser, where some ad blockers hide them.
       </p>
 
-      <Section title="Day by day" note="Light bars: unique visitors that day. Dark marks inside: Get the card clicks. Hover or tap a day for its numbers.">
+      <Section title="Day by day" note={
+          data.daily.length > 100
+            ? 'One bar per week. Light bars: visitors. Dark marks inside: Get the card clicks. Hover or tap a week for its numbers.'
+            : 'Light bars: unique visitors that day. Dark marks inside: Get the card clicks. Hover or tap a day for its numbers.'
+        }>
         <Daily rows={data.daily} />
       </Section>
 

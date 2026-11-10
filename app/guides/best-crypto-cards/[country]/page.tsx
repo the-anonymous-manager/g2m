@@ -6,7 +6,7 @@ import { fmtDate, pct } from '@/lib/format';
 import { homeFx } from '@/lib/fx';
 import { currencyOf } from '@/lib/currencies.mjs';
 import { TOPICS, countryGuide, countryGuidePath, countryGuides } from '@/lib/guides';
-import { absoluteUrl, site } from '@/lib/site';
+import { absoluteUrl, site, shareMeta } from '@/lib/site';
 import { Eyebrow } from '@/components/bits';
 import { BackButton } from '@/components/BackButton';
 import { GuideList } from '@/components/GuideList';
@@ -29,8 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     alternates: { canonical: path },
-    openGraph: { title: `Best crypto cards in ${g.name} · G2M`, description, url: absoluteUrl(path) },
-    twitter: { title: `Best crypto cards in ${g.name} · G2M`, description }
+    ...shareMeta(`Best crypto cards in ${g.name} · G2M`, description, path)
   };
 }
 

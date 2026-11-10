@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { getCards } from '@/lib/cards';
 import { fmtDate } from '@/lib/format';
 import { FEES_GUIDE, TOPICS, topicCards } from '@/lib/guides';
-import { absoluteUrl, site } from '@/lib/site';
+import { absoluteUrl, site, shareMeta } from '@/lib/site';
 import { Eyebrow } from '@/components/bits';
 import { BackButton } from '@/components/BackButton';
 import { GuideList } from '@/components/GuideList';
@@ -27,8 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description: t.description,
     alternates: { canonical: `/guides/${t.slug}` },
-    openGraph: { title: `${t.title} · G2M`, description: t.description, url: absoluteUrl(`/guides/${t.slug}`) },
-    twitter: { title: `${t.title} · G2M`, description: t.description }
+    ...shareMeta(`${t.title} · G2M`, t.description, `/guides/${t.slug}`)
   };
 }
 

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { shareMeta } from '@/lib/site';
 import { getCard, getCards } from '@/lib/cards';
 import { toRow } from '@/lib/types';
 import { fiatPerUsd } from '@/lib/prices';
@@ -14,13 +15,12 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   const card = p.card ? getCard(p.card) : null;
   const title = card ? `${card.name}: the real cost of a ${p.what.toLowerCase()}` : 'Real swipe receipt';
   const description = 'What one purchase really costs on a crypto card: every fee, the cashback, and the real result.';
-  const images = card ? [{ url: `/receipt/image?${receiptQuery(p)}`, width: 1200, height: 630, alt: title }] : undefined;
+  const image = card ? `/receipt/image?${receiptQuery(p)}` : undefined;
   return {
     title,
     description,
     alternates: { canonical: '/receipt' },
-    openGraph: { title, description, images },
-    twitter: { card: 'summary_large_image', title, description, images: images?.map((i) => i.url) }
+    ...shareMeta(title, description, '/receipt', image)
   };
 }
 
