@@ -7,7 +7,7 @@ import { fmtDate, pct, usd } from '@/lib/format';
 import { WIN_WORDS, versusPoints } from '@/lib/verdict';
 import { versusPath } from '@/lib/versus';
 import { alternativesPath, alternativesTo } from '@/lib/alternatives';
-import { absoluteUrl, site } from '@/lib/site';
+import { absoluteUrl, site, shareMeta } from '@/lib/site';
 import { Eyebrow } from '@/components/bits';
 import { BackButton } from '@/components/BackButton';
 import { GuideList } from '@/components/GuideList';
@@ -40,8 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     alternates: { canonical: alternativesPath(card.slug) },
-    openGraph: { title: `${card.brand} alternatives · G2M`, description, url: absoluteUrl(alternativesPath(card.slug)) },
-    twitter: { title: `${card.brand} alternatives · G2M`, description }
+    ...shareMeta(`${card.brand} alternatives · G2M`, description, alternativesPath(card.slug), `/cards/${card.slug}/opengraph-image`)
   };
 }
 

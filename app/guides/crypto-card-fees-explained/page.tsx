@@ -4,7 +4,7 @@ import { getCards } from '@/lib/cards';
 import { basketCosts, BASKET_PURCHASES, BASKET_USD } from '@/lib/score';
 import { fmtDate, money, pct, usd } from '@/lib/format';
 import { FEES_GUIDE, TOPICS } from '@/lib/guides';
-import { absoluteUrl, site } from '@/lib/site';
+import { absoluteUrl, site, shareMeta } from '@/lib/site';
 import { Eyebrow } from '@/components/bits';
 import { BackButton } from '@/components/BackButton';
 
@@ -17,8 +17,7 @@ export const metadata: Metadata = {
   title: FEES_GUIDE.title,
   description: FEES_GUIDE.description,
   alternates: { canonical: path },
-  openGraph: { title: `${FEES_GUIDE.title} · G2M`, description: FEES_GUIDE.description, url: absoluteUrl(path) },
-  twitter: { title: `${FEES_GUIDE.title} · G2M`, description: FEES_GUIDE.description }
+  ...shareMeta(`${FEES_GUIDE.title} · G2M`, FEES_GUIDE.description, path)
 };
 
 const list = (xs: string[]) => (xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`);

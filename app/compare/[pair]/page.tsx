@@ -7,7 +7,7 @@ import { toRow } from '@/lib/types';
 import { cashbackLabel, fmtDate, pct, usd } from '@/lib/format';
 import { parseVersus, versusPath } from '@/lib/versus';
 import { versusPoints, versusSummary } from '@/lib/verdict';
-import { absoluteUrl, site } from '@/lib/site';
+import { absoluteUrl, site, shareMeta } from '@/lib/site';
 import { ROWS, best } from '@/components/compareRows';
 import { CardArt } from '@/components/CardArt';
 import { Eyebrow, ScorePill } from '@/components/bits';
@@ -38,8 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     alternates: { canonical: path },
-    openGraph: { title: `${a.name} vs ${b.name} · G2M`, description, url: absoluteUrl(path) },
-    twitter: { title: `${a.name} vs ${b.name} · G2M`, description }
+    ...shareMeta(`${a.name} vs ${b.name} · G2M`, description, path)
   };
 }
 
