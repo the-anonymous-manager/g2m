@@ -8,6 +8,8 @@ import { absoluteUrl, site, shareMeta } from '@/lib/site';
 import { Eyebrow } from '@/components/bits';
 import { BackButton } from '@/components/BackButton';
 import { GuideList } from '@/components/GuideList';
+import { LOCALES, intlGuide, languageLinks } from '@/lib/i18n/locales';
+import { intlTopic } from '@/lib/i18n/guides';
 
 // Built ahead of time at every deploy (the card data is bundled, and each sheet sync deploys), so the page is served
 // ready-made instead of being put together on each visit. See open-next.config.ts.
@@ -30,7 +32,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description: t.description,
-    alternates: { canonical: `/guides/${t.slug}` },
+    alternates: {
+      canonical: `/guides/${t.slug}`,
+      languages: languageLinks(`/guides/${t.slug}`, (l) => intlGuide(l, t.slug), LOCALES.filter((l) => intlTopic(l, t.slug)))
+    },
     ...shareMeta(`${t.title} · G2M`, t.description, `/guides/${t.slug}`)
   };
 }

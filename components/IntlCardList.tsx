@@ -27,7 +27,8 @@ export function IntlCardList({
   f,
   placement,
   fx,
-  fxLabel
+  fxLabel,
+  note
 }: {
   cards: Card[];
   locale: Locale;
@@ -36,6 +37,8 @@ export function IntlCardList({
   placement: string;
   fx?: (c: Card) => string;
   fxLabel?: string;
+  /** A line under the facts, e.g. what this card does better than another. */
+  note?: (c: Card) => React.ReactNode;
 }) {
   return (
     <ol className="guide-list">
@@ -72,6 +75,11 @@ export function IntlCardList({
                 <dd>{f.custody(c)}</dd>
               </div>
             </dl>
+            {note ? (
+              <p className="muted" style={{ margin: 0, fontSize: 15 }}>
+                {note(c)}
+              </p>
+            ) : null}
             <div className="pick-actions">
               <OutboundLink slug={c.slug} name={c.brand} placement={placement} className="btn btn-metal btn-sm">
                 {d.getCard}

@@ -41,13 +41,41 @@ export const hreflangOf = (l: Locale) => (l.code === 'ar' ? 'ar' : l.tag);
 export const intlHome = (l: Locale) => `/${l.code}`;
 export const intlCard = (l: Locale, slug: string) => `/${l.code}/cards/${slug}`;
 export const intlCountry = (l: Locale, countrySlug: string) => `/${l.code}/best-crypto-cards/${countrySlug}`;
+export const intlVersus = (l: Locale, pair: string) => `/${l.code}/compare/${pair}`;
+export const intlAlternatives = (l: Locale, slug: string) => `/${l.code}/cards/${slug}/alternatives`;
+export const intlReferral = (l: Locale, slug: string) => `/${l.code}/cards/${slug}/referral-code`;
+export const intlGuides = (l: Locale) => `/${l.code}/guides`;
+export const intlGuide = (l: Locale, slug: string) => `/${l.code}/guides/${slug}`;
+export const intlMethodology = (l: Locale) => `/${l.code}/methodology`;
+
+/** English guides with no translated page (the fees guide is long prose kept in English). */
+const ENGLISH_ONLY_GUIDES = new Set(['crypto-card-fees-explained']);
+
+/**
+ * The same page in another language, for the language menu: `to` undefined means English. A page that has no
+ * translated version (the calculator, the rankings table) opens that language's home page instead.
+ */
+export function pathIn(pathname: string, to: Locale | undefined): string {
+  const from = localeOfPath(pathname);
+  // The address without its language prefix, in English terms: "/de/best-crypto-cards/x" → "/guides/best-crypto-cards/x".
+  let en = from ? pathname.slice(from.code.length + 1) || '/' : pathname || '/';
+  if (from && en.startsWith('/best-crypto-cards/')) en = `/guides${en}`;
+  if (!to) return en;
+  const country = en.match(/^\/guides\/best-crypto-cards\/([^/]+)$/);
+  if (country) return intlCountry(to, country[1]);
+  const guide = en.match(/^\/guides\/([^/]+)$/);
+  if (guide) return ENGLISH_ONLY_GUIDES.has(guide[1]) ? intlGuides(to) : intlGuide(to, guide[1]);
+  if (en === '/guides' || en === '/methodology' || /^\/compare\/[^/]+-vs-[^/]+$/.test(en) || /^\/cards\/[^/]+(\/alternatives|\/referral-code)?$/.test(en))
+    return `/${to.code}${en}`;
+  return intlHome(to);
+}
 
 /**
  * hreflang links for a page that exists in every language: English at `en`, the others at `path(locale)`.
- * Goes in a page's `alternates.languages`.
+ * Goes in a page's `alternates.languages`. `only` limits it to the languages the page exists in.
  */
-export function languageLinks(en: string, path: (l: Locale) => string): Record<string, string> {
-  return { en, ...Object.fromEntries(LOCALES.map((l) => [hreflangOf(l), path(l)])), 'x-default': en };
+export function languageLinks(en: string, path: (l: Locale) => string, only: Locale[] = LOCALES): Record<string, string> {
+  return { en, ...Object.fromEntries(only.map((l) => [hreflangOf(l), path(l)])), 'x-default': en };
 }
 
 /** "{name} has {n} cards" with { name, n } filled in. */

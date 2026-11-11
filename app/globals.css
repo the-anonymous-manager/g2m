@@ -2652,3 +2652,78 @@ body::before {
 .intl-table th {
   white-space: normal;
 }
+
+/* ---------- Language menu (header): a globe button opening the list of languages ---------- */
+.lang-menu {
+  position: relative;
+}
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.lang-btn::-webkit-details-marker {
+  display: none;
+}
+.lang-btn:hover,
+.lang-menu[open] .lang-btn {
+  background: var(--surface-2);
+}
+.lang-code {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+.lang-caret {
+  transition: transform 0.15s ease;
+}
+.lang-menu[open] .lang-caret {
+  transform: rotate(180deg);
+}
+.lang-list {
+  position: absolute;
+  inset-inline-end: 0;
+  top: calc(100% + 8px);
+  z-index: 60;
+  min-width: 200px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+.lang-list a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text);
+}
+.lang-list a:hover {
+  background: var(--surface-2);
+}
+.lang-list a[aria-current='true'] {
+  font-weight: 650;
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+}
+.lang-list .mono {
+  font-size: 12px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lang-caret {
+    transition: none;
+  }
+}

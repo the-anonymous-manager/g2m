@@ -378,6 +378,23 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   languages; the sitemap has them (3,045 addresses). /stats: "Other languages" by language, and a page kind.
   Home and card pages are prebuilt (296), language-market country pages too, the other country pages on first visit.
   Not translated yet: rankings table, "X vs Y", topic guides, alternatives, referral pages, tools, methodology.
+- Languages, part 2 (11 Nov 2026, Akash: "why not translated those pages?", then "go 1,2,3"). Added in all 8
+  languages: "X vs Y" (`/de/compare/a-vs-b`; who wins each point comes from `lib/verdict.ts`, the sentences from
+  the dictionary in `lib/i18n/verdict.ts`; matchups among the top 10 cards prebuilt, the rest on first visit),
+  alternatives, referral code pages, a guides hub and the 20 topic guides (`/de/guides/...`; the long fees guide
+  stays English), and a shorter methodology (`/de/methodology`; calculator details link to English). Sheet text
+  (summaries, pros, cons, sign-up bonuses) and the guide text now show translated, from `data/i18n/<code>.json`,
+  which maps the exact English text to its translation (359 lines a language, written by Claude, numbers checked
+  against the English; not reviewed by native speakers). When the sheet text changes, the page shows the new English
+  text marked as English until the line is translated: `npm run i18n:missing` lists what is missing. A guide only
+  appears in a language once its title and description are translated. Dictionaries: 211 lines each.
+  Language menu (Akash: "on the top with sign"): a globe button with the language code in the header of every page
+  (`components/LanguageMenu.tsx`), opening the same page in the chosen language where it exists, else that language's
+  home (`pathIn` in `lib/i18n/locales.ts`); it replaces the footer language lists. hreflang added to the English
+  "X vs Y", alternatives, referral, guides and methodology pages; sitemap 4,005 addresses.
+- Google canonical fix (11 Nov 2026, Search Console "Duplicate without user-selected canonical", 56 pages, and
+  "User-declared canonical: None" on the home page): Next.js streamed the title and canonical into `<body>` for
+  Googlebot, which ignores a canonical there. `htmlLimitedBots: /.*/` in `next.config.mjs` keeps them in `<head>`.
 - Site audit (10 Nov 2026, Akash: "check whole website, stats page, bugs, competitors"). Crawled all 959 sitemap
   pages (no broken links, no error pages) and swept 28 page types at 1440, 390 and 320 px. Fixed: (1) 888 pages
   (vs, guides, country guides, alternatives) had no share picture and card pages showed the small X card, because a

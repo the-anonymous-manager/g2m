@@ -95,11 +95,16 @@ and confirm what changed on the site (not which files moved).
   served from static files, see `open-next.config.ts`): they must not read cookies, headers or the time of the request.
 - Other languages (`lib/i18n/`): German, French, Spanish, Polish, Turkish, Russian, Arabic (right to left) and
   Traditional Chinese (Hong Kong) at `/de`, `/fr`, `/es`, `/pl`, `/tr`, `/ru`, `/ar`, `/zh-hk`. Each has a home page
-  (`app/[lang]`), a page per card (`/de/cards/kast`) and country pages (`/de/best-crypto-cards/germany`). Every word
-  comes from that language's dictionary (`lib/i18n/dict/<code>.ts`, same keys as `en.ts`) and every value from the
-  card data; numbers, money, dates and country names come from Intl. Text typed in the sheet (summary, notes, pros,
-  cons, bonus) is English only and is not shown there: never put English sheet text on a translated page. A new
-  label needs a line in all nine dictionary files. To add a language: `LOCALES` in `locales.ts`, a `chrome.ts`
+  (`app/[lang]`), card pages (`/de/cards/kast`, plus `/alternatives` and `/referral-code`), "X vs Y"
+  (`/de/compare/a-vs-b`), guides (`/de/guides`, `/de/guides/<topic>`), country pages (`/de/best-crypto-cards/germany`)
+  and `/de/methodology`. Every word comes from that language's dictionary (`lib/i18n/dict/<code>.ts`, same keys as
+  `en.ts`) and every value from the card data; numbers, money, dates and country names come from Intl. Text typed in
+  the sheet (summary, pros, cons, bonus) and the guide text are translated in `data/i18n/<code>.json` (exact English
+  text → translation; `lib/i18n/notes.ts`). After a sheet edit changes that text, run `npm run i18n:missing` and add
+  the new lines to all eight files (keep every number as in the English); until then the page shows the English,
+  marked as English. Never put English sheet text in a translated title or description. A new label needs a line in
+  all nine dictionary files. The header's language menu (`components/LanguageMenu.tsx`) maps each page to its
+  translation with `pathIn` in `locales.ts`: a new translated page type needs a line there. To add a language: `LOCALES` in `locales.ts`, a `chrome.ts`
   entry, a dictionary file, and its line in `dict/index.ts`.
 - `app/go/[slug]` outbound redirect with UTM tags; `/stats` (private) counts only people: crawler hits are stored as
   `auto:<event>` (`isAutomated` in `lib/stats/server.ts`)

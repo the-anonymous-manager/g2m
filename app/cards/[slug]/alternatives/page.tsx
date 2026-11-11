@@ -11,6 +11,7 @@ import { absoluteUrl, site, shareMeta } from '@/lib/site';
 import { Eyebrow } from '@/components/bits';
 import { BackButton } from '@/components/BackButton';
 import { GuideList } from '@/components/GuideList';
+import { intlAlternatives, languageLinks } from '@/lib/i18n/locales';
 
 // "Best X alternatives": built only from the card data, like the guides and the "X vs Y" pages.
 // Built ahead of time at every deploy (the card data is bundled, and each sheet sync deploys), so the page is served
@@ -44,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    alternates: { canonical: alternativesPath(card.slug) },
+    alternates: { canonical: alternativesPath(card.slug), languages: languageLinks(alternativesPath(card.slug), (l) => intlAlternatives(l, card.slug)) },
     ...shareMeta(`${card.brand} alternatives · G2M`, description, alternativesPath(card.slug), `/cards/${card.slug}/opengraph-image`)
   };
 }

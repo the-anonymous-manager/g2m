@@ -7,6 +7,9 @@ import type { Dict } from './dict';
 // Numbers, money, dates and country names the way each language writes them (Intl), plus the few card values that
 // need a word instead of a number ("Free", "Not published").
 
+/** Direction marks help inside the page but not in a search result or in structured data. */
+export const clean = (s: string) => s.replace(/[\u2066-\u2069\u200e\u200f\u061c]/g, '');
+
 export function formatters(l: Locale, d: Dict) {
   const pctF = new Intl.NumberFormat(l.tag, { style: 'percent', maximumFractionDigits: 2 });
   const usdF = new Intl.NumberFormat(l.tag, { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 2 });
@@ -28,7 +31,17 @@ export function formatters(l: Locale, d: Dict) {
     if (base != null) return pct(base);
     return iso(`≤ ${pctF.format(max! / 100)}`);
   };
+  let listF: Intl.ListFormat | null = null;
+  try {
+    listF = new Intl.ListFormat(l.tag, { style: 'long', type: 'conjunction' });
+  } catch {
+    listF = null;
+  }
   return {
+    /** A card name inside a sentence: kept in its own direction in right-to-left text. */
+    name: (s: string) => (l.dir === 'rtl' ? `\u2068${s}\u2069` : s),
+    /** "A, B and C" the way the language writes it. */
+    list: (xs: string[]) => (listF ? listF.format(xs) : xs.join(', ')),
     pct,
     usd,
     num: (n: number) => numF.format(n),

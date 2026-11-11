@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getCards, lastUpdated } from '@/lib/cards';
 import { countryGuides, countrySlug } from '@/lib/guides';
-import { LOCALES, fill, hreflangOf, intlCard, intlCountry, intlHome, languageLinks, localeByCode } from '@/lib/i18n/locales';
+import { LOCALES, fill, hreflangOf, intlCard, intlCountry, intlHome, intlMethodology, languageLinks, localeByCode } from '@/lib/i18n/locales';
 import { DICTS } from '@/lib/i18n/dict';
 import { formatters } from '@/lib/i18n/format';
 import { absoluteUrl, shareMeta, site } from '@/lib/site';
@@ -92,7 +92,7 @@ export default async function IntlHomePage({ params }: Props) {
           {d.howText}
         </p>
         <p style={{ margin: 0 }}>
-          <Link href="/methodology" lang="en" hrefLang="en">
+          <Link href={intlMethodology(locale)}>
             {d.methodLink}
           </Link>
         </p>

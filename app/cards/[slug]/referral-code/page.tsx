@@ -11,6 +11,7 @@ import { Eyebrow, ScorePill } from '@/components/bits';
 import { BackButton } from '@/components/BackButton';
 import { OutboundLink } from '@/components/OutboundLink';
 import { ReferralBox } from '@/components/ReferralBox';
+import { intlReferral, languageLinks } from '@/lib/i18n/locales';
 
 // "X referral code": the code, what a new user gets for it in the issuer's own terms, and how to use it.
 // Built only from the sheet (referral link, code, sign-up bonus), so it changes when the sheet does.
@@ -44,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: title.length + ' · G2M'.length <= 60 ? title : { absolute: title },
     description,
-    alternates: { canonical: referralPath(card.slug) },
+    alternates: { canonical: referralPath(card.slug), languages: languageLinks(referralPath(card.slug), (l) => intlReferral(l, card.slug)) },
     ...shareMeta(`${name} referral code · G2M`, description, referralPath(card.slug), `/cards/${card.slug}/opengraph-image`)
   };
 }

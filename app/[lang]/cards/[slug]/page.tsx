@@ -5,18 +5,22 @@ import { getCard, getCards } from '@/lib/cards';
 import { availabilityIn } from '@/lib/regions';
 import { confirmedCountries, SCORE_WEIGHTS } from '@/lib/score';
 import { countryGuides, countrySlug } from '@/lib/guides';
-import { LOCALES, fill, hreflangOf, intlCard, intlCountry, intlHome, languageLinks, localeByCode } from '@/lib/i18n/locales';
+import { LOCALES, fill, hreflangOf, intlAlternatives, intlCard, intlCountry, intlGuides, intlHome, intlReferral, languageLinks, localeByCode } from '@/lib/i18n/locales';
 import { DICTS } from '@/lib/i18n/dict';
-import { formatters } from '@/lib/i18n/format';
+import { clean, formatters } from '@/lib/i18n/format';
+import { note } from '@/lib/i18n/notes';
+import { hasReferralPage } from '@/lib/referral';
 import { absoluteUrl, shareMeta, site } from '@/lib/site';
 import { shortName } from '@/lib/versus';
 import { CardArt } from '@/components/CardArt';
 import { Eyebrow } from '@/components/bits';
 import { OutboundLink } from '@/components/OutboundLink';
 import { IntlScore } from '@/components/IntlCardList';
+import { IntlText } from '@/components/IntlText';
 
 // A card's page in another language: its facts, tiers, score and availability, all from the card data, with labels
-// from that language's dictionary. The long notes written in the sheet stay on the English review, which is linked.
+// from that language's dictionary. The notes typed in the sheet (summary, pros, cons, bonus) come from data/i18n,
+// in English until translated. Sources and tier conditions stay on the English review, which is linked.
 // Built ahead of time at each deploy.
 type Props = { params: Promise<{ lang: string; slug: string }> };
 
@@ -24,9 +28,6 @@ export const dynamicParams = false;
 export function generateStaticParams() {
   return LOCALES.flatMap((l) => getCards().map((c) => ({ lang: l.code, slug: c.slug })));
 }
-
-/** Direction marks help inside the page but not in a search result or in structured data. */
-const clean = (s: string) => s.replace(/[\u2066\u2069\u200e\u200f\u061c]/g, '');
 
 function load(lang: string, slug: string) {
   const locale = localeByCode(lang);
@@ -158,6 +159,9 @@ export default async function IntlCardPage({ params }: Props) {
           <bdi>{card.name}</bdi>
         </h1>
         <p className="lead">{fill(d.cardLead, vars)}</p>
+        <p style={{ margin: 0, maxWidth: '75ch' }}>
+          <IntlText note={note(locale, card.summary)} label={d.inEnglish} />
+        </p>
       </div>
 
       <div className="panel panel-pad ref-hero">
@@ -171,6 +175,14 @@ export default async function IntlCardPage({ params }: Props) {
             </b>
             <IntlScore value={card.score.total} label={d.score} />
           </div>
+          {card.links.affiliate && card.signupBonus ? (
+            <div className="stack" style={{ gap: 4 }}>
+              <b>{d.bonus}</b>
+              <p className="muted" style={{ margin: 0 }}>
+                <IntlText note={note(locale, card.signupBonus)} label={d.inEnglish} />
+              </p>
+            </div>
+          ) : null}
           {card.links.affiliate && card.referralCode ? (
             <p style={{ margin: 0 }}>
               {d.referralCode}: <code className="mono">{card.referralCode}</code>
@@ -186,6 +198,32 @@ export default async function IntlCardPage({ params }: Props) {
           </div>
         </div>
       </div>
+
+      {card.pros.length || card.cons.length ? (
+        <div className="grid-2">
+          {(
+            [
+              ['pros', d.prosTitle, card.pros],
+              ['cons', d.consTitle, card.cons]
+            ] as const
+          )
+            .filter(([, , xs]) => xs.length)
+            .map(([id, title, xs]) => (
+              <section key={id} aria-labelledby={id} className="panel panel-pad stack" style={{ gap: 10 }}>
+                <h2 id={id} className="h3" style={{ margin: 0 }}>
+                  {title}
+                </h2>
+                <ul className="vs-points" style={{ margin: 0 }}>
+                  {xs.map((x) => (
+                    <li key={x}>
+                      <IntlText note={note(locale, x)} label={d.inEnglish} />
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+        </div>
+      ) : null}
 
       <section aria-labelledby="facts" className="stack" style={{ gap: 12 }}>
         <h2 id="facts" className="h3">
@@ -295,6 +333,22 @@ export default async function IntlCardPage({ params }: Props) {
           </div>
         ))}
       </section>
+
+      <nav aria-label={d.guides} className="stack" style={{ gap: 8 }}>
+        <ul className="guide-links">
+          <li>
+            <Link href={intlAlternatives(locale, card.slug)}>{d.altLink}</Link>
+          </li>
+          {hasReferralPage(card) ? (
+            <li>
+              <Link href={intlReferral(locale, card.slug)}>{d.refLink}</Link>
+            </li>
+          ) : null}
+          <li>
+            <Link href={intlGuides(locale)}>{d.guidesTitle}</Link>
+          </li>
+        </ul>
+      </nav>
 
       <p className="faint" style={{ fontSize: 13, margin: 0 }}>
         {d.cardNote}{' '}

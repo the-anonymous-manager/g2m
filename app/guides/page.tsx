@@ -5,6 +5,7 @@ import { getCards } from '@/lib/cards';
 import { alternativesPath } from '@/lib/alternatives';
 import { hasReferralPage, referralPath } from '@/lib/referral';
 import { Eyebrow } from '@/components/bits';
+import { intlGuides, languageLinks } from '@/lib/i18n/locales';
 
 // Built ahead of time at every deploy (the card data is bundled, and each sheet sync deploys), so the page is served
 // ready-made instead of being put together on each visit. See open-next.config.ts.
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   title: 'Crypto card guides',
   description:
     'Plain guides to crypto cards: the best cards by country, cards with no FX fee or no annual fee, Apple Pay, USDT and USDC cards, crypto credit cards, alternatives to every card, and every fee explained.',
-  alternates: { canonical: '/guides' }
+  alternates: { canonical: '/guides', languages: languageLinks('/guides', intlGuides) }
 };
 
 export default function GuidesPage() {
