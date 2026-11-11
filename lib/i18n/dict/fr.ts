@@ -270,5 +270,22 @@ export const fr: Dict = {
   noFeeS: "nuls",
   rankTitle: "Classement des cartes crypto",
   rankDesc: "Toutes les cartes crypto classées selon le score G2M : cashback, frais annuels, frais de change, conservation des fonds et pays couverts. Filtrez par pays, frais et fonctionnalités.",
-  rankLead: "Chaque carte est notée de la même façon : récompenses, frais, couverture et contrôle. Choisissez votre pays pour voir ce que vous pouvez vraiment obtenir. Cartes : {n}. Dernière vérification : {date}."
+  rankLead: "Chaque carte est notée de la même façon : récompenses, frais, couverture et contrôle. Choisissez votre pays pour voir ce que vous pouvez vraiment obtenir. Cartes : {n}. Dernière vérification : {date}.",
+  heroLead: "De la blockchain à la caisse. Chaque carte crypto classée selon ses récompenses, ses frais et les pays où elle fonctionne vraiment, pour choisir celle qui vous rapporte.",
+  searchLabel: "Rechercher des cartes",
+  searchPlaceholder: "Rechercher une carte, une marque ou une région",
+  searchButton: "Rechercher",
+  seeAllN: "Voir les {n} cartes",
+  findBest: "Trouver votre carte",
+  bookSpot: "Les émetteurs peuvent réserver cet emplacement, toujours signalé comme sponsorisé.",
+  bookPicks: "Les émetteurs peuvent réserver l'un de ces emplacements.",
+  topTitle: "Les meilleures cartes crypto du moment",
+  fullRankings: "Classement complet",
+  regionsTitle: "Cartes confirmées là où vous vivez",
+  toolFinderTag: "5 questions",
+  toolCalcTag: "vos chiffres",
+  toolWalletTag: "portefeuille de 2 cartes",
+  toolReceiptTag: "un achat",
+  toolCorridorTag: "retrait",
+  toolCompareTag: "côte à côte"
 };

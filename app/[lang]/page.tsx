@@ -5,29 +5,34 @@ import { getCards, getRank, lastUpdated } from '@/lib/cards';
 import type { Card } from '@/lib/types';
 import { getSponsor } from '@/lib/sponsor';
 import { getPicks, type HomePick } from '@/lib/picks';
-import { countryGuides, countrySlug } from '@/lib/guides';
-import { fill, hreflangOf, intlCard, intlCountry, intlHome, intlMethodology, languageLinks, localeByCode } from '@/lib/i18n/locales';
+import { fill, hreflangOf, intlCard, intlHome, intlMethodology, intlRankings, languageLinks, localeByCode } from '@/lib/i18n/locales';
 import { DICTS, type Dict } from '@/lib/i18n/dict';
 import { clean, formatters, type Fmt } from '@/lib/i18n/format';
 import { note } from '@/lib/i18n/notes';
 import { absoluteUrl, shareMeta, site } from '@/lib/site';
 import { CardArt } from '@/components/CardArt';
-import { ArrowIcon, Eyebrow } from '@/components/bits';
+import { HomeLeaderboard } from '@/components/HomeLeaderboard';
+import { MarketPanels, type MarketPanel } from '@/components/MarketPanels';
+import { UI } from '@/lib/i18n/ui';
+import { ASIA } from '@/lib/countries.mjs';
+import { COUNTRIES, availabilityIn } from '@/lib/regions';
+import { toRow, type Market } from '@/lib/types';
+import { ArrowIcon, Eyebrow, SearchIcon } from '@/components/bits';
 import { GlyphField } from '@/components/motion/GlyphField';
-import { IntlCardList, IntlScore } from '@/components/IntlCardList';
+import { IntlScore } from '@/components/IntlCardList';
 import { IntlText } from '@/components/IntlText';
 import { OutboundLink } from '@/components/OutboundLink';
 
-// The home page in another language (/de, /ar ...), laid out like the English home page: the hero with the top
-// spot, the numbers, new cards, the ranking, cards by country, our picks, how cards are judged and the tools. Every
-// word comes from that language's dictionary and every value from the card data.
+// The home page in another language (/de, /ar ...), section for section the same as the English home page
+// (app/(en)/page.tsx): hero with search and the top spot, the numbers, New on G2M, the top-5 leaderboard, cards
+// confirmed where you live, our picks, how cards are judged and the tools. Words come from the language's dictionary
+// (lib/i18n/dict) and, for the interactive parts, its tool pack (lib/i18n/ui); values come from the card data.
 // Rendered on every request, like the English home page, so a sponsorship starts and ends on its dates.
 export const dynamic = 'force-dynamic';
 
 type Props = { params: Promise<{ lang: string }> };
 
-/** Cards shown before "Show all cards". */
-const TOP = 10;
+const MARKETS: Market[] = ['US', 'GB', 'EU'];
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang } = await params;
@@ -113,38 +118,53 @@ export default async function IntlHomePage({ params }: Props) {
     .filter((c) => c.addedOn)
     .sort((a, b) => b.addedOn!.localeCompare(a.addedOn!) || a.rank - b.rank)
     .slice(0, 3);
-  const top = f.list(cards.slice(0, 3).map((c) => `${f.name(c.name)} (${c.score.total}/100)`));
-  // This language's own markets first, then the countries with the most confirmed cards.
-  const guides = countryGuides();
-  const withGuide = new Set(guides.map((g) => g.cc));
-  const countries = [...locale.markets.filter((cc) => withGuide.has(cc)), ...guides.map((g) => g.cc).filter((cc) => !locale.markets.includes(cc))].slice(0, 30);
-  const faq = [
-    { q: d.q1, a: d.a1 },
-    { q: d.q2, a: fill(d.a2, { top }) },
-    { q: d.q3, a: fill(d.a3, { nofee: noFee, n: cards.length }) }
+  const ui = UI[locale.code];
+  const rows = cards.map(toRow);
+  const prefix = `/${locale.code}`;
+  const rankings = intlRankings(locale);
+  // Country names from the server, so the leaderboard and panels match in the browser (see intlFmt).
+  const countryNames = Object.fromEntries(COUNTRIES.map((c) => [c.code, f.country(c.code)]));
+  // The same four panels as the English home page: the US, the UK, the EU, then Asia as a whole.
+  const panels: MarketPanel[] = [
+    ...MARKETS.map((m) => {
+      const list = cards.filter((c) => c.coverage.markets[m] === 'yes');
+      return {
+        key: m,
+        title: m === 'EU' ? ui.regions.EU : f.country(m),
+        href: m === 'EU' ? `${rankings}?region=EU` : `${rankings}?country=${m}`,
+        count: list.length,
+        cards: list.slice(0, 3).map((c) => ({ row: toRow(c) }))
+      };
+    }),
+    (() => {
+      const asia = cards
+        .map((c) => ({ c, n: ASIA.filter((cc: string) => availabilityIn(c, cc) === 'yes').length }))
+        .filter((x) => x.n > 0);
+      return {
+        key: 'ASIA',
+        title: ui.regions.ASIA,
+        href: `${rankings}?region=ASIA`,
+        count: asia.length,
+        cards: asia.slice(0, 3).map(({ c, n }) => ({ row: toRow(c), note: fill(ui.home.asiaN, { n }) }))
+      };
+    })()
   ];
-  const tools: [string, string, string][] = [
-    ['/finder', d.toolFinder, d.toolFinderText],
-    ['/calculator', d.toolCalc, d.toolCalcText],
-    ['/wallet', d.toolWallet, d.toolWalletText],
-    ['/receipt', d.toolReceipt, d.toolReceiptText],
-    ['/corridors', d.toolCorridor, d.toolCorridorText],
-    ['/compare', d.toolCompare, d.toolCompareText]
+  const tools: [string, string, string, string][] = [
+    ['/finder', d.toolFinderTag, d.toolFinder, d.toolFinderText],
+    ['/calculator', d.toolCalcTag, d.toolCalc, d.toolCalcText],
+    ['/wallet', d.toolWalletTag, d.toolWallet, d.toolWalletText],
+    ['/receipt', d.toolReceiptTag, d.toolReceipt, d.toolReceiptText],
+    ['/corridors', d.toolCorridorTag, d.toolCorridor, d.toolCorridorText],
+    ['/compare', d.toolCompareTag, d.toolCompare, d.toolCompareText]
   ];
-  const clean = (s: string) => s.replace(/[⁦-⁩]/g, '');
+  const mail = (subject: string) => `mailto:${site.contactEmail}?subject=${encodeURIComponent(subject)}`;
   const jsonLd = [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      inLanguage: hreflangOf(locale),
-      mainEntity: faq.map((x) => ({ '@type': 'Question', name: clean(x.q), acceptedAnswer: { '@type': 'Answer', text: clean(x.a) } }))
-    },
     {
       '@context': 'https://schema.org',
       '@type': 'ItemList',
       name: fill(d.homeH1, vars),
       inLanguage: hreflangOf(locale),
-      itemListElement: cards.map((c, i) => ({ '@type': 'ListItem', position: i + 1, url: absoluteUrl(intlCard(locale, c.slug)), name: c.name }))
+      itemListElement: cards.slice(0, 10).map((c, i) => ({ '@type': 'ListItem', position: i + 1, url: absoluteUrl(intlCard(locale, c.slug)), name: c.name }))
     }
   ];
 
@@ -169,12 +189,23 @@ export default async function IntlHomePage({ params }: Props) {
                 </span>
               </span>
             </p>
-            <p className="lead">{fill(d.homeLead, vars)}</p>
+            <p className="lead">{d.heroLead}</p>
+            {/* Searches this language's rankings table, like the English search box searches /cards. */}
+            <form action={rankings} method="get" role="search" className="search">
+              <label htmlFor="home-q" className="sr-only">
+                {d.searchLabel}
+              </label>
+              <SearchIcon />
+              <input id="home-q" name="q" type="search" placeholder={d.searchPlaceholder} autoComplete="off" />
+              <button type="submit" className="btn btn-metal">
+                {d.searchButton}
+              </button>
+            </form>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 24px' }}>
-              <a href="#ranking" style={{ padding: '10px 0', fontWeight: 600, textUnderlineOffset: 4 }}>
-                {d.heroRanking}
-              </a>
-              <Link href="/finder" lang="en" hrefLang="en" style={{ padding: '10px 0', fontWeight: 600, textUnderlineOffset: 4 }}>
+              <Link href={`${rankings}?country=all`} style={{ padding: '10px 0', fontWeight: 600, textUnderlineOffset: 4 }}>
+                {fill(d.seeAllN, { n: cards.length })}
+              </Link>
+              <Link href="/finder" hrefLang="en" style={{ padding: '10px 0', fontWeight: 600, textUnderlineOffset: 4 }}>
                 {d.heroFinder}
               </Link>
             </div>
@@ -218,7 +249,9 @@ export default async function IntlHomePage({ params }: Props) {
                 ) : ourPick ? (
                   d.spotPickNote
                 ) : (
-                  d.spotTopNote
+                  <>
+                    {d.spotTopNote} <a href={mail('Featured spot on G2M')}>{d.bookSpot}</a>
+                  </>
                 )}
               </p>
             </div>
@@ -255,11 +288,16 @@ export default async function IntlHomePage({ params }: Props) {
       {/* New on G2M */}
       {newest.length ? (
         <section className="wrap section-tight stack" style={{ gap: 14 }} aria-labelledby="new">
-          <div className="stack" style={{ gap: 8 }}>
-            <Eyebrow>{d.newEyebrow}</Eyebrow>
-            <h2 id="new" className="h3" style={{ margin: 0 }}>
-              {d.newTitle}
-            </h2>
+          <div className="pager" style={{ alignItems: 'flex-end' }}>
+            <div className="stack" style={{ gap: 8 }}>
+              <Eyebrow>{d.newEyebrow}</Eyebrow>
+              <h2 id="new" className="h3" style={{ margin: 0 }}>
+                {d.newTitle}
+              </h2>
+            </div>
+            <Link href={`${rankings}?country=all`} className="muted" style={{ fontSize: 15 }}>
+              {fill(d.seeAllN, { n: cards.length })}
+            </Link>
           </div>
           <div className="grid-3">
             {newest.map((c) => (
@@ -281,6 +319,15 @@ export default async function IntlHomePage({ params }: Props) {
                     {f.colon}
                     {f.usdCell(c.fees.annualUsd)}
                   </span>
+                  {c.links.affiliate && c.signupBonus ? (
+                    <span className="bonus-line">
+                      <strong>
+                        {d.bonus}
+                        {f.colon}
+                      </strong>
+                      <IntlText note={note(locale, c.signupBonus)} label={d.inEnglish} />
+                    </span>
+                  ) : null}
                 </span>
                 <IntlScore value={c.score.total} label={d.score} showBar={false} />
               </Link>
@@ -289,46 +336,33 @@ export default async function IntlHomePage({ params }: Props) {
         </section>
       ) : null}
 
-      {/* The ranking: the top ten, then the rest behind "Show all" (still in the page for search engines) */}
-      <section id="ranking" className="wrap section stack" style={{ gap: 20, scrollMarginTop: 90 }} aria-labelledby="ranking-title">
-        <div className="stack" style={{ gap: 8 }}>
-          <Eyebrow>{d.topEyebrow}</Eyebrow>
-          <h2 id="ranking-title" className="h2">
-            {d.rankingTitle}
-          </h2>
+      {/* Leaderboard: the top five, for the visitor's country when known */}
+      <section className="wrap section stack" style={{ gap: 20 }} aria-labelledby="top">
+        <div className="pager" style={{ alignItems: 'flex-end' }}>
+          <div className="stack" style={{ gap: 8 }}>
+            <Eyebrow>{d.topEyebrow}</Eyebrow>
+            <h2 id="top" className="h2">
+              {d.topTitle}
+            </h2>
+          </div>
+          <Link href={rankings} className="btn">
+            {d.fullRankings} <ArrowIcon />
+          </Link>
         </div>
-        <IntlCardList cards={cards.slice(0, TOP)} locale={locale} d={d} f={f} placement={`intl-${locale.code}-home`} />
-        {cards.length > TOP ? (
-          <details className="rank-more">
-            <summary className="btn" style={{ alignSelf: 'flex-start', listStyle: 'none', cursor: 'pointer' }}>
-              {fill(d.showAll, { n: cards.length })} <ArrowIcon />
-            </summary>
-            <div style={{ marginTop: 14 }}>
-              <IntlCardList cards={cards.slice(TOP)} locale={locale} d={d} f={f} placement={`intl-${locale.code}-home`} start={TOP + 1} />
-            </div>
-          </details>
-        ) : null}
+        <HomeLeaderboard rows={rows} ui={ui} tag={locale.tag} prefix={prefix} countryNames={countryNames} />
       </section>
 
-      {/* Cards by country */}
-      {countries.length ? (
-        <section className="wrap section stack" style={{ gap: 20 }} aria-labelledby="countries">
-          <div className="stack" style={{ gap: 8 }}>
-            <Eyebrow>{d.regionsEyebrow}</Eyebrow>
-            <h2 id="countries" className="h2">
-              {d.countriesTitle}
-            </h2>
-            <p className="lead">{d.regionsLead}</p>
-          </div>
-          <ul className="guide-links">
-            {countries.map((cc) => (
-              <li key={cc}>
-                <Link href={intlCountry(locale, countrySlug(cc))}>{f.country(cc)}</Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
+      {/* Markets */}
+      <section className="wrap section stack" style={{ gap: 20 }} aria-labelledby="regions">
+        <div className="stack" style={{ gap: 8 }}>
+          <Eyebrow>{d.regionsEyebrow}</Eyebrow>
+          <h2 id="regions" className="h2">
+            {d.regionsTitle}
+          </h2>
+          <p className="lead">{d.regionsLead}</p>
+        </div>
+        <MarketPanels rows={rows} panels={panels} ui={ui} tag={locale.tag} prefix={prefix} countryNames={countryNames} />
+      </section>
 
       {/* Our picks */}
       <section className="wrap section stack" style={{ gap: 20 }} aria-labelledby="picks">
@@ -381,11 +415,14 @@ export default async function IntlHomePage({ params }: Props) {
             );
           })}
         </div>
-        {anyFeatured ? (
-          <p className="faint" style={{ fontSize: 13, margin: 0 }}>
-            {d.pickSponsored} <Link href={intlMethodology(locale)}>{d.moneyLink}</Link>
-          </p>
-        ) : null}
+        <p className="faint" style={{ fontSize: 13, margin: 0 }}>
+          {anyFeatured ? (
+            <>
+              {d.pickSponsored} <Link href={intlMethodology(locale)}>{d.moneyLink}</Link>.{' '}
+            </>
+          ) : null}
+          <a href={mail('Featured pick on G2M')}>{d.bookPicks}</a>
+        </p>
       </section>
 
       {/* How cards are judged */}
@@ -410,45 +447,25 @@ export default async function IntlHomePage({ params }: Props) {
             </div>
           ))}
         </div>
-        <p className="muted" style={{ margin: 0, maxWidth: '75ch' }}>
-          {d.howText}
-        </p>
         <Link href={intlMethodology(locale)} style={{ fontWeight: 600, textUnderlineOffset: 4, alignSelf: 'flex-start', padding: '8px 0' }}>
           {d.methodLink}
         </Link>
       </section>
 
-      {/* Tools (English pages) */}
-      <section className="wrap section stack" style={{ gap: 20 }} aria-labelledby="tools">
-        <h2 id="tools" className="h3">
+      {/* Tools (the tool pages are in English for now; the header says so) */}
+      <section className="wrap section" aria-labelledby="tools">
+        <h2 id="tools" className="sr-only">
           {d.toolsTitle}
         </h2>
         <div className="grid-3">
-          {tools.map(([href, t, x]) => (
+          {tools.map(([href, tag, t, x]) => (
             <Link key={href} href={href} hrefLang="en" className="panel panel-pad stack" style={{ gap: 10, textDecoration: 'none' }}>
+              <span className="eyebrow">[ {tag} ]</span>
               <span className="h3">{t}</span>
               <span className="muted">{x}</span>
             </Link>
           ))}
         </div>
-      </section>
-
-      {/* Questions */}
-      <section className="wrap section stack" style={{ gap: 14 }} aria-labelledby="faq">
-        <h2 id="faq" className="h3">
-          {d.faqTitle}
-        </h2>
-        {faq.map((x) => (
-          <div key={x.q} className="stack" style={{ gap: 6 }}>
-            <h3 style={{ fontSize: 17, margin: 0 }}>{x.q}</h3>
-            <p className="muted" style={{ margin: 0 }}>
-              {x.a}
-            </p>
-          </div>
-        ))}
-        <p className="faint" style={{ fontSize: 13, margin: 0 }}>
-          {fill(d.builtNote, { date: f.date(lastUpdated()) })}
-        </p>
       </section>
     </>
   );

@@ -115,6 +115,16 @@ export const uiEn = {
     minCashback: '{x}+ cashback',
     matching: 'matching “{q}”'
   },
+  // Home page leaderboard and region panels.
+  home: {
+    rankedFor: "Ranked for {place}, where {n} cards are confirmed.",
+    yourLocation: "Your location",
+    nConfirmed: "{n} confirmed",
+    noneIn: "No card has confirmed {place} yet.",
+    allFor: "All cards for {place}",
+    asiaN: "{n} countries in Asia",
+    range: "{a} to {b}"
+  },
   regions: { EU: 'EU / EEA', ASIA: 'Asia' }
 };
 

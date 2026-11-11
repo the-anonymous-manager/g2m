@@ -111,5 +111,15 @@ export const uiRu: Ui = {
     minCashback: 'кешбэк {x}+',
     matching: 'поиск «{q}»'
   },
+  // Home page leaderboard and region panels.
+  home: {
+    rankedFor: "Рейтинг для страны: {place}. Подтверждено карт: {n}.",
+    yourLocation: "Ваше местоположение",
+    nConfirmed: "Подтверждено: {n}",
+    noneIn: "Пока ни одна карта не подтверждена здесь: {place}.",
+    allFor: "Все карты: {place}",
+    asiaN: "Стран в Азии: {n}",
+    range: "{a}–{b}"
+  },
   regions: { EU: 'ЕС / ЕЭЗ', ASIA: 'Азия' }
 };

@@ -269,5 +269,22 @@ export const zhHK: Dict = {
   noFeeS: "免費",
   rankTitle: "加密貨幣卡排名",
   rankDesc: "按 G2M 評分排名的所有加密貨幣卡：現金回贈、年費、外幣兌換費、資產託管及適用地區。可按國家或地區、收費及功能篩選。",
-  rankLead: "每張卡以同一套準則評分：獎賞、收費、適用範圍及資金控制權。選擇居住地，看看你實際可以申請哪些卡。卡片數目：{n}。最後查核：{date}。"
+  rankLead: "每張卡以同一套準則評分：獎賞、收費、適用範圍及資金控制權。選擇居住地，看看你實際可以申請哪些卡。卡片數目：{n}。最後查核：{date}。",
+  heroLead: "由鏈上到收銀台。每張加密貨幣卡按獎賞、收費及實際適用地區排名，助你揀出最划算的一張。",
+  searchLabel: "搜尋卡片",
+  searchPlaceholder: "搜尋卡片、品牌或地區",
+  searchButton: "搜尋",
+  seeAllN: "查看全部 {n} 張卡",
+  findBest: "尋找最適合你的卡",
+  bookSpot: "發卡機構可預訂此位置，並會標示為贊助。",
+  bookPicks: "發卡機構可預訂其中一個位置。",
+  topTitle: "目前最佳加密貨幣卡",
+  fullRankings: "完整排名",
+  regionsTitle: "你所在地已確認可用的卡",
+  toolFinderTag: "5 條問題",
+  toolCalcTag: "你的數字",
+  toolWalletTag: "雙卡組合",
+  toolReceiptTag: "一次消費",
+  toolCorridorTag: "提現",
+  toolCompareTag: "並排比較"
 };
