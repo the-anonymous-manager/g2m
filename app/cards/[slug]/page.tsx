@@ -22,6 +22,7 @@ import { TierBreakEven } from '@/components/TierBreakEven';
 import { BackButton } from '@/components/BackButton';
 import { versusPath } from '@/lib/versus';
 import { alternativesPath, alternativesTo } from '@/lib/alternatives';
+import { hasReferralPage, referralPath } from '@/lib/referral';
 
 const KYC_LABEL = {
   residency_id: 'A residence permit or local ID where you live is accepted',
@@ -283,6 +284,11 @@ export default async function CardPage({ params }: Props) {
             </div>
             {card.links.affiliate ? (
               <ReferralBox slug={card.slug} brand={card.brand} bonus={card.signupBonus} code={card.referralCode} />
+            ) : null}
+            {hasReferralPage(card) ? (
+              <Link href={referralPath(card.slug)} className="muted" style={{ fontSize: 14 }}>
+                How to use the {card.brand} referral {card.referralCode ? 'code' : 'link'}
+              </Link>
             ) : null}
             <ShareBar
               text={`${card.name}: G2M score ${card.score.total}/100, ${cashbackLabel(card.cashback.basePct, card.cashback.maxPct)} back`}

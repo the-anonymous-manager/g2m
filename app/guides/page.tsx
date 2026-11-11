@@ -3,10 +3,11 @@ import Link from 'next/link';
 import { FEES_GUIDE, TOPICS, countryGuidePath, countryGuides, topicCards } from '@/lib/guides';
 import { getCards } from '@/lib/cards';
 import { alternativesPath } from '@/lib/alternatives';
+import { hasReferralPage, referralPath } from '@/lib/referral';
 import { Eyebrow } from '@/components/bits';
 
-// Rendered on request like the card pages (no incremental cache on the host); the data is bundled, so it is cheap.
-export const dynamic = 'force-dynamic';
+// Built ahead of time at every deploy (the card data is bundled, and each sheet sync deploys), so the page is served
+// ready-made instead of being put together on each visit. See open-next.config.ts.
 
 export const metadata: Metadata = {
   title: 'Crypto card guides',
@@ -62,6 +63,25 @@ export default function GuidesPage() {
             .map((c) => (
               <li key={c.slug}>
                 <Link href={alternativesPath(c.slug)}>{c.brand} alternatives</Link>
+              </li>
+            ))}
+        </ul>
+      </section>
+
+      <section id="referral-codes" aria-labelledby="referral-title" className="stack" style={{ gap: 14, scrollMarginTop: 90 }}>
+        <h2 id="referral-title" className="h3">
+          Referral codes
+        </h2>
+        <p className="muted" style={{ margin: 0 }}>
+          The code for each card, what a new user gets for it, and how to use it.
+        </p>
+        <ul className="guide-links">
+          {[...getCards()]
+            .filter(hasReferralPage)
+            .sort((a, b) => a.brand.localeCompare(b.brand))
+            .map((c) => (
+              <li key={c.slug}>
+                <Link href={referralPath(c.slug)}>{c.brand} referral code</Link>
               </li>
             ))}
         </ul>

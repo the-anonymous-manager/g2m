@@ -17,3 +17,16 @@ export function parseVersus(pair: string): [string, string] | null {
 export function allPairs<T extends { slug: string }>(cards: T[]): [T, T][] {
   return cards.flatMap((a, i) => cards.slice(i + 1).map((b): [T, T] => [a, b]));
 }
+
+/** A card's short name for titles: "ether.fi Cash Card" → "ether.fi", "Krak Card" → "Krak", "Ethena Pay" stays. */
+export const shortName = (name: string) => name.replace(/ (Visa |Cash )?Card$/, '');
+
+/**
+ * The search-result title of an "X vs Y" page. Search results cut titles at about 60 characters, so the longest
+ * wording that fits (with the " · G2M" the site adds) is used.
+ */
+export function versusTitle(a: string, b: string, year: number): string {
+  const pair = `${shortName(a)} vs ${shortName(b)}`;
+  const options = [`${pair} Card: Fees & Cashback (${year})`, `${pair}: Fees & Cashback (${year})`, `${pair} (${year})`];
+  return options.find((t) => t.length + ' · G2M'.length <= 60) ?? options[options.length - 1];
+}

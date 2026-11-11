@@ -5,7 +5,7 @@ import { getCard, getCards } from '@/lib/cards';
 import type { Card } from '@/lib/types';
 import { toRow } from '@/lib/types';
 import { cashbackLabel, fmtDate, pct, usd } from '@/lib/format';
-import { parseVersus, versusPath } from '@/lib/versus';
+import { allPairs, parseVersus, versusPath, versusTitle } from '@/lib/versus';
 import { versusPoints, versusSummary } from '@/lib/verdict';
 import { absoluteUrl, site, shareMeta } from '@/lib/site';
 import { ROWS, best } from '@/components/compareRows';
@@ -14,8 +14,12 @@ import { Eyebrow, ScorePill } from '@/components/bits';
 import { OutboundLink } from '@/components/OutboundLink';
 import { BackButton } from '@/components/BackButton';
 
-// Rendered on request like the card pages (no incremental cache on the host); the data is bundled, so it is cheap.
-export const dynamic = 'force-dynamic';
+// Built ahead of time at every deploy (the card data is bundled, and each sheet sync deploys), so the page is served
+// ready-made instead of being put together on each visit. See open-next.config.ts.
+export function generateStaticParams() {
+  return allPairs(getCards()).map(([a, b]) => ({ pair: versusPath(a.slug, b.slug).split('/').pop()! }));
+}
+
 
 type Props = { params: Promise<{ pair: string }> };
 
@@ -32,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!cards) return {};
   const [a, b] = cards;
   const path = versusPath(a.slug, b.slug);
-  const title = `${a.name} vs ${b.name}: fees, cashback and countries compared`;
+  const title = versusTitle(a.name, b.name, new Date().getUTCFullYear());
   const description = `${a.name} vs ${b.name}: G2M score ${a.score.total} vs ${b.score.total}, cashback ${cashbackLabel(a.cashback.basePct, a.cashback.maxPct)} vs ${cashbackLabel(b.cashback.basePct, b.cashback.maxPct)}, annual fee ${usd(a.fees.annualUsd)} vs ${usd(b.fees.annualUsd)}, FX fee ${pct(a.fees.fxPct)} vs ${pct(b.fees.fxPct)}.`;
   return {
     title,

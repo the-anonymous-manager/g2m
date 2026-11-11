@@ -5,14 +5,18 @@ import type { Card } from '@/lib/types';
 import { fmtDate, pct } from '@/lib/format';
 import { homeFx } from '@/lib/fx';
 import { currencyOf } from '@/lib/currencies.mjs';
-import { TOPICS, countryGuide, countryGuidePath, countryGuides } from '@/lib/guides';
+import { TOPICS, countryGuide, countryGuidePath, countryGuides, countrySlug } from '@/lib/guides';
 import { absoluteUrl, site, shareMeta } from '@/lib/site';
 import { Eyebrow } from '@/components/bits';
 import { BackButton } from '@/components/BackButton';
 import { GuideList } from '@/components/GuideList';
 
-// Rendered on request like the card pages (no incremental cache on the host); the data is bundled, so it is cheap.
-export const dynamic = 'force-dynamic';
+// Built ahead of time at every deploy (the card data is bundled, and each sheet sync deploys), so the page is served
+// ready-made instead of being put together on each visit. See open-next.config.ts.
+export function generateStaticParams() {
+  return countryGuides().map((g) => ({ country: countrySlug(g.cc) }));
+}
+
 
 type Props = { params: Promise<{ country: string }> };
 

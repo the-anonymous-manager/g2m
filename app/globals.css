@@ -2543,3 +2543,24 @@ body::before {
 .st-down {
   color: var(--bad);
 }
+
+/* ---------- Referral code pages ---------- */
+.ref-hero {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.ref-hero-art {
+  flex: none;
+  display: flex;
+}
+.ref-hero > .stack {
+  flex: 1 1 280px;
+}
+.ref-steps {
+  margin: 0;
+  padding-left: 22px;
+  display: grid;
+  gap: 10px;
+}

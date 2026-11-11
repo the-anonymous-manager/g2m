@@ -31,6 +31,7 @@ const PLACES: [RegExp, string][] = [
   [/^finder-(\d)$/, 'Card finder result $1'],
   [/^guide-(.+)$/, 'Guide: $1'],
   [/^alternatives-(.+)$/, 'Alternatives to $1'],
+  [/^referral-(.+)$/, 'Referral code page: $1'],
   [/^unknown$/, 'Link opened directly']
 ];
 export function placeLabel(p: string | null) {
@@ -60,6 +61,7 @@ const KIND = `CASE
   WHEN path = '/' THEN 'Home'
   WHEN path = '/cards' THEN 'Rankings'
   WHEN path LIKE '/cards/%/alternatives' THEN 'Alternatives pages'
+  WHEN path LIKE '/cards/%/referral-code' THEN 'Referral code pages'
   WHEN path LIKE '/cards/%' THEN 'Card reviews'
   WHEN path LIKE '/compare/%' THEN 'X vs Y pages'
   WHEN path LIKE '/guides/best-crypto-cards/%' THEN 'Country guides'
