@@ -111,5 +111,15 @@ export const uiTr: Ui = {
     minCashback: '{x}+ nakit iade',
     matching: '"{q}" araması'
   },
+  // Home page leaderboard and region panels.
+  home: {
+    rankedFor: "Sıralama: {place}. Orada onaylı kartlar: {n}.",
+    yourLocation: "Konumun",
+    nConfirmed: "Onaylı: {n}",
+    noneIn: "Henüz hiçbir kart burada onaylı değil: {place}.",
+    allFor: "Tüm kartlar: {place}",
+    asiaN: "Asya'daki ülkeler: {n}",
+    range: "{a}–{b}"
+  },
   regions: { EU: 'AB / AEA', ASIA: 'Asya' }
 };

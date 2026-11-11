@@ -8,6 +8,8 @@ import { rankIn } from '@/lib/score';
 import { CardArt } from '@/components/CardArt';
 import { ScorePill } from '@/components/bits';
 import { useRegion } from '@/components/RegionContext';
+import { englishFmt, fillText, intlFmt } from '@/lib/i18n/clientFormat';
+import { uiEn, type Ui } from '@/lib/i18n/ui/en';
 
 export type MarketPanel = {
   key: string;
@@ -21,7 +23,25 @@ type Panel = MarketPanel & { mine: boolean };
 
 // Cards confirmed in the US, the UK, the EU and Asia. A visitor whose country has no panel of its own
 // (Japan, India, Brazil...) gets one first; a visitor in the US, the UK or the EEA sees that panel first.
-export function MarketPanels({ panels, rows }: { panels: MarketPanel[]; rows: CardRow[] }) {
+export function MarketPanels({
+  panels,
+  rows,
+  ui = uiEn,
+  tag,
+  prefix = '',
+  countryNames
+}: {
+  panels: MarketPanel[];
+  rows: CardRow[];
+  /** Another language (see RankingsTable); the panels' titles and links come in already translated. */
+  ui?: Ui;
+  tag?: string;
+  prefix?: string;
+  countryNames?: Record<string, string>;
+}) {
+  const english = !tag;
+  const h = ui.home;
+  const fmt = useMemo(() => (tag ? intlFmt(tag, ui, countryNames) : englishFmt), [tag, ui, countryNames]);
   const { country, ready } = useRegion();
   const here = ready ? country : null;
   const myMarket = countryToMarket(here);
@@ -32,15 +52,15 @@ export function MarketPanels({ panels, rows }: { panels: MarketPanel[]; rows: Ca
       const yes = rankIn(rows, here).filter((c) => availabilityIn(c, here) === 'yes');
       all.unshift({
         key: here,
-        title: countryName(here),
-        href: `/cards?country=${here}`,
+        title: english ? countryName(here) : fmt.country(here),
+        href: `${prefix}/cards?country=${here}`,
         count: yes.length,
         cards: yes.slice(0, 3).map((row) => ({ row })),
         mine: true
       });
     }
     return all.sort((a, b) => Number(b.mine) - Number(a.mine));
-  }, [panels, rows, here, myMarket]);
+  }, [panels, rows, here, myMarket, english, fmt, prefix]);
   const anyMine = ordered.some((p) => p.mine);
 
   return (
@@ -51,18 +71,18 @@ export function MarketPanels({ panels, rows }: { panels: MarketPanel[]; rows: Ca
             {/* Same-height label row on every panel keeps the titles lined up. */}
             {anyMine ? (
               <span className="eyebrow" style={{ fontSize: 11, minHeight: 15 }}>
-                {mine ? 'Your location' : ' '}
+                {mine ? (english ? 'Your location' : h.yourLocation) : ' '}
               </span>
             ) : null}
             <h3 className="h3">{title}</h3>
-            <span className={`badge ${count ? 'badge-yes' : 'badge-unknown'}`}>{count} confirmed</span>
+            <span className={`badge ${count ? 'badge-yes' : 'badge-unknown'}`}>{english ? `${count} confirmed` : fillText(h.nConfirmed, { n: count })}</span>
           </div>
           {cards.length ? (
             <ul className="list-plain">
               {cards.map(({ row: c, note }) => (
                 <li key={c.slug} style={{ alignItems: 'center', justifyContent: 'space-between' }}>
                   <Link
-                    href={`/cards/${c.slug}`}
+                    href={`${prefix}/cards/${c.slug}`}
                     style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', fontWeight: 600 }}
                   >
                     <CardArt card={c} size="sm" />
@@ -75,15 +95,15 @@ export function MarketPanels({ panels, rows }: { panels: MarketPanel[]; rows: Ca
                       ) : null}
                     </span>
                   </Link>
-                  <ScorePill value={c.score.total} showBar={false} />
+                  <ScorePill value={c.score.total} showBar={false} label={english ? undefined : ui.table.colScore} />
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="muted">No card has confirmed {title} yet.</p>
+            <p className="muted">{english ? `No card has confirmed ${title} yet.` : fillText(h.noneIn, { place: title })}</p>
           )}
           <Link href={href} className="muted" style={{ fontSize: 15 }}>
-            All cards for {title}
+            {english ? `All cards for ${title}` : fillText(h.allFor, { place: title })}
           </Link>
         </div>
       ))}

@@ -417,6 +417,14 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   against the previous build (same text before and after clicks). Long words: short custody labels in the table and
   wrapping headings, so the table fits 1280 px in every language. Next stages, one PR each: card page in full,
   compare, calculator, finder, wallet, receipt, corridors, submit, fees guide.
+- Translated home pages = English home page (11 Nov 2026, Akash with screenshots: "Rangliste" showed the list on the
+  home page, "See all cards" missing, a link not working, a plain country list English doesn't have; "similar
+  experience for other language like we have in English version, nothing changes"). `/de` etc. now have exactly the
+  English sections in the same order: hero with search (searches `/de/cards`), "See all N cards", the top spot,
+  numbers, New on G2M with "See all", the top-5 leaderboard by the visitor's country with "Full rankings", the US / UK /
+  EU / Asia panels with the visitor's country first, our picks, how cards are judged, the tools. HomeLeaderboard and
+  MarketPanels take the language pack; English home checked word for word against the live build (no country, DE, IN).
+  The country-guide link list and FAQ left the translated home pages (English has neither; the guides hub links them).
 - Google canonical fix (11 Nov 2026, Search Console "Duplicate without user-selected canonical", 56 pages, and
   "User-declared canonical: None" on the home page): Next.js streamed the title and canonical into `<body>` for
   Googlebot, which ignores a canonical there. `htmlLimitedBots: /.*/` in `next.config.mjs` keeps them in `<head>`.

@@ -111,5 +111,15 @@ export const uiPl: Ui = {
     minCashback: 'cashback {x}+',
     matching: 'pasujące do „{q}”'
   },
+  // Home page leaderboard and region panels.
+  home: {
+    rankedFor: "Ranking dla: {place}. Karty potwierdzone na miejscu: {n}.",
+    yourLocation: "Twoja lokalizacja",
+    nConfirmed: "Potwierdzone: {n}",
+    noneIn: "Żadna karta nie jest jeszcze potwierdzona dla: {place}.",
+    allFor: "Wszystkie karty dla: {place}",
+    asiaN: "Kraje w Azji: {n}",
+    range: "{a}–{b}"
+  },
   regions: { EU: 'UE / EOG', ASIA: 'Azja' }
 };

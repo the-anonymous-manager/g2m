@@ -111,5 +111,15 @@ export const uiDe: Ui = {
     minCashback: '{x}+ Cashback',
     matching: 'Suche „{q}“'
   },
+  // Home page leaderboard and region panels.
+  home: {
+    rankedFor: "Rangliste für {place}. Dort bestätigte Karten: {n}.",
+    yourLocation: "Dein Standort",
+    nConfirmed: "Bestätigt: {n}",
+    noneIn: "Noch keine Karte ist hier bestätigt: {place}.",
+    allFor: "Alle Karten für: {place}",
+    asiaN: "Länder in Asien: {n}",
+    range: "{a}–{b}"
+  },
   regions: { EU: 'EU / EWR', ASIA: 'Asien' }
 };

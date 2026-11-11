@@ -270,5 +270,22 @@ export const pl: Dict = {
   noFeeS: "zerowa",
   rankTitle: "Ranking kart kryptowalutowych",
   rankDesc: "Wszystkie karty krypto według wyniku G2M: cashback, opłata roczna, przewalutowanie, przechowywanie środków i kraje działania. Filtruj według kraju, opłat i funkcji.",
-  rankLead: "Każda karta oceniana tak samo: nagrody, opłaty, zasięg i kontrola. Wybierz kraj zamieszkania, aby zobaczyć, co naprawdę możesz dostać. Karty: {n}. Ostatnie sprawdzenie: {date}."
+  rankLead: "Każda karta oceniana tak samo: nagrody, opłaty, zasięg i kontrola. Wybierz kraj zamieszkania, aby zobaczyć, co naprawdę możesz dostać. Karty: {n}. Ostatnie sprawdzenie: {date}.",
+  heroLead: "Od blockchaina do kasy. Każda karta krypto oceniona pod kątem nagród, opłat i tego, gdzie naprawdę działa, żebyś wybrał tę, która ci się opłaca.",
+  searchLabel: "Szukaj kart",
+  searchPlaceholder: "Szukaj karty, marki lub regionu",
+  searchButton: "Szukaj",
+  seeAllN: "Zobacz wszystkie karty ({n})",
+  findBest: "Znajdź swoją kartę",
+  bookSpot: "Wydawcy mogą wykupić to miejsce jako oznaczoną reklamę.",
+  bookPicks: "Wydawcy mogą wykupić jedno z tych miejsc.",
+  topTitle: "Najlepsze karty krypto teraz",
+  fullRankings: "Pełny ranking",
+  regionsTitle: "Karty potwierdzone tam, gdzie mieszkasz",
+  toolFinderTag: "5 pytań",
+  toolCalcTag: "twoje liczby",
+  toolWalletTag: "portfel z 2 kart",
+  toolReceiptTag: "jeden zakup",
+  toolCorridorTag: "wypłata",
+  toolCompareTag: "obok siebie"
 };

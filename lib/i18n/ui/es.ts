@@ -111,5 +111,15 @@ export const uiEs: Ui = {
     minCashback: 'cashback {x}+',
     matching: 'que coinciden con «{q}»'
   },
+  // Home page leaderboard and region panels.
+  home: {
+    rankedFor: "Clasificación para {place}. Tarjetas confirmadas allí: {n}.",
+    yourLocation: "Tu ubicación",
+    nConfirmed: "Confirmadas: {n}",
+    noneIn: "Ninguna tarjeta ha confirmado {place} todavía.",
+    allFor: "Todas las tarjetas para {place}",
+    asiaN: "Países de Asia: {n}",
+    range: "{a}–{b}"
+  },
   regions: { EU: 'UE / EEE', ASIA: 'Asia' }
 };

@@ -270,5 +270,22 @@ export const tr: Dict = {
   noFeeS: "yok",
   rankTitle: "Kripto kart sıralaması",
   rankDesc: "G2M puanına göre tüm kripto kartlar: nakit iade, yıllık ücret, döviz ücreti, saklama ve her kartın çalıştığı yerler. Ülkeye, ücretlere ve özelliklere göre filtrele.",
-  rankLead: "Her kart aynı şekilde puanlanır: ödüller, ücretler, kapsam ve kontrol. Gerçekte neler alabileceğini görmek için yaşadığın ülkeyi seç. Kartlar: {n}. Son kontrol: {date}."
+  rankLead: "Her kart aynı şekilde puanlanır: ödüller, ücretler, kapsam ve kontrol. Gerçekte neler alabileceğini görmek için yaşadığın ülkeyi seç. Kartlar: {n}. Son kontrol: {date}.",
+  heroLead: "Zincirden kasaya. Her kripto kart ödüllere, ücretlere ve gerçekten nerede çalıştığına göre sıralanır; sana en çok kazandıranı seçersin.",
+  searchLabel: "Kart ara",
+  searchPlaceholder: "Kart, marka veya bölge ara",
+  searchButton: "Ara",
+  seeAllN: "{n} kartın tümünü gör",
+  findBest: "En iyi kartını bul",
+  bookSpot: "Kartı çıkaran şirketler bu yeri işaretli sponsor olarak ayırtabilir.",
+  bookPicks: "Kartı çıkaran şirketler bu yerlerden birini ayırtabilir.",
+  topTitle: "Şu anın en iyi kripto kartları",
+  fullRankings: "Tüm sıralama",
+  regionsTitle: "Yaşadığın yerde onaylı kartlar",
+  toolFinderTag: "5 soru",
+  toolCalcTag: "senin rakamların",
+  toolWalletTag: "2 kartlı cüzdan",
+  toolReceiptTag: "tek alışveriş",
+  toolCorridorTag: "para çekme",
+  toolCompareTag: "yan yana"
 };

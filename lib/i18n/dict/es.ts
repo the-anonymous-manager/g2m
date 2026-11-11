@@ -270,5 +270,22 @@ export const es: Dict = {
   noFeeS: "gratuita",
   rankTitle: "Clasificación de tarjetas cripto",
   rankDesc: "Todas las tarjetas cripto según la puntuación G2M: cashback, cuota anual, comisión por cambio de divisa, custodia y dónde funciona cada una. Filtra por país, comisiones y funciones.",
-  rankLead: "Cada tarjeta se puntúa igual: recompensas, comisiones, cobertura y control. Elige dónde vives para ver lo que realmente puedes conseguir. Tarjetas: {n}. Última revisión: {date}."
+  rankLead: "Cada tarjeta se puntúa igual: recompensas, comisiones, cobertura y control. Elige dónde vives para ver lo que realmente puedes conseguir. Tarjetas: {n}. Última revisión: {date}.",
+  heroLead: "De la blockchain a la caja. Cada tarjeta cripto clasificada por recompensas, comisiones y dónde funciona de verdad, para que elijas la que más te devuelve.",
+  searchLabel: "Buscar tarjetas",
+  searchPlaceholder: "Busca una tarjeta, marca o región",
+  searchButton: "Buscar",
+  seeAllN: "Ver las {n} tarjetas",
+  findBest: "Encuentra tu mejor tarjeta",
+  bookSpot: "Los emisores pueden reservar este espacio como patrocinio señalado.",
+  bookPicks: "Los emisores pueden reservar uno de estos espacios.",
+  topTitle: "Las mejores tarjetas cripto ahora mismo",
+  fullRankings: "Clasificación completa",
+  regionsTitle: "Tarjetas confirmadas donde vives",
+  toolFinderTag: "5 preguntas",
+  toolCalcTag: "tus números",
+  toolWalletTag: "cartera de 2 tarjetas",
+  toolReceiptTag: "una compra",
+  toolCorridorTag: "retiro",
+  toolCompareTag: "lado a lado"
 };

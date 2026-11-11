@@ -111,5 +111,15 @@ export const uiZhHK: Ui = {
     minCashback: '回贈 {x} 或以上',
     matching: '搜尋「{q}」'
   },
+  // Home page leaderboard and region panels.
+  home: {
+    rankedFor: "{place}排名：當地已確認 {n} 張卡。",
+    yourLocation: "你的所在地",
+    nConfirmed: "已確認 {n} 張",
+    noneIn: "暫時沒有卡片確認可在 {place} 申請。",
+    allFor: "{place}的所有卡片",
+    asiaN: "亞洲國家及地區：{n}",
+    range: "{a}–{b}"
+  },
   regions: { EU: '歐盟／歐洲經濟區', ASIA: '亞洲' }
 };

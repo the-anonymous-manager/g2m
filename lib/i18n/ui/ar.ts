@@ -111,5 +111,15 @@ export const uiAr: Ui = {
     minCashback: 'كاش باك {x}+',
     matching: 'تطابق "{q}"'
   },
+  // Home page leaderboard and region panels.
+  home: {
+    rankedFor: "الترتيب في {place}. البطاقات المؤكَّدة هناك: {n}.",
+    yourLocation: "موقعك",
+    nConfirmed: "المؤكَّدة: {n}",
+    noneIn: "لم تؤكد أي بطاقة {place} بعد.",
+    allFor: "كل البطاقات في {place}",
+    asiaN: "دول في آسيا: {n}",
+    range: "{a}–{b}"
+  },
   regions: { EU: 'الاتحاد الأوروبي / المنطقة الاقتصادية الأوروبية', ASIA: 'آسيا' }
 };
