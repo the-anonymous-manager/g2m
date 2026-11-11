@@ -104,7 +104,10 @@ export default async function IntlAlternativesPage({ params }: Props) {
         <p className="lead">{fill(d.altLead, { name: f.name(card.name), score: card.score.total, rank: card.rank, n: all.length })}</p>
         {card.cons.length ? (
           <div className="prose stack" style={{ gap: 6 }}>
-            <p style={{ margin: 0 }}>{d.altWhy}:</p>
+            <p style={{ margin: 0 }}>
+              {d.altWhy}
+              {f.colon.trimEnd()}
+            </p>
             <ul style={{ margin: 0 }}>
               {card.cons.map((c) => (
                 <li key={c}>

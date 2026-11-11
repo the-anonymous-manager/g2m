@@ -90,7 +90,10 @@ and confirm what changed on the site (not which files moved).
 
 ## Map
 
-- `app/` pages: home, `/cards`, `/cards/[slug]`, `/cards/[slug]/alternatives` (`lib/alternatives.ts`), `/cards/[slug]/referral-code` (`lib/referral.ts`), `/compare`, `/compare/[pair]` ("a-vs-b" SEO pages, `lib/verdict.ts`), `/guides` (country and topic guides, `lib/guides.ts`), `/finder`, `/calculator`, `/methodology`, `/submit`
+- Two root layouts: English pages live in `app/(en)/` (the group name is not in the address), the other languages in
+  `app/[lang]/` with their own `<html lang dir>`; both use `components/SiteDocument.tsx`. Addresses that match nothing
+  get `app/global-not-found.tsx`.
+- `app/(en)/` pages: home, `/cards`, `/cards/[slug]`, `/cards/[slug]/alternatives` (`lib/alternatives.ts`), `/cards/[slug]/referral-code` (`lib/referral.ts`), `/compare`, `/compare/[pair]` ("a-vs-b" SEO pages, `lib/verdict.ts`), `/guides` (country and topic guides, `lib/guides.ts`), `/finder`, `/calculator`, `/methodology`, `/submit`
 - Guides, "X vs Y", alternatives and referral-code pages are built ahead of time at each deploy (`generateStaticParams`,
   served from static files, see `open-next.config.ts`): they must not read cookies, headers or the time of the request.
 - Other languages (`lib/i18n/`): German, French, Spanish, Polish, Turkish, Russian, Arabic (right to left) and
@@ -102,7 +105,8 @@ and confirm what changed on the site (not which files moved).
   the sheet (summary, pros, cons, bonus) and the guide text are translated in `data/i18n/<code>.json` (exact English
   text → translation; `lib/i18n/notes.ts`). After a sheet edit changes that text, run `npm run i18n:missing` and add
   the new lines to all eight files (keep every number as in the English); until then the page shows the English,
-  marked as English. Never put English sheet text in a translated title or description. A new label needs a line in
+  marked as English. Amounts in translations stay English-style ("$2,000") so numbers can be checked; `localAmounts`
+  rewrites them per language. Never put English sheet text in a translated title or description. A new label needs a line in
   all nine dictionary files. The header's language menu (`components/LanguageMenu.tsx`) maps each page to its
   translation with `pathIn` in `locales.ts`: a new translated page type needs a line there. To add a language: `LOCALES` in `locales.ts`, a `chrome.ts`
   entry, a dictionary file, and its line in `dict/index.ts`.

@@ -266,5 +266,6 @@ export const ru: Dict = {
   toolCorridor: "Коридоры и IBAN",
   toolCorridorText: "Выведите USDC или USDT на банковский счёт: SEPA, ACH, Faster Payments, AED, INR или SWIFT.",
   toolCompare: "Сравнить карты",
-  toolCompareText: "До трёх карт рядом: комиссия за комиссией, бонус за бонусом."
+  toolCompareText: "До трёх карт рядом: комиссия за комиссией, бонус за бонусом.",
+  noFeeS: "отсутствует"
 };

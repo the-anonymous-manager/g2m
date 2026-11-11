@@ -40,6 +40,9 @@ export function formatters(l: Locale, d: Dict) {
   return {
     /** A card name inside a sentence: kept in its own direction in right-to-left text. */
     name: (s: string) => (l.dir === 'rtl' ? `\u2068${s}\u2069` : s),
+    /** The colon after a label, with the space after it: French also puts one before it; Chinese uses the
+     *  full-width colon, with no space. */
+    colon: l.code === 'fr' ? '\u00a0: ' : l.code === 'zh-hk' ? '：' : ': ',
     /** "A, B and C" the way the language writes it. */
     list: (xs: string[]) => (listF ? listF.format(xs) : xs.join(', ')),
     pct,
@@ -53,7 +56,7 @@ export function formatters(l: Locale, d: Dict) {
     cashbackCell: (c: Pick<Card, 'cashback'>) => range(c.cashback.basePct, c.cashback.maxPct) ?? d.notPublished,
     // Inside a sentence
     pctS: (n: number | null | undefined) => (n == null ? d.npFeeS : pct(n)),
-    usdS: (n: number | null | undefined) => (n == null ? d.npFeeS : usd(n)),
+    usdS: (n: number | null | undefined) => (n == null ? d.npFeeS : n === 0 ? d.noFeeS : usd(n)),
     cashbackS: (c: Pick<Card, 'cashback'>) => range(c.cashback.basePct, c.cashback.maxPct) ?? d.npS,
     custody: (c: Pick<Card, 'custody'>) =>
       c.custody === 'self-custodial' ? d.nonCustodial : c.custody === 'custodial' ? d.custodial : c.custody === 'both' ? d.custodyBoth : d.notPublished,

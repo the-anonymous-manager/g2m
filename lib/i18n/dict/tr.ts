@@ -266,5 +266,6 @@ export const tr: Dict = {
   toolCorridor: "Koridor ve IBAN bulucu",
   toolCorridorText: "USDC veya USDT'yi bankaya gönder: SEPA, ACH, Faster Payments, AED, INR veya SWIFT.",
   toolCompare: "Kartları karşılaştır",
-  toolCompareText: "En fazla üç kart yan yana, ücret ücret ve avantaj avantaj."
+  toolCompareText: "En fazla üç kart yan yana, ücret ücret ve avantaj avantaj.",
+  noFeeS: "yok"
 };

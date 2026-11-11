@@ -36,11 +36,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const x = load(lang, slug);
   if (!x) return {};
   const { locale, card, d } = x;
+  const f = formatters(locale, d);
   const vars = { name: shortName(card.name), code: card.referralCode ?? '', year: new Date().getUTCFullYear() };
   const title = fill(card.referralCode ? d.refTitleCode : d.refTitleLink, vars);
   // The bonus goes in the search result only when it is translated: no English inside a translated description.
   const bonus = card.signupBonus ? noteOrNull(locale, card.signupBonus) : null;
-  const description = clean(`${fill(card.referralCode ? d.refDescCode : d.refDescLink, { ...vars, name: card.name })}${bonus ? ` ${d.bonus}: ${bonus}.` : ''}`).slice(0, 300);
+  const description = clean(`${fill(card.referralCode ? d.refDescCode : d.refDescLink, { ...vars, name: card.name })}${bonus ? ` ${d.bonus}${f.colon}${bonus}.` : ''}`).slice(0, 300);
   const path = intlReferral(locale, card.slug);
   return {
     title: { absolute: `${title} · ${site.name}` },
@@ -129,7 +130,8 @@ export default async function IntlReferralPage({ params }: Props) {
           </div>
           {code ? (
             <p style={{ margin: 0 }}>
-              {d.referralCode}:{' '}
+              {d.referralCode}
+              {f.colon}
               <code className="mono">
                 <bdi>{code}</bdi>
               </code>

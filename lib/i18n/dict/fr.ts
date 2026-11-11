@@ -266,5 +266,7 @@ export const fr: Dict = {
   toolCorridor: "Corridors et IBAN",
   toolCorridorText: "Envoyez des USDC ou USDT vers une banque : SEPA, ACH, Faster Payments, AED, INR ou SWIFT.",
   toolCompare: "Comparer des cartes",
-  toolCompareText: "Jusqu'à trois cartes côte à côte, frais par frais et avantage par avantage."
+  toolCompareText: "Jusqu'à trois cartes côte à côte, frais par frais et avantage par avantage.",
+  noFeeS: "nuls",
+
 };

@@ -1,8 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import './globals.css';
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
-import { LocaleFrame } from '@/components/LocaleFrame';
+import '@/app/globals.css';
 import { Analytics } from '@/components/Analytics';
 import { PageTracker } from '@/components/PageTracker';
 import { NavMemory } from '@/components/BackButton';
@@ -10,9 +7,13 @@ import { RegionProvider } from '@/components/RegionContext';
 import { themeInitScript } from '@/components/ThemeToggle';
 import { MotionRoot, motionInitScript } from '@/components/motion/MotionRoot';
 import { site } from '@/lib/site';
-import { lastUpdated } from '@/lib/cards';
 
-export const metadata: Metadata = {
+// The <html> document shared by the two root layouts: English pages (app/(en)/layout.tsx) and the other languages
+// (app/[lang]/layout.tsx). Each layout passes its language, so the HTML the server sends already says which
+// language the page is in (browsers then don't offer to translate a German page "from English", and screen
+// readers use the right voice) and Arabic is right to left from the first paint.
+
+export const baseMetadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     default: `${site.name} · ${site.tagline} The crypto card directory`,
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true }
 };
 
-export const viewport: Viewport = {
+export const baseViewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
@@ -47,9 +48,20 @@ export const viewport: Viewport = {
   ]
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export function SiteDocument({
+  lang,
+  dir = 'ltr',
+  skip,
+  children
+}: {
+  lang: string;
+  dir?: 'ltr' | 'rtl';
+  /** "Skip to content" in the page's language. */
+  skip: string;
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={lang} dir={dir} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script dangerouslySetInnerHTML={{ __html: motionInitScript }} />
@@ -63,13 +75,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <a href="#main" className="skip-link">
-          Skip to content
+          {skip}
         </a>
-        <RegionProvider>
-          <LocaleFrame header={<Header />} footer={<Footer updated={lastUpdated()} />}>
-            {children}
-          </LocaleFrame>
-        </RegionProvider>
+        <RegionProvider>{children}</RegionProvider>
         <MotionRoot />
         <NavMemory />
         <Analytics />

@@ -266,5 +266,6 @@ export const ar: Dict = {
   toolCorridor: "الممرات وأرقام IBAN",
   toolCorridorText: "حوّل USDC أو USDT إلى بنك: SEPA أو ACH أو Faster Payments أو AED أو INR أو SWIFT.",
   toolCompare: "قارن البطاقات",
-  toolCompareText: "حتى ثلاث بطاقات جنبًا إلى جنب، رسمًا رسمًا وميزةً ميزة."
+  toolCompareText: "حتى ثلاث بطاقات جنبًا إلى جنب، رسمًا رسمًا وميزةً ميزة.",
+  noFeeS: "مجانية"
 };

@@ -80,4 +80,7 @@ export function languageLinks(en: string, path: (l: Locale) => string, only: Loc
 
 /** "{name} has {n} cards" with { name, n } filled in. */
 export const fill = (template: string, vars: Record<string, string | number>) =>
-  template.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? String(vars[k]) : m));
+  template
+    .replace(/\{(\w+)\}/g, (m, k) => (k in vars ? String(vars[k]) : m))
+    // A value that ends with a full stop (Russian dates end in "г.") before the sentence's own one.
+    .replace(/(?<!\.)\.\.(?!\.)/g, '.');
