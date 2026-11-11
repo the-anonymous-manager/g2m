@@ -338,6 +338,30 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
 - Wording (4 Nov 2026): visitors see "non-custodial", never "self-custodial" (labels, filters, home stat, picks, guide,
   methodology, card text). The guide moved to /guides/non-custodial-crypto-cards (old address redirects). The sheet's
   Custody value is still `self-custodial` internally. The score's "control" points are unchanged.
+- Tracking fix (11 Nov 2026). Akash's 30-day export showed 266 "Get the card" clicks against 243 page views: about
+  250 were crawlers opening every /go link (no page behind the click, "phone" user agents from DE/NL/SG/HK/KR, bursts
+  of 15 links in 20 seconds, the first home-page link fetched dozens of times). About 16 clicks were real. Now:
+  `isAutomated()` in `lib/stats/server.ts` stores a hit as `auto:<event>` (outside every number, shown as one "left
+  out" line on /stats) when it comes from a hosting network (Cloudflare `cf.asOrganization`; Private Relay and VPN
+  networks are not on the list), lacks the Sec-Fetch headers every browser sends, or, for /go, is neither a
+  same-origin press nor a link a person opened (Sec-Fetch-User). Old direct /go rows are moved to `auto:Outbound`
+  once (flag row in `daily`, new rows carry `"v":2`). Client: no hits from scripted browsers (`navigator.webdriver`),
+  a page view counts when the tab is visible, tool events are sent once per page per state, and tool breakdowns count
+  people. `utm_source=chatgpt.com` now shows as "AI chat". The events export has a Visitor column.
+- /stats additions (11 Nov 2026): change against the period before (when the data goes back that far), "Clicks that
+  earn nothing" (cards without a referral link), "Views by kind of page" with visits from search, "Where visits
+  start", and "What people search for" (new `Search` event from the rankings box with the number of cards found;
+  0 = a card to add). Missing-card signals so far: 404s for /cards/bit2me and /cards/bitpanda.
+- "X vs Y" titles (11 Nov 2026): `versusTitle()` in `lib/versus.ts`, short names, at most 60 characters with " · G2M"
+  (e.g. "ether.fi vs KAST Card: Fees & Cashback (2026)").
+- Referral code pages (11 Nov 2026): `/cards/[slug]/referral-code` for cards with a referral link and a code or
+  bonus (17 now; `lib/referral.ts`): the code with a copy button, the bonus in the issuer's terms, generic steps, FAQ
+  and HowTo data. Linked from the card page, /guides ("Referral codes") and the sitemap.
+- Speed (11 Nov 2026): guides, country guides, "X vs Y", alternatives and referral-code pages (about 930) are built
+  ahead of time and served from Workers static assets (`open-next.config.ts`, static-assets incremental cache; the
+  deploy command fills it). Local test: about 20 ms against 40 to 100 ms; live they also skip the Worker's cold start.
+  The build takes about 70 s. Home, rankings, card reviews (live prices) and tools stay dynamic.
+- Languages (asked 11 Nov 2026, "add language for seo"): not started; waiting for Akash's choice of languages.
 - Site audit (10 Nov 2026, Akash: "check whole website, stats page, bugs, competitors"). Crawled all 959 sitemap
   pages (no broken links, no error pages) and swept 28 page types at 1440, 390 and 320 px. Fixed: (1) 888 pages
   (vs, guides, country guides, alternatives) had no share picture and card pages showed the small X card, because a

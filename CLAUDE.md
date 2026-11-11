@@ -90,8 +90,11 @@ and confirm what changed on the site (not which files moved).
 
 ## Map
 
-- `app/` pages: home, `/cards`, `/cards/[slug]`, `/cards/[slug]/alternatives` (`lib/alternatives.ts`), `/compare`, `/compare/[pair]` ("a-vs-b" SEO pages, `lib/verdict.ts`), `/guides` (country and topic guides, `lib/guides.ts`), `/finder`, `/calculator`, `/methodology`, `/submit`
-- `app/go/[slug]` outbound redirect with UTM tags
+- `app/` pages: home, `/cards`, `/cards/[slug]`, `/cards/[slug]/alternatives` (`lib/alternatives.ts`), `/cards/[slug]/referral-code` (`lib/referral.ts`), `/compare`, `/compare/[pair]` ("a-vs-b" SEO pages, `lib/verdict.ts`), `/guides` (country and topic guides, `lib/guides.ts`), `/finder`, `/calculator`, `/methodology`, `/submit`
+- Guides, "X vs Y", alternatives and referral-code pages are built ahead of time at each deploy (`generateStaticParams`,
+  served from static files, see `open-next.config.ts`): they must not read cookies, headers or the time of the request.
+- `app/go/[slug]` outbound redirect with UTM tags; `/stats` (private) counts only people: crawler hits are stored as
+  `auto:<event>` (`isAutomated` in `lib/stats/server.ts`)
 - `components/` UI, `lib/` logic (score, table engine, calculator, finder, regions), `middleware.ts` geo cookie
 - `components/motion/` hero glyph field, scroll reveals, tilt; all off under reduced motion (no custom cursor)
 - Settings via env vars, see `.env.example` and `README.md`

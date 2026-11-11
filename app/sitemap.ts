@@ -4,6 +4,7 @@ import { absoluteUrl } from '@/lib/site';
 import { allPairs, versusPath } from '@/lib/versus';
 import { FEES_GUIDE, TOPICS, countryGuidePath, countryGuides } from '@/lib/guides';
 import { alternativesPath } from '@/lib/alternatives';
+import { hasReferralPage, referralPath } from '@/lib/referral';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const updated = new Date(`${lastUpdated()}T00:00:00Z`);
@@ -26,6 +27,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'weekly' as const,
     priority: 0.7
   }));
+  // "X referral code", for cards with G2M's referral link and a code or bonus.
+  const referrals = getCards()
+    .filter(hasReferralPage)
+    .map((c) => ({ url: absoluteUrl(referralPath(c.slug)), lastModified: new Date(`${c.lastChecked}T00:00:00Z`), changeFrequency: 'weekly' as const, priority: 0.7 }));
   // Every "X vs Y" page, dated by the older of the two cards' checks.
   const pairs = allPairs(getCards()).map(([a, b]) => ({
     url: absoluteUrl(versusPath(a.slug, b.slug)),
@@ -37,5 +42,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const guides = ['/guides', `/guides/${FEES_GUIDE.slug}`, ...TOPICS.map((t) => `/guides/${t.slug}`), ...countryGuides().map((g) => countryGuidePath(g.cc))].map(
     (p) => ({ url: absoluteUrl(p), lastModified: updated, changeFrequency: 'weekly' as const, priority: 0.7 })
   );
-  return [...pages, ...cards, ...alternatives, ...guides, ...pairs];
+  return [...pages, ...cards, ...alternatives, ...referrals, ...guides, ...pairs];
 }

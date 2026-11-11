@@ -99,6 +99,14 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
   const visible = useMemo(() => sortRows(filterRows(ranked, f), f.sort), [ranked, f]);
   const set = <K extends keyof Filters>(key: K, value: Filters[K]) => setF((prev) => ({ ...prev, [key]: value }));
 
+  // What people type in the search box and how many cards it finds: a search that finds nothing is a card to add.
+  useEffect(() => {
+    const q = f.q.trim().toLowerCase();
+    if (q.length < 2) return;
+    const t = setTimeout(() => track('Search', { q: q.slice(0, 40), found: visible.length }), 2000);
+    return () => clearTimeout(t);
+  }, [f.q, visible.length]);
+
   const onSort = (key: SortKey, additive: boolean) => {
     setF((prev) => ({ ...prev, sort: toggleSort(prev.sort, key, additive) }));
   };

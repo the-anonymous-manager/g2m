@@ -66,6 +66,7 @@ function ensureSchema(db: D1) {
     ])
     // Tables made before the monthly visitor code (mid) existed get the column; "duplicate column" means it is there.
     .then(() => db.prepare('ALTER TABLE ev ADD COLUMN mid TEXT').run().catch(() => {}))
+    .then(() => cleanOldClicks(db).catch(() => {}))
     .catch((e) => {
       schema = null;
       throw e;
@@ -73,9 +74,43 @@ function ensureSchema(db: D1) {
   return schema;
 }
 
+/**
+ * Until 10 Nov 2026 every request to /go/<card> counted as a "Get the card" click, and crawlers that open every link
+ * on a page made up most of them (no page behind the click, bursts of 15 links in 20 seconds). Those old rows are
+ * moved to "auto:Outbound" once, so they stop counting. Rows written since carry "v":2 and are judged when recorded.
+ */
+async function cleanOldClicks(db: D1) {
+  const done = await db.prepare("SELECT n FROM daily WHERE day = 'meta' AND metric = 'migration' AND key = 'auto-clicks'").first();
+  if (done) return;
+  await db.batch([
+    db.prepare(`UPDATE ev SET name = 'auto:Outbound' WHERE name = 'Outbound' AND path = 'direct' AND (props IS NULL OR props NOT LIKE '%"v":2%')`),
+    db.prepare("INSERT OR REPLACE INTO daily (day, metric, key, n) VALUES ('meta', 'migration', 'auto-clicks', 1)")
+  ]);
+}
+
+// Networks of hosting companies: real people browse from home, office and mobile networks, crawlers from these.
+// Left out on purpose: Cloudflare, Fastly and Akamai Technologies (Apple's Private Relay and WARP leave through them)
+// and the networks most consumer VPNs rent (M247, Datacamp), so VPN users still count.
+const HOSTING =
+  /amazon|\baws\b|google cloud|google llc|microsoft|digitalocean|\bovh\b|hetzner|linode|akamai connected|vultr|choopa|constant company|alibaba|tencent|oracle|contabo|scaleway|online s\.a\.s|huawei cloud|\bionos\b|hostinger|kamatera|upcloud/i;
+
+/**
+ * True when a hit does not look like a person using a browser: it comes from a hosting network, or it lacks the
+ * headers every current browser adds (Sec-Fetch-*), or, for a "Get the card" link, nothing shows a person pressed it
+ * (not on a G2M page and not a link they opened themselves). Such hits are kept as "auto:<event>", outside every count.
+ */
+export function isAutomated(req: Request, click: boolean) {
+  const org = String((context()?.cf as { asOrganization?: unknown } | undefined)?.asOrganization ?? '');
+  if (org && HOSTING.test(org)) return true;
+  const fetchSite = req.headers.get('sec-fetch-site');
+  if (!fetchSite) return true;
+  if (!click) return false;
+  return !(fetchSite === 'same-origin' || req.headers.get('sec-fetch-user') === '?1');
+}
+
 // Crawlers, link previews (X, WhatsApp, Telegram, Slack...), uptime checkers and scripts.
 const BOT =
-  /bot\b|bot\/|crawl|spider|slurp|preview|headless|lighthouse|pagespeed|python|curl|wget|httpclient|okhttp|axios|node-fetch|go-http|java\/|facebookexternalhit|whatsapp|telegram|discord|slack|embedly|vercel|uptime|monitor|scan/i;
+  /bot\b|bot\/|crawl|spider|scrapy|slurp|preview|headless|lighthouse|pagespeed|python|curl|wget|httpclient|okhttp|axios|node-fetch|go-http|java\/|facebookexternalhit|whatsapp|telegram|discord|slack|embedly|vercel|uptime|monitor|scan/i;
 
 export function isBot(ua: string) {
   return !ua || BOT.test(ua);
@@ -104,7 +139,11 @@ const SOURCES: [RegExp, string][] = [
 
 /** Where a visit came from: the campaign tag if the link had one, else the referring site, else Direct. */
 export function sourceOf(refHost: string | null, utm: string | null) {
-  if (utm) return `Campaign: ${utm.slice(0, 40)}`;
+  if (utm) {
+    const host = utm.toLowerCase().replace(/^www\./, '');
+    for (const [re, label] of SOURCES) if (re.test(host)) return label;
+    return `Campaign: ${utm.slice(0, 40)}`;
+  }
   if (!refHost) return 'Direct';
   for (const [re, label] of SOURCES) if (re.test(refHost)) return label;
   return refHost;
@@ -166,7 +205,7 @@ export async function record(req: Request, hit: Hit) {
       .bind(
         now.getTime(),
         day,
-        hit.name.slice(0, 40),
+        `${isAutomated(req, hit.name === 'Outbound') ? 'auto:' : ''}${hit.name}`.slice(0, 40),
         clip(hit.path, 200),
         clip(hit.card, 60),
         clip(hit.place, 60),

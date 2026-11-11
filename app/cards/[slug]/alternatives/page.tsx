@@ -13,7 +13,12 @@ import { BackButton } from '@/components/BackButton';
 import { GuideList } from '@/components/GuideList';
 
 // "Best X alternatives": built only from the card data, like the guides and the "X vs Y" pages.
-export const dynamic = 'force-dynamic';
+// Built ahead of time at every deploy (the card data is bundled, and each sheet sync deploys), so the page is served
+// ready-made instead of being put together on each visit. See open-next.config.ts.
+export function generateStaticParams() {
+  return getCards().map((c) => ({ slug: c.slug }));
+}
+
 
 const COUNT = 10;
 type Props = { params: Promise<{ slug: string }> };

@@ -16,7 +16,16 @@ export function PageTracker() {
     // Where the visit came from only matters for the page they landed on.
     const landing = first.current;
     first.current = false;
-    send('pageview', { landing, ref: landing ? document.referrer : undefined, utm: params.get('utm_source') || params.get('ref') });
+    const hit = () => send('pageview', { landing, ref: landing ? document.referrer : undefined, utm: params.get('utm_source') || params.get('ref') });
+    // A page loaded in a background tab, or prepared ahead by the browser, counts once someone actually looks at it.
+    if (document.visibilityState === 'visible') return hit();
+    const onShow = () => {
+      if (document.visibilityState !== 'visible') return;
+      document.removeEventListener('visibilitychange', onShow);
+      hit();
+    };
+    document.addEventListener('visibilitychange', onShow);
+    return () => document.removeEventListener('visibilitychange', onShow);
   }, [pathname]);
 
   return null;

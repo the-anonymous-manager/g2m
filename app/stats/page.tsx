@@ -89,26 +89,49 @@ function Daily({ rows: days }: { rows: Report['daily'] }) {
   );
 }
 
+/** Up or down against the period just before, e.g. "+12% vs the 30 days before". Nothing when there is no earlier data. */
+function Delta({ now, before, days }: { now: number; before: number | undefined; days: number }) {
+  if (before == null) return null;
+  const span = days === 1 ? 'yesterday' : `the ${days} days before`;
+  if (!before) return <small className="st-delta faint">{now ? `none ${days === 1 ? 'yesterday' : `in ${span}`}` : 'no change'}</small>;
+  const change = Math.round(((now - before) / before) * 100);
+  return (
+    <small className={`st-delta ${change > 0 ? 'st-up' : change < 0 ? 'st-down' : 'faint'}`}>
+      {change > 0 ? '+' : ''}
+      {change}% vs {span} ({n(before)})
+    </small>
+  );
+}
+
 function Dashboard({ data, days, counted }: { data: Report; days: number; counted: boolean }) {
   const t = data.totals;
+  const b = data.before;
+  const unpaid = data.cards.filter((c) => !c.referral && c.clicks > 0);
+  const unpaidClicks = unpaid.reduce((sum, c) => sum + c.clicks, 0);
+  const autoTotal = data.auto.reduce((sum, a) => sum + a.n, 0);
+  const autoOf = (name: string) => data.auto.find((a) => a.name === name)?.n ?? 0;
   return (
     <>
       <div className="stats">
         <div className="stat">
           <b>{n(t.visits)}</b>
           <span className="faint">total visits</span>
+          <Delta now={t.visits} before={b?.visits} days={days} />
         </div>
         <div className="stat">
           <b>{n(t.visitors)}</b>
           <span className="faint">unique visitors</span>
+          <Delta now={t.visitors} before={b?.visitors} days={days} />
         </div>
         <div className="stat">
           <b>{n(t.views)}</b>
           <span className="faint">page views</span>
+          <Delta now={t.views} before={b?.views} days={days} />
         </div>
         <div className="stat">
           <b>{n(t.clicks)}</b>
           <span className="faint">&ldquo;Get the card&rdquo; clicks</span>
+          <Delta now={t.clicks} before={b?.clicks} days={days} />
         </div>
         <div className="stat">
           <b>{n(t.clickers)}</b>
@@ -122,6 +145,17 @@ function Dashboard({ data, days, counted }: { data: Report; days: number; counte
         Unique visitors: each person once, however many times they come back (an anonymous code, no cookies, renewed each
         calendar month, so someone who returns next month counts again). Clicks are counted on G2M&apos;s server, so ad
         blockers can&apos;t hide them, while visits are counted in the browser, where some ad blockers hide them.
+      </p>
+      <p className={autoTotal ? 'notice' : 'faint'} style={{ fontSize: 14, marginTop: -16 }}>
+        {autoTotal ? (
+          <>
+            Left out of every number here: {n(autoTotal)} automatic hits from crawlers and scripts ({n(autoOf('Outbound'))}{' '}
+            opened a Get the card link without a person pressing it, {n(autoOf('pageview'))} page loads from hosting networks or
+            without a real browser). Only clicks made by a person on a G2M page, or on a link they opened themselves, count.
+          </>
+        ) : (
+          'Crawlers and scripts are left out: only clicks made by a person on a G2M page, or on a link they opened themselves, count.'
+        )}
       </p>
 
       <Section title="Day by day" note={
@@ -153,12 +187,44 @@ function Dashboard({ data, days, counted }: { data: Report; days: number; counte
         />
       </Section>
 
+      <Section
+        title="Clicks that earn nothing"
+        note="Get the card clicks on cards with no referral link in the sheet. Joining these issuers' referral programmes comes first for the cards at the top."
+      >
+        {unpaid.length ? (
+          <>
+            <p style={{ margin: 0 }}>
+              <b>{n(unpaidClicks)}</b> of {n(t.clicks)} clicks ({t.clicks ? Math.round((unpaidClicks / t.clicks) * 100) : 0}%) went to{' '}
+              {unpaid.length} {unpaid.length === 1 ? 'card' : 'cards'} without a referral link.
+            </p>
+            <BarTable head={['Card', 'Clicks', 'People']} rows={unpaid.map((c) => [<Link key={c.slug} href={`/cards/${c.slug}`}>{c.name}</Link>, c.clicks, c.people])} />
+          </>
+        ) : (
+          <p className="faint" style={{ fontSize: 14 }}>None: every click in this period went to a card with a referral link.</p>
+        )}
+      </Section>
+
       <div className="grid-2">
         <Section title="Where the clicks happen">
           <BarTable head={['Spot on the site', 'Clicks']} rows={data.byPlace.map((r) => [r.place, r.clicks])} />
         </Section>
         <Section title="Clicks by country">
           <BarTable head={['Country', 'Clicks']} rows={data.clickCountries.map((r) => [country(r.country), Number(r.clicks)])} />
+        </Section>
+      </div>
+
+      <div className="grid-2">
+        <Section title="Views by kind of page" note="From search: visits that started on this kind of page from Google, Bing or another search engine.">
+          <BarTable
+            head={['Kind of page', 'Views', 'Visitors', 'Visits started here', 'From search']}
+            rows={data.kinds.map((k) => [k.kind, k.views, k.visitors, k.landings, k.search])}
+          />
+        </Section>
+        <Section title="Where visits start" note="The first page of each visit, and where most of those visits came from.">
+          <BarTable
+            head={['First page', 'Visits', 'Mostly from']}
+            rows={data.landings.map((r) => [<Link key={r.path} href={r.path}>{r.path}</Link>, r.visits, r.top || '–'])}
+          />
         </Section>
       </div>
 
@@ -209,6 +275,17 @@ function Dashboard({ data, days, counted }: { data: Report; days: number; counte
               </div>
             ))}
         </div>
+      </Section>
+
+      <Section
+        title="What people search for"
+        note="Typed in the rankings search box. Cards found 0 means nothing matched: usually a card people expect and G2M does not list yet."
+      >
+        <BarTable
+          head={['Search', 'People', 'Cards found']}
+          rows={data.searches.map((r) => [r.q, r.people, r.found === 0 ? <b key={r.q}>0, nothing found</b> : r.found])}
+          empty="No searches yet (counted from 10 Nov 2026)."
+        />
       </Section>
 
       <Section title="Broken pages (404)" note="Addresses people tried that don't exist, and where the link was.">

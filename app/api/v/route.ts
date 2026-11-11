@@ -15,6 +15,7 @@ const EVENTS = new Set([
   'Finder',
   'Rankings',
   'Region',
+  'Search',
   'Share',
   'Submit',
   'Theme',

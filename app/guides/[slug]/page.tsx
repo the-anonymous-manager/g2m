@@ -9,8 +9,12 @@ import { Eyebrow } from '@/components/bits';
 import { BackButton } from '@/components/BackButton';
 import { GuideList } from '@/components/GuideList';
 
-// Rendered on request like the card pages (no incremental cache on the host); the data is bundled, so it is cheap.
-export const dynamic = 'force-dynamic';
+// Built ahead of time at every deploy (the card data is bundled, and each sheet sync deploys), so the page is served
+// ready-made instead of being put together on each visit. See open-next.config.ts.
+export function generateStaticParams() {
+  return TOPICS.map((t) => ({ slug: t.slug }));
+}
+
 
 type Props = { params: Promise<{ slug: string }> };
 
