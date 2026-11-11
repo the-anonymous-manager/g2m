@@ -392,6 +392,13 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   (`components/LanguageMenu.tsx`), opening the same page in the chosen language where it exists, else that language's
   home (`pathIn` in `lib/i18n/locales.ts`); it replaces the footer language lists. hreflang added to the English
   "X vs Y", alternatives, referral, guides and methodology pages; sitemap 4,005 addresses.
+- Translated home pages (11 Nov 2026, Akash: "homepage isn't translating"). The language menu worked, but `/de` etc.
+  was a plain ranking list that looked nothing like the English home page. It now follows the English layout: hero
+  with the tagline ("Gib deine Coins klüger aus."), the top spot (same Sponsor tab rules, "Sponsored" note in the
+  language), the numbers, New on G2M, the ranking (top 10, then "Show all"), cards by country, Our picks (the
+  automatic labels and the Picks tab "why" lines translated; the why lines are in `data/i18n` and in
+  `npm run i18n:missing`), how cards are judged, the tools (linked to the English tools) and the FAQ. Rendered on
+  every request like the English home page, so sponsor dates apply. 54 new dictionary lines per language.
 - Google canonical fix (11 Nov 2026, Search Console "Duplicate without user-selected canonical", 56 pages, and
   "User-declared canonical: None" on the home page): Next.js streamed the title and canonical into `<body>` for
   Googlebot, which ignores a canonical there. `htmlLimitedBots: /.*/` in `next.config.mjs` keeps them in `<head>`.

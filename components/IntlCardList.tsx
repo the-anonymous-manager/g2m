@@ -8,13 +8,15 @@ import { CardArt } from '@/components/CardArt';
 import { OutboundLink } from '@/components/OutboundLink';
 
 /** The score as a number with its bar; the label is in the page's language. */
-export function IntlScore({ value, label }: { value: number; label: string }) {
+export function IntlScore({ value, label, showBar = true }: { value: number; label: string; showBar?: boolean }) {
   return (
     <span className="score" aria-label={`${label}: ${value}/100`}>
       <span className="score-num">{value}</span>
-      <span className="score-bar" aria-hidden="true">
-        <i style={{ width: `${Math.max(0, Math.min(100, value))}%` }} />
-      </span>
+      {showBar ? (
+        <span className="score-bar" aria-hidden="true">
+          <i style={{ width: `${Math.max(0, Math.min(100, value))}%` }} />
+        </span>
+      ) : null}
     </span>
   );
 }
@@ -28,7 +30,8 @@ export function IntlCardList({
   placement,
   fx,
   fxLabel,
-  note
+  note,
+  start = 1
 }: {
   cards: Card[];
   locale: Locale;
@@ -39,13 +42,15 @@ export function IntlCardList({
   fxLabel?: string;
   /** A line under the facts, e.g. what this card does better than another. */
   note?: (c: Card) => React.ReactNode;
+  /** The number of the first card, when a list continues another. */
+  start?: number;
 }) {
   return (
-    <ol className="guide-list">
+    <ol className="guide-list" start={start}>
       {cards.map((c, i) => (
         <li key={c.slug} className="panel guide-item">
           <span className="guide-num mono" aria-hidden="true">
-            {i + 1}
+            {start + i}
           </span>
           <Link href={intlCard(locale, c.slug)} className="guide-art" tabIndex={-1} aria-hidden="true">
             <CardArt card={c} width={110} />
