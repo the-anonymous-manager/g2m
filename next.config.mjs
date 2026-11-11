@@ -6,6 +6,9 @@ const nextConfig = {
   // every visitor except a short list of crawlers that excludes Googlebot, and Google ignores a canonical link in the
   // body: Search Console showed "User-declared canonical: None" on the home page, /cards and /submit (Nov 2026).
   htmlLimitedBots: /.*/,
+  // Two root layouts (English, and the other languages with their own <html lang>) need a stand-alone 404 page
+  // for addresses that match nothing: app/global-not-found.tsx.
+  experimental: { globalNotFound: true },
   // The guide formerly called "self-custodial" is now "non-custodial": keep the old address working.
   async redirects() {
     return [

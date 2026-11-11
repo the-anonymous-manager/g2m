@@ -66,11 +66,15 @@ function Facts({ card, d, f, className }: { card: Card; d: Dict; f: Fmt; classNa
 }
 
 /** The sign-up bonus line, translated (or the English, marked as English, until it is). */
-function Bonus({ card, d, locale }: { card: Card; d: Dict; locale: NonNullable<ReturnType<typeof localeByCode>> }) {
+function Bonus({ card, d, f, locale }: { card: Card; d: Dict; f: Fmt; locale: NonNullable<ReturnType<typeof localeByCode>> }) {
   if (!card.links.affiliate || !card.signupBonus) return null;
   return (
     <p className="bonus-line">
-      <strong>{d.bonus}:</strong> <IntlText note={note(locale, card.signupBonus)} label={d.inEnglish} />
+      <strong>
+        {d.bonus}
+        {f.colon}
+      </strong>
+      <IntlText note={note(locale, card.signupBonus)} label={d.inEnglish} />
     </p>
   );
 }
@@ -191,7 +195,7 @@ export default async function IntlHomePage({ params }: Props) {
                 <IntlScore value={featured.score.total} label={d.score} />
               </div>
               <Facts card={featured} d={d} f={f} className="hero-feature-facts" />
-              <Bonus card={featured} d={d} locale={locale} />
+              <Bonus card={featured} d={d} f={f} locale={locale} />
               <div className="hero-feature-actions">
                 <OutboundLink
                   slug={featured.slug}
@@ -271,7 +275,11 @@ export default async function IntlHomePage({ params }: Props) {
                     {fill(d.addedOn, { date: f.date(c.addedOn!) })}
                   </span>
                   <span className="muted" style={{ fontSize: 14 }}>
-                    {d.cashback}: {f.cashbackCell(c)} · {d.annualFee}: {f.usdCell(c.fees.annualUsd)}
+                    {d.cashback}
+                    {f.colon}
+                    {f.cashbackCell(c)} · {d.annualFee}
+                    {f.colon}
+                    {f.usdCell(c.fees.annualUsd)}
                   </span>
                 </span>
                 <IntlScore value={c.score.total} label={d.score} showBar={false} />
@@ -354,7 +362,7 @@ export default async function IntlHomePage({ params }: Props) {
                 ) : null}
                 {p.kind === 'featured' ? <p className="faint pick-paid">{d.pickSponsored}</p> : null}
                 <Facts card={p.card} d={d} f={f} className="pick-facts" />
-                <Bonus card={p.card} d={d} locale={locale} />
+                <Bonus card={p.card} d={d} f={f} locale={locale} />
                 <div className="pick-actions">
                   <OutboundLink
                     slug={p.card.slug}

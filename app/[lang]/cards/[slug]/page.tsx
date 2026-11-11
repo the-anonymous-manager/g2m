@@ -8,7 +8,7 @@ import { countryGuides, countrySlug } from '@/lib/guides';
 import { LOCALES, fill, hreflangOf, intlAlternatives, intlCard, intlCountry, intlGuides, intlHome, intlReferral, languageLinks, localeByCode } from '@/lib/i18n/locales';
 import { DICTS } from '@/lib/i18n/dict';
 import { clean, formatters } from '@/lib/i18n/format';
-import { note } from '@/lib/i18n/notes';
+import { note, noteOrNull } from '@/lib/i18n/notes';
 import { hasReferralPage } from '@/lib/referral';
 import { absoluteUrl, shareMeta, site } from '@/lib/site';
 import { shortName } from '@/lib/versus';
@@ -185,7 +185,9 @@ export default async function IntlCardPage({ params }: Props) {
           ) : null}
           {card.links.affiliate && card.referralCode ? (
             <p style={{ margin: 0 }}>
-              {d.referralCode}: <code className="mono">{card.referralCode}</code>
+              {d.referralCode}
+              {f.colon}
+              <code className="mono">{card.referralCode}</code>
             </p>
           ) : null}
           <div className="pick-actions">
@@ -280,7 +282,8 @@ export default async function IntlCardPage({ params }: Props) {
                 {card.tiers.map((t) => (
                   <tr key={t.name}>
                     <td>
-                      <bdi>{t.name}</bdi>
+                      {/* Plain-word tier names ("Virtual card") are translated; product names ("Platinum") stay. */}
+                      <bdi>{noteOrNull(locale, t.name) ?? t.name}</bdi>
                     </td>
                     <td>{f.usdCell(t.feeUsdYear)}</td>
                     <td>{f.pctCell(t.cashbackPct)}</td>

@@ -265,5 +265,6 @@ export const zhHK: Dict = {
   toolCorridor: "匯款通道及 IBAN",
   toolCorridorText: "把 USDC 或 USDT 轉到銀行：SEPA、ACH、Faster Payments、AED、INR 或 SWIFT。",
   toolCompare: "比較卡片",
-  toolCompareText: "最多三張卡並排比較，逐項收費、逐項福利。"
+  toolCompareText: "最多三張卡並排比較，逐項收費、逐項福利。",
+  noFeeS: "免費"
 };

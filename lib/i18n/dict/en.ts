@@ -101,6 +101,8 @@ export const en = {
   npS: 'not published',
   // The same after "annual fee" or "FX fee", for languages where the word must agree with it.
   npFeeS: 'not published',
+  // An annual fee of 0 inside a sentence ("annual fee {fee}"), for languages where "$0" or "free" reads badly.
+  noFeeS: 'none',
   unconfirmed: 'Not confirmed',
   available: 'Available',
   notAvailable: 'Not available',

@@ -399,6 +399,17 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   automatic labels and the Picks tab "why" lines translated; the why lines are in `data/i18n` and in
   `npm run i18n:missing`), how cards are judged, the tools (linked to the English tools) and the FAQ. Rendered on
   every request like the English home page, so sponsor dates apply. 54 new dictionary lines per language.
+- Language bug sweep (11 Nov 2026, Akash: "lots of issues with new languages, check all and fix"). Crawled all 5,288
+  translated pages (all 200) and swept 9 page types x 8 languages on phone and desktop. Fixed: (1) every translated page
+  was sent as `<html lang="en">` (Chrome offered to translate German pages "from English"; screen readers used an
+  English voice): the English pages moved to `app/(en)/` and `app/[lang]/layout.tsx` is a second root layout with the
+  right `lang` and `dir`; (2) money in translated sheet text was English-style ("$2,000" reads as two dollars in
+  German): `localAmounts` in `lib/i18n/notes.ts` writes it per language ("2.000 $", "2 000 $US", "US$2,000");
+  (3) "annual fee $0" in sentences now reads "Jahresgebühr entfällt" etc. (`noFeeS`); (4) colons per language (French
+  " :", Chinese "："); (5) Russian dates ended in "г.." ; (6) the Chinese header wrapped on phones ("ZH" now); (7) the tools
+  link was cut off on phones (shorter); (8) plain tier names ("Virtual card") translated; (9) 404s in the language of
+  the address, and unknown first segments (/xyz) get the normal English 404. Akash then asked for the whole site in
+  each language (rankings table, calculator, finder, compare, wallet, receipt...): not done yet, planned in stages.
 - Google canonical fix (11 Nov 2026, Search Console "Duplicate without user-selected canonical", 56 pages, and
   "User-declared canonical: None" on the home page): Next.js streamed the title and canonical into `<body>` for
   Googlebot, which ignores a canonical there. `htmlLimitedBots: /.*/` in `next.config.mjs` keeps them in `<head>`.
