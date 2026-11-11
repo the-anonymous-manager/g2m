@@ -7,9 +7,11 @@ import { availabilityIn, countryName } from '@/lib/regions';
 
 export type NomadFit = {
   ok: boolean;
-  /** Short badge text for the card. */
+  /** Short badge text for the card (English). */
   badge: string;
   tone: 'ok' | 'warn' | 'no';
+  /** Which badge it is, so other languages can word it (lib/i18n/ui: nomad.<kind>). */
+  kind: 'citizens' | 'notOffered' | 'residency' | 'passportNo' | 'ruleNP' | 'takes' | 'needs';
 };
 
 type Nomad = Pick<CardRow, 'coverage' | 'kycRule' | 'restrictedPassports'>;
@@ -19,16 +21,16 @@ export function nomadFit(card: Nomad, passport: string, home: string): NomadFit 
   if (!passport || !home || passport === home) return null;
   const place = countryName(home);
   if (card.restrictedPassports?.includes(passport)) {
-    return { ok: false, badge: `Not open to citizens of ${countryName(passport)}`, tone: 'no' };
+    return { ok: false, badge: `Not open to citizens of ${countryName(passport)}`, tone: 'no', kind: 'citizens' };
   }
-  if (availabilityIn(card, home) === 'no') return { ok: false, badge: `Not offered in ${place}`, tone: 'no' };
-  if (card.kycRule === 'residency_id') return { ok: true, badge: `Eligible with ${place} residency ID`, tone: 'ok' };
+  if (availabilityIn(card, home) === 'no') return { ok: false, badge: `Not offered in ${place}`, tone: 'no', kind: 'notOffered' };
+  if (card.kycRule === 'residency_id') return { ok: true, badge: `Eligible with ${place} residency ID`, tone: 'ok', kind: 'residency' };
   const passportOk = availabilityIn(card, passport);
   if (passportOk === 'no') {
-    return { ok: false, badge: `Passports from ${countryName(passport)} not accepted`, tone: 'no' };
+    return { ok: false, badge: `Passports from ${countryName(passport)} not accepted`, tone: 'no', kind: 'passportNo' };
   }
-  if (card.kycRule == null) return { ok: true, badge: 'Residency rule not published — check with issuer', tone: 'warn' };
+  if (card.kycRule == null) return { ok: true, badge: 'Residency rule not published — check with issuer', tone: 'warn', kind: 'ruleNP' };
   return passportOk === 'yes'
-    ? { ok: true, badge: `Takes passports from ${countryName(passport)}`, tone: 'ok' }
-    : { ok: true, badge: `Needs a supported passport — check ${countryName(passport)} with the issuer`, tone: 'warn' };
+    ? { ok: true, badge: `Takes passports from ${countryName(passport)}`, tone: 'ok', kind: 'takes' }
+    : { ok: true, badge: `Needs a supported passport — check ${countryName(passport)} with the issuer`, tone: 'warn', kind: 'needs' };
 }

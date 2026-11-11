@@ -2735,3 +2735,20 @@ body::before {
 .rank-more[open] > summary {
   display: none;
 }
+
+/* Translated rankings table: longer words than English, so headings and badges may wrap instead of making the
+   table wider than the screen. */
+.intl .rank-table th {
+  white-space: normal;
+  vertical-align: bottom;
+}
+.intl .rank-table .sort-btn {
+  text-align: start;
+}
+.intl .rank-table .badge,
+.rank-table .nomad-badge {
+  white-space: normal;
+}
+.intl .rank-table .card-cell {
+  min-width: 190px;
+}

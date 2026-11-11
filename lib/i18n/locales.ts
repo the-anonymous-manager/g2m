@@ -41,6 +41,7 @@ export const hreflangOf = (l: Locale) => (l.code === 'ar' ? 'ar' : l.tag);
 export const intlHome = (l: Locale) => `/${l.code}`;
 export const intlCard = (l: Locale, slug: string) => `/${l.code}/cards/${slug}`;
 export const intlCountry = (l: Locale, countrySlug: string) => `/${l.code}/best-crypto-cards/${countrySlug}`;
+export const intlRankings = (l: Locale) => `/${l.code}/cards`;
 export const intlVersus = (l: Locale, pair: string) => `/${l.code}/compare/${pair}`;
 export const intlAlternatives = (l: Locale, slug: string) => `/${l.code}/cards/${slug}/alternatives`;
 export const intlReferral = (l: Locale, slug: string) => `/${l.code}/cards/${slug}/referral-code`;
@@ -65,7 +66,7 @@ export function pathIn(pathname: string, to: Locale | undefined): string {
   if (country) return intlCountry(to, country[1]);
   const guide = en.match(/^\/guides\/([^/]+)$/);
   if (guide) return ENGLISH_ONLY_GUIDES.has(guide[1]) ? intlGuides(to) : intlGuide(to, guide[1]);
-  if (en === '/guides' || en === '/methodology' || /^\/compare\/[^/]+-vs-[^/]+$/.test(en) || /^\/cards\/[^/]+(\/alternatives|\/referral-code)?$/.test(en))
+  if (en === '/cards' || en === '/guides' || en === '/methodology' || /^\/compare\/[^/]+-vs-[^/]+$/.test(en) || /^\/cards\/[^/]+(\/alternatives|\/referral-code)?$/.test(en))
     return `/${to.code}${en}`;
   return intlHome(to);
 }

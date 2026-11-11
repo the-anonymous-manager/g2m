@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { Locale } from '@/lib/i18n/locales';
-import { intlGuides, intlHome } from '@/lib/i18n/locales';
+import { intlGuides, intlHome, intlRankings } from '@/lib/i18n/locales';
 import { CHROME } from '@/lib/i18n/chrome';
 import { LogoLockup, LogoMark } from '@/components/Logo';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -16,7 +16,7 @@ export function IntlHeader({ locale }: { locale: Locale }) {
           <LogoLockup id="hdr" />
         </Link>
         <nav className="intl-nav" aria-label={t.ranking}>
-          <Link href={intlHome(locale)}>{t.ranking}</Link>
+          <Link href={intlRankings(locale)}>{t.ranking}</Link>
           <Link href={intlGuides(locale)}>{t.guides}</Link>
           <Link href="/finder" hrefLang="en">
             {t.tools}

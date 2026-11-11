@@ -268,5 +268,7 @@ export const fr: Dict = {
   toolCompare: "Comparer des cartes",
   toolCompareText: "Jusqu'à trois cartes côte à côte, frais par frais et avantage par avantage.",
   noFeeS: "nuls",
-
+  rankTitle: "Classement des cartes crypto",
+  rankDesc: "Toutes les cartes crypto classées selon le score G2M : cashback, frais annuels, frais de change, conservation des fonds et pays couverts. Filtrez par pays, frais et fonctionnalités.",
+  rankLead: "Chaque carte est notée de la même façon : récompenses, frais, couverture et contrôle. Choisissez votre pays pour voir ce que vous pouvez vraiment obtenir. Cartes : {n}. Dernière vérification : {date}."
 };

@@ -267,5 +267,8 @@ export const pl: Dict = {
   toolCorridorText: "Przelej USDC lub USDT do banku: SEPA, ACH, Faster Payments, AED, INR lub SWIFT.",
   toolCompare: "Porównaj karty",
   toolCompareText: "Do trzech kart obok siebie, opłata po opłacie i korzyść po korzyści.",
-  noFeeS: "zerowa"
+  noFeeS: "zerowa",
+  rankTitle: "Ranking kart kryptowalutowych",
+  rankDesc: "Wszystkie karty krypto według wyniku G2M: cashback, opłata roczna, przewalutowanie, przechowywanie środków i kraje działania. Filtruj według kraju, opłat i funkcji.",
+  rankLead: "Każda karta oceniana tak samo: nagrody, opłaty, zasięg i kontrola. Wybierz kraj zamieszkania, aby zobaczyć, co naprawdę możesz dostać. Karty: {n}. Ostatnie sprawdzenie: {date}."
 };

@@ -22,6 +22,10 @@ export const en = {
   a2: 'On the G2M score, the top three are {top}. The best one for you depends on where you live and how you spend.',
   q3: 'Do crypto cards have fees?',
   a3: 'Most charge a fee on purchases in a foreign currency, and some charge a yearly fee or a fee to load the card. Cards with no annual fee here: {nofee} of {n}.',
+  // Rankings table page (/de/cards)
+  rankTitle: 'Crypto card rankings',
+  rankDesc: 'Every crypto card ranked by the G2M score: cashback, annual fee, FX fee, custody and where each card works. Filter by country, fees and features.',
+  rankLead: 'Every card scored the same way on rewards, fees, coverage and control. Pick where you live to see what you can actually get. Cards: {n}. Last checked: {date}.',
   // Home page, laid out like the English one
   heroLine1: 'Spend your',
   heroLine2: 'bags better.',

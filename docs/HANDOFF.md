@@ -410,6 +410,13 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   link was cut off on phones (shorter); (8) plain tier names ("Virtual card") translated; (9) 404s in the language of
   the address, and unknown first segments (/xyz) get the normal English 404. Akash then asked for the whole site in
   each language (rankings table, calculator, finder, compare, wallet, receipt...): not done yet, planned in stages.
+- Whole site in each language, stage 1 (11 Nov 2026; Akash: "better to have language packs than translation", then
+  chose "whole site in each language"): the full rankings table at `/de/cards` etc. in all 8 languages, with the
+  passport bar, every filter, badges, compare bar and share buttons from `lib/i18n/ui/<code>.ts`. The header's
+  "Ranking" link and the language menu point there; hreflang and sitemap added. English `/cards` checked word for word
+  against the previous build (same text before and after clicks). Long words: short custody labels in the table and
+  wrapping headings, so the table fits 1280 px in every language. Next stages, one PR each: card page in full,
+  compare, calculator, finder, wallet, receipt, corridors, submit, fees guide.
 - Google canonical fix (11 Nov 2026, Search Console "Duplicate without user-selected canonical", 56 pages, and
   "User-declared canonical: None" on the home page): Next.js streamed the title and canonical into `<body>` for
   Googlebot, which ignores a canonical there. `htmlLimitedBots: /.*/` in `next.config.mjs` keeps them in `<head>`.

@@ -1,6 +1,9 @@
 import type { CardRow } from '@/lib/types';
 import { REGIONS, availabilityIn, availabilityInRegion, countryName, isCountry, isRegion, type Region } from '@/lib/regions';
 import { nomadFit } from '@/lib/nomad';
+import { uiEn, type Ui } from '@/lib/i18n/ui/en';
+// Plain-text filling only (no React here).
+const fillText = (t: string, v: Record<string, string>) => t.replace(/\{(\w+)\}/g, (m, k) => v[k] ?? m);
 
 // Table engine: multi-column sorting + filters, all serialisable to the URL
 // so any filtered view can be shared (e.g. on X) and reopened exactly.
@@ -188,21 +191,34 @@ export function serializeFilters(f: Filters): string {
   return p.toString();
 }
 
-export function describeFilters(f: Filters, countryLabel?: string): string {
+/**
+ * What the filters show, in words ("for Germany, no annual fee"). `w` and the formatters word it in another
+ * language (lib/i18n/ui); English by default.
+ */
+export function describeFilters(
+  f: Filters,
+  countryLabel?: string,
+  w: Ui['describe'] = uiEn.describe,
+  fmt: { country: (cc: string) => string; pct: (n: number) => string; region: (r: keyof typeof REGIONS) => string } = {
+    country: countryName,
+    pct: (n) => `${n}%`,
+    region: (r) => REGIONS[r].label
+  }
+): string {
   const parts: string[] = [];
   // Without strict, the list also holds cards whose issuer has not confirmed the country.
-  if (f.country) parts.push(`${f.strict ? 'confirmed in' : 'for'} ${countryLabel ?? f.country}`);
-  else if (f.region) parts.push(`${f.strict ? 'confirmed in' : 'for'} ${REGIONS[f.region].label}`);
-  if (f.passport && f.country && f.passport !== f.country) parts.push(`with a passport from ${countryName(f.passport)}`);
-  if (f.custody === 'self') parts.push('non-custodial');
-  if (f.custody === 'custodial') parts.push('custodial');
-  if (f.nofee) parts.push('no annual fee');
-  if (f.lounge) parts.push('with lounge access');
-  if (f.noid) parts.push('with no ID check');
-  if (f.bonus) parts.push('with a sign-up bonus');
-  if (f.metal) parts.push('metal');
+  const where = f.country ? (countryLabel ?? f.country) : f.region ? fmt.region(f.region) : '';
+  if (where) parts.push(fillText(f.strict ? w.confirmedIn : w.for, { place: where }));
+  if (f.passport && f.country && f.passport !== f.country) parts.push(fillText(w.passportFrom, { passport: fmt.country(f.passport) }));
+  if (f.custody === 'self') parts.push(w.nonCustodial);
+  if (f.custody === 'custodial') parts.push(w.custodial);
+  if (f.nofee) parts.push(w.noFee);
+  if (f.lounge) parts.push(w.lounge);
+  if (f.noid) parts.push(w.noId);
+  if (f.bonus) parts.push(w.bonus);
+  if (f.metal) parts.push(w.metal);
   if (f.net) parts.push(f.net === 'amex' ? 'Amex' : f.net === 'visa' ? 'Visa' : 'Mastercard');
-  if (f.min) parts.push(`${f.min}%+ cashback`);
-  if (f.q) parts.push(`matching “${f.q}”`);
-  return parts.length ? parts.join(', ') : 'all cards';
+  if (f.min) parts.push(fillText(w.minCashback, { x: fmt.pct(f.min) }));
+  if (f.q) parts.push(fillText(w.matching, { q: f.q }));
+  return parts.length ? parts.join(', ') : w.all;
 }
