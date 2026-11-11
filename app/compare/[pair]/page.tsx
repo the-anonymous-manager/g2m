@@ -13,6 +13,7 @@ import { CardArt } from '@/components/CardArt';
 import { Eyebrow, ScorePill } from '@/components/bits';
 import { OutboundLink } from '@/components/OutboundLink';
 import { BackButton } from '@/components/BackButton';
+import { intlVersus, languageLinks } from '@/lib/i18n/locales';
 
 // Built ahead of time at every deploy (the card data is bundled, and each sheet sync deploys), so the page is served
 // ready-made instead of being put together on each visit. See open-next.config.ts.
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    alternates: { canonical: path },
+    alternates: { canonical: path, languages: languageLinks(path, (l) => intlVersus(l, path.split('/').pop()!)) },
     ...shareMeta(`${a.name} vs ${b.name} · G2M`, description, path)
   };
 }

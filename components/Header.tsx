@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { LogoLockup } from '@/components/Logo';
 import { NavLinks } from '@/components/NavLinks';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { LanguageMenu } from '@/components/LanguageMenu';
 
 export function Header() {
   return (
@@ -12,6 +13,7 @@ export function Header() {
         </Link>
         <NavLinks />
         <div className="header-actions">
+          <LanguageMenu label="Language" />
           <ThemeToggle />
           <Link href="/finder" className="btn btn-metal header-cta">
             Find your best card

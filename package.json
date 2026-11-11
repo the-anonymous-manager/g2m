@@ -8,6 +8,7 @@
     "build": "npm run validate && node scripts/generate-og-fonts.mjs && next build",
     "start": "next start",
     "validate": "node scripts/validate-cards.mjs",
+    "i18n:missing": "node scripts/i18n-missing.mjs",
     "sheet:sync": "node scripts/sheet-sync.mjs",
     "sheet:export": "node scripts/sheet-export.mjs",
     "cf:build": "npm run validate && node scripts/generate-og-fonts.mjs && opennextjs-cloudflare build",

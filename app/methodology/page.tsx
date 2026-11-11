@@ -5,12 +5,13 @@ import { BASKET, BASKET_PURCHASES, BASKET_USD, SCORE_WEIGHTS } from '@/lib/score
 import { money } from '@/lib/format';
 import { fmtDate } from '@/lib/format';
 import { Eyebrow } from '@/components/bits';
+import { intlMethodology, languageLinks } from '@/lib/i18n/locales';
 
 export const metadata: Metadata = {
   title: 'How we score crypto cards',
   description:
     'The G2M score explained: rewards 25, fees 30, coverage 20, banking features 15, control 10. Same rules for every card, no paid rankings.',
-  alternates: { canonical: '/methodology' }
+  alternates: { canonical: '/methodology', languages: languageLinks('/methodology', intlMethodology) }
 };
 
 const PARTS = [
