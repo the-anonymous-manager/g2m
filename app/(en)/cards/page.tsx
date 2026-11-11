@@ -5,12 +5,13 @@ import { parseFilters } from '@/lib/table';
 import { RankingsTable } from '@/components/RankingsTable';
 import { Eyebrow } from '@/components/bits';
 import { fmtDate } from '@/lib/format';
+import { intlRankings, languageLinks } from '@/lib/i18n/locales';
 
 export const metadata: Metadata = {
   title: 'Crypto card rankings',
   description:
     'Every crypto card ranked by the G2M score: cashback, annual fee, FX fee, custody and where each card works. Filter by US, UK, EU, India and UAE.',
-  alternates: { canonical: '/cards' }
+  alternates: { canonical: '/cards', languages: languageLinks('/cards', intlRankings) }
 };
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };

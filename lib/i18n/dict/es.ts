@@ -268,5 +268,7 @@ export const es: Dict = {
   toolCompare: "Comparar tarjetas",
   toolCompareText: "Hasta tres tarjetas lado a lado, comisión a comisión y ventaja a ventaja.",
   noFeeS: "gratuita",
-
+  rankTitle: "Clasificación de tarjetas cripto",
+  rankDesc: "Todas las tarjetas cripto según la puntuación G2M: cashback, cuota anual, comisión por cambio de divisa, custodia y dónde funciona cada una. Filtra por país, comisiones y funciones.",
+  rankLead: "Cada tarjeta se puntúa igual: recompensas, comisiones, cobertura y control. Elige dónde vives para ver lo que realmente puedes conseguir. Tarjetas: {n}. Última revisión: {date}."
 };

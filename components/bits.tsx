@@ -1,9 +1,9 @@
 import type { Availability, Market } from '@/lib/types';
 import { MARKET_LABELS } from '@/lib/regions';
 
-export function ScorePill({ value, showBar = true }: { value: number; showBar?: boolean }) {
+export function ScorePill({ value, showBar = true, label }: { value: number; showBar?: boolean; label?: string }) {
   return (
-    <span className="score" aria-label={`G2M score ${value} out of 100`}>
+    <span className="score" aria-label={label ? `${label}: ${value}/100` : `G2M score ${value} out of 100`}>
       <span className="score-num">{value}</span>
       {showBar ? (
         <span className="score-bar" aria-hidden="true">
@@ -20,17 +20,21 @@ export function MarketBadge({
   value,
   market,
   where,
-  short = false
+  short = false,
+  words
 }: {
   value: Availability;
   market?: Market;
   // Place name for the tooltip when it is a country rather than one of the five markets.
   where?: string;
   short?: boolean;
+  /** Another language's words (lib/i18n/ui common); English when left out. */
+  words?: { yes: string; no: string; unclear: string; available: string; notAvailable: string; notConfirmed: string };
 }) {
-  const text = short ? (value === 'yes' ? 'Yes' : value === 'no' ? 'No' : 'Unclear') : AVAIL_TEXT[value];
+  const full = words ? { yes: words.available, no: words.notAvailable, unknown: words.notConfirmed }[value] : AVAIL_TEXT[value];
+  const text = short ? (value === 'yes' ? (words?.yes ?? 'Yes') : value === 'no' ? (words?.no ?? 'No') : (words?.unclear ?? 'Unclear')) : full;
   const place = where ?? (market ? MARKET_LABELS[market] : undefined);
-  const label = place ? `${place}: ${AVAIL_TEXT[value]}` : AVAIL_TEXT[value];
+  const label = place ? `${place}: ${full}` : full;
   return (
     <span className={`badge badge-${value}`} title={label} aria-label={label}>
       {value === 'yes' ? (

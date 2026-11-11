@@ -4,7 +4,17 @@ import { useState } from 'react';
 import { track } from '@/lib/analytics';
 
 // Share the current view (with its filters in the URL) on X, or copy the link.
-export function ShareBar({ text, path, label = 'Share this view' }: { text: string; path?: string; label?: string }) {
+type ShareWords = { postOnX: string; copyLink: string; linkCopied: string; linkCopiedSr: string; copyPrompt: string; shareView: string };
+const EN: ShareWords = {
+  postOnX: 'Post on X',
+  copyLink: 'Copy link',
+  linkCopied: 'Link copied',
+  linkCopiedSr: 'Link copied to clipboard',
+  copyPrompt: 'Copy this link',
+  shareView: 'Share this view'
+};
+
+export function ShareBar({ text, path, label, words = EN }: { text: string; path?: string; label?: string; words?: ShareWords }) {
   const [copied, setCopied] = useState(false);
 
   const currentUrl = () => {
@@ -27,12 +37,12 @@ export function ShareBar({ text, path, label = 'Share this view' }: { text: stri
       track('Share', { channel: 'copy' });
       setTimeout(() => setCopied(false), 1800);
     } catch {
-      window.prompt('Copy this link', url);
+      window.prompt(words.copyPrompt, url);
     }
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }} aria-label={label}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }} aria-label={label ?? words.shareView}>
       <button type="button" className="btn btn-sm" onClick={shareX}>
         <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
           <path
@@ -40,13 +50,13 @@ export function ShareBar({ text, path, label = 'Share this view' }: { text: stri
             d="M17.75 3h3.07l-6.7 7.66L22 21h-6.17l-4.83-6.32L5.47 21H2.4l7.17-8.2L2 3h6.33l4.37 5.78L17.75 3Zm-1.08 16.2h1.7L7.4 4.7H5.57l11.1 14.5Z"
           />
         </svg>
-        Post on X
+        {words.postOnX}
       </button>
       <button type="button" className="btn btn-sm" onClick={copy}>
-        {copied ? 'Link copied' : 'Copy link'}
+        {copied ? words.linkCopied : words.copyLink}
       </button>
       <span className="sr-only" aria-live="polite">
-        {copied ? 'Link copied to clipboard' : ''}
+        {copied ? words.linkCopiedSr : ''}
       </span>
     </div>
   );

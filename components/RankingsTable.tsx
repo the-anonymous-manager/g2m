@@ -14,11 +14,13 @@ import {
   type Filters,
   type SortKey
 } from '@/lib/table';
-import { REGIONS, availabilityIn, availabilityInRegion, confirmedCountriesIn, countryName, isCountry } from '@/lib/regions';
+import { REGIONS, availabilityIn, availabilityInRegion, confirmedCountriesIn, isCountry } from '@/lib/regions';
 import { nomadFit } from '@/lib/nomad';
 import { NomadBadge, NomadBar } from '@/components/NomadBar';
 import { rankIn } from '@/lib/score';
-import { CUSTODY_LABEL, NP, pct, usd } from '@/lib/format';
+import { CUSTODY_LABEL } from '@/lib/format';
+import { englishFmt, fillNodes, fillText, intlFmt } from '@/lib/i18n/clientFormat';
+import { uiEn, type Ui } from '@/lib/i18n/ui/en';
 import { CardArt } from '@/components/CardArt';
 import { MarketBadge, ScorePill, SearchIcon } from '@/components/bits';
 import { ShareBar } from '@/components/ShareBar';
@@ -46,9 +48,39 @@ const saveHome = (v: string | null) => {
   }
 };
 
-type Props = { rows: CardRow[]; initial: Filters; hadMarketParam: boolean; allCountries?: boolean };
+type Props = {
+  rows: CardRow[];
+  initial: Filters;
+  hadMarketParam: boolean;
+  allCountries?: boolean;
+  /** Another language: its tool pack, its BCP 47 tag (for Intl) and its address prefix ("/de"). English when left out. */
+  ui?: Ui;
+  tag?: string;
+  prefix?: string;
+  /** Country names in that language, from the server (see intlFmt). */
+  countryNames?: Record<string, string>;
+};
 
-export function RankingsTable({ rows, initial, hadMarketParam, allCountries = false }: Props) {
+export function RankingsTable({ rows, initial, hadMarketParam, allCountries = false, ui = uiEn, tag, prefix = '', countryNames }: Props) {
+  const t = ui.table;
+  const c0 = ui.common;
+  const fmt = useMemo(() => (tag ? intlFmt(tag, ui, countryNames) : englishFmt), [tag, ui, countryNames]);
+  const english = !tag;
+  const custodyLabel = (c: CardRow['custody']) =>
+    english ? CUSTODY_LABEL[c] : { 'self-custodial': c0.nonCustodial, custodial: c0.custodial, both: c0.custodyBoth, unknown: c0.notPublished }[c];
+  const regionName = (r: keyof typeof REGIONS) => (english ? REGIONS[r].label : ui.regions[r]);
+  const cardHref = (slug: string) => `${prefix}/cards/${slug}`;
+  // Sort-button words for the other languages (English keeps COLUMNS' own labels).
+  const COL_WORDS: Record<SortKey, string> = {
+    rank: '#',
+    score: t.colScore,
+    name: t.colCard,
+    cashback: t.colBase,
+    max: t.colMax,
+    annual: t.colAnnual,
+    fx: t.colFx,
+    countries: t.colCountries
+  };
   const [f, setF] = useState<Filters>(initial);
   const [picked, setPicked] = useState<string[]>([]);
   const { country: myCountry, ready } = useRegion();
@@ -126,10 +158,10 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
     return { dir: f.sort[i].dir, order: i + 1 };
   };
 
-  const place = f.country ? countryName(f.country) : undefined;
+  const place = f.country ? fmt.country(f.country) : undefined;
   const region = !f.country && f.region ? f.region : null;
-  const regionLabel = region ? REGIONS[region].label : undefined;
-  const description = describeFilters(f, place);
+  const regionLabel = region ? regionName(region) : undefined;
+  const description = describeFilters(f, place, ui.describe, { country: fmt.country, pct: (n) => fmt.pct(n), region: regionName });
   const confirmed = f.country
     ? ranked.filter((c) => availabilityIn(c, f.country) === 'yes').length
     : region
@@ -147,9 +179,9 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
           className="sort-btn"
           data-active={s ? 'true' : 'false'}
           onClick={(e) => onSort(k, e.shiftKey)}
-          title="Click to sort. Shift-click to add a second sort."
+          title={t.sortTitle}
         >
-          {label ?? COLUMNS[k].label}
+          {label ?? (english ? COLUMNS[k].label : COL_WORDS[k])}
           <span aria-hidden="true" style={{ fontSize: 10 }}>
             {s ? (s.dir === 'asc' ? '▲' : '▼') : '↕'}
             {s && f.sort.length > 1 ? s.order : ''}
@@ -164,6 +196,8 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
       {/* Filters */}
       <div className="panel panel-pad stack" style={{ gap: 16 }}>
         <NomadBar
+          ui={ui}
+          fmt={fmt}
           idPrefix="f"
           passport={f.passport}
           home={f.country}
@@ -178,7 +212,7 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'flex-end' }}>
           <div className="field" style={{ flex: '2 1 260px' }}>
             <label className="field-label" htmlFor="f-q">
-              Search
+              {t.search}
             </label>
             <div className="search" style={{ maxWidth: 'none', borderRadius: 12, padding: '0 14px' }}>
               <SearchIcon />
@@ -186,7 +220,7 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
                 id="f-q"
                 type="search"
                 value={f.q}
-                placeholder="Card, brand or region"
+                placeholder={t.searchPlaceholder}
                 onChange={(e) => set('q', e.target.value.slice(0, 80))}
                 autoComplete="off"
               />
@@ -194,7 +228,7 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
           </div>
           <div className="field" style={{ flex: '1 1 160px' }}>
             <label className="field-label" htmlFor="f-custody">
-              Custody
+              {t.custody}
             </label>
             <select
               id="f-custody"
@@ -202,14 +236,14 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
               value={f.custody}
               onChange={(e) => set('custody', e.target.value as Filters['custody'])}
             >
-              <option value="">Any</option>
-              <option value="self">Non-custodial</option>
-              <option value="custodial">Custodial</option>
+              <option value="">{t.any}</option>
+              <option value="self">{english ? 'Non-custodial' : c0.nonCustodial}</option>
+              <option value="custodial">{english ? 'Custodial' : c0.custodial}</option>
             </select>
           </div>
           <div className="field" style={{ flex: '1 1 140px' }}>
             <label className="field-label" htmlFor="f-net">
-              Network
+              {t.network}
             </label>
             <select
               id="f-net"
@@ -217,7 +251,7 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
               value={f.net}
               onChange={(e) => set('net', e.target.value as Filters['net'])}
             >
-              <option value="">Any</option>
+              <option value="">{t.any}</option>
               <option value="visa">Visa</option>
               <option value="mastercard">Mastercard</option>
               <option value="amex">Amex</option>
@@ -225,7 +259,7 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
           </div>
           <div className="field" style={{ flex: '1 1 140px' }}>
             <label className="field-label" htmlFor="f-min">
-              Typical cashback
+              {t.typicalCashback}
             </label>
             <select
               id="f-min"
@@ -233,42 +267,42 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
               value={String(f.min)}
               onChange={(e) => set('min', Number(e.target.value))}
             >
-              <option value="0">Any</option>
-              <option value="1">1%+</option>
-              <option value="2">2%+</option>
-              <option value="3">3%+</option>
+              <option value="0">{t.any}</option>
+              <option value="1">{fmt.pct(1)}+</option>
+              <option value="2">{fmt.pct(2)}+</option>
+              <option value="3">{fmt.pct(3)}+</option>
             </select>
           </div>
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
           <button type="button" className="chip" aria-pressed={f.nofee} onClick={() => set('nofee', !f.nofee)}>
-            No annual fee
+            {t.noAnnualFee}
           </button>
           <button type="button" className="chip" aria-pressed={f.physical} onClick={() => set('physical', !f.physical)}>
-            Physical card
+            {t.physicalCard}
           </button>
           <button type="button" className="chip" aria-pressed={f.metal} onClick={() => set('metal', !f.metal)}>
-            Metal card
+            {t.metalCard}
           </button>
           <button type="button" className="chip" aria-pressed={f.lounge} onClick={() => set('lounge', !f.lounge)}>
-            Lounge access
+            {t.lounge}
           </button>
           <button type="button" className="chip" aria-pressed={f.noid} onClick={() => set('noid', !f.noid)}>
-            No ID check
+            {t.noId}
           </button>
           <button type="button" className="chip" aria-pressed={f.bonus} onClick={() => set('bonus', !f.bonus)}>
-            Sign-up bonus
+            {t.bonus}
           </button>
           {regionLabel ? (
-            <button type="button" className="chip is-on" aria-pressed="true" onClick={() => set('region', '')} title="Show every region">
+            <button type="button" className="chip is-on" aria-pressed="true" onClick={() => set('region', '')} title={t.showEveryRegion}>
               {regionLabel} <span aria-hidden="true">×</span>
-              <span className="sr-only">(remove region)</span>
+              <span className="sr-only">{t.removeRegion}</span>
             </button>
           ) : null}
           {f.country || regionLabel ? (
             <label className="check" style={{ marginLeft: 4 }}>
               <input type="checkbox" checked={f.strict} onChange={(e) => set('strict', e.target.checked)} />
-              Only cards confirmed in {place ?? regionLabel}
+              {fillText(t.onlyConfirmed, { place: (place ?? regionLabel)! })}
             </label>
           ) : null}
           {!isDefault ? (
@@ -276,7 +310,7 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
                 saveHome(null);
                 setF(DEFAULT_FILTERS);
               }}>
-              Reset filters
+              {t.reset}
             </button>
           ) : null}
         </div>
@@ -284,24 +318,33 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
 
       <div className="pager">
         <p className="muted" aria-live="polite">
-          <b style={{ color: 'var(--text)' }}>{visible.length}</b> of {rows.length} cards · {description}
-          {(f.country || region) && !f.strict ? ` (${confirmed} confirmed)` : ''}
+          {fillNodes(t.count, { shown: <b style={{ color: 'var(--text)' }}>{visible.length}</b>, total: rows.length })} · {description}
+          {(f.country || region) && !f.strict ? ` ${fillText(t.confirmedCount, { n: confirmed })}` : ''}
           {f.country && confirmed === 0 && visible.length ? (
             <>
               <br />
-              No card has confirmed {place} yet, so this is the global ranking. Check with the issuer before you apply.
+              {fillText(t.noneConfirmed, { place: place! })}
             </>
           ) : null}
         </p>
-        <ShareBar text={`Crypto cards ${description === 'all cards' ? 'ranked' : `${description}, ranked`} on G2M`} />
+        <ShareBar
+          words={c0}
+          text={
+            english
+              ? `Crypto cards ${description === 'all cards' ? 'ranked' : `${description}, ranked`} on G2M`
+              : description === ui.describe.all
+                ? t.shareText
+                : fillText(t.shareTextFiltered, { description })
+          }
+        />
       </div>
 
       {visible.length === 0 ? (
         <div className="panel panel-pad stack" style={{ gap: 10, alignItems: 'flex-start' }}>
-          <h2 className="h3">No cards match these filters</h2>
-          <p className="muted">Try another country, or allow cards whose availability is not confirmed yet.</p>
+          <h2 className="h3">{t.emptyTitle}</h2>
+          <p className="muted">{t.emptyText}</p>
           <button type="button" className="btn btn-sm" onClick={() => setF(DEFAULT_FILTERS)}>
-            Show all cards
+            {t.showAll}
           </button>
         </div>
       ) : (
@@ -309,20 +352,26 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
           {/* Desktop table */}
           <div className="table-wrap rank-table">
             <table className="table">
-              <caption className="sr-only">Crypto cards ranked by G2M score</caption>
+              <caption className="sr-only">{t.caption}</caption>
               <thead>
                 <tr>
                   {sortHead('rank', '#', { width: 64 })}
                   {sortHead('name')}
                   {sortHead('score')}
-                  {sortHead('cashback', 'Base back')}
-                  {sortHead('max', 'Max back')}
+                  {sortHead('cashback', t.colBase)}
+                  {sortHead('max', t.colMax)}
                   {sortHead('annual')}
                   {sortHead('fx')}
-                  <th scope="col">Custody</th>
-                  {f.country ? <th scope="col">In {place}</th> : region ? <th scope="col">In {regionLabel}</th> : sortHead('countries')}
+                  <th scope="col">{t.custody}</th>
+                  {f.country ? (
+                    <th scope="col">{fillText(t.colIn, { place: place! })}</th>
+                  ) : region ? (
+                    <th scope="col">{fillText(t.colIn, { place: regionLabel! })}</th>
+                  ) : (
+                    sortHead('countries')
+                  )}
                   <th scope="col">
-                    <span className="sr-only">Compare</span>
+                    <span className="sr-only">{t.compare}</span>
                   </th>
                 </tr>
               </thead>
@@ -338,40 +387,42 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
                         <div className="card-cell">
                           <CardArt card={c} size="sm" />
                           <div className="stack" style={{ gap: 2, minWidth: 0 }}>
-                            <Link href={`/cards/${c.slug}`}>{c.name}</Link>
+                            <Link href={cardHref(c.slug)}>{c.name}</Link>
                             <span className="faint" style={{ fontSize: 13 }}>
-                              {c.network} · {c.forms.includes('metal') ? 'Metal available' : c.forms.includes('physical') ? 'Physical + virtual' : 'Virtual'}
+                              {c.network} · {c.forms.includes('metal') ? t.metal : c.forms.includes('physical') ? t.physicalVirtual : t.virtual}
                             </span>
                           </div>
                         </div>
                       </td>
                       <td>
-                        <ScorePill value={c.score.total} />
+                        <ScorePill value={c.score.total} label={english ? undefined : t.colScore} />
                       </td>
-                      <td className="num">{pct(c.cashback.basePct, '—')}</td>
+                      <td className="num">{fmt.pct(c.cashback.basePct, '—')}</td>
                       <td className="num">
-                        {c.cashback.maxPct != null ? pct(c.cashback.maxPct) : '—'}
+                        {c.cashback.maxPct != null ? fmt.pct(c.cashback.maxPct) : '—'}
                         {c.cashback.payout ? (
                           <span className="faint" style={{ display: 'block', fontSize: 12 }}>
-                            in {c.cashback.payout.split(',')[0]}
+                            {fillText(t.paidIn, { x: c.cashback.payout.split(',')[0] })}
                           </span>
                         ) : null}
                       </td>
-                      <td className="num">{usd(c.fees.annualUsd, '—')}</td>
-                      <td className="num">{pct(c.fees.fxPct, '—')}</td>
+                      <td className="num">{fmt.usd(c.fees.annualUsd, '—')}</td>
+                      <td className="num">{fmt.pct(c.fees.fxPct, '—')}</td>
                       <td>
                         <span className={`badge ${c.custody === 'self-custodial' || c.custody === 'both' ? 'badge-accent' : 'badge-unknown'}`}>
-                          {CUSTODY_LABEL[c.custody]}
+                          {english
+                            ? CUSTODY_LABEL[c.custody]
+                            : { 'self-custodial': t.custSelf, custodial: t.custCustodial, both: t.custBoth, unknown: c0.notPublished }[c.custody]}
                         </span>
                       </td>
                       <td>
                         {f.country ? (
                           <div className="stack" style={{ gap: 4, alignItems: 'flex-start' }}>
-                            <MarketBadge value={availabilityIn(c, f.country)} where={place} />
-                            <NomadBadge fit={nomadFit(c, f.passport, f.country)} />
+                            <MarketBadge value={availabilityIn(c, f.country)} where={place} words={english ? undefined : c0} />
+                            <NomadBadge fit={nomadFit(c, f.passport, f.country)} passport={f.passport} home={f.country} ui={english ? undefined : ui} fmt={fmt} />
                           </div>
                         ) : region ? (
-                          <RegionBadge card={c} region={region} />
+                          <RegionBadge card={c} region={region} label={regionLabel!} ui={english ? undefined : ui} />
                         ) : (
                           <span className="num" title={c.coverage.scope}>
                             {c.coverage.countries ?? '—'}
@@ -379,14 +430,14 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
                         )}
                       </td>
                       <td>
-                        <label className="check" title={on ? 'Remove from compare' : 'Add to compare'}>
+                        <label className="check" title={on ? t.removeCompare : t.addCompare}>
                           <input
                             type="checkbox"
                             checked={on}
                             disabled={!on && picked.length >= MAX_COMPARE}
                             onChange={() => togglePick(c.slug)}
                           />
-                          <span className="sr-only">Compare {c.name}</span>
+                          <span className="sr-only">{fillText(t.compareCard, { name: c.name })}</span>
                         </label>
                       </td>
                     </tr>
@@ -397,7 +448,7 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
           </div>
 
           {/* Phone list */}
-          <ol className="rank-list" aria-label="Crypto cards ranked by G2M score">
+          <ol className="rank-list" aria-label={t.caption}>
             {visible.map((c) => {
               const rank = c.rank;
               const on = picked.includes(c.slug);
@@ -409,48 +460,48 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
                     </span>
                     <CardArt card={c} size="sm" />
                     <div className="stack" style={{ gap: 2, minWidth: 0, flex: 1 }}>
-                      <Link href={`/cards/${c.slug}`} style={{ fontWeight: 650, textDecoration: 'none' }}>
+                      <Link href={cardHref(c.slug)} style={{ fontWeight: 650, textDecoration: 'none' }}>
                         {c.name}
                       </Link>
                       <span className="faint" style={{ fontSize: 13 }}>
-                        {c.network} · {c.custody === 'unknown' ? 'Custody not published' : CUSTODY_LABEL[c.custody]}
+                        {c.network} · {c.custody === 'unknown' ? c0.custodyNP : custodyLabel(c.custody)}
                       </span>
                     </div>
-                    <ScorePill value={c.score.total} showBar={false} />
+                    <ScorePill value={c.score.total} showBar={false} label={english ? undefined : t.colScore} />
                   </div>
                   <dl className="rank-item-facts">
                     <div>
-                      <dt>Cashback</dt>
+                      <dt>{t.cashback}</dt>
                       <dd>
                         {c.cashback.basePct != null
-                          ? pct(c.cashback.basePct)
+                          ? fmt.pct(c.cashback.basePct)
                           : c.cashback.maxPct != null
-                            ? `Up to ${pct(c.cashback.maxPct)}`
-                            : NP}
+                            ? fillText(c0.upTo, { x: fmt.pct(c.cashback.maxPct) })
+                            : c0.notPublished}
                       </dd>
                     </div>
                     <div>
-                      <dt>Annual fee</dt>
-                      <dd>{usd(c.fees.annualUsd, '—')}</dd>
+                      <dt>{t.colAnnual}</dt>
+                      <dd>{fmt.usd(c.fees.annualUsd, '—')}</dd>
                     </div>
                     <div>
-                      <dt>FX fee</dt>
-                      <dd>{pct(c.fees.fxPct, '—')}</dd>
+                      <dt>{t.fx}</dt>
+                      <dd>{fmt.pct(c.fees.fxPct, '—')}</dd>
                     </div>
                     <div>
-                      <dt>{f.country ? `In ${place}` : region ? `In ${regionLabel}` : 'Countries'}</dt>
+                      <dt>{f.country ? fillText(t.colIn, { place: place! }) : region ? fillText(t.colIn, { place: regionLabel! }) : t.colCountries}</dt>
                       <dd>
                         {f.country ? (
-                          <MarketBadge value={availabilityIn(c, f.country)} short />
+                          <MarketBadge value={availabilityIn(c, f.country)} short words={english ? undefined : c0} />
                         ) : region ? (
-                          <RegionBadge card={c} region={region} short />
+                          <RegionBadge card={c} region={region} label={regionLabel!} short ui={english ? undefined : ui} />
                         ) : (
                           c.coverage.countries ?? '—'
                         )}
                       </dd>
                     </div>
                   </dl>
-                  <NomadBadge fit={nomadFit(c, f.passport, f.country)} />
+                  <NomadBadge fit={nomadFit(c, f.passport, f.country)} passport={f.passport} home={f.country} ui={english ? undefined : ui} fmt={fmt} />
                   <label className="check" style={{ fontSize: 13 }}>
                     <input
                       type="checkbox"
@@ -458,7 +509,7 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
                       disabled={!on && picked.length >= MAX_COMPARE}
                       onChange={() => togglePick(c.slug)}
                     />
-                    Compare
+                    {t.compare}
                   </label>
                 </li>
               );
@@ -468,21 +519,20 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
       )}
 
       <p className="faint" style={{ fontSize: 13 }}>
-        “—” means the issuer does not publish that figure. Max cashback usually needs a top tier, staking or a paid plan.
-        Click a column to sort; shift-click to add a second sort.
+        {t.note}
       </p>
 
       {picked.length > 0 ? (
-        <div className="compare-bar" role="region" aria-label="Compare selection">
+        <div className="compare-bar" role="region" aria-label={t.compareBar}>
           <div className="wrap" style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
             <span style={{ fontWeight: 600 }}>
-              {picked.length} of {MAX_COMPARE} selected
+              {fillText(t.selected, { n: picked.length, max: MAX_COMPARE })}
             </span>
             <span className="faint" style={{ fontSize: 14, flex: 1, minWidth: 0 }}>
               {picked.map((s) => rows.find((r) => r.slug === s)?.brand).join(' · ')}
             </span>
             <button type="button" className="btn btn-sm" onClick={() => setPicked([])}>
-              Clear
+              {t.clear}
             </button>
             <Link
               href={`/compare?c=${picked.join(',')}`}
@@ -493,7 +543,7 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
                 else track('Compare open', { n: picked.length });
               }}
             >
-              {picked.length < 2 ? 'Pick one more' : `Compare ${picked.length} cards`}
+              {picked.length < 2 ? t.pickOneMore : fillText(t.compareN, { n: picked.length })}
             </Link>
           </div>
         </div>
@@ -503,14 +553,27 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
 }
 
 /** Available in a region: the badge, and for Asia how many of its countries are confirmed. */
-function RegionBadge({ card, region, short }: { card: CardRow; region: keyof typeof REGIONS; short?: boolean }) {
+function RegionBadge({
+  card,
+  region,
+  label,
+  short,
+  ui
+}: {
+  card: CardRow;
+  region: keyof typeof REGIONS;
+  label: string;
+  short?: boolean;
+  /** Another language's pack; English when left out. */
+  ui?: Ui;
+}) {
   const n = region === 'ASIA' ? confirmedCountriesIn(card, region) : 0;
   return (
     <div className="stack" style={{ gap: 4, alignItems: 'flex-start' }}>
-      <MarketBadge value={availabilityInRegion(card, region)} where={REGIONS[region].label} short={short} />
+      <MarketBadge value={availabilityInRegion(card, region)} where={label} short={short} words={ui?.common} />
       {n ? (
         <span className="faint" style={{ fontSize: 12 }}>
-          {n} {n === 1 ? 'country' : 'countries'}
+          {ui ? fillText(ui.table.regionCountries, { n }) : `${n} ${n === 1 ? 'country' : 'countries'}`}
         </span>
       ) : null}
     </div>

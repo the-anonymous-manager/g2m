@@ -268,5 +268,7 @@ export const de: Dict = {
   toolCompare: "Karten vergleichen",
   toolCompareText: "Bis zu drei Karten nebeneinander, Gebühr für Gebühr und Vorteil für Vorteil.",
   noFeeS: "entfällt",
-
+  rankTitle: "Rangliste der Krypto-Karten",
+  rankDesc: "Alle Krypto-Karten nach G2M-Score: Cashback, Jahresgebühr, Fremdwährungsgebühr, Verwahrung und wo jede Karte funktioniert. Filter nach Land, Gebühren und Funktionen.",
+  rankLead: "Jede Karte wird gleich bewertet: Prämien, Gebühren, Verfügbarkeit und Kontrolle. Wähle dein Wohnland und sieh, was du wirklich bekommst. Karten: {n}. Zuletzt geprüft: {date}."
 };

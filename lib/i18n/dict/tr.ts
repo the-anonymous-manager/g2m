@@ -267,5 +267,8 @@ export const tr: Dict = {
   toolCorridorText: "USDC veya USDT'yi bankaya gönder: SEPA, ACH, Faster Payments, AED, INR veya SWIFT.",
   toolCompare: "Kartları karşılaştır",
   toolCompareText: "En fazla üç kart yan yana, ücret ücret ve avantaj avantaj.",
-  noFeeS: "yok"
+  noFeeS: "yok",
+  rankTitle: "Kripto kart sıralaması",
+  rankDesc: "G2M puanına göre tüm kripto kartlar: nakit iade, yıllık ücret, döviz ücreti, saklama ve her kartın çalıştığı yerler. Ülkeye, ücretlere ve özelliklere göre filtrele.",
+  rankLead: "Her kart aynı şekilde puanlanır: ödüller, ücretler, kapsam ve kontrol. Gerçekte neler alabileceğini görmek için yaşadığın ülkeyi seç. Kartlar: {n}. Son kontrol: {date}."
 };

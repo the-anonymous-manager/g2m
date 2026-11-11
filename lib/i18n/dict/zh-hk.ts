@@ -266,5 +266,8 @@ export const zhHK: Dict = {
   toolCorridorText: "把 USDC 或 USDT 轉到銀行：SEPA、ACH、Faster Payments、AED、INR 或 SWIFT。",
   toolCompare: "比較卡片",
   toolCompareText: "最多三張卡並排比較，逐項收費、逐項福利。",
-  noFeeS: "免費"
+  noFeeS: "免費",
+  rankTitle: "加密貨幣卡排名",
+  rankDesc: "按 G2M 評分排名的所有加密貨幣卡：現金回贈、年費、外幣兌換費、資產託管及適用地區。可按國家或地區、收費及功能篩選。",
+  rankLead: "每張卡以同一套準則評分：獎賞、收費、適用範圍及資金控制權。選擇居住地，看看你實際可以申請哪些卡。卡片數目：{n}。最後查核：{date}。"
 };
