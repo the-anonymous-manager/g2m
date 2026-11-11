@@ -2727,3 +2727,11 @@ body::before {
     transition: none;
   }
 }
+
+/* "Show all cards" on the translated home pages */
+.rank-more > summary::-webkit-details-marker {
+  display: none;
+}
+.rank-more[open] > summary {
+  display: none;
+}
