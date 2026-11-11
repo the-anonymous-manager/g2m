@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { LocaleFrame } from '@/components/LocaleFrame';
 import { Analytics } from '@/components/Analytics';
 import { PageTracker } from '@/components/PageTracker';
 import { NavMemory } from '@/components/BackButton';
@@ -65,9 +66,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <RegionProvider>
-          <Header />
-          <main id="main">{children}</main>
-          <Footer updated={lastUpdated()} />
+          <LocaleFrame header={<Header />} footer={<Footer updated={lastUpdated()} />}>
+            {children}
+          </LocaleFrame>
         </RegionProvider>
         <MotionRoot />
         <NavMemory />

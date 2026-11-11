@@ -228,6 +228,12 @@ function Dashboard({ data, days, counted }: { data: Report; days: number; counte
         </Section>
       </div>
 
+      {data.langs.length ? (
+        <Section title="Other languages" note="Views of the translated pages (/de, /ar ...), by language.">
+          <BarTable head={['Language', 'Views', 'Visitors', 'Visits started here']} rows={data.langs.map((l) => [l.lang, l.views, l.visitors, l.landings])} />
+        </Section>
+      ) : null}
+
       <Section title="Top pages">
         <BarTable
           head={['Page', 'Views', 'Visitors']}

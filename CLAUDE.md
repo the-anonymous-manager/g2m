@@ -93,6 +93,14 @@ and confirm what changed on the site (not which files moved).
 - `app/` pages: home, `/cards`, `/cards/[slug]`, `/cards/[slug]/alternatives` (`lib/alternatives.ts`), `/cards/[slug]/referral-code` (`lib/referral.ts`), `/compare`, `/compare/[pair]` ("a-vs-b" SEO pages, `lib/verdict.ts`), `/guides` (country and topic guides, `lib/guides.ts`), `/finder`, `/calculator`, `/methodology`, `/submit`
 - Guides, "X vs Y", alternatives and referral-code pages are built ahead of time at each deploy (`generateStaticParams`,
   served from static files, see `open-next.config.ts`): they must not read cookies, headers or the time of the request.
+- Other languages (`lib/i18n/`): German, French, Spanish, Polish, Turkish, Russian, Arabic (right to left) and
+  Traditional Chinese (Hong Kong) at `/de`, `/fr`, `/es`, `/pl`, `/tr`, `/ru`, `/ar`, `/zh-hk`. Each has a home page
+  (`app/[lang]`), a page per card (`/de/cards/kast`) and country pages (`/de/best-crypto-cards/germany`). Every word
+  comes from that language's dictionary (`lib/i18n/dict/<code>.ts`, same keys as `en.ts`) and every value from the
+  card data; numbers, money, dates and country names come from Intl. Text typed in the sheet (summary, notes, pros,
+  cons, bonus) is English only and is not shown there: never put English sheet text on a translated page. A new
+  label needs a line in all nine dictionary files. To add a language: `LOCALES` in `locales.ts`, a `chrome.ts`
+  entry, a dictionary file, and its line in `dict/index.ts`.
 - `app/go/[slug]` outbound redirect with UTM tags; `/stats` (private) counts only people: crawler hits are stored as
   `auto:<event>` (`isAutomated` in `lib/stats/server.ts`)
 - `components/` UI, `lib/` logic (score, table engine, calculator, finder, regions), `middleware.ts` geo cookie

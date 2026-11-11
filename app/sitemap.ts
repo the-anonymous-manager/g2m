@@ -2,7 +2,8 @@ import type { MetadataRoute } from 'next';
 import { getCards, lastUpdated } from '@/lib/cards';
 import { absoluteUrl } from '@/lib/site';
 import { allPairs, versusPath } from '@/lib/versus';
-import { FEES_GUIDE, TOPICS, countryGuidePath, countryGuides } from '@/lib/guides';
+import { FEES_GUIDE, TOPICS, countryGuidePath, countryGuides, countrySlug } from '@/lib/guides';
+import { LOCALES, intlCard, intlCountry, intlHome } from '@/lib/i18n/locales';
 import { alternativesPath } from '@/lib/alternatives';
 import { hasReferralPage, referralPath } from '@/lib/referral';
 
@@ -42,5 +43,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const guides = ['/guides', `/guides/${FEES_GUIDE.slug}`, ...TOPICS.map((t) => `/guides/${t.slug}`), ...countryGuides().map((g) => countryGuidePath(g.cc))].map(
     (p) => ({ url: absoluteUrl(p), lastModified: updated, changeFrequency: 'weekly' as const, priority: 0.7 })
   );
-  return [...pages, ...cards, ...alternatives, ...referrals, ...guides, ...pairs];
+  // The other languages: home, every card and every country guide in each.
+  const intl = LOCALES.flatMap((l) => [
+    { url: absoluteUrl(intlHome(l)), lastModified: updated, changeFrequency: 'weekly' as const, priority: 0.8 },
+    ...getCards().map((c) => ({
+      url: absoluteUrl(intlCard(l, c.slug)),
+      lastModified: new Date(`${c.lastChecked}T00:00:00Z`),
+      changeFrequency: 'weekly' as const,
+      priority: 0.6
+    })),
+    ...countryGuides().map((g) => ({ url: absoluteUrl(intlCountry(l, countrySlug(g.cc))), lastModified: updated, changeFrequency: 'weekly' as const, priority: 0.5 }))
+  ]);
+  return [...pages, ...cards, ...alternatives, ...referrals, ...guides, ...intl, ...pairs];
 }

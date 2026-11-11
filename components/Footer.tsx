@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { LogoMark } from '@/components/Logo';
 import { site } from '@/lib/site';
 import { fmtDate } from '@/lib/format';
+import { LOCALES, intlHome } from '@/lib/i18n/locales';
 
 export function Footer({ updated }: { updated: string }) {
   return (
@@ -37,6 +38,17 @@ export function Footer({ updated }: { updated: string }) {
             ) : null}
           </nav>
         </div>
+        <nav aria-label="Languages" className="footer-links lang-links">
+          <span className="faint">Languages:</span>
+          <Link href="/" aria-current="true">
+            English
+          </Link>
+          {LOCALES.map((l) => (
+            <Link key={l.code} href={intlHome(l)} lang={l.tag} hrefLang={l.tag}>
+              {l.name}
+            </Link>
+          ))}
+        </nav>
         <p className="faint" style={{ fontSize: 13, maxWidth: '90ch' }}>
           Not financial advice. Card terms change often, so check the issuer&apos;s site before you apply. Some links may
           earn G2M a referral fee; that never changes a card&apos;s rank. Data last checked {fmtDate(updated)}.

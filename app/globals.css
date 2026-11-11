@@ -2564,3 +2564,91 @@ body::before {
   display: grid;
   gap: 10px;
 }
+
+/* ---------- Other languages (/de, /ar ...): header links, language list, right-to-left ---------- */
+.intl-nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  white-space: nowrap;
+  font-weight: 500;
+}
+.intl-nav::-webkit-scrollbar {
+  display: none;
+}
+.intl-nav a {
+  text-decoration: none;
+  color: var(--muted);
+}
+.intl-nav a:hover {
+  color: var(--text);
+}
+.lang-links {
+  align-items: baseline;
+}
+.lang-links a[aria-current='true'] {
+  color: var(--text);
+  font-weight: 600;
+}
+.intl-table th,
+.intl-table td {
+  text-align: start;
+}
+.intl-table td:last-child,
+.intl-table th:last-child {
+  text-align: end;
+}
+[dir='rtl'] .guide-num {
+  direction: ltr;
+}
+[dir='rtl'] .score-num {
+  text-align: left;
+}
+@media (max-width: 860px) {
+  .intl .header-row {
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+  .intl .intl-nav {
+    order: 3;
+    flex-basis: 100%;
+    gap: 18px;
+    font-size: 15px;
+  }
+}
+.intl-markets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+}
+.intl-markets li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+/* The small spaced capital labels suit Latin letters only: Arabic letters must stay joined, and Chinese has no
+   capitals. Cyrillic keeps them. */
+.intl[lang^='ar'] .eyebrow,
+.intl[lang^='ar'] th,
+.intl[lang^='ar'] dt,
+.intl[lang^='zh'] .eyebrow,
+.intl[lang^='zh'] th,
+.intl[lang^='zh'] dt {
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 14px;
+}
+.intl-table {
+  min-width: 0;
+}
+.intl-table th {
+  white-space: normal;
+}
