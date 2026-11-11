@@ -361,7 +361,23 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   ahead of time and served from Workers static assets (`open-next.config.ts`, static-assets incremental cache; the
   deploy command fills it). Local test: about 20 ms against 40 to 100 ms; live they also skip the Worker's cold start.
   The build takes about 70 s. Home, rankings, card reviews (live prices) and tools stay dynamic.
-- Languages (asked 11 Nov 2026, "add language for seo"): not started; waiting for Akash's choice of languages.
+- Languages (11 Nov 2026). Akash chose Chinese (Hong Kong), Russian, German, Arabic (UAE) and Turkish, and asked for
+  the top 3 European languages by crypto card users. No public source gives card users by country; from what exists
+  (Chainalysis 2026: UK the largest Western European market, Germany 13th worldwide, France first in Western Europe
+  for exchange withdrawals; OKX's European card report covers France, Germany, the Netherlands and Poland; CoinGate
+  2026 payment share France 2.87%, Poland 2.06%, Spain 1.39%, Italy 1.09%) the three added are French, Spanish
+  (also Latin America, where G2M already has visitors) and Polish. Dutch and Italian are the next candidates.
+  Built: `/de`, `/fr`, `/es`, `/pl`, `/tr`, `/ru`, `/ar` (right to left), `/zh-hk`, each with a home page (full
+  ranking, how the score works, FAQ), a page per card (facts, tiers, score parts, availability in that language's
+  markets, FAQ, referral code) and a page per country guide: 259 pages a language, 2,072 in all. Words come from
+  `lib/i18n/dict/*.ts` (93 lines each, written by Claude, not reviewed by native speakers); values come from the
+  card data through Intl, so nothing goes stale. Sheet text (summaries, notes, pros, cons, bonus terms) is English
+  only and is left off; each page links to the English review. `LocaleFrame` (in the root layout) gives translated
+  addresses their own header and footer inside a `<div lang dir>`; `<html lang>` is corrected in the browser.
+  hreflang links join the English home, card and country pages with their translations; the footer lists the
+  languages; the sitemap has them (3,045 addresses). /stats: "Other languages" by language, and a page kind.
+  Home and card pages are prebuilt (296), language-market country pages too, the other country pages on first visit.
+  Not translated yet: rankings table, "X vs Y", topic guides, alternatives, referral pages, tools, methodology.
 - Site audit (10 Nov 2026, Akash: "check whole website, stats page, bugs, competitors"). Crawled all 959 sitemap
   pages (no broken links, no error pages) and swept 28 page types at 1440, 390 and 320 px. Fixed: (1) 888 pages
   (vs, guides, country guides, alternatives) had no share picture and card pages showed the small X card, because a

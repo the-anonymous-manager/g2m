@@ -1,6 +1,7 @@
 import 'server-only';
 import { getCards } from '@/lib/cards';
 import type { D1 } from '@/lib/stats/server';
+import { LOCALES } from '@/lib/i18n/locales';
 
 // The numbers on /stats, all read from the `ev` table (lib/stats/server.ts) for one date range.
 
@@ -58,6 +59,7 @@ export const EVENT_LABELS: Record<string, string> = {
 
 // The kind of page a path is, for "views by kind of page" (SQL CASE, first match wins).
 const KIND = `CASE
+  WHEN ${LOCALES.map((l) => `path = '/${l.code}' OR path LIKE '/${l.code}/%'`).join(' OR ')} THEN 'Other languages'
   WHEN path = '/' THEN 'Home'
   WHEN path = '/cards' THEN 'Rankings'
   WHEN path LIKE '/cards/%/alternatives' THEN 'Alternatives pages'
@@ -84,7 +86,7 @@ export async function report(db: D1, days: number) {
   const affiliate = new Set(getCards().filter((c) => c.links.affiliate).map((c) => c.slug));
 
   const prevFrom = previousStart(days);
-  const [totals, daily, byCard, cardViews, byPlace, clickCountries, pages, sources, refs, countries, devices, tools, details, broken, before, landings, kinds, searches, auto] =
+  const [totals, daily, byCard, cardViews, byPlace, clickCountries, pages, sources, refs, countries, devices, tools, details, broken, before, landings, kinds, searches, langs, auto] =
     await Promise.all([
       db
         .prepare(
@@ -200,6 +202,15 @@ export async function report(db: D1, days: number) {
            FROM ev WHERE name = 'Search' AND day >= ? GROUP BY q ORDER BY (found > 0), people DESC, q LIMIT 40`,
         from
       ),
+      // Views of the translated pages, by language (the first part of the address).
+      all(
+        db,
+        `SELECT CASE WHEN instr(substr(path, 2), '/') > 0 THEN substr(path, 2, instr(substr(path, 2), '/') - 1) ELSE substr(path, 2) END AS lang,
+             COUNT(*) AS views, COUNT(DISTINCT ${U}) AS visitors, SUM(source IS NOT NULL) AS landings
+           FROM ev WHERE name = 'pageview' AND day >= ? AND (${LOCALES.map((l) => `path = '/${l.code}' OR path LIKE '/${l.code}/%'`).join(' OR ')})
+           GROUP BY lang ORDER BY views DESC`,
+        from
+      ),
       // Hits kept out of every number above: crawlers and scripts (see isAutomated in lib/stats/server.ts).
       all(db, `SELECT name, COUNT(*) AS n FROM ev WHERE name LIKE 'auto:%' AND day >= ? GROUP BY name ORDER BY n DESC`, from)
     ]);
@@ -273,6 +284,12 @@ export async function report(db: D1, days: number) {
     landings: landings.map((r) => ({ path: String(r.path), visits: Number(r.visits), visitors: Number(r.visitors), top: r.top ? String(r.top) : '' })),
     kinds: kinds.map((r) => ({ kind: String(r.kind), views: Number(r.views), visitors: Number(r.visitors), landings: Number(r.landings ?? 0), search: Number(r.search ?? 0) })),
     searches: searches.map((r) => ({ q: String(r.q ?? ''), people: Number(r.people), found: Number(r.found ?? 0) })).filter((r) => r.q),
+    langs: langs.map((r) => ({
+      lang: LOCALES.find((l) => l.code === String(r.lang))?.name ?? String(r.lang),
+      views: Number(r.views),
+      visitors: Number(r.visitors),
+      landings: Number(r.landings ?? 0)
+    })),
     auto: auto.map((r) => ({ name: String(r.name).slice(5), n: Number(r.n) })),
     daily: days_,
     cards,

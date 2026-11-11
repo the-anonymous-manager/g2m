@@ -7,6 +7,7 @@ import { homeFx } from '@/lib/fx';
 import { currencyOf } from '@/lib/currencies.mjs';
 import { TOPICS, countryGuide, countryGuidePath, countryGuides, countrySlug } from '@/lib/guides';
 import { absoluteUrl, site, shareMeta } from '@/lib/site';
+import { intlCountry, languageLinks } from '@/lib/i18n/locales';
 import { Eyebrow } from '@/components/bits';
 import { BackButton } from '@/components/BackButton';
 import { GuideList } from '@/components/GuideList';
@@ -32,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    alternates: { canonical: path },
+    alternates: { canonical: path, languages: languageLinks(path, (l) => intlCountry(l, countrySlug(g.cc))) },
     ...shareMeta(`Best crypto cards in ${g.name} · G2M`, description, path)
   };
 }

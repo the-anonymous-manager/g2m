@@ -23,6 +23,7 @@ import { BackButton } from '@/components/BackButton';
 import { versusPath } from '@/lib/versus';
 import { alternativesPath, alternativesTo } from '@/lib/alternatives';
 import { hasReferralPage, referralPath } from '@/lib/referral';
+import { intlCard, languageLinks } from '@/lib/i18n/locales';
 
 const KYC_LABEL = {
   residency_id: 'A residence permit or local ID where you live is accepted',
@@ -52,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    alternates: { canonical: `/cards/${card.slug}` },
+    alternates: { canonical: `/cards/${card.slug}`, languages: languageLinks(`/cards/${card.slug}`, (l) => intlCard(l, card.slug)) },
     ...shareMeta(`${card.name} · G2M score ${card.score.total}`, description, `/cards/${card.slug}`, null)
   };
 }
