@@ -27,8 +27,10 @@ const SPACED_PERCENT = new Set(['de', 'fr', 'es', 'ru']);
  * "0,30 $" (German), "US$2,000" (Chinese) and so on, the same as the amounts Intl writes everywhere else on the page.
  */
 export function localAmounts(l: Locale, text: string): string {
-  const out = text.replace(/([$€])(\d{1,3}(?:,\d{3})+|\d+)(\.\d{1,2})?/g, (_, sign: string, int: string, dec: string | undefined) => {
-    const n = Number(int.replace(/,/g, '') + (dec ?? ''));
+  // "$15K" and "$1M" are thousands and millions.
+  const out = text.replace(/([$€])(\d{1,3}(?:,\d{3})+|\d+)(\.\d{1,2})?([KM](?![a-zA-Z]))?/g, (_, sign: string, int: string, dec: string | undefined, unit: string | undefined) => {
+    const n = Number(int.replace(/,/g, '') + (dec ?? '')) * (unit === 'K' ? 1e3 : unit === 'M' ? 1e6 : 1);
+    if (unit) dec = undefined;
     const s = new Intl.NumberFormat(l.tag, {
       style: 'currency',
       currency: sign === '€' ? 'EUR' : 'USD',
@@ -39,7 +41,9 @@ export function localAmounts(l: Locale, text: string): string {
     return l.dir === 'rtl' ? `\u2066${s}\u2069` : s;
   });
   // "2 %" with a space that never breaks the line, where the language spaces it.
-  return SPACED_PERCENT.has(l.code) ? out.replace(/(\d)[ \u00a0\u202f]?%/g, '$1\u00a0%') : out;
+  const spaced = SPACED_PERCENT.has(l.code) ? out.replace(/(\d)[ \u00a0\u202f]?%/g, '$1\u00a0%') : out;
+  // French puts a space before : ; ! ? and inside \u00ab \u00bb; it must not break the line either.
+  return l.code === 'fr' ? spaced.replace(/ ([:;!?\u00bb])/g, '\u00a0$1').replace(/\u00ab /g, '\u00ab\u00a0') : spaced;
 }
 
 /** The text in the page's language, or the English original when there is no translation yet. */

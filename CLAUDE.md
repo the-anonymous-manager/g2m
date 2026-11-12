@@ -102,7 +102,7 @@ and confirm what changed on the site (not which files moved).
   (`/de/compare/a-vs-b`), guides (`/de/guides`, `/de/guides/<topic>`), country pages (`/de/best-crypto-cards/germany`)
   and `/de/methodology`. Every word comes from that language's dictionary (`lib/i18n/dict/<code>.ts`, same keys as
   `en.ts`) and every value from the card data; numbers, money, dates and country names come from Intl. Text typed in
-  the sheet (summary, pros, cons, bonus) and the guide text are translated in `data/i18n/<code>.json` (exact English
+  the sheet (summary, pros, cons, bonus, and the card page's coverage, cashback, fee, perk and tier notes) and the guide text are translated in `data/i18n/<code>.json` (exact English
   text → translation; `lib/i18n/notes.ts`). After a sheet edit changes that text, run `npm run i18n:missing` and add
   the new lines to all eight files (keep every number as in the English); until then the page shows the English,
   marked as English. Amounts in translations stay English-style ("$2,000") so numbers can be checked; `localAmounts`
@@ -113,7 +113,8 @@ and confirm what changed on the site (not which files moved).
   tool live in a language pack, `lib/i18n/ui/<code>.ts` (same keys as `en.ts`, sent to the browser, one language per
   page); numbers and country names come from `intlFmt` (`lib/i18n/clientFormat.tsx`), with country names passed down
   from the server so the server HTML and the browser agree. Components take `ui`/`tag`/`prefix` props and stay exactly
-  as before in English when left out. Done: the rankings table (`/de/cards`). Next: card page in full, compare,
+  as before in English when left out. Done: the rankings table (`/de/cards`) and the full card page (`/de/cards/kast`,
+  one component for every language: `components/CardReview.tsx`, words in `lib/i18n/ui/card/<code>.ts`). Next: compare,
   calculator, finder, wallet, receipt, corridors, submit, fees guide. To add a language: `LOCALES` in `locales.ts`, a `chrome.ts`
   entry, a dictionary file, and its line in `dict/index.ts`.
 - `app/go/[slug]` outbound redirect with UTM tags; `/stats` (private) counts only people: crawler hits are stored as

@@ -1,11 +1,16 @@
 // Lists the English text that has no translation yet in data/i18n/<language>.json: card summaries, pros, cons and
-// sign-up bonuses from data/cards.json, the home page picks' notes (data/picks.json) and the topic guide text in
+// sign-up bonuses and the rest of the card page's text (coverage, notes, ATM, fees, perks, tier conditions) from
+// data/cards.json, the home page picks' notes (data/picks.json) and the topic guide text in
 // lib/guides.ts. Translated pages show missing text in English (marked as English) until it is added, so this only
 // reports, it never fails the build.
 //
 //   npm run i18n:missing            counts per language, and the missing lines
 //   npm run i18n:missing -- --json  writes data/i18n/missing.json ({ "de": ["English text", ...], ... }) to hand out
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { COUNTRY_NAMES } from '../lib/countries.mjs';
+
+// Coverage examples that are plain country names are shown with each language's own country names (Intl).
+const COUNTRY = new Set(Object.values(COUNTRY_NAMES));
 
 const root = new URL('..', import.meta.url);
 const read = (p) => readFileSync(new URL(p, root), 'utf8');
@@ -13,6 +18,21 @@ const read = (p) => readFileSync(new URL(p, root), 'utf8');
 const cards = JSON.parse(read('data/cards.json'));
 const list = Array.isArray(cards) ? cards : cards.cards;
 const sheet = list.flatMap((c) => [c.summary, ...(c.pros ?? []), ...(c.cons ?? []), c.signupBonus].filter(Boolean));
+// The rest of the card page's sheet text: coverage, notes, ATM, other fees, perks and each tier's conditions.
+const details = list.flatMap((c) =>
+  [
+    c.coverage?.scope,
+    ...(c.coverage?.examples ?? []).filter((x) => !COUNTRY.has(x)),
+    c.cashback?.note,
+    c.cashback?.payout,
+    c.fees?.fxNote,
+    c.fees?.atm,
+    ...(c.fees?.other ?? []),
+    ...(c.perks ?? []),
+    c.noIdCheck && c.noIdCheck.toLowerCase() !== 'yes' ? c.noIdCheck : null,
+    ...(c.tiers ?? []).flatMap((t) => [t.requirement, t.feeNote, ...(t.perks ?? [])])
+  ].filter((x) => typeof x === 'string' && x.trim())
+);
 // The "why" line of each home page pick (the sheet's Picks tab).
 const picks = JSON.parse(read('data/picks.json')).map((p) => p.note).filter(Boolean);
 
@@ -26,7 +46,7 @@ for (const m of block.matchAll(/(title|description|intro|tips):\s*(\[[\s\S]*?\]|
   for (const s of m[2].matchAll(str)) guides.push(unq(s[1]));
 }
 
-const wanted = [...new Set([...guides, ...sheet, ...picks])];
+const wanted = [...new Set([...guides, ...sheet, ...picks, ...details])];
 const langs = readdirSync(new URL('data/i18n/', root))
   .filter((f) => f.endsWith('.json') && f !== 'missing.json')
   .map((f) => f.replace(/\.json$/, ''));
