@@ -98,7 +98,7 @@ and confirm what changed on the site (not which files moved).
   served from static files, see `open-next.config.ts`): they must not read cookies, headers or the time of the request.
 - Other languages (`lib/i18n/`): German, French, Spanish, Polish, Turkish, Russian, Arabic (right to left) and
   Traditional Chinese (Hong Kong) at `/de`, `/fr`, `/es`, `/pl`, `/tr`, `/ru`, `/ar`, `/zh-hk`. Each has a home page
-  (`app/[lang]`), card pages (`/de/cards/kast`, plus `/alternatives` and `/referral-code`), "X vs Y"
+  (`app/[lang]`), card pages (`/de/cards/kast`, plus `/alternatives` and `/referral-code`), the compare tool (`/de/compare`), "X vs Y"
   (`/de/compare/a-vs-b`), guides (`/de/guides`, `/de/guides/<topic>`), country pages (`/de/best-crypto-cards/germany`)
   and `/de/methodology`. Every word comes from that language's dictionary (`lib/i18n/dict/<code>.ts`, same keys as
   `en.ts`) and every value from the card data; numbers, money, dates and country names come from Intl. Text typed in
@@ -114,8 +114,9 @@ and confirm what changed on the site (not which files moved).
   page); numbers and country names come from `intlFmt` (`lib/i18n/clientFormat.tsx`), with country names passed down
   from the server so the server HTML and the browser agree. Components take `ui`/`tag`/`prefix` props and stay exactly
   as before in English when left out. Done: the rankings table (`/de/cards`) and the full card page (`/de/cards/kast`,
-  one component for every language: `components/CardReview.tsx`, words in `lib/i18n/ui/card/<code>.ts`). Next: compare,
-  calculator, finder, wallet, receipt, corridors, submit, fees guide. To add a language: `LOCALES` in `locales.ts`, a `chrome.ts`
+  one component for every language: `components/CardReview.tsx`, words in `lib/i18n/ui/card/<code>.ts`) and the compare
+  tool (`/de/compare`, `components/CompareClient.tsx` + `compareRows.tsx`, words in `lib/i18n/ui/compare/<code>.ts`; the
+  sheet text it shows is translated on the server in `app/[lang]/compare/page.tsx`). Next: calculator, finder, wallet, receipt, corridors, submit, fees guide. To add a language: `LOCALES` in `locales.ts`, a `chrome.ts`
   entry, a dictionary file, and its line in `dict/index.ts`.
 - `app/go/[slug]` outbound redirect with UTM tags; `/stats` (private) counts only people: crawler hits are stored as
   `auto:<event>` (`isAutomated` in `lib/stats/server.ts`)

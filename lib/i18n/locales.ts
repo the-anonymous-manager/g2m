@@ -48,6 +48,7 @@ export const intlReferral = (l: Locale, slug: string) => `/${l.code}/cards/${slu
 export const intlGuides = (l: Locale) => `/${l.code}/guides`;
 export const intlGuide = (l: Locale, slug: string) => `/${l.code}/guides/${slug}`;
 export const intlMethodology = (l: Locale) => `/${l.code}/methodology`;
+export const intlCompare = (l: Locale) => `/${l.code}/compare`;
 
 /** English guides with no translated page (the fees guide is long prose kept in English). */
 const ENGLISH_ONLY_GUIDES = new Set(['crypto-card-fees-explained']);
@@ -66,7 +67,7 @@ export function pathIn(pathname: string, to: Locale | undefined): string {
   if (country) return intlCountry(to, country[1]);
   const guide = en.match(/^\/guides\/([^/]+)$/);
   if (guide) return ENGLISH_ONLY_GUIDES.has(guide[1]) ? intlGuides(to) : intlGuide(to, guide[1]);
-  if (en === '/cards' || en === '/guides' || en === '/methodology' || /^\/compare\/[^/]+-vs-[^/]+$/.test(en) || /^\/cards\/[^/]+(\/alternatives|\/referral-code)?$/.test(en))
+  if (en === '/cards' || en === '/guides' || en === '/methodology' || en === '/compare' || /^\/compare\/[^/]+-vs-[^/]+$/.test(en) || /^\/cards\/[^/]+(\/alternatives|\/referral-code)?$/.test(en))
     return `/${to.code}${en}`;
   return intlHome(to);
 }

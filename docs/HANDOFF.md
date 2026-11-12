@@ -417,6 +417,14 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   against the previous build (same text before and after clicks). Long words: short custody labels in the table and
   wrapping headings, so the table fits 1280 px in every language. Next stages, one PR each: card page in full,
   compare, calculator, finder, wallet, receipt, corridors, submit, fees guide.
+- Whole site in each language, stage 2b (12 Nov 2026, Akash: "step 2"): the compare tool at `/de/compare` etc. in all
+  8 languages: card and tier pickers, the tier presets, every table row (tier rows and card rows), share buttons and
+  links, with numbers from Intl and the sheet text it shows (ATM, perks, requirements, bonus, coverage) translated on
+  the server. English `/compare` checked word for word against the live build in 10 states (presets, one tier per
+  card, a card's tiers lined up, staking and country-only tiers): no differences. The card page's Compare button, the
+  rankings compare bar and the translated home page's Compare tool now open the translated tool; hreflang and sitemap
+  added. Also fixed (every language): the "Compare its N tiers side by side" button no longer runs off phone screens.
+  Next: calculator, finder, wallet/receipt/corridors, submit + fees guide.
 - Card re-check (12 Nov 2026, Akash: "quick check to update the cards details if anything changes"): every card's
   main issuer fee and cashback pages read again. Changed in the sheet (sources added, lastChecked 2026-11-12):
   Plasma One renamed and repriced its tiers on 11 Nov (Standard free 1% to $500 then 0.1%; Premium $600/yr or 20K

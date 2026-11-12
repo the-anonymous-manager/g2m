@@ -4,16 +4,19 @@ import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CardRow, Tier } from '@/lib/types';
 import { countryName } from '@/lib/regions';
-import { approxUsd, cashbackLabel, pct, tierCashback, usd } from '@/lib/format';
+import { approxUsd } from '@/lib/format';
 import { stakeUsd } from '@/lib/calc';
-import { currentPreset, parsePick, pickText, presetIndex, tierIndex, tierPrice, tierSlug, type TierPreset } from '@/lib/tierpick';
+import { currentPreset, parsePick, pickText, presetIndex, tierIndex, tierSlug, type TierPreset } from '@/lib/tierpick';
 import { TierPresets } from '@/components/TierPresets';
 import { CardArt } from '@/components/CardArt';
-import { ROWS, best } from '@/components/compareRows';
+import { ROWS, best, cardRows, compareText, type CompareLang } from '@/components/compareRows';
 import { OutboundLink } from '@/components/OutboundLink';
 import { ShareBar } from '@/components/ShareBar';
 import { versusPath } from '@/lib/versus';
 import { track } from '@/lib/analytics';
+import type { Ui } from '@/lib/i18n/ui/en';
+import { compareEn } from '@/lib/i18n/ui/compare/en';
+import { fillText, intlFmt } from '@/lib/i18n/clientFormat';
 
 const SLOTS = 3;
 
@@ -28,28 +31,37 @@ type TierRow = {
 const firstRate = (t: Tier) => t.cashbackPct ?? t.bands?.[0]?.pct ?? null;
 
 /** Rows about the tier picked for each card (shown once at least one card has a tier picked). */
-const tierRows = (prices: Record<string, number>): TierRow[] => [
-  { label: 'Yearly price', render: (_c, t) => tierPrice(t), value: (_c, t) => t.feeUsdYear, better: 'low' },
-  { label: 'Cashback on this tier', render: (_c, t) => tierCashback(t), value: (_c, t) => firstRate(t), better: 'high' },
-  { label: 'Monthly cashback cap', render: (_c, t) => (t.capMonthlyUsd != null ? `${usd(t.capMonthlyUsd)} a month` : 'None published') },
-  { label: 'FX fee on this tier', render: (c, t) => pct(t.fxPct ?? c.fees.fxPct), value: (c, t) => t.fxPct ?? c.fees.fxPct, better: 'low' },
-  { label: 'To qualify', render: (_c, t) => t.requirement ?? (t.stake ? '—' : 'Open to everyone') },
-  {
-    label: 'Stake value today',
-    render: (_c, t) => {
-      if (!t.stake) return 'No stake';
-      const v = stakeUsd(t, prices);
-      const amount = t.stake.amount != null ? t.stake.amount.toLocaleString('en-US') : 'Some';
-      return `${amount} ${t.stake.token}${v != null ? ` (${approxUsd(v)})` : ''}`;
+const tierRows = (prices: Record<string, number>, lang?: CompareLang): TierRow[] => {
+  const w = lang ? lang.ui.compare : compareEn;
+  const x = compareText(lang);
+  const place = (cc: string) => (cc === 'EEA' ? w.eea : lang ? lang.fmt.country(cc) : countryName(cc));
+  const approx = (v: number) =>
+    lang
+      ? (lang.tag.startsWith('ar') ? (s: string) => `\u2066${s}\u2069` : (s: string) => s)(`~${new Intl.NumberFormat(lang.tag, { style: 'currency', currency: 'USD', maximumFractionDigits: v >= 100 ? 0 : 2, minimumFractionDigits: v >= 100 ? 0 : 2 }).format(v)}`)
+      : approxUsd(v);
+  return [
+    { label: w.rYearly, render: (_c, t) => x.price(t), value: (_c, t) => t.feeUsdYear, better: 'low' },
+    { label: w.rTierCb, render: (_c, t) => x.tierCb(t), value: (_c, t) => firstRate(t), better: 'high' },
+    { label: w.rCap, render: (_c, t) => (t.capMonthlyUsd != null ? fillText(w.capMonth, { x: x.usd(t.capMonthlyUsd) }) : w.noneCap) },
+    { label: w.rTierFx, render: (c, t) => x.pct(t.fxPct ?? c.fees.fxPct), value: (c, t) => t.fxPct ?? c.fees.fxPct, better: 'low' },
+    { label: w.rQualify, render: (_c, t) => t.requirement ?? (t.stake ? '—' : w.openAll) },
+    {
+      label: w.rStake,
+      render: (_c, t) => {
+        if (!t.stake) return w.noStake;
+        const v = stakeUsd(t, prices);
+        const amount = t.stake.amount != null ? x.count(t.stake.amount) : w.someAmount;
+        return `${amount} ${t.stake.token}${v != null ? ` (${approx(v)})` : ''}`;
+      }
+    },
+    { label: w.rTierPerks, render: (_c, t) => (t.perks.length ? t.perks.join(' · ') : '—') },
+    {
+      label: w.rOffered,
+      render: (_c, t) =>
+        t.countries ? t.countries.map(place).join(', ') : t.exceptCountries ? fillText(w.everywhereBut, { list: t.exceptCountries.join(', ') }) : w.whereverCard
     }
-  },
-  { label: 'Tier perks', render: (_c, t) => (t.perks.length ? t.perks.join(' · ') : '—') },
-  {
-    label: 'Offered in',
-    render: (_c, t) =>
-      t.countries ? t.countries.map((cc) => (cc === 'EEA' ? 'EEA' : countryName(cc))).join(', ') : t.exceptCountries ? `Everywhere but ${t.exceptCountries.join(', ')}` : 'Wherever the card is'
-  }
-];
+  ];
+};
 
 /** The slots (by position) with the best value in a tier row. */
 function bestTier(slots: Slot[], row: TierRow): Set<number> {
@@ -65,7 +77,30 @@ function bestTier(slots: Slot[], row: TierRow): Set<number> {
 
 const entryOf = (s: Slot) => pickText({ slug: s.card.slug, tier: s.tier == null ? null : tierSlug(s.card.tiers[s.tier].name) });
 
-export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; initial: string[]; prices: Record<string, number> }) {
+/**
+ * The compare tool. English by default; `ui`, `tag`, `prefix` and `countryNames` give another language (words from
+ * lib/i18n/ui, numbers from Intl, links inside that language), as on /de/compare.
+ */
+export function CompareClient({
+  rows,
+  initial,
+  prices,
+  ui,
+  tag,
+  prefix = '',
+  countryNames
+}: {
+  rows: CardRow[];
+  initial: string[];
+  prices: Record<string, number>;
+  ui?: Ui;
+  tag?: string;
+  prefix?: string;
+  countryNames?: Record<string, string>;
+}) {
+  const lang = useMemo<CompareLang | undefined>(() => (ui && tag ? { ui, tag, fmt: intlFmt(tag, ui, countryNames) } : undefined), [ui, tag, countryNames]);
+  const w = ui ? ui.compare : compareEn;
+  const x = compareText(lang);
   const [slots, setSlotsState] = useState<Slot[]>(() => {
     const seen = new Set<string>();
     const valid = initial
@@ -104,7 +139,8 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
   const chosen = slots.map((s) => s.card);
   const preset = currentPreset(slots);
   const anyTier = slots.some((s) => s.tier != null);
-  const TIER_ROWS = useMemo(() => tierRows(prices), [prices]);
+  const TIER_ROWS = useMemo(() => tierRows(prices, lang), [prices, lang]);
+  const CARD_ROWS = useMemo(() => (lang ? cardRows(lang) : ROWS), [lang]);
 
   const setSlot = (i: number, slug: string) => {
     setSlotsState((prev) => {
@@ -132,6 +168,8 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
   const pickers = Array.from({ length: Math.min(SLOTS, chosen.length + 1) }, (_, i) => i);
   const columns = `minmax(130px, 170px) repeat(${Math.max(chosen.length, 1)}, minmax(210px, 1fr))`;
   const shareName = (s: Slot) => (s.tier == null ? s.card.brand : `${s.card.brand} ${s.card.tiers[s.tier].name}`);
+  // Pages not translated yet (the calculator) open in English.
+  const toEnglish = prefix ? 'en' : undefined;
 
   return (
     <div className="stack" style={{ gap: 20 }}>
@@ -142,10 +180,10 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
             return (
               <div className="field" key={i} style={{ flex: '1 1 200px' }}>
                 <label className="field-label" htmlFor={`slot-${i}`}>
-                  Card {i + 1}
+                  {fillText(w.cardN, { n: i + 1 })}
                 </label>
                 <select id={`slot-${i}`} className="select" value={s?.card.slug ?? ''} onChange={(e) => setSlot(i, e.target.value)}>
-                  <option value="">{s ? 'Remove this card' : 'Add a card'}</option>
+                  <option value="">{s ? w.removeCard : w.addCard}</option>
                   {rows.map((r) => (
                     <option key={r.slug} value={r.slug}>
                       {r.name}
@@ -155,7 +193,7 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
                 {s ? (
                   <>
                     <label className="sr-only" htmlFor={`slot-tier-${i}`}>
-                      {s.card.name} tier
+                      {fillText(w.tierOf, { name: s.card.name })}
                     </label>
                     <select
                       id={`slot-tier-${i}`}
@@ -163,11 +201,10 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
                       value={s.tier == null ? '' : String(s.tier)}
                       onChange={(e) => setTier(i, e.target.value === '' ? null : Number(e.target.value))}
                     >
-                      <option value="">Card overview ({s.card.tiers.length} {s.card.tiers.length === 1 ? 'tier' : 'tiers'})</option>
+                      <option value="">{s.card.tiers.length === 1 ? w.overviewOne : fillText(w.overviewN, { n: s.card.tiers.length })}</option>
                       {s.card.tiers.map((t, k) => (
                         <option key={t.name} value={k}>
-                          {t.name} · {tierPrice(t)}
-                          {t.comingSoon ? ' · coming soon' : ''}
+                          {`${t.name} · ${x.price(t)}${t.comingSoon ? ` · ${w.comingSoon}` : ''}`}
                         </option>
                       ))}
                     </select>
@@ -179,64 +216,78 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
         </div>
         {tiersOf ? (
           <div className="stack" style={{ gap: 8 }}>
-            <span className="field-label">Tiers side by side</span>
+            <span className="field-label">{w.sideBySide}</span>
             <div>
-              <button type="button" className="btn btn-sm" onClick={() => lineUpTiers(tiersOf)}>
-                Compare {tiersOf.tiers.length > SLOTS ? `${SLOTS} of its ${tiersOf.tiers.length}` : `its ${tiersOf.tiers.length}`} tiers side
-                by side: {tiersOf.tiers.slice(0, SLOTS).map((t) => t.name).join(' · ')}
+              <button type="button" className="btn btn-sm" style={{ whiteSpace: 'normal', height: 'auto', textAlign: 'start', maxWidth: '100%' }} onClick={() => lineUpTiers(tiersOf)}>
+                {fillText(tiersOf.tiers.length > SLOTS ? w.lineUpSome : w.lineUpAll, {
+                  k: SLOTS,
+                  n: tiersOf.tiers.length,
+                  names: tiersOf.tiers
+                    .slice(0, SLOTS)
+                    .map((t) => t.name)
+                    .join(' · ')
+                })}
               </button>
             </div>
           </div>
         ) : null}
         {sameCard ? (
           <p className="faint" style={{ fontSize: 13, margin: 0 }}>
-            {slots[0].card.name}, tier by tier. Change a tier above, or pick another card in any slot.
+            {fillText(w.sameCard, { name: slots[0].card.name })}
           </p>
         ) : (
-          <TierPresets cards={chosen} value={preset} onPick={applyPreset} allLabel="Card overview" />
+          <TierPresets
+            cards={chosen}
+            value={preset}
+            onPick={applyPreset}
+            allLabel={w.overview}
+            words={ui ? { heading: w.tiersToCompare, all: w.presetAll, entry: w.presetEntry, next: w.presetNext, top: w.presetTop } : undefined}
+          />
         )}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
           {chosen.length >= 1 ? (
-            <Link href={`/calculator?mode=tiers&cards=${slots.map(entryOf).join(',')}`} className="btn btn-sm">
-              What {chosen.length > 1 ? 'these keep' : 'this keeps'} you a year →
+            <Link href={`/calculator?mode=tiers&cards=${slots.map(entryOf).join(',')}`} className="btn btn-sm" hrefLang={toEnglish}>
+              {chosen.length > 1 ? w.keepsMany : w.keepsOne}
             </Link>
           ) : null}
           {chosen.length === 2 && chosen[0].slug !== chosen[1].slug ? (
-            <Link href={versusPath(chosen[0].slug, chosen[1].slug)} className="btn btn-sm">
-              Full {chosen[0].brand} vs {chosen[1].brand} page
+            <Link href={`${prefix}${versusPath(chosen[0].slug, chosen[1].slug)}`} className="btn btn-sm">
+              {fillText(w.fullVs, { a: chosen[0].brand, b: chosen[1].brand })}
             </Link>
           ) : null}
-          {chosen.length >= 2 ? <ShareBar text={`${slots.map(shareName).join(' vs ')}: crypto cards compared on G2M`} /> : null}
+          {chosen.length >= 2 ? (
+            <ShareBar text={fillText(w.shareText, { names: slots.map(shareName).join(w.vs) })} words={ui ? ui.common : undefined} />
+          ) : null}
         </div>
       </div>
 
       {chosen.length === 0 ? (
-        <p className="muted">Pick a card above to start comparing.</p>
+        <p className="muted">{w.pickToStart}</p>
       ) : (
         <div className="table-wrap">
           <div
             role="table"
-            aria-label="Card comparison"
+            aria-label={w.tableLabel}
             className="cmp-table"
             style={{ minWidth: 170 + chosen.length * 220, ['--cmp-n' as string]: Math.max(chosen.length, 1) }}
           >
             <div role="row" className="cmp-row cmp-head" style={{ gridTemplateColumns: columns }}>
               <div role="columnheader" className="cmp-label">
-                <span className="sr-only">Detail</span>
+                <span className="sr-only">{w.detail}</span>
               </div>
               {slots.map(({ card: c, tier }, i) => (
                 <div role="columnheader" key={i} className="cmp-cell stack" style={{ gap: 12 }}>
                   <CardArt card={c} width={150} />
-                  <Link href={`/cards/${c.slug}`} style={{ fontWeight: 700, fontSize: 17, textDecoration: 'none' }}>
+                  <Link href={`${prefix}/cards/${c.slug}`} style={{ fontWeight: 700, fontSize: 17, textDecoration: 'none' }}>
                     {c.name}
                   </Link>
                   {tier != null ? (
                     <span className="badge badge-accent" style={{ alignSelf: 'flex-start' }}>
-                      {c.tiers[tier].name} · {tierPrice(c.tiers[tier])}
+                      {`${c.tiers[tier].name} · ${x.price(c.tiers[tier])}`}
                     </span>
                   ) : (
                     <span className="faint" style={{ fontSize: 14 }}>
-                      {cashbackLabel(c.cashback.basePct, c.cashback.maxPct)} back
+                      {fillText(w.cbBack, { cb: x.range(c.cashback.basePct, c.cashback.maxPct) })}
                     </span>
                   )}
                 </div>
@@ -246,11 +297,11 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
               <>
                 <div role="row" className="cmp-row cmp-section" style={{ gridTemplateColumns: columns }}>
                   <div role="rowheader" className="cmp-label">
-                    The tier picked
+                    {w.tierPicked}
                   </div>
                   {slots.map(({ card: c, tier }, i) => (
                     <div role="cell" key={i} className="cmp-cell">
-                      {tier != null ? <b>{c.tiers[tier].name}</b> : <span className="faint">Pick a tier above</span>}
+                      {tier != null ? <b>{c.tiers[tier].name}</b> : <span className="faint">{w.pickTier}</span>}
                     </div>
                   ))}
                 </div>
@@ -264,7 +315,7 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
                       {slots.map(({ card: c, tier }, i) => (
                         <div role="cell" key={i} className={`cmp-cell ${winners.has(i) ? 'cmp-best' : ''}`}>
                           {tier != null ? row.render(c, c.tiers[tier]) : <span className="faint">—</span>}
-                          {winners.has(i) ? <span className="sr-only"> (best)</span> : null}
+                          {winners.has(i) ? <span className="sr-only">{w.best}</span> : null}
                         </div>
                       ))}
                     </div>
@@ -273,18 +324,18 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
                 {sameCard ? null : (
                 <div role="row" className="cmp-row cmp-section" style={{ gridTemplateColumns: columns }}>
                   <div role="rowheader" className="cmp-label">
-                    The card
+                    {w.theCard}
                   </div>
                   {slots.map((_, i) => (
                     <div role="cell" key={i} className="cmp-cell faint">
-                      Every tier
+                      {w.everyTier}
                     </div>
                   ))}
                 </div>
                 )}
               </>
             ) : null}
-            {sameCard ? null : ROWS.map((row) => {
+            {sameCard ? null : CARD_ROWS.map((row) => {
               const winners = best(chosen, row);
               return (
                 <div role="row" key={row.label} className="cmp-row" style={{ gridTemplateColumns: columns }}>
@@ -294,7 +345,7 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
                   {chosen.map((c, i) => (
                     <div role="cell" key={i} className={`cmp-cell ${winners.has(c.slug) ? 'cmp-best' : ''}`}>
                       {row.render(c)}
-                      {winners.has(c.slug) ? <span className="sr-only"> (best)</span> : null}
+                      {winners.has(c.slug) ? <span className="sr-only">{w.best}</span> : null}
                     </div>
                   ))}
                 </div>
@@ -302,12 +353,12 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
             })}
             <div role="row" className="cmp-row" style={{ gridTemplateColumns: columns }}>
               <div role="rowheader" className="cmp-label">
-                <span className="sr-only">Apply</span>
+                <span className="sr-only">{w.apply}</span>
               </div>
               {chosen.map((c, i) => (
                 <div role="cell" key={i} className="cmp-cell">
                   <OutboundLink slug={c.slug} name={c.brand} placement="compare" className="btn btn-metal btn-sm">
-                    Get {c.brand}
+                    {fillText(w.getBrand, { brand: c.brand })}
                   </OutboundLink>
                 </div>
               ))}
@@ -316,8 +367,7 @@ export function CompareClient({ rows, initial, prices }: { rows: CardRow[]; init
         </div>
       )}
       <p className="faint" style={{ fontSize: 13 }}>
-        Highlighted values are the best among the cards shown. “Not published” means the issuer does not state it. Stake
-        values use today&apos;s token price.
+        {w.footnote}
       </p>
     </div>
   );
