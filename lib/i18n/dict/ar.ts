@@ -216,7 +216,7 @@ export const ar: Dict = {
   heroLine1: "أنفق عملاتك",
   heroLine2: "بذكاء أكبر.",
   heroRanking: "اطّلع على الترتيب",
-  heroFinder: "اعثر على أفضل بطاقة لك (بالإنجليزية)",
+  heroFinder: "اعثر على أفضل بطاقة لك",
   spotFeatured: "مميَّزة",
   spotPick: "اختيارنا",
   spotTop: "الأولى في الترتيب",

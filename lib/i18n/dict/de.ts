@@ -216,7 +216,7 @@ export const de: Dict = {
   heroLine1: "Gib deine Coins",
   heroLine2: "klüger aus.",
   heroRanking: "Zur Rangliste",
-  heroFinder: "Finde deine beste Karte (auf Englisch)",
+  heroFinder: "Finde deine beste Karte",
   spotFeatured: "hervorgehoben",
   spotPick: "unsere Wahl",
   spotTop: "Platz 1",

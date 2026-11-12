@@ -5,11 +5,13 @@ import { toRow } from '@/lib/types';
 import { parseAnswers } from '@/lib/finder';
 import { FinderClient } from '@/components/FinderClient';
 import { Eyebrow } from '@/components/bits';
+import { finderEn } from '@/lib/i18n/ui/finder/en';
+import { intlFinder, languageLinks } from '@/lib/i18n/locales';
 
 export const metadata: Metadata = {
-  title: 'Crypto card finder',
-  description: 'Answer five questions and get the three crypto cards that fit where you live, how you spend, and what you need: Apple Pay, a physical card, credit, yield, free tiers or a bank account.',
-  alternates: { canonical: '/finder' }
+  title: finderEn.metaTitle,
+  description: finderEn.metaDesc,
+  alternates: { canonical: '/finder', languages: languageLinks('/finder', intlFinder) }
 };
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
@@ -20,14 +22,14 @@ export default async function FinderPage({ searchParams }: Props) {
   return (
     <div className="wrap section stack" style={{ gap: 28, maxWidth: 980 }}>
       <div className="stack" style={{ gap: 12 }}>
-        <Eyebrow>5 questions</Eyebrow>
-        <h1 className="h2">Find your best card</h1>
-        <p className="lead">Five quick answers. We leave out cards you can&apos;t get where you live and explain every pick.</p>
+        <Eyebrow>{finderEn.eyebrow}</Eyebrow>
+        <h1 className="h2">{finderEn.title}</h1>
+        <p className="lead">{finderEn.lead}</p>
         <Link href="/corridors" className="wallet-teaser" style={{ alignSelf: 'stretch' }}>
-          <span className="field-label">[ off-ramp ]</span>
-          <span className="wallet-teaser-text">Need to move USDC or USDT to a bank? See which cards give you an IBAN or cash out on SEPA, ACH, Faster Payments, AED, INR or SWIFT.</span>
+          <span className="field-label">{finderEn.rampTag}</span>
+          <span className="wallet-teaser-text">{finderEn.rampText}</span>
           <span className="wallet-teaser-cta">
-            Corridor finder <span aria-hidden="true">→</span>
+            {finderEn.rampCta} <span aria-hidden="true">→</span>
           </span>
         </Link>
       </div>

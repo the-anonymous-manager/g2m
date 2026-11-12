@@ -47,7 +47,7 @@ export const en = {
   heroLine1: 'Spend your',
   heroLine2: 'bags better.',
   heroRanking: 'See the ranking',
-  heroFinder: 'Find your best card (in English)',
+  heroFinder: 'Find your best card',
   spotFeatured: 'featured',
   spotPick: 'our pick',
   spotTop: 'top ranked',

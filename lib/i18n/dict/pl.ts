@@ -216,7 +216,7 @@ export const pl: Dict = {
   heroLine1: "Wydawaj swoje krypto",
   heroLine2: "mądrzej.",
   heroRanking: "Zobacz ranking",
-  heroFinder: "Znajdź swoją kartę (po angielsku)",
+  heroFinder: "Znajdź swoją kartę",
   spotFeatured: "wyróżniona",
   spotPick: "nasz wybór",
   spotTop: "nr 1 w rankingu",

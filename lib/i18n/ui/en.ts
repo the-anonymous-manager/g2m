@@ -1,5 +1,6 @@
 import { compareEn } from './compare/en';
 import { calcEn } from './calc/en';
+import { finderEn } from './finder/en';
 
 // Language packs for the interactive tools (the rankings table first; the calculator, finder, compare and the other
 // tools follow). Unlike lib/i18n/dict, these are sent to the browser, so each page passes only its own language's
@@ -328,7 +329,8 @@ export const uiEn = {
   /** The compare tool (/compare, /de/compare). */
   compare: compareEn,
   /** The rewards calculator (/calculator, /de/calculator). */
-  calc: calcEn
+  calc: calcEn,
+  finder: finderEn
 };
 
 export type Ui = typeof uiEn;

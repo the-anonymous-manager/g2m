@@ -216,7 +216,7 @@ export const ru: Dict = {
   heroLine1: "Тратьте крипту",
   heroLine2: "с умом.",
   heroRanking: "Смотреть рейтинг",
-  heroFinder: "Подобрать карту (на английском)",
+  heroFinder: "Подобрать карту",
   spotFeatured: "в фокусе",
   spotPick: "наш выбор",
   spotTop: "№ 1 в рейтинге",

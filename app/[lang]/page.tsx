@@ -150,7 +150,7 @@ export default async function IntlHomePage({ params }: Props) {
     })()
   ];
   const tools: [string, string, string, string][] = [
-    ['/finder', d.toolFinderTag, d.toolFinder, d.toolFinderText],
+    [`${prefix}/finder`, d.toolFinderTag, d.toolFinder, d.toolFinderText],
     [`${prefix}/calculator`, d.toolCalcTag, d.toolCalc, d.toolCalcText],
     ['/wallet', d.toolWalletTag, d.toolWallet, d.toolWalletText],
     ['/receipt', d.toolReceiptTag, d.toolReceipt, d.toolReceiptText],
@@ -205,7 +205,7 @@ export default async function IntlHomePage({ params }: Props) {
               <Link href={`${rankings}?country=all`} style={{ padding: '10px 0', fontWeight: 600, textUnderlineOffset: 4 }}>
                 {fill(d.seeAllN, { n: cards.length })}
               </Link>
-              <Link href="/finder" hrefLang="en" style={{ padding: '10px 0', fontWeight: 600, textUnderlineOffset: 4 }}>
+              <Link href={`${prefix}/finder`} style={{ padding: '10px 0', fontWeight: 600, textUnderlineOffset: 4 }}>
                 {d.heroFinder}
               </Link>
             </div>
