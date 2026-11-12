@@ -48,9 +48,13 @@ function context(locale?: Locale) {
   const f = locale && d ? formatters(locale, d) : null;
   const ifmt = locale ? intlFmt(locale.tag, ui) : null;
   const P = (n: number | null | undefined, empty = NP) => (english ? pct(n, empty) : ifmt!.pct(n, empty === NP ? ui.common.notPublished : empty));
-  const U = (n: number | null | undefined, empty = NP) => (english ? usd(n, empty) : ifmt!.usd(n, empty === NP ? ui.common.notPublished : empty));
+  /** In right-to-left text an amount keeps its own order ("US$ 1,000", never "1,000 US$" next to "$US 1,000"). */
+  const iso = (s: string) => (locale?.dir === 'rtl' && /\d/.test(s) ? `\u2066${s}\u2069` : s);
+  const U = (n: number | null | undefined, empty = NP) => (english ? usd(n, empty) : iso(ifmt!.usd(n, empty === NP ? ui.common.notPublished : empty)));
   /** A plain amount, never "Free" (for "$10 coffee", limits and caps). */
-  const M = (n: number) => (english ? `$${n.toLocaleString('en-US')}` : new Intl.NumberFormat(locale!.tag, { style: 'currency', currency: 'USD', maximumFractionDigits: 2, minimumFractionDigits: 0 }).format(n));
+  const M = (n: number) => (english ? `$${n.toLocaleString('en-US')}` : iso(new Intl.NumberFormat(locale!.tag, { style: 'currency', currency: 'USD', maximumFractionDigits: 2, minimumFractionDigits: 0 }).format(n)));
+  /** The comma between items: "，" in Chinese, "،" in Arabic. */
+  const sep = locale?.code === 'zh-hk' ? '，' : locale?.code === 'ar' ? '، ' : ', ';
   const country = (cc: string) => (english ? countryName(cc) : f!.country(cc));
   const market = (m: Market) => (english ? MARKET_LABELS[m] : m === 'EU' ? ui.regions.EU : f!.country(m === 'GB' ? 'GB' : m));
   const date = (iso: string) => (english ? fmtDate(iso) : f!.date(iso));
@@ -78,7 +82,7 @@ function context(locale?: Locale) {
     referral: (slug: string) => (locale ? intlReferral(locale, slug) : referralPath(slug)),
     methodology: locale ? intlMethodology(locale) : '/methodology'
   };
-  return { english, locale, ui, t, d, f, P, U, M, country, market, date, list, tx, Tx, range, prefix, href };
+  return { english, locale, ui, t, d, f, P, U, M, sep, country, market, date, list, tx, Tx, range, prefix, href };
 }
 type Ctx = ReturnType<typeof context>;
 
@@ -91,7 +95,7 @@ function bandsLabel(tier: Pick<Tier, 'bands' | 'cashbackPct'>, c: Ctx) {
         const from = i === 0 ? 0 : (tier.bands![i - 1].uptoUsd ?? 0);
         return b.uptoUsd == null ? fill(c.t.bandAbove, { p: c.P(b.pct), a: c.M(from) }) : fill(c.t.bandUpTo, { p: c.P(b.pct), a: c.M(b.uptoUsd) });
       })
-      .join(', ');
+      .join(c.sep);
   }
   return c.P(tier.cashbackPct);
 }
@@ -308,7 +312,7 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
   const custodyLabel = english
     ? CUSTODY_LABEL[card.custody]
     : { 'self-custodial': ui.common.nonCustodial, custodial: ui.common.custodial, both: ui.common.custodyBoth, unknown: ui.common.notPublished }[card.custody];
-  const forms = english ? card.forms.join(', ') : card.forms.map((x) => ({ virtual: t.formVirtual, physical: t.formPhysical, metal: t.formMetal })[x] ?? x).join(', ');
+  const forms = english ? card.forms.join(', ') : card.forms.map((x) => ({ virtual: t.formVirtual, physical: t.formPhysical, metal: t.formMetal })[x] ?? x).join(c.sep);
   const kyc = { residency_id: t.kycResidency, passport_strict: t.kycPassport, both: t.kycBoth } as const;
   const faqs = cardFaqs(card, locale);
   const np = english ? 'Not published' : ui.common.notPublished;
@@ -692,7 +696,7 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
             {card.assets.length ? (
               <div className="fact" style={{ gridColumn: '1 / -1' }}>
                 <dt>{t.spendFrom}</dt>
-                <dd style={{ fontSize: 15, fontWeight: 500 }}>{card.assets.join(', ')}</dd>
+                <dd style={{ fontSize: 15, fontWeight: 500 }}>{card.assets.join(c.sep)}</dd>
               </div>
             ) : null}
             {card.issuer ? (
