@@ -1,4 +1,5 @@
 import type { Ui } from './en';
+import { cardZhHK } from './card/zh-hk';
 
 export const uiZhHK: Ui = {
   common: {
@@ -121,5 +122,6 @@ export const uiZhHK: Ui = {
     asiaN: "亞洲國家及地區：{n}",
     range: "{a}–{b}"
   },
+  card: cardZhHK,
   regions: { EU: '歐盟／歐洲經濟區', ASIA: '亞洲' }
 };

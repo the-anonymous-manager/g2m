@@ -417,6 +417,16 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   against the previous build (same text before and after clicks). Long words: short custody labels in the table and
   wrapping headings, so the table fits 1280 px in every language. Next stages, one PR each: card page in full,
   compare, calculator, finder, wallet, receipt, corridors, submit, fees guide.
+- Whole site in each language, stage 2a (12 Nov 2026; Akash: "first go with 1,2,3,4,5,6", the first being the card
+  page): `/de/cards/kast` etc. are now the full English card review in each language, built by the same component
+  (`components/CardReview.tsx`; the English page calls it with no language and is unchanged, checked word for word
+  for all 36 cards with no country, IN and DE, including the country list after clicking). New in other languages:
+  the referral box, country standing with passport fit, the full country list and country check, tier break-even
+  and staking check, the tiers table, the receipt teaser, more details, FAQ and its search data. The card page's
+  other sheet text (coverage, cashback and fee notes, perks, each tier's requirement, fee note and perks: 495 lines)
+  is translated in all eight `data/i18n` files and listed by `npm run i18n:missing`. Translations written by Claude,
+  not yet checked by native speakers. Links to compare, receipt and submit still go to the English pages until those
+  stages. Next: compare, calculator, finder, wallet/receipt/corridors, submit + fees guide.
 - Translated home pages = English home page (11 Nov 2026, Akash with screenshots: "Rangliste" showed the list on the
   home page, "See all cards" missing, a link not working, a plain country list English doesn't have; "similar
   experience for other language like we have in English version, nothing changes"). `/de` etc. now have exactly the

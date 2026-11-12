@@ -1,4 +1,5 @@
 import type { Ui } from './en';
+import { cardTr } from './card/tr';
 
 export const uiTr: Ui = {
   common: {
@@ -121,5 +122,6 @@ export const uiTr: Ui = {
     asiaN: "Asya'daki ülkeler: {n}",
     range: "{a}–{b}"
   },
+  card: cardTr,
   regions: { EU: 'AB / AEA', ASIA: 'Asya' }
 };

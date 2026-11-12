@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 // Opens and closes the card page's full country list (the section with id `target`), which starts closed.
 // A link to #countries opens it straight away.
-export function CountryToggle({ target, label }: { target: string; label: string }) {
+export function CountryToggle({ target, label, hideLabel = 'Hide the country list' }: { target: string; label: string; hideLabel?: string }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export function CountryToggle({ target, label }: { target: string; label: string
 
   return (
     <button type="button" className="country-jump" aria-expanded={open} aria-controls={target} onClick={toggle}>
-      {open ? 'Hide the country list' : label}{' '}
+      {open ? hideLabel : label}{' '}
       <span aria-hidden="true" className="country-jump-arrow" data-open={open}>
         ↓
       </span>

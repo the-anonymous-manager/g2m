@@ -2,10 +2,26 @@
 
 import { useState } from 'react';
 import { track } from '@/lib/analytics';
+import type { Ui } from '@/lib/i18n/ui/en';
+
+const fillT = (t: string, v: Record<string, string>) => t.replace(/\{(\w+)\}/g, (m, k) => v[k] ?? m);
 
 // On a card page: the sign-up bonus for joining through G2M's referral link, and G2M's referral code with a copy
 // button, for apps that ask for a code. Only shown when the card has a referral link (lib/types toRow).
-export function ReferralBox({ slug, brand, bonus, code }: { slug: string; brand: string; bonus?: string; code?: string }) {
+export function ReferralBox({
+  slug,
+  brand,
+  bonus,
+  code,
+  words
+}: {
+  slug: string;
+  brand: string;
+  bonus?: string;
+  code?: string;
+  /** Another language's card words (lib/i18n/ui); English when left out. */
+  words?: Ui['card'];
+}) {
   const [copied, setCopied] = useState(false);
   if (!bonus && !code) return null;
 
@@ -16,7 +32,7 @@ export function ReferralBox({ slug, brand, bonus, code }: { slug: string; brand:
       track('Share', { channel: 'code', card: slug });
       setTimeout(() => setCopied(false), 1800);
     } catch {
-      window.prompt('Copy this code', code);
+      window.prompt(words?.copyCode ?? 'Copy this code', code);
     }
   };
 
@@ -24,21 +40,30 @@ export function ReferralBox({ slug, brand, bonus, code }: { slug: string; brand:
     <div className="referral-box">
       {bonus ? (
         <p>
-          <strong>Sign-up bonus with G2M&apos;s link:</strong> {bonus}
+          <strong>{words?.bonusWithLink ?? "Sign-up bonus with G2M's link:"}</strong> {bonus}
         </p>
       ) : null}
       {code ? (
         <p className="referral-code">
-          <span>Referral code</span>
+          <span>{words?.referralCode ?? 'Referral code'}</span>
           <code className="mono">{code}</code>
           <button type="button" className="btn btn-sm" onClick={copy}>
-            {copied ? 'Copied' : 'Copy'}
+            {copied ? (words?.copied ?? 'Copied') : (words?.copy ?? 'Copy')}
           </button>
         </p>
       ) : null}
       <p className="faint" style={{ fontSize: 13 }}>
-        {bonus ? `${brand}'s own terms; they can change. ` : ''}G2M may earn a referral fee. It never changes a card&apos;s
-        score or rank.
+        {words ? (
+          <>
+            {bonus ? fillT(words.ownTerms, { brand }) : ''}
+            {words.refFee}
+          </>
+        ) : (
+          <>
+            {bonus ? `${brand}'s own terms; they can change. ` : ''}G2M may earn a referral fee. It never changes a card&apos;s
+            score or rank.
+          </>
+        )}
       </p>
     </div>
   );
