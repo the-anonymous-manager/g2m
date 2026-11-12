@@ -288,14 +288,14 @@
     "type": "credit",
     "forms": ["virtual", "physical"],
     "custody": "self-custodial",
-    "summary": "Non-custodial Visa card paying 3% back on every tier, with airport lounge access and Visa Signature perks.",
+    "summary": "Non-custodial Visa card paying 3% back on every tier, with Visa Signature perks and airport lounges from Luxe up.",
     "cashback": { "basePct": 3, "maxPct": 4, "payout": "ETHFI", "note": "3% on the first $2,000 a month (Core), $10,000 (Luxe) or $50,000 (Pinnacle), then 1%, then 0.5%. VIP: 4% on the first $50,000 a month (the rate above is not published). Lower 3% limits on purchases settled in euros. Paid in ETHFI after a 7-day lock." },
-    "fees": { "annualUsd": 0, "fxPct": 0.5, "fxNote": "No FX fee on USD or EUR purchases (EUR in beta). Other currencies: about 1% network rate plus 0.5% (Core), 0.25% (Luxe) or nothing (Pinnacle, VIP).", "fxByCurrency": { "USD": 0, "EUR": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "atm": "Free: 10 a month on Core and Luxe, unlimited on Pinnacle and VIP. Up to $5,000 per withdrawal, 5 a day", "other": ["Virtual cards: 1 free on Core, 2 on Luxe, 10 on Pinnacle, unlimited on VIP. In 14 countries (e.g. Mexico, Nigeria, the Philippines) the first one costs $10 on Core", "Physical card free on Core (shipping extra); metal card free on Luxe and up, shipping included"] },
+    "fees": { "annualUsd": 0, "fxPct": 0.5, "fxNote": "No FX fee on USD or EUR purchases (EUR in beta). Other currencies: about 1% network rate plus 0.5% (Core), 0.25% (Luxe) or nothing (Pinnacle, VIP).", "fxByCurrency": { "USD": 0, "EUR": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 50, "atm": "Free: 10 a month on Core and Luxe, unlimited on Pinnacle and VIP. Up to $5,000 per withdrawal, 5 a day", "other": ["Virtual cards: 1 free on Core, 4 on Luxe, 10 on Pinnacle, 50 on VIP, then $10 each. In 14 countries (e.g. Mexico, Nigeria, the Philippines) the first one costs $10 on Core", "Physical card: plastic $50 on Core; Luxe includes 1 metal card, Pinnacle and VIP 2 (extra ones $100)"] },
     "tiers": [
-      { "name": "Core", "feeUsdYear": 0, "cashbackPct": 3, "bands": [ { "uptoUsd": 2000, "pct": 3 }, { "uptoUsd": 3000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "fxPct": 0.5, "requirement": "Free for everyone", "perks": ["Airport lounge benefit", "Visa concierge", "Purchase and price protection", "10 free ATM withdrawals a month", "1 free virtual card"] },
-      { "name": "Luxe", "feeUsdYear": 199, "feeNote": "Or 5K points a month, $15K in Liquid, or 30K ETHFI staked", "cashbackPct": 3, "bands": [ { "uptoUsd": 10000, "pct": 3 }, { "uptoUsd": 20000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "fxPct": 0.25, "requirement": "$199/year, 5K points a month, $15K in Liquid or 30K ETHFI staked", "stake": { "token": "ETHFI", "amount": 30000, "coingeckoId": "ether-fi" }, "perks": ["10% Category Cashback on subscriptions, up to $10 a month", "Free metal card, shipping included", "10 free ATM withdrawals a month", "Airport lounge benefit", "Visa concierge"] },
-      { "name": "Pinnacle", "feeUsdYear": 999, "feeNote": "Or 25K points a month, $100K in Liquid, or 150K ETHFI staked", "cashbackPct": 3, "bands": [ { "uptoUsd": 50000, "pct": 3 }, { "uptoUsd": 80000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "fxPct": 0, "requirement": "$999/year, 25K points a month, $100K in Liquid or 150K ETHFI staked", "stake": { "token": "ETHFI", "amount": 150000, "coingeckoId": "ether-fi" }, "perks": ["20% Category Cashback on subscriptions, up to $20 a month", "Unlimited free ATM withdrawals", "Free metal card, express shipping", "Dedicated account manager team", "25% back on airport fast track, up to $25 a year"] },
-      { "name": "VIP", "feeUsdYear": 0, "feeNote": "No fee and can't be bought; needs $500K in Liquid or 500K ETHFI staked", "cashbackPct": 4, "capMonthlyUsd": 2000, "fxPct": 0, "requirement": "$500K in Liquid or 500K ETHFI staked", "stake": { "token": "ETHFI", "amount": 500000, "coingeckoId": "ether-fi" }, "perks": ["30% Category Cashback on subscriptions, up to $30 a month", "Unlimited free ATM withdrawals", "Free gold metal card, express shipping", "Executive support", "25% back on airport fast track, up to $50 a year"] }
+      { "name": "Core", "feeUsdYear": 0, "cashbackPct": 3, "bands": [ { "uptoUsd": 2000, "pct": 3 }, { "uptoUsd": 3000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "fxPct": 0.5, "requirement": "Free for everyone", "perks": ["Visa concierge", "Purchase and price protection", "10 free ATM withdrawals a month", "1 free virtual card", "Plastic physical card $50"] },
+      { "name": "Luxe", "feeUsdYear": 199, "feeNote": "Or 5K points a month, $15K in Liquid, or 30K ETHFI staked", "cashbackPct": 3, "bands": [ { "uptoUsd": 10000, "pct": 3 }, { "uptoUsd": 20000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "fxPct": 0.25, "requirement": "$199/year, 5K points a month, $15K in Liquid or 30K ETHFI staked", "stake": { "token": "ETHFI", "amount": 30000, "coingeckoId": "ether-fi" }, "perks": ["10% Category Cashback on subscriptions, up to $10 a month", "Purple metal card included", "4 free virtual cards", "2 airport lounge passes a year", "10 free ATM withdrawals a month", "Visa concierge"] },
+      { "name": "Pinnacle", "feeUsdYear": 999, "feeNote": "Or 25K points a month, $100K in Liquid, or 150K ETHFI staked", "cashbackPct": 3, "bands": [ { "uptoUsd": 50000, "pct": 3 }, { "uptoUsd": 80000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "fxPct": 0, "requirement": "$999/year, 25K points a month, $100K in Liquid or 150K ETHFI staked", "stake": { "token": "ETHFI", "amount": 150000, "coingeckoId": "ether-fi" }, "perks": ["20% Category Cashback on subscriptions, up to $20 a month", "Unlimited airport lounge passes", "Unlimited free ATM withdrawals", "Black metal card (2 included)", "Dedicated account manager team", "25% back on airport fast track, up to $25 a year"] },
+      { "name": "VIP", "feeUsdYear": 0, "feeNote": "No fee and can't be bought; needs $500K in Liquid or 500K ETHFI staked", "cashbackPct": 4, "capMonthlyUsd": 2000, "fxPct": 0, "requirement": "$500K in Liquid or 500K ETHFI staked", "stake": { "token": "ETHFI", "amount": 500000, "coingeckoId": "ether-fi" }, "perks": ["30% Category Cashback on subscriptions, up to $30 a month", "Unlimited airport lounge passes", "Unlimited free ATM withdrawals", "Gold metal card", "Executive support", "25% back on airport fast track, up to $50 a year"] }
     ],
     "coverage": { "countries": 91, "scope": "Global (91 countries)", "examples": ["United Arab Emirates", "Argentina", "Austria", "Australia"], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AD", "AE", "AG", "AO", "AR", "AT", "AU", "BB", "BD", "BE", "BG", "BH", "BO", "BR", "BS", "BZ", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DM", "DO", "EC", "ES", "FR", "GB", "GG", "GI", "GR", "GT", "GY", "HK", "HN", "HR", "HU", "ID", "IE", "IM", "IS", "IT", "JE", "JP", "KN", "KR", "KY", "LC", "LI", "LT", "LU", "LV", "MC", "MT", "MV", "MX", "MY", "NG", "NO", "NZ", "OM", "PA", "PE", "PH", "PL", "PR", "PT", "PW", "PY", "RO", "SA", "SC", "SE", "SG", "SI", "SK", "SR", "SV", "TC", "TH", "TT", "TW", "US", "UY", "VC", "VG", "VU", "ZA"], "others": "no" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 27, "ramps": "both", "credit": true, "yield": true },
@@ -306,9 +306,9 @@
     "referralCode": "gwei2merchant",
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
-    "perks": ["Airport lounge access on every tier", "Visa Signature benefits"],
-    "pros": ["3% back even on the free Core tier", "Non-custodial with lounge access", "Free physical card; metal card from Luxe"],
-    "cons": ["Core pays 3% only on the first $2,000 a month, then 1% and 0.5%", "Higher tiers cost $199 or $999 a year, or a large ETHFI stake or deposit"],
+    "perks": ["Airport lounge passes from Luxe: 2 a year, unlimited on Pinnacle and VIP", "Visa Signature benefits", "ether.fi Travel: 5% back plus up to 65% off hotels and flights"],
+    "pros": ["3% back even on the free Core tier", "Non-custodial, with airport lounges from Luxe", "Metal card included from Luxe"],
+    "cons": ["Core pays 3% only on the first $2,000 a month, then 1% and 0.5%", "Higher tiers cost $199 or $999 a year, or a large ETHFI stake or deposit", "The physical card costs $50 on Core"],
     "links": { "official": "https://www.ether.fi/", "affiliate": "https://www.ether.fi/app/cash/referral?ref_code=gwei2merchant" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/ether.fi", "verified": "2026-08-30" },
@@ -325,15 +325,15 @@
       { "label": "ether.fi Help: KYC Process and Requirements", "url": "https://help.ether.fi/en/articles/269731-kyc-process-and-requirements", "verified": "2026-10-25" },
       { "label": "ether.fi Help: In which countries are bank transfers available?", "url": "https://help.ether.fi/en/articles/860025-in-which-countries-are-bank-transfers-available", "verified": "2026-10-25" },
       { "label": "ether.fi Help: Supported assets and networks for your Vault with Cash", "url": "https://help.ether.fi/en/articles/758804-supported-assets-and-networks-for-your-vault-with-cash", "verified": "2026-10-25" },
-      { "label": "ether.fi Help: How do Membership levels work?", "url": "https://help.ether.fi/en/articles/303625-how-do-membership-levels-work", "verified": "2026-10-25" },
-      { "label": "ether.fi Help: Membership level benefits", "url": "https://help.ether.fi/en/articles/776152-membership-level-benefits", "verified": "2026-10-25" },
-      { "label": "ether.fi Help: How does cashback work?", "url": "https://help.ether.fi/en/articles/262374-how-does-cashback-work", "verified": "2026-10-25" },
+      { "label": "ether.fi Help: How do Membership levels work?", "url": "https://help.ether.fi/en/articles/303625-how-do-membership-levels-work", "verified": "2026-11-12" },
+      { "label": "ether.fi Help: What are the benefits of a personal Cash credit card? (cards, lounges and ATM by level)", "url": "https://help.ether.fi/en/articles/304368-what-are-the-benefits-of-a-personal-cash-credit-card", "verified": "2026-11-12" },
+      { "label": "ether.fi Help: How does cashback work?", "url": "https://help.ether.fi/en/articles/262374-how-does-cashback-work", "verified": "2026-11-12" },
       { "label": "ether.fi Help: How does Category Cashback work?", "url": "https://help.ether.fi/en/articles/823083-how-does-category-cashback-work", "verified": "2026-10-25" },
       { "label": "ether.fi Help: Why purchase a Membership upgrade?", "url": "https://help.ether.fi/en/articles/846487-why-purchase-a-membership-upgrade", "verified": "2026-10-25" },
       { "label": "ether.fi Help: ATM withdrawal limits for personal Cash cards", "url": "https://help.ether.fi/en/articles/303623-what-are-the-atm-withdrawal-limits-for-personal-cash-cards", "verified": "2026-10-25" },
       { "label": "ether.fi app: referral offer, 3% cashback on all purchases (checked in the app by G2M)", "url": "https://www.ether.fi/app/cash/referral", "verified": "2026-11-03" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-12",
     "metal": "silver",
     "image": { "source": "https://g2m.life/card-originals/etherfi.avif", "file": "/card-images/etherfi-771a2daf.webp" }
   },
@@ -388,12 +388,12 @@
     "custody": "custodial",
     "summary": "Dual-mode Mastercard: spend against your crypto in credit mode or from your balance in debit mode, with up to 2% back.",
     "cashback": { "basePct": 0.5, "maxPct": 2, "payout": "NEXO or BTC", "note": "Credit Mode purchases only: 0.5% (Base), 0.7% (Silver), 1% (Gold) or 2% (Platinum) in NEXO, or 0.1% to 0.5% in BTC. Monthly caps $50 to $200. The Loyalty Program needs a $5,000 portfolio." },
-    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "0.2% on EEA, UK and Swiss currencies, 2% on others (0.7% and 2.5% at weekends). No currency is free of FX fees.", "fxByCurrency": { "EUR": 0.2, "GBP": 0.2, "CHF": 0.2, "CZK": 0.2, "DKK": 0.2, "HUF": 0.2, "PLN": 0.2, "RON": 0.2, "SEK": 0.2, "ISK": 0.2, "NOK": 0.2 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 0, "atm": "Free up to $150 (Base), $300 (Silver), $600 (Gold) or $2,000 (Platinum) a month, then 2% (min $1.99)", "other": ["First physical card free; replacement $15 / EUR 15 / GBP 15", "Weekend FX surcharge +0.5%", "Cards are valid for 5 years"] },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "0.2% on EEA, UK and Swiss currencies, 2% on others (0.7% and 2.5% at weekends). No currency is free of FX fees.", "fxByCurrency": { "EUR": 0.2, "GBP": 0.2, "CHF": 0.2, "CZK": 0.2, "DKK": 0.2, "HUF": 0.2, "PLN": 0.2, "RON": 0.2, "SEK": 0.2, "ISK": 0.2, "NOK": 0.2 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 0, "atm": "Free up to €200 (Base), €400 (Silver), €1,000 (Gold) or €2,000 (Platinum) a month (£180 to £1,800 in the UK), then 2% (min €1.99)", "other": ["Physical card free, shipping included; it needs Gold tier or higher and a $5,000 portfolio", "Card replacement $15 / EUR 15 / GBP 15", "Weekend FX surcharge +0.5%", "Cards are valid for 5 years"] },
     "tiers": [
-      { "name": "Base", "feeUsdYear": 0, "cashbackPct": 0.5, "capMonthlyUsd": 50, "requirement": "Portfolio of at least $5,000", "perks": ["Free ATM withdrawals up to $150 a month"] },
-      { "name": "Silver", "feeUsdYear": 0, "cashbackPct": 0.7, "capMonthlyUsd": 100, "requirement": "$5,000+ portfolio, 1% of it in NEXO", "perks": ["Free ATM withdrawals up to $300 a month"] },
-      { "name": "Gold", "feeUsdYear": 0, "cashbackPct": 1, "capMonthlyUsd": 150, "requirement": "$5,000+ portfolio, 5% of it in NEXO", "perks": ["Free ATM withdrawals up to $600 a month"] },
-      { "name": "Platinum", "feeUsdYear": 0, "cashbackPct": 2, "capMonthlyUsd": 200, "requirement": "$5,000+ portfolio, 10% of it in NEXO", "perks": ["Free ATM withdrawals up to $2,000 a month"] }
+      { "name": "Base", "feeUsdYear": 0, "cashbackPct": 0.5, "capMonthlyUsd": 50, "requirement": "Portfolio of at least $5,000", "perks": ["Free ATM withdrawals up to €200 a month", "Virtual card only"] },
+      { "name": "Silver", "feeUsdYear": 0, "cashbackPct": 0.7, "capMonthlyUsd": 100, "requirement": "$5,000+ portfolio, 1% of it in NEXO", "perks": ["Free ATM withdrawals up to €400 a month", "Virtual card only"] },
+      { "name": "Gold", "feeUsdYear": 0, "cashbackPct": 1, "capMonthlyUsd": 150, "requirement": "$5,000+ portfolio, 5% of it in NEXO", "perks": ["Free ATM withdrawals up to €1,000 a month", "Free physical card"] },
+      { "name": "Platinum", "feeUsdYear": 0, "cashbackPct": 2, "capMonthlyUsd": 200, "requirement": "$5,000+ portfolio, 10% of it in NEXO", "perks": ["Free ATM withdrawals up to €2,000 a month", "Free physical card"] }
     ],
     "coverage": { "countries": 34, "scope": "EEA, UK, Argentina, Brazil and Mexico", "examples": ["United Kingdom", "Germany", "Argentina", "Brazil", "Mexico"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AD", "AR", "AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MC", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK"], "others": "unknown" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 3, "ramps": "both", "credit": true, "yield": true },
@@ -406,7 +406,7 @@
     "assets": [],
     "perks": ["Credit mode: spend without selling your crypto", "Personal EUR IBAN, GBP and USD accounts"],
     "pros": ["Very low FX on European currencies", "Free ATM allowance on every tier"],
-    "cons": ["Cashback only in Credit Mode, capped at $50 to $200 a month", "Needs a $5,000 portfolio for rewards"],
+    "cons": ["Cashback only in Credit Mode, capped at $50 to $200 a month", "Needs a $5,000 portfolio for rewards", "Physical card only from Gold tier"],
     "links": { "official": "https://nexo.com/", "affiliate": "https://nexo.com/ref/imwig0fvpw?src=ios-link" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/nexo-card", "verified": "2026-09-01" },
@@ -428,9 +428,10 @@
       { "label": "Nexo Help: Nexo Credit Line (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/nexo-credit-line", "verified": "2026-10-25" },
       { "label": "Nexo Help: Nexo Savings (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/nexo-savings", "verified": "2026-10-25" },
       { "label": "Nexo: referral rewards for invited friends (45-day window, NEXO Token rewards by tier)", "url": "https://nexo.com/ref/imwig0fvpw", "verified": "2026-11-03" },
-      { "label": "Nexo app: Referral Program, how it works (30-day average balance, 0.5% NEXO bonus; checked in the app by G2M)", "url": "https://nexo.com/ref", "verified": "2026-11-03" }
+      { "label": "Nexo app: Referral Program, how it works (30-day average balance, 0.5% NEXO bonus; checked in the app by G2M)", "url": "https://nexo.com/ref", "verified": "2026-11-03" },
+      { "label": "Nexo: Crypto Card page (cashback, FX, free ATM limits by tier, physical card from Gold tier)", "url": "https://nexo.com/crypto-card", "verified": "2026-11-12" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-12",
     "metal": "gunmetal",
     "image": { "source": "https://g2m.life/card-originals/nexo.webp", "file": "/card-images/nexo-ee91231a.webp" }
   },
@@ -443,11 +444,18 @@
     "type": "debit",
     "forms": ["virtual", "physical"],
     "custody": "custodial",
-    "summary": "Kraken's debit card for the EEA, UK and US, with no subscription and up to 2% back in Europe.",
-    "cashback": { "basePct": null, "maxPct": 2, "payout": null, "note": "Up to 2% in the EEA and UK; the US rate is not published." },
-    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in your primary currency: GBP in the UK, EUR in the EEA (no FX markup), USD in the US (1% on foreign-currency purchases and purchases outside the US).", "fxByCurrency": { "USD": 0, "EUR": 0, "GBP": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 0, "atm": "Supported; fees not published", "other": [] },
+    "summary": "Kraken's debit card for the EEA, UK and US, with no subscription. Cashback up to 2%, set by the average balance you keep in Krak.",
+    "cashback": { "basePct": 0.5, "maxPct": 2, "payout": null, "note": "Set by your 30-day average balance in Krak. EEA and UK: 0.5% from €200 (or £200), 1% from €1,000, 1.5% from €10,000, 2% from €50,000. US: 1% from $1,000, 1.5% from $10,000, 1.75% from $75,000, 2% from $150,000. Below that: no cashback." },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in your primary currency: GBP in the UK, EUR in the EEA (no FX markup), USD in the US (1% on foreign-currency purchases and purchases outside the US).", "fxByCurrency": { "USD": 0, "EUR": 0, "GBP": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 0, "atm": "No Krak fee; the ATM's own fee may apply", "other": [] },
     "tiers": [
-      { "name": "Krak Card", "feeUsdYear": 0, "cashbackPct": 2, "requirement": "Rate shown is the EEA/UK maximum", "countries": ["EEA", "GB"] }
+      { "name": "Lite (EEA, UK)", "feeUsdYear": 0, "cashbackPct": 0.5, "fxPct": 0, "requirement": "€200 (or £200) average balance over 30 days", "countries": ["EEA", "GB"] },
+      { "name": "Pro (EEA, UK)", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 0, "requirement": "€1,000 (or £1,000) average balance over 30 days", "countries": ["EEA", "GB"] },
+      { "name": "Elite (EEA, UK)", "feeUsdYear": 0, "cashbackPct": 1.5, "fxPct": 0, "requirement": "€10,000 (or £10,000) average balance over 30 days", "countries": ["EEA", "GB"] },
+      { "name": "Max (EEA, UK)", "feeUsdYear": 0, "cashbackPct": 2, "fxPct": 0, "requirement": "€50,000 (or £50,000) average balance over 30 days", "countries": ["EEA", "GB"] },
+      { "name": "Lite (US)", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 1, "requirement": "$1,000 average balance over 30 days", "countries": ["US"] },
+      { "name": "Pro (US)", "feeUsdYear": 0, "cashbackPct": 1.5, "fxPct": 1, "requirement": "$10,000 average balance over 30 days", "countries": ["US"] },
+      { "name": "Elite (US)", "feeUsdYear": 0, "cashbackPct": 1.75, "fxPct": 1, "requirement": "$75,000 average balance over 30 days", "countries": ["US"] },
+      { "name": "Max (US)", "feeUsdYear": 0, "cashbackPct": 2, "fxPct": 1, "requirement": "$150,000 average balance over 30 days", "countries": ["US"] }
     ],
     "coverage": { "countries": 32, "scope": "EEA, UK and US", "examples": ["United Kingdom", "United States", "Germany"], "markets": { "IN": "no", "AE": "no", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK", "US"], "others": "no" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 3, "ramps": "both", "credit": false, "yield": true },
@@ -456,8 +464,8 @@
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
     "perks": [],
-    "pros": ["Big, regulated exchange", "No subscription"],
-    "cons": ["Most fees not published", "US cashback not published"],
+    "pros": ["Big, regulated exchange", "No subscription, no Krak ATM fee", "No FX fee in the EEA and UK"],
+    "cons": ["Cashback depends on your balance: 2% only from €50,000 (EEA, UK) or $150,000 (US)", "No cashback below a €200 (or $1,000 in the US) average balance"],
     "links": { "official": "https://www.kraken.com/" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/kraken-card", "verified": "2026-09-28" },
@@ -475,9 +483,10 @@
       { "label": "Krak Support: Supported regions and currencies on Krak", "url": "https://support.krak.app/articles/supported-regions-and-currencies-on-krak", "verified": "2026-10-25" },
       { "label": "Krak Support: Cash deposit options", "url": "https://support.krak.app/articles/cash-deposit-options-fees-minimums-and-processing-times", "verified": "2026-10-25" },
       { "label": "Krak Support: US Krak Card FAQs", "url": "https://support.krak.app/articles/us-krak-card-faqs", "verified": "2026-10-25" },
-      { "label": "Krak Support: Cryptocurrencies available on Krak", "url": "https://support.krak.app/articles/cryptocurrencies-available-on-krak", "verified": "2026-10-25" }
+      { "label": "Krak Support: Cryptocurrencies available on Krak", "url": "https://support.krak.app/articles/cryptocurrencies-available-on-krak", "verified": "2026-10-25" },
+      { "label": "Krak: Pricing (cashback tiers by 30-day average balance, no Krak ATM fee)", "url": "https://krak.app/pricing", "verified": "2026-11-12" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-12",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/krak.png", "file": "/card-images/krak-517ef3c9.webp" }
   },
@@ -540,11 +549,11 @@
     "forms": ["virtual", "physical"],
     "custody": "custodial",
     "summary": "Solana-native Visa card with 2% back in USDC, rising to 4% when you refer friends. Available across Asia-Pacific, the Gulf, Latin America and 31 US states.",
-    "cashback": { "basePct": 2, "maxPct": 4, "payout": "USDC", "note": "4% after 2 qualifying referrals in the previous month. Capped at $100 a month." },
+    "cashback": { "basePct": 2, "maxPct": 4, "payout": "USDC", "note": "2% capped at $100 a month; 4% after 2 qualifying referrals in the previous month, capped at $200 a month." },
     "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "No fee on USD payments. Other currencies: 1% on Rain-issued cards, 1.8% on DCS-issued cards (Asia-Pacific).", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 13.13, "atm": "Not published", "other": ["Physical card $13.13 plus shipping"] },
     "tiers": [
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 2, "capMonthlyUsd": 100 },
-      { "name": "Referral boost", "feeUsdYear": 0, "cashbackPct": 4, "capMonthlyUsd": 100, "requirement": "2 qualifying referrals in the previous month" }
+      { "name": "Referral boost", "feeUsdYear": 0, "cashbackPct": 4, "capMonthlyUsd": 200, "requirement": "2 qualifying referrals in the previous month" }
     ],
     "coverage": { "countries": 52, "scope": "Asia-Pacific, the Gulf and Latin America", "examples": ["United Arab Emirates", "Singapore", "Japan", "Argentina", "Brazil"], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "unknown", "EU": "unknown" }, "countryList": { "yes": ["AE", "AG", "AR", "AU", "BB", "BO", "BR", "BS", "BZ", "CI", "CO", "CR", "DM", "DO", "EC", "EG", "GD", "GH", "GT", "GY", "HN", "JP", "KE", "KN", "KR", "KY", "LC", "MA", "MX", "MY", "NZ", "PA", "PE", "PH", "PK", "PY", "SG", "SN", "SR", "SV", "TC", "TH", "TT", "TW", "UG", "US", "UY", "VC", "VN", "ZA", "ZM"], "no": ["IN"], "unclear": ["BD", "NG"], "others": "unknown" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 15, "ramps": "both", "credit": false, "yield": false },
@@ -558,7 +567,7 @@
     "assets": ["USDC", "USDT"],
     "perks": ["Works on Arbitrum, Base, Solana and Sui"],
     "pros": ["2% back in USDC with no annual fee", "Cheap physical card"],
-    "cons": ["Cashback capped at $100 a month", "4% needs ongoing referrals"],
+    "cons": ["Cashback capped at $100 a month ($200 with the referral boost)", "4% needs ongoing referrals"],
     "links": { "official": "https://jup.ag/", "affiliate": "https://jupiter.go.link/a7ppe" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/jupiter", "verified": "2026-10-01" },
@@ -567,9 +576,10 @@
       { "label": "Jupiter Docs: Remittance", "url": "https://docs.jup.ag/user-docs/global/spend/remittance", "verified": "2026-10-25" },
       { "label": "Jupiter Docs: Risks & Security", "url": "https://docs.jup.ag/user-docs/global/spend/risks-and-security", "verified": "2026-10-24" },
       { "label": "Jupiter docs: Rewards & Referrals (friend gets $20 after $1,000 spend within 30 days of card activation; where to enter a code)", "url": "https://docs.jup.ag/user-docs/global/spend/rewards-and-referrals", "verified": "2026-11-04" },
-      { "label": "Jupiter app: card not offered to residents of India (checked in the app by G2M)", "url": "https://jup.ag/", "verified": "2026-11-04" }
+      { "label": "Jupiter app: card not offered to residents of India (checked in the app by G2M)", "url": "https://jup.ag/", "verified": "2026-11-04" },
+      { "label": "Jupiter docs: Rewards & Referrals (2% capped at $100 a month, 4% capped at $200)", "url": "https://docs.jup.ag/user-docs/global/spend/rewards-and-referrals", "verified": "2026-11-12" }
     ],
-    "lastChecked": "2026-11-04",
+    "lastChecked": "2026-11-12",
     "metal": "rose",
     "image": { "source": "https://g2m.life/card-originals/jupiter.png", "file": "/card-images/jupiter-16f17db8.webp" }
   },
@@ -584,10 +594,10 @@
     "custody": "self-custodial",
     "summary": "Non-custodial Visa card from the Avalanche ecosystem with no card fees, earning Avax Points instead of cashback.",
     "cashback": { "basePct": null, "maxPct": null, "payout": "Avax Points", "note": "Earns Avax Points with travel portal redemptions; no cashback rate published." },
-    "fees": { "annualUsd": 0, "fxPct": 3, "fxNote": "Billed in US dollars. International card: up to 3% on non-USD purchases plus a cross-border fee of up to 3%. US card agreement: 2% on foreign-currency purchases and purchases outside the US.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 0, "atm": "Not published", "other": ["No shipping, account or card fees"] },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in US dollars. Avalanche's site lists a 1% FX fee. The card agreements allow more: up to 3% on non-USD purchases plus a cross-border fee of up to 3% (international card), or 2% on foreign purchases (US card).", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 0, "atm": "Not published", "other": ["No shipping, account or card fees"] },
     "tiers": [
-      { "name": "Global", "feeUsdYear": 0, "cashbackPct": null, "fxPct": 3, "exceptCountries": ["US"] },
-      { "name": "United States", "feeUsdYear": 0, "cashbackPct": null, "fxPct": 2, "countries": ["US"] }
+      { "name": "Global", "feeUsdYear": 0, "cashbackPct": null, "fxPct": 1, "exceptCountries": ["US"] },
+      { "name": "United States", "feeUsdYear": 0, "cashbackPct": null, "fxPct": 1, "countries": ["US"] }
     ],
     "coverage": { "countries": 31, "scope": "Latin America, the Caribbean and the US", "examples": ["Argentina", "Brazil", "Chile", "Bahamas"], "markets": { "IN": "no", "AE": "unknown", "US": "yes", "GB": "unknown", "EU": "unknown" }, "countryList": { "yes": ["AG", "AR", "BB", "BO", "BR", "BS", "BZ", "CL", "CO", "CR", "DM", "DO", "EC", "GD", "GT", "GY", "HN", "HT", "JM", "KN", "LC", "MX", "PA", "PE", "PY", "SR", "SV", "TT", "US", "UY", "VC"], "no": ["BY", "CN", "CU", "IL", "IN", "IQ", "IR", "KP", "LK", "NG", "NI", "NP", "RU", "SY", "TR", "UA", "VE", "VN"], "others": "unknown" } },
     "ecosystem": { "iban": "none", "payoutCorridors": 0, "ramps": "none", "credit": false, "yield": false },
@@ -597,16 +607,17 @@
     "assets": ["AVAX", "USDC", "USDT"],
     "perks": ["Avax Points", "Travel portal redemptions"],
     "pros": ["No card, shipping or account fees", "Non-custodial"],
-    "cons": ["No cashback rate", "Up to 3% FX outside the US"],
+    "cons": ["No cashback rate", "The card agreements allow FX fees above the 1% the site lists"],
     "links": { "official": "https://www.avax.network/" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/avalanche-card", "verified": "2026-09-28" },
       { "label": "Avalanche Card: International Card Agreement", "url": "https://legal.avalanchecard.com/legal/avalanche-card-international-card-agreement-94211945", "verified": "2026-10-25" },
       { "label": "Avalanche Card: homepage FAQ", "url": "https://www.avalanchecard.com/", "verified": "2026-10-25" },
       { "label": "Avalanche App Terms and Conditions", "url": "https://legal.avalanchecard.com/legal/avalanche-app-terms-conditions-4b62a44e", "verified": "2026-10-24" },
-      { "label": "Avalanche Card US Card Agreement", "url": "https://legal.avalanchecard.com/legal/avalanche-card-us-card-agreement-bcc089aa", "verified": "2026-10-24" }
+      { "label": "Avalanche Card US Card Agreement", "url": "https://legal.avalanchecard.com/legal/avalanche-card-us-card-agreement-bcc089aa", "verified": "2026-10-24" },
+      { "label": "Avalanche Card: homepage (FX fee 1%, no card or shipping fees)", "url": "https://www.avalanchecard.com/", "verified": "2026-11-12" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-12",
     "metal": "rose",
     "image": { "source": "https://g2m.life/card-originals/avalanche-card.png", "file": "/card-images/avalanche-card-5862e75d.webp" }
   },
@@ -884,13 +895,13 @@
     "type": "spend",
     "forms": ["virtual", "physical"],
     "custody": "self-custodial",
-    "summary": "Non-custodial Visa from Plasma that spends USDT, with cashback paid in XPL. The free Lite tier pays 2% on your first $500 a month.",
-    "cashback": { "basePct": 2, "maxPct": 4, "payout": "XPL, weekly", "note": "Lite: 2% on the first $500 a month, then 0.1%. Core: 3% stepping down to 0.25%. Platinum: 4% stepping down to 1%. AI merchants and partner airlines earn up to 10% on higher tiers." },
-    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "Billed in US dollars. Lite: 1% Plasma markup plus about 1% Visa FX. Core: 0.5% plus about 1%. Platinum: no FX fee.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0.15, "cardFeeUsd": 0, "physicalCardFeeUsd": 20, "atm": "$2 + 2% per USD withdrawal; physical card only, up to $1,000 a withdrawal and 3 a day", "other": ["Crypto deposits: 0.15% to 0.75% Plasma fee plus network fees"] },
+    "summary": "Non-custodial Visa from Plasma that spends USDT, with cashback paid in XPL. The free Standard tier pays 1% on your first $500 a month.",
+    "cashback": { "basePct": 1, "maxPct": 3, "payout": "XPL, weekly", "note": "Since 11 Nov 2026. Standard: 1% on the first $500 a month, then 0.1%. Premium: 2% on the first $1,000, 1% on the next $1,000, then 0.25%. Platinum: 3% on the first $3,000, 2% up to $10,000, then 1%. Members who joined earlier keep the old rates until their membership period ends." },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "Billed in US dollars. Standard: 1% Plasma markup plus about 1% Visa FX. Premium: no FX fee on the first $3,000 a month. Platinum: no FX fee.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0.15, "cardFeeUsd": 0, "physicalCardFeeUsd": 20, "atm": "$2 + 2% per USD withdrawal; physical card only, up to $1,000 a withdrawal and 3 a day", "other": ["Crypto deposits: 0.15% to 0.75% Plasma fee plus network fees"] },
     "tiers": [
-      { "name": "Lite", "feeUsdYear": 0, "cashbackPct": 2, "bands": [ { "uptoUsd": 500, "pct": 2 }, { "uptoUsd": null, "pct": 0.1 } ], "fxPct": 2, "perks": ["1 free virtual card"] },
-      { "name": "Core", "feeUsdYear": 199, "feeNote": "Or lock 20,000 XPL for 12 months instead", "cashbackPct": 3, "bands": [ { "uptoUsd": 1000, "pct": 3 }, { "uptoUsd": 2000, "pct": 2 }, { "uptoUsd": 3000, "pct": 1 }, { "uptoUsd": null, "pct": 0.25 } ], "fxPct": 1.5, "requirement": "$199 a year, or lock 20,000 XPL for 12 months", "stake": { "token": "XPL", "amount": 20000, "coingeckoId": "plasma" }, "perks": ["5% on AI merchants (first $250 a month)", "ChatGPT Go subscription", "Up to 2 free virtual cards"] },
-      { "name": "Platinum", "feeUsdYear": 0, "feeNote": "No fee; needs 100,000 XPL locked for 12 months", "cashbackPct": 4, "bands": [ { "uptoUsd": 3000, "pct": 4 }, { "uptoUsd": 10000, "pct": 3 }, { "uptoUsd": 15000, "pct": 2 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "Lock 100,000 XPL for 12 months", "stake": { "token": "XPL", "amount": 100000, "coingeckoId": "plasma" }, "perks": ["10% on AI merchants (first $500 a month)", "10% on partner airlines, up to $600 a year", "Lounge access", "Visa concierge", "Travel insurance"] }
+      { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 1, "bands": [ { "uptoUsd": 500, "pct": 1 }, { "uptoUsd": null, "pct": 0.1 } ], "fxPct": 2, "perks": ["1 free virtual card"] },
+      { "name": "Premium", "feeUsdYear": 600, "feeNote": "Or lock 20,000 XPL for 12 months instead", "cashbackPct": 2, "bands": [ { "uptoUsd": 1000, "pct": 2 }, { "uptoUsd": 2000, "pct": 1 }, { "uptoUsd": null, "pct": 0.25 } ], "fxPct": 0, "requirement": "$600 a year, or lock 20,000 XPL for 12 months", "stake": { "token": "XPL", "amount": 20000, "coingeckoId": "plasma" }, "perks": ["Visa Signature physical card", "No FX fee on the first $3,000 a month", "2 virtual cards", "$200 a year in AI credits", "eSIM mobile data", "ATM up to $3,000 a day"] },
+      { "name": "Platinum", "feeUsdYear": 2500, "feeNote": "Or lock 100,000 XPL for 12 months instead", "cashbackPct": 3, "bands": [ { "uptoUsd": 3000, "pct": 3 }, { "uptoUsd": 10000, "pct": 2 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "$2,500 a year, or lock 100,000 XPL for 12 months", "stake": { "token": "XPL", "amount": 100000, "coingeckoId": "plasma" }, "perks": ["Metal card and 3 virtual cards", "Unlimited airport lounges", "Up to $600 a year back on flights", "$500 a year in AI credits", "Travel insurance and purchase protection", "ATM up to $25,000 a day"] }
     ],
     "coverage": { "countries": null, "scope": "Growing list of countries, full list not published; the US in 31 states", "examples": ["United States"], "markets": { "IN": "unknown", "AE": "unknown", "US": "yes", "GB": "unknown", "EU": "unknown" }, "countryList": { "yes": ["US"], "no": ["CU", "IR", "KP", "RU", "SY", "UA", "VE"], "others": "unknown" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 19, "ramps": "both", "credit": false, "yield": true },
@@ -903,8 +914,8 @@
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDT", "USDC"],
     "perks": ["Earn on your balance until you spend it (variable rate)", "Free USDT transfers on Plasma"],
-    "pros": ["2% back on the free tier, up to 4% on Platinum", "Non-custodial: Plasma does not hold your funds", "No FX fee on Platinum"],
-    "cons": ["Lite drops to 0.1% after $500 a month", "Cashback is paid in XPL, so its value moves with the token", "Indian ID documents are blocked by default at sign-up"],
+    "pros": ["1% back on the free tier, up to 3% on Platinum", "Non-custodial: Plasma does not hold your funds", "No FX fee on Platinum, or on the first $3,000 a month on Premium"],
+    "cons": ["Standard drops to 0.1% after $500 a month", "Premium costs $600 a year and Platinum $2,500 (or an XPL lock)", "Cashback is paid in XPL, so its value moves with the token", "Indian ID documents are blocked by default at sign-up"],
     "links": { "official": "https://www.plasma.org/", "affiliate": "https://plasma.org/download/F7VZFW" },
     "sources": [
       { "label": "Plasma Help Center: fees on Plasma One", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15506070-what-are-the-fees-on-plasma-one", "verified": "2026-10-25" },
@@ -923,9 +934,13 @@
       { "label": "Plasma Support: Which countries does Plasma One support for fiat deposits and withdrawals?", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15180607-which-countries-does-plasma-one-support-for-fiat-deposits-and-withdrawals", "verified": "2026-10-25" },
       { "label": "Plasma Support: How do I withdraw fiat to my bank account?", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15180677-how-do-i-withdraw-fiat-to-my-bank-account", "verified": "2026-10-25" },
       { "label": "Plasma One Help: the $10 referral bonus (ongoing, $100 at 2+ merchants in 14 days)", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15926373-how-do-i-get-the-10-referral-bonus", "verified": "2026-11-03" },
-      { "label": "Plasma One app: invite rewards, $10 first spend and $200 high spend (checked in the app by G2M)", "url": "https://www.plasma.org/plasma-one-rewards", "verified": "2026-11-03" }
+      { "label": "Plasma One app: invite rewards, $10 first spend and $200 high spend (checked in the app by G2M)", "url": "https://www.plasma.org/plasma-one-rewards", "verified": "2026-11-03" },
+      { "label": "Plasma Support: Cashback rates and spend bands by tier (Standard, Premium, Platinum, from 11 Nov 2026)", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15506768-cashback-rates-and-spend-bands-by-tier", "verified": "2026-11-12" },
+      { "label": "Plasma: Premium ($600 a year or 20,000 XPL; 0% FX up to $3,000 a month)", "url": "https://www.plasma.org/premium", "verified": "2026-11-12" },
+      { "label": "Plasma: Platinum ($2,500 a year or 100,000 XPL; 0% FX, lounges)", "url": "https://www.plasma.org/personal/platinum", "verified": "2026-11-12" },
+      { "label": "Plasma: Compare memberships (Standard $0, Premium $600, Platinum $2,500 a year)", "url": "https://www.plasma.org/compare", "verified": "2026-11-12" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-12",
     "metal": "silver",
     "image": { "source": "https://g2m.life/card-originals/plasma-one.png", "file": "/card-images/plasma-one-235674a2.webp" }
   },
@@ -1026,10 +1041,10 @@
     "forms": ["virtual", "physical", "metal"],
     "custody": "self-custodial",
     "summary": "Non-custodial Visa from Tria that spends from 1,000+ tokens, with cashback from 1.5% to 6% depending on your membership.",
-    "cashback": { "basePct": 1.5, "maxPct": 6, "payout": null, "note": "Lite: 1.5% on the first $1,000 a month, then 0.5%. Pro: 4.5% on the first $1,000, then 1%. Max: 6% on the first $2,000, then 1%." },
+    "cashback": { "basePct": 1.5, "maxPct": 6, "payout": null, "note": "Lite: 1.5% on the first $1,000 a month, then 1%. Pro: 4.5% on the first $1,000, then 1%. Max: 6% on the first $2,000, then 1%." },
     "fees": { "annualUsd": 20, "fxPct": 0, "fxNote": "Billed in US dollars. Tria charges no FX fee of its own; its help center says fees vary by region and card type, and the card terms allow Visa FX of up to 3%.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "physicalCardFeeUsd": 109, "atm": "Pro and Max: up to $750 a day, fee not published. No ATM access on Lite.", "other": [] },
     "tiers": [
-      { "name": "Lite", "feeUsdYear": 20, "cashbackPct": 1.5, "bands": [ { "uptoUsd": 1000, "pct": 1.5 }, { "uptoUsd": null, "pct": 0.5 } ], "fxPct": 0, "perks": ["Virtual Visa Platinum card", "1.5% with no cap on Tria Travel (hotels, rentals; not flights)"] },
+      { "name": "Lite", "feeUsdYear": 20, "cashbackPct": 1.5, "bands": [ { "uptoUsd": 1000, "pct": 1.5 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "perks": ["Virtual Visa Platinum card", "1.5% with no cap on Tria Travel (hotels, rentals; not flights)"] },
       { "name": "Pro", "feeUsdYear": 109, "cashbackPct": 4.5, "bands": [ { "uptoUsd": 1000, "pct": 4.5 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "$109 a year", "perks": ["Plastic Visa Signature card", "4.5% with no cap on Tria Travel (hotels, rentals; not flights)", "Lounge access", "Visa Luxury Hotels and Visa concierge", "ATM up to $750 a day"] },
       { "name": "Max", "feeUsdYear": 250, "cashbackPct": 6, "bands": [ { "uptoUsd": 2000, "pct": 6 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "$250 a year", "perks": ["Metal Visa Signature card", "6% with no cap on Tria Travel (hotels, rentals; not flights)", "Lounge access", "Visa Luxury Hotels and Visa concierge", "ATM up to $750 a day"] }
     ],
@@ -1044,7 +1059,7 @@
     "assets": ["USDC", "USDT"],
     "perks": ["Price protection up to $2,000", "Purchase protection up to $10,000", "Spend up to $1M a day on Pro and Max"],
     "pros": ["No FX or deposit fees on any tier", "1.5% on the entry tier, up to 6% on Max", "Lounge access on Pro and Max"],
-    "cons": ["Every tier has a yearly fee: $20 Lite, $109 Pro, $250 Max", "Higher rates stop after $1,000 to $2,000 a month (0.5% after that on Lite)"],
+    "cons": ["Every tier has a yearly fee: $20 Lite, $109 Pro, $250 Max", "Higher rates stop after $1,000 to $2,000 a month (1% after that)"],
     "links": { "official": "https://tria.so/", "affiliate": "https://app.tria.so/?accessCode=YFXSXC5574" },
     "sources": [
       { "label": "Tria Help Center: What are Tria Cards?", "url": "https://intercom.help/tria/en/articles/13513481-what-are-tria-cards", "verified": "2026-10-22" },
@@ -1060,9 +1075,10 @@
       { "label": "Tria Help Center: KYC Document Requirements", "url": "https://help.tria.so/en/articles/14035336-kyc-document-requirements", "verified": "2026-10-25" },
       { "label": "Tria Card Terms (USA)", "url": "https://docs.tria.so/card-terms-us", "verified": "2026-10-25" },
       { "label": "Tria Help Center: Tria Card Top Up Guide", "url": "https://help.tria.so/en/articles/14056654-tria-card-top-up-guide", "verified": "2026-10-25" },
-      { "label": "Tria app: sign-up offer, $10 after sign-up and card activation (checked in the app by G2M)", "url": "https://www.tria.so/", "verified": "2026-11-04" }
+      { "label": "Tria app: sign-up offer, $10 after sign-up and card activation (checked in the app by G2M)", "url": "https://www.tria.so/", "verified": "2026-11-04" },
+      { "label": "Tria Help Center: What are Tria Cards? (1% after the monthly cap on every tier)", "url": "https://intercom.help/tria/en/articles/13513481-what-are-tria-cards", "verified": "2026-11-12" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-12",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/tria.png", "file": "/card-images/tria-c57fc51e.webp" }
   },
@@ -1076,15 +1092,15 @@
     "forms": ["virtual", "physical"],
     "custody": "self-custodial",
     "summary": "Non-custodial Visa debit card from COCA. Cashback runs from 1% to 8% depending on how many COCA tokens you hold.",
-    "cashback": { "basePct": 1, "maxPct": 8, "payout": "Stablecoins, monthly", "note": "Starter: 1% with no limit. Standard to Elite: 3% to 8% up to a monthly spend limit of $1,000 to $10,000, then 1%." },
+    "cashback": { "basePct": 1, "maxPct": 8, "payout": "Stablecoins, monthly", "note": "No limit on cashback earned: Starter 1%, Standard 3%, Standard+ 4%, Premium 5%, Premium+ 6%, Elite 8%. Each tier can claim only so much to your balance a month: $15 (Starter) to $350 (Elite), more with boosters; unclaimed rewards carry over." },
     "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "No FX fee on direct pairs: spending in EUR or US dollars (COCA's docs: zero FX fees on direct pairs). 2% on other currencies (as shown in the COCA app).", "fxByCurrency": { "USD": 0, "EUR": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 5, "atm": "Free up to $250 a month, then 2%", "other": ["Plastic card: $5 on Starter, Standard and Standard+; free on higher tiers"] },
     "tiers": [
-      { "name": "Starter", "feeUsdYear": 0, "cashbackPct": 1 },
-      { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 3, "bands": [ { "uptoUsd": 1000, "pct": 3 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "Hold 300 COCA", "stake": { "token": "COCA", "amount": 300, "coingeckoId": "coca" }, "perks": ["50% back on 1 subscription"] },
-      { "name": "Standard+", "feeUsdYear": 0, "cashbackPct": 4, "bands": [ { "uptoUsd": 1750, "pct": 4 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "Hold 1,000 COCA", "stake": { "token": "COCA", "amount": 1000, "coingeckoId": "coca" }, "perks": ["50% back on 2 subscriptions"] },
-      { "name": "Premium", "feeUsdYear": 0, "cashbackPct": 5, "bands": [ { "uptoUsd": 2500, "pct": 5 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "Hold 3,000 COCA", "stake": { "token": "COCA", "amount": 3000, "coingeckoId": "coca" }, "perks": ["50% back on 2 subscriptions"] },
-      { "name": "Premium+", "feeUsdYear": 0, "cashbackPct": 6, "bands": [ { "uptoUsd": 5000, "pct": 6 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "Hold 10,000 COCA", "stake": { "token": "COCA", "amount": 10000, "coingeckoId": "coca" }, "perks": ["50% back on 3 subscriptions"] },
-      { "name": "Elite", "feeUsdYear": 0, "cashbackPct": 8, "bands": [ { "uptoUsd": 10000, "pct": 8 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "Hold 30,000 COCA", "stake": { "token": "COCA", "amount": 30000, "coingeckoId": "coca" }, "perks": ["50% back on 4 subscriptions"] }
+      { "name": "Starter", "feeUsdYear": 0, "cashbackPct": 1, "capMonthlyUsd": 15, "perks": ["Claim up to $15 a month"] },
+      { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 3, "capMonthlyUsd": 25, "requirement": "Hold 300 COCA", "stake": { "token": "COCA", "amount": 300, "coingeckoId": "coca" }, "perks": ["50% back on 1 subscription", "Claim up to $25 a month"] },
+      { "name": "Standard+", "feeUsdYear": 0, "cashbackPct": 4, "capMonthlyUsd": 35, "requirement": "Hold 1,000 COCA", "stake": { "token": "COCA", "amount": 1000, "coingeckoId": "coca" }, "perks": ["50% back on 2 subscriptions", "Claim up to $35 a month"] },
+      { "name": "Premium", "feeUsdYear": 0, "cashbackPct": 5, "capMonthlyUsd": 60, "requirement": "Hold 3,000 COCA", "stake": { "token": "COCA", "amount": 3000, "coingeckoId": "coca" }, "perks": ["50% back on 2 subscriptions", "Claim up to $60 a month"] },
+      { "name": "Premium+", "feeUsdYear": 0, "cashbackPct": 6, "capMonthlyUsd": 140, "requirement": "Hold 10,000 COCA", "stake": { "token": "COCA", "amount": 10000, "coingeckoId": "coca" }, "perks": ["50% back on 3 subscriptions", "Claim up to $140 a month"] },
+      { "name": "Elite", "feeUsdYear": 0, "cashbackPct": 8, "capMonthlyUsd": 350, "requirement": "Hold 30,000 COCA", "stake": { "token": "COCA", "amount": 30000, "coingeckoId": "coca" }, "perks": ["50% back on 4 subscriptions", "Claim up to $350 a month"] }
     ],
     "coverage": { "countries": 73, "scope": "UK, EEA, Asia, South America, the Middle East and Africa", "examples": ["United Kingdom"], "markets": { "IN": "no", "AE": "yes", "US": "no", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AD", "AE", "AR", "AT", "AU", "AZ", "BE", "BG", "BR", "CH", "CL", "CO", "CY", "CZ", "DE", "DK", "EC", "EE", "ES", "FI", "FR", "GB", "GE", "GG", "GH", "GI", "GR", "HK", "HR", "HU", "IE", "IL", "IM", "IS", "IT", "JE", "JP", "KE", "KR", "KZ", "LI", "LT", "LU", "LV", "MC", "MD", "ME", "MO", "MT", "MX", "MY", "NG", "NL", "NO", "NZ", "OM", "PA", "PE", "PH", "PL", "PT", "RO", "SA", "SE", "SI", "SK", "SV", "TH", "TW", "UA", "UG", "UZ", "ZA"], "others": "no" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 1, "ramps": "both", "credit": false, "yield": true },
@@ -1096,7 +1112,7 @@
     "assets": ["USDT", "USDC", "EURC", "EURS"],
     "perks": ["Yield on your card balance (variable)"],
     "pros": ["1% with no tokens needed", "Up to 8% on higher tiers", "Free ATM withdrawals up to $250 a month"],
-    "cons": ["Higher tiers need you to hold COCA tokens", "FX fee not published", "Not offered in the US"],
+    "cons": ["Higher tiers need you to hold COCA tokens", "You can claim only $15 to $350 of rewards a month, by tier", "Not offered in the US"],
     "links": { "official": "https://www.coca.xyz/", "affiliate": "https://coca.sjv.io/c/8068794/4117922/47661" },
     "sources": [
       { "label": "COCA docs: membership tiers", "url": "https://docs.coca.xyz/coca/membership-and-rewards/membership-you-deserve", "verified": "2026-10-24" },
@@ -1111,9 +1127,10 @@
       { "label": "COCA Help: What Bank Accounts Are Available in COCA?", "url": "https://help.coca.xyz/support/solutions/articles/205000059619-what-bank-accounts-are-available-in-coca-", "verified": "2026-10-25" },
       { "label": "COCA Docs: Buy Crypto", "url": "https://docs.coca.xyz/coca/crypto-account/buy-crypto", "verified": "2026-10-24" },
       { "label": "COCA affiliate team, 2 Nov 2026: November Welcome Cashback Drop, 8% on a new user's first 3 eligible purchases (offer ends 30 Nov 2026)", "url": "https://www.coca.xyz/", "verified": "2026-11-03" },
-      { "label": "COCA docs: COCA Card fees (zero FX fees on direct pairs); 2% on other currencies as shown in the COCA app", "url": "https://docs.coca.xyz/coca/banking-account/coca-card", "verified": "2026-11-04" }
+      { "label": "COCA docs: COCA Card fees (zero FX fees on direct pairs); 2% on other currencies as shown in the COCA app", "url": "https://docs.coca.xyz/coca/banking-account/coca-card", "verified": "2026-11-04" },
+      { "label": "COCA docs: Membership you deserve (unlimited cashback, monthly claim capacity by tier)", "url": "https://docs.coca.xyz/coca/membership-and-rewards/membership-you-deserve", "verified": "2026-11-12" }
     ],
-    "lastChecked": "2026-11-04",
+    "lastChecked": "2026-11-12",
     "metal": "rose",
     "image": { "source": "https://g2m.life/card-originals/coca.png", "file": "/card-images/coca-c187374f.webp" }
   },
@@ -1493,7 +1510,7 @@
     "forms": ["virtual", "physical"],
     "custody": "custodial",
     "summary": "Stablecoin prepaid cards from Hong Kong-based Infini: 1.5% cashback on every card, no annual or monthly fee, first card free. FX fee 1% on the Pro card, 3% on Lite; Max has no FX fee but charges 1% outside Hong Kong.",
-    "cashback": { "basePct": 1.5, "maxPct": 2.5, "payout": null, "note": "From 1 Nov 2026 every Infini card earns 1.5% on eligible purchases, worked out on the settled amount. Infini says up to 2.5% depending on membership tier and promotions, without giving the details." },
+    "cashback": { "basePct": 1.5, "maxPct": 5, "payout": null, "note": "From 1 Nov 2026 every Infini card earns 1.5% on eligible purchases, worked out on the settled amount. Infini's pricing page says up to 5% depending on membership tier and promotions, without giving the details." },
     "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Pro card: 1% on non-USD spending. Lite: 3%. Max: no FX fee, but a 1% cross-border fee on purchases outside Hong Kong and $0.30 on purchases under $50. US-dollar spending has no FX fee on Pro and Lite.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "atm": null, "other": ["First card free (one free card per account); extra cards priced when you apply", "Initial top-up of at least $10, which stays on the card", "No monthly or annual fee", "Refund fee 1% on Pro and Max", "Max: 1% cross-border fee outside Hong Kong; $0.30 on purchases under $50", "USD and EUR account details $10 one-time; bank deposits and withdrawals 0.20% plus $1 (ACH), $20 (wire) or EUR 1 (SEPA)", "Buying or selling stablecoins with USD 0.10% to 0.20%"] },
     "tiers": [
       { "name": "Pro", "feeUsdYear": 0, "cashbackPct": 1.5, "fxPct": 1, "perks": ["Visa with a Hong Kong card BIN", "No Apple Pay or Google Pay", "1% refund fee"] },
@@ -1515,9 +1532,10 @@
       { "label": "Infini: pricing (personal cards, accounts and transfers)", "url": "https://infini.money/en/pricing", "verified": "2026-11-04" },
       { "label": "Infini: personal account and cards (Apple Pay, Google Pay, account details)", "url": "https://infini.money/en/personal", "verified": "2026-11-04" },
       { "label": "Infini: compliance statement (licences, sanctions)", "url": "https://infini.money/en/compliance-statement", "verified": "2026-11-04" },
-      { "label": "Infini app: referral bonus, $10 each after the friend opens a card and spends $100 (checked in the app by G2M)", "url": "https://infini.money/", "verified": "2026-11-04" }
+      { "label": "Infini app: referral bonus, $10 each after the friend opens a card and spends $100 (checked in the app by G2M)", "url": "https://infini.money/", "verified": "2026-11-04" },
+      { "label": "Infini: Pricing (1.5% cashback, up to 5%; FX by card)", "url": "https://infini.money/en/pricing", "verified": "2026-11-12" }
     ],
-    "lastChecked": "2026-11-04",
+    "lastChecked": "2026-11-12",
     "addedOn": "2026-11-04",
     "metal": "rose",
     "image": { "source": "https://g2m.life/card-originals/infini.webp", "file": "/card-images/infini-3b3cbb71.webp" }
