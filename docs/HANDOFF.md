@@ -417,6 +417,22 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   against the previous build (same text before and after clicks). Long words: short custody labels in the table and
   wrapping headings, so the table fits 1280 px in every language. Next stages, one PR each: card page in full,
   compare, calculator, finder, wallet, receipt, corridors, submit, fees guide.
+- Card re-check (12 Nov 2026, Akash: "quick check to update the cards details if anything changes"): every card's
+  main issuer fee and cashback pages read again. Changed in the sheet (sources added, lastChecked 2026-11-12):
+  Plasma One renamed and repriced its tiers on 11 Nov (Standard free 1% to $500 then 0.1%; Premium $600/yr or 20K
+  XPL, 2%/1%/0.25%, 0% FX on the first $3K a month; Platinum $2,500/yr or 100K XPL, 3%/2%/1%, 0% FX); Krak's
+  cashback is now set by 30-day average balance (EEA/UK 0.5% from EUR 200 to 2% from EUR 50K; US 1% from $1K to 2%
+  from $150K; 8 tiers with countries) and Krak charges no ATM fee; COCA cashback is now "unlimited" but each tier can
+  claim only $15 to $350 a month (stored as the monthly cap; unclaimed rewards carry over); ether.fi card and lounge
+  benefits by level (free virtual cards 1/4/10/50, Core physical card $50, lounges from Luxe), its old benefits page
+  was gone; Nexo free ATM EUR 200/400/1,000/2,000 and physical card from Gold; Jupiter's 4% boost capped at $200;
+  Tria Lite pays 1% after its cap; Infini says up to 5%; Avalanche's site lists 1% FX (agreements allow more).
+  Rank moves: Krak 20th to 14th, Avalanche 29th to 24th, Plasma One 18th to 21st. Unchanged on re-read: Crypto.com
+  (Level Up tiers renamed Basic/Plus/Pro/Private on the fee page), Bybit (fee page lists APAC and Georgia FX as "Not
+  Supported"; the card FAQ still lists them, so coverage kept), Bitget, KAST, MetaMask, MEXC, Solayer, Tangem, Ethena,
+  Exa, Kolo, Karta, Avici, Tuyo, Pionex, DogPay, Solid, Cashi, Kite, SolCard, Laso, XPlace. Not readable as text
+  (pictures or moved pages), left as they were: Wirex One, Bleap, RedotPay (fee table image, updated July), Coinbase
+  One (card page moved).
 - New card, OrbitX (12 Nov 2026, Akash forwarded OrbitX's reply and their card picture): sheet row 38, tiers Neo
   ($12/yr, Visa Platinum, FX 2%, $0.20 "fiat conversion fee" per purchase) and Lux ($30/yr, Visa Signature, FX 1%,
   $0.10), all from orbitxpay.com/card-fees. The $0.20/$0.10 is read as a per-purchase fee (the card terms list
