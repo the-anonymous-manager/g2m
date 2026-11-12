@@ -417,6 +417,14 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   against the previous build (same text before and after clicks). Long words: short custody labels in the table and
   wrapping headings, so the table fits 1280 px in every language. Next stages, one PR each: card page in full,
   compare, calculator, finder, wallet, receipt, corridors, submit, fees guide.
+- Karta update (12 Nov 2026, Akash sent app screenshots and his referral link): in the sheet, Karta now has its
+  referral link (https://karta.social/29fda4cb62, no sign-up bonus for the friend, so none listed), cashback 0% (Karta
+  confirms no cashback on your own spending), the metal card (299 USDT pre-order, first shipments planned for December
+  2026; plastic 99 USDT for November), virtual card replacement 15 USDT, Tron top-ups 5.90 USDT, the declined-ATM fee and
+  the Visa Signature benefits (DragonPass airport offers, GigSky eSIM, car rental and purchase cover, warranty,
+  concierge), all from Karta's Help Center. ATM limits (250 USDT per withdrawal including the fee, 3 tries in 24 hours)
+  are only in the Karta app: added at Akash's request, marked "Per the Karta app", source = the app link. Its "lounge access at fixed rates" is pay-per-visit, so lounge checks now skip a
+  perk that says "at fixed prices" (`lib/perks.ts`). Score (40) and rank (33rd) unchanged. 15 new lines translated.
 - Whole site in each language, stage 2d (12 Nov 2026, Akash: "step 4"): the card finder at `/de/finder` etc. in all 8
   languages: the five questions, the passport option, the results with their reasons and "check first" notes, share
   buttons and links (perks quoted from the sheet translated on the server). The picks are worked out exactly as before;

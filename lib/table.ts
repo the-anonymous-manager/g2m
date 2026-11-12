@@ -2,6 +2,7 @@ import type { CardRow } from '@/lib/types';
 import { REGIONS, availabilityIn, availabilityInRegion, countryName, isCountry, isRegion, type Region } from '@/lib/regions';
 import { nomadFit } from '@/lib/nomad';
 import { uiEn, type Ui } from '@/lib/i18n/ui/en';
+import { isLoungePerk } from '@/lib/perks';
 // Plain-text filling only (no React here).
 const fillText = (t: string, v: Record<string, string>) => t.replace(/\{(\w+)\}/g, (m, k) => v[k] ?? m);
 
@@ -88,7 +89,7 @@ export function sortRows(rows: CardRow[], rules: SortRule[]): CardRow[] {
 }
 
 const hasLounge = (c: CardRow) =>
-  [...c.perks, ...c.tiers.flatMap((t) => t.perks)].some((p) => /lounge/i.test(p));
+  [...c.perks, ...c.tiers.flatMap((t) => t.perks)].some(isLoungePerk);
 
 export function filterRows(rows: CardRow[], f: Filters): CardRow[] {
   const q = f.q.trim().toLowerCase();

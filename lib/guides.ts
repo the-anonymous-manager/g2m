@@ -4,6 +4,7 @@ import { getCards } from '@/lib/cards';
 import { rankIn } from '@/lib/score';
 import { availabilityIn, countryName } from '@/lib/regions';
 import { COUNTRY_CODES } from '@/lib/countries.mjs';
+import { isLoungePerk } from '@/lib/perks';
 
 // The /guides pages. Every list and number comes from the card data, so a sheet edit updates the guides too;
 // only the general explanations are written here, and they name no card facts.
@@ -41,7 +42,7 @@ export function countryGuides(): CountryGuide[] {
 
 export const countryGuide = (slug: string) => countryGuides().find((g) => countrySlug(g.cc) === slug);
 
-const hasLounge = (c: Card) => [...c.perks, ...c.tiers.flatMap((t) => t.perks)].some((p) => /lounge/i.test(p));
+const hasLounge = (c: Card) => [...c.perks, ...c.tiers.flatMap((t) => t.perks)].some(isLoungePerk);
 
 export type Topic = {
   slug: string;

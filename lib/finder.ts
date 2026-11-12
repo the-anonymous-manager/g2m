@@ -4,6 +4,7 @@ import { cashbackLabel, pct } from '@/lib/format';
 import { netRate, rankIn } from '@/lib/score';
 import { homeFx } from '@/lib/fx';
 import { nomadFit, type NomadFit } from '@/lib/nomad';
+import { isLoungePerk } from '@/lib/perks';
 
 export type Hold = 'self' | 'exchange' | 'any';
 export type Priority = 'cashback' | 'fees' | 'travel' | 'perks';
@@ -84,7 +85,7 @@ export const USES: Use[] = ['wallets', 'physical', 'credit', 'yield'];
 export const MONEY: Money[] = ['free', 'paid', 'bank'];
 
 const allPerks = (c: CardRow) => Array.from(new Set([...c.perks, ...c.tiers.flatMap((t) => t.perks)]));
-const hasLounge = (c: CardRow) => allPerks(c).some((p) => /lounge/i.test(p));
+const hasLounge = (c: CardRow) => allPerks(c).some(isLoungePerk);
 
 /** A comma list from the link, keeping only known values, in their usual order. */
 const listOf = <T extends string>(raw: string, known: readonly T[]): T[] => {
