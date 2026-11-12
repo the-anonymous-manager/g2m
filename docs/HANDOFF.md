@@ -417,6 +417,17 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   against the previous build (same text before and after clicks). Long words: short custody labels in the table and
   wrapping headings, so the table fits 1280 px in every language. Next stages, one PR each: card page in full,
   compare, calculator, finder, wallet, receipt, corridors, submit, fees guide.
+- New card, OrbitX (12 Nov 2026, Akash forwarded OrbitX's reply and their card picture): sheet row 38, tiers Neo
+  ($12/yr, Visa Platinum, FX 2%, $0.20 "fiat conversion fee" per purchase) and Lux ($30/yr, Visa Signature, FX 1%,
+  $0.10), all from orbitxpay.com/card-fees. The $0.20/$0.10 is read as a per-purchase fee (the card terms list
+  "authorization and settlement fees up to $0.50" on USD purchases too). Physical cards are not out yet (OrbitX: later;
+  Lux metal $350 at launch), so forms = virtual and the ATM line says physical only. Issuer Third National is named in
+  OrbitX's published card terms (their email calls the BIN sponsor confidential; it is public in the terms). Funds stay
+  in the user's wallet ("will not, in any circumstance, be holding custody"). No published cashback and no country
+  list (focus regions only), so all five markets are unknown and it ranks 32nd of 37 (43/100). Named accounts in 9
+  currencies, payouts to 100+ countries, yield on USDC. No referral link yet. Picture in `public/card-originals/`
+  (sent by OrbitX). Also fixed: per-purchase fees showed "$0.2"/"$0.3" (now "$0.20"/"$0.30", DogPay too), and a
+  coverage note ending in a full stop got a second one.
 - Whole site in each language, stage 2a (12 Nov 2026; Akash: "first go with 1,2,3,4,5,6", the first being the card
   page): `/de/cards/kast` etc. are now the full English card review in each language, built by the same component
   (`components/CardReview.tsx`; the English page calls it with no language and is unchanged, checked word for word

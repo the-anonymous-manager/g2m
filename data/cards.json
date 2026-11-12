@@ -1602,5 +1602,45 @@
     "addedOn": "2026-11-04",
     "metal": "silver",
     "image": { "source": "https://g2m.life/card-originals/xplace.png", "file": "/card-images/xplace-4127bb21.webp" }
+  },
+  {
+    "slug": "orbitx",
+    "name": "OrbitX Card",
+    "brand": "OrbitX",
+    "issuer": "Third National",
+    "network": "Visa",
+    "type": "mixed",
+    "forms": ["virtual"],
+    "custody": "self-custodial",
+    "summary": "A Visa card from Singapore-based OrbitX that spends USDC or USDT from your own wallet, with named bank accounts in 9 currencies. Neo costs $12 a year (2% FX fee), Lux $30 (1%, Visa Signature). No published cashback; virtual card only for now.",
+    "cashback": { "basePct": null, "maxPct": null, "payout": null, "note": "Not published. OrbitX told G2M it cannot yet share a full rewards breakdown." },
+    "fees": { "annualUsd": 12, "fxPct": 2, "fxNote": "Billed in US dollars, so US-dollar spending has no FX fee. Other currencies: 2% on Neo, 1% on Lux. Every purchase also pays a fiat conversion fee of $0.20 on Neo or $0.10 on Lux.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txFlatUsd": 0.2, "cardFeeUsd": 0, "atm": "Physical card only, not available yet: the ATM's own fee + 2% + $2; limit $500 on Neo, $1,000 on Lux", "other": ["Fiat conversion fee on every purchase: $0.20 on Neo, $0.10 on Lux", "Withdrawing to a crypto wallet: $2", "Declined purchase (low balance): $0.10 on Neo, $0.05 on Lux", "Card replacement: $100 on Neo, $199 on Lux", "Physical cards come later: plastic $100 (Neo), metal $350 (Lux) at launch", "Returned payment up to $69 (card terms)", "Spending limit $50,000 a day on Neo; no limit on Lux"] },
+    "tiers": [
+      { "name": "Neo", "feeUsdYear": 12, "cashbackPct": null, "fxPct": 2, "requirement": "$12 a year", "perks": ["Visa Platinum", "$0.20 fiat conversion fee on every purchase", "Up to 10 add-on cards", "Spending up to $50,000 a day", "Plastic card $100 when physical cards launch"] },
+      { "name": "Lux", "feeUsdYear": 30, "cashbackPct": null, "fxPct": 1, "requirement": "$30 a year", "perks": ["Visa Signature benefits", "$0.10 fiat conversion fee on every purchase", "Unlimited add-on cards", "No daily spending limit", "Metal card $350 when physical cards launch"] }
+    ],
+    "coverage": { "countries": null, "scope": "No published country list. OrbitX focuses on Latin America, East Asia, Africa and the Middle East. The international card is not for US citizens; a separate US card agreement exists.", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
+    "ecosystem": { "iban": "named", "payoutCorridors": 9, "ramps": "both", "credit": null, "yield": true },
+    "bankRails": [ { "rail": "SWIFT", "in": false, "out": true, "fee": "to 100+ countries, by local clearing or SWIFT" } ],
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["USDC", "USDT"],
+    "perks": ["Named bank accounts in 9 currencies: USD, EUR, GBP, AED, NGN, BRL, MXN, COP, PHP", "Send money to 100+ countries in your own name", "Yield on USDC through on-chain strategies", "Funds on Base and Polygon; Solana and Tron coming"],
+    "pros": ["Funds stay in your own wallet (non-custodial)", "Named bank accounts in 9 currencies and transfers to 100+ countries", "Low annual fee: $12 (Neo) or $30 (Lux)"],
+    "cons": ["No published cashback", "FX fee 2% on Neo (1% on Lux), plus $0.20 or $0.10 on every purchase", "No published country list; virtual card only for now"],
+    "links": { "official": "https://orbitxpay.com/" },
+    "sources": [
+      { "label": "OrbitX: Card Fees and Terms (Neo and Lux plans)", "url": "https://orbitxpay.com/card-fees", "verified": "2026-11-12" },
+      { "label": "OrbitX: Spend Card International Terms (issuer Third National, fees, collateral stays in your wallet)", "url": "https://orbitxpay.com/spend-card-terms", "verified": "2026-11-12" },
+      { "label": "OrbitX: Spend Card US Terms", "url": "https://orbitxpay.com/spend-card-terms-us-consumer", "verified": "2026-11-12" },
+      { "label": "OrbitX: For individuals (named accounts in 9 currencies, balance or credit mode)", "url": "https://orbitxpay.com/individual", "verified": "2026-11-12" },
+      { "label": "OrbitX: Home (non-custodial wallet, transfers to 100+ countries, yield on USDC)", "url": "https://orbitxpay.com/", "verified": "2026-11-12" },
+      { "label": "OrbitX: Apple Pay terms", "url": "https://orbitxpay.com/apple-pay-terms", "verified": "2026-11-12" },
+      { "label": "OrbitX: Google Pay terms", "url": "https://orbitxpay.com/google-pay-terms-and-conditions", "verified": "2026-11-12" },
+      { "label": "OrbitX team, reply to G2M (12 Nov 2026): self-custodial wallets, physical cards later (Lux metal $350), KYC checks, focus regions; card picture sent by OrbitX", "url": "https://orbitxpay.com/card-fees", "verified": "2026-11-12" }
+    ],
+    "lastChecked": "2026-11-12",
+    "addedOn": "2026-11-12",
+    "metal": "black",
+    "image": { "source": "https://g2m.life/card-originals/orbitx.webp", "file": "/card-images/orbitx-da41de2b.webp" }
   }
 ]
