@@ -422,8 +422,8 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   confirms no cashback on your own spending), the metal card (299 USDT pre-order, first shipments planned for December
   2026; plastic 99 USDT for November), virtual card replacement 15 USDT, Tron top-ups 5.90 USDT, the declined-ATM fee and
   the Visa Signature benefits (DragonPass airport offers, GigSky eSIM, car rental and purchase cover, warranty,
-  concierge), all from Karta's Help Center. The app shows a 250 USDT per-withdrawal ATM limit and 3 tries a day, not
-  on a public page, so not listed. Its "lounge access at fixed rates" is pay-per-visit, so lounge checks now skip a
+  concierge), all from Karta's Help Center. ATM limits (250 USDT per withdrawal including the fee, 3 tries in 24 hours)
+  are only in the Karta app: added at Akash's request, marked "Per the Karta app", source = the app link. Its "lounge access at fixed rates" is pay-per-visit, so lounge checks now skip a
   perk that says "at fixed prices" (`lib/perks.ts`). Score (40) and rank (33rd) unchanged. 15 new lines translated.
 - Whole site in each language, stage 2d (12 Nov 2026, Akash: "step 4"): the card finder at `/de/finder` etc. in all 8
   languages: the five questions, the passport option, the results with their reasons and "check first" notes, share

@@ -998,7 +998,7 @@
     "custody": "self-custodial",
     "summary": "Visa Signature card run from a Telegram app, topped up with USDT or USDC on eight networks. Every card payment carries a 1.5% fee.",
     "cashback": { "basePct": 0, "maxPct": null, "payout": null, "note": "No cashback on your own spending. You earn cashback on the spending of friends you refer." },
-    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in US dollars. Visa adds 1% on payments in other currencies, on top of Karta's 1.5% fee on every card payment.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txPct": 1.5, "cardFeeUsd": 5, "physicalCardFeeUsd": 99, "atm": "1 USDT + 2.5% per withdrawal; 1 USDT for a declined withdrawal", "other": ["Virtual card: 5 USDT one-time", "Virtual card replacement: 15 USDT", "Plastic card: 99 USDT pre-order, plus shipping (not published); first shipments planned for November 2026", "Metal card: 299 USDT pre-order, plus shipping (not published); first shipments planned for December 2026", "Top-ups on Tron (TRC-20): 5.90 USDT; free on the other networks", "Sending crypto out: 0.1% plus a network fee of 0.90 to 4.90 USDT", "Bank payouts: coming soon"] },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in US dollars. Visa adds 1% on payments in other currencies, on top of Karta's 1.5% fee on every card payment.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txPct": 1.5, "cardFeeUsd": 5, "physicalCardFeeUsd": 99, "atm": "1 USDT + 2.5% per withdrawal; 1 USDT for a declined withdrawal. Per the Karta app: up to 250 USDT per withdrawal including the fee, and 3 tries in any 24 hours (declined ones count)", "other": ["Virtual card: 5 USDT one-time", "Virtual card replacement: 15 USDT", "Plastic card: 99 USDT pre-order, plus shipping (not published); first shipments planned for November 2026", "Metal card: 299 USDT pre-order, plus shipping (not published); first shipments planned for December 2026", "Top-ups on Tron (TRC-20): 5.90 USDT; free on the other networks", "Sending crypto out: 0.1% plus a network fee of 0.90 to 4.90 USDT", "Bank payouts: coming soon"] },
     "tiers": [
       { "name": "Karta Personal", "feeUsdYear": 0, "feeNote": "One-time: 5 USDT for the virtual card; 99 USDT plastic or 299 USDT metal card (pre-order)", "cashbackPct": null }
     ],
@@ -1026,7 +1026,8 @@
       { "label": "Karta Card Terms (B2C)", "url": "https://legal.karta.io/b2c-card-terms", "verified": "2026-10-25" },
       { "label": "Karta Personal Help Center: Which documents are accepted for identity verification?", "url": "https://intercom.help/karta-personal/en/articles/10476379-which-documents-are-accepted-for-identity-verification", "verified": "2026-10-25" },
       { "label": "Karta Personal Help Center: What stablecoins can I use to top up my account?", "url": "https://intercom.help/karta-personal/en/articles/10460873-what-stablecoins-can-i-use-to-top-up-my-account", "verified": "2026-10-25" },
-      { "label": "Karta Personal Help Center: Visa Signature Card Benefits", "url": "https://intercom.help/karta-personal/en/articles/11035105-visa-signature-card-benefits", "verified": "2026-11-12" }
+      { "label": "Karta Personal Help Center: Visa Signature Card Benefits", "url": "https://intercom.help/karta-personal/en/articles/11035105-visa-signature-card-benefits", "verified": "2026-11-12" },
+      { "label": "Karta app: fees screen (ATM withdrawal limits)", "url": "https://t.me/Karta/app", "verified": "2026-11-12" }
     ],
     "lastChecked": "2026-11-12",
     "metal": "gunmetal",
