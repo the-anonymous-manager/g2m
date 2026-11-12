@@ -994,13 +994,13 @@
     "issuer": null,
     "network": "Visa",
     "type": "prepaid",
-    "forms": ["virtual", "physical"],
+    "forms": ["virtual", "physical", "metal"],
     "custody": "self-custodial",
     "summary": "Visa Signature card run from a Telegram app, topped up with USDT or USDC on eight networks. Every card payment carries a 1.5% fee.",
-    "cashback": { "basePct": null, "maxPct": null, "payout": null, "note": "No cashback on your own spending. You earn cashback on the spending of friends you refer." },
-    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in US dollars. Visa adds 1% on payments in other currencies, on top of Karta's 1.5% fee on every card payment.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txPct": 1.5, "cardFeeUsd": 5, "physicalCardFeeUsd": 99, "atm": "1 USDT + 2.5% per withdrawal", "other": ["Virtual card: 5 USDT one-time", "Plastic card: 99 USDT pre-order, plus shipping (not published)", "Bank payouts: coming soon"] },
+    "cashback": { "basePct": 0, "maxPct": null, "payout": null, "note": "No cashback on your own spending. You earn cashback on the spending of friends you refer." },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in US dollars. Visa adds 1% on payments in other currencies, on top of Karta's 1.5% fee on every card payment.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txPct": 1.5, "cardFeeUsd": 5, "physicalCardFeeUsd": 99, "atm": "1 USDT + 2.5% per withdrawal; 1 USDT for a declined withdrawal", "other": ["Virtual card: 5 USDT one-time", "Virtual card replacement: 15 USDT", "Plastic card: 99 USDT pre-order, plus shipping (not published); first shipments planned for November 2026", "Metal card: 299 USDT pre-order, plus shipping (not published); first shipments planned for December 2026", "Top-ups on Tron (TRC-20): 5.90 USDT; free on the other networks", "Sending crypto out: 0.1% plus a network fee of 0.90 to 4.90 USDT", "Bank payouts: coming soon"] },
     "tiers": [
-      { "name": "Karta Personal", "feeUsdYear": 0, "feeNote": "One-time: 5 USDT for the virtual card, from 100 USDT for a physical card", "cashbackPct": null }
+      { "name": "Karta Personal", "feeUsdYear": 0, "feeNote": "One-time: 5 USDT for the virtual card; 99 USDT plastic or 299 USDT metal card (pre-order)", "cashbackPct": null }
     ],
     "coverage": { "countries": null, "scope": "Not published; depends on local rules and card partners", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "no", "GB": "unknown", "EU": "unknown" }, "countryList": { "yes": [], "no": ["US"], "others": "unknown" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 0, "ramps": "on", "credit": false, "yield": false },
@@ -1010,14 +1010,14 @@
     "restrictedPassports": ["US"],
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDT", "USDC"],
-    "perks": ["Visa Signature", "Fiat top-ups by ACH, SEPA, SWIFT, PIX and SPEI"],
-    "pros": ["Free crypto top-ups on eight networks", "Virtual card for a one-time 5 USDT", "Non-custodial wallet"],
+    "perks": ["Visa Signature", "Visa Airport Companion (DragonPass): lounge visits at fixed prices, airport dining discounts, some free set meals and airport transfer offers", "1GB of free GigSky eSIM data when travelling", "Car rental insurance against theft or damage, up to 31 days", "Purchase protection against theft or accidental damage, up to 180 days", "Extended warranty on some purchases", "24/7 digital concierge for travel, bookings, dining and events", "Fiat top-ups by ACH, SEPA, SWIFT, PIX and SPEI"],
+    "pros": ["Free crypto top-ups on seven networks (Tron costs 5.90 USDT)", "Virtual card for a one-time 5 USDT", "Visa Signature travel and purchase cover", "Non-custodial wallet"],
     "cons": ["1.5% fee on every card payment", "No cashback on your own spending", "Country list not published"],
-    "links": { "official": "https://karta.io/" },
+    "links": { "official": "https://karta.io/", "affiliate": "https://karta.social/29fda4cb62" },
     "sources": [
-      { "label": "Karta: fees and limits", "url": "https://karta.io/", "verified": "2026-10-25" },
-      { "label": "Karta Help Center: Are there any fees for using Karta Personal?", "url": "https://intercom.help/karta-personal/en/articles/10511616-are-there-any-fees-for-using-karta-personal", "verified": "2026-10-24" },
-      { "label": "Karta Personal Help Center: FAQ: Preorder Physical Cards", "url": "https://intercom.help/karta-personal/en/articles/13915440-faq-preorder-physical-cards", "verified": "2026-10-24" },
+      { "label": "Karta: fees and limits", "url": "https://karta.io/", "verified": "2026-11-12" },
+      { "label": "Karta Help Center: Are there any fees for using Karta Personal?", "url": "https://intercom.help/karta-personal/en/articles/10511616-are-there-any-fees-for-using-karta-personal", "verified": "2026-11-12" },
+      { "label": "Karta Personal Help Center: FAQ: Preorder Physical Cards", "url": "https://intercom.help/karta-personal/en/articles/13915440-faq-preorder-physical-cards", "verified": "2026-11-12" },
       { "label": "Karta Personal Help Center: How to top up via virtual account", "url": "https://intercom.help/karta-personal/en/articles/15272021-how-to-top-up-via-virtual-account", "verified": "2026-10-24" },
       { "label": "Karta Personal Help Center: What are Virtual Accounts and how do they work?", "url": "https://intercom.help/karta-personal/en/articles/15272772-what-are-virtual-accounts-and-how-do-they-work", "verified": "2026-10-24" },
       { "label": "Karta Personal Help Center: What fund transfer methods are available?", "url": "https://intercom.help/karta-personal/en/articles/10511647-what-fund-transfer-methods-are-available", "verified": "2026-10-24" },
@@ -1025,9 +1025,10 @@
       { "label": "Karta Personal Help Center: Who Can Get a Karta Personal Card?", "url": "https://intercom.help/karta-personal/en/articles/10531752-who-can-get-a-karta-personal-card", "verified": "2026-10-25" },
       { "label": "Karta Card Terms (B2C)", "url": "https://legal.karta.io/b2c-card-terms", "verified": "2026-10-25" },
       { "label": "Karta Personal Help Center: Which documents are accepted for identity verification?", "url": "https://intercom.help/karta-personal/en/articles/10476379-which-documents-are-accepted-for-identity-verification", "verified": "2026-10-25" },
-      { "label": "Karta Personal Help Center: What stablecoins can I use to top up my account?", "url": "https://intercom.help/karta-personal/en/articles/10460873-what-stablecoins-can-i-use-to-top-up-my-account", "verified": "2026-10-25" }
+      { "label": "Karta Personal Help Center: What stablecoins can I use to top up my account?", "url": "https://intercom.help/karta-personal/en/articles/10460873-what-stablecoins-can-i-use-to-top-up-my-account", "verified": "2026-10-25" },
+      { "label": "Karta Personal Help Center: Visa Signature Card Benefits", "url": "https://intercom.help/karta-personal/en/articles/11035105-visa-signature-card-benefits", "verified": "2026-11-12" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-12",
     "metal": "gunmetal",
     "image": { "source": "https://g2m.life/card-originals/karta-io.png", "file": "/card-images/karta-io-39be2b64.webp" }
   },

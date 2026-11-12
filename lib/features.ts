@@ -1,4 +1,5 @@
 import type { CardRow, Tier } from '@/lib/types';
+import { isLoungePerk } from '@/lib/perks';
 
 // Things beyond cashback a wallet can need. Each comes from published card data; anything not confirmed counts as
 // missing. `tierLevel` features depend on the plan (e.g. lounge access only on paid tiers).
@@ -14,7 +15,7 @@ export const FEATURES: Feature[] = [
     label: 'Airport lounge access',
     short: 'Lounges',
     tierLevel: true,
-    has: (_c, t) => (t.perks ?? []).some((p) => /lounge/i.test(p))
+    has: (_c, t) => (t.perks ?? []).some(isLoungePerk)
   },
   { key: 'yield', label: 'Yield on your balance', short: 'Yield', has: (c) => c.ecosystem?.yield === true },
   { key: 'borrow', label: 'Borrow against crypto', short: 'Borrow', has: (c) => c.ecosystem?.credit === true },
