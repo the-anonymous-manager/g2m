@@ -28,6 +28,8 @@ export const englishFmt: ClientFmt = {
 export function intlFmt(tag: string, ui: Ui, names?: Record<string, string>): ClientFmt {
   const pctF = new Intl.NumberFormat(tag, { style: 'percent', maximumFractionDigits: 2 });
   const usdF = new Intl.NumberFormat(tag, { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 2 });
+  // Cents always with two digits: $0.20, never $0.2.
+  const usdC = new Intl.NumberFormat(tag, { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
   let display: Intl.DisplayNames | null = null;
   try {
     display = new Intl.DisplayNames([tag], { type: 'region', style: 'short' });
@@ -38,7 +40,7 @@ export function intlFmt(tag: string, ui: Ui, names?: Record<string, string>): Cl
   let sorted: { code: string; name: string }[] | null = null;
   return {
     pct: (n, empty = ui.common.notPublished) => (n == null ? empty : pctF.format(n / 100)),
-    usd: (n, empty = ui.common.notPublished) => (n == null ? empty : n === 0 ? ui.common.free : usdF.format(n)),
+    usd: (n, empty = ui.common.notPublished) => (n == null ? empty : n === 0 ? ui.common.free : (n % 1 ? usdC : usdF).format(n)),
     country,
     countries: () =>
       (sorted ??= COUNTRIES.map((c) => ({ code: c.code, name: country(c.code) })).sort((a, b) => a.name.localeCompare(b.name, tag)))

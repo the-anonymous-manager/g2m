@@ -52,7 +52,7 @@ function context(locale?: Locale) {
   const iso = (s: string) => (locale?.dir === 'rtl' && /\d/.test(s) ? `\u2066${s}\u2069` : s);
   const U = (n: number | null | undefined, empty = NP) => (english ? usd(n, empty) : iso(ifmt!.usd(n, empty === NP ? ui.common.notPublished : empty)));
   /** A plain amount, never "Free" (for "$10 coffee", limits and caps). */
-  const M = (n: number) => (english ? `$${n.toLocaleString('en-US')}` : iso(new Intl.NumberFormat(locale!.tag, { style: 'currency', currency: 'USD', maximumFractionDigits: 2, minimumFractionDigits: 0 }).format(n)));
+  const M = (n: number) => (english ? `$${n.toLocaleString('en-US')}` : iso(new Intl.NumberFormat(locale!.tag, { style: 'currency', currency: 'USD', maximumFractionDigits: 2, minimumFractionDigits: n % 1 ? 2 : 0 }).format(n)));
   /** The comma between items: "，" in Chinese, "،" in Arabic. */
   const sep = locale?.code === 'zh-hk' ? '，' : locale?.code === 'ar' ? '، ' : ', ';
   const country = (cc: string) => (english ? countryName(cc) : f!.country(cc));
@@ -85,6 +85,9 @@ function context(locale?: Locale) {
   return { english, locale, ui, t, d, f, P, U, M, sep, country, market, date, list, tx, Tx, range, prefix, href };
 }
 type Ctx = ReturnType<typeof context>;
+
+/** A sentence with one full stop at the end, never two. */
+const endStop = (s: string) => (/[.!?。]$/.test(s) ? s : `${s}.`);
 
 /** Cashback bands of a tier ("2% up to $2,000/mo, 1% above $2,000"). */
 function bandsLabel(tier: Pick<Tier, 'bands' | 'cashbackPct'>, c: Ctx) {
@@ -181,7 +184,7 @@ export function cardFaqs(card: Card, locale?: Locale): { q: string; a: string }[
     out.push({
       q: fill(t.qWhere, { name }),
       a: [
-        card.coverage.scope ? `${c.tx(card.coverage.scope)}.` : '',
+        card.coverage.scope ? endStop(c.tx(card.coverage.scope)) : '',
         yes.length ? fill(t.confirmedIn, { list: c.list(yes) }) : '',
         no.length ? fill(t.notIn, { list: c.list(no) }) : ''
       ]
@@ -499,7 +502,11 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
             {card.coverage.countries && !card.coverage.scope.includes(String(card.coverage.countries))
               ? ` · ${english ? `${card.coverage.countries} countries` : fill(t.countriesN, { n: card.coverage.countries })}`
               : ''}
-            .{' '}
+            {/* No second full stop when the description already ends with one. */}
+            {/[.!?。]$/.test(english ? card.coverage.scope : c.tx(card.coverage.scope)) &&
+            !(card.coverage.countries && !card.coverage.scope.includes(String(card.coverage.countries)))
+              ? ''
+              : '.'}{' '}
             {card.coverage.examples.length
               ? english
                 ? `Includes ${card.coverage.examples.join(', ')}.`
