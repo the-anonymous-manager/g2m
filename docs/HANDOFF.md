@@ -417,6 +417,15 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   against the previous build (same text before and after clicks). Long words: short custody labels in the table and
   wrapping headings, so the table fits 1280 px in every language. Next stages, one PR each: card page in full,
   compare, calculator, finder, wallet, receipt, corridors, submit, fees guide.
+- Whole site in each language, stage 2d (12 Nov 2026, Akash: "step 4"): the card finder at `/de/finder` etc. in all 8
+  languages: the five questions, the passport option, the results with their reasons and "check first" notes, share
+  buttons and links (perks quoted from the sheet translated on the server). The picks are worked out exactly as before;
+  `lib/finder.ts` now records each reason as a fact and words it in English the same way. English `/finder` checked
+  against the live build in 15 answer sets and clicks: same words, titles and links. The translated home pages' "Find
+  your best card" link and finder tile now open the translated finder; hreflang and sitemap added. The header's "Tools
+  (English)" link stays until wallet, receipt and corridors are translated. Also: CLAUDE.md now says the site is on
+  Cloudflare (Vercel's old project still builds every push and filled its free storage; Akash to disconnect it).
+  Next: wallet/receipt/corridors, submit + fees guide.
 - Whole site in each language, stage 2c (12 Nov 2026, Akash: "step 3"): the rewards calculator at `/de/calculator` etc.
   in all 8 languages: all three modes (best card, compare tiers, one card line by line), the form, tables, break-even
   lines, notes, share buttons and the 2-card wallet teaser, with money and percentages from Intl and the sheet text it

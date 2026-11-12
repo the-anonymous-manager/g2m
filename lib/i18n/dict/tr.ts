@@ -216,7 +216,7 @@ export const tr: Dict = {
   heroLine1: "Kriptonu",
   heroLine2: "daha akıllı harca.",
   heroRanking: "Sıralamayı gör",
-  heroFinder: "En iyi kartını bul (İngilizce)",
+  heroFinder: "En iyi kartını bul",
   spotFeatured: "öne çıkan",
   spotPick: "bizim seçimimiz",
   spotTop: "sıralamada 1 numara",

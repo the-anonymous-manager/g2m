@@ -2,6 +2,7 @@ import type { Ui } from './en';
 import { cardZhHK } from './card/zh-hk';
 import { compareZhHK } from './compare/zh-hk';
 import { calcZhHk } from './calc/zh-hk';
+import { finderZhHk } from './finder/zh-hk';
 
 export const uiZhHK: Ui = {
   common: {
@@ -127,5 +128,6 @@ export const uiZhHK: Ui = {
   card: cardZhHK,
   regions: { EU: '歐盟／歐洲經濟區', ASIA: '亞洲' },
   compare: compareZhHK,
-  calc: calcZhHk
+  calc: calcZhHk,
+  finder: finderZhHk
 };

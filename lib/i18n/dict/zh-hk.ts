@@ -215,7 +215,7 @@ export const zhHK: Dict = {
   heroLine1: "用你的加密貨幣",
   heroLine2: "花得更精明。",
   heroRanking: "查看排名",
-  heroFinder: "尋找最適合你的卡（英文）",
+  heroFinder: "尋找最適合你的卡",
   spotFeatured: "精選",
   spotPick: "編輯之選",
   spotTop: "排名第一",

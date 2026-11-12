@@ -2,6 +2,7 @@ import type { Ui } from './en';
 import { cardEs } from './card/es';
 import { compareEs } from './compare/es';
 import { calcEs } from './calc/es';
+import { finderEs } from './finder/es';
 
 export const uiEs: Ui = {
   common: {
@@ -127,5 +128,6 @@ export const uiEs: Ui = {
   card: cardEs,
   regions: { EU: 'UE / EEE', ASIA: 'Asia' },
   compare: compareEs,
-  calc: calcEs
+  calc: calcEs,
+  finder: finderEs
 };

@@ -12,7 +12,8 @@ and confirm what changed on the site (not which files moved).
 
 - Next.js 15 App Router, React 19, TypeScript 5.9, Zod. Keep TypeScript on 5.x: Next 15 cannot type-check with TypeScript 7.
 - No database. All card data lives in `data/cards.json`; schema in `lib/card-schema.mjs`.
-- Hosted on Vercel from this repo's `main` branch; every push to `main` deploys g2m.life.
+- Hosted on Cloudflare Workers (OpenNext adapter, `npm run cf:build`) from this repo's `main` branch; every push to `main`
+  deploys g2m.life. Vercel stopped serving the site on 25 Oct 2026 (its old project can be disconnected).
 
 ## Commands
 
@@ -98,7 +99,7 @@ and confirm what changed on the site (not which files moved).
   served from static files, see `open-next.config.ts`): they must not read cookies, headers or the time of the request.
 - Other languages (`lib/i18n/`): German, French, Spanish, Polish, Turkish, Russian, Arabic (right to left) and
   Traditional Chinese (Hong Kong) at `/de`, `/fr`, `/es`, `/pl`, `/tr`, `/ru`, `/ar`, `/zh-hk`. Each has a home page
-  (`app/[lang]`), card pages (`/de/cards/kast`, plus `/alternatives` and `/referral-code`), the compare tool (`/de/compare`), the calculator (`/de/calculator`), "X vs Y"
+  (`app/[lang]`), card pages (`/de/cards/kast`, plus `/alternatives` and `/referral-code`), the compare tool (`/de/compare`), the calculator (`/de/calculator`), the finder (`/de/finder`), "X vs Y"
   (`/de/compare/a-vs-b`), guides (`/de/guides`, `/de/guides/<topic>`), country pages (`/de/best-crypto-cards/germany`)
   and `/de/methodology`. Every word comes from that language's dictionary (`lib/i18n/dict/<code>.ts`, same keys as
   `en.ts`) and every value from the card data; numbers, money, dates and country names come from Intl. Text typed in
@@ -118,8 +119,10 @@ and confirm what changed on the site (not which files moved).
   tool (`/de/compare`, `components/CompareClient.tsx` + `compareRows.tsx`, words in `lib/i18n/ui/compare/<code>.ts`; the
   sheet text it shows is translated on the server in `app/[lang]/compare/page.tsx`) and the rewards calculator (`/de/calculator`,
   `components/CalculatorClient.tsx` + `calcText.tsx`, words in `lib/i18n/ui/calc/<code>.ts`; `lib/calc.ts` still writes its
-  notes in English and `noteText` swaps in the translation, so a new calc note needs a line there and in every pack).
-  Next: finder, wallet, receipt, corridors, submit, fees guide. To add a language: `LOCALES` in `locales.ts`, a `chrome.ts`
+  notes in English and `noteText` swaps in the translation, so a new calc note needs a line there and in every pack)
+  and the card finder (`/de/finder`, `components/FinderClient.tsx`, words in `lib/i18n/ui/finder/<code>.ts`; `lib/finder.ts`
+  gives each pick's reasons as facts (`Why`), worded by `whyEn` in English and `whyText` in other languages, so a new
+  reason needs both and a line in every pack). Next: wallet, receipt, corridors, submit, fees guide. To add a language: `LOCALES` in `locales.ts`, a `chrome.ts`
   entry, a dictionary file, and its line in `dict/index.ts`.
 - `app/go/[slug]` outbound redirect with UTM tags; `/stats` (private) counts only people: crawler hits are stored as
   `auto:<event>` (`isAutomated` in `lib/stats/server.ts`)
