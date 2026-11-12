@@ -151,7 +151,7 @@ export default async function IntlHomePage({ params }: Props) {
   ];
   const tools: [string, string, string, string][] = [
     ['/finder', d.toolFinderTag, d.toolFinder, d.toolFinderText],
-    ['/calculator', d.toolCalcTag, d.toolCalc, d.toolCalcText],
+    [`${prefix}/calculator`, d.toolCalcTag, d.toolCalc, d.toolCalcText],
     ['/wallet', d.toolWalletTag, d.toolWallet, d.toolWalletText],
     ['/receipt', d.toolReceiptTag, d.toolReceipt, d.toolReceiptText],
     ['/corridors', d.toolCorridorTag, d.toolCorridor, d.toolCorridorText],

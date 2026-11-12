@@ -417,6 +417,16 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   against the previous build (same text before and after clicks). Long words: short custody labels in the table and
   wrapping headings, so the table fits 1280 px in every language. Next stages, one PR each: card page in full,
   compare, calculator, finder, wallet, receipt, corridors, submit, fees guide.
+- Whole site in each language, stage 2c (12 Nov 2026, Akash: "step 3"): the rewards calculator at `/de/calculator` etc.
+  in all 8 languages: all three modes (best card, compare tiers, one card line by line), the form, tables, break-even
+  lines, notes, share buttons and the 2-card wallet teaser, with money and percentages from Intl and the sheet text it
+  shows (tier requirements, "rewards paid in") translated on the server. The maths is untouched: `lib/calc.ts` writes
+  its notes in English and the page swaps in the translation (`noteText` in `components/calcText.tsx`). English
+  `/calculator` checked against the live build in 24 states (every mode, countries, year 1, physical card, valuation,
+  one purchase size, staking tiers): same words and links, and the same phone layout. The compare tool's "what it keeps
+  you" button and the translated home page's calculator tile now open the translated calculator; hreflang and sitemap
+  added. The swipe receipt, methodology and wallet links stay English and say so. Phone tables now wrap a line only
+  when longer words do not fit (English unchanged). Next: finder, wallet/receipt/corridors, submit + fees guide.
 - Whole site in each language, stage 2b (12 Nov 2026, Akash: "step 2"): the compare tool at `/de/compare` etc. in all
   8 languages: card and tier pickers, the tier presets, every table row (tier rows and card rows), share buttons and
   links, with numbers from Intl and the sheet text it shows (ATM, perks, requirements, bonus, coverage) translated on

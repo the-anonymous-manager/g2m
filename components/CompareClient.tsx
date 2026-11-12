@@ -169,7 +169,6 @@ export function CompareClient({
   const columns = `minmax(130px, 170px) repeat(${Math.max(chosen.length, 1)}, minmax(210px, 1fr))`;
   const shareName = (s: Slot) => (s.tier == null ? s.card.brand : `${s.card.brand} ${s.card.tiers[s.tier].name}`);
   // Pages not translated yet (the calculator) open in English.
-  const toEnglish = prefix ? 'en' : undefined;
 
   return (
     <div className="stack" style={{ gap: 20 }}>
@@ -246,7 +245,7 @@ export function CompareClient({
         )}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
           {chosen.length >= 1 ? (
-            <Link href={`/calculator?mode=tiers&cards=${slots.map(entryOf).join(',')}`} className="btn btn-sm" hrefLang={toEnglish}>
+            <Link href={`${prefix}/calculator?mode=tiers&cards=${slots.map(entryOf).join(',')}`} className="btn btn-sm">
               {chosen.length > 1 ? w.keepsMany : w.keepsOne}
             </Link>
           ) : null}

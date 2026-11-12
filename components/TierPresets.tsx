@@ -15,7 +15,7 @@ export function TierPresets({
   value,
   onPick,
   country,
-  allLabel = PRESET_LABEL.all,
+  allLabel,
   words
 }: {
   cards: CardRow[];
@@ -27,7 +27,7 @@ export function TierPresets({
 }) {
   if (!cards.length) return null;
   const heading = words?.heading ?? 'Tiers to compare';
-  const label = (p: TierPreset) => (p === 'all' ? allLabel : words ? words[p] : PRESET_LABEL[p]);
+  const label = (p: TierPreset) => (p === 'all' ? (allLabel ?? words?.all ?? PRESET_LABEL.all) : words ? words[p] : PRESET_LABEL[p]);
   return (
     <div className="stack" style={{ gap: 8 }}>
       <span className="field-label">{heading}</span>
