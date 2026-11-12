@@ -6,12 +6,13 @@ import { isCountry } from '@/lib/regions';
 import { usdPrices } from '@/lib/prices';
 import { CalculatorClient } from '@/components/CalculatorClient';
 import { Eyebrow } from '@/components/bits';
+import { intlCalculator, languageLinks } from '@/lib/i18n/locales';
 
 export const metadata: Metadata = {
   title: 'Crypto card rewards calculator',
   description:
     'See what every crypto card leaves you with in a year after plan, FX, per-purchase, small-purchase and top-up fees. Compare tiers across up to three cards, or audit one card line by line.',
-  alternates: { canonical: '/calculator' }
+  alternates: { canonical: '/calculator', languages: languageLinks('/calculator', intlCalculator) }
 };
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };

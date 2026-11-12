@@ -535,7 +535,7 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
               {t.clear}
             </button>
             <Link
-              href={`/compare?c=${picked.join(',')}`}
+              href={`${prefix}/compare?c=${picked.join(',')}`}
               className="btn btn-sm btn-metal"
               aria-disabled={picked.length < 2}
               onClick={(e) => {

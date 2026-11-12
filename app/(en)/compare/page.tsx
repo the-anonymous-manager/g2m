@@ -8,12 +8,13 @@ import { BackButton } from '@/components/BackButton';
 import { PICK } from '@/lib/tierpick';
 import { usdPrices } from '@/lib/prices';
 import { allPairs, versusPath } from '@/lib/versus';
+import { intlCompare, languageLinks } from '@/lib/i18n/locales';
 
 export const metadata: Metadata = {
   title: 'Compare crypto cards',
   description:
     'Compare up to three crypto cards side by side, or one tier of each: cashback, annual fee, FX fee, caps, staking, custody, countries and perks.',
-  alternates: { canonical: '/compare' }
+  alternates: { canonical: '/compare', languages: languageLinks('/compare', intlCompare) }
 };
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };

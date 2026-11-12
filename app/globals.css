@@ -1653,6 +1653,11 @@ body::before {
     gap: 8px;
     font-size: 14px;
     white-space: nowrap;
+    /* Longer words in other languages: wrap only when the line does not fit. */
+    flex-wrap: wrap;
+  }
+  .calc-table td.calc-notes {
+    white-space: normal;
   }
   .calc-table td.calc-notes:empty {
     display: none;

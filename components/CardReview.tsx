@@ -360,7 +360,7 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
               <OutboundLink slug={card.slug} name={card.brand} placement={english ? 'card-hero' : `intl-${locale!.code}-card-hero`}>
                 {fill(t.getBrand, { brand: card.brand })}
               </OutboundLink>
-              <Link href={`/compare?c=${[card.slug, ...alternatives.slice(0, 2).map((a) => a.slug)].join(',')}`} className="btn" hrefLang={english ? undefined : 'en'}>
+              <Link href={`${c.prefix}/compare?c=${[card.slug, ...alternatives.slice(0, 2).map((a) => a.slug)].join(',')}`} className="btn">
                 {t.compare}
               </Link>
             </div>

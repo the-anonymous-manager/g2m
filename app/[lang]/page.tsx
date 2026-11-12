@@ -151,11 +151,11 @@ export default async function IntlHomePage({ params }: Props) {
   ];
   const tools: [string, string, string, string][] = [
     ['/finder', d.toolFinderTag, d.toolFinder, d.toolFinderText],
-    ['/calculator', d.toolCalcTag, d.toolCalc, d.toolCalcText],
+    [`${prefix}/calculator`, d.toolCalcTag, d.toolCalc, d.toolCalcText],
     ['/wallet', d.toolWalletTag, d.toolWallet, d.toolWalletText],
     ['/receipt', d.toolReceiptTag, d.toolReceipt, d.toolReceiptText],
     ['/corridors', d.toolCorridorTag, d.toolCorridor, d.toolCorridorText],
-    ['/compare', d.toolCompareTag, d.toolCompare, d.toolCompareText]
+    [`${prefix}/compare`, d.toolCompareTag, d.toolCompare, d.toolCompareText]
   ];
   const mail = (subject: string) => `mailto:${site.contactEmail}?subject=${encodeURIComponent(subject)}`;
   const jsonLd = [
@@ -459,7 +459,7 @@ export default async function IntlHomePage({ params }: Props) {
         </h2>
         <div className="grid-3">
           {tools.map(([href, tag, t, x]) => (
-            <Link key={href} href={href} hrefLang="en" className="panel panel-pad stack" style={{ gap: 10, textDecoration: 'none' }}>
+            <Link key={href} href={href} hrefLang={href.startsWith(prefix) ? undefined : 'en'} className="panel panel-pad stack" style={{ gap: 10, textDecoration: 'none' }}>
               <span className="eyebrow">[ {tag} ]</span>
               <span className="h3">{t}</span>
               <span className="muted">{x}</span>

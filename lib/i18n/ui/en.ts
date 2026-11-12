@@ -1,3 +1,6 @@
+import { compareEn } from './compare/en';
+import { calcEn } from './calc/en';
+
 // Language packs for the interactive tools (the rankings table first; the calculator, finder, compare and the other
 // tools follow). Unlike lib/i18n/dict, these are sent to the browser, so each page passes only its own language's
 // pack. English is the reference: every other pack has the same keys and the same {slots}.
@@ -321,7 +324,11 @@ export const uiEn = {
     priceNA: '. Live price unavailable right now.',
     stakeNote: 'Prices from CoinGecko, updated hourly. A stake is your own money locked up, not a fee, but its value moves with the token.'
   },
-  regions: { EU: 'EU / EEA', ASIA: 'Asia' }
+  regions: { EU: 'EU / EEA', ASIA: 'Asia' },
+  /** The compare tool (/compare, /de/compare). */
+  compare: compareEn,
+  /** The rewards calculator (/calculator, /de/calculator). */
+  calc: calcEn
 };
 
 export type Ui = typeof uiEn;

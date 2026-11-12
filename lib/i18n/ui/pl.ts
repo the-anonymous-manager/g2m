@@ -1,5 +1,7 @@
 import type { Ui } from './en';
 import { cardPl } from './card/pl';
+import { comparePl } from './compare/pl';
+import { calcPl } from './calc/pl';
 
 export const uiPl: Ui = {
   common: {
@@ -123,5 +125,7 @@ export const uiPl: Ui = {
     range: "{a}–{b}"
   },
   card: cardPl,
-  regions: { EU: 'UE / EOG', ASIA: 'Azja' }
+  regions: { EU: 'UE / EOG', ASIA: 'Azja' },
+  compare: comparePl,
+  calc: calcPl
 };
