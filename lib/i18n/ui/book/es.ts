@@ -3,6 +3,7 @@ import type { bookEn } from './en';
 export const bookEs: typeof bookEn = {
   lead: "Los emisores de tarjetas pueden reservar uno de estos espacios.",
   open: "Reservar un espacio",
+  bookTop: "Reservar este espacio",
   close: "Cerrar el formulario",
   title: "Reservar un espacio en G2M",
   intro: "Dinos qué tarjeta, qué espacio y cuánto quieres pagar. Respondemos por Telegram o por correo para acordar el precio y las fechas.",

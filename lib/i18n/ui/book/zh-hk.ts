@@ -3,6 +3,7 @@ import type { bookEn } from './en';
 export const bookZhHk: typeof bookEn = {
   lead: "發卡機構可預訂以下其中一個位置。",
   open: "預訂位置",
+  bookTop: "預訂此位置",
   close: "關閉表格",
   title: "預訂 G2M 位置",
   intro: "告訴我們是哪張卡、哪個位置，以及你想付多少。我們會透過 Telegram 或電郵回覆，商定價格及日期。",

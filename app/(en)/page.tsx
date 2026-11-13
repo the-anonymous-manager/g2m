@@ -217,9 +217,13 @@ export default function HomePage() {
                   <>
                     Sponsored. It never changes a card&apos;s score or rank.{' '}
                     <Link href="/methodology#money">How G2M makes money</Link>
+                    {' · '}
+                    <a href="#book-top">Book this spot</a>
                   </>
                 ) : ourPick ? (
-                  'Our pick, chosen by G2M.'
+                  <>
+                    Our pick, chosen by G2M. <a href="#book-top">Book this spot</a>
+                  </>
                 ) : (
                   <>
                     The highest G2M score worldwide right now. Card issuers can{' '}

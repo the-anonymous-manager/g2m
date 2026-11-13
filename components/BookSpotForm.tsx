@@ -61,16 +61,26 @@ export function BookSpotForm({
       })
     );
     // "#book" opens the form; "#book-top" (the "book this spot" link on the top card) also picks the top spot.
-    const fromHash = () => {
-      if (location.hash === '#book' || location.hash === '#book-top') setOpen(true);
-      if (location.hash === '#book-top') {
+    const show = (hash: string) => {
+      if (hash === '#book' || hash === '#book-top') setOpen(true);
+      if (hash === '#book-top') {
         setSpot('top');
-        document.getElementById('book')?.scrollIntoView({ block: 'start' });
+        requestAnimationFrame(() => document.getElementById('book')?.scrollIntoView({ block: 'start' }));
       }
+    };
+    const fromHash = () => show(location.hash);
+    // A second click on the same link doesn't change the address, so links are handled directly too.
+    const onClick = (e: MouseEvent) => {
+      const a = (e.target as Element | null)?.closest?.('a[href="#book"], a[href="#book-top"]');
+      if (a) show(a.getAttribute('href') ?? '');
     };
     fromHash();
     window.addEventListener('hashchange', fromHash);
-    return () => window.removeEventListener('hashchange', fromHash);
+    document.addEventListener('click', onClick);
+    return () => {
+      window.removeEventListener('hashchange', fromHash);
+      document.removeEventListener('click', onClick);
+    };
   }, [tag]);
 
   const spotLabel: Record<(typeof SPOTS)[number], string> = { any: w.spotAny, slot1: w.spot1, slot2: w.spot2, slot3: w.spot3, top: w.spotTop };

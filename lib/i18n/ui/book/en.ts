@@ -3,6 +3,8 @@
 export const bookEn = {
   lead: 'Card issuers can book one of these spots.',
   open: 'Book a spot',
+  /** On the top card of the home page; opens the form with the top spot chosen. */
+  bookTop: 'Book this spot',
   close: 'Close the form',
   title: 'Book a spot on G2M',
   intro: "Tell us which card, which spot and what you'd like to pay. We reply on Telegram or by email to agree the price and dates.",

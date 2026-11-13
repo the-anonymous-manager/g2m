@@ -3,6 +3,7 @@ import type { bookEn } from './en';
 export const bookTr: typeof bookEn = {
   lead: "Kart sağlayıcılar bu alanlardan birini ayırtabilir.",
   open: "Alan ayırt",
+  bookTop: "Bu alanı ayırt",
   close: "Formu kapat",
   title: "G2M’de bir alan ayırtın",
   intro: "Hangi kart, hangi alan ve ne kadar ödemek istediğinizi yazın. Fiyat ve tarihleri netleştirmek için Telegram’dan veya e-postayla yanıt veririz.",

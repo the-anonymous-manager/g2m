@@ -3,6 +3,7 @@ import type { bookEn } from './en';
 export const bookPl: typeof bookEn = {
   lead: "Wydawcy kart mogą zarezerwować jedno z tych miejsc.",
   open: "Zarezerwuj miejsce",
+  bookTop: "Zarezerwuj to miejsce",
   close: "Zamknij formularz",
   title: "Zarezerwuj miejsce na G2M",
   intro: "Napisz, która karta, które miejsce i ile chcesz płacić. Odpowiadamy na Telegramie lub e-mailem, by uzgodnić cenę i terminy.",

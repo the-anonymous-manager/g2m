@@ -245,9 +245,13 @@ export default async function IntlHomePage({ params }: Props) {
                 {sponsor ? (
                   <>
                     {d.spotSponsored} <Link href={intlMethodology(locale)}>{d.moneyLink}</Link>
+                    {' · '}
+                    <a href="#book-top">{UI[locale.code].book.bookTop}</a>
                   </>
                 ) : ourPick ? (
-                  d.spotPickNote
+                  <>
+                    {d.spotPickNote} <a href="#book-top">{UI[locale.code].book.bookTop}</a>
+                  </>
                 ) : (
                   <>
                     {d.spotTopNote} <a href="#book-top">{d.bookSpot}</a>
