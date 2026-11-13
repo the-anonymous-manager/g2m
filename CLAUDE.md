@@ -77,8 +77,8 @@ and confirm what changed on the site (not which files moved).
   (none = always). Never mark an unpaid card as Featured. Empty row = the top-ranked card. Never changes a score or rank.
 - Our picks (home page, 3 slots): the sheet's Picks tab (Slot 1-3, Card ID, Type "Our pick"/"Featured", Why, Start,
   End; Featured = paid, needs both dates, shows "Sponsored"), synced to `data/picks.json` (`lib/picks.ts`).
-  Card issuers ask for a spot with the "Book a spot" form under the picks (`components/BookSpotForm.tsx`, words in
-  `lib/i18n/ui/book/`): card, spot, monthly budget, months, start, company, Telegram and/or email. It posts to `/api/book`,
+  Card issuers ask for a spot on its own page, `/book` (`/de/book` ...; "Book a spot" under the picks and "Book this spot"
+  on the top card, which adds `?spot=top`; `components/BookPage.tsx` + `BookSpotForm.tsx`, words in `lib/i18n/ui/book/`): card, spot, monthly budget, months, start, company, Telegram and/or email. It posts to `/api/book`,
   is saved in the D1 table `booking` (`lib/bookings.ts`, 5 a day per sender) and listed on `/stats`. A request never
   goes live by itself: Akash replies, then adds it to the Picks or Sponsor tab.
   Unbooked slots show cards listed in the last 30 days as "New on G2M", then the automatic picks (top ranked, best no

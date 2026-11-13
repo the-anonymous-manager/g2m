@@ -3,14 +3,14 @@ import { getCards, lastUpdated } from '@/lib/cards';
 import { absoluteUrl } from '@/lib/site';
 import { allPairs, versusPath } from '@/lib/versus';
 import { FEES_GUIDE, TOPICS, countryGuidePath, countryGuides, countrySlug } from '@/lib/guides';
-import { LOCALES, intlRankings, intlCompare, intlCalculator, intlFinder, intlWallet, intlReceipt, intlCorridors, intlSubmit, intlFeesGuide, intlAlternatives, intlCard, intlCountry, intlGuide, intlGuides, intlHome, intlMethodology, intlReferral, intlVersus } from '@/lib/i18n/locales';
+import { LOCALES, intlRankings, intlCompare, intlCalculator, intlFinder, intlWallet, intlReceipt, intlCorridors, intlSubmit, intlBook, intlFeesGuide, intlAlternatives, intlCard, intlCountry, intlGuide, intlGuides, intlHome, intlMethodology, intlReferral, intlVersus } from '@/lib/i18n/locales';
 import { intlTopics } from '@/lib/i18n/guides';
 import { alternativesPath } from '@/lib/alternatives';
 import { hasReferralPage, referralPath } from '@/lib/referral';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const updated = new Date(`${lastUpdated()}T00:00:00Z`);
-  const pages = ['/', '/cards', '/finder', '/calculator', '/wallet', '/receipt', '/corridors', '/compare', '/methodology', '/submit'].map((p) => ({
+  const pages = ['/', '/cards', '/finder', '/calculator', '/wallet', '/receipt', '/corridors', '/compare', '/methodology', '/submit', '/book'].map((p) => ({
     url: absoluteUrl(p),
     lastModified: updated,
     changeFrequency: 'weekly' as const,
@@ -49,7 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const top = getCards().slice(0, 10);
   const topPairs = top.flatMap((a, i) => top.slice(i + 1).map((b) => versusPath(a.slug, b.slug).split('/').pop()!));
   const intl = LOCALES.flatMap((l) => [
-    ...[intlRankings(l), intlCompare(l), intlCalculator(l), intlFinder(l), intlWallet(l), intlReceipt(l), intlCorridors(l), intlSubmit(l), intlFeesGuide(l), intlGuides(l), intlMethodology(l), ...intlTopics(l).map((t) => intlGuide(l, t.slug))].map((p) => ({
+    ...[intlRankings(l), intlCompare(l), intlCalculator(l), intlFinder(l), intlWallet(l), intlReceipt(l), intlCorridors(l), intlSubmit(l), intlBook(l), intlFeesGuide(l), intlGuides(l), intlMethodology(l), ...intlTopics(l).map((t) => intlGuide(l, t.slug))].map((p) => ({
       url: absoluteUrl(p),
       lastModified: updated,
       changeFrequency: 'weekly' as const,

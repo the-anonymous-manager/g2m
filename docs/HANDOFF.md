@@ -552,6 +552,15 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   reply on Telegram or by email. If saving fails, the form offers the request as a prepared email. All 9 languages
   (`lib/i18n/ui/book/`). Tested on a local Cloudflare preview with a local database (`npm run cf:preview`, a
   `.dev.vars` with STATS_PASSWORD for /stats).
+- Booking form on its own page (13 Nov 2026, Akash with a screenshot of the form open on the home page: "the form
+  should open in a new page"). `/book` and `/de/book` etc. (in the sitemap and the language menu) hold the form, with
+  what can be booked (top spot, Our picks) and the Sponsored rule. The home page keeps one line under the picks
+  ("Card issuers can book one of these spots. Book a spot") and "Book this spot" on the top card links to
+  `/book?spot=top`; `?card=<slug>` picks the card. Same saving and /stats list as before.
+- Solid for Our picks slot 2 (13 Nov 2026, Akash: "Give spot 2 to solid as our pick"): the Google Sheets connector
+  was down in this session, so the change is for the sheet's Picks tab (Slot 2: Card ID solid, Type Our pick, Why
+  "Free and non-custodial: 3% back in USDC, up to $50 a month, and no fee on US-dollar spending."); that Why is
+  already translated in data/i18n.
 - Whole site in each language, stage 2a (12 Nov 2026; Akash: "first go with 1,2,3,4,5,6", the first being the card
   page): `/de/cards/kast` etc. are now the full English card review in each language, built by the same component
   (`components/CardReview.tsx`; the English page calls it with no language and is unchanged, checked word for word
