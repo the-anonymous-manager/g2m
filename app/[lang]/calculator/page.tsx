@@ -12,7 +12,7 @@ import { DICTS } from '@/lib/i18n/dict';
 import { formatters } from '@/lib/i18n/format';
 import { noteOrNull } from '@/lib/i18n/notes';
 import { UI } from '@/lib/i18n/ui';
-import { shareMeta, site } from '@/lib/site';
+import { metaDescription, metaTitle, shareMeta } from '@/lib/site';
 
 // The rewards calculator in another language (/de/calculator): the same calculator as /calculator, with every word
 // from that language's pack (lib/i18n/ui/calc), numbers from Intl, and the sheet text it shows (tier requirements,
@@ -28,8 +28,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!locale) return {};
   const w = UI[locale.code].calc;
   return {
-    title: { absolute: `${w.metaTitle} · ${site.name}` },
-    description: w.metaDesc,
+    title: metaTitle(w.metaTitle),
+    description: metaDescription(w.metaDesc),
     alternates: { canonical: intlCalculator(locale), languages: languageLinks('/calculator', intlCalculator) },
     ...shareMeta(w.metaTitle, w.metaDesc, intlCalculator(locale))
   };

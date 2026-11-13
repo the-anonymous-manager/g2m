@@ -12,7 +12,7 @@ import { DICTS } from '@/lib/i18n/dict';
 import { formatters } from '@/lib/i18n/format';
 import { noteOrNull } from '@/lib/i18n/notes';
 import { UI } from '@/lib/i18n/ui';
-import { shareMeta, site } from '@/lib/site';
+import { metaDescription, metaTitle, shareMeta } from '@/lib/site';
 
 // The card finder in another language (/de/finder): the same five questions and the same picks as /finder, with every
 // word from that language's pack (lib/i18n/ui/finder) and the perks it quotes from the sheet translated here.
@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!locale) return {};
   const w = UI[locale.code].finder;
   return {
-    title: { absolute: `${w.metaTitle} · ${site.name}` },
-    description: w.metaDesc,
+    title: metaTitle(w.metaTitle),
+    description: metaDescription(w.metaDesc),
     alternates: { canonical: intlFinder(locale), languages: languageLinks('/finder', intlFinder) },
     ...shareMeta(w.metaTitle, w.metaDesc, intlFinder(locale))
   };

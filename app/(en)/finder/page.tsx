@@ -7,11 +7,17 @@ import { FinderClient } from '@/components/FinderClient';
 import { Eyebrow } from '@/components/bits';
 import { finderEn } from '@/lib/i18n/ui/finder/en';
 import { intlFinder, languageLinks } from '@/lib/i18n/locales';
+import { metaDescription, shareMeta } from '@/lib/site';
+
+const pageTitle = finderEn.metaTitle;
+const pageDescription =
+  finderEn.metaDesc;
 
 export const metadata: Metadata = {
-  title: finderEn.metaTitle,
-  description: finderEn.metaDesc,
-  alternates: { canonical: '/finder', languages: languageLinks('/finder', intlFinder) }
+  title: pageTitle,
+  description: metaDescription(pageDescription),
+  alternates: { canonical: '/finder', languages: languageLinks('/finder', intlFinder) },
+  ...shareMeta(pageTitle, pageDescription, '/finder')
 };
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };

@@ -7,12 +7,17 @@ import { FEATURE_KEYS, type FeatureKey } from '@/lib/features';
 import { WalletBuilder } from '@/components/WalletBuilder';
 import { Eyebrow } from '@/components/bits';
 import { intlWallet, languageLinks } from '@/lib/i18n/locales';
+import { metaDescription, shareMeta } from '@/lib/site';
+
+const pageTitle = 'Crypto card wallet builder: the best 2-card combo';
+const pageDescription =
+  'Find the two crypto cards that keep you the most money together, with the features you need: lounge access, yield, borrowing, a bank account or a non-custodial wallet.';
 
 export const metadata: Metadata = {
-  title: 'Crypto card wallet builder: the best 2-card combo',
-  description:
-    'Find the two crypto cards that keep you the most money together, with the features you need: lounge access, yield, borrowing, a bank account or a non-custodial wallet.',
-  alternates: { canonical: '/wallet', languages: languageLinks('/wallet', intlWallet) }
+  title: pageTitle,
+  description: metaDescription(pageDescription),
+  alternates: { canonical: '/wallet', languages: languageLinks('/wallet', intlWallet) },
+  ...shareMeta(pageTitle, pageDescription, '/wallet')
 };
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };

@@ -5,7 +5,7 @@ import { SubmitForm } from '@/components/SubmitForm';
 import { Eyebrow } from '@/components/bits';
 import { intlSubmit, languageLinks, localeByCode } from '@/lib/i18n/locales';
 import { UI } from '@/lib/i18n/ui';
-import { shareMeta, site } from '@/lib/site';
+import { metaDescription, metaTitle, shareMeta, site } from '@/lib/site';
 
 // The submit form in another language (/de/submit): the same form as /submit with that language's words
 // (lib/i18n/ui/submit). The email it prepares stays in English, because it goes to the G2M team.
@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!locale) return {};
   const w = UI[locale.code].submit;
   return {
-    title: { absolute: `${w.metaTitle} · ${site.name}` },
-    description: w.metaDesc,
+    title: metaTitle(w.metaTitle),
+    description: metaDescription(w.metaDesc),
     alternates: { canonical: intlSubmit(locale), languages: languageLinks('/submit', intlSubmit) },
     ...shareMeta(w.metaTitle, w.metaDesc, intlSubmit(locale))
   };

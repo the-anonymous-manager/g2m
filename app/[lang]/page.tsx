@@ -9,7 +9,7 @@ import { fill, hreflangOf, intlCard, intlHome, intlMethodology, intlRankings, la
 import { DICTS, type Dict } from '@/lib/i18n/dict';
 import { clean, formatters, type Fmt } from '@/lib/i18n/format';
 import { note } from '@/lib/i18n/notes';
-import { absoluteUrl, shareMeta, site } from '@/lib/site';
+import { absoluteUrl, metaDescription, metaTitle, shareMeta, site } from '@/lib/site';
 import { CardArt } from '@/components/CardArt';
 import { HomeLeaderboard } from '@/components/HomeLeaderboard';
 import { MarketPanels, type MarketPanel } from '@/components/MarketPanels';
@@ -43,8 +43,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = fill(d.homeTitle, vars);
   const description = fill(d.homeDesc, vars);
   return {
-    title: { absolute: `${title} · ${site.name}` },
-    description,
+    title: metaTitle(title),
+    description: metaDescription(description),
     alternates: { canonical: intlHome(locale), languages: languageLinks('/', intlHome) },
     ...shareMeta(title, description, intlHome(locale))
   };

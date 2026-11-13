@@ -7,7 +7,7 @@ import { toRow } from '@/lib/types';
 import { cashbackLabel, fmtDate, pct, usd } from '@/lib/format';
 import { allPairs, parseVersus, versusPath, versusTitle } from '@/lib/versus';
 import { versusPoints, versusSummary } from '@/lib/verdict';
-import { absoluteUrl, site, shareMeta } from '@/lib/site';
+import { absoluteUrl, metaDescription, metaTitle, shareMeta, site } from '@/lib/site';
 import { ROWS, best } from '@/components/compareRows';
 import { CardArt } from '@/components/CardArt';
 import { Eyebrow, ScorePill } from '@/components/bits';
@@ -40,8 +40,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = versusTitle(a.name, b.name, new Date().getUTCFullYear());
   const description = `${a.name} vs ${b.name}: G2M score ${a.score.total} vs ${b.score.total}, cashback ${cashbackLabel(a.cashback.basePct, a.cashback.maxPct)} vs ${cashbackLabel(b.cashback.basePct, b.cashback.maxPct)}, annual fee ${usd(a.fees.annualUsd)} vs ${usd(b.fees.annualUsd)}, FX fee ${pct(a.fees.fxPct)} vs ${pct(b.fees.fxPct)}.`;
   return {
-    title,
-    description,
+    title: metaTitle(title),
+    description: metaDescription(description),
     alternates: { canonical: path, languages: languageLinks(path, (l) => intlVersus(l, path.split('/').pop()!)) },
     ...shareMeta(`${a.name} vs ${b.name} · G2M`, description, path)
   };

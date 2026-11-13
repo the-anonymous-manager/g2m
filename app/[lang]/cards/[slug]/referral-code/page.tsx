@@ -8,7 +8,7 @@ import { LOCALES, fill, hreflangOf, intlCard, intlHome, intlReferral, languageLi
 import { DICTS } from '@/lib/i18n/dict';
 import { clean, formatters } from '@/lib/i18n/format';
 import { note, noteOrNull } from '@/lib/i18n/notes';
-import { absoluteUrl, shareMeta, site } from '@/lib/site';
+import { absoluteUrl, metaDescription, metaTitle, shareMeta } from '@/lib/site';
 import { CardArt } from '@/components/CardArt';
 import { Eyebrow } from '@/components/bits';
 import { OutboundLink } from '@/components/OutboundLink';
@@ -44,8 +44,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = clean(`${fill(card.referralCode ? d.refDescCode : d.refDescLink, { ...vars, name: card.name })}${bonus ? ` ${d.bonus}${f.colon}${bonus}.` : ''}`).slice(0, 300);
   const path = intlReferral(locale, card.slug);
   return {
-    title: { absolute: `${title} · ${site.name}` },
-    description,
+    title: metaTitle(title),
+    description: metaDescription(description),
     alternates: { canonical: path, languages: languageLinks(referralPath(card.slug), (l) => intlReferral(l, card.slug)) },
     ...shareMeta(title, description, path, `/cards/${card.slug}/opengraph-image`)
   };

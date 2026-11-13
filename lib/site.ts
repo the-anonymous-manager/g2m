@@ -16,6 +16,42 @@ export const site = {
 
 export const absoluteUrl = (path = '/') => `${site.url}${path.startsWith('/') ? path : `/${path}`}`;
 
+/** The language of a page for link previews (og:locale), from the first part of its address (/de/…). */
+const OG_LOCALE: Record<string, string> = {
+  de: 'de_DE',
+  fr: 'fr_FR',
+  es: 'es_ES',
+  pl: 'pl_PL',
+  tr: 'tr_TR',
+  ru: 'ru_RU',
+  ar: 'ar_AE',
+  'zh-hk': 'zh_HK'
+};
+
+/**
+ * A search-result description that fits what Google shows (about 160 characters; about 80 for Chinese, whose
+ * characters are twice as wide): whole sentences while they fit, else cut at a word with "…".
+ */
+export function metaDescription(s: string): string {
+  const t = s.replace(/\s+/g, ' ').trim();
+  const cjk = (t.match(/[　-鿿＀-￯]/g) ?? []).length > t.length / 3;
+  const max = cjk ? 80 : 160;
+  if (t.length <= max) return t;
+  // Whole sentences that fit: a sentence ends at . ! ? followed by a space (so "0.5%" and "ether.fi" stay whole), or 。！？.
+  let end = 0;
+  for (const m of t.matchAll(/[.!?](?=\s)|[。！？]/g)) {
+    if (m.index! + 1 > max) break;
+    end = m.index! + 1;
+  }
+  if (end >= max * 0.45) return t.slice(0, end);
+  const cut = t.slice(0, max - 1);
+  const space = cut.lastIndexOf(' ');
+  return `${(space > max * 0.5 ? cut.slice(0, space) : cut).replace(/[\s,;:·(–-]+$/, '')}…`;
+}
+
+/** A page title with " · G2M" unless that makes it longer than Google shows (about 65 characters). */
+export const metaTitle = (t: string) => ({ absolute: t.length + 6 > 65 ? t : `${t} · ${site.name}` });
+
 /**
  * Link-preview data (Open Graph + X) for a page. A page that sets its own `openGraph` or `twitter` replaces the
  * site-wide ones entirely, picture and card size included, so every page must go through here.
@@ -24,8 +60,17 @@ export const absoluteUrl = (path = '/') => `${site.url}${path.startsWith('/') ? 
  */
 export function shareMeta(title: string, description: string, path: string, image: string | null = '/opengraph-image'): Pick<Metadata, 'openGraph' | 'twitter'> {
   const images = image ? [{ url: image, width: 1200, height: 630, alt: title }] : undefined;
+  description = metaDescription(description);
   return {
-    openGraph: { type: 'website', siteName: `${site.name} · ${site.expansion}`, title, description, url: absoluteUrl(path), ...(images ? { images } : {}) },
+    openGraph: {
+      type: 'website',
+      siteName: `${site.name} · ${site.expansion}`,
+      title,
+      description,
+      url: absoluteUrl(path),
+      locale: OG_LOCALE[path.split('/')[1]] ?? 'en_US',
+      ...(images ? { images } : {})
+    },
     twitter: {
       card: 'summary_large_image',
       title,

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { getCard, guessCard } from '@/lib/cards';
 import { cashbackLabel, fmtDate, pct, usd } from '@/lib/format';
-import { shareMeta } from '@/lib/site';
+import { metaDescription, metaTitle, shareMeta } from '@/lib/site';
 import { intlCard, languageLinks } from '@/lib/i18n/locales';
 import { CardReview } from '@/components/CardReview';
 
@@ -26,8 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }, ${card.fees.fxPct == null ? 'FX fee not published' : card.fees.fxPct === 0 ? 'no FX fee' : `${pct(card.fees.fxPct)} FX fee`}. G2M score ${card.score.total}/100.`;
   const description = `${facts} ${card.summary}`.length <= 160 ? `${facts} ${card.summary}` : `${facts} Fees, tiers, countries and sources, checked ${fmtDate(card.lastChecked)}.`;
   return {
-    title,
-    description,
+    title: metaTitle(title),
+    description: metaDescription(description),
     alternates: { canonical: `/cards/${card.slug}`, languages: languageLinks(`/cards/${card.slug}`, (l) => intlCard(l, card.slug)) },
     ...shareMeta(`${card.name} · G2M score ${card.score.total}`, description, `/cards/${card.slug}`, null)
   };

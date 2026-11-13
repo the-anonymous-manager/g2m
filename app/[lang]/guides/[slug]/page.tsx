@@ -8,7 +8,7 @@ import { DICTS } from '@/lib/i18n/dict';
 import { clean, formatters } from '@/lib/i18n/format';
 import { intlTopic, intlTopics } from '@/lib/i18n/guides';
 import { note, noteOrNull } from '@/lib/i18n/notes';
-import { absoluteUrl, shareMeta, site } from '@/lib/site';
+import { absoluteUrl, metaDescription, metaTitle, shareMeta } from '@/lib/site';
 import { Eyebrow } from '@/components/bits';
 import { IntlCardList } from '@/components/IntlCardList';
 import { IntlText } from '@/components/IntlText';
@@ -37,8 +37,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = noteOrNull(locale, topic.description)!;
   const path = intlGuide(locale, topic.slug);
   return {
-    title: { absolute: `${title} · ${site.name}` },
-    description,
+    title: metaTitle(title),
+    description: metaDescription(description),
     alternates: {
       canonical: path,
       languages: languageLinks(`/guides/${topic.slug}`, (l) => intlGuide(l, topic.slug), LOCALES.filter((l) => intlTopic(l, topic.slug)))

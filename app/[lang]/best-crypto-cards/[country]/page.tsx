@@ -7,7 +7,7 @@ import { countryGuide, countryGuides, countrySlug } from '@/lib/guides';
 import { LOCALES, fill, hreflangOf, intlCard, intlCountry, intlHome, languageLinks, localeByCode } from '@/lib/i18n/locales';
 import { DICTS } from '@/lib/i18n/dict';
 import { formatters } from '@/lib/i18n/format';
-import { absoluteUrl, shareMeta, site } from '@/lib/site';
+import { absoluteUrl, metaDescription, metaTitle, shareMeta } from '@/lib/site';
 import { Eyebrow } from '@/components/bits';
 import { IntlCardList } from '@/components/IntlCardList';
 
@@ -38,8 +38,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = fill(d.countryDesc, vars);
   const slug = countrySlug(guide.cc);
   return {
-    title: { absolute: `${title} · ${site.name}` },
-    description,
+    title: metaTitle(title),
+    description: metaDescription(description),
     alternates: { canonical: intlCountry(locale, slug), languages: languageLinks(`/guides/best-crypto-cards/${slug}`, (l) => intlCountry(l, slug)) },
     ...shareMeta(title, description, intlCountry(locale, slug))
   };

@@ -6,12 +6,17 @@ import { money } from '@/lib/format';
 import { fmtDate } from '@/lib/format';
 import { Eyebrow } from '@/components/bits';
 import { intlMethodology, languageLinks } from '@/lib/i18n/locales';
+import { metaDescription, shareMeta } from '@/lib/site';
+
+const pageTitle = 'How we score crypto cards';
+const pageDescription =
+  'The G2M score explained: rewards 25, fees 30, coverage 20, banking features 15, control 10. Same rules for every card, no paid rankings.';
 
 export const metadata: Metadata = {
-  title: 'How we score crypto cards',
-  description:
-    'The G2M score explained: rewards 25, fees 30, coverage 20, banking features 15, control 10. Same rules for every card, no paid rankings.',
-  alternates: { canonical: '/methodology', languages: languageLinks('/methodology', intlMethodology) }
+  title: pageTitle,
+  description: metaDescription(pageDescription),
+  alternates: { canonical: '/methodology', languages: languageLinks('/methodology', intlMethodology) },
+  ...shareMeta(pageTitle, pageDescription, '/methodology')
 };
 
 const PARTS = [

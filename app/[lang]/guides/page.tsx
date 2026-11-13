@@ -11,7 +11,7 @@ import { DICTS } from '@/lib/i18n/dict';
 import { formatters } from '@/lib/i18n/format';
 import { intlTopics } from '@/lib/i18n/guides';
 import { noteOrNull } from '@/lib/i18n/notes';
-import { shareMeta, site } from '@/lib/site';
+import { metaDescription, metaTitle, shareMeta } from '@/lib/site';
 import { Eyebrow } from '@/components/bits';
 
 // The guides hub in another language: topic guides, country guides, alternatives and referral codes, all linking to
@@ -29,8 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!locale) return {};
   const d = DICTS[locale.code];
   return {
-    title: { absolute: `${d.guidesTitle} · ${site.name}` },
-    description: d.guidesDesc,
+    title: metaTitle(d.guidesTitle),
+    description: metaDescription(d.guidesDesc),
     alternates: { canonical: intlGuides(locale), languages: languageLinks('/guides', intlGuides) },
     ...shareMeta(d.guidesTitle, d.guidesDesc, intlGuides(locale))
   };

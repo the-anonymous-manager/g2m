@@ -7,7 +7,7 @@ import { fmtDate, pct, usd } from '@/lib/format';
 import { WIN_WORDS, versusPoints } from '@/lib/verdict';
 import { versusPath } from '@/lib/versus';
 import { alternativesPath, alternativesTo } from '@/lib/alternatives';
-import { absoluteUrl, site, shareMeta } from '@/lib/site';
+import { absoluteUrl, metaDescription, metaTitle, shareMeta, site } from '@/lib/site';
 import { Eyebrow } from '@/components/bits';
 import { BackButton } from '@/components/BackButton';
 import { GuideList } from '@/components/GuideList';
@@ -43,8 +43,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = `Best ${card.brand} Alternatives ${year}: ${alts.length} Crypto Cards Compared`;
   const description = `Cards to consider instead of the ${card.name}, ranked by the G2M score: ${list(alts.slice(0, 3).map((c) => c.name))} and more, with cashback, annual fee and FX fee side by side.`;
   return {
-    title,
-    description,
+    title: metaTitle(title),
+    description: metaDescription(description),
     alternates: { canonical: alternativesPath(card.slug), languages: languageLinks(alternativesPath(card.slug), (l) => intlAlternatives(l, card.slug)) },
     ...shareMeta(`${card.brand} alternatives · G2M`, description, alternativesPath(card.slug), `/cards/${card.slug}/opengraph-image`)
   };

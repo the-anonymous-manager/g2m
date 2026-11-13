@@ -141,3 +141,6 @@ and confirm what changed on the site (not which files moved).
 - `components/` UI, `lib/` logic (score, table engine, calculator, finder, regions), `middleware.ts` geo cookie
 - `components/motion/` hero glyph field, scroll reveals, tilt; all off under reduced motion (no custom cursor)
 - Settings via env vars, see `.env.example` and `README.md`
+- SEO: every page's metadata goes through `lib/site.ts`: `metaDescription()` (fits Google's ~160 characters, ~80 for
+  Chinese, cutting at a sentence), `metaTitle()` (drops " · G2M" when the title is long) and `shareMeta()` (share
+  previews with og:locale from the address). A new page needs all three plus `alternates` with `languageLinks`.

@@ -9,7 +9,7 @@ import { LOCALES, fill, hreflangOf, intlCard, intlHome, intlVersus, languageLink
 import { DICTS } from '@/lib/i18n/dict';
 import { clean, formatters } from '@/lib/i18n/format';
 import { intlVersusPoints } from '@/lib/i18n/verdict';
-import { absoluteUrl, shareMeta, site } from '@/lib/site';
+import { absoluteUrl, metaDescription, metaTitle, shareMeta } from '@/lib/site';
 import { CardArt } from '@/components/CardArt';
 import { Eyebrow } from '@/components/bits';
 import { OutboundLink } from '@/components/OutboundLink';
@@ -63,8 +63,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   );
   const path = intlVersus(locale, canonical);
   return {
-    title: { absolute: `${title} · ${site.name}` },
-    description,
+    title: metaTitle(title),
+    description: metaDescription(description),
     alternates: { canonical: path, languages: languageLinks(`/compare/${canonical}`, (l) => intlVersus(l, canonical)) },
     ...shareMeta(title, description, path)
   };

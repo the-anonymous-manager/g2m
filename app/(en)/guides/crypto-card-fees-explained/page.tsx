@@ -5,7 +5,7 @@ import { feesStats } from '@/lib/feesGuide';
 import { intlFeesGuide, languageLinks } from '@/lib/i18n/locales';
 import { fmtDate, money, pct, usd } from '@/lib/format';
 import { FEES_GUIDE, TOPICS } from '@/lib/guides';
-import { absoluteUrl, site, shareMeta } from '@/lib/site';
+import { absoluteUrl, metaDescription, shareMeta, site } from '@/lib/site';
 import { Eyebrow } from '@/components/bits';
 import { BackButton } from '@/components/BackButton';
 
@@ -16,7 +16,7 @@ const path = `/guides/${FEES_GUIDE.slug}`;
 
 export const metadata: Metadata = {
   title: FEES_GUIDE.title,
-  description: FEES_GUIDE.description,
+  description: metaDescription(FEES_GUIDE.description),
   alternates: { canonical: path, languages: languageLinks(path, intlFeesGuide) },
   ...shareMeta(`${FEES_GUIDE.title} · G2M`, FEES_GUIDE.description, path)
 };
