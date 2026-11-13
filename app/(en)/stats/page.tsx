@@ -5,6 +5,8 @@ import { countryName } from '@/lib/regions';
 import { IGNORE_COOKIE, STATS_COOKIE, isStatsUser, readyDb } from '@/lib/stats/server';
 import { RANGES, rangeDays, report, type Report } from '@/lib/stats/report';
 import { login, logout, setCounted } from './actions';
+import { SPOT_LABEL, listBookings, type Booking } from '@/lib/bookings';
+import { getCard } from '@/lib/cards';
 
 // The private stats page: G2M's own analytics (lib/stats). Locked with STATS_PASSWORD (a Cloudflare Worker secret).
 export const metadata: Metadata = { title: 'Stats', robots: { index: false, follow: false } };
@@ -319,6 +321,56 @@ function Dashboard({ data, days, counted }: { data: Report; days: number; counte
   );
 }
 
+/** Spot booking requests from the form under Our picks on the home page, newest first. */
+function Bookings({ rows }: { rows: Booking[] }) {
+  return (
+    <Section
+      title="Spot booking requests"
+      note="From the Book a spot form on the home page. Reply on Telegram or by email; nothing goes live until you add it to the sheet's Picks or Sponsor tab."
+    >
+      {rows.length ? (
+        <div className="table-wrap">
+          <table className="table st-table">
+            <thead>
+              <tr>
+                {['Received', 'Card', 'Spot', 'Per month', 'For', 'Start', 'Company', 'Telegram', 'Email', 'Note'].map((h) => (
+                  <th key={h} scope="col">
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((b) => (
+                <tr key={b.id}>
+                  <td className="num">{new Date(b.ts).toISOString().slice(0, 16).replace('T', ' ')}</td>
+                  <td>{b.listed ? <Link href={`/cards/${b.card}`}>{getCard(b.card)?.name ?? b.card}</Link> : `${b.card} (not listed)`}</td>
+                  <td>{SPOT_LABEL[b.spot as keyof typeof SPOT_LABEL] ?? b.spot}</td>
+                  <td className="num">${n(b.budgetUsd)}</td>
+                  <td className="num">
+                    {b.months} month{b.months === 1 ? '' : 's'}
+                  </td>
+                  <td>{b.start || 'ASAP'}</td>
+                  <td>
+                    {b.company}
+                    {b.name ? <span className="faint"> · {b.name}</span> : null}
+                    {b.lang !== 'en' ? <span className="faint"> · /{b.lang}</span> : null}
+                  </td>
+                  <td>{b.telegram ? <a href={`https://t.me/${b.telegram}`}>@{b.telegram}</a> : '—'}</td>
+                  <td>{b.email ? <a href={`mailto:${b.email}`}>{b.email}</a> : '—'}</td>
+                  <td style={{ whiteSpace: 'pre-wrap', minWidth: 200 }}>{b.note || '—'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <p className="faint" style={{ fontSize: 14 }}>No requests yet.</p>
+      )}
+    </Section>
+  );
+}
+
 export default async function StatsPage({ searchParams }: { searchParams: Promise<{ r?: string; wrong?: string }> }) {
   const sp = await searchParams;
   const jar = await cookies();
@@ -358,6 +410,7 @@ export default async function StatsPage({ searchParams }: { searchParams: Promis
   const days = rangeDays(sp.r);
   const db = await readyDb().catch(() => null);
   const data = db ? await report(db, days).catch((e) => (console.error('stats: report failed', e), null)) : null;
+  const bookings = db ? await listBookings(db).catch((e) => (console.error('stats: bookings failed', e), [])) : [];
 
   return (
     <div className="wrap section stack" style={{ gap: 32 }}>
@@ -390,6 +443,7 @@ export default async function StatsPage({ searchParams }: { searchParams: Promis
         </form>
         {data ? <p className="faint" style={{ fontSize: 14 }}>From {data.from} to today (dates in UTC).</p> : null}
       </div>
+      {db ? <Bookings rows={bookings} /> : null}
       {data ? (
         <Dashboard data={data} days={days} counted={counted} />
       ) : (

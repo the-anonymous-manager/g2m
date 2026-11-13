@@ -22,6 +22,7 @@ import { GlyphField } from '@/components/motion/GlyphField';
 import { IntlScore } from '@/components/IntlCardList';
 import { IntlText } from '@/components/IntlText';
 import { OutboundLink } from '@/components/OutboundLink';
+import { BookSpotForm } from '@/components/BookSpotForm';
 
 // The home page in another language (/de, /ar ...), section for section the same as the English home page
 // (app/(en)/page.tsx): hero with search and the top spot, the numbers, New on G2M, the top-5 leaderboard, cards
@@ -157,7 +158,6 @@ export default async function IntlHomePage({ params }: Props) {
     [`${prefix}/corridors`, d.toolCorridorTag, d.toolCorridor, d.toolCorridorText],
     [`${prefix}/compare`, d.toolCompareTag, d.toolCompare, d.toolCompareText]
   ];
-  const mail = (subject: string) => `mailto:${site.contactEmail}?subject=${encodeURIComponent(subject)}`;
   const jsonLd = [
     {
       '@context': 'https://schema.org',
@@ -245,12 +245,16 @@ export default async function IntlHomePage({ params }: Props) {
                 {sponsor ? (
                   <>
                     {d.spotSponsored} <Link href={intlMethodology(locale)}>{d.moneyLink}</Link>
+                    {' · '}
+                    <a href="#book-top">{UI[locale.code].book.bookTop}</a>
                   </>
                 ) : ourPick ? (
-                  d.spotPickNote
+                  <>
+                    {d.spotPickNote} <a href="#book-top">{UI[locale.code].book.bookTop}</a>
+                  </>
                 ) : (
                   <>
-                    {d.spotTopNote} <a href={mail('Featured spot on G2M')}>{d.bookSpot}</a>
+                    {d.spotTopNote} <a href="#book-top">{d.bookSpot}</a>
                   </>
                 )}
               </p>
@@ -415,14 +419,20 @@ export default async function IntlHomePage({ params }: Props) {
             );
           })}
         </div>
-        <p className="faint" style={{ fontSize: 13, margin: 0 }}>
-          {anyFeatured ? (
-            <>
-              {d.pickSponsored} <Link href={intlMethodology(locale)}>{d.moneyLink}</Link>.{' '}
-            </>
-          ) : null}
-          <a href={mail('Featured pick on G2M')}>{d.bookPicks}</a>
-        </p>
+        <BookSpotForm
+          cards={cards.map((c) => ({ slug: c.slug, name: c.name }))}
+          email={site.contactEmail}
+          words={UI[locale.code].book}
+          tag={locale.tag}
+          lang={locale.code}
+          before={
+            anyFeatured ? (
+              <>
+                {d.pickSponsored} <Link href={intlMethodology(locale)}>{d.moneyLink}</Link>.{' '}
+              </>
+            ) : null
+          }
+        />
       </section>
 
       {/* How cards are judged */}

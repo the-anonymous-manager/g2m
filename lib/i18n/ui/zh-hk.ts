@@ -7,6 +7,7 @@ import { walletZhHk } from './wallet/zh-hk';
 import { receiptZhHk } from './receipt/zh-hk';
 import { corridorZhHk } from './corridor/zh-hk';
 import { submitZhHk } from './submit/zh-hk';
+import { bookZhHk } from './book/zh-hk';
 
 export const uiZhHK: Ui = {
   common: {
@@ -137,5 +138,6 @@ export const uiZhHK: Ui = {
   wallet: walletZhHk,
   receipt: receiptZhHk,
   corridor: corridorZhHk,
-  submit: submitZhHk
+  submit: submitZhHk,
+  book: bookZhHk
 };

@@ -17,6 +17,7 @@ const EVENTS = new Set([
   'Region',
   'Search',
   'Share',
+  'Book',
   'Submit',
   'Theme',
   'Wallet'

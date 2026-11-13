@@ -7,6 +7,7 @@ import { walletAr } from './wallet/ar';
 import { receiptAr } from './receipt/ar';
 import { corridorAr } from './corridor/ar';
 import { submitAr } from './submit/ar';
+import { bookAr } from './book/ar';
 
 export const uiAr: Ui = {
   common: {
@@ -137,5 +138,6 @@ export const uiAr: Ui = {
   wallet: walletAr,
   receipt: receiptAr,
   corridor: corridorAr,
-  submit: submitAr
+  submit: submitAr,
+  book: bookAr
 };

@@ -7,6 +7,7 @@ import { walletPl } from './wallet/pl';
 import { receiptPl } from './receipt/pl';
 import { corridorPl } from './corridor/pl';
 import { submitPl } from './submit/pl';
+import { bookPl } from './book/pl';
 
 export const uiPl: Ui = {
   common: {
@@ -137,5 +138,6 @@ export const uiPl: Ui = {
   wallet: walletPl,
   receipt: receiptPl,
   corridor: corridorPl,
-  submit: submitPl
+  submit: submitPl,
+  book: bookPl
 };

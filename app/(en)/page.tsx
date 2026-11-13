@@ -14,6 +14,7 @@ import { cashbackLabel, fmtDate, pct, usd } from '@/lib/format';
 import { metaDescription, site } from '@/lib/site';
 import { intlHome, languageLinks } from '@/lib/i18n/locales';
 import { CardArt } from '@/components/CardArt';
+import { BookSpotForm } from '@/components/BookSpotForm';
 import { ArrowIcon, Eyebrow, MarketBadge, ScorePill, SearchIcon } from '@/components/bits';
 
 const MARKETS: Market[] = ['US', 'GB', 'EU'];
@@ -216,15 +217,17 @@ export default function HomePage() {
                   <>
                     Sponsored. It never changes a card&apos;s score or rank.{' '}
                     <Link href="/methodology#money">How G2M makes money</Link>
+                    {' · '}
+                    <a href="#book-top">Book this spot</a>
                   </>
                 ) : ourPick ? (
-                  'Our pick, chosen by G2M.'
+                  <>
+                    Our pick, chosen by G2M. <a href="#book-top">Book this spot</a>
+                  </>
                 ) : (
                   <>
                     The highest G2M score worldwide right now. Card issuers can{' '}
-                    <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Featured spot on G2M')}`}>
-                      book this spot
-                    </a>{' '}
+                    <a href="#book-top">book this spot</a>{' '}
                     as a labelled sponsor.
                   </>
                 )}
@@ -398,16 +401,18 @@ export default function HomePage() {
             </article>
           ))}
         </div>
-        <p className="faint" style={{ fontSize: 13, margin: 0 }}>
-          {anyFeatured ? (
-            <>
-              Featured cards marked Sponsored are paid for; that never changes a card&apos;s score or rank.{' '}
-              <Link href="/methodology#money">How G2M makes money</Link>.{' '}
-            </>
-          ) : null}
-          Card issuers can{' '}
-          <a href={`mailto:${site.contactEmail}?subject=${encodeURIComponent('Featured pick on G2M')}`}>book one of these spots</a>.
-        </p>
+        <BookSpotForm
+          cards={cards.map((c) => ({ slug: c.slug, name: c.name }))}
+          email={site.contactEmail}
+          before={
+            anyFeatured ? (
+              <>
+                Featured cards marked Sponsored are paid for; that never changes a card&apos;s score or rank.{' '}
+                <Link href="/methodology#money">How G2M makes money</Link>.{' '}
+              </>
+            ) : null
+          }
+        />
       </section>
 
       {/* How we judge */}

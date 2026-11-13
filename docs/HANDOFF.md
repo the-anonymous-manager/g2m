@@ -542,6 +542,16 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     $2,000 with the rest carried over). Forms now include metal. The stake columns stay empty (the requirement is a
     USD share, not a token amount), so the calculator shows "Needs: Portfolio of …" and leaves these tiers out of
     the default view. Still 5th of 39 (the score uses Base).
+- "Book a spot" form (13 Nov 2026, Akash with a screenshot of "Card issuers can book one of these spots": "this
+  portion should have a form, also like how much they want to pay for month"; "telegram username is helpful"). The
+  email link under Our picks (and "book this spot" on the top card, which opens it with "Top spot" chosen via
+  `#book-top`; the top card always shows "Book this spot", also while it is Our pick or sponsored) now opens a form in place: card (or one not on G2M yet), spot (any pick, pick 1-3, top spot), what they
+  want to pay a month in USD, 1/3/6/12 months, start month, company, name, Telegram username and/or work email, note.
+  Sent to `/api/book`, saved in D1 table `booking` (`lib/bookings.ts`; a hidden field and a 5-a-day limit per sender
+  keep spam out; bots get a silent "ok"), listed newest first on `/stats` under "Spot booking requests" with links to
+  reply on Telegram or by email. If saving fails, the form offers the request as a prepared email. All 9 languages
+  (`lib/i18n/ui/book/`). Tested on a local Cloudflare preview with a local database (`npm run cf:preview`, a
+  `.dev.vars` with STATS_PASSWORD for /stats).
 - Whole site in each language, stage 2a (12 Nov 2026; Akash: "first go with 1,2,3,4,5,6", the first being the card
   page): `/de/cards/kast` etc. are now the full English card review in each language, built by the same component
   (`components/CardReview.tsx`; the English page calls it with no language and is unchanged, checked word for word
