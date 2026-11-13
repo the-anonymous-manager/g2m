@@ -574,6 +574,15 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
 - Swipe receipt currencies (13 Nov 2026, Akash: "add more currencies here"): the "Paid in" and "Show receipt in" lists
   keep the 19 common currencies (and the visitor's own) first, then "More currencies": every country currency in
   lib/currencies.mjs with a live rate, A to Z (132 more). The receipt picture shows a code when it has no symbol.
+- COCA corrections from the COCA team (13 Nov 2026, forwarded by Akash), each checked on COCA's help centre: no
+  fee-free ATM allowance since late October (ATM: fee not published, €850 a day, €5,000 a month, 5 withdrawals a day);
+  no EURS (assets USDT, USDC, EURC on 16 networks, plus SEPA and card top-ups); cashback is claimed in the app into the
+  USD or EUR balance (as USDC or EURC) after 14 days pending, no monthly payout date; 5% APY on USD balances at every
+  tier (variable, EUR none); spending limits (€30,000 a purchase/day/month, €75,000 per 3 months, €100,000 per 6;
+  COCA wrote "unlimited by request" for Elite, the help page says Elite can ask for a higher limit, so the site says
+  that); claim capacity boosters and carry-over; personal EUR IBAN for residents of 28 countries (T&C 1.3). Custody
+  was already non-custodial, and the 73-country list already matched T&C 1.2. Card picture now COCA's own Drive file
+  (same design, higher resolution). Still unpublished per COCA: restricted passports, issuing bank, full fee schedule.
 - Whole site in each language, stage 2a (12 Nov 2026; Akash: "first go with 1,2,3,4,5,6", the first being the card
   page): `/de/cards/kast` etc. are now the full English card review in each language, built by the same component
   (`components/CardReview.tsx`; the English page calls it with no language and is unchanged, checked word for word

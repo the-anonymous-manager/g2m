@@ -1102,8 +1102,8 @@
     "forms": ["virtual", "physical"],
     "custody": "self-custodial",
     "summary": "Non-custodial Visa debit card from COCA. Cashback runs from 1% to 8% depending on how many COCA tokens you hold.",
-    "cashback": { "basePct": 1, "maxPct": 8, "payout": "Stablecoins, monthly", "note": "No limit on cashback earned: Starter 1%, Standard 3%, Standard+ 4%, Premium 5%, Premium+ 6%, Elite 8%. Each tier can claim only so much to your balance a month: $15 (Starter) to $350 (Elite), more with boosters; unclaimed rewards carry over." },
-    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "No FX fee on direct pairs: spending in EUR or US dollars (COCA's docs: zero FX fees on direct pairs). 2% on other currencies (as shown in the COCA app).", "fxByCurrency": { "USD": 0, "EUR": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 5, "atm": "Free up to $250 a month, then 2%", "other": ["Plastic card: $5 on Starter, Standard and Standard+; free on higher tiers"] },
+    "cashback": { "basePct": 1, "maxPct": 8, "payout": "USD or EUR balance, claimed in the app", "note": "Starter 1%, Standard 3%, Standard+ 4%, Premium 5%, Premium+ 6%, Elite 8%, with no limit on what you earn. Rewards stay pending for 14 days, then you claim them in the app into your USD or EUR balance (as USDC or EURC), up to a monthly claim capacity: $15 (Starter) to $350 (Elite), raised by Capacity Boosters for card spend, time on a tier and extra COCA staked. Unclaimed rewards carry over to the next month and expire after 12 months." },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "No FX fee on direct pairs: spending in EUR or US dollars (COCA's docs: zero FX fees on direct pairs). 2% on other currencies (as shown in the COCA app).", "fxByCurrency": { "USD": 0, "EUR": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 5, "atm": "Fee not published. Limits: €850 a day, €5,000 a month, 5 withdrawals a day", "other": ["Plastic card: $5 on Starter, Standard and Standard+; free on higher tiers", "Spending limits: €30,000 a purchase, a day and a month; €75,000 per 3 months; €100,000 per 6 months (Elite members can ask for more)"] },
     "tiers": [
       { "name": "Starter", "feeUsdYear": 0, "cashbackPct": 1, "capMonthlyUsd": 15, "perks": ["Claim up to $15 a month"] },
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 3, "capMonthlyUsd": 25, "requirement": "Hold 300 COCA", "stake": { "token": "COCA", "amount": 300, "coingeckoId": "coca" }, "perks": ["50% back on 1 subscription", "Claim up to $25 a month"] },
@@ -1114,15 +1114,15 @@
     ],
     "coverage": { "countries": 73, "scope": "UK, EEA, Asia, South America, the Middle East and Africa", "examples": ["United Kingdom"], "markets": { "IN": "no", "AE": "yes", "US": "no", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AD", "AE", "AR", "AT", "AU", "AZ", "BE", "BG", "BR", "CH", "CL", "CO", "CY", "CZ", "DE", "DK", "EC", "EE", "ES", "FI", "FR", "GB", "GE", "GG", "GH", "GI", "GR", "HK", "HR", "HU", "IE", "IL", "IM", "IS", "IT", "JE", "JP", "KE", "KR", "KZ", "LI", "LT", "LU", "LV", "MC", "MD", "ME", "MO", "MT", "MX", "MY", "NG", "NL", "NO", "NZ", "OM", "PA", "PE", "PH", "PL", "PT", "RO", "SA", "SE", "SI", "SK", "SV", "TH", "TW", "UA", "UG", "UZ", "ZA"], "others": "no" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 1, "ramps": "both", "credit": false, "yield": true },
-    "bankRails": [ { "rail": "EUR_SEPA", "in": true, "out": true, "fee": "EEA and UK residents" } ],
+    "bankRails": [ { "rail": "EUR_SEPA", "in": true, "out": true, "fee": "residents of 28 European countries" } ],
     "bankForNonResidents": false,
     "kycRule": "residency_id",
     "signupBonus": "8% cashback on your first 3 eligible card purchases, if you register in November 2026, complete KYC, fund the card and buy by 30 Nov 2026. No code needed",
     "wallets": { "applePay": true, "googlePay": true },
-    "assets": ["USDT", "USDC", "EURC", "EURS"],
-    "perks": ["Yield on your card balance (variable)"],
-    "pros": ["1% with no tokens needed", "Up to 8% on higher tiers", "Free ATM withdrawals up to $250 a month"],
-    "cons": ["Higher tiers need you to hold COCA tokens", "You can claim only $15 to $350 of rewards a month, by tier", "Not offered in the US"],
+    "assets": ["USDT", "USDC", "EURC"],
+    "perks": ["5% APY on USD balances at every tier (variable; EUR balances earn none)", "Personal EUR IBAN with SEPA transfers (residents of 28 European countries)", "Fund with USDC, USDT or EURC on 16 networks, by SEPA transfer or by card top-up", "Hotel discounts of up to 50% with COCA Travel"],
+    "pros": ["1% with no tokens needed, up to 8% on higher tiers", "5% APY on USD balances", "Personal EUR IBAN for residents of 28 European countries"],
+    "cons": ["Higher tiers need you to hold COCA tokens", "You can claim only $15 to $350 of rewards a month by tier (more with boosters)", "Not offered in the US"],
     "links": { "official": "https://www.coca.xyz/", "affiliate": "https://coca.sjv.io/c/8068794/4117922/47661" },
     "sources": [
       { "label": "COCA docs: membership tiers", "url": "https://docs.coca.xyz/coca/membership-and-rewards/membership-you-deserve", "verified": "2026-10-24" },
@@ -1138,11 +1138,16 @@
       { "label": "COCA Docs: Buy Crypto", "url": "https://docs.coca.xyz/coca/crypto-account/buy-crypto", "verified": "2026-10-24" },
       { "label": "COCA affiliate team, 2 Nov 2026: November Welcome Cashback Drop, 8% on a new user's first 3 eligible purchases (offer ends 30 Nov 2026)", "url": "https://www.coca.xyz/", "verified": "2026-11-03" },
       { "label": "COCA docs: COCA Card fees (zero FX fees on direct pairs); 2% on other currencies as shown in the COCA app", "url": "https://docs.coca.xyz/coca/banking-account/coca-card", "verified": "2026-11-04" },
-      { "label": "COCA docs: Membership you deserve (unlimited cashback, monthly claim capacity by tier)", "url": "https://docs.coca.xyz/coca/membership-and-rewards/membership-you-deserve", "verified": "2026-11-12" }
+      { "label": "COCA docs: Membership you deserve (unlimited cashback, monthly claim capacity by tier)", "url": "https://docs.coca.xyz/coca/membership-and-rewards/membership-you-deserve", "verified": "2026-11-12" },
+      { "label": "COCA Help: Debit card limits (ATM and spending limits, 27 Oct 2026)", "url": "https://help.coca.xyz/support/solutions/articles/205000042688-coca-debit-card-limits", "verified": "2026-11-13" },
+      { "label": "COCA Help: Supported assets for deposits in crypto", "url": "https://help.coca.xyz/support/solutions/articles/205000069392-supported-assets-for-deposits-in-crypto", "verified": "2026-11-13" },
+      { "label": "COCA Help: Loyalty Program T&C (card countries 1.2, EUR IBAN countries 1.3, claiming 2-3, APY 4)", "url": "https://help.coca.xyz/support/solutions/articles/205000042710-tier-system-terms-conditions", "verified": "2026-11-13" },
+      { "label": "COCA Help: How claim capacity boosters work", "url": "https://help.coca.xyz/support/solutions/articles/205000072788-how-claim-capacity-boosters-work", "verified": "2026-11-13" },
+      { "label": "COCA team, 13 Nov 2026: corrections (no ATM allowance since late October, no EURS) and card art (Google Drive)", "url": "https://drive.google.com/drive/folders/1bu5Vvz4nECKSOeTindikPTrr2fWpckVC", "verified": "2026-11-13" }
     ],
-    "lastChecked": "2026-11-12",
+    "lastChecked": "2026-11-13",
     "metal": "rose",
-    "image": { "source": "https://g2m.life/card-originals/coca.png", "file": "/card-images/coca-c187374f.webp" }
+    "image": { "source": "https://drive.google.com/file/d/1uqi5VbEgpKgyJWNG-wKBSDN3KwZGB79k/view", "file": "/card-images/coca-bcba93b5.webp" }
   },
   {
     "slug": "avici",
