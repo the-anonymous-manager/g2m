@@ -9,9 +9,9 @@
   },
   {
     "slot": 2,
-    "slug": "etherfi",
+    "slug": "solid",
     "type": "pick",
-    "note": "3% back even on the free tier, non-custodial, with lounge access.",
+    "note": "Free and non-custodial: 3% back in USDC, up to $50 a month, and no fee on US-dollar spending.",
     "start": null,
     "end": null
   },
