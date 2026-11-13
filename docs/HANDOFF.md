@@ -534,8 +534,14 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     card is the source of the current line).
   - Pictures: the sync downloads "Card image" links, which point at g2m.life/card-originals/ before those files are
     deployed; run it once with a fetch override that reads them from `public/card-originals/` (Node `--import`).
-  - Open: Wirex One now publishes portfolio-based tier requirements ("Wirex One Membership – how it works"); its tier
-    rows still say "Not published".
+  - Wirex One tiers (Akash: "update wirex"): requirements are now published. No fee and nothing locked; the tier
+    follows the portfolio and its share in the WPAY token: Premium $500+ with 1%, Elite $2,500+ with 3%, Private
+    $25,000+ with 5%, Bespoke $50,000+ with 10%. Each tier row lists its perks from "Membership levels benefits"
+    (physical card from Premium, metal Visa Signature with lounges, AirRefund and Sixt on Private and Bespoke, 50%
+    subscription rebates, free ATM allowance, fee-free trading, earn boosts, monthly cashback redemption cap $25 to
+    $2,000 with the rest carried over). Forms now include metal. The stake columns stay empty (the requirement is a
+    USD share, not a token amount), so the calculator shows "Needs: Portfolio of …" and leaves these tiers out of
+    the default view. Still 5th of 39 (the score uses Base).
 - Whole site in each language, stage 2a (12 Nov 2026; Akash: "first go with 1,2,3,4,5,6", the first being the card
   page): `/de/cards/kast` etc. are now the full English card review in each language, built by the same component
   (`components/CardReview.tsx`; the English page calls it with no language and is unchanged, checked word for word
