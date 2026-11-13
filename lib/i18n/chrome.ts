@@ -3,7 +3,7 @@
 
 export type Chrome = {
   ranking: string; // link to the translated home page
-  tools: string; // link to the English tools
+  tools: string; // the tools menu
   english: string; // link to the English site
   languages: string; // label of the language list
   language: string; // the language button in the header
@@ -16,7 +16,7 @@ export type Chrome = {
 export const CHROME: Record<string, Chrome> = {
   de: {
     ranking: 'Rangliste',
-    tools: "Tools (Englisch)",
+    tools: "Tools",
     english: 'English',
     languages: 'Sprachen',
     language: 'Sprache',
@@ -28,7 +28,7 @@ export const CHROME: Record<string, Chrome> = {
   },
   fr: {
     ranking: 'Classement',
-    tools: "Outils (en anglais)",
+    tools: "Outils",
     english: 'English',
     languages: 'Langues',
     language: 'Langue',
@@ -40,7 +40,7 @@ export const CHROME: Record<string, Chrome> = {
   },
   es: {
     ranking: 'Clasificación',
-    tools: "Herramientas (en inglés)",
+    tools: "Herramientas",
     english: 'English',
     languages: 'Idiomas',
     language: 'Idioma',
@@ -52,7 +52,7 @@ export const CHROME: Record<string, Chrome> = {
   },
   pl: {
     ranking: 'Ranking',
-    tools: "Narzędzia (ang.)",
+    tools: "Narzędzia",
     english: 'English',
     languages: 'Języki',
     language: 'Język',
@@ -64,7 +64,7 @@ export const CHROME: Record<string, Chrome> = {
   },
   tr: {
     ranking: 'Sıralama',
-    tools: "Araçlar (İngilizce)",
+    tools: "Araçlar",
     english: 'English',
     languages: 'Diller',
     language: 'Dil',
@@ -76,7 +76,7 @@ export const CHROME: Record<string, Chrome> = {
   },
   ru: {
     ranking: 'Рейтинг',
-    tools: "Инструменты (англ.)",
+    tools: "Инструменты",
     english: 'English',
     languages: 'Языки',
     language: 'Язык',
@@ -88,7 +88,7 @@ export const CHROME: Record<string, Chrome> = {
   },
   ar: {
     ranking: 'الترتيب',
-    tools: "الأدوات (بالإنجليزية)",
+    tools: "الأدوات",
     english: 'English',
     languages: 'اللغات',
     language: 'اللغة',
@@ -100,7 +100,7 @@ export const CHROME: Record<string, Chrome> = {
   },
   'zh-hk': {
     ranking: '排名',
-    tools: "工具（英文）",
+    tools: "工具",
     english: 'English',
     languages: '語言',
     language: '語言',

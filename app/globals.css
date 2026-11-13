@@ -2592,6 +2592,40 @@ body::before {
 .intl-nav a:hover {
   color: var(--text);
 }
+/* The tools menu opens below the header links, so the links row must not clip it (three links fit on any phone). */
+.intl .intl-nav {
+  overflow: visible;
+}
+.tools-menu {
+  position: relative;
+}
+.tools-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  color: var(--muted);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.tools-btn::-webkit-details-marker {
+  display: none;
+}
+.tools-btn:hover,
+.tools-menu[open] .tools-btn,
+.tools-btn[aria-current='page'] {
+  color: var(--text);
+}
+.tools-menu[open] .lang-caret {
+  transform: rotate(180deg);
+}
+.tools-list {
+  inset-inline-start: 0;
+  inset-inline-end: auto;
+  min-width: 240px;
+  white-space: normal;
+}
 .lang-links {
   align-items: baseline;
 }

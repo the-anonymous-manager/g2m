@@ -417,6 +417,15 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   against the previous build (same text before and after clicks). Long words: short custody labels in the table and
   wrapping headings, so the table fits 1280 px in every language. Next stages, one PR each: card page in full,
   compare, calculator, finder, wallet, receipt, corridors, submit, fees guide.
+- Whole site in each language, stage 2f (13 Nov 2026, Akash: "step 6", the last of "1,2,3,4,5,6"): the submit form
+  (`/de/submit` etc.) and the fees guide (`/de/guides/crypto-card-fees-explained`) in all 8 languages. The form's
+  words are translated; the email it prepares stays English ("New card for G2M: …") so the team can read it, and the
+  form says so. The fees guide has the same sections, live numbers and $1,000-month table as the English guide (text
+  in `lib/i18n/fees`, numbers shared in `lib/feesGuide.ts`), and is listed on the translated guides pages. The
+  translated header's "Tools (English)" link is now a Tools menu with the six tools in that language. Card pages'
+  "Tell us" link opens the translated form. English `/submit` (with its error messages and prepared email), the fees
+  guide, guides, home, card page and methodology checked against the live build: no differences. Every page of the
+  site now exists in all 8 languages; translations are Claude's, not yet checked by native speakers.
 - Whole site in each language, stage 2e (13 Nov 2026, Akash: "step 5"): the wallet builder, swipe receipt and
   corridor finder at `/de/wallet`, `/de/receipt`, `/de/corridors` etc. in all 8 languages: every form, result, table,
   note and share text, with money and percentages from Intl. The maths is unchanged: the wallet's "card 2 for these

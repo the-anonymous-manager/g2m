@@ -755,7 +755,7 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
           </a>
           {/^[,.;:]/.test(t.termsB) ? '' : ' '}
           {t.termsB}{' '}
-          <Link href={`/submit?card=${card.slug}`} hrefLang={english ? undefined : 'en'}>
+          <Link href={`${c.prefix}/submit?card=${card.slug}`}>
             {t.tellUs}
           </Link>
           .

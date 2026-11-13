@@ -1,0 +1,30 @@
+import type { submitEn } from './en';
+
+export const submitTr: typeof submitEn = {
+  metaTitle: "Kart veya düzeltme gönderin",
+  metaDesc: "Kart sağlayıcılar ve kullanıcılar: G2M’e bir kripto kart ekleyin veya listedeki bir kart için düzeltme gönderin.",
+  eyebrow: "gönder",
+  title: "Kart ekleyin veya düzeltin",
+  lead: "Kart sağlayıcılar yeni bir kart gönderebilir, herkes düzeltme gönderebilir. Her değişikliği yayına almadan önce sağlayıcının yayımladığı koşullarla karşılaştırırız. Listelenmek ücretsizdir ve puanı etkilemez.",
+  kindAria: "Ne göndermek istiyorsunuz?",
+  kindNew: "Yeni kart ekle",
+  kindFix: "Listedeki bir kartı düzelt",
+  name: "Kart adı",
+  site: "Resmî web sitesi",
+  card: "Kart",
+  pickCard: "Bir kart seçin",
+  detailsNew: "Ücretler, cashback ve ülkeler",
+  detailsFix: "Neyin yanlış olduğu ve bunu gösteren bir bağlantı",
+  from: "E-postanız veya X kullanıcı adınız (isteğe bağlı)",
+  errName: "Kartın adını ekleyin.",
+  errSite: "Web sitesi https:// ile başlamalı",
+  errCard: "Düzeltilmesi gereken kartı seçin.",
+  errDetails: "Biraz daha bilgi verin (en az 10 karakter).",
+  prepare: "Mesajımı hazırla",
+  ready: "Mesajınız hazır",
+  sendTo: "{email} adresine gönderin. E-posta uygulamanızda açın veya kopyalayın.",
+  openEmail: "E-posta uygulamasında aç",
+  copy: "Mesajı kopyala",
+  copied: "Kopyalandı",
+  englishNote: "Mesaj G2M ekibi için İngilizce hazırlanır; bilgilerinizi herhangi bir dilde yazabilirsiniz."
+};

@@ -6,6 +6,7 @@ import { finderPl } from './finder/pl';
 import { walletPl } from './wallet/pl';
 import { receiptPl } from './receipt/pl';
 import { corridorPl } from './corridor/pl';
+import { submitPl } from './submit/pl';
 
 export const uiPl: Ui = {
   common: {
@@ -135,5 +136,6 @@ export const uiPl: Ui = {
   finder: finderPl,
   wallet: walletPl,
   receipt: receiptPl,
-  corridor: corridorPl
+  corridor: corridorPl,
+  submit: submitPl
 };

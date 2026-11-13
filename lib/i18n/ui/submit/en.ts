@@ -1,0 +1,30 @@
+// The submit form's words (/submit, /de/submit). The email it prepares stays in English: it goes to G2M.
+export const submitEn = {
+  metaTitle: 'Submit a card or a correction',
+  metaDesc: 'Card issuers and users: add a crypto card to G2M or send a correction to a listed card.',
+  eyebrow: 'submit',
+  title: 'Add a card or fix one',
+  lead: "Issuers can submit a new card, and anyone can send a correction. We check every change against the issuer's published terms before it goes live. Listing is free and does not affect the score.",
+  kindAria: 'What are you sending?',
+  kindNew: 'Add a new card',
+  kindFix: 'Fix a listed card',
+  name: 'Card name',
+  site: 'Official website',
+  card: 'Card',
+  pickCard: 'Pick a card',
+  detailsNew: 'Fees, cashback and countries',
+  detailsFix: 'What is wrong, and a link that shows it',
+  from: 'Your email or X handle (optional)',
+  errName: 'Add the card name.',
+  errSite: 'The website should start with https://',
+  errCard: 'Pick the card that needs a fix.',
+  errDetails: 'Tell us a little more (at least 10 characters).',
+  prepare: 'Prepare my message',
+  ready: 'Your message is ready',
+  sendTo: 'Send it to {email}. Open it in your email app, or copy it.',
+  openEmail: 'Open in email app',
+  copy: 'Copy message',
+  copied: 'Copied',
+  // Shown on translated pages only: the message is written for G2M.
+  englishNote: ''
+};

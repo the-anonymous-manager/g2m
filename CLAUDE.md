@@ -101,8 +101,9 @@ and confirm what changed on the site (not which files moved).
   served from static files, see `open-next.config.ts`): they must not read cookies, headers or the time of the request.
 - Other languages (`lib/i18n/`): German, French, Spanish, Polish, Turkish, Russian, Arabic (right to left) and
   Traditional Chinese (Hong Kong) at `/de`, `/fr`, `/es`, `/pl`, `/tr`, `/ru`, `/ar`, `/zh-hk`. Each has a home page
-  (`app/[lang]`), card pages (`/de/cards/kast`, plus `/alternatives` and `/referral-code`), the compare tool (`/de/compare`), the calculator (`/de/calculator`), the finder (`/de/finder`), the wallet builder, swipe receipt and corridor finder (`/de/wallet`, `/de/receipt`, `/de/corridors`), "X vs Y"
-  (`/de/compare/a-vs-b`), guides (`/de/guides`, `/de/guides/<topic>`), country pages (`/de/best-crypto-cards/germany`)
+  (`app/[lang]`), card pages (`/de/cards/kast`, plus `/alternatives` and `/referral-code`), the compare tool (`/de/compare`), the calculator (`/de/calculator`), the finder (`/de/finder`), the wallet builder, swipe receipt and corridor finder (`/de/wallet`, `/de/receipt`, `/de/corridors`), the submit form (`/de/submit`), "X vs Y"
+  (`/de/compare/a-vs-b`), guides (`/de/guides`, `/de/guides/<topic>`, the fees guide `/de/guides/crypto-card-fees-explained` with its text in
+  `lib/i18n/fees/<code>.ts` and numbers from `lib/feesGuide.ts`), country pages (`/de/best-crypto-cards/germany`)
   and `/de/methodology`. Every word comes from that language's dictionary (`lib/i18n/dict/<code>.ts`, same keys as
   `en.ts`) and every value from the card data; numbers, money, dates and country names come from Intl. Text typed in
   the sheet (summary, pros, cons, bonus, and the card page's coverage, cashback, fee, perk and tier notes) and the guide text are translated in `data/i18n/<code>.json` (exact English
@@ -128,8 +129,10 @@ and confirm what changed on the site (not which files moved).
   `lib/i18n/ui/wallet|receipt|corridor/<code>.ts`; `lib/combo.ts` `sliceParts` and `lib/swipe.ts` line `vars` and
   `noteParts` give facts that each language words; the corridor finder's bank rail fee notes are translated in
   data/i18n like other sheet text). The receipt picture (`/receipt/image`) stays English: its font has no Arabic or
-  Chinese letters. Next: submit, fees guide. Arabic pages switch off letter spacing in page content (it pulls Arabic
-  letters apart). To add a language: `LOCALES` in `locales.ts`, a `chrome.ts`
+  Chinese letters. The submit form's words are in `lib/i18n/ui/submit/<code>.ts`; the email it prepares stays English
+  (it goes to G2M). The whole site is now in every language; the translated header has a Tools menu
+  (`components/ToolsMenu.tsx`, tool names from the dictionaries). Arabic pages switch off letter spacing in page
+  content (it pulls Arabic letters apart). To add a language: `LOCALES` in `locales.ts`, a `chrome.ts`
   entry, a dictionary file, and its line in `dict/index.ts`.
 - `app/go/[slug]` outbound redirect with UTM tags; `/stats` (private) counts only people: crawler hits are stored as
   `auto:<event>` (`isAutomated` in `lib/stats/server.ts`)

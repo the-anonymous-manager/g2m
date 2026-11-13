@@ -54,9 +54,9 @@ export const intlFinder = (l: Locale) => `/${l.code}/finder`;
 export const intlWallet = (l: Locale) => `/${l.code}/wallet`;
 export const intlReceipt = (l: Locale) => `/${l.code}/receipt`;
 export const intlCorridors = (l: Locale) => `/${l.code}/corridors`;
+export const intlSubmit = (l: Locale) => `/${l.code}/submit`;
+export const intlFeesGuide = (l: Locale) => `/${l.code}/guides/crypto-card-fees-explained`;
 
-/** English guides with no translated page (the fees guide is long prose kept in English). */
-const ENGLISH_ONLY_GUIDES = new Set(['crypto-card-fees-explained']);
 
 /**
  * The same page in another language, for the language menu: `to` undefined means English. A page that has no
@@ -71,8 +71,8 @@ export function pathIn(pathname: string, to: Locale | undefined): string {
   const country = en.match(/^\/guides\/best-crypto-cards\/([^/]+)$/);
   if (country) return intlCountry(to, country[1]);
   const guide = en.match(/^\/guides\/([^/]+)$/);
-  if (guide) return ENGLISH_ONLY_GUIDES.has(guide[1]) ? intlGuides(to) : intlGuide(to, guide[1]);
-  if (en === '/cards' || en === '/guides' || en === '/methodology' || en === '/compare' || en === '/calculator' || en === '/finder' || en === '/wallet' || en === '/receipt' || en === '/corridors' || /^\/compare\/[^/]+-vs-[^/]+$/.test(en) || /^\/cards\/[^/]+(\/alternatives|\/referral-code)?$/.test(en))
+  if (guide) return intlGuide(to, guide[1]);
+  if (en === '/cards' || en === '/guides' || en === '/methodology' || en === '/compare' || en === '/calculator' || en === '/finder' || en === '/wallet' || en === '/receipt' || en === '/corridors' || en === '/submit' || /^\/compare\/[^/]+-vs-[^/]+$/.test(en) || /^\/cards\/[^/]+(\/alternatives|\/referral-code)?$/.test(en))
     return `/${to.code}${en}`;
   return intlHome(to);
 }
