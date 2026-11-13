@@ -84,7 +84,7 @@ export const calcZhHk: typeof calcEn = {
   howWorks: '計算器如何運作',
   footB: '（英文）。想逐項看一筆消費，可試試',
   receipt: '消費收據',
-  footC: '（英文）。',
+  footC: '。',
   yearAt: '每月 {spend}，一年下來',
   cardsIn: ' · 你在{place}可申請的卡',
   homeIn: ' · 本地消費以{cur}計',
@@ -201,5 +201,5 @@ export const calcZhHk: typeof calcEn = {
   walletPair: '同時使用 {a} + {b}，比只用 {single} 多留 {plus}。',
   walletPlus: '每年 +{x}',
   walletOne: '以這個消費額，單論金錢一張卡已足夠。還想要機場貴賓室、收益、借貸或銀行賬戶嗎？',
-  walletCta: '組合你的錢包（英文）'
+  walletCta: '組合你的錢包'
 };

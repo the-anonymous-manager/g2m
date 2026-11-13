@@ -3,6 +3,9 @@ import { cardRu } from './card/ru';
 import { compareRu } from './compare/ru';
 import { calcRu } from './calc/ru';
 import { finderRu } from './finder/ru';
+import { walletRu } from './wallet/ru';
+import { receiptRu } from './receipt/ru';
+import { corridorRu } from './corridor/ru';
 
 export const uiRu: Ui = {
   common: {
@@ -129,5 +132,8 @@ export const uiRu: Ui = {
   regions: { EU: 'ЕС / ЕЭЗ', ASIA: 'Азия' },
   compare: compareRu,
   calc: calcRu,
-  finder: finderRu
+  finder: finderRu,
+  wallet: walletRu,
+  receipt: receiptRu,
+  corridor: corridorRu
 };

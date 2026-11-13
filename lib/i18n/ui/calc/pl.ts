@@ -84,7 +84,7 @@ export const calcPl: typeof calcEn = {
   howWorks: 'Jak działa kalkulator',
   footB: ' (po angielsku). Aby zobaczyć jeden zakup pozycja po pozycji, użyj ',
   receipt: 'paragonu transakcji',
-  footC: ' (po angielsku).',
+  footC: '.',
   yearAt: 'Rok przy {spend} miesięcznie',
   cardsIn: ' · karty dostępne w: {place}',
   homeIn: ' · wydatki w kraju w {cur}',
@@ -201,5 +201,5 @@ export const calcPl: typeof calcEn = {
   walletPair: 'Połącz {a} + {b} i zachowaj {plus} więcej niż z samą kartą {single}.',
   walletPlus: '+{x} rocznie',
   walletOne: 'Przy tych wydatkach jedna karta wystarczy, jeśli chodzi o pieniądze. Chcesz też saloniki, zysk, pożyczki albo konto bankowe?',
-  walletCta: 'Zbuduj swój portfel (po angielsku)'
+  walletCta: 'Zbuduj swój portfel'
 };

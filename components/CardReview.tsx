@@ -644,7 +644,7 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
             {fill(t.receiptLead, { name: card.name })}
           </p>
         </div>
-        <Link href={`/receipt?card=${card.slug}`} className="wallet-teaser" hrefLang={english ? undefined : 'en'}>
+        <Link href={`${c.prefix}/receipt?card=${card.slug}`} className="wallet-teaser">
           <span className="field-label">[ {t.receiptTag} ]</span>
           <span className="wallet-teaser-text">{fill(t.receiptText, { a: c.M(10), b: c.M(50), c: c.M(200), name: card.name })}</span>
           <span className="wallet-teaser-cta">

@@ -9,7 +9,7 @@ export const finderEs: typeof finderEn = {
   lead: 'Cinco respuestas rápidas. Dejamos fuera las tarjetas que no puedes conseguir donde vives y explicamos cada elección.',
   rampTag: '[ salida a banco ]',
   rampText: '¿Necesitas pasar USDC o USDT a un banco? Mira qué tarjetas te dan un IBAN o pagan por SEPA, ACH, Faster Payments, AED, INR o SWIFT.',
-  rampCta: 'Buscador de corredores (en inglés)',
+  rampCta: 'Buscador de corredores',
   q1: '¿Dónde vives?',
   pickCountry: 'Elige tu país',
   yourLocation: ' (tu ubicación)',

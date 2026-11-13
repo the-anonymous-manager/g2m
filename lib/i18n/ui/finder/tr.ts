@@ -9,7 +9,7 @@ export const finderTr: typeof finderEn = {
   lead: 'Beş hızlı yanıt. Yaşadığınız yerde alamayacağınız kartları çıkarır, her seçimi açıklarız.',
   rampTag: '[ bankaya çıkış ]',
   rampText: 'USDC veya USDT’yi bankaya mı aktarmanız gerekiyor? Hangi kartların IBAN verdiğini veya SEPA, ACH, Faster Payments, AED, INR ya da SWIFT ile ödeme yaptığını görün.',
-  rampCta: 'Koridor bulucu (İngilizce)',
+  rampCta: 'Koridor bulucu',
   q1: 'Nerede yaşıyorsunuz?',
   pickCountry: 'Ülkenizi seçin',
   yourLocation: ' (konumunuz)',

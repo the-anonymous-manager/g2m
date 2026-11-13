@@ -84,7 +84,7 @@ export const calcAr: typeof calcEn = {
   howWorks: 'كيف تعمل الحاسبة',
   footB: ' (بالإنجليزية). لرؤية عملية شراء واحدة بندًا ببند، جرّب ',
   receipt: 'إيصال الشراء',
-  footC: ' (بالإنجليزية).',
+  footC: '.',
   yearAt: 'سنة بإنفاق {spend} شهريًا',
   cardsIn: ' · بطاقات يمكنك الحصول عليها في {place}',
   homeIn: ' · الإنفاق المحلي بـ{cur}',
@@ -201,5 +201,5 @@ export const calcAr: typeof calcEn = {
   walletPair: 'اجمع {a} + {b} واحتفظ بـ {plus} أكثر من {single} وحدها.',
   walletPlus: '+{x} سنويًا',
   walletOne: 'بطاقة واحدة تكفي من حيث المال بهذا الإنفاق. هل تريد أيضًا صالات المطارات أو عائدًا أو اقتراضًا أو حسابًا بنكيًا؟',
-  walletCta: 'كوّن محفظتك (بالإنجليزية)'
+  walletCta: 'كوّن محفظتك'
 };

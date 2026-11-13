@@ -9,7 +9,7 @@ export const finderRu: typeof finderEn = {
   lead: 'Пять быстрых ответов. Мы убираем карты, недоступные там, где вы живёте, и объясняем каждый выбор.',
   rampTag: '[ вывод в банк ]',
   rampText: 'Нужно перевести USDC или USDT в банк? Посмотрите, какие карты дают IBAN или выводят деньги через SEPA, ACH, Faster Payments, AED, INR или SWIFT.',
-  rampCta: 'Подбор коридора (на английском)',
+  rampCta: 'Подбор коридора',
   q1: 'Где вы живёте?',
   pickCountry: 'Выберите страну',
   yourLocation: ' (ваше местоположение)',

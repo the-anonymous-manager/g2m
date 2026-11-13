@@ -3,6 +3,9 @@ import { cardPl } from './card/pl';
 import { comparePl } from './compare/pl';
 import { calcPl } from './calc/pl';
 import { finderPl } from './finder/pl';
+import { walletPl } from './wallet/pl';
+import { receiptPl } from './receipt/pl';
+import { corridorPl } from './corridor/pl';
 
 export const uiPl: Ui = {
   common: {
@@ -129,5 +132,8 @@ export const uiPl: Ui = {
   regions: { EU: 'UE / EOG', ASIA: 'Azja' },
   compare: comparePl,
   calc: calcPl,
-  finder: finderPl
+  finder: finderPl,
+  wallet: walletPl,
+  receipt: receiptPl,
+  corridor: corridorPl
 };

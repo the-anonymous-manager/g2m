@@ -52,7 +52,7 @@ export default async function IntlFinderPage({ params, searchParams }: Props) {
         <Eyebrow>{w.eyebrow}</Eyebrow>
         <h1 className="h2">{w.title}</h1>
         <p className="lead">{w.lead}</p>
-        <Link href="/corridors" hrefLang="en" className="wallet-teaser" style={{ alignSelf: 'stretch' }}>
+        <Link href={`/${locale.code}/corridors`} className="wallet-teaser" style={{ alignSelf: 'stretch' }}>
           <span className="field-label">{w.rampTag}</span>
           <span className="wallet-teaser-text">{w.rampText}</span>
           <span className="wallet-teaser-cta">

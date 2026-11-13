@@ -9,7 +9,7 @@ export const finderAr: typeof finderEn = {
   lead: 'خمس إجابات سريعة. نستبعد البطاقات التي لا يمكنك الحصول عليها حيث تقيم ونشرح كل اختيار.',
   rampTag: '[ السحب إلى البنك ]',
   rampText: 'تريد نقل USDC أو USDT إلى بنك؟ اعرف أي البطاقات تمنحك IBAN أو تحوّل عبر SEPA أو ACH أو Faster Payments أو AED أو INR أو SWIFT.',
-  rampCta: 'أداة الممرات (بالإنجليزية)',
+  rampCta: 'أداة الممرات',
   q1: 'أين تقيم؟',
   pickCountry: 'اختر بلدك',
   yourLocation: ' (موقعك)',

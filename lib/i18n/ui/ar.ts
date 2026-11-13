@@ -3,6 +3,9 @@ import { cardAr } from './card/ar';
 import { compareAr } from './compare/ar';
 import { calcAr } from './calc/ar';
 import { finderAr } from './finder/ar';
+import { walletAr } from './wallet/ar';
+import { receiptAr } from './receipt/ar';
+import { corridorAr } from './corridor/ar';
 
 export const uiAr: Ui = {
   common: {
@@ -129,5 +132,8 @@ export const uiAr: Ui = {
   regions: { EU: 'الاتحاد الأوروبي / المنطقة الاقتصادية الأوروبية', ASIA: 'آسيا' },
   compare: compareAr,
   calc: calcAr,
-  finder: finderAr
+  finder: finderAr,
+  wallet: walletAr,
+  receipt: receiptAr,
+  corridor: corridorAr
 };

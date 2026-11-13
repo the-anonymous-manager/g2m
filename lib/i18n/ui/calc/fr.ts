@@ -84,7 +84,7 @@ export const calcFr: typeof calcEn = {
   howWorks: 'Fonctionnement du calculateur',
   footB: ' (en anglais). Pour voir un achat ligne par ligne, essayez le ',
   receipt: 'ticket de caisse',
-  footC: ' (en anglais).',
+  footC: '.',
   yearAt: 'Une année à {spend} par mois',
   cardsIn: ' · cartes disponibles en {place}',
   homeIn: ' · dépenses locales en {cur}',
@@ -201,5 +201,5 @@ export const calcFr: typeof calcEn = {
   walletPair: 'Associez {a} + {b} et gardez {plus} de plus qu’avec {single} seule.',
   walletPlus: '+{x} par an',
   walletOne: "Une carte suffit pour l'argent à ce niveau de dépenses. Vous voulez aussi des salons, du rendement, de l'emprunt ou un compte bancaire ?",
-  walletCta: 'Composer votre portefeuille (en anglais)'
+  walletCta: 'Composer votre portefeuille'
 };

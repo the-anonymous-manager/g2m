@@ -548,7 +548,7 @@ function Calculator({ rows, initial, initialCountry, hadCountry, prices, prefix 
 
       {input.mode === 'best' ? (
         <>
-          <WalletTeaser cards={formOk} input={input} country={country} words={L.english ? undefined : { ...w, money: L.money }} />
+          <WalletTeaser cards={formOk} input={input} country={country} prefix={prefix} words={L.english ? undefined : { ...w, money: L.money }} />
           <BestView results={results} input={input} country={country} currency={currency} hiddenVirtual={hiddenVirtual} prices={prices} prefix={prefix} />
         </>
       ) : !picked ? (
@@ -565,7 +565,7 @@ function Calculator({ rows, initial, initialCountry, hadCountry, prices, prefix 
           {w.howWorks}
         </Link>
         {w.footB}
-        <Link href="/receipt" hrefLang={toEnglish}>
+        <Link href={`${prefix}/receipt`}>
           {w.receipt}
         </Link>
         {w.footC}

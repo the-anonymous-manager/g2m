@@ -4,24 +4,50 @@ import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CardRow } from '@/lib/types';
 import { COUNTRIES, availabilityIn, countryName, isCountry } from '@/lib/regions';
-import { corridorMatches, destinations, railLabel } from '@/lib/corridors';
+import { corridorMatches, destinations, railLabel, MAIN_DESTINATIONS } from '@/lib/corridors';
 import { CardArt } from '@/components/CardArt';
 import { Chips } from '@/components/Chips';
 import { ShareBar } from '@/components/ShareBar';
 import { MarketBadge } from '@/components/bits';
 import { useRegion } from '@/components/RegionContext';
 import { track } from '@/lib/analytics';
+import { fillNodes, fillText, intlFmt } from '@/lib/i18n/clientFormat';
+import { corridorEn } from '@/lib/i18n/ui/corridor/en';
+import type { Ui } from '@/lib/i18n/ui/en';
 
-type Props = { rows: CardRow[]; initialCoin: 'USDC' | 'USDT'; initialTo: string; initialCountry: string; hadCountry: boolean };
-
-const RECEIVE: Record<string, string> = {
-  named: 'Account in your name',
-  shared: 'Shared account (reference code)',
-  account: 'Account details (type not stated)'
+type Props = {
+  rows: CardRow[];
+  initialCoin: 'USDC' | 'USDT';
+  initialTo: string;
+  initialCountry: string;
+  hadCountry: boolean;
+  /** Another language (English when left out): its words, language tag, address prefix (/de), country names and the
+   *  issuers' rail fee notes from the sheet, English → translation. */
+  ui?: Ui;
+  tag?: string;
+  prefix?: string;
+  countryNames?: Record<string, string>;
+  sheet?: Record<string, string>;
 };
 
 // Move a stablecoin to a bank: which cards can receive money or cash out on a chosen rail, and what it costs.
-export function CorridorFinder({ rows, initialCoin, initialTo, initialCountry, hadCountry }: Props) {
+export function CorridorFinder({ rows, initialCoin, initialTo, initialCountry, hadCountry, ui, tag, prefix = '', countryNames, sheet }: Props) {
+  const english = !ui || !tag;
+  const w = english ? corridorEn : ui.corridor;
+  const fmt = useMemo(() => (english ? null : intlFmt(tag!, ui!, countryNames)), [english, tag, ui, countryNames]);
+  const place = (cc: string) => (fmt ? fmt.country(cc) : countryName(cc));
+  const countryList = fmt ? fmt.countries() : COUNTRIES;
+  const num = (n: number) => (english ? String(n) : n.toLocaleString(tag));
+  // Rail names in the page's language: "EUR SEPA", "USD wire", "SWIFT wire".
+  const rail = (r: string) => {
+    if (english) return railLabel(r);
+    if (r === 'SWIFT') return w.swiftWire;
+    const [cur, method] = r.split('_');
+    const word = { WIRE: w.mWIRE, FPS: w.mFPS, BANK: w.mBANK }[method];
+    return word ? `${cur} ${word}` : railLabel(r);
+  };
+  const tx = (s: string) => (english ? s : (sheet?.[s] ?? s));
+
   const [coin, setCoin] = useState<'USDC' | 'USDT'>(initialCoin);
   const [to, setTo] = useState(initialTo);
   const [country, setCountry] = useState(initialCountry);
@@ -35,7 +61,12 @@ export function CorridorFinder({ rows, initialCoin, initialTo, initialCountry, h
     if (myCountry) setCountry(myCountry);
   }, [ready, myCountry, hadCountry]);
 
-  const dests = useMemo(() => destinations(rows), [rows]);
+  const dests = useMemo(() => {
+    const all = destinations(rows);
+    if (english) return all;
+    const main = new Set<string>(MAIN_DESTINATIONS.map((d) => d.id));
+    return all.map((d) => ({ id: d.id, label: main.has(d.id) ? (w as typeof corridorEn)[`d${d.id}` as 'dEUR'] : fillText(w.dLocal, { cur: d.id }) }));
+  }, [rows, english, w]);
   const eligible = useMemo(() => (country ? rows.filter((r) => availabilityIn(r, country) !== 'no') : rows), [rows, country]);
   const results = useMemo(() => corridorMatches(eligible, to, coin), [eligible, to, coin]);
   const unknown = eligible.filter((r) => r.bankRails == null).length;
@@ -55,13 +86,14 @@ export function CorridorFinder({ rows, initialCoin, initialTo, initialCountry, h
 
   const cashOut = results.filter((r) => r.cashOut).length;
   const receive = results.filter((r) => r.receive).length;
+  const receiveText = { named: w.named, shared: w.shared, account: w.account };
 
   return (
     <div className="stack" style={{ gap: 24 }}>
       <form className="panel panel-pad stack" style={{ gap: 18 }} onSubmit={(e) => e.preventDefault()}>
         <div className="calc-grid">
           <Chips
-            label="Move"
+            label={w.move}
             value={coin}
             onChange={setCoin}
             options={[
@@ -71,7 +103,7 @@ export function CorridorFinder({ rows, initialCoin, initialTo, initialCountry, h
           />
           <div className="field">
             <label className="field-label" htmlFor="cf-to">
-              To
+              {w.to}
             </label>
             <select id="cf-to" className="select" value={to} onChange={(e) => setTo(e.target.value)}>
               {dests.map((d) => (
@@ -83,14 +115,14 @@ export function CorridorFinder({ rows, initialCoin, initialTo, initialCountry, h
           </div>
           <div className="field">
             <label className="field-label" htmlFor="cf-country">
-              Where you live
+              {w.whereLive}
             </label>
             <select id="cf-country" className="select" value={country} onChange={(e) => setCountry(isCountry(e.target.value) ? e.target.value : '')}>
-              <option value="">All countries</option>
-              {COUNTRIES.map((c) => (
+              <option value="">{w.allCountries}</option>
+              {countryList.map((c) => (
                 <option key={c.code} value={c.code}>
                   {c.name}
-                  {c.code === myCountry ? ' (your location)' : ''}
+                  {c.code === myCountry ? w.yourLocation : ''}
                 </option>
               ))}
             </select>
@@ -100,34 +132,35 @@ export function CorridorFinder({ rows, initialCoin, initialTo, initialCountry, h
 
       <div className="pager">
         <p className="muted" style={{ margin: 0 }}>
-          <b style={{ color: 'var(--text)' }}>{coin}</b> to <b style={{ color: 'var(--text)' }}>{destLabel}</b>: {cashOut} card
-          {cashOut === 1 ? '' : 's'} can cash out, {receive} can receive money
-          {country ? ` · cards you may get in ${countryName(country)}` : ''}
+          {fillNodes(w.summary, {
+            coin: <b style={{ color: 'var(--text)' }}>{coin}</b>,
+            dest: <b style={{ color: 'var(--text)' }}>{destLabel}</b>,
+            cash: fillText(cashOut === 1 ? w.cardsOne : w.cardsMany, { n: num(cashOut) }),
+            receive: fillText(w.receiveN, { n: num(receive) })
+          })}
+          {country ? fillText(w.inCountry, { place: place(country) }) : ''}
         </p>
-        <ShareBar text={`Which crypto cards move ${coin} to ${destLabel} · G2M corridor finder`} />
+        <ShareBar text={fillText(w.share, { coin, dest: destLabel })} words={english ? undefined : ui.common} />
       </div>
 
       {results.length === 0 ? (
         <div className="panel panel-pad">
           <p className="muted" style={{ margin: 0 }}>
-            No card {country ? `available in ${countryName(country)} ` : ''}has a confirmed {destLabel} rail yet. Try SWIFT, or
-            another currency.
+            {fillText(w.none, { where: country ? fillText(w.noneWhere, { place: place(country) }) : '', dest: destLabel })}
           </p>
         </div>
       ) : (
         <div className="table-wrap calc-wrap">
           <table className="table calc-table">
-            <caption className="sr-only">
-              Cards that move {coin} to {destLabel}
-            </caption>
+            <caption className="sr-only">{fillText(w.caption, { coin, dest: destLabel })}</caption>
             <thead>
               <tr>
-                <th scope="col">Card</th>
-                <th scope="col">Cash out to a bank</th>
-                <th scope="col">Receive from a bank</th>
-                <th scope="col">Rail</th>
-                <th scope="col">Fees and notes</th>
-                <th scope="col">Non-residents</th>
+                <th scope="col">{w.thCard}</th>
+                <th scope="col">{w.thCashOut}</th>
+                <th scope="col">{w.thReceive}</th>
+                <th scope="col">{w.thRail}</th>
+                <th scope="col">{w.thFees}</th>
+                <th scope="col">{w.thNonRes}</th>
                 <th scope="col">{coin}</th>
               </tr>
             </thead>
@@ -138,32 +171,43 @@ export function CorridorFinder({ rows, initialCoin, initialTo, initialCountry, h
                     <div className="card-cell">
                       <CardArt card={m.card} size="sm" />
                       <div className="stack" style={{ gap: 2 }}>
-                        <Link href={`/cards/${m.card.slug}`}>{m.card.name}</Link>
+                        <Link href={`${prefix}/cards/${m.card.slug}`}>{m.card.name}</Link>
                         <span className="faint" style={{ fontSize: 13 }}>
-                          G2M score {m.card.score.total}
+                          {fillText(w.score, { n: num(m.card.score.total) })}
                         </span>
                       </div>
                     </div>
                   </td>
-                  <td data-label="Cash out">
-                    <MarketBadge value={m.cashOut ? 'yes' : 'no'} where="Cash out" short />
+                  <td data-label={w.dlCashOut}>
+                    <MarketBadge value={m.cashOut ? 'yes' : 'no'} where={w.dlCashOut} short words={english ? undefined : ui.common} />
                   </td>
-                  <td data-label="Receive">{m.receive ? RECEIVE[m.receive] : <span className="faint">No</span>}</td>
-                  <td data-label="Rail">{m.rails.map((r) => railLabel(r.rail)).join(', ')}</td>
-                  <td data-label="Fees and notes" className="corridor-fees">
-                    {m.fees.length ? m.fees.join(' · ') : <span className="faint">Not published</span>}
-                  </td>
-                  <td data-label="Non-residents">
-                    {m.card.bankForNonResidents == null ? (
-                      <span className="faint">Not published</span>
-                    ) : m.card.bankForNonResidents ? (
-                      'Yes'
+                  <td data-label={w.dlReceive}>{m.receive ? receiveText[m.receive] : <span className="faint">{w.no}</span>}</td>
+                  <td data-label={w.thRail}>{m.rails.map((r) => rail(r.rail)).join(', ')}</td>
+                  <td data-label={w.thFees} className="corridor-fees">
+                    {m.fees.length ? (
+                      english ? (
+                        m.fees.join(' · ')
+                      ) : (
+                        m.rails
+                          .filter((r) => r.fee)
+                          .map((r) => `${rail(r.rail)}: ${tx(r.fee!)}`)
+                          .join(' · ')
+                      )
                     ) : (
-                      'No'
+                      <span className="faint">{w.notPublished}</span>
+                    )}
+                  </td>
+                  <td data-label={w.thNonRes}>
+                    {m.card.bankForNonResidents == null ? (
+                      <span className="faint">{w.notPublished}</span>
+                    ) : m.card.bankForNonResidents ? (
+                      w.yes
+                    ) : (
+                      w.no
                     )}
                   </td>
                   <td data-label={coin}>
-                    {m.coin === 'listed' ? 'Supported' : m.coin === 'no' ? 'No' : <span className="faint">Not stated</span>}
+                    {m.coin === 'listed' ? w.supported : m.coin === 'no' ? w.no : <span className="faint">{w.notStated}</span>}
                   </td>
                 </tr>
               ))}
@@ -173,11 +217,9 @@ export function CorridorFinder({ rows, initialCoin, initialTo, initialCountry, h
       )}
 
       <p className="faint" style={{ fontSize: 13, maxWidth: '90ch' }}>
-        Rails come from each issuer&apos;s own help pages and fee lists. &ldquo;Cash out&rdquo; means you can send money from the app
-        to a bank account on that rail; &ldquo;receive&rdquo; means the app gives you account details a bank can pay into. Fees
-        are shown where the issuer publishes them (&ldquo;in&rdquo; = receiving, &ldquo;out&rdquo; = cashing out).{' '}
-        {unknown ? `${unknown} card${unknown === 1 ? '' : 's'} here ha${unknown === 1 ? 's' : 've'} no confirmed rails yet. ` : ''}
-        Check limits and eligibility with the issuer before you move money.
+        {w.footA}
+        {unknown ? fillText(unknown === 1 ? w.unknownOne : w.unknownMany, { n: num(unknown) }) : ''}
+        {w.footB}
       </p>
     </div>
   );
