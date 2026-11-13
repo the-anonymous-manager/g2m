@@ -25,6 +25,7 @@ export const receiptDe: typeof receiptEn = {
   yours: ' (deine)',
   showIn: 'Beleg anzeigen in',
   asPaid: ' (wie bezahlt)',
+  moreCur: 'Weitere Währungen',
   foreignNote: 'Wer mit einer {base}-Karte in {cur} bezahlt, kauft in fremder Währung: Die Fremdwährungsgebühr und Gebühren nur für Auslandseinkäufe fallen an.',
   homeNote: 'Bezahlt in {base}, der eigenen Währung der Karte: keine Fremdwährungsgebühr.',
   match: 'An echten Einkauf anpassen',

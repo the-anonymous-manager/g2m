@@ -25,6 +25,7 @@ export const receiptTr: typeof receiptEn = {
   yours: ' (sizinki)',
   showIn: 'Fişi göster',
   asPaid: ' (ödendiği gibi)',
+  moreCur: 'Diğer para birimleri',
   foreignNote: '{base} kartla {cur} ödemek yabancı para birimiyle alışveriştir: döviz ücreti ve yalnızca yurt dışına özgü ücretler uygulanır.',
   homeNote: 'Kartın kendi para birimi {base} ile ödeme: döviz ücreti yok.',
   match: 'Gerçek bir alışverişe eşle',

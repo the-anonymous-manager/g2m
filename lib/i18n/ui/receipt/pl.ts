@@ -25,6 +25,7 @@ export const receiptPl: typeof receiptEn = {
   yours: ' (Twoja)',
   showIn: 'Pokaż paragon w',
   asPaid: ' (jak zapłacono)',
+  moreCur: 'Więcej walut',
   foreignNote: 'Płacąc w {cur} kartą w {base}, robisz zakup w obcej walucie: naliczana jest opłata za przewalutowanie i opłaty za zakupy zagraniczne.',
   homeNote: 'Płatność w {base}, walucie karty: bez opłaty za przewalutowanie.',
   match: 'Dopasuj do prawdziwego zakupu',

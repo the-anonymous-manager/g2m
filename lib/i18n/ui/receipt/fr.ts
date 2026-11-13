@@ -25,6 +25,7 @@ export const receiptFr: typeof receiptEn = {
   yours: ' (la vôtre)',
   showIn: 'Afficher le ticket en',
   asPaid: ' (comme payé)',
+  moreCur: 'Autres devises',
   foreignNote: 'Payer en {cur} avec une carte en {base} est un achat en devise étrangère : les frais de change et les frais propres à l’étranger s’appliquent.',
   homeNote: 'Paiement en {base}, la devise de la carte : pas de frais de change.',
   match: 'Coller à un vrai achat',
