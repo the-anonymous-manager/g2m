@@ -1,0 +1,30 @@
+import type { submitEn } from './en';
+
+export const submitZhHk: typeof submitEn = {
+  metaTitle: "提交新卡或更正",
+  metaDesc: "發卡機構及用戶：向 G2M 提交加密卡，或為已列出的卡提交更正。",
+  eyebrow: "提交",
+  title: "新增卡或更正資料",
+  lead: "發卡機構可提交新卡，任何人都可提交更正。每項修改上線前，我們都會對照發卡機構公佈的條款核實。列出免費，亦不影響評分。",
+  kindAria: "你想提交甚麼？",
+  kindNew: "新增一張卡",
+  kindFix: "更正已列出的卡",
+  name: "卡名稱",
+  site: "官方網站",
+  card: "卡",
+  pickCard: "選擇一張卡",
+  detailsNew: "費用、回贈及適用國家",
+  detailsFix: "哪裏有誤，以及可證明的連結",
+  from: "你的電郵或 X 帳號（選填）",
+  errName: "請填寫卡名稱。",
+  errSite: "網站應以 https:// 開頭",
+  errCard: "請選擇需要更正的卡。",
+  errDetails: "請多寫一點（最少 10 個字元）。",
+  prepare: "準備我的訊息",
+  ready: "你的訊息已準備好",
+  sendTo: "請發送至 {email}。可在電郵應用程式開啟，或複製內容。",
+  openEmail: "在電郵應用程式開啟",
+  copy: "複製訊息",
+  copied: "已複製",
+  englishNote: "訊息會以英文為 G2M 團隊準備；你可用任何語言填寫資料。"
+};

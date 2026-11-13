@@ -1,14 +1,17 @@
 import Link from 'next/link';
 import type { Locale } from '@/lib/i18n/locales';
-import { intlGuides, intlHome, intlRankings } from '@/lib/i18n/locales';
+import { intlCalculator, intlCompare, intlCorridors, intlFinder, intlGuides, intlHome, intlRankings, intlReceipt, intlWallet } from '@/lib/i18n/locales';
+import { DICTS } from '@/lib/i18n/dict';
+import { ToolsMenu } from '@/components/ToolsMenu';
 import { CHROME } from '@/lib/i18n/chrome';
 import { LogoLockup, LogoMark } from '@/components/Logo';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { LanguageMenu } from '@/components/LanguageMenu';
 
-/** Header of the translated pages: the ranking, guides and tools links, the language menu and the theme switch. */
+/** Header of the translated pages: the ranking and guides links, the tools menu, the language menu and the theme switch. */
 export function IntlHeader({ locale }: { locale: Locale }) {
   const t = CHROME[locale.code];
+  const d = DICTS[locale.code];
   return (
     <header className="site-header">
       <div className="wrap header-row">
@@ -18,9 +21,17 @@ export function IntlHeader({ locale }: { locale: Locale }) {
         <nav className="intl-nav" aria-label={t.ranking}>
           <Link href={intlRankings(locale)}>{t.ranking}</Link>
           <Link href={intlGuides(locale)}>{t.guides}</Link>
-          <Link href="/finder" hrefLang="en">
-            {t.tools}
-          </Link>
+          <ToolsMenu
+            label={t.tools}
+            items={[
+              { href: intlFinder(locale), name: d.toolFinder },
+              { href: intlCalculator(locale), name: d.toolCalc },
+              { href: intlWallet(locale), name: d.toolWallet },
+              { href: intlCompare(locale), name: d.toolCompare },
+              { href: intlReceipt(locale), name: d.toolReceipt },
+              { href: intlCorridors(locale), name: d.toolCorridor }
+            ]}
+          />
         </nav>
         <div className="header-actions">
           <LanguageMenu label={t.language} />

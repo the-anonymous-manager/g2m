@@ -3,11 +3,12 @@ import { getCards } from '@/lib/cards';
 import { site } from '@/lib/site';
 import { SubmitForm } from '@/components/SubmitForm';
 import { Eyebrow } from '@/components/bits';
+import { intlSubmit, languageLinks } from '@/lib/i18n/locales';
 
 export const metadata: Metadata = {
   title: 'Submit a card or a correction',
   description: 'Card issuers and users: add a crypto card to G2M or send a correction to a listed card.',
-  alternates: { canonical: '/submit' }
+  alternates: { canonical: '/submit', languages: languageLinks('/submit', intlSubmit) }
 };
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };

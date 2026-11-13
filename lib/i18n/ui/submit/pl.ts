@@ -1,0 +1,30 @@
+import type { submitEn } from './en';
+
+export const submitPl: typeof submitEn = {
+  metaTitle: "Zgłoś kartę lub poprawkę",
+  metaDesc: "Wydawcy i użytkownicy: dodaj kartę krypto do G2M albo wyślij poprawkę do karty z listy.",
+  eyebrow: "zgłoś",
+  title: "Dodaj kartę lub ją popraw",
+  lead: "Wydawcy mogą zgłosić nową kartę, a każdy może wysłać poprawkę. Sprawdzamy każdą zmianę z opublikowanymi warunkami wydawcy, zanim trafi na stronę. Dodanie do listy jest bezpłatne i nie wpływa na ocenę.",
+  kindAria: "Co chcesz wysłać?",
+  kindNew: "Dodaj nową kartę",
+  kindFix: "Popraw kartę z listy",
+  name: "Nazwa karty",
+  site: "Oficjalna strona",
+  card: "Karta",
+  pickCard: "Wybierz kartę",
+  detailsNew: "Opłaty, cashback i kraje",
+  detailsFix: "Co jest nie tak, i link, który to pokazuje",
+  from: "Twój e-mail lub nazwa w X (opcjonalnie)",
+  errName: "Podaj nazwę karty.",
+  errSite: "Adres strony powinien zaczynać się od https://",
+  errCard: "Wybierz kartę do poprawienia.",
+  errDetails: "Napisz nam trochę więcej (co najmniej 10 znaków).",
+  prepare: "Przygotuj wiadomość",
+  ready: "Twoja wiadomość jest gotowa",
+  sendTo: "Wyślij ją na {email}. Otwórz ją w aplikacji pocztowej albo skopiuj.",
+  openEmail: "Otwórz w aplikacji pocztowej",
+  copy: "Kopiuj wiadomość",
+  copied: "Skopiowano",
+  englishNote: "Wiadomość jest przygotowana po angielsku dla zespołu G2M; swoje informacje możesz napisać w dowolnym języku."
+};

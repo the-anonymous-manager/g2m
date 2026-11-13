@@ -1,0 +1,30 @@
+import type { submitEn } from './en';
+
+export const submitFr: typeof submitEn = {
+  metaTitle: "Proposer une carte ou une correction",
+  metaDesc: "Émetteurs et utilisateurs : ajoutez une carte crypto à G2M ou envoyez une correction pour une carte listée.",
+  eyebrow: "proposer",
+  title: "Ajouter une carte ou la corriger",
+  lead: "Les émetteurs peuvent proposer une nouvelle carte, et tout le monde peut envoyer une correction. Nous vérifions chaque changement d'après les conditions publiées par l'émetteur avant de le mettre en ligne. L'inscription est gratuite et n'influence pas le score.",
+  kindAria: "Que voulez-vous envoyer ?",
+  kindNew: "Ajouter une nouvelle carte",
+  kindFix: "Corriger une carte listée",
+  name: "Nom de la carte",
+  site: "Site officiel",
+  card: "Carte",
+  pickCard: "Choisissez une carte",
+  detailsNew: "Frais, cashback et pays",
+  detailsFix: "Ce qui est faux, et un lien qui le montre",
+  from: "Votre e-mail ou votre compte X (facultatif)",
+  errName: "Indiquez le nom de la carte.",
+  errSite: "Le site doit commencer par https://",
+  errCard: "Choisissez la carte à corriger.",
+  errDetails: "Dites-nous-en un peu plus (au moins 10 caractères).",
+  prepare: "Préparer mon message",
+  ready: "Votre message est prêt",
+  sendTo: "Envoyez-le à {email}. Ouvrez-le dans votre app d'e-mail ou copiez-le.",
+  openEmail: "Ouvrir dans l'app d'e-mail",
+  copy: "Copier le message",
+  copied: "Copié",
+  englishNote: "Le message est préparé en anglais pour l'équipe G2M ; vous pouvez écrire vos informations dans n'importe quelle langue."
+};

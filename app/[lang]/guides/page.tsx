@@ -5,7 +5,8 @@ import { getCards } from '@/lib/cards';
 import { countryGuides, countrySlug, topicCards } from '@/lib/guides';
 import { hasReferralPage } from '@/lib/referral';
 import { shortName } from '@/lib/versus';
-import { LOCALES, fill, intlAlternatives, intlCountry, intlGuide, intlGuides, intlReferral, languageLinks, localeByCode } from '@/lib/i18n/locales';
+import { FEES } from '@/lib/i18n/fees';
+import { LOCALES, fill, intlAlternatives, intlCountry, intlFeesGuide, intlGuide, intlGuides, intlReferral, languageLinks, localeByCode } from '@/lib/i18n/locales';
 import { DICTS } from '@/lib/i18n/dict';
 import { formatters } from '@/lib/i18n/format';
 import { intlTopics } from '@/lib/i18n/guides';
@@ -69,6 +70,12 @@ export default async function IntlGuidesPage({ params }: Props) {
               </span>
             </Link>
           ))}
+          <Link href={intlFeesGuide(locale)} className="panel panel-pad stack" style={{ gap: 6, textDecoration: 'none' }}>
+            <b>{FEES[locale.code].title}</b>
+            <span className="faint" style={{ fontSize: 14 }}>
+              {FEES[locale.code].tile}
+            </span>
+          </Link>
         </div>
       </section>
 
