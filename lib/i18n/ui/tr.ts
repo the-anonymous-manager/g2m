@@ -7,6 +7,7 @@ import { walletTr } from './wallet/tr';
 import { receiptTr } from './receipt/tr';
 import { corridorTr } from './corridor/tr';
 import { submitTr } from './submit/tr';
+import { bookTr } from './book/tr';
 
 export const uiTr: Ui = {
   common: {
@@ -137,5 +138,6 @@ export const uiTr: Ui = {
   wallet: walletTr,
   receipt: receiptTr,
   corridor: corridorTr,
-  submit: submitTr
+  submit: submitTr,
+  book: bookTr
 };

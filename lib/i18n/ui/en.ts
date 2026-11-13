@@ -5,6 +5,7 @@ import { walletEn } from './wallet/en';
 import { receiptEn } from './receipt/en';
 import { corridorEn } from './corridor/en';
 import { submitEn } from './submit/en';
+import { bookEn } from './book/en';
 
 // Language packs for the interactive tools (the rankings table first; the calculator, finder, compare and the other
 // tools follow). Unlike lib/i18n/dict, these are sent to the browser, so each page passes only its own language's
@@ -338,7 +339,9 @@ export const uiEn = {
   wallet: walletEn,
   receipt: receiptEn,
   corridor: corridorEn,
-  submit: submitEn
+  submit: submitEn,
+  /** The "Book a spot" form under Our picks on the home page. */
+  book: bookEn
 };
 
 export type Ui = typeof uiEn;

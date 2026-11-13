@@ -7,6 +7,7 @@ import { walletEs } from './wallet/es';
 import { receiptEs } from './receipt/es';
 import { corridorEs } from './corridor/es';
 import { submitEs } from './submit/es';
+import { bookEs } from './book/es';
 
 export const uiEs: Ui = {
   common: {
@@ -137,5 +138,6 @@ export const uiEs: Ui = {
   wallet: walletEs,
   receipt: receiptEs,
   corridor: corridorEs,
-  submit: submitEs
+  submit: submitEs,
+  book: bookEs
 };
