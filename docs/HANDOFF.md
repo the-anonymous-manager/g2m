@@ -515,6 +515,33 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   currencies, payouts to 100+ countries, yield on USDC. No referral link yet. Picture in `public/card-originals/`
   (sent by OrbitX). Also fixed: per-purchase fees showed "$0.2"/"$0.3" (now "$0.20"/"$0.30", DogPay too), and a
   coverage note ending in a full stop got a second one.
+- New cards PEXX and Pulsar Money, referral re-check (13 Nov 2026, Akash sent both card pictures, the PEXX link
+  app.pexx.com/referral/T8W78 and Pulsar's invite code KW424). Sheet rows 39-40, 39 cards in all.
+  - PEXX (19th of 39): Visa/Mastercard debit, 1% back in PEXX Points (PEXX values 100 points at $1; not cashable yet,
+    they convert to HeyMax Max Miles). Fees from PEXX's own FAQ: 0.6% on every purchase plus 1.2% FX outside USD;
+    its pricing page still says one flat 2.6%, which the FX note says. 68 card countries (complete list, residence
+    based), USD account with routing number for non-US residents, 17 payout currencies, up to 4% APY.
+  - Pulsar Money (24th of 39): virtual Visa issued through Wirex, Free (0.5% on the first $500 a month, then 0.25%)
+    and Pro ($99.99 a year, standard 2%, 4% on subscriptions; November 2026 runs 4% on the first $3,000). Points are
+    USDC refunds on past purchases and expire. No FX fee from a matching USD or EUR balance, up to 1% otherwise; ATM
+    free to $200 a month then 2%. 73 card countries (Wirex's list plus Serbia). Custody "unknown": Pulsar's terms
+    say each wallet is described by its own control set-up, with no blanket label.
+  - Neither PEXX nor Pulsar gives the new user anything for a referral (rewards go to the referrer), so no sign-up
+    bonus. Referral re-check of the cards not checked on 12 Nov: KAST changed (the friend now gets 10% off the first
+    paid membership, no more $20 after $100), Wirex One now shows its bonus (60-day Premium trial), RedotPay's 5 USDs
+    wording made exact (30 days, not for the card fee). Unchanged: Solid, XPlace, Kite (referrer only), SolCard.
+    No new-user reward published by the issuer: Tuyo, DogPay, Hyperbeat, Bitget Wallet's guide (its in-app invite
+    card is the source of the current line).
+  - Pictures: the sync downloads "Card image" links, which point at g2m.life/card-originals/ before those files are
+    deployed; run it once with a fetch override that reads them from `public/card-originals/` (Node `--import`).
+  - Wirex One tiers (Akash: "update wirex"): requirements are now published. No fee and nothing locked; the tier
+    follows the portfolio and its share in the WPAY token: Premium $500+ with 1%, Elite $2,500+ with 3%, Private
+    $25,000+ with 5%, Bespoke $50,000+ with 10%. Each tier row lists its perks from "Membership levels benefits"
+    (physical card from Premium, metal Visa Signature with lounges, AirRefund and Sixt on Private and Bespoke, 50%
+    subscription rebates, free ATM allowance, fee-free trading, earn boosts, monthly cashback redemption cap $25 to
+    $2,000 with the rest carried over). Forms now include metal. The stake columns stay empty (the requirement is a
+    USD share, not a token amount), so the calculator shows "Needs: Portfolio of …" and leaves these tiers out of
+    the default view. Still 5th of 39 (the score uses Base).
 - Whole site in each language, stage 2a (12 Nov 2026; Akash: "first go with 1,2,3,4,5,6", the first being the card
   page): `/de/cards/kast` etc. are now the full English card review in each language, built by the same component
   (`components/CardReview.tsx`; the English page calls it with no language and is unchanged, checked word for word
