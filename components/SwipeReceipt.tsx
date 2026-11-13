@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CardRow } from '@/lib/types';
 import { baseCurrencies, swipeReceipt, type SwipeLine, type SwipeNote } from '@/lib/swipe';
-import { currencyOf } from '@/lib/currencies.mjs';
+import { COUNTRY_CURRENCY, currencyOf } from '@/lib/currencies.mjs';
 import { useRegion } from '@/components/RegionContext';
 import { track } from '@/lib/analytics';
 import { site } from '@/lib/site';
@@ -41,6 +41,8 @@ const PRESETS = [
 ] as const;
 const WHAT = ['Coffee', 'Subscription', 'Dinner', 'Flight or hotel', 'Purchase'] as const;
 const COMMON = ['USD', 'EUR', 'GBP', 'AED', 'INR', 'SGD', 'AUD', 'CAD', 'CHF', 'JPY', 'HKD', 'THB', 'PHP', 'BRL', 'MXN', 'ARS', 'TRY', 'NGN', 'ZAR'];
+/** Every country's everyday currency (lib/currencies.mjs): listed under the common ones when there is a live rate. */
+const WORLD = [...new Set(Object.values(COUNTRY_CURRENCY) as string[])].sort();
 
 /** A preset in another currency, rounded to a price that looks real (e.g. ₹840, €9.20). */
 function niceAmount(x: number): number {
@@ -126,12 +128,15 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false, ui, tag,
 
   const { country } = useRegion();
   const home = currencyOf(country);
-  const currencies = useMemo(() => {
+  // The common currencies first (and the visitor's own), then every other currency with a live rate, A to Z.
+  const currencyGroups = useMemo(() => {
     const ok = (c: string) => c === 'USD' || Boolean(perUsd?.[c]);
-    const list = COMMON.filter(ok);
-    if (home && ok(home) && !list.includes(home)) list.unshift(home);
-    return list;
+    const top = COMMON.filter(ok);
+    if (home && ok(home) && !top.includes(home)) top.unshift(home);
+    const more = WORLD.filter((c) => ok(c) && !top.includes(c));
+    return { top, more };
   }, [perUsd, home]);
+  const currencies = useMemo(() => [...currencyGroups.top, ...currencyGroups.more], [currencyGroups]);
 
   const fromLink = Boolean(initial?.card);
   const [slug, setSlug] = useState(initial?.card ?? cards[0]?.slug);
@@ -323,12 +328,22 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false, ui, tag,
               {w.paidIn}
             </label>
             <select id="sw-cur" className="select" value={currency} onChange={(e) => changeCurrency(e.target.value)}>
-              {currencies.map((c) => (
+              {currencyGroups.top.map((c) => (
                 <option key={c} value={c}>
                   {c}
                   {c === home ? w.yours : ''}
                 </option>
               ))}
+              {currencyGroups.more.length ? (
+                <optgroup label={w.moreCur}>
+                  {currencyGroups.more.map((c) => (
+                    <option key={c} value={c}>
+                  {c}
+                  {c === home ? w.yours : ''}
+                </option>
+                  ))}
+                </optgroup>
+              ) : null}
             </select>
           </div>
           <div className="field">
@@ -336,12 +351,22 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false, ui, tag,
               {w.showIn}
             </label>
             <select id="sw-show" className="select" value={shown} onChange={(e) => setDisplay(e.target.value === currency ? null : e.target.value)}>
-              {currencies.map((c) => (
+              {currencyGroups.top.map((c) => (
                 <option key={c} value={c}>
                   {c}
                   {c === currency ? w.asPaid : ''}
                 </option>
               ))}
+              {currencyGroups.more.length ? (
+                <optgroup label={w.moreCur}>
+                  {currencyGroups.more.map((c) => (
+                    <option key={c} value={c}>
+                  {c}
+                  {c === currency ? w.asPaid : ''}
+                </option>
+                  ))}
+                </optgroup>
+              ) : null}
             </select>
           </div>
         </div>

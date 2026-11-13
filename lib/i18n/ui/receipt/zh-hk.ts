@@ -25,6 +25,7 @@ export const receiptZhHk: typeof receiptEn = {
   yours: '（你的貨幣）',
   showIn: '收據顯示貨幣',
   asPaid: '（按付款貨幣）',
+  moreCur: '更多貨幣',
   foreignNote: '用 {base} 卡以 {cur} 付款屬外幣消費：須付外幣手續費及只限海外消費的費用。',
   homeNote: '以卡本身的貨幣 {base} 付款：毋須外幣手續費。',
   match: '對照真實消費',

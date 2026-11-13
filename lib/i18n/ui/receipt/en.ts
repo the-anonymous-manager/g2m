@@ -28,6 +28,8 @@ export const receiptEn = {
   yours: ' (yours)',
   showIn: 'Show receipt in',
   asPaid: ' (as paid)',
+  /** The group under the common currencies in the currency lists. */
+  moreCur: 'More currencies',
   foreignNote: 'Paying in {cur} on a {base} card is a foreign purchase: the FX fee and any foreign-only fees apply.',
   homeNote: "Paying in {base}, the card's own currency: no FX fee.",
   match: 'Match a real swipe',

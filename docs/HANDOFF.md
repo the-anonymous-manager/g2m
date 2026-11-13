@@ -561,6 +561,28 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   was down in this session, so the change is for the sheet's Picks tab (Slot 2: Card ID solid, Type Our pick, Why
   "Free and non-custodial: 3% back in USDC, up to $50 a month, and no fee on US-dollar spending."); that Why is
   already translated in data/i18n.
+- Infini re-check (13 Nov 2026, Akash: "Update infini card and tiers as well"). Infini now has personal membership
+  tiers set by the rolling 30-day average balance: Standard (none) 1.5%; Professional ($2,000) 3% on the first $1,000
+  a month, then 1.5%; Elite ($100,000) 5% on the first $10,000, then 1.5%. AI subscriptions paid directly to 50+ AI
+  services earn 30% (Standard, cap $10 a month) or 50% (Professional cap $10, Elite $100). So the sheet's tiers are now
+  the memberships, not the cards; the cards (Pro 1% FX, Lite 3% FX, Max 1% outside Hong Kong + $0.30 under $50, and the
+  new Lite Plus with no FX or cross-border fee for Professional and Elite) are in the FX note and the Standard perks.
+  Also: extra cards $10, refund fee 1%, SWIFT withdrawals 0.10%-0.20% + $50, bank fees 0.20/0.15/0.10% by tier.
+  Score unchanged (Standard is the entry tier; 18th of 39). Sources: the help centre's level guide, card guide and AI
+  cashback rules. Open: the help centre's referral article (Aug 2026) says $5 each after the friend's first card
+  purchase; the sign-up bonus still shows the $10-after-$100 seen in the app on 4 Nov.
+- Swipe receipt currencies (13 Nov 2026, Akash: "add more currencies here"): the "Paid in" and "Show receipt in" lists
+  keep the 19 common currencies (and the visitor's own) first, then "More currencies": every country currency in
+  lib/currencies.mjs with a live rate, A to Z (132 more). The receipt picture shows a code when it has no symbol.
+- COCA corrections from the COCA team (13 Nov 2026, forwarded by Akash), each checked on COCA's help centre: no
+  fee-free ATM allowance since late October (ATM: fee not published, €850 a day, €5,000 a month, 5 withdrawals a day);
+  no EURS (assets USDT, USDC, EURC on 16 networks, plus SEPA and card top-ups); cashback is claimed in the app into the
+  USD or EUR balance (as USDC or EURC) after 14 days pending, no monthly payout date; 5% APY on USD balances at every
+  tier (variable, EUR none); spending limits (€30,000 a purchase/day/month, €75,000 per 3 months, €100,000 per 6;
+  COCA wrote "unlimited by request" for Elite, the help page says Elite can ask for a higher limit, so the site says
+  that); claim capacity boosters and carry-over; personal EUR IBAN for residents of 28 countries (T&C 1.3). Custody
+  was already non-custodial, and the 73-country list already matched T&C 1.2. Card picture now COCA's own Drive file
+  (same design, higher resolution). Still unpublished per COCA: restricted passports, issuing bank, full fee schedule.
 - Whole site in each language, stage 2a (12 Nov 2026; Akash: "first go with 1,2,3,4,5,6", the first being the card
   page): `/de/cards/kast` etc. are now the full English card review in each language, built by the same component
   (`components/CardReview.tsx`; the English page calls it with no language and is unchanged, checked word for word
