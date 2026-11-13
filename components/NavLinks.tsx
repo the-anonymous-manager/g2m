@@ -13,7 +13,8 @@ export const NAV = [
   { href: '/methodology', label: 'Methodology' }
 ] as const;
 
-export function NavLinks() {
+/** `items`: the same links in another language (/de/cards …); English when left out. */
+export function NavLinks({ items = NAV, label = 'Main' }: { items?: readonly { href: string; label: string }[]; label?: string }) {
   const path = usePathname() || '/';
   const nav = useRef<HTMLElement>(null);
 
@@ -39,8 +40,8 @@ export function NavLinks() {
   }, [path]);
 
   return (
-    <nav ref={nav} className="nav" aria-label="Main">
-      {NAV.map((item) => {
+    <nav ref={nav} className="nav" aria-label={label}>
+      {items.map((item) => {
         const active = path === item.href || path.startsWith(`${item.href}/`);
         return (
           <Link key={item.href} href={item.href} aria-current={active ? 'page' : undefined}>

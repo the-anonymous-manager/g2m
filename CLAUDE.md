@@ -130,8 +130,10 @@ and confirm what changed on the site (not which files moved).
   `noteParts` give facts that each language words; the corridor finder's bank rail fee notes are translated in
   data/i18n like other sheet text). The receipt picture (`/receipt/image`) stays English: its font has no Arabic or
   Chinese letters. The submit form's words are in `lib/i18n/ui/submit/<code>.ts`; the email it prepares stays English
-  (it goes to G2M). The whole site is now in every language; the translated header has a Tools menu
-  (`components/ToolsMenu.tsx`, tool names from the dictionaries). Arabic pages switch off letter spacing in page
+  (it goes to G2M). The whole site is now in every language. Translated pages use the English header and footer
+  (`components/Header.tsx`, `Footer.tsx` with `words`; filled in `components/IntlFrame.tsx` from `lib/i18n/chrome.ts`): same
+  links in the same order, so a new header or footer link needs its word in chrome.ts too. Header link names are
+  kept short so each language fits one row at 1,200 px like English. Arabic pages switch off letter spacing in page
   content (it pulls Arabic letters apart). To add a language: `LOCALES` in `locales.ts`, a `chrome.ts`
   entry, a dictionary file, and its line in `dict/index.ts`.
 - `app/go/[slug]` outbound redirect with UTM tags; `/stats` (private) counts only people: crawler hits are stored as
