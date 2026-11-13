@@ -3,6 +3,9 @@ import { cardTr } from './card/tr';
 import { compareTr } from './compare/tr';
 import { calcTr } from './calc/tr';
 import { finderTr } from './finder/tr';
+import { walletTr } from './wallet/tr';
+import { receiptTr } from './receipt/tr';
+import { corridorTr } from './corridor/tr';
 
 export const uiTr: Ui = {
   common: {
@@ -129,5 +132,8 @@ export const uiTr: Ui = {
   regions: { EU: 'AB / AEA', ASIA: 'Asya' },
   compare: compareTr,
   calc: calcTr,
-  finder: finderTr
+  finder: finderTr,
+  wallet: walletTr,
+  receipt: receiptTr,
+  corridor: corridorTr
 };

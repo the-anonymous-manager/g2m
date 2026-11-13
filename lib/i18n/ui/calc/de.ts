@@ -84,7 +84,7 @@ export const calcDe: typeof calcEn = {
   howWorks: 'So funktioniert der Rechner',
   footB: ' (Englisch). Einen einzelnen Kauf Zeile für Zeile zeigt der ',
   receipt: 'Kassenbon',
-  footC: ' (Englisch).',
+  footC: '.',
   yearAt: 'Ein Jahr mit {spend} im Monat',
   cardsIn: ' · Karten, die du in {place} bekommen kannst',
   homeIn: ' · Ausgaben zu Hause in {cur}',
@@ -201,5 +201,5 @@ export const calcDe: typeof calcEn = {
   walletPair: 'Kombiniere {a} + {b} und behalte {plus} mehr als mit {single} allein.',
   walletPlus: '+{x} im Jahr',
   walletOne: 'Bei diesen Ausgaben reicht eine Karte fürs Geld. Willst du auch Lounges, Rendite, Kredit oder ein Bankkonto?',
-  walletCta: 'Wallet zusammenstellen (Englisch)'
+  walletCta: 'Wallet zusammenstellen'
 };

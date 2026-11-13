@@ -1,5 +1,6 @@
 // Lists the English text that has no translation yet in data/i18n/<language>.json: card summaries, pros, cons and
-// sign-up bonuses and the rest of the card page's text (coverage, notes, ATM, fees, perks, tier conditions) from
+// sign-up bonuses, the rest of the card page's text (coverage, notes, ATM, fees, perks, tier conditions) and the corridor
+// finder's bank rail fee notes from
 // data/cards.json, the home page picks' notes (data/picks.json) and the topic guide text in
 // lib/guides.ts. Translated pages show missing text in English (marked as English) until it is added, so this only
 // reports, it never fails the build.
@@ -30,7 +31,9 @@ const details = list.flatMap((c) =>
     ...(c.fees?.other ?? []),
     ...(c.perks ?? []),
     c.noIdCheck && c.noIdCheck.toLowerCase() !== 'yes' ? c.noIdCheck : null,
-    ...(c.tiers ?? []).flatMap((t) => [t.requirement, t.feeNote, ...(t.perks ?? [])])
+    ...(c.tiers ?? []).flatMap((t) => [t.requirement, t.feeNote, ...(t.perks ?? [])]),
+    // Bank rail fee notes, shown on the corridor finder.
+    ...(c.bankRails ?? []).map((r) => r.fee)
   ].filter((x) => typeof x === 'string' && x.trim())
 );
 // The "why" line of each home page pick (the sheet's Picks tab).

@@ -9,7 +9,7 @@ export const finderDe: typeof finderEn = {
   lead: 'Fünf kurze Antworten. Karten, die du in deinem Land nicht bekommst, lassen wir weg, und jede Empfehlung wird erklärt.',
   rampTag: '[ Off-Ramp ]',
   rampText: 'USDC oder USDT auf ein Bankkonto bringen? Sieh nach, welche Karten dir eine IBAN geben oder per SEPA, ACH, Faster Payments, AED, INR oder SWIFT auszahlen.',
-  rampCta: 'Korridor-Finder (Englisch)',
+  rampCta: 'Korridor-Finder',
   q1: 'Wo wohnst du?',
   pickCountry: 'Wähle dein Land',
   yourLocation: ' (dein Standort)',

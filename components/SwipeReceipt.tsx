@@ -2,13 +2,17 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CardRow } from '@/lib/types';
-import { baseCurrencies, swipeReceipt } from '@/lib/swipe';
+import { baseCurrencies, swipeReceipt, type SwipeLine, type SwipeNote } from '@/lib/swipe';
 import { currencyOf } from '@/lib/currencies.mjs';
 import { useRegion } from '@/components/RegionContext';
 import { track } from '@/lib/analytics';
 import { site } from '@/lib/site';
 import { receiptQuery, type ReceiptParams } from '@/lib/receipt-params';
 import { tierPrice } from '@/lib/tierpick';
+import { calcText } from '@/components/calcText';
+import { fillText } from '@/lib/i18n/clientFormat';
+import { receiptEn } from '@/lib/i18n/ui/receipt/en';
+import type { Ui } from '@/lib/i18n/ui/en';
 
 type Props = {
   /** The cards to pick from. */
@@ -19,14 +23,23 @@ type Props = {
   syncUrl?: boolean;
   /** Units of each currency per 1 US dollar. null = live rates unavailable (US dollars only). */
   perUsd: Record<string, number> | null;
+  /** Another language (English when left out): its words, language tag, address prefix (/de) and the sheet text the
+   *  receipt shows ("paid in"), English → translation. */
+  ui?: Ui;
+  tag?: string;
+  prefix?: string;
+  sheet?: Record<string, string>;
 };
 
+type W = typeof receiptEn;
+// The link keeps these English names (`what=Coffee`); each language shows its own word.
 const PRESETS = [
   { label: 'Coffee', usd: 10 },
   { label: 'Subscription', usd: 20 },
   { label: 'Dinner', usd: 50 },
   { label: 'Flight or hotel', usd: 200 }
-];
+] as const;
+const WHAT = ['Coffee', 'Subscription', 'Dinner', 'Flight or hotel', 'Purchase'] as const;
 const COMMON = ['USD', 'EUR', 'GBP', 'AED', 'INR', 'SGD', 'AUD', 'CAD', 'CHF', 'JPY', 'HKD', 'THB', 'PHP', 'BRL', 'MXN', 'ARS', 'TRY', 'NGN', 'ZAR'];
 
 /** A preset in another currency, rounded to a price that looks real (e.g. ₹840, €9.20). */
@@ -36,16 +49,81 @@ function niceAmount(x: number): number {
   return Math.round(x * 10) / 10;
 }
 
-function fmt(n: number, currency: string): string {
+/** Money in any currency, in the page's language ("en-US" keeps the English page as it was). */
+function money(n: number, currency: string, tag = 'en-US'): string {
+  let s: string;
   try {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(n);
+    s = new Intl.NumberFormat(tag, { style: 'currency', currency }).format(n);
   } catch {
-    return `${n.toFixed(2)} ${currency}`;
+    s = `${n.toFixed(2)} ${currency}`;
+  }
+  // In right-to-left text an amount keeps its own order.
+  return tag.startsWith('ar') ? `⁦${s}⁩` : s;
+}
+
+/** One receipt line in another language, from the facts lib/swipe.ts recorded (English keeps its own label). */
+function lineText(l: SwipeLine, w: W, pct: (n: number) => string, usd: (n: number) => string, cur: (n: number, c: string) => string, tx: (s: string) => string): string {
+  const v = l.vars ?? {};
+  switch (l.key) {
+    case 'price':
+      return v.asPaid ? w.lPrice : fillText(w.lPriceIn, { x: cur(Number(v.amount), String(v.currency)) });
+    case 'fx':
+      return v.foreign ? fillText(w.lFxForeign, { p: pct(Number(v.pct)), cur: String(v.currency), base: String(v.base) }) : fillText(w.lFxHome, { p: pct(Number(v.pct)), base: String(v.base) });
+    case 'tx':
+      return fillText(w.lTx, { p: pct(Number(v.pct)) });
+    case 'flat':
+      return fillText(w.lFlat, { x: usd(Number(v.usd)) });
+    case 'small':
+      return fillText(w.lSmall, { fee: usd(Number(v.fee)), rule: v.inclusive ? w.atOrUnder : w.under, under: usd(Number(v.under)), foreign: v.foreignOnly ? w.foreignPurchases : '' });
+    case 'topup':
+      return fillText(w.lTopUp, { p: pct(Number(v.pct)) });
+    case 'cashback':
+      return fillText(w.lCashback, {
+        p: pct(Number(v.pct)),
+        cap: v.capUsd != null ? fillText(w.capped, { x: usd(Number(v.capUsd)) }) : '',
+        payout: v.payout ? fillText(w.payoutIn, { x: tx(String(v.payout)) }) : ''
+      });
+    default:
+      return l.label;
+  }
+}
+
+function noteText(n: SwipeNote, w: W, usd: (n: number) => string, count: (n: number) => string): string {
+  switch (n.k) {
+    case 'billing':
+      return w.nBilling;
+    case 'noRate':
+      return w.nNoRate;
+    case 'fxNP':
+      return w.nFxNP;
+    case 'topUpNP':
+      return w.nTopUpNP;
+    case 'freeSmall':
+      return fillText(w.nFreeSmall, { n: count(n.n ?? 0) });
+    case 'cbNP':
+      return w.nCbNP;
+    case 'capTx':
+      return fillText(w.nCapTx, { x: usd(n.n ?? 0) });
+    case 'capMonth':
+      return fillText(w.nCapMonth, { x: usd(n.n ?? 0) });
   }
 }
 
 // One purchase on one card, as a receipt: price, every fee, the cashback, and what it really cost.
-export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props) {
+export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false, ui, tag, prefix = '', sheet }: Props) {
+  const english = !ui || !tag;
+  const w: W = english ? receiptEn : ui.receipt;
+  const L = useMemo(() => (english ? calcText() : calcText(ui, tag)), [english, ui, tag]);
+  const lang = english ? 'en-US' : tag!;
+  const fmt = (n: number, currency: string) => money(n, currency, lang);
+  const pct = (n: number) => (english ? `${n}%` : new Intl.NumberFormat(lang, { style: 'percent', maximumFractionDigits: 2 }).format(n / 100));
+  const usd = (n: number) => (english ? `$${Number.isInteger(n) ? n : n.toFixed(2)}` : Number.isInteger(n) ? L.money(n) : L.cash(n));
+  const count = (n: number) => (english ? String(n) : n.toLocaleString(lang));
+  const tx = (s: string) => (english ? s : (sheet?.[s] ?? s));
+  const whatText = (s: string) => (english ? s : (WHAT as readonly string[]).includes(s) ? w[s as (typeof WHAT)[number]] : s);
+  const price = (t: CardRow['tiers'][number]) =>
+    english ? tierPrice(t) : t.feeUsdYear == null ? ui.calc.priceNP : t.feeUsdYear ? fillText(ui.calc.perYear, { x: L.money(t.feeUsdYear) }) : ui.calc.free;
+
   const { country } = useRegion();
   const home = currencyOf(country);
   const currencies = useMemo(() => {
@@ -96,6 +174,12 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
   });
   const shown = r.display;
   const rate = currency === 'USD' ? 1 : perUsd?.[currency] ?? 1;
+  const what = whatText(label);
+  const lineLabel = (l: SwipeLine) => (english ? l.label : lineText(l, w, pct, usd, fmt, tx));
+  const notes = english ? r.notes : r.noteParts.map((n) => noteText(n, w, usd, count));
+  const signedRaw = `${r.netPct >= 0 ? '+' : '−'}${english ? `${Math.abs(r.netPct).toFixed(2)}%` : new Intl.NumberFormat(lang, { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(Math.abs(r.netPct) / 100)}`;
+  // In right-to-left text the sign stays with the number.
+  const signedPct = lang.startsWith('ar') ? `\u2066${signedRaw}\u2069` : signedRaw;
 
   const pickPreset = (p: (typeof PRESETS)[number]) => {
     setLabel(p.label);
@@ -103,10 +187,10 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
   };
   const changeCurrency = (cur: string) => {
     touched.current = true;
-    const usd = amount / rate;
+    const usdAmount = amount / rate;
     const next = cur === 'USD' ? 1 : perUsd?.[cur] ?? 1;
     setCurrency(cur);
-    setAmountText(String(niceAmount(usd * next)));
+    setAmountText(String(niceAmount(usdAmount * next)));
   };
 
   const params: ReceiptParams = {
@@ -124,15 +208,23 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
   };
   const query = receiptQuery(params);
   // The receipt page; its share preview is the receipt picture.
-  const shareUrl = () => `${site.url}/receipt?${query}`;
+  const shareUrl = () => `${site.url}${prefix}/receipt?${query}`;
   useEffect(() => {
     if (!syncUrl) return;
     window.history.replaceState(window.history.state, '', `${window.location.pathname}?${query}`);
   }, [syncUrl, query]);
   const postOnX = () => {
-    const headline = r.headlinePct != null ? `"up to ${r.headlinePct}% back"` : 'its rewards';
-    const outcome = `${r.netPct >= 0 ? '+' : '−'}${Math.abs(r.netPct).toFixed(2)}%`;
-    const text = `${card.name} advertises ${headline}. My real ${fmt(amount, currency)} ${label.toLowerCase()} swipe on its ${r.base} card: ${outcome} after every fee (${r.net >= 0 ? 'kept' : 'lost'} ${fmt(Math.abs(r.net), shown)}). Receipt:`;
+    const headline = r.headlinePct != null ? fillText(w.xHeadline, { p: pct(r.headlinePct) }) : w.xNoHeadline;
+    const text = fillText(w.xText, {
+      card: card.name,
+      headline,
+      amount: fmt(amount, currency),
+      what: english ? what.toLowerCase() : what,
+      base: r.base,
+      outcome: signedPct,
+      kept: r.net >= 0 ? w.xKept : w.xLost,
+      x: fmt(Math.abs(r.net), shown)
+    });
     track('Share', { channel: 'x', what: 'receipt' });
     window.open(`https://x.com/intent/post?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl())}`, '_blank', 'noopener,noreferrer');
   };
@@ -143,7 +235,7 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
         {cards.length > 1 ? (
           <div className="field">
             <label className="field-label" htmlFor="sw-card">
-              Card
+              {w.card}
             </label>
             <select
               id="sw-card"
@@ -166,7 +258,7 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
         {/* Always shown, so it is clear which tier the receipt uses even when a card has only one. */}
         <div className="field">
           <label className="field-label" htmlFor="sw-tier">
-            Tier
+            {w.tier}
           </label>
           <select
             id="sw-tier"
@@ -177,28 +269,28 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
           >
             {card.tiers.map((t, i) => (
               <option key={t.name} value={i}>
-                {t.name} · {tierPrice(t)}
-                {t.comingSoon ? ' · coming soon' : ''}
+                {t.name} · {price(t)}
+                {t.comingSoon ? w.comingSoon : ''}
               </option>
             ))}
           </select>
           {card.tiers.length < 2 ? (
             <span className="faint" style={{ fontSize: 12 }}>
-              {card.name} has one tier.
+              {fillText(w.oneTier, { name: card.name })}
             </span>
           ) : null}
         </div>
-        <div className="chip-row" role="group" aria-label="Quick purchases">
+        <div className="chip-row" role="group" aria-label={w.quick}>
           {PRESETS.map((p) => (
             <button key={p.label} type="button" className="chip" aria-pressed={label === p.label} onClick={() => pickPreset(p)}>
-              {p.label} ${p.usd}
+              {english ? `${p.label} $${p.usd}` : `${w[p.label]} ${L.money(p.usd)}`}
             </button>
           ))}
         </div>
         <div className="swipe-fields">
           <div className="field">
             <label className="field-label" htmlFor="sw-amount">
-              Purchase amount
+              {w.amount}
             </label>
             <input
               id="sw-amount"
@@ -215,61 +307,58 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
         <div className="swipe-currencies">
           <div className="field">
             <label className="field-label" htmlFor="sw-base">
-              Card&apos;s base currency
+              {w.baseCur}
             </label>
             <select id="sw-base" className="select" value={r.base} onChange={(e) => setBase(e.target.value)} disabled={bases.list.length < 2}>
               {bases.list.map((c) => (
                 <option key={c} value={c}>
                   {c}
-                  {!bases.known ? ' (assumed)' : ''}
+                  {!bases.known ? w.assumed : ''}
                 </option>
               ))}
             </select>
           </div>
           <div className="field">
             <label className="field-label" htmlFor="sw-cur">
-              Paid in
+              {w.paidIn}
             </label>
             <select id="sw-cur" className="select" value={currency} onChange={(e) => changeCurrency(e.target.value)}>
               {currencies.map((c) => (
                 <option key={c} value={c}>
                   {c}
-                  {c === home ? ' (yours)' : ''}
+                  {c === home ? w.yours : ''}
                 </option>
               ))}
             </select>
           </div>
           <div className="field">
             <label className="field-label" htmlFor="sw-show">
-              Show receipt in
+              {w.showIn}
             </label>
             <select id="sw-show" className="select" value={shown} onChange={(e) => setDisplay(e.target.value === currency ? null : e.target.value)}>
               {currencies.map((c) => (
                 <option key={c} value={c}>
                   {c}
-                  {c === currency ? ' (as paid)' : ''}
+                  {c === currency ? w.asPaid : ''}
                 </option>
               ))}
             </select>
           </div>
         </div>
         <p className="faint" style={{ fontSize: 12, margin: 0 }}>
-          {r.foreign
-            ? `Paying in ${currency} on a ${r.base} card is a foreign purchase: the FX fee and any foreign-only fees apply.`
-            : `Paying in ${r.base}, the card's own currency: no FX fee.`}
+          {r.foreign ? fillText(w.foreignNote, { cur: currency, base: r.base }) : fillText(w.homeNote, { base: r.base })}
         </p>
         <details className="calc-split swipe-match" open={Boolean(matchValue)}>
           <summary>
-            <span className="field-label">Match a real swipe</span>{' '}
-            <span className="muted">Matching a real app screenshot? Enter the amount it shows.</span>
+            <span className="field-label">{w.match}</span> <span className="muted">{w.matchHint}</span>
           </summary>
           <div className="stack" style={{ gap: 10, marginTop: 12 }}>
-            <div className="chip-row" role="group" aria-label="What the app shows">
+            <div className="chip-row" role="group" aria-label={w.matchAria}>
               {(
                 [
-                  ['cleared', 'Cleared amount (price + FX)'],
-                  ['total', 'Total charged'],
-                  ['rate', 'Exchange rate']
+                  ['cleared', w.mCleared],
+                  ['total', w.mTotal],
+                  ['rate', w.mRate]
                 ] as const
               ).map(([k, lbl]) => (
                 <button key={k} type="button" className="chip" aria-pressed={matchMode === k} onClick={() => setMatchMode(k)}>
@@ -279,48 +368,44 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
             </div>
             <div className="field">
               <label className="field-label" htmlFor="sw-match">
-                {matchMode === 'rate' ? `${currency} per 1 ${r.base}` : `Amount in ${r.base}`}
+                {matchMode === 'rate' ? fillText(w.ratePer, { cur: currency, base: r.base }) : fillText(w.amountIn, { base: r.base })}
               </label>
               <input
                 id="sw-match"
                 className="input num"
                 inputMode="decimal"
-                placeholder={matchMode === 'cleared' ? 'e.g. 19.53' : matchMode === 'total' ? 'e.g. 19.63' : 'e.g. 95.42'}
+                placeholder={fillText(w.eg, { x: matchMode === 'cleared' ? '19.53' : matchMode === 'total' ? '19.63' : '95.42' })}
                 value={matchText}
                 onChange={(e) => setMatchText(e.target.value.replace(/[^\d.]/g, ''))}
               />
               <span className="faint" style={{ fontSize: 12 }}>
-                {matchMode === 'cleared'
-                  ? 'The "transaction cleared" amount: price with the FX fee already in the rate. Fixed fees are added on top.'
-                  : matchMode === 'total'
-                    ? 'Everything the app charged for this purchase, fees included.'
-                    : 'The rate before the FX fee. Leave empty to use the live mid-market rate.'}
+                {matchMode === 'cleared' ? w.helpCleared : matchMode === 'total' ? w.helpTotal : w.helpRate}
               </span>
             </div>
           </div>
         </details>
         {!perUsd ? (
           <p className="faint" style={{ fontSize: 12, margin: 0 }}>
-            Live exchange rates are unavailable right now, so only US dollars are offered.
+            {w.noRates}
           </p>
         ) : null}
       </div>
 
-      <figure className="slip" aria-label={`Receipt: ${label} on ${card.name}`}>
+      <figure className="slip" aria-label={fillText(w.slipAria, { what, card: card.name })}>
         <div className="slip-head">
-          <span>[ swipe receipt ]</span>
+          <span>{w.slipTag}</span>
           <span>{card.name}</span>
         </div>
         <p className="slip-sub">
-          {label} · {tier.name} · {r.base} card · paid in {currency}
-          {currency !== 'USD' ? ` · ≈ $${r.usd.toFixed(2)}` : ''}
+          {fillText(w.slipSub, { what, tier: tier.name, base: r.base, cur: currency })}
+          {currency !== 'USD' ? fillText(w.approx, { x: english ? `$${r.usd.toFixed(2)}` : L.cash(r.usd) }) : ''}
         </p>
         <dl className="slip-lines">
           {r.lines.flatMap((l) => [
             <div key={l.key} className={`slip-line slip-${l.kind}`}>
               <dt>
                 {l.kind === 'fee' ? '+ ' : l.kind === 'reward' ? '− ' : ''}
-                {l.label}
+                {lineLabel(l)}
               </dt>
               <dd>{fmt(l.amount, shown)}</dd>
             </div>,
@@ -328,7 +413,7 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
             ...(l.key === 'fx'
               ? [
                   <div key="cleared" className="slip-line slip-cleared">
-                    <dt>= Cleared amount (price + FX)</dt>
+                    <dt>{w.cleared}</dt>
                     <dd>
                       {fmt(r.cleared, shown)}
                       {shown !== r.base ? ` · ${fmt(r.clearedBase, r.base)}` : ''}
@@ -340,36 +425,34 @@ export function SwipeReceipt({ cards, initial, perUsd, syncUrl = false }: Props)
         </dl>
         <div className="slip-total">
           <div className="slip-line">
-            <dt>Paid at the till</dt>
+            <dt>{w.paidTill}</dt>
             <dd>{fmt(r.totalPaid, shown)}</dd>
           </div>
           <div className="slip-line">
-            <dt>Real cost after cashback</dt>
+            <dt>{w.realCost}</dt>
             <dd>{fmt(Math.round((r.totalPaid - r.cashback) * 100) / 100, shown)}</dd>
           </div>
         </div>
         <div className="slip-result" style={{ color: r.net >= 0 ? 'var(--ok)' : 'var(--bad)' }}>
-          <b>
-            {r.netPct >= 0 ? '+' : '−'}
-            {Math.abs(r.netPct).toFixed(2)}%
-          </b>
-          <span>{r.net >= 0 ? `You keep ${fmt(r.net, shown)}` : `Costs you ${fmt(-r.net, shown)} more`}</span>
+          <b>{signedPct}</b>
+          <span>{r.net >= 0 ? fillText(w.youKeep, { x: fmt(r.net, shown) }) : fillText(w.costsMore, { x: fmt(-r.net, shown) })}</span>
         </div>
-        {r.headlinePct != null ? <p className="slip-note">Advertised: up to {r.headlinePct}% back</p> : null}
+        {r.headlinePct != null ? <p className="slip-note">{fillText(w.advertised, { p: pct(r.headlinePct) })}</p> : null}
         {r.mode !== 'live' ? (
           <p className="slip-note">
-            Matched to your app{r.impliedRate ? ` · 1 ${r.base} = ${fmt(r.impliedRate, currency)} before FX` : ''}
+            {w.matched}
+            {r.impliedRate ? fillText(w.matchedRate, { base: r.base, x: fmt(r.impliedRate, currency) }) : ''}
           </p>
         ) : r.foreign ? (
-          <p className="slip-note">Live mid-market rate. Your card&apos;s rate on the day can differ by a few cents: match your app above.</p>
+          <p className="slip-note">{w.liveRate}</p>
         ) : null}
-        {r.notes.length ? <p className="slip-note">{r.notes.join(' · ')}</p> : null}
+        {notes.length ? <p className="slip-note">{notes.join(' · ')}</p> : null}
         <div className="slip-actions">
           <button type="button" className="btn btn-metal btn-sm" onClick={postOnX}>
-            Post receipt on X
+            {w.postX}
           </button>
           <a className="btn btn-sm" href={`/receipt/image?${query}&size=tall`} download={`g2m-receipt-${card.slug}.png`} onClick={() => track('Share', { channel: 'image', what: 'receipt' })}>
-            Download image
+            {w.download}
           </a>
         </div>
       </figure>

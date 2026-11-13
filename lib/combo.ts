@@ -158,31 +158,43 @@ const PART_LABEL: Record<Segment['part'], string> = {
   travel: 'other currencies'
 };
 
-/** Plain words for the slices that go on the second card, e.g. "purchases under $25 · all spending in other currencies". */
-export function describeSlices(toSecond: Segment[], all: Segment[]): string[] {
-  const out: string[] = [];
+/**
+ * The slices that go on the second card, as facts: all of one part (`all`), purchases up to (`max`) or from (`min`) a
+ * size, or a list of sizes (`list`, in US dollars). `describeSlices` words them in English; other languages use these.
+ */
+export type SlicePart = { part: Segment['part']; kind: 'all' | 'max' | 'min' | 'list'; sizes: number[] };
+
+export function sliceParts(toSecond: Segment[], all: Segment[]): SlicePart[] {
+  const out: SlicePart[] = [];
   const sizes = [...new Set(all.map((g) => g.size))].sort((a, b) => a - b);
   for (const part of ['home', 'usd', 'travel'] as const) {
     const mine = toSecond.filter((g) => g.part === part).map((g) => g.size);
     const ofPart = all.filter((g) => g.part === part && g.spendYear > 0).map((g) => g.size);
     if (!mine.length) continue;
     if (mine.length === ofPart.length) {
-      out.push(`all spending in ${PART_LABEL[part]}`);
+      out.push({ part, kind: 'all', sizes: [] });
       continue;
     }
     const max = Math.max(...mine);
     const min = Math.min(...mine);
     const below = sizes.filter((z) => z <= max).every((z) => mine.includes(z) || !ofPart.includes(z));
     const above = sizes.filter((z) => z >= min).every((z) => mine.includes(z) || !ofPart.includes(z));
-    out.push(
-      below
-        ? `purchases of $${max} or less in ${PART_LABEL[part]}`
-        : above
-          ? `purchases of $${min} or more in ${PART_LABEL[part]}`
-          : `${mine.map((z) => `$${z}`).join(', ')} purchases in ${PART_LABEL[part]}`
-    );
+    out.push(below ? { part, kind: 'max', sizes: [max] } : above ? { part, kind: 'min', sizes: [min] } : { part, kind: 'list', sizes: mine });
   }
   return out;
+}
+
+/** Plain words for the slices that go on the second card, e.g. "purchases under $25 · all spending in other currencies". */
+export function describeSlices(toSecond: Segment[], all: Segment[]): string[] {
+  return sliceParts(toSecond, all).map(({ part, kind, sizes }) =>
+    kind === 'all'
+      ? `all spending in ${PART_LABEL[part]}`
+      : kind === 'max'
+        ? `purchases of $${sizes[0]} or less in ${PART_LABEL[part]}`
+        : kind === 'min'
+          ? `purchases of $${sizes[0]} or more in ${PART_LABEL[part]}`
+          : `${sizes.map((z) => `$${z}`).join(', ')} purchases in ${PART_LABEL[part]}`
+  );
 }
 
 /** Features a combo gives you that the other card does not, for "what each card brings". */

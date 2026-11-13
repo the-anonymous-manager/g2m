@@ -6,7 +6,16 @@ import { isSmallPurchase } from '@/lib/calc';
 // purchase really costs. Three currencies: the card's base (billing) currency, the currency the shop charges in, and
 // the currency the receipt is shown in. Small-purchase limits are in US dollars.
 
-export type SwipeLine = { key: string; label: string; amount: number; kind: 'price' | 'fee' | 'reward' };
+/** `vars`: the facts in the label, so other languages can word it (the English label is built from the same facts). */
+export type SwipeLine = {
+  key: string;
+  label: string;
+  amount: number;
+  kind: 'price' | 'fee' | 'reward';
+  vars?: Record<string, string | number | boolean | null>;
+};
+/** A note as a fact (`k`) with its number, for other languages; `notes` has the English. */
+export type SwipeNote = { k: 'billing' | 'noRate' | 'fxNP' | 'topUpNP' | 'freeSmall' | 'cbNP' | 'capTx' | 'capMonth'; n?: number };
 
 export type SwipeResult = {
   /** The currency the shop charged in. */
@@ -43,6 +52,7 @@ export type SwipeResult = {
   /** Shop currency per 1 unit of the base currency, as used (implied when matched to a real app). */
   impliedRate: number | null;
   notes: string[];
+  noteParts: SwipeNote[];
 };
 
 /** Settings for one receipt. Amounts to match are in the card's base currency. */
@@ -104,12 +114,17 @@ export function swipeReceipt(
   opts: SwipeOptions = {}
 ): SwipeResult {
   const notes: string[] = [];
+  const noteParts: SwipeNote[] = [];
+  const note = (text: string, part: SwipeNote) => {
+    notes.push(text);
+    noteParts.push(part);
+  };
   const bases = baseCurrencies(card, opts.homeCurrency);
   const base = opts.base && bases.list.includes(opts.base) ? opts.base : bases.list[0];
-  if (!bases.known) notes.push('Billing currency not published, so US dollars are assumed');
+  if (!bases.known) note('Billing currency not published, so US dollars are assumed', { k: 'billing' });
   const rateOf = (c: string) => (c === 'USD' ? 1 : perUsd[c] ?? null);
   const display = opts.display && rateOf(opts.display) ? opts.display : currency;
-  if (!rateOf(currency) || !rateOf(base)) notes.push('No live exchange rate for one of these currencies, so amounts are not converted');
+  if (!rateOf(currency) || !rateOf(base)) note('No live exchange rate for one of these currencies, so amounts are not converted', { k: 'noRate' });
   const baseRate = rateOf(base) ?? 1; // base currency per US dollar
 
   // A purchase is foreign when the shop's currency is not the card's base currency.
@@ -119,11 +134,11 @@ export function swipeReceipt(
   const by = card.fees.fxByCurrency ?? {};
   const other = otherFxPct(card, tier);
   const fxPct = !foreign ? (by[base] ?? 0) : by[currency] != null && by[currency] > 0 ? by[currency] : other;
-  if (fxPct == null) notes.push('FX fee not published, counted as 0');
+  if (fxPct == null) note('FX fee not published, counted as 0', { k: 'fxNP' });
   const fxp = (fxPct ?? 0) / 100;
   const txp = card.fees.txPct / 100;
   const load = card.fees.topUpPct;
-  if (load == null) notes.push('Top-up fee not published, counted as 0');
+  if (load == null) note('Top-up fee not published, counted as 0', { k: 'topUpNP' });
   const lp = Math.min((load ?? 0) / 100, 0.5);
   const sp = card.fees.smallPurchase;
   const flatB = card.fees.txFlatUsd * baseRate;
@@ -180,33 +195,41 @@ export function swipeReceipt(
   }
 
   const lines: SwipeLine[] = [
-    { key: 'price', label: display === currency ? 'Merchant price' : `Merchant price (${fmtPlain(amount, currency)})`, amount: price, kind: 'price' }
+    {
+      key: 'price',
+      label: display === currency ? 'Merchant price' : `Merchant price (${fmtPlain(amount, currency)})`,
+      amount: price,
+      kind: 'price',
+      vars: { asPaid: display === currency, amount, currency }
+    }
   ];
   if (fx > 0) {
     lines.push({
       key: 'fx',
       label: foreign ? `FX fee (${fxPct}%, ${currency} on a ${base} card)` : `FX fee (${fxPct}% on ${base})`,
       amount: fx,
-      kind: 'fee'
+      kind: 'fee',
+      vars: { pct: fxPct ?? 0, currency, base, foreign }
     });
   }
-  if (tx > 0) lines.push({ key: 'tx', label: `Per-purchase fee (${card.fees.txPct}%)`, amount: tx, kind: 'fee' });
-  if (flat > 0) lines.push({ key: 'flat', label: `Flat fee per purchase (${usdText(card.fees.txFlatUsd)})`, amount: flat, kind: 'fee' });
+  if (tx > 0) lines.push({ key: 'tx', label: `Per-purchase fee (${card.fees.txPct}%)`, amount: tx, kind: 'fee', vars: { pct: card.fees.txPct } });
+  if (flat > 0) lines.push({ key: 'flat', label: `Flat fee per purchase (${usdText(card.fees.txFlatUsd)})`, amount: flat, kind: 'fee', vars: { usd: card.fees.txFlatUsd } });
   if (small > 0 && sp) {
     lines.push({
       key: 'small',
       label: `Small-purchase fee (${usdText(sp.feeUsd)} ${sp.inclusive ? 'at or under' : 'under'} ${usdText(sp.underUsd)}${sp.foreignOnly ? ', foreign purchases' : ''})`,
       amount: small,
-      kind: 'fee'
+      kind: 'fee',
+      vars: { fee: sp.feeUsd, under: sp.underUsd, inclusive: Boolean(sp.inclusive), foreignOnly: Boolean(sp.foreignOnly) }
     });
   }
-  if (small > 0 && sp?.freePerMonth) notes.push(`The first ${sp.freePerMonth} small purchases each month are free; this receipt assumes you have used them`);
-  if (topUp > 0) lines.push({ key: 'topup', label: `Top-up fee (${load}% of what you load)`, amount: topUp, kind: 'fee' });
+  if (small > 0 && sp?.freePerMonth) note(`The first ${sp.freePerMonth} small purchases each month are free; this receipt assumes you have used them`, { k: 'freeSmall', n: sp.freePerMonth });
+  if (topUp > 0) lines.push({ key: 'topup', label: `Top-up fee (${load}% of what you load)`, amount: topUp, kind: 'fee', vars: { pct: load } });
   const fees = r(lines.filter((l) => l.kind === 'fee').reduce((s, l) => s + l.amount, 0));
 
   // Cashback on the amount the card is charged (price + FX), like card apps.
   const ratePct = tierRate(tier);
-  if (ratePct == null) notes.push('Cashback rate not published');
+  if (ratePct == null) note('Cashback rate not published', { k: 'cbNP' });
   // A per-purchase cap (e.g. Kolo: at most $1 a purchase), converted to the receipt currency.
   const maxTx = card.cashback.maxPerTxUsd;
   const capD = maxTx ? inDisplay(maxTx * baseRate) : Infinity;
@@ -217,10 +240,11 @@ export function swipeReceipt(
     key: 'cashback',
     label: `Cashback (${ratePct ?? 0}%${capped ? `, capped at ${usdText(maxTx!)} a purchase` : ''}${card.cashback.payout ? ` in ${card.cashback.payout}` : ''})`,
     amount: cashback,
-    kind: 'reward'
+    kind: 'reward',
+    vars: { pct: ratePct ?? 0, capUsd: capped ? maxTx! : null, payout: card.cashback.payout }
   });
-  if (maxTx && !capped) notes.push(`Cashback is capped at ${usdText(maxTx)} a purchase`);
-  if (tier.capMonthlyUsd != null) notes.push(`Cashback stops at $${tier.capMonthlyUsd} a month`);
+  if (maxTx && !capped) note(`Cashback is capped at ${usdText(maxTx)} a purchase`, { k: 'capTx', n: maxTx });
+  if (tier.capMonthlyUsd != null) note(`Cashback stops at $${tier.capMonthlyUsd} a month`, { k: 'capMonth', n: tier.capMonthlyUsd });
 
   const totalPaid = r(price + fees);
   const net = r(cashback - fees);
@@ -244,7 +268,8 @@ export function swipeReceipt(
     clearedBase: Math.round(clearedB * 10 ** minorUnits(base)) / 10 ** minorUnits(base),
     mode,
     impliedRate,
-    notes
+    notes,
+    noteParts
   };
 }
 

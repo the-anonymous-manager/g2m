@@ -84,7 +84,7 @@ export const calcTr: typeof calcEn = {
   howWorks: 'Hesaplayıcı nasıl çalışır',
   footB: ' (İngilizce). Tek bir alışverişi satır satır görmek için şunu deneyin: ',
   receipt: 'alışveriş fişi',
-  footC: ' (İngilizce).',
+  footC: '.',
   yearAt: 'Ayda {spend} ile bir yıl',
   cardsIn: ' · {place} için alınabilecek kartlar',
   homeIn: ' · ülke içi harcama {cur} ile',
@@ -201,5 +201,5 @@ export const calcTr: typeof calcEn = {
   walletPair: '{a} + {b} kartlarını birlikte kullanın ve yalnızca {single} kartına göre {plus} fazlasını tutun.',
   walletPlus: 'yılda +{x}',
   walletOne: 'Bu harcamada para açısından tek kart yeterli. Salon, getiri, borçlanma veya banka hesabı da mı istiyorsunuz?',
-  walletCta: 'Cüzdanınızı oluşturun (İngilizce)'
+  walletCta: 'Cüzdanınızı oluşturun'
 };

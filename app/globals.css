@@ -2610,6 +2610,11 @@ body::before {
 [dir='rtl'] .guide-num {
   direction: ltr;
 }
+/* Arabic letters join up: spacing them apart (labels, the receipt) breaks the words. */
+[dir='rtl'] main *,
+[dir='rtl'] main *::before {
+  letter-spacing: normal !important;
+}
 [dir='rtl'] .score-num {
   text-align: left;
 }

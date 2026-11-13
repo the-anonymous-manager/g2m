@@ -3,6 +3,9 @@ import { cardEs } from './card/es';
 import { compareEs } from './compare/es';
 import { calcEs } from './calc/es';
 import { finderEs } from './finder/es';
+import { walletEs } from './wallet/es';
+import { receiptEs } from './receipt/es';
+import { corridorEs } from './corridor/es';
 
 export const uiEs: Ui = {
   common: {
@@ -129,5 +132,8 @@ export const uiEs: Ui = {
   regions: { EU: 'UE / EEE', ASIA: 'Asia' },
   compare: compareEs,
   calc: calcEs,
-  finder: finderEs
+  finder: finderEs,
+  wallet: walletEs,
+  receipt: receiptEs,
+  corridor: corridorEs
 };

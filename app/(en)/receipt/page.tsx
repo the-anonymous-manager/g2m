@@ -6,6 +6,7 @@ import { fiatPerUsd } from '@/lib/prices';
 import { parseReceiptParams, receiptQuery } from '@/lib/receipt-params';
 import { SwipeReceipt } from '@/components/SwipeReceipt';
 import { Eyebrow } from '@/components/bits';
+import { intlReceipt, languageLinks } from '@/lib/i18n/locales';
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
 
@@ -19,7 +20,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   return {
     title,
     description,
-    alternates: { canonical: '/receipt' },
+    alternates: { canonical: '/receipt', languages: languageLinks('/receipt', intlReceipt) },
     ...shareMeta(title, description, '/receipt', image)
   };
 }

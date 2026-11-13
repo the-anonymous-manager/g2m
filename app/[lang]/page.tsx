@@ -152,9 +152,9 @@ export default async function IntlHomePage({ params }: Props) {
   const tools: [string, string, string, string][] = [
     [`${prefix}/finder`, d.toolFinderTag, d.toolFinder, d.toolFinderText],
     [`${prefix}/calculator`, d.toolCalcTag, d.toolCalc, d.toolCalcText],
-    ['/wallet', d.toolWalletTag, d.toolWallet, d.toolWalletText],
-    ['/receipt', d.toolReceiptTag, d.toolReceipt, d.toolReceiptText],
-    ['/corridors', d.toolCorridorTag, d.toolCorridor, d.toolCorridorText],
+    [`${prefix}/wallet`, d.toolWalletTag, d.toolWallet, d.toolWalletText],
+    [`${prefix}/receipt`, d.toolReceiptTag, d.toolReceipt, d.toolReceiptText],
+    [`${prefix}/corridors`, d.toolCorridorTag, d.toolCorridor, d.toolCorridorText],
     [`${prefix}/compare`, d.toolCompareTag, d.toolCompare, d.toolCompareText]
   ];
   const mail = (subject: string) => `mailto:${site.contactEmail}?subject=${encodeURIComponent(subject)}`;

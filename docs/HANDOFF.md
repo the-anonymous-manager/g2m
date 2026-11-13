@@ -417,6 +417,17 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   against the previous build (same text before and after clicks). Long words: short custody labels in the table and
   wrapping headings, so the table fits 1280 px in every language. Next stages, one PR each: card page in full,
   compare, calculator, finder, wallet, receipt, corridors, submit, fees guide.
+- Whole site in each language, stage 2e (13 Nov 2026, Akash: "step 5"): the wallet builder, swipe receipt and
+  corridor finder at `/de/wallet`, `/de/receipt`, `/de/corridors` etc. in all 8 languages: every form, result, table,
+  note and share text, with money and percentages from Intl. The maths is unchanged: the wallet's "card 2 for these
+  purchases" (`sliceParts`) and the receipt's lines and notes (`vars`, `noteParts`) are recorded as facts and worded
+  per language, with English exactly as before. Receipt links keep the English purchase name (`what=Coffee`); each
+  language shows its own word. The receipt picture to post or download stays English (no Arabic or Chinese letters
+  in its font). The corridor finder's 69 bank rail fee notes are now translated (and listed by `npm run i18n:missing`).
+  English `/wallet`, `/receipt` and `/corridors` checked against the live build in 29 states (words, links, labels,
+  titles): no differences. Links from the calculator, card pages, finder and translated home pages now open the
+  translated tools; hreflang and sitemap added. Arabic pages: letter spacing off in page content, so Arabic letters
+  join up (labels were spaced apart before). Next: submit + fees guide, then the header's Tools menu.
 - Karta update (12 Nov 2026, Akash sent app screenshots and his referral link): in the sheet, Karta now has its
   referral link (https://karta.social/29fda4cb62, no sign-up bonus for the friend, so none listed), cashback 0% (Karta
   confirms no cashback on your own spending), the metal card (299 USDT pre-order, first shipments planned for December

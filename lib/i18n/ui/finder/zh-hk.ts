@@ -8,7 +8,7 @@ export const finderZhHk: typeof finderEn = {
   lead: '五個簡單答案。我們會剔除你所在地無法申請的卡，並解釋每個選擇。',
   rampTag: '[ 提款到銀行 ]',
   rampText: '想把 USDC 或 USDT 轉到銀行？看看哪些卡提供 IBAN，或可經 SEPA、ACH、Faster Payments、AED、INR 或 SWIFT 提款。',
-  rampCta: '匯款通道工具（英文）',
+  rampCta: '匯款通道工具',
   q1: '你住在哪裏？',
   pickCountry: '選擇你的國家',
   yourLocation: '（你的位置）',

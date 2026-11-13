@@ -4,12 +4,13 @@ import { toRow } from '@/lib/types';
 import { isCountry } from '@/lib/regions';
 import { CorridorFinder } from '@/components/CorridorFinder';
 import { Eyebrow } from '@/components/bits';
+import { intlCorridors, languageLinks } from '@/lib/i18n/locales';
 
 export const metadata: Metadata = {
   title: 'Crypto off-ramp and IBAN finder: USDC to SEPA, ACH, UPI',
   description:
     'Which crypto cards move USDC or USDT to a bank: EUR SEPA, USD ACH, GBP Faster Payments, AED, INR or SWIFT. Accounts in your name, cash-out rails and fees.',
-  alternates: { canonical: '/corridors' }
+  alternates: { canonical: '/corridors', languages: languageLinks('/corridors', intlCorridors) }
 };
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
