@@ -3,7 +3,10 @@ import { LogoMark } from '@/components/Logo';
 import { site } from '@/lib/site';
 import { fmtDate } from '@/lib/format';
 
-export function Footer({ updated }: { updated: string }) {
+type FooterWords = { about: string; links: { href: string; label: string }[]; label: string; disclaimer: string };
+
+/** `words`: the same footer in another language (its text, links and the date already filled in); English when left out. */
+export function Footer({ updated, words }: { updated: string; words?: FooterWords }) {
   return (
     <footer className="site-footer">
       <div className="wrap stack" style={{ gap: 28 }}>
@@ -16,10 +19,18 @@ export function Footer({ updated }: { updated: string }) {
               </span>
             </div>
             <p className="muted" style={{ fontSize: 14 }}>
-              {site.tagline} {site.subline} Independent crypto card rankings, built from published card terms.
+              {words ? words.about : `${site.tagline} ${site.subline} Independent crypto card rankings, built from published card terms.`}
             </p>
           </div>
-          <nav aria-label="Footer" className="footer-links">
+          <nav aria-label={words?.label ?? 'Footer'} className="footer-links">
+            {words ? (
+              words.links.map((l) => (
+                <Link key={l.href} href={l.href}>
+                  {l.label}
+                </Link>
+              ))
+            ) : (
+              <>
             <Link href="/cards?country=all">All cards</Link>
             <Link href="/finder">Card finder</Link>
             <Link href="/calculator">Rewards calculator</Link>
@@ -30,6 +41,8 @@ export function Footer({ updated }: { updated: string }) {
             <Link href="/guides">Guides</Link>
             <Link href="/methodology">Methodology</Link>
             <Link href="/submit">Submit a card</Link>
+              </>
+            )}
             {site.twitter ? (
               <a href={`https://x.com/${site.twitter.replace(/^@/, '')}`} target="_blank" rel="noopener noreferrer">
                 X
@@ -38,8 +51,14 @@ export function Footer({ updated }: { updated: string }) {
           </nav>
         </div>
         <p className="faint" style={{ fontSize: 13, maxWidth: '90ch' }}>
-          Not financial advice. Card terms change often, so check the issuer&apos;s site before you apply. Some links may
-          earn G2M a referral fee; that never changes a card&apos;s rank. Data last checked {fmtDate(updated)}.
+          {words ? (
+            words.disclaimer
+          ) : (
+            <>
+              Not financial advice. Card terms change often, so check the issuer&apos;s site before you apply. Some links may
+              earn G2M a referral fee; that never changes a card&apos;s rank. Data last checked {fmtDate(updated)}.
+            </>
+          )}
         </p>
       </div>
     </footer>

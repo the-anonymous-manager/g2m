@@ -417,6 +417,13 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   against the previous build (same text before and after clicks). Long words: short custody labels in the table and
   wrapping headings, so the table fits 1280 px in every language. Next stages, one PR each: card page in full,
   compare, calculator, finder, wallet, receipt, corridors, submit, fees guide.
+- Same header and footer in every language (13 Nov 2026, Akash: "this should match with english website. everything
+  should be same"): translated pages now use the English header (Rankings, Card finder, Rewards calculator, Wallet
+  builder, Compare, Methodology, language, theme, "Find your best card") and the English footer (description, the 11
+  links, disclaimer with the data date), in each language, instead of the shorter Ranking / Guides / Tools header and
+  disclaimer-only footer. Header names are shortened where needed (fr "Calculateur", es "Calculadora", ru
+  "Калькулятор", pl "Portfel") so every language fits one row at 1,200 px and up and wraps like English below it;
+  header height matches English at 390, 900, 1024, 1280 and 1440 px. English pages: same header and footer.
 - Whole site in each language, stage 2f (13 Nov 2026, Akash: "step 6", the last of "1,2,3,4,5,6"): the submit form
   (`/de/submit` etc.) and the fees guide (`/de/guides/crypto-card-fees-explained`) in all 8 languages. The form's
   words are translated; the email it prepares stays English ("New card for G2M: …") so the team can read it, and the

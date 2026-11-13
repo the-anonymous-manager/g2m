@@ -4,19 +4,28 @@ import { NavLinks } from '@/components/NavLinks';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { LanguageMenu } from '@/components/LanguageMenu';
 
-export function Header() {
+type HeaderWords = {
+  home: string;
+  homeLabel: string;
+  nav: { href: string; label: string }[];
+  language: string;
+  cta: { href: string; label: string };
+};
+
+/** `words`: the same header in another language (its links and labels); English when left out. */
+export function Header({ words }: { words?: HeaderWords }) {
   return (
     <header className="site-header">
       <div className="wrap header-row">
-        <Link href="/" className="brand" aria-label="G2M home">
+        <Link href={words?.home ?? '/'} className="brand" aria-label={words?.homeLabel ?? 'G2M home'}>
           <LogoLockup id="hdr" />
         </Link>
-        <NavLinks />
+        {words ? <NavLinks items={words.nav} label={words.homeLabel} /> : <NavLinks />}
         <div className="header-actions">
-          <LanguageMenu label="Language" />
+          <LanguageMenu label={words?.language ?? 'Language'} />
           <ThemeToggle />
-          <Link href="/finder" className="btn btn-metal header-cta">
-            Find your best card
+          <Link href={words?.cta.href ?? '/finder'} className="btn btn-metal header-cta">
+            {words?.cta.label ?? 'Find your best card'}
           </Link>
         </div>
       </div>

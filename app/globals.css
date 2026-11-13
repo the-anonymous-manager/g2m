@@ -2571,61 +2571,6 @@ body::before {
 }
 
 /* ---------- Other languages (/de, /ar ...): header links, language list, right-to-left ---------- */
-.intl-nav {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  flex: 1 1 auto;
-  min-width: 0;
-  overflow-x: auto;
-  scrollbar-width: none;
-  white-space: nowrap;
-  font-weight: 500;
-}
-.intl-nav::-webkit-scrollbar {
-  display: none;
-}
-.intl-nav a {
-  text-decoration: none;
-  color: var(--muted);
-}
-.intl-nav a:hover {
-  color: var(--text);
-}
-/* The tools menu opens below the header links, so the links row must not clip it (three links fit on any phone). */
-.intl .intl-nav {
-  overflow: visible;
-}
-.tools-menu {
-  position: relative;
-}
-.tools-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 44px;
-  color: var(--muted);
-  cursor: pointer;
-  list-style: none;
-  user-select: none;
-}
-.tools-btn::-webkit-details-marker {
-  display: none;
-}
-.tools-btn:hover,
-.tools-menu[open] .tools-btn,
-.tools-btn[aria-current='page'] {
-  color: var(--text);
-}
-.tools-menu[open] .lang-caret {
-  transform: rotate(180deg);
-}
-.tools-list {
-  inset-inline-start: 0;
-  inset-inline-end: auto;
-  min-width: 240px;
-  white-space: normal;
-}
 .lang-links {
   align-items: baseline;
 }
@@ -2652,16 +2597,26 @@ body::before {
 [dir='rtl'] .score-num {
   text-align: left;
 }
-@media (max-width: 860px) {
+/* Translated header: one row on wide screens like the English one; if a language's links are still too long, they
+   scroll sideways instead of pushing the buttons onto a second row. Narrower, it wraps like the English header. */
+@media (min-width: 1200px) {
   .intl .header-row {
-    flex-wrap: wrap;
-    row-gap: 6px;
+    flex-wrap: nowrap;
   }
-  .intl .intl-nav {
-    order: 3;
-    flex-basis: 100%;
-    gap: 18px;
-    font-size: 15px;
+  .intl .nav {
+    flex: 0 1 auto;
+    min-width: 0;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+  .intl .nav::-webkit-scrollbar {
+    display: none;
+  }
+  .intl .brand,
+  .intl .header-actions {
+    flex-shrink: 0;
   }
 }
 .intl-markets {
