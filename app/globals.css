@@ -2752,21 +2752,7 @@ body::before {
   min-width: 190px;
 }
 
-/* "Book a spot" form under Our picks (components/BookSpotForm.tsx) */
-.link-button {
-  appearance: none;
-  background: none;
-  border: 0;
-  padding: 0;
-  font: inherit;
-  color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  cursor: pointer;
-}
-.link-button:hover {
-  color: var(--text);
-}
+/* The booking form on /book (components/BookSpotForm.tsx) */
 .book-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

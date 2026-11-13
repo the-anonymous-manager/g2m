@@ -5,7 +5,7 @@ import { getCards, getRank, lastUpdated } from '@/lib/cards';
 import type { Card } from '@/lib/types';
 import { getSponsor } from '@/lib/sponsor';
 import { getPicks, type HomePick } from '@/lib/picks';
-import { fill, hreflangOf, intlCard, intlHome, intlMethodology, intlRankings, languageLinks, localeByCode } from '@/lib/i18n/locales';
+import { fill, hreflangOf, intlBook, intlCard, intlHome, intlMethodology, intlRankings, languageLinks, localeByCode } from '@/lib/i18n/locales';
 import { DICTS, type Dict } from '@/lib/i18n/dict';
 import { clean, formatters, type Fmt } from '@/lib/i18n/format';
 import { note } from '@/lib/i18n/notes';
@@ -22,7 +22,6 @@ import { GlyphField } from '@/components/motion/GlyphField';
 import { IntlScore } from '@/components/IntlCardList';
 import { IntlText } from '@/components/IntlText';
 import { OutboundLink } from '@/components/OutboundLink';
-import { BookSpotForm } from '@/components/BookSpotForm';
 
 // The home page in another language (/de, /ar ...), section for section the same as the English home page
 // (app/(en)/page.tsx): hero with search and the top spot, the numbers, New on G2M, the top-5 leaderboard, cards
@@ -246,15 +245,15 @@ export default async function IntlHomePage({ params }: Props) {
                   <>
                     {d.spotSponsored} <Link href={intlMethodology(locale)}>{d.moneyLink}</Link>
                     {' · '}
-                    <a href="#book-top">{UI[locale.code].book.bookTop}</a>
+                    <Link href={`${intlBook(locale)}?spot=top`}>{UI[locale.code].book.bookTop}</Link>
                   </>
                 ) : ourPick ? (
                   <>
-                    {d.spotPickNote} <a href="#book-top">{UI[locale.code].book.bookTop}</a>
+                    {d.spotPickNote} <Link href={`${intlBook(locale)}?spot=top`}>{UI[locale.code].book.bookTop}</Link>
                   </>
                 ) : (
                   <>
-                    {d.spotTopNote} <a href="#book-top">{d.bookSpot}</a>
+                    {d.spotTopNote} <Link href={`${intlBook(locale)}?spot=top`}>{d.bookSpot}</Link>
                   </>
                 )}
               </p>
@@ -419,20 +418,14 @@ export default async function IntlHomePage({ params }: Props) {
             );
           })}
         </div>
-        <BookSpotForm
-          cards={cards.map((c) => ({ slug: c.slug, name: c.name }))}
-          email={site.contactEmail}
-          words={UI[locale.code].book}
-          tag={locale.tag}
-          lang={locale.code}
-          before={
-            anyFeatured ? (
-              <>
-                {d.pickSponsored} <Link href={intlMethodology(locale)}>{d.moneyLink}</Link>.{' '}
-              </>
-            ) : null
-          }
-        />
+        <p className="faint" style={{ fontSize: 13, margin: 0 }}>
+          {anyFeatured ? (
+            <>
+              {d.pickSponsored} <Link href={intlMethodology(locale)}>{d.moneyLink}</Link>.{' '}
+            </>
+          ) : null}
+          {UI[locale.code].book.lead} <Link href={intlBook(locale)}>{UI[locale.code].book.open}</Link>
+        </p>
       </section>
 
       {/* How cards are judged */}
