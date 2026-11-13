@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { getCards } from '@/lib/cards';
 import { fmtDate } from '@/lib/format';
 import { FEES_GUIDE, TOPICS, topicCards } from '@/lib/guides';
-import { absoluteUrl, site, shareMeta } from '@/lib/site';
+import { absoluteUrl, metaDescription, metaTitle, shareMeta, site } from '@/lib/site';
 import { Eyebrow } from '@/components/bits';
 import { BackButton } from '@/components/BackButton';
 import { GuideList } from '@/components/GuideList';
@@ -30,8 +30,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const n = topicCards(t).length;
   const title = `${t.title} (${n} compared)`;
   return {
-    title,
-    description: t.description,
+    title: metaTitle(title),
+    description: metaDescription(t.description),
     alternates: {
       canonical: `/guides/${t.slug}`,
       languages: languageLinks(`/guides/${t.slug}`, (l) => intlGuide(l, t.slug), LOCALES.filter((l) => intlTopic(l, t.slug)))

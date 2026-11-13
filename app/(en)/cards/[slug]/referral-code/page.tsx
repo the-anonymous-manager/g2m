@@ -5,7 +5,7 @@ import { getCard, getCards } from '@/lib/cards';
 import { cashbackLabel, fmtDate, pct, usd } from '@/lib/format';
 import { hasReferralPage, referralPath } from '@/lib/referral';
 import { shortName } from '@/lib/versus';
-import { absoluteUrl, shareMeta, site } from '@/lib/site';
+import { absoluteUrl, metaDescription, shareMeta, site } from '@/lib/site';
 import { CardArt } from '@/components/CardArt';
 import { Eyebrow, ScorePill } from '@/components/bits';
 import { BackButton } from '@/components/BackButton';
@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }How to use it, step by step.`.slice(0, 300);
   return {
     title: title.length + ' · G2M'.length <= 60 ? title : { absolute: title },
-    description,
+    description: metaDescription(description),
     alternates: { canonical: referralPath(card.slug), languages: languageLinks(referralPath(card.slug), (l) => intlReferral(l, card.slug)) },
     ...shareMeta(`${name} referral code · G2M`, description, referralPath(card.slug), `/cards/${card.slug}/opengraph-image`)
   };

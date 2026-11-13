@@ -9,7 +9,7 @@ import { clean, formatters } from '@/lib/i18n/format';
 import { FEES } from '@/lib/i18n/fees';
 import { intlTopic, intlTopics } from '@/lib/i18n/guides';
 import { noteOrNull } from '@/lib/i18n/notes';
-import { absoluteUrl, shareMeta, site } from '@/lib/site';
+import { absoluteUrl, metaDescription, metaTitle, shareMeta } from '@/lib/site';
 import { Eyebrow } from '@/components/bits';
 
 // The fees guide in another language (/de/guides/crypto-card-fees-explained): the same sections, numbers and table as
@@ -28,8 +28,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!locale) return {};
   const t = FEES[locale.code];
   return {
-    title: { absolute: `${t.title} · ${site.name}` },
-    description: t.description,
+    title: metaTitle(t.title),
+    description: metaDescription(t.description),
     alternates: { canonical: intlFeesGuide(locale), languages: languageLinks('/guides/crypto-card-fees-explained', intlFeesGuide) },
     ...shareMeta(t.title, t.description, intlFeesGuide(locale))
   };

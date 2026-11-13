@@ -6,7 +6,7 @@ import { fmtDate, pct } from '@/lib/format';
 import { homeFx } from '@/lib/fx';
 import { currencyOf } from '@/lib/currencies.mjs';
 import { TOPICS, countryGuide, countryGuidePath, countryGuides, countrySlug } from '@/lib/guides';
-import { absoluteUrl, site, shareMeta } from '@/lib/site';
+import { absoluteUrl, metaDescription, metaTitle, shareMeta, site } from '@/lib/site';
 import { intlCountry, languageLinks } from '@/lib/i18n/locales';
 import { Eyebrow } from '@/components/bits';
 import { BackButton } from '@/components/BackButton';
@@ -31,8 +31,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = `Best crypto cards in ${g.name}: ${g.confirmed.length} compared`;
   const description = `${g.confirmed.length} crypto cards confirmed in ${g.name}, ranked by the G2M score for ${g.name}: cashback, annual fee, FX fee on local spending and custody. Top ranked: ${list(g.confirmed.slice(0, 3).map((c) => c.name))}.`;
   return {
-    title,
-    description,
+    title: metaTitle(title),
+    description: metaDescription(description),
     alternates: { canonical: path, languages: languageLinks(path, (l) => intlCountry(l, countrySlug(g.cc))) },
     ...shareMeta(`Best crypto cards in ${g.name} · G2M`, description, path)
   };

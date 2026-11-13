@@ -9,12 +9,17 @@ import { PICK } from '@/lib/tierpick';
 import { usdPrices } from '@/lib/prices';
 import { allPairs, versusPath } from '@/lib/versus';
 import { intlCompare, languageLinks } from '@/lib/i18n/locales';
+import { metaDescription, shareMeta } from '@/lib/site';
+
+const pageTitle = 'Compare crypto cards';
+const pageDescription =
+  'Compare up to three crypto cards side by side, or one tier of each: cashback, annual fee, FX fee, caps, staking, custody, countries and perks.';
 
 export const metadata: Metadata = {
-  title: 'Compare crypto cards',
-  description:
-    'Compare up to three crypto cards side by side, or one tier of each: cashback, annual fee, FX fee, caps, staking, custody, countries and perks.',
-  alternates: { canonical: '/compare', languages: languageLinks('/compare', intlCompare) }
+  title: pageTitle,
+  description: metaDescription(pageDescription),
+  alternates: { canonical: '/compare', languages: languageLinks('/compare', intlCompare) },
+  ...shareMeta(pageTitle, pageDescription, '/compare')
 };
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };

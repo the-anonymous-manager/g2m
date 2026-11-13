@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { shareMeta } from '@/lib/site';
+import { metaDescription, metaTitle, shareMeta } from '@/lib/site';
 import { getCard, getCards } from '@/lib/cards';
 import { toRow } from '@/lib/types';
 import { fiatPerUsd } from '@/lib/prices';
@@ -18,8 +18,8 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   const description = 'What one purchase really costs on a crypto card: every fee, the cashback, and the real result.';
   const image = card ? `/receipt/image?${receiptQuery(p)}` : undefined;
   return {
-    title,
-    description,
+    title: metaTitle(title),
+    description: metaDescription(description),
     alternates: { canonical: '/receipt', languages: languageLinks('/receipt', intlReceipt) },
     ...shareMeta(title, description, '/receipt', image)
   };

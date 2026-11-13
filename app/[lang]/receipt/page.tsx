@@ -9,7 +9,7 @@ import { Eyebrow } from '@/components/bits';
 import { intlReceipt, languageLinks, localeByCode } from '@/lib/i18n/locales';
 import { noteOrNull } from '@/lib/i18n/notes';
 import { UI } from '@/lib/i18n/ui';
-import { shareMeta, site } from '@/lib/site';
+import { metaDescription, metaTitle, shareMeta } from '@/lib/site';
 
 // The swipe receipt in another language (/de/receipt): the same receipt as /receipt, every word from that language's
 // pack (lib/i18n/ui/receipt), money from Intl, and "rewards paid in" from the sheet translated here. The picture to
@@ -28,8 +28,8 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   const title = card ? w.metaTitleCard.replace('{card}', card.name).replace('{what}', what) : w.metaTitle;
   const image = card ? `/receipt/image?${receiptQuery(p)}` : undefined;
   return {
-    title: { absolute: `${title} · ${site.name}` },
-    description: w.metaDesc,
+    title: metaTitle(title),
+    description: metaDescription(w.metaDesc),
     alternates: { canonical: intlReceipt(locale), languages: languageLinks('/receipt', intlReceipt) },
     ...shareMeta(title, w.metaDesc, intlReceipt(locale), image)
   };

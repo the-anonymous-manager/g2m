@@ -11,7 +11,7 @@ import { toRow, type Card, type Market } from '@/lib/types';
 import { MARKET_LABELS, availabilityIn } from '@/lib/regions';
 import { ASIA } from '@/lib/countries.mjs';
 import { cashbackLabel, fmtDate, pct, usd } from '@/lib/format';
-import { site } from '@/lib/site';
+import { metaDescription, site } from '@/lib/site';
 import { intlHome, languageLinks } from '@/lib/i18n/locales';
 import { CardArt } from '@/components/CardArt';
 import { ArrowIcon, Eyebrow, MarketBadge, ScorePill, SearchIcon } from '@/components/bits';
@@ -30,7 +30,9 @@ export function generateMetadata(): Metadata {
     title: { absolute: `Best Crypto Cards ${year}: Fees, Cashback & Rewards Compared · ${site.name}` },
     // The same page in the other languages (hreflang), so each reader's search engine offers their own.
     alternates: { canonical: '/', languages: languageLinks('/', intlHome) },
-    description: `Compare ${n} crypto cards side by side: cashback, annual and FX fees, where each card works, sign-up bonuses and no-KYC options. Every card ranked by the same rules.`
+    description: metaDescription(
+      `Compare ${n} crypto cards side by side: cashback, annual and FX fees, where each card works, sign-up bonuses and no-KYC options. Every card ranked by the same rules.`
+    )
   };
 }
 

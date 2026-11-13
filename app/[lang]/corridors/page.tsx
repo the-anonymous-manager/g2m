@@ -10,7 +10,7 @@ import { DICTS } from '@/lib/i18n/dict';
 import { formatters } from '@/lib/i18n/format';
 import { noteOrNull } from '@/lib/i18n/notes';
 import { UI } from '@/lib/i18n/ui';
-import { shareMeta, site } from '@/lib/site';
+import { metaDescription, metaTitle, shareMeta } from '@/lib/site';
 
 // The corridor (off-ramp) finder in another language (/de/corridors): the same results as /corridors, every word from
 // that language's pack (lib/i18n/ui/corridor) and the issuers' rail fee notes translated here (data/i18n).
@@ -23,8 +23,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!locale) return {};
   const w = UI[locale.code].corridor;
   return {
-    title: { absolute: `${w.metaTitle} · ${site.name}` },
-    description: w.metaDesc,
+    title: metaTitle(w.metaTitle),
+    description: metaDescription(w.metaDesc),
     alternates: { canonical: intlCorridors(locale), languages: languageLinks('/corridors', intlCorridors) },
     ...shareMeta(w.metaTitle, w.metaDesc, intlCorridors(locale))
   };

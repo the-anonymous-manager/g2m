@@ -11,7 +11,7 @@ import { DICTS } from '@/lib/i18n/dict';
 import { clean, formatters } from '@/lib/i18n/format';
 import { winWords } from '@/lib/i18n/verdict';
 import { note } from '@/lib/i18n/notes';
-import { absoluteUrl, shareMeta, site } from '@/lib/site';
+import { absoluteUrl, metaDescription, metaTitle, shareMeta } from '@/lib/site';
 import { shortName } from '@/lib/versus';
 import { Eyebrow } from '@/components/bits';
 import { IntlCardList } from '@/components/IntlCardList';
@@ -44,8 +44,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = clean(fill(d.altDesc, { name: card.name, n: alts.length }));
   const path = intlAlternatives(locale, card.slug);
   return {
-    title: { absolute: `${title} · ${site.name}` },
-    description,
+    title: metaTitle(title),
+    description: metaDescription(description),
     alternates: { canonical: path, languages: languageLinks(`/cards/${card.slug}/alternatives`, (l) => intlAlternatives(l, card.slug)) },
     ...shareMeta(title, description, path, `/cards/${card.slug}/opengraph-image`)
   };

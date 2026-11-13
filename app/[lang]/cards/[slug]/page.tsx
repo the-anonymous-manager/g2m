@@ -4,7 +4,7 @@ import { getCard } from '@/lib/cards';
 import { fill, intlCard, languageLinks, localeByCode } from '@/lib/i18n/locales';
 import { DICTS } from '@/lib/i18n/dict';
 import { clean, formatters } from '@/lib/i18n/format';
-import { shareMeta, site } from '@/lib/site';
+import { metaDescription, metaTitle, shareMeta } from '@/lib/site';
 import { shortName } from '@/lib/versus';
 import { CardReview } from '@/components/CardReview';
 
@@ -40,8 +40,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = clean(fill(d.cardDesc, { ...vars, name: card.name }));
   const path = intlCard(locale, card.slug);
   return {
-    title: { absolute: `${title} · ${site.name}` },
-    description,
+    title: metaTitle(title),
+    description: metaDescription(description),
     alternates: { canonical: path, languages: languageLinks(`/cards/${card.slug}`, (l) => intlCard(l, card.slug)) },
     ...shareMeta(title, description, path, `/cards/${card.slug}/opengraph-image`)
   };

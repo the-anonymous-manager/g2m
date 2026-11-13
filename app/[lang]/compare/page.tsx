@@ -15,7 +15,7 @@ import { formatters } from '@/lib/i18n/format';
 import { note } from '@/lib/i18n/notes';
 import { UI } from '@/lib/i18n/ui';
 import { COUNTRIES } from '@/lib/regions';
-import { shareMeta, site } from '@/lib/site';
+import { metaDescription, metaTitle, shareMeta } from '@/lib/site';
 
 // The compare tool in another language (/de/compare): the same tool as /compare, with every word from that
 // language's pack (lib/i18n/ui/compare), numbers from Intl, and the issuer notes the table shows (ATM, perks,
@@ -28,8 +28,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!locale) return {};
   const w = UI[locale.code].compare;
   return {
-    title: { absolute: `${w.metaTitle} · ${site.name}` },
-    description: w.metaDesc,
+    title: metaTitle(w.metaTitle),
+    description: metaDescription(w.metaDesc),
     alternates: { canonical: intlCompare(locale), languages: languageLinks('/compare', intlCompare) },
     ...shareMeta(w.metaTitle, w.metaDesc, intlCompare(locale))
   };

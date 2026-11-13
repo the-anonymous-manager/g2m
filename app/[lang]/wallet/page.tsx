@@ -11,7 +11,7 @@ import { intlWallet, languageLinks, localeByCode } from '@/lib/i18n/locales';
 import { DICTS } from '@/lib/i18n/dict';
 import { formatters } from '@/lib/i18n/format';
 import { UI } from '@/lib/i18n/ui';
-import { shareMeta, site } from '@/lib/site';
+import { metaDescription, metaTitle, shareMeta } from '@/lib/site';
 
 // The wallet builder in another language (/de/wallet): the same pairs as /wallet, every word from that language's pack
 // (lib/i18n/ui/wallet), numbers from Intl.
@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!locale) return {};
   const w = UI[locale.code].wallet;
   return {
-    title: { absolute: `${w.metaTitle} · ${site.name}` },
-    description: w.metaDesc,
+    title: metaTitle(w.metaTitle),
+    description: metaDescription(w.metaDesc),
     alternates: { canonical: intlWallet(locale), languages: languageLinks('/wallet', intlWallet) },
     ...shareMeta(w.metaTitle, w.metaDesc, intlWallet(locale))
   };

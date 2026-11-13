@@ -6,12 +6,17 @@ import { RankingsTable } from '@/components/RankingsTable';
 import { Eyebrow } from '@/components/bits';
 import { fmtDate } from '@/lib/format';
 import { intlRankings, languageLinks } from '@/lib/i18n/locales';
+import { absoluteUrl, metaDescription, shareMeta } from '@/lib/site';
+
+const pageTitle = 'Crypto card rankings';
+const pageDescription =
+  'Every crypto card ranked by the G2M score: cashback, annual fee, FX fee, custody and where each card works. Filter by US, UK, EU, India and UAE.';
 
 export const metadata: Metadata = {
-  title: 'Crypto card rankings',
-  description:
-    'Every crypto card ranked by the G2M score: cashback, annual fee, FX fee, custody and where each card works. Filter by US, UK, EU, India and UAE.',
-  alternates: { canonical: '/cards', languages: languageLinks('/cards', intlRankings) }
+  title: pageTitle,
+  description: metaDescription(pageDescription),
+  alternates: { canonical: '/cards', languages: languageLinks('/cards', intlRankings) },
+  ...shareMeta(pageTitle, pageDescription, '/cards')
 };
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
@@ -24,8 +29,16 @@ export default async function CardsPage({ searchParams }: Props) {
   const allCountries = String(Array.isArray(raw) ? raw[0] : (raw ?? '')).toLowerCase() === 'all';
   const cards = getCards();
   const rows = cards.map(toRow);
+  // The ranking as a list for search engines: every card in rank order.
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: pageTitle,
+    itemListElement: cards.map((c, i) => ({ '@type': 'ListItem', position: i + 1, url: absoluteUrl(`/cards/${c.slug}`), name: c.name }))
+  };
   return (
     <div className="wrap wrap-wide section stack" style={{ gap: 28 }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="stack" style={{ gap: 12 }}>
         <Eyebrow>leaderboard</Eyebrow>
         <h1 className="h2">Crypto card rankings</h1>

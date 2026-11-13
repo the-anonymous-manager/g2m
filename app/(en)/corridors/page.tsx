@@ -5,12 +5,17 @@ import { isCountry } from '@/lib/regions';
 import { CorridorFinder } from '@/components/CorridorFinder';
 import { Eyebrow } from '@/components/bits';
 import { intlCorridors, languageLinks } from '@/lib/i18n/locales';
+import { metaDescription, shareMeta } from '@/lib/site';
+
+const pageTitle = 'Crypto off-ramp and IBAN finder: USDC to SEPA, ACH, UPI';
+const pageDescription =
+  'Which crypto cards move USDC or USDT to a bank: EUR SEPA, USD ACH, GBP Faster Payments, AED, INR or SWIFT. Accounts in your name, cash-out rails and fees.';
 
 export const metadata: Metadata = {
-  title: 'Crypto off-ramp and IBAN finder: USDC to SEPA, ACH, UPI',
-  description:
-    'Which crypto cards move USDC or USDT to a bank: EUR SEPA, USD ACH, GBP Faster Payments, AED, INR or SWIFT. Accounts in your name, cash-out rails and fees.',
-  alternates: { canonical: '/corridors', languages: languageLinks('/corridors', intlCorridors) }
+  title: pageTitle,
+  description: metaDescription(pageDescription),
+  alternates: { canonical: '/corridors', languages: languageLinks('/corridors', intlCorridors) },
+  ...shareMeta(pageTitle, pageDescription, '/corridors')
 };
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };

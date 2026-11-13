@@ -417,6 +417,15 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   against the previous build (same text before and after clicks). Long words: short custody labels in the table and
   wrapping headings, so the table fits 1280 px in every language. Next stages, one PR each: card page in full,
   compare, calculator, finder, wallet, receipt, corridors, submit, fees guide.
+- SEO check (13 Nov 2026, Akash: "now seo"): crawled all 4,131 sitemap pages as Googlebot. Already right: every page
+  loads, has a title, description, self canonical, one h1, the right html lang, valid JSON-LD, share tags, no noindex,
+  no duplicate titles or descriptions, and hreflang that points both ways; no broken internal links. Fixed:
+  descriptions longer than Google shows (2,067 pages, mostly country guides, alternatives, referral and tool pages) now
+  fit via `metaDescription`; 140 long titles drop " · G2M" (`metaTitle`); 9 English pages (/cards, /finder,
+  /calculator, /wallet, /corridors, /compare, /methodology, /submit, /guides) had the home page's share preview, now
+  their own; og:locale on every page; the rankings pages (English and 8 languages) give the ranking as an ItemList.
+  Left as is: translated "X vs Y" pages beyond the top pairs stay out of the sitemap (linked from the English ones);
+  10 titles of far-off territories stay long. Visible page content unchanged (21 pages compared).
 - Same header and footer in every language (13 Nov 2026, Akash: "this should match with english website. everything
   should be same"): translated pages now use the English header (Rankings, Card finder, Rewards calculator, Wallet
   builder, Compare, Methodology, language, theme, "Find your best card") and the English footer (description, the 11

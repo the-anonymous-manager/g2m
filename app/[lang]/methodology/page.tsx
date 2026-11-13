@@ -6,7 +6,7 @@ import { BASKET, BASKET_PURCHASES, BASKET_USD, SCORE_WEIGHTS } from '@/lib/score
 import { LOCALES, fill, intlMethodology, languageLinks, localeByCode } from '@/lib/i18n/locales';
 import { DICTS } from '@/lib/i18n/dict';
 import { formatters } from '@/lib/i18n/format';
-import { shareMeta, site } from '@/lib/site';
+import { metaDescription, metaTitle, shareMeta } from '@/lib/site';
 import { Eyebrow } from '@/components/bits';
 
 // How the score works, in another language: the same rules as the English methodology, a little shorter (the
@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!locale) return {};
   const d = DICTS[locale.code];
   return {
-    title: { absolute: `${d.methTitle} · ${site.name}` },
-    description: d.methDesc,
+    title: metaTitle(d.methTitle),
+    description: metaDescription(d.methDesc),
     alternates: { canonical: intlMethodology(locale), languages: languageLinks('/methodology', intlMethodology) },
     ...shareMeta(d.methTitle, d.methDesc, intlMethodology(locale))
   };
