@@ -583,6 +583,13 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   that); claim capacity boosters and carry-over; personal EUR IBAN for residents of 28 countries (T&C 1.3). Custody
   was already non-custodial, and the 73-country list already matched T&C 1.2. Card picture now COCA's own Drive file
   (same design, higher resolution). Still unpublished per COCA: restricted passports, issuing bank, full fee schedule.
+- Hyperbeat update (15 Nov 2026, Akash with screenshots of Hyperbeat's support chat, "Beater Support" on hyperbeat.org):
+  card FX about 0.4% to 1% on non-USD spending (set to 1%, billed in USD); ATM on the physical card $1 + 0.65%, $0.60
+  for a balance inquiry or decline, $250 a withdrawal and 3 a day; USD and EUR virtual accounts in your own name. The
+  blog post "Introducing Liquid Banking" confirms the IBAN and virtual account (ACH, Fedwire, SEPA), SWIFT deposits in
+  USD, EUR or VND, and bank withdrawals in 10 currencies (AED, GBP, IDR, MYR, SGD, THB, TRY, VND, USD, EUR). Then
+  Akash: "There's no annual fee or card fee" (from the same support chat): annual fee, card fee and every tier set to
+  $0. Score 22 to 47, rank 39th to 32nd.
 - 90-day re-check, batch 1 (15 Nov 2026, Akash: "start this one"): the 14 cards last checked on 25 Oct, each against
   its issuer pages, edited in the sheet, sources dated 15 Nov. Changes:
   - MetaMask: the Metal card is closed to new orders (existing ones keep 3%), so the Metal tier is gone; 1% back in
