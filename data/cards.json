@@ -560,7 +560,7 @@
     "custody": "custodial",
     "summary": "Solana-native Visa card with 2% back in USDC, rising to 4% when you refer friends. Available across Asia-Pacific, the Gulf, Latin America and 31 US states.",
     "cashback": { "basePct": 2, "maxPct": 4, "payout": "USDC", "note": "2% capped at $100 a month; 4% after 2 qualifying referrals in the previous month, capped at $200 a month." },
-    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "No fee on USD payments. Other currencies: 1% on Rain-issued cards, 1.8% on DCS-issued cards (Asia-Pacific).", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 13.13, "atm": "Not published", "other": ["Physical card $13.13 plus shipping"] },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "No fee on USD payments. Other currencies: 1% on Rain-issued cards, 1.8% on DCS-issued cards (Asia-Pacific).", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 13.13, "atm": "Rain-issued physical card: $1 + 0.65% per withdrawal (non-USD adds $0.30 + 1%), $0.60 for a balance inquiry or decline. DCS-issued cards: no ATM access for now.", "other": ["Physical card $13.13 plus shipping"] },
     "tiers": [
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 2, "capMonthlyUsd": 100 },
       { "name": "Referral boost", "feeUsdYear": 0, "cashbackPct": 4, "capMonthlyUsd": 200, "requirement": "2 qualifying referrals in the previous month" }
@@ -587,7 +587,8 @@
       { "label": "Jupiter Docs: Risks & Security", "url": "https://docs.jup.ag/user-docs/global/spend/risks-and-security", "verified": "2026-10-24" },
       { "label": "Jupiter docs: Rewards & Referrals (friend gets $20 after $1,000 spend within 30 days of card activation; where to enter a code)", "url": "https://docs.jup.ag/user-docs/global/spend/rewards-and-referrals", "verified": "2026-11-04" },
       { "label": "Jupiter app: card not offered to residents of India (checked in the app by G2M)", "url": "https://jup.ag/", "verified": "2026-11-04" },
-      { "label": "Jupiter docs: Rewards & Referrals (2% capped at $100 a month, 4% capped at $200)", "url": "https://docs.jup.ag/user-docs/global/spend/rewards-and-referrals", "verified": "2026-11-12" }
+      { "label": "Jupiter docs: Rewards & Referrals (2% capped at $100 a month, 4% capped at $200)", "url": "https://docs.jup.ag/user-docs/global/spend/rewards-and-referrals", "verified": "2026-11-12" },
+      { "label": "Jupiter docs: Fees and limits (ATM fees for Rain and DCS cards)", "url": "https://docs.jup.ag/user-docs/global/spend/fees-and-limits", "verified": "2026-11-15" }
     ],
     "lastChecked": "2026-11-12",
     "metal": "rose",
@@ -642,7 +643,7 @@
     "custody": "self-custodial",
     "summary": "Solana-based USDC card available in 154 countries for a $20 yearly membership. Earns points rather than cashback.",
     "cashback": { "basePct": null, "maxPct": null, "payout": "Points", "note": "Earns points; no cashback rate published." },
-    "fees": { "annualUsd": 20, "fxPct": 1.5, "fxNote": "Billed in US dollars: USD purchases pay a flat $0.15 and no FX fee. Other currencies: $0.10 + 1.5% per international transaction.", "fxByCurrency": { "USD": 0 }, "topUpPct": 1, "txFlatUsd": 0.15, "cardFeeUsd": 0, "physicalCardFeeUsd": 24.99, "atm": "Supported; fee not published", "other": ["$0.15 per transaction", "1% top-up fee", "Physical card shipping: $24.99 in the US, $59.99 elsewhere", "Cards are switched off after 6 months without use"] },
+    "fees": { "annualUsd": 20, "fxPct": 1.5, "fxNote": "Billed in US dollars: USD purchases pay a flat $0.15 and no FX fee. Other currencies: $0.10 + 1.5% per international transaction.", "fxByCurrency": { "USD": 0 }, "topUpPct": 1, "txFlatUsd": 0.15, "cardFeeUsd": 0, "physicalCardFeeUsd": 24.99, "atm": "Physical card only. Solayer lists no ATM fee of its own; the ATM owner may charge.", "other": ["$0.15 per transaction", "1% top-up fee", "Physical card shipping: $24.99 in the US, $59.99 elsewhere", "Cards are switched off after 6 months without use"] },
     "tiers": [
       { "name": "Membership", "feeUsdYear": 20, "cashbackPct": null }
     ],
@@ -664,7 +665,8 @@
       { "label": "Solayer Docs: Solayer Pay overview", "url": "https://docs.solayer.org/solayer-pay/overview", "verified": "2026-10-25" },
       { "label": "Solayer Docs: Eligibility", "url": "https://docs.solayer.org/solayer-pay/eligibility", "verified": "2026-10-25" },
       { "label": "Solayer Docs: FAQ, Supported Countries for Card Issuance", "url": "https://docs.solayer.org/solayer-pay/faq", "verified": "2026-10-25" },
-      { "label": "Solayer Docs: KYC Guide", "url": "https://docs.solayer.org/solayer-pay/tutorials/kyc", "verified": "2026-10-25" }
+      { "label": "Solayer Docs: KYC Guide", "url": "https://docs.solayer.org/solayer-pay/tutorials/kyc", "verified": "2026-10-25" },
+      { "label": "Solayer Docs: FAQ (ATM with the physical card, local ATM fees may apply)", "url": "https://docs.solayer.org/solayer-pay/faq", "verified": "2026-11-15" }
     ],
     "lastChecked": "2026-11-15",
     "metal": "gunmetal",
@@ -1065,7 +1067,7 @@
     "custody": "self-custodial",
     "summary": "Non-custodial Visa from Tria that spends from 1,000+ tokens, with cashback from 1.5% to 6% depending on your membership.",
     "cashback": { "basePct": 1.5, "maxPct": 6, "payout": null, "note": "Lite: 1.5% on the first $1,000 a month, then 1%. Pro: 4.5% on the first $1,000, then 1%. Max: 6% on the first $2,000, then 1%." },
-    "fees": { "annualUsd": 20, "fxPct": 0, "fxNote": "Billed in US dollars. Tria charges no FX fee of its own; its help center says fees vary by region and card type, and the card terms allow Visa FX of up to 3%.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "physicalCardFeeUsd": 109, "atm": "Pro and Max: up to $750 a day, fee not published. No ATM access on Lite.", "other": [] },
+    "fees": { "annualUsd": 20, "fxPct": 0, "fxNote": "Billed in US dollars. Tria charges no FX fee of its own; its help center says fees vary by region and card type, and the card terms allow Visa FX of up to 3%.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "physicalCardFeeUsd": 109, "atm": "Pro and Max: up to $2 + 3% per withdrawal (up to $2 for a balance inquiry or decline), up to $750 a day. No ATM access on Lite.", "other": [] },
     "tiers": [
       { "name": "Lite", "feeUsdYear": 20, "cashbackPct": 1.5, "bands": [ { "uptoUsd": 1000, "pct": 1.5 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "perks": ["Virtual Visa Platinum card", "1.5% with no cap on Tria Travel (hotels, rentals; not flights)"] },
       { "name": "Pro", "feeUsdYear": 109, "cashbackPct": 4.5, "bands": [ { "uptoUsd": 1000, "pct": 4.5 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "$109 a year", "perks": ["Plastic Visa Signature card", "4.5% with no cap on Tria Travel (hotels, rentals; not flights)", "Lounge access", "Visa Luxury Hotels and Visa concierge", "ATM up to $750 a day"] },
@@ -1099,7 +1101,8 @@
       { "label": "Tria Card Terms (USA)", "url": "https://docs.tria.so/card-terms-us", "verified": "2026-10-25" },
       { "label": "Tria Help Center: Tria Card Top Up Guide", "url": "https://help.tria.so/en/articles/14056654-tria-card-top-up-guide", "verified": "2026-10-25" },
       { "label": "Tria app: sign-up offer, $10 after sign-up and card activation (checked in the app by G2M)", "url": "https://www.tria.so/", "verified": "2026-11-04" },
-      { "label": "Tria Help Center: What are Tria Cards? (1% after the monthly cap on every tier)", "url": "https://intercom.help/tria/en/articles/13513481-what-are-tria-cards", "verified": "2026-11-12" }
+      { "label": "Tria Help Center: What are Tria Cards? (1% after the monthly cap on every tier)", "url": "https://intercom.help/tria/en/articles/13513481-what-are-tria-cards", "verified": "2026-11-12" },
+      { "label": "Tria International Card Terms: ATM fees up to $2 + 3%", "url": "https://docs.tria.so/card-terms-international", "verified": "2026-11-15" }
     ],
     "lastChecked": "2026-11-12",
     "metal": "black",
@@ -1352,6 +1355,8 @@
     ],
     "coverage": { "countries": 104, "scope": "105 countries, including the UK, the EU and EEA, the UAE and 30+ US states", "examples": ["United States", "United Kingdom", "Germany", "United Arab Emirates"], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AD", "AE", "AG", "AR", "AT", "AU", "AZ", "BB", "BD", "BE", "BG", "BH", "BO", "BR", "BS", "BZ", "CH", "CI", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "EG", "ES", "FI", "FR", "GB", "GD", "GE", "GG", "GH", "GI", "GR", "GT", "GY", "HK", "HN", "HR", "HU", "ID", "IE", "IL", "IM", "IS", "IT", "JE", "JP", "KE", "KN", "KR", "KY", "KZ", "LC", "LI", "LT", "LU", "LV", "MA", "MD", "MO", "MT", "MX", "MY", "NG", "NL", "NO", "NZ", "OM", "PA", "PE", "PH", "PK", "PL", "PT", "PY", "RO", "SA", "SE", "SG", "SI", "SK", "SN", "SR", "SV", "TC", "TH", "TR", "TT", "TW", "UA", "UG", "US", "UY", "UZ", "VC", "VN", "ZA", "ZM"], "no": ["BY", "CN", "CU", "IN", "IQ", "IR", "KP", "MM", "NI", "NP", "RU", "SY", "VE"], "others": "no" } },
     "ecosystem": { "iban": "named", "payoutCorridors": null, "ramps": "both", "credit": true, "yield": true },
+    "kycRule": "residency_id",
+    "restrictedPassports": [],
     "signupBonus": "$25 in FUSE after you verify, deposit and spend $150 within 30 days, at least $10 at each of 3 or more shops",
     "referralCode": "GEK07",
     "wallets": { "applePay": true, "googlePay": true },
@@ -1368,7 +1373,8 @@
       { "label": "Solid blog: referral rewards, $25 in FUSE each (terms from 8 Sep 2026)", "url": "https://www.solid.xyz/post/referral-rewards-25-fuse", "verified": "2026-11-03" },
       { "label": "Solid app: Invite friends, $25 each after $150 spend at 3+ merchants (checked in the app by G2M)", "url": "https://www.solid.xyz/post/referral-rewards-25-fuse", "verified": "2026-11-03" },
       { "label": "Solid Help: Rain cards are closing on 20 November (switch to a Wirex card, US Virtual Accounts close)", "url": "https://support.solid.xyz/articles/rain-cards-closing-20-november", "verified": "2026-11-15" },
-      { "label": "Solid Help: Card fees and limits (Rain or Wirex by country, 1.5% FX, EUR spending)", "url": "https://support.solid.xyz/articles/card-fees-limits", "verified": "2026-11-15" }
+      { "label": "Solid Help: Card fees and limits (Rain or Wirex by country, 1.5% FX, EUR spending)", "url": "https://support.solid.xyz/articles/card-fees-limits", "verified": "2026-11-15" },
+      { "label": "Solid Help: KYC verification (eligibility by country of residence, any passport)", "url": "https://support.solid.xyz/articles/kyc-verification-rejections-wrong-country-and-unsupported-regions", "verified": "2026-11-15" }
     ],
     "lastChecked": "2026-11-15",
     "addedOn": "2026-10-29",
@@ -1435,6 +1441,7 @@
     ],
     "coverage": { "countries": 9, "scope": "Nine countries in Asia-Pacific", "examples": ["Singapore", "Japan", "Australia", "Philippines"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "no", "EU": "no" }, "countryList": { "yes": ["AU", "JP", "KR", "MY", "PH", "SG", "TH", "TW", "VN"], "others": "no" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 17, "ramps": "both", "credit": null, "yield": null },
+    "kycRule": "residency_id",
     "referralCode": "NF656X",
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
@@ -1451,7 +1458,8 @@
       { "label": "Kite: USD account", "url": "https://www.kiteapp.xyz/global-usd-and-euro-account", "verified": "2026-10-29" },
       { "label": "Kite: offers and rewards terms (30-day pending, paid per offer terms)", "url": "https://www.kiteapp.xyz/offer-reward-terms", "verified": "2026-10-29" },
       { "label": "Kite offer: 5% back on Grab (no cap, paid in USD to the card)", "url": "https://www.kiteapp.xyz/offers/grab", "verified": "2026-10-29" },
-      { "label": "Kite offer: 5% back on AI subscriptions (no cap)", "url": "https://www.kiteapp.xyz/offers/ai-subscriptions", "verified": "2026-10-29" }
+      { "label": "Kite offer: 5% back on AI subscriptions (no cap)", "url": "https://www.kiteapp.xyz/offers/ai-subscriptions", "verified": "2026-10-29" },
+      { "label": "Kite Help: Getting your Kite card (live in a supported country)", "url": "https://www.kiteapp.xyz/help/getting-your-kite-card-what-it-is-eligibility", "verified": "2026-11-15" }
     ],
     "lastChecked": "2026-11-03",
     "addedOn": "2026-10-29",

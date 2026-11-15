@@ -599,6 +599,11 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- Gap sweep, batch 2 (15 Nov 2026, Akash: "ok"): ATM fees for Jupiter (Rain card $1 + 0.65%, DCS cards no ATM),
+  Tria (up to $2 + 3%, terms), Solayer (no own fee, physical card only); ID rules: Solid (by residence, any passport),
+  Kite (must live in one of its 9 countries). Searched but not published: passport/nationality rules for PEXX,
+  Pulsar, ether.fi, Bitget Wallet, Wirex, Tangem, MetaMask, Krak; ATM fees for COCA, Tuyo, PEXX, Avalanche; most
+  issuing banks; cashback for cards that state none (Avici, Tuyo, Exa, MEXC global, DogPay, OrbitX, Solayer points).
 - Hyperbeat update (15 Nov 2026, Akash with screenshots of Hyperbeat's support chat, "Beater Support" on hyperbeat.org):
   card FX about 0.4% to 1% on non-USD spending (set to 1%, billed in USD); ATM on the physical card $1 + 0.65%, $0.60
   for a balance inquiry or decline, $250 a withdrawal and 3 a day; USD and EUR virtual accounts in your own name. The
