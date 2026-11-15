@@ -583,6 +583,25 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   that); claim capacity boosters and carry-over; personal EUR IBAN for residents of 28 countries (T&C 1.3). Custody
   was already non-custodial, and the 73-country list already matched T&C 1.2. Card picture now COCA's own Drive file
   (same design, higher resolution). Still unpublished per COCA: restricted passports, issuing bank, full fee schedule.
+- 90-day re-check, batch 1 (15 Nov 2026, Akash: "start this one"): the 14 cards last checked on 25 Oct, each against
+  its issuer pages, edited in the sheet, sources dated 15 Nov. Changes:
+  - MetaMask: the Metal card is closed to new orders (existing ones keep 3%), so the Metal tier is gone; 1% back in
+    mUSD; other-crypto and DeFi-token spending fees added. Score 70 to 67.
+  - Coinbase One: rewards in bitcoin, four levels by assets on Coinbase (2%; 2.5% from $10,000; 3% from $50,000; 4%
+    from $200,000, boosted on the first $10,000 a month), Travel 5%, USDC yield. Entry level is the flat 2%: 62 to 61.
+  - Exa: Exa publishes no standing cashback rate (the old 1% came from an aggregator; its only issuer offer was a 1.5%
+    Argentina promotion that ended 31 Dec 2025), so cashback is now "not published". Score 67 to 60.
+  - Bleap (terms of 12 Nov 2026): restaurants and supermarkets cut to 1%; 1% capped at EUR 3,000 a month (cap set to
+    $33 at 1.1052); cashback can only be withdrawn with EUR 200 of everyday spend in 30 days, else it expires after 67
+    days. Score unchanged.
+  - Tangem Pay: Plus cashback cap $300 (was $500); welcome cashback and lounge visits are "coming soon", so
+    `lib/perks.ts` no longer counts a lounge perk marked "coming soon"; Early Birds physical card for the first 5,000.
+  - Crypto.com and Bybit: ATM allowances now published; Crypto.com card top-up fees and EU outside-EU FX by tier;
+    Bybit crypto conversion 0.9% also in the EEA, physical card prices by region.
+  - Bitget Wallet: 3% after $200 to $400 a month; payout BTC, gold, tokenised stocks or USDC. MEXC: Thailand card no
+    longer charges 1% crypto conversion. Solayer: international shipping $59.99.
+  - Unchanged: Ethena Pay, Kolo, Avici, Tuyo (dates bumped).
+  Next due: Pionex, DogPay (28 Oct), Solid, Cashi (29 Oct), SolCard, Laso (31 Oct), Kite (3 Nov), Hyperbeat, xPlace (4 Nov).
 - Bing setup (15 Nov 2026, Akash: "bing setup"). IndexNow: after each deploy, `.github/workflows/cf-deploy.yml`
   compares the live sitemap from before the deploy with the new one and sends only new pages and pages with a new date
   to Bing (and Yandex, Seznam, Naver) with `scripts/indexnow.mjs`. The key is public by design and lives in the script

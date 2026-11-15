@@ -9,8 +9,8 @@
     "forms": ["virtual", "physical"],
     "custody": "custodial",
     "summary": "The best-known crypto card: prepaid in most regions plus a US Visa Signature credit card, paying rewards in CRO through Crypto.com's Level Up membership.",
-    "cashback": { "basePct": null, "maxPct": 6, "payout": "CRO", "note": "Up to 5% back on the prepaid card and 1.5% to 6% on the US credit card, depending on your Level Up tier. The free Basic rate is not published." },
-    "fees": { "annualUsd": 0, "fxPct": 3, "fxNote": "Billed in your region's currency (US dollars, euros or pounds). US: 3% on non-USD purchases on Midnight, Ruby, Jade and Indigo, none on Rose and above. Europe and UK: 0.2% inside the EU/UK and 2% outside on the base tier, less on higher tiers.", "fxByCurrency": { "USD": 0, "EUR": 0, "GBP": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 4.99, "atm": "Supported; fees not published in our sources", "other": [] },
+    "cashback": { "basePct": null, "maxPct": 6, "payout": "CRO", "note": "Up to 5% back on the prepaid card and 1.5% to 6% on the US credit card, depending on your Level Up tier. Rewards count on the first $750 of spending a month on Plus, $1,500 on Pro and $3,000 to $5,000 on Private (then 0.5% to 1%). The free Basic rate is not published." },
+    "fees": { "annualUsd": 0, "fxPct": 3, "fxNote": "Billed in your region's currency (US dollars, euros or pounds). US: 3% on non-USD purchases on Midnight, Ruby, Jade and Indigo, none on Rose and above. Europe and UK: 0.2% inside the EU/UK. Outside: 2% on Midnight, free up to €400 a month on Ruby and €800 on Jade and Indigo (then 2%), free on higher tiers.", "fxByCurrency": { "USD": 0, "EUR": 0, "GBP": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 4.99, "atm": "Free each month up to $200 on Midnight, $400 on Ruby, $800 on Jade and Indigo and $1,000 on higher tiers (€200 to €1,000 in Europe), then 2%", "other": ["Card top-up with a debit or credit card: 1% (US credit card 2.99%, PayPal 2.1%)"] },
     "tiers": [
       { "name": "Basic", "feeUsdYear": 0, "cashbackPct": null, "requirement": "No subscription or CRO lockup" },
       { "name": "Level Up (top tier)", "feeUsdYear": null, "feeNote": "Plans start at $4.99/month; top-tier price not published. CRO lockup or staking also qualifies.", "cashbackPct": 5, "requirement": "Level Up subscription, CRO lockup or staking", "stake": { "token": "CRO", "amount": null, "coingeckoId": "crypto-com-chain" }, "perks": ["Up to 5% back in CRO on the prepaid card", "Higher APY on cash balances"] }
@@ -27,10 +27,10 @@
     "links": { "official": "https://crypto.com/cards" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/cex/card-details/crypto-com", "verified": "2026-09-28" },
-      { "label": "Crypto.com: Level Up announcement", "url": "https://crypto.com/en/company-news/revamped-levelup", "verified": "2025-09-02" },
+      { "label": "Crypto.com: Level Up announcement", "url": "https://crypto.com/en/company-news/revamped-levelup", "verified": "2026-11-15" },
       { "label": "Crypto.com Help Center: card availability by region (country list compiled by Card Map)", "url": "https://help.crypto.com/en/articles/3966346", "verified": "2026-10-03" },
-      { "label": "Crypto.com Help Center: Prepaid Visa Card fees and limits (United States)", "url": "https://help.crypto.com/en/articles/5966563-crypto-com-prepaid-visa-card-fees-and-limits-united-states", "verified": "2026-10-24" },
-      { "label": "Crypto.com Help: Prepaid Visa Card Fees and Limits (Europe)", "url": "https://help.crypto.com/en/articles/5977463-crypto-com-prepaid-visa-card-fees-and-limits-europe-for-users-with-a-residential-address-in-europe", "verified": "2026-10-24" },
+      { "label": "Crypto.com Help Center: Prepaid Visa Card fees and limits (United States)", "url": "https://help.crypto.com/en/articles/5966563-crypto-com-prepaid-visa-card-fees-and-limits-united-states", "verified": "2026-11-15" },
+      { "label": "Crypto.com Help: Prepaid Visa Card Fees and Limits (Europe)", "url": "https://help.crypto.com/en/articles/5977463-crypto-com-prepaid-visa-card-fees-and-limits-europe-for-users-with-a-residential-address-in-europe", "verified": "2026-11-15" },
       { "label": "Crypto.com Help: Set up EUR Account", "url": "https://help.crypto.com/en/articles/9794701-set-up-eur-account", "verified": "2026-10-25" },
       { "label": "Crypto.com Help: Set Up USD Account", "url": "https://help.crypto.com/en/articles/9739732-set-up-usd-account", "verified": "2026-10-24" },
       { "label": "Crypto.com Help: Cash Account General Information", "url": "https://help.crypto.com/en/articles/4777911-cash-account-general-information", "verified": "2026-10-24" },
@@ -48,7 +48,7 @@
       { "label": "Crypto.com Help: SGD Withdrawal via the FAST Network", "url": "https://help.crypto.com/en/articles/6043324-fiat-wallet-sgd-withdrawal-via-fast-network", "verified": "2026-10-25" },
       { "label": "Crypto.com Help: How do I fund my Crypto.com Prepaid Visa Card (US)?", "url": "https://help.crypto.com/en/articles/3131878", "verified": "2026-10-25" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-15",
     "metal": "gunmetal",
     "image": { "source": "https://g2m.life/card-originals/crypto-com.webp", "file": "/card-images/crypto-com-d9046a8f.webp" }
   },
@@ -63,7 +63,7 @@
     "custody": "custodial",
     "summary": "Exchange-linked Mastercard with no annual fee. Cashback climbs with your Bybit VIP level, up to 10% for Supreme VIPs.",
     "cashback": { "basePct": null, "maxPct": 10, "payout": "Points, redeemable for USDT or crypto", "note": "2% for VIP 1 to 2, 4% for VIP 3, 10% for Supreme VIP. The non-VIP rate is not published." },
-    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "Billed in your region's currency (EUR in the EEA, USD in Asia-Pacific, ARS, BRL, MXN or PEN in Latin America). Other currencies: 0.5% in the EEA, 1% to 2% in most regions, 7% in Argentina.", "fxByCurrency": { "EUR": 0, "USD": 0, "ARS": 0, "BRL": 0, "MXN": 0, "PEN": 0 }, "topUpPct": 0, "txPct": 0.9, "cardFeeUsd": 0, "physicalCardFeeUsd": 0, "atm": "Around $100 or €100 a month depending on region", "other": ["Crypto conversion fee 0.9% outside the EEA"] },
+    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "Billed in your region's currency (EUR in the EEA, USD in Asia-Pacific, ARS, BRL, MXN or PEN in Latin America). Other currencies: 0.5% in the EEA, 1% to 2% in most regions, 7% in Argentina.", "fxByCurrency": { "EUR": 0, "USD": 0, "ARS": 0, "BRL": 0, "MXN": 0, "PEN": 0 }, "topUpPct": 0, "txPct": 0.9, "cardFeeUsd": 0, "physicalCardFeeUsd": 0, "atm": "Free up to about $100 or €100 a month (by region), then 2%", "other": ["Crypto conversion fee 0.9% (0.5% in Argentina, 3% in Kazakhstan)", "Physical card: free in the EEA, Brazil and Mexico, 5 USDT in Asia-Pacific, $5 in Argentina, $29.99 in Australia and Georgia"] },
     "tiers": [
       { "name": "VIP 1 to 2", "feeUsdYear": 0, "cashbackPct": 2, "requirement": "Bybit VIP 1 or 2" },
       { "name": "VIP 3 (Alpha)", "feeUsdYear": 0, "cashbackPct": 4, "requirement": "Bybit VIP 3" },
@@ -82,17 +82,17 @@
     "links": { "official": "https://www.bybitcard.com/" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/cex/card-details/bybit", "verified": "2026-09-01" },
-      { "label": "Bybit Learn: Bybit Card for VIPs", "url": "https://www.bybit.com/en/learn/bybit-vip/bybit-vip-bybit-card", "verified": "2026-06-15" },
+      { "label": "Bybit Learn: Bybit Card for VIPs", "url": "https://www.bybit.com/en/learn/bybit-vip/bybit-vip-bybit-card", "verified": "2026-11-15" },
       { "label": "Bybit Help Center: Bybit Card FAQ, and Bybit EU: Virtual Card Lite (country list compiled by Card Map)", "url": "https://www.bybit.com/en/help-center/article/FAQ-Bybit-Card-General-Inquiries", "verified": "2026-10-03" },
-      { "label": "Bybit Help Center: Bybit Card usage, fees and limits", "url": "https://www.bybit.com/en/help-center/article/Fees-and-Spending-Limits-Bybit-Card", "verified": "2026-10-24" },
-      { "label": "Bybit EU Help: Fees and Limits (Bybit Card)", "url": "https://www.bybit.eu/en-EU/help-center/article/Fees-and-Spending-Limits-Bybit-Card", "verified": "2026-10-24" },
+      { "label": "Bybit Help Center: Bybit Card usage, fees and limits", "url": "https://www.bybit.com/en/help-center/article/Fees-and-Spending-Limits-Bybit-Card", "verified": "2026-11-15" },
+      { "label": "Bybit EU Help: Fees and Limits (Bybit Card)", "url": "https://www.bybit.eu/en-EU/help-center/article/Fees-and-Spending-Limits-Bybit-Card", "verified": "2026-11-15" },
       { "label": "Bybit EU Help: FAQ — Fiat Deposit", "url": "https://www.bybit.eu/en-EU/help-center/article/FAQ-Fiat-Deposit", "verified": "2026-10-24" },
       { "label": "Bybit EU Help: How to Withdraw Fiat Currencies on Bybit EU", "url": "https://www.bybit.eu/en-EU/help-center/article/How-to-Withdraw-Fiat-Currencies-on-Bybit", "verified": "2026-10-25" },
       { "label": "Bybit EU Help: FAQ — Reward Services", "url": "https://www.bybit.eu/en-EU/help-center/article/FAQ-Rewards-Service", "verified": "2026-10-24" },
       { "label": "Bybit EU Help: FAQ - Bybit Card General Inquiries", "url": "https://www.bybit.eu/en-EU/help-center/article/FAQ-Bybit-Card-General-Inquiries", "verified": "2026-10-25" },
       { "label": "Bybit EU Help: FAQ - Fiat Withdrawal", "url": "https://www.bybit.eu/en-EU/help-center/article/FAQ-Fiat-Withdrawal", "verified": "2026-10-25" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-15",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/bybit.png", "file": "/card-images/bybit-543ce936.webp" }
   },
@@ -106,26 +106,31 @@
     "forms": ["virtual", "physical"],
     "custody": "custodial",
     "summary": "A US-only American Express credit card for Coinbase One members, earning 2% to 4% back on every purchase.",
-    "cashback": { "basePct": 2, "maxPct": 4, "payout": null, "note": "2% base; 2.5% to 4% on the first $10,000 each month, then 2%." },
+    "cashback": { "basePct": 2, "maxPct": 4, "payout": "BTC", "note": "2% back in bitcoin. With more on Coinbase (30-day average) the rate rises to 2.5% ($10,000+), 3% ($50,000+) or 4% ($200,000+) on the first $10,000 of purchases each month, then 2%. 5% on Coinbase One Card Travel bookings." },
     "fees": { "annualUsd": 49.99, "fxPct": 0, "fxNote": "Billed in US dollars; no foreign transaction fee (American Express converts at its rate).", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 0, "atm": "Cash advance: the greater of $10 or 5%", "other": ["Requires Coinbase One ($49.99/year)", "Late payment up to $41"] },
     "tiers": [
-      { "name": "Coinbase One Card", "feeUsdYear": 49.99, "feeNote": "Coinbase One membership", "cashbackPct": 2, "bands": [ { "uptoUsd": 10000, "pct": 2.5 }, { "uptoUsd": null, "pct": 2 } ], "requirement": "Coinbase One membership and credit approval" }
+      { "name": "Under $10,000 on Coinbase", "feeUsdYear": 49.99, "feeNote": "Coinbase One membership", "cashbackPct": 2, "requirement": "Coinbase One membership and credit approval" },
+      { "name": "$10,000+ on Coinbase", "feeUsdYear": 49.99, "feeNote": "Coinbase One membership", "cashbackPct": 2.5, "bands": [ { "uptoUsd": 10000, "pct": 2.5 }, { "uptoUsd": null, "pct": 2 } ], "requirement": "$10,000 to $49,999 in assets on Coinbase (30-day average)" },
+      { "name": "$50,000+ on Coinbase", "feeUsdYear": 49.99, "feeNote": "Coinbase One membership", "cashbackPct": 3, "bands": [ { "uptoUsd": 10000, "pct": 3 }, { "uptoUsd": null, "pct": 2 } ], "requirement": "$50,000 to $199,999 in assets on Coinbase (30-day average)" },
+      { "name": "$200,000+ on Coinbase", "feeUsdYear": 49.99, "feeNote": "Coinbase One membership", "cashbackPct": 4, "bands": [ { "uptoUsd": 10000, "pct": 4 }, { "uptoUsd": null, "pct": 2 } ], "requirement": "$200,000 or more in assets on Coinbase (30-day average)" }
     ],
     "coverage": { "countries": 1, "scope": "United States only", "examples": ["United States"], "markets": { "IN": "no", "AE": "no", "US": "yes", "GB": "no", "EU": "no" }, "countryList": { "yes": ["US"], "others": "no" } },
-    "ecosystem": { "iban": "none", "payoutCorridors": null, "ramps": "both", "credit": false, "yield": null },
+    "ecosystem": { "iban": "none", "payoutCorridors": null, "ramps": "both", "credit": false, "yield": true },
     "bankRails": [ { "rail": "USD_ACH", "in": true, "out": true, "fee": "$0" } ],
     "wallets": { "applePay": true, "googlePay": true },
     "assets": [],
-    "perks": [],
+    "perks": ["5% back in bitcoin on Coinbase One Card Travel bookings (no cap)", "A secured version with a USDC deposit if you are not approved", "3.75% rewards on USDC for Coinbase One members"],
     "pros": ["Strong flat rewards on everything", "Real credit card with no staking needed"],
     "cons": ["US only", "Needs a paid Coinbase One membership"],
     "links": { "official": "https://www.coinbase.com/" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/coinbase-card", "verified": "2026-09-18" },
       { "label": "Coinbase One Card cardholder agreement (Cardless / First Electronic Bank)", "url": "https://legal.cardless.com/cardholder_agreement/coinbase/cardholder_agreement.pdf", "verified": "2026-10-25" },
-      { "label": "Coinbase Help: Payment methods for US customers (ACH in and out, free; set by the owner, page blocks automated reading)", "url": "https://help.coinbase.com/en/coinbase/getting-started/getting-started-with-coinbase/payment-methods-for-us-customers", "verified": "2026-10-25" }
+      { "label": "Coinbase Help: Payment methods for US customers (ACH in and out, free; set by the owner, page blocks automated reading)", "url": "https://help.coinbase.com/en/coinbase/getting-started/getting-started-with-coinbase/payment-methods-for-us-customers", "verified": "2026-10-25" },
+      { "label": "Coinbase One Card Rewards Program Terms (reward tiers by assets on Coinbase, paid in bitcoin; 14 Oct 2026)", "url": "https://www.coinbase.com/legal/creditcard/rewards", "verified": "2026-11-15" },
+      { "label": "Coinbase One Card page (no annual card fee with Coinbase One, no FX fee, Travel 5%, USDC rewards, secured option)", "url": "https://www.coinbase.com/creditcard", "verified": "2026-11-15" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-15",
     "metal": "silver",
     "image": { "source": "https://g2m.life/card-originals/coinbase-one.webp", "file": "/card-images/coinbase-one-01779548.webp" }
   },
@@ -139,11 +144,11 @@
     "forms": ["virtual", "physical"],
     "custody": "custodial",
     "summary": "A no-fee Visa debit card from Bitget Wallet in 52 countries across Europe, Latin America, Asia-Pacific and South Africa, with 2% back as standard and 3% for new or high-spend users.",
-    "cashback": { "basePct": 2, "maxPct": 3, "payout": null, "note": "3% for new users or after a monthly spend threshold (amount not published)." },
+    "cashback": { "basePct": 2, "maxPct": 3, "payout": "Your choice: BTC, gold, tokenised US stocks or USDC", "note": "2% as standard. 3% for new users, or once you spend $200 to $400 on the card in a month." },
     "fees": { "annualUsd": 0, "fxPct": 1.7, "fxNote": "No fee when paying in USD, 1.7% conversion fee in other currencies.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0.1, "atm": "1% or $5, whichever is higher", "other": ["Crypto-to-fiat conversion about 0.05%"] },
     "tiers": [
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 2 },
-      { "name": "Boosted", "feeUsdYear": 0, "cashbackPct": 3, "requirement": "New users, or a monthly spend threshold" }
+      { "name": "Boosted", "feeUsdYear": 0, "cashbackPct": 3, "requirement": "New users, or $200 to $400 of card spending a month" }
     ],
     "coverage": { "countries": 52, "scope": "EEA, UK, Latin America, Asia-Pacific and South Africa", "examples": ["United Kingdom", "Germany", "Brazil", "Japan", "South Korea", "South Africa"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AR", "AT", "AU", "BD", "BE", "BG", "BR", "CL", "CO", "CY", "CZ", "DE", "DK", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HR", "HU", "IE", "IS", "IT", "JP", "KR", "LI", "LT", "LU", "LV", "MT", "MX", "MY", "NL", "NO", "PA", "PE", "PH", "PK", "PL", "PT", "RO", "SE", "SI", "SK", "SV", "TH", "TW", "VN", "ZA"], "others": "no" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 3, "ramps": "both", "credit": false, "yield": true },
@@ -161,19 +166,19 @@
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/bitget-wallet", "verified": "2026-08-30" },
       { "label": "Bitget: Bitget Wallet Card eligible countries", "url": "https://www.bitget.com/support/articles/12560603890043", "verified": "2026-10-22" },
-      { "label": "Bitget Wallet Help Center: Spending fees FAQ", "url": "https://web3.bitget.com/helpCenter/318", "verified": "2026-10-24" },
+      { "label": "Bitget Wallet Help Center: Spending fees FAQ", "url": "https://web3.bitget.com/helpCenter/318", "verified": "2026-11-15" },
       { "label": "Bitget Wallet Help: Fees (Europe, Africa, and LATAM card)", "url": "https://web3.bitget.com/helpCenter/283", "verified": "2026-10-24" },
       { "label": "Bitget Wallet Help: How to apply and verify my identity? (Europe, Africa, and LATAM)", "url": "https://web3.bitget.com/helpCenter/277", "verified": "2026-10-25" },
       { "label": "Bitget Wallet Help: Physical card FAQ (APAC)", "url": "https://web3.bitget.com/helpCenter/675", "verified": "2026-10-25" },
       { "label": "Bitget Wallet Help: What is a Virtual Account?", "url": "https://web3.bitget.com/helpCenter/872", "verified": "2026-10-24" },
       { "label": "Bitget Wallet Help: How to transfer funds to a bank account", "url": "https://web3.bitget.com/helpCenter/465", "verified": "2026-10-25" },
       { "label": "Bitget Wallet Help: What is Stablecoin Earn Plus?", "url": "https://web3.bitget.com/helpCenter/380", "verified": "2026-10-24" },
-      { "label": "Bitget Wallet Card page, FAQ", "url": "https://web3.bitget.com/card", "verified": "2026-10-24" },
+      { "label": "Bitget Wallet Card page, FAQ", "url": "https://web3.bitget.com/card", "verified": "2026-11-15" },
       { "label": "Bitget Wallet Help: How to apply for a Virtual Account", "url": "https://web3.bitget.com/helpCenter/874", "verified": "2026-10-25" },
       { "label": "Bitget Wallet Help: Top-up FAQ (Europe, Africa, and LATAM)", "url": "https://web3.bitget.com/helpCenter/281", "verified": "2026-10-25" },
       { "label": "Bitget Wallet app: Referral Center and Card rebate screens (checked in the app by G2M)", "url": "https://web3.bitget.com/en/blog/articles/card-referral-program", "verified": "2026-11-03" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-15",
     "metal": "champagne",
     "image": { "source": "https://g2m.life/card-originals/bitget-wallet.webp", "file": "/card-images/bitget-wallet-2c1c2ddc.webp" }
   },
@@ -346,14 +351,13 @@
     "issuer": null,
     "network": "Mastercard",
     "type": "debit",
-    "forms": ["virtual", "physical", "metal"],
+    "forms": ["virtual"],
     "custody": "self-custodial",
-    "summary": "Spend straight from your MetaMask wallet. Free virtual card, or a $199 Metal card with 0% FX and free ATM cash.",
-    "cashback": { "basePct": 1, "maxPct": 1, "payout": null, "note": "1% on both the free and Metal cards." },
-    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in your own local currency (US dollars in Argentina), so no FX fee at home. The free card adds 1% when the merchant is abroad; Metal does not.", "fxHome": true, "topUpPct": 0, "cardFeeUsd": 0, "atm": "2%; Metal: free up to $1,200 a month", "other": ["Metal card replacement $99"] },
+    "summary": "Spend straight from your MetaMask wallet with a free virtual card that pays 1% back in mUSD. The Metal card is no longer offered to new users.",
+    "cashback": { "basePct": 1, "maxPct": 1, "payout": "mUSD", "note": "1% back in mUSD on eligible purchases. Existing Metal cards keep 3% until they expire." },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in your own local currency (US dollars in Argentina), so no FX fee at home. 1% when the merchant is abroad. Stablecoins in a currency that is neither yours nor the merchant's: 0.5%.", "fxHome": true, "topUpPct": 0, "cardFeeUsd": 0, "atm": "2%, up to $1,000 a day", "other": ["Spending other crypto (e.g. wETH): 0.875%", "Spending DeFi or yield tokens (e.g. aUSDC): free up to $1,200 a month, then 0.5%"] },
     "tiers": [
-      { "name": "Virtual", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 1 },
-      { "name": "Metal", "feeUsdYear": 199, "cashbackPct": 1, "fxPct": 0, "perks": ["Free ATM withdrawals up to $1,200 a month", "Physical metal card"] }
+      { "name": "Virtual", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 1 }
     ],
     "coverage": { "countries": 53, "scope": "53 countries incl. the EU, Latin America and Canada; new sign-ups paused in the US and UK", "examples": ["Argentina", "Austria", "Brazil", "Canada", "Switzerland"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "no", "EU": "yes" }, "countryList": { "yes": ["AD", "AR", "AS", "AT", "BE", "BG", "BH", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "DE", "DK", "DO", "ES", "FI", "FR", "GG", "GI", "GR", "GT", "GU", "HR", "HU", "IE", "IM", "IS", "IT", "JE", "LI", "LU", "MC", "MP", "MT", "MX", "NL", "NO", "OM", "PA", "PL", "PR", "PT", "RO", "SE", "SI", "SK", "SV", "UM", "UY", "VI"], "no": ["GB", "US"], "others": "no" } },
     "ecosystem": { "iban": "none", "payoutCorridors": 3, "ramps": "both", "credit": false, "yield": true },
@@ -361,21 +365,21 @@
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT", "EURe", "GBPe"],
     "perks": ["Works on Base, Linea, Monad and Solana"],
-    "pros": ["Non-custodial, spends from your own wallet", "Metal tier has 0% FX"],
-    "cons": ["Only 1% back", "Metal costs $199 a year", "New sign-ups paused in the US and UK"],
+    "pros": ["Non-custodial, spends from your own wallet", "No FX fee in your own currency"],
+    "cons": ["Only 1% back", "1% fee when the merchant is abroad", "New sign-ups paused in the US and UK", "Metal card no longer offered"],
     "links": { "official": "https://metamask.io/" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/metamask-card", "verified": "2026-09-28" },
       { "label": "MetaMask Help Center: Card FAQ (region selector) (country list compiled by Card Map)", "url": "https://support.metamask.io/manage-crypto/metamask-card/card-faq", "verified": "2026-10-04" },
-      { "label": "MetaMask Support: MetaMask Card limits and fees", "url": "https://support.metamask.io/trade/metamask-card/limits-and-fees/", "verified": "2026-10-24" },
-      { "label": "MetaMask Help: MetaMask Card FAQs", "url": "https://support.metamask.io/trade/metamask-card/card-faq/", "verified": "2026-10-24" },
-      { "label": "MetaMask Help: MetaMask Metal card", "url": "https://support.metamask.io/trade/metamask-card/metal-card/", "verified": "2026-10-24" },
+      { "label": "MetaMask Support: MetaMask Card limits and fees", "url": "https://support.metamask.io/trade/metamask-card/limits-and-fees/", "verified": "2026-11-15" },
+      { "label": "MetaMask Help: MetaMask Card FAQs", "url": "https://support.metamask.io/trade/metamask-card/card-faq/", "verified": "2026-11-15" },
+      { "label": "MetaMask Help: MetaMask Metal card", "url": "https://support.metamask.io/trade/metamask-card/metal-card/", "verified": "2026-11-15" },
       { "label": "MetaMask Help: Money Account", "url": "https://support.metamask.io/trade/money-account/", "verified": "2026-10-24" },
       { "label": "MetaMask Help: Sell crypto for currency in MetaMask", "url": "https://support.metamask.io/manage-crypto/move-crypto/sell/how-to-sell-your-crypto-assets-for-fiat-currency-in-metamask/", "verified": "2026-10-25" },
       { "label": "MetaMask Help: User guide: mUSD", "url": "https://support.metamask.io/manage-crypto/tokens/musd/", "verified": "2026-10-24" },
-      { "label": "MetaMask Help: Get started with MetaMask Card", "url": "https://support.metamask.io/trade/metamask-card/getting-started-with-card/", "verified": "2026-10-25" }
+      { "label": "MetaMask Help: Get started with MetaMask Card", "url": "https://support.metamask.io/trade/metamask-card/getting-started-with-card/", "verified": "2026-11-15" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-15",
     "metal": "gold",
     "image": { "source": "https://g2m.life/card-originals/metamask.png", "file": "/card-images/metamask-9ce45bb0.webp" }
   },
@@ -503,7 +507,7 @@
     "custody": "custodial",
     "summary": "Exchange card in three versions: a 110-country virtual card with no FX markup, a Thailand card paying 4% to 10%, and a co-branded ether.fi credit card.",
     "cashback": { "basePct": null, "maxPct": 10, "payout": "USDT", "note": "Thailand card: 4% Standard, 6% Premier, 10% Elite, capped at 100 to 800 USDT a month. No cashback published for the global virtual card." },
-    "fees": { "annualUsd": 0, "fxPct": 0, "fxNote": "Billed in US dollars. Global card: no markup on the Visa rate, plus a 1% card transaction fee on every purchase. Thailand (APAC) card: 1% on non-USD purchases.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txPct": 1, "smallPurchase": { "feeUsd": 0.1, "underUsd": 1, "foreignOnly": false }, "cardFeeUsd": 0, "atm": "Not available on the global virtual card", "other": ["1% card transaction fee (global card)", "1% crypto conversion (Thailand card)"] },
+    "fees": { "annualUsd": 0, "fxPct": 0, "fxNote": "Billed in US dollars. Global card: no markup on the Visa rate, plus a 1% card transaction fee on every purchase. Thailand (APAC) card: 1% on non-USD purchases.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txPct": 1, "smallPurchase": { "feeUsd": 0.1, "underUsd": 1, "foreignOnly": false }, "cardFeeUsd": 0, "atm": "Not available on the global virtual card", "other": ["1% card transaction fee (global card)", "Global card issuance normally $20, waived for now"] },
     "tiers": [
       { "name": "Global virtual", "feeUsdYear": 0, "cashbackPct": null },
       { "name": "Thailand Standard", "feeUsdYear": 0, "cashbackPct": 4, "capMonthlyUsd": 100, "fxPct": 1, "requirement": "Thailand residents", "countries": ["TH"] },
@@ -525,9 +529,9 @@
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/cex/card-details/mexc", "verified": "2026-09-01" },
       { "label": "MEXC Learn: MEXC Card supported countries, restricted regions and KYC (21 Sep 2026) (country list compiled by Card Map)", "url": "https://www.mexc.com/learn/article/mexc-card-supported-countries-restricted-regions-what-kyc-actually-requires/1", "verified": "2026-10-04" },
-      { "label": "MEXC Learn: MEXC Card fees and limits, Global Card and MEXC Card (APAC) compared", "url": "https://www.mexc.com/learn/article/mexc-card-fees-and-limits-global-card-and-mexc-card-apac-compared/1", "verified": "2026-10-22" },
-      { "label": "MEXC Support: Understanding the MEXC Card (updated 2026-10-21)", "url": "https://www.mexc.co/support/article/understanding-the-mexc-card-446453561133852672", "verified": "2026-10-24" },
-      { "label": "MEXC Card page", "url": "https://www.mexc.co/buy-crypto/mexc-card", "verified": "2026-10-25" },
+      { "label": "MEXC Learn: MEXC Card fees and limits, Global Card and MEXC Card (APAC) compared", "url": "https://www.mexc.com/learn/article/mexc-card-fees-and-limits-global-card-and-mexc-card-apac-compared/1", "verified": "2026-11-15" },
+      { "label": "MEXC Support: Understanding the MEXC Card (updated 2026-10-21)", "url": "https://www.mexc.co/support/article/understanding-the-mexc-card-446453561133852672", "verified": "2026-11-15" },
+      { "label": "MEXC Card page", "url": "https://www.mexc.co/buy-crypto/mexc-card", "verified": "2026-11-15" },
       { "label": "MEXC Support: Fiat Deposit via Bank Transfer - SEPA", "url": "https://www.mexc.co/support/article/fiat-deposit-via-bank-transfer-sepa-364723073679663104", "verified": "2026-10-25" },
       { "label": "MEXC Support: How to Deposit and Withdraw USD on MEXC", "url": "https://www.mexc.co/support/article/how-to-deposit-and-withdraw-usd-on-mexc-469383446634460160", "verified": "2026-10-25" },
       { "label": "MEXC Learn: What Is the MEXC Global Card?", "url": "https://www.mexc.co/learn/article/what-is-the-mexc-global-card-cashback-7-apr-fees-limits-and-how-to-apply/1", "verified": "2026-10-24" },
@@ -537,7 +541,7 @@
       { "label": "MEXC Learn: MEXC Card supported countries, restricted regions and KYC", "url": "https://www.mexc.co/learn/article/mexc-card-supported-countries-restricted-regions-what-kyc-actually-requires/1", "verified": "2026-10-25" },
       { "label": "MEXC User Agreement: Prohibited Jurisdictions (13 Oct 2026)", "url": "https://www.mexc.co/terms", "verified": "2026-10-25" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-15",
     "metal": "gunmetal",
     "image": { "source": "https://g2m.life/card-originals/mexc.png", "file": "/card-images/mexc-32c9e8e8.webp" }
   },
@@ -634,7 +638,7 @@
     "custody": "self-custodial",
     "summary": "Solana-based USDC card available in 154 countries for a $20 yearly membership. Earns points rather than cashback.",
     "cashback": { "basePct": null, "maxPct": null, "payout": "Points", "note": "Earns points; no cashback rate published." },
-    "fees": { "annualUsd": 20, "fxPct": 1.5, "fxNote": "Billed in US dollars: USD purchases pay a flat $0.15 and no FX fee. Other currencies: $0.10 + 1.5% per international transaction.", "fxByCurrency": { "USD": 0 }, "topUpPct": 1, "txFlatUsd": 0.15, "cardFeeUsd": 0, "physicalCardFeeUsd": 24.99, "atm": "Supported; fee not published", "other": ["$0.15 per transaction", "1% top-up fee"] },
+    "fees": { "annualUsd": 20, "fxPct": 1.5, "fxNote": "Billed in US dollars: USD purchases pay a flat $0.15 and no FX fee. Other currencies: $0.10 + 1.5% per international transaction.", "fxByCurrency": { "USD": 0 }, "topUpPct": 1, "txFlatUsd": 0.15, "cardFeeUsd": 0, "physicalCardFeeUsd": 24.99, "atm": "Supported; fee not published", "other": ["$0.15 per transaction", "1% top-up fee", "Physical card shipping: $24.99 in the US, $59.99 elsewhere", "Cards are switched off after 6 months without use"] },
     "tiers": [
       { "name": "Membership", "feeUsdYear": 20, "cashbackPct": null }
     ],
@@ -651,14 +655,14 @@
     "links": { "official": "https://solayer.org/" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/solayer", "verified": "2026-08-27" },
-      { "label": "Solayer Docs: Solayer Pay fee structure", "url": "https://docs.solayer.org/solayer-pay/fee", "verified": "2026-10-24" },
-      { "label": "Solayer Docs: Physical Card", "url": "https://docs.solayer.org/solayer-pay/card", "verified": "2026-10-24" },
+      { "label": "Solayer Docs: Solayer Pay fee structure", "url": "https://docs.solayer.org/solayer-pay/fee", "verified": "2026-11-15" },
+      { "label": "Solayer Docs: Physical Card", "url": "https://docs.solayer.org/solayer-pay/card", "verified": "2026-11-15" },
       { "label": "Solayer Docs: Solayer Pay overview", "url": "https://docs.solayer.org/solayer-pay/overview", "verified": "2026-10-25" },
       { "label": "Solayer Docs: Eligibility", "url": "https://docs.solayer.org/solayer-pay/eligibility", "verified": "2026-10-25" },
       { "label": "Solayer Docs: FAQ, Supported Countries for Card Issuance", "url": "https://docs.solayer.org/solayer-pay/faq", "verified": "2026-10-25" },
       { "label": "Solayer Docs: KYC Guide", "url": "https://docs.solayer.org/solayer-pay/tutorials/kyc", "verified": "2026-10-25" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-15",
     "metal": "gunmetal",
     "image": { "source": "https://g2m.life/card-originals/solayer.png", "file": "/card-images/solayer-287fd11b.webp" }
   },
@@ -732,10 +736,10 @@
     "forms": ["virtual", "physical"],
     "custody": "self-custodial",
     "summary": "Non-custodial Mastercard for Europe with 0% FX, free ATM cash up to €400 a month and category cashback up to 20% on subscriptions.",
-    "cashback": { "basePct": 1, "maxPct": 20, "payout": "USDC", "note": "1% base, 2% restaurants and supermarkets, 3% rides and food delivery, up to 20% on small subscriptions. A fair-usage limit applies." },
+    "cashback": { "basePct": 1, "maxPct": 20, "payout": "USDC", "note": "1% on everyday spending (up to €3,000 a month), 3% on Uber and Bolt rides and on food delivery, 20% on some streaming, AI and gaming subscriptions (each with a monthly limit). Cashback can be withdrawn only while you spend €200 on everyday purchases in 30 days; otherwise it expires after 67 days." },
     "fees": { "annualUsd": 0, "fxPct": 0, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 0, "atm": "Free up to €400 a month, then 2%", "other": [] },
     "tiers": [
-      { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 1 }
+      { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 1, "capMonthlyUsd": 33, "perks": ["1% on up to €3,000 of everyday spending a month (€600 a purchase)"] }
     ],
     "coverage": { "countries": null, "scope": "EEA, with some Latin American markets", "examples": ["EEA", "Mexico"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "no", "EU": "yes" }, "countryList": { "yes": ["AT", "BE", "BG", "CH", "CY", "CZ", "DE", "DK", "EE", "FI", "FR", "GR", "HR", "HU", "IE", "IS", "LI", "LT", "LU", "LV", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK"], "unclear": ["AR", "BO", "BR", "CL", "CO", "CR", "CU", "DO", "EC", "ES", "GT", "HN", "HT", "IT", "MX", "NI", "PA", "PE", "PY", "SV", "UY", "VE"], "others": "no" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 3, "ramps": "both", "credit": false, "yield": true },
@@ -746,14 +750,14 @@
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC"],
     "perks": ["Category cashback", "Free ATM up to €400 a month"],
-    "pros": ["0% FX and no fees", "Category cashback beats flat 1%"],
-    "cons": ["Mainly Europe", "Fair-usage limit on cashback"],
+    "pros": ["0% FX and no fees", "3% on rides and food delivery, 20% on some subscriptions"],
+    "cons": ["Mainly Europe", "Cashback can only be withdrawn after €200 of everyday spending in 30 days, and expires if you stop"],
     "links": { "official": "https://www.bleap.finance/en-us/card/crypto-card" },
     "sources": [
       { "label": "SpendNode review", "url": "https://www.spendnode.io/crypto-cards/bleap/", "verified": "2026-08-03" },
-      { "label": "Bleap: card page", "url": "https://www.bleap.finance/en-us/card/crypto-card", "verified": "2026-10-24" },
+      { "label": "Bleap: card page", "url": "https://www.bleap.finance/en-us/card/crypto-card", "verified": "2026-11-15" },
       { "label": "Bleap: homepage FAQ", "url": "https://www.bleap.finance/", "verified": "2026-10-24" },
-      { "label": "Bleap Help: Fee Schedule", "url": "https://help.bleap.finance/en/articles/12097920-fee-schedule", "verified": "2026-10-25" },
+      { "label": "Bleap Help: Fee Schedule", "url": "https://help.bleap.finance/en/articles/12097920-fee-schedule", "verified": "2026-11-15" },
       { "label": "Bleap Help: How can I obtain a physical Bleap card?", "url": "https://help.bleap.finance/en/articles/17213661-how-can-i-obtain-a-physical-bleap-card", "verified": "2026-10-24" },
       { "label": "Bleap Help: Dedicated IBANs", "url": "https://help.bleap.finance/en/articles/15311957-dedicated-ibans", "verified": "2026-10-25" },
       { "label": "Bleap Help: Bank Withdrawals", "url": "https://help.bleap.finance/en/articles/17661424-bank-withdrawals", "verified": "2026-10-25" },
@@ -763,9 +767,11 @@
       { "label": "Bleap Help: Requirements for verification regarding residence permits", "url": "https://help.bleap.finance/en/articles/15820181-what-are-the-requirements-for-verification-regarding-residence-permits", "verified": "2026-10-25" },
       { "label": "Bleap Help: How to verify my Bleap account", "url": "https://help.bleap.finance/en/articles/15069158-how-to-verify-my-bleap-account", "verified": "2026-10-25" },
       { "label": "Bleap Help: How to add funds to your Bleap wallet", "url": "https://help.bleap.finance/en/articles/11125240-how-to-add-funds-to-your-bleap-wallet", "verified": "2026-10-25" },
-      { "label": "Bleap Help: How does the Bleap debit card use wallet balances", "url": "https://help.bleap.finance/en/articles/15820587-how-does-the-bleap-debit-card-use-wallet-balances-for-payments", "verified": "2026-10-25" }
+      { "label": "Bleap Help: How does the Bleap debit card use wallet balances", "url": "https://help.bleap.finance/en/articles/15820587-how-does-the-bleap-debit-card-use-wallet-balances-for-payments", "verified": "2026-10-25" },
+      { "label": "Bleap Cashback Terms and Conditions (rates, monthly limits, €200 spending goal; 12 Nov 2026)", "url": "https://www.bleap.finance/legal-agreements/cashback-terms-and-conditions", "verified": "2026-11-15" },
+      { "label": "Bleap: cashback page and FAQ", "url": "https://www.bleap.finance/card/cashback", "verified": "2026-11-15" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-15",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/bleap-flat.png", "file": "/card-images/bleap-7d0969e3.webp" }
   },
@@ -780,28 +786,28 @@
     "custody": "self-custodial",
     "summary": "Visa card from the Tangem hardware wallet team, with three tiers from free to $999 a year and up to 4% back in USDC.",
     "cashback": { "basePct": 1, "maxPct": 4, "payout": "USDC", "note": "Basic 1% (cap $100/month), Plus 2% (cap $500), Prestige 4% (cap $1,000, coming soon)." },
-    "fees": { "annualUsd": 0, "fxPct": 1.5, "fxNote": "Billed in US dollars. Visa rate + 1.5% on non-USD purchases.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 28.82, "atm": "4% on Basic, 2% on Plus, 1% on Prestige", "other": ["Plastic card delivery from $28.82 (physical card not available yet)", "Virtual card replacement $5"] },
+    "fees": { "annualUsd": 0, "fxPct": 1.5, "fxNote": "Billed in US dollars. Visa rate + 1.5% on non-USD purchases.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 28.82, "atm": "4% on Basic, 2% on Plus, 1% on Prestige", "other": ["Physical Early Birds card for Basic and Plus, limited to the first 5,000 users; delivery from $28.82", "Virtual card replacement $5"] },
     "tiers": [
-      { "name": "Basic", "feeUsdYear": 0, "cashbackPct": 1, "capMonthlyUsd": 100, "perks": ["Welcome offer: 5% on your first $500"] },
-      { "name": "Plus", "feeUsdYear": 359.88, "feeNote": "$29.99/month, free with $4,500 monthly spend or $65,000 in Yield Mode", "cashbackPct": 2, "capMonthlyUsd": 500, "perks": ["2 airport lounge visits a year"] },
-      { "name": "Prestige", "feeUsdYear": 999, "cashbackPct": 4, "capMonthlyUsd": 1000, "perks": ["8 airport lounge visits a year", "Metal card"], "comingSoon": true }
+      { "name": "Basic", "feeUsdYear": 0, "cashbackPct": 1, "capMonthlyUsd": 100 },
+      { "name": "Plus", "feeUsdYear": 359.88, "feeNote": "$29.99/month, free with $4,500 monthly spend or $65,000 in Yield Mode", "cashbackPct": 2, "capMonthlyUsd": 300, "perks": ["2 airport lounge visits a year (coming soon)"] },
+      { "name": "Prestige", "feeUsdYear": 999, "cashbackPct": 4, "capMonthlyUsd": 1000, "perks": ["8 airport lounge visits a year (coming soon)", "Metal card"], "comingSoon": true }
     ],
     "coverage": { "countries": null, "scope": "Select regions worldwide", "examples": ["United States"], "markets": { "IN": "unknown", "AE": "yes", "US": "yes", "GB": "unknown", "EU": "unknown" }, "countryList": { "yes": ["AE", "AG", "AR", "AU", "BB", "BD", "BO", "BR", "BS", "BZ", "CI", "CO", "CR", "DO", "EC", "EG", "GD", "GH", "GT", "GY", "HK", "HN", "JP", "KE", "KN", "KY", "LC", "MA", "MX", "MY", "NZ", "PA", "PE", "PH", "PK", "PR", "PY", "SG", "SN", "SR", "SV", "TC", "TH", "TT", "UG", "US", "UY", "VC", "ZA", "ZM"], "others": "unknown" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 1, "ramps": "both", "credit": false, "yield": false },
     "bankRails": [ { "rail": "USD_ACH", "in": true, "out": true, "fee": "in $1, out $1 on Basic" }, { "rail": "USD_WIRE", "in": true, "out": true, "fee": "in $10-11, out $11 on Basic" } ],
     "wallets": { "applePay": null, "googlePay": null },
     "assets": ["USDC", "USDT"],
-    "perks": ["Priority Pass lounges on Plus and Prestige"],
+    "perks": ["Airport lounge visits on Plus and Prestige (coming soon)"],
     "pros": ["Clear, published tier pricing", "Free Basic tier with 1% back"],
-    "cons": ["4% ATM fee on Basic", "Prestige not launched yet"],
+    "cons": ["4% ATM fee on Basic", "Prestige, lounge visits and the welcome cashback are not live yet"],
     "links": { "official": "https://tangem.com/tangem-pay/" },
     "sources": [
-      { "label": "Tangem: Pay tiers explained", "url": "https://tangem.com/en/blog/post/tangem-pay-tiers/", "verified": "2026-08-06" },
+      { "label": "Tangem: Pay tiers explained", "url": "https://tangem.com/en/blog/post/tangem-pay-tiers/", "verified": "2026-11-15" },
       { "label": "Tangem: Terms, fees and limits for Tangem Pay cards (PDF)", "url": "https://tangem.com/docs/en/tangem-visa-tariffs.pdf", "verified": "2026-10-25" },
-      { "label": "Tangem Pay page FAQ", "url": "https://tangem.com/en/tangem-pay/", "verified": "2026-10-25" },
+      { "label": "Tangem Pay page FAQ", "url": "https://tangem.com/en/tangem-pay/", "verified": "2026-11-15" },
       { "label": "Tangem Help Center: Getting Started & KYC", "url": "https://tangem.com/en/help-center/tangem-pay-getting-started-kyc/", "verified": "2026-10-25" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-15",
     "metal": "silver",
     "image": { "source": "https://g2m.life/card-originals/tangem-pay.png", "file": "/card-images/tangem-pay-dfc057bf.webp" }
   },
@@ -835,12 +841,12 @@
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/ethena", "verified": "2026-09-29" },
       { "label": "Ethena Pay: Available Jurisdictions (country list compiled by Card Map)", "url": "https://pay.ethena.fi/jurisdictions", "verified": "2026-10-25" },
-      { "label": "Ethena Pay: Pricing", "url": "https://pay.ethena.fi/pricing", "verified": "2026-10-25" },
+      { "label": "Ethena Pay: Pricing", "url": "https://pay.ethena.fi/pricing", "verified": "2026-11-15" },
       { "label": "Ethena Pay: home page (Daily Boost yield, cashback paid in AVAX)", "url": "https://pay.ethena.fi/", "verified": "2026-10-24" },
       { "label": "Ethena Pay blog: Introducing Ethena Pay", "url": "https://pay.ethena.fi/blog/introducing-ethena-pay", "verified": "2026-10-25" },
       { "label": "Ethena Pay Terms of Use", "url": "https://pay.ethena.fi/terms", "verified": "2026-10-25" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-15",
     "metal": "gold",
     "image": { "source": "https://g2m.life/card-originals/ethena-pay-flat.png", "file": "/card-images/ethena-pay-1976e765.webp" }
   },
@@ -854,11 +860,11 @@
     "forms": ["virtual"],
     "custody": "self-custodial",
     "summary": "Non-custodial virtual Visa from Exactly, paid from USDC, with Visa purchase-protection perks and listed availability in India.",
-    "cashback": { "basePct": 1, "maxPct": 1, "payout": null, "note": "1% per cryptocards.so; DefiLlama does not publish a rate." },
+    "cashback": { "basePct": null, "maxPct": null, "payout": null, "note": "Exa does not publish a standing cashback rate. Past offers were promotions only (1.5% in Argentina until 31 Dec 2025)." },
     "fees": { "annualUsd": 0, "fxPct": 1.5, "fxNote": "Billed in US dollars. Global card: 1.5% on non-USD purchases, plus up to 1.5% cross-border. US card: 1%.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "atm": "$1 + 0.65% per withdrawal; up to $250 each", "other": [] },
     "tiers": [
-      { "name": "Global", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 1.5, "exceptCountries": ["US"] },
-      { "name": "United States", "feeUsdYear": 0, "cashbackPct": 1, "fxPct": 1, "countries": ["US"] }
+      { "name": "Global", "feeUsdYear": 0, "cashbackPct": null, "fxPct": 1.5, "exceptCountries": ["US"] },
+      { "name": "United States", "feeUsdYear": 0, "cashbackPct": null, "fxPct": 1, "countries": ["US"] }
     ],
     "coverage": { "countries": 46, "scope": "45 countries plus 31 US states, incl. the UAE, Latin America and parts of Asia and Africa", "examples": ["United Arab Emirates", "Mexico", "Argentina", "Singapore"], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "no", "EU": "no" }, "countryList": { "yes": ["AE", "AG", "AR", "AU", "BB", "BO", "BR", "BS", "BZ", "CI", "CO", "CR", "DO", "EC", "GD", "GH", "GT", "GY", "HK", "HN", "JP", "KE", "KN", "KY", "LC", "MA", "MX", "MY", "NZ", "PA", "PE", "PH", "PK", "PY", "SG", "SN", "SR", "SV", "TC", "TT", "UG", "US", "UY", "VC", "ZA", "ZM"], "no": ["BD", "BY", "CN", "CU", "IL", "IN", "IQ", "IR", "KP", "MM", "NI", "NP", "RU", "SY", "TR", "UA", "VE", "VN"], "unclear": ["NG"], "others": "no" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 3, "ramps": "both", "credit": true, "yield": true },
@@ -869,14 +875,14 @@
     "assets": ["USDC"],
     "perks": ["Concierge", "Extended warranty", "Purchase protection"],
     "pros": ["Available in India and the UAE", "Non-custodial with Visa protections"],
-    "cons": ["Up to 3% FX outside the US", "Virtual card only"],
+    "cons": ["No published cashback rate", "Up to 3% FX outside the US", "Virtual card only"],
     "links": { "official": "https://exactly.app/" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/exa-card", "verified": "2026-08-29" },
       { "label": "Exa Help Center: Currency conversion rate for purchases with Exa Card that are not in USD", "url": "https://help.exactly.app/en/articles/10102554-currency-conversion-rate-for-purchases-with-exa-card-that-are-not-in-usd", "verified": "2026-10-22" },
-      { "label": "Exa Help Center: Exa Card associated fees and costs", "url": "https://help.exactly.app/en/articles/9055779-exa-card-associated-fees-and-costs", "verified": "2026-10-24" },
+      { "label": "Exa Help Center: Exa Card associated fees and costs", "url": "https://help.exactly.app/en/articles/9055779-exa-card-associated-fees-and-costs", "verified": "2026-11-15" },
       { "label": "Exa Help Center: Are there any gas fees?", "url": "https://help.exactly.app/en/articles/9449561-are-there-any-gas-fees", "verified": "2026-10-24" },
-      { "label": "Exa homepage", "url": "https://exactly.app/", "verified": "2026-10-24" },
+      { "label": "Exa homepage", "url": "https://exactly.app/", "verified": "2026-11-15" },
       { "label": "Exa Help Center: Is there a physical card?", "url": "https://help.exactly.app/en/articles/10026846-is-there-a-physical-card", "verified": "2026-10-24" },
       { "label": "Exa Help Center: How to Add Funds to Your Exa App", "url": "https://help.exactly.app/en/articles/14361371-how-to-add-funds-to-your-exa-app", "verified": "2026-10-25" },
       { "label": "Exa Help Center: Onramping & Offramping Fees & Limits", "url": "https://help.exactly.app/en/articles/14093183-onramping-offramping-fees-limits", "verified": "2026-10-25" },
@@ -888,9 +894,10 @@
       { "label": "Exa Help Center: Exa Card terms and conditions", "url": "https://help.exactly.app/en/articles/10707672-exa-card-terms-and-conditions", "verified": "2026-10-25" },
       { "label": "Exa Help Center: Exa Card Terms for US citizens", "url": "https://help.exactly.app/en/articles/11384293-exa-card-terms-for-us-citizens", "verified": "2026-10-25" },
       { "label": "Exa Help Center: Bridge terms and conditions", "url": "https://help.exactly.app/en/articles/13862897-bridge-terms-and-conditions", "verified": "2026-10-25" },
-      { "label": "Exa Help Center: What should I do if I sent an unsupported asset (like USDT) to my Exa wallet?", "url": "https://help.exactly.app/en/articles/11431146-what-should-i-do-if-i-sent-an-unsupported-asset-like-usdt-to-my-exa-wallet", "verified": "2026-10-25" }
+      { "label": "Exa Help Center: What should I do if I sent an unsupported asset (like USDT) to my Exa wallet?", "url": "https://help.exactly.app/en/articles/11431146-what-should-i-do-if-i-sent-an-unsupported-asset-like-usdt-to-my-exa-wallet", "verified": "2026-10-25" },
+      { "label": "Exa Help: Cashback promotion terms, Argentina (1.5%, ended 31 Dec 2025)", "url": "https://help.exactly.app/es/articles/13198483-terminos-y-condiciones-promocion-cashback", "verified": "2026-11-15" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-15",
     "metal": "rose",
     "image": { "source": "https://g2m.life/card-originals/exa.webp", "file": "/card-images/exa-1108d908.webp" }
   },
@@ -978,8 +985,8 @@
     "cons": ["1% conversion fee on every purchase cancels out the 1% cashback", "Cashback drops to 1% after 30 days and is capped at $100 a month", "Virtual only until physical cards arrive (planned for 2027)"],
     "links": { "official": "https://kolo.xyz/" },
     "sources": [
-      { "label": "Kolo Help Center: cashback program", "url": "https://help.kolo.xyz/en/articles/13623113-cashback-program", "verified": "2026-10-25" },
-      { "label": "Kolo Help Center: fees and pricing", "url": "https://help.kolo.xyz/en/articles/13942206-fees-pricing", "verified": "2026-10-25" },
+      { "label": "Kolo Help Center: cashback program", "url": "https://help.kolo.xyz/en/articles/13623113-cashback-program", "verified": "2026-11-15" },
+      { "label": "Kolo Help Center: fees and pricing", "url": "https://help.kolo.xyz/en/articles/13942206-fees-pricing", "verified": "2026-11-15" },
       { "label": "Kolo Help Center: card overview", "url": "https://help.kolo.xyz/en/articles/13605242-card-overview", "verified": "2026-10-24" },
       { "label": "Kolo Help Center: cash withdrawal", "url": "https://help.kolo.xyz/en/articles/16001482-cash-withdrawal", "verified": "2026-10-22" },
       { "label": "Kolo: where Kolo works", "url": "https://kolo.xyz/countries", "verified": "2026-10-24" },
@@ -991,7 +998,7 @@
       { "label": "Kolo Help Center: Kolo Verification - How It Works", "url": "https://help.kolo.xyz/en/articles/14550196-kolo-verification-how-it-works", "verified": "2026-10-25" },
       { "label": "Kolo Terms of Use (PDF)", "url": "https://kolo.xyz/legal-pdf/kolo/terms-of-use", "verified": "2026-10-25" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-15",
     "metal": "gold",
     "image": { "source": "https://g2m.life/card-originals/kolo.png", "file": "/card-images/kolo-64ab5c7f.webp" }
   },
@@ -1177,7 +1184,7 @@
     "cons": ["No cashback", "Not available to residents of India", "Not available in the UK or EU"],
     "links": { "official": "https://avici.money/" },
     "sources": [
-      { "label": "Avici docs: fees and limits", "url": "https://docs.avici.money/getting-started/secured-credit-cards/fees-and-limits", "verified": "2026-10-24" },
+      { "label": "Avici docs: fees and limits", "url": "https://docs.avici.money/getting-started/secured-credit-cards/fees-and-limits", "verified": "2026-11-15" },
       { "label": "Avici docs: regions and prohibitions", "url": "https://docs.avici.money/getting-started/secured-credit-cards/regions-and-prohibitions-for-avici-card", "verified": "2026-10-22" },
       { "label": "Avici docs: how secured credit cards work", "url": "https://docs.avici.money/getting-started/secured-credit-cards", "verified": "2026-10-22" },
       { "label": "Avici docs: Platinum and Signature cards", "url": "https://docs.avici.money/getting-started/secured-credit-cards/virtual-and-physical-cards", "verified": "2026-10-22" },
@@ -1195,7 +1202,7 @@
       { "label": "Avici Docs: Spending and Transactions", "url": "https://docs.avici.money/getting-started/secured-credit-cards/spending-and-transactions", "verified": "2026-10-25" },
       { "label": "Avici Docs: Virtual Accounts - Blockchains, Currencies and Payment Rails", "url": "https://docs.avici.money/getting-started/virtual-accounts/blockchains-currencies-and-payment-rails", "verified": "2026-10-25" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-15",
     "metal": "champagne",
     "image": { "source": "https://g2m.life/card-originals/avici.png", "file": "/card-images/avici-c57f64db.webp" }
   },
@@ -1226,7 +1233,7 @@
     "cons": ["Up to 2% on non-USD or non-US purchases", "No cashback rate", "Virtual only for now; not offered in the UK"],
     "links": { "official": "https://tuyo.com/", "affiliate": "https://get.tuyo.com/code/0akash0x" },
     "sources": [
-      { "label": "Tuyo: card fees and limits", "url": "https://tuyo.com/card", "verified": "2026-10-24" },
+      { "label": "Tuyo: card fees and limits", "url": "https://tuyo.com/card", "verified": "2026-11-15" },
       { "label": "Tuyo: FAQ", "url": "https://tuyo.com/faq", "verified": "2026-10-24" },
       { "label": "Tuyo: home page (custody and UK notice)", "url": "https://tuyo.com/", "verified": "2026-10-22" },
       { "label": "Tuyo Help: Tuyo Card overview", "url": "https://help.tuyo.com/guides/card.html", "verified": "2026-10-25" },
@@ -1238,7 +1245,7 @@
       { "label": "Tuyo Help: Bank transfer status", "url": "https://help.tuyo.com/guides/bank-transfer-status.html", "verified": "2026-10-25" },
       { "label": "Tuyo Help: Add cash with crypto", "url": "https://help.tuyo.com/guides/add-cash-crypto.html", "verified": "2026-10-25" }
     ],
-    "lastChecked": "2026-10-25",
+    "lastChecked": "2026-11-15",
     "metal": "champagne",
     "image": { "source": "https://g2m.life/card-originals/tuyo.png", "file": "/card-images/tuyo-324f9f42.webp" }
   },
