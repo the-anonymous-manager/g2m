@@ -148,3 +148,4 @@ and confirm what changed on the site (not which files moved).
 - SEO: every page's metadata goes through `lib/site.ts`: `metaDescription()` (fits Google's ~160 characters, ~80 for
   Chinese, cutting at a sentence), `metaTitle()` (drops " · G2M" when the title is long) and `shareMeta()` (share
   previews with og:locale from the address). A new page needs all three plus `alternates` with `languageLinks`.
+- Bing: each deploy sends new and changed sitemap pages to IndexNow (`scripts/indexnow.mjs`, key file in `public/`).
