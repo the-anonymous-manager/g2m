@@ -583,6 +583,13 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   that); claim capacity boosters and carry-over; personal EUR IBAN for residents of 28 countries (T&C 1.3). Custody
   was already non-custodial, and the 73-country list already matched T&C 1.2. Card picture now COCA's own Drive file
   (same design, higher resolution). Still unpublished per COCA: restricted passports, issuing bank, full fee schedule.
+- Bing setup (15 Nov 2026, Akash: "bing setup"). IndexNow: after each deploy, `.github/workflows/cf-deploy.yml`
+  compares the live sitemap from before the deploy with the new one and sends only new pages and pages with a new date
+  to Bing (and Yandex, Seznam, Naver) with `scripts/indexnow.mjs`. The key is public by design and lives in the script
+  and in `public/00504a6a775f25b104f2649439b337d7.txt` (keep both the same). The step never fails a deploy. To send
+  every page once (first time, or after big changes): Actions > Deploy to Cloudflare Workers > Run workflow, tick
+  "Send every page to Bing". Akash's part: Bing Webmaster Tools, sign in, "Import from Google Search Console" (no
+  code or DNS change needed), then check Sitemaps lists https://g2m.life/sitemap.xml.
 - Whole site in each language, stage 2a (12 Nov 2026; Akash: "first go with 1,2,3,4,5,6", the first being the card
   page): `/de/cards/kast` etc. are now the full English card review in each language, built by the same component
   (`components/CardReview.tsx`; the English page calls it with no language and is unchanged, checked word for word
