@@ -587,8 +587,9 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   card FX about 0.4% to 1% on non-USD spending (set to 1%, billed in USD); ATM on the physical card $1 + 0.65%, $0.60
   for a balance inquiry or decline, $250 a withdrawal and 3 a day; USD and EUR virtual accounts in your own name. The
   blog post "Introducing Liquid Banking" confirms the IBAN and virtual account (ACH, Fedwire, SEPA), SWIFT deposits in
-  USD, EUR or VND, and bank withdrawals in 10 currencies (AED, GBP, IDR, MYR, SGD, THB, TRY, VND, USD, EUR). Annual fee
-  still not published (empty). Score 22 to 37, rank 39th to 36th.
+  USD, EUR or VND, and bank withdrawals in 10 currencies (AED, GBP, IDR, MYR, SGD, THB, TRY, VND, USD, EUR). Then
+  Akash: "There's no annual fee or card fee" (from the same support chat): annual fee, card fee and every tier set to
+  $0. Score 22 to 47, rank 39th to 32nd.
 - 90-day re-check, batch 1 (15 Nov 2026, Akash: "start this one"): the 14 cards last checked on 25 Oct, each against
   its issuer pages, edited in the sheet, sources dated 15 Nov. Changes:
   - MetaMask: the Metal card is closed to new orders (existing ones keep 3%), so the Metal tier is gone; 1% back in
