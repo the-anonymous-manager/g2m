@@ -583,6 +583,22 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   that); claim capacity boosters and carry-over; personal EUR IBAN for residents of 28 countries (T&C 1.3). Custody
   was already non-custodial, and the 73-country list already matched T&C 1.2. Card picture now COCA's own Drive file
   (same design, higher resolution). Still unpublished per COCA: restricted passports, issuing bank, full fee schedule.
+- Gap sweep with Firecrawl, batch 1 (15 Nov 2026, Akash: "do thorough checks for each crypto card for the not published
+  and country available sections"). 208 gaps across 39 cards to start. Filled from issuer pages only:
+  - Country lists: DogPay (card terms: 28 excluded countries incl. Cyprus, Vietnam), Infini (KYC restricted list of 12
+    Oct 2026, incl. India, Indonesia, Bangladesh, Croatia, Slovenia), OrbitX (prohibitions list, 18 countries), Cashi
+    (not for US residents or citizens; no other list), Plasma One (12 countries blocked at document level marked unclear).
+    All others = available for DogPay, Infini and OrbitX, whose lists are exclusion lists.
+  - Apple Pay / Google Pay: Crypto.com, Bybit, Tangem Pay, Hyperbeat (both), RedotPay (Google Pay).
+  - Banking: Cashi rails (USD account in your name via Lead Bank, local currency rails), non-residents yes, KYC rule
+    both, US passports restricted; Coinbase One 1 payout currency (ACH); Laso pays US bank accounts by ACH.
+  - Solid: Rain-issued cards close on 20 Nov 2026 (users switch to a Wirex card where available, with a free EUR IBAN;
+    US virtual accounts close). Issuer, fee note and cons updated; country list not changed yet (Solid has not said
+    which countries lose the card). Re-check after 20 Nov.
+  - Not published anywhere we could find: KAST and Karta country lists (in-app only), Pionex card issuance by country,
+    Kite bank account (coming soon), Ethena Pay payout currencies.
+  Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
+  Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
 - Hyperbeat update (15 Nov 2026, Akash with screenshots of Hyperbeat's support chat, "Beater Support" on hyperbeat.org):
   card FX about 0.4% to 1% on non-USD spending (set to 1%, billed in USD); ATM on the physical card $1 + 0.65%, $0.60
   for a balance inquiry or decline, $250 a withdrawal and 3 a day; USD and EUR virtual accounts in your own name. The
