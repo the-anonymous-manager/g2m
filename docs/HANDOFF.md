@@ -589,7 +589,11 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   blog post "Introducing Liquid Banking" confirms the IBAN and virtual account (ACH, Fedwire, SEPA), SWIFT deposits in
   USD, EUR or VND, and bank withdrawals in 10 currencies (AED, GBP, IDR, MYR, SGD, THB, TRY, VND, USD, EUR). Then
   Akash: "There's no annual fee or card fee" (from the same support chat): annual fee, card fee and every tier set to
-  $0. Score 22 to 47, rank 39th to 32nd.
+  $0. Then the help centre (help.hyperbeat.org, Akash's screenshot of its country list): full country list (81
+  countries incl. the EEA, plus 35 US states; "Europe" read as the EEA, so the UK and Switzerland are unclear), the
+  not-available list (India, Indonesia, Turkey, Vietnam ...), card fees, bank deposit and withdrawal fees per rail, 15
+  withdrawal currencies, virtual accounts by country of residence (so non-residents yes, KYC rule residency_id).
+  Score 22 to 55, rank 39th to 25th.
 - 90-day re-check, batch 1 (15 Nov 2026, Akash: "start this one"): the 14 cards last checked on 25 Oct, each against
   its issuer pages, edited in the sheet, sources dated 15 Nov. Changes:
   - MetaMask: the Metal card is closed to new orders (existing ones keep 3%), so the Metal tier is gone; 1% back in
