@@ -59,7 +59,7 @@ and confirm what changed on the site (not which files moved).
 - Welcome rates ("Intro cashback %" and "Intro offer days", `cashback.intro`): only short published welcome offers on
   the entry tier; the calculator's Year 1 uses them, scores never do.
 - Lounges: a perk that mentions a lounge counts as lounge access (rankings filter, finder, wallet, lounge guide), unless it
-  says "at fixed prices" (a pay-per-visit offer such as Visa Airport Companion on Visa Signature cards; `lib/perks.ts`).
+  says "coming soon" (not live yet) or "at fixed prices" (a pay-per-visit offer such as Visa Airport Companion on Visa Signature cards; `lib/perks.ts`).
 - Real card pictures: "Card image" link in the sheet (`image.source`); the sync stores the files in
   `public/card-images/`. Only use issuer press-kit images or ones an issuer sent; never copy from other sites.
 - Referral links go in `links.affiliate`; all "Get the card" buttons use `/go/<slug>`, which picks it up.
