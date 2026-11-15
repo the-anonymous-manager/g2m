@@ -19,7 +19,7 @@
     "ecosystem": { "iban": "named", "payoutCorridors": 7, "ramps": "both", "credit": false, "yield": true },
     "bankRails": [ { "rail": "EUR_SEPA", "in": true, "out": true, "fee": "out EUR 1, minimum EUR 80" }, { "rail": "USD_ACH", "in": true, "out": true, "fee": "out free" }, { "rail": "GBP_FPS", "in": true, "out": true, "fee": "out GBP 1.90, minimum GBP 70" }, { "rail": "AED_BANK", "in": true, "out": true, "fee": "out AED 10, free on Prime" }, { "rail": "AUD_BANK", "in": true, "out": true }, { "rail": "CAD_BANK", "in": true, "out": true, "fee": "out CAD 1.99, free on Prime" }, { "rail": "SGD_BANK", "in": true, "out": true, "fee": "out SGD 1.99" } ],
     "bankForNonResidents": false,
-    "wallets": { "applePay": null, "googlePay": null },
+    "wallets": { "applePay": true, "googlePay": true },
     "assets": ["CRO"],
     "perks": ["Level Up membership benefits"],
     "pros": ["Huge, established brand", "Up to 5% back on prepaid and up to 6% on the US credit card"],
@@ -46,7 +46,9 @@
       { "label": "Crypto.com Help: AED Withdrawal via Local Bank Transfers", "url": "https://help.crypto.com/en/articles/10085288-aed-withdrawal-via-local-bank-transfers", "verified": "2026-10-25" },
       { "label": "Crypto.com Help: CAD Withdrawal", "url": "https://help.crypto.com/en/articles/4533192-fiat-wallet-cad-withdrawal", "verified": "2026-10-25" },
       { "label": "Crypto.com Help: SGD Withdrawal via the FAST Network", "url": "https://help.crypto.com/en/articles/6043324-fiat-wallet-sgd-withdrawal-via-fast-network", "verified": "2026-10-25" },
-      { "label": "Crypto.com Help: How do I fund my Crypto.com Prepaid Visa Card (US)?", "url": "https://help.crypto.com/en/articles/3131878", "verified": "2026-10-25" }
+      { "label": "Crypto.com Help: How do I fund my Crypto.com Prepaid Visa Card (US)?", "url": "https://help.crypto.com/en/articles/3131878", "verified": "2026-10-25" },
+      { "label": "Crypto.com Help: How to set up Apple Pay in your Apple Wallet", "url": "https://help.crypto.com/en/articles/6201686-how-to-set-up-apple-pay-in-your-apple-wallet", "verified": "2026-11-15" },
+      { "label": "Crypto.com Help: How to set up Google/Samsung Pay in your Google/Samsung Wallet", "url": "https://help.crypto.com/en/articles/13396903-how-to-set-up-google-samsung-pay-in-your-google-samsung-wallet", "verified": "2026-11-15" }
     ],
     "lastChecked": "2026-11-15",
     "metal": "gunmetal",
@@ -74,7 +76,7 @@
     "bankRails": [ { "rail": "EUR_SEPA", "in": true, "out": true, "fee": "deposits free" } ],
     "bankForNonResidents": false,
     "kycRule": "residency_id",
-    "wallets": { "applePay": null, "googlePay": null },
+    "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC"],
     "perks": ["Subscription rebates for VIPs"],
     "pros": ["No annual fee", "Very high cashback for active traders"],
@@ -90,7 +92,8 @@
       { "label": "Bybit EU Help: How to Withdraw Fiat Currencies on Bybit EU", "url": "https://www.bybit.eu/en-EU/help-center/article/How-to-Withdraw-Fiat-Currencies-on-Bybit", "verified": "2026-10-25" },
       { "label": "Bybit EU Help: FAQ — Reward Services", "url": "https://www.bybit.eu/en-EU/help-center/article/FAQ-Rewards-Service", "verified": "2026-10-24" },
       { "label": "Bybit EU Help: FAQ - Bybit Card General Inquiries", "url": "https://www.bybit.eu/en-EU/help-center/article/FAQ-Bybit-Card-General-Inquiries", "verified": "2026-10-25" },
-      { "label": "Bybit EU Help: FAQ - Fiat Withdrawal", "url": "https://www.bybit.eu/en-EU/help-center/article/FAQ-Fiat-Withdrawal", "verified": "2026-10-25" }
+      { "label": "Bybit EU Help: FAQ - Fiat Withdrawal", "url": "https://www.bybit.eu/en-EU/help-center/article/FAQ-Fiat-Withdrawal", "verified": "2026-10-25" },
+      { "label": "Bybit Card page (add it to Apple Pay or Google Pay)", "url": "https://www.bybit.com/en/cards/", "verified": "2026-11-15" }
     ],
     "lastChecked": "2026-11-15",
     "metal": "black",
@@ -115,7 +118,7 @@
       { "name": "$200,000+ on Coinbase", "feeUsdYear": 49.99, "feeNote": "Coinbase One membership", "cashbackPct": 4, "bands": [ { "uptoUsd": 10000, "pct": 4 }, { "uptoUsd": null, "pct": 2 } ], "requirement": "$200,000 or more in assets on Coinbase (30-day average)" }
     ],
     "coverage": { "countries": 1, "scope": "United States only", "examples": ["United States"], "markets": { "IN": "no", "AE": "no", "US": "yes", "GB": "no", "EU": "no" }, "countryList": { "yes": ["US"], "others": "no" } },
-    "ecosystem": { "iban": "none", "payoutCorridors": null, "ramps": "both", "credit": false, "yield": true },
+    "ecosystem": { "iban": "none", "payoutCorridors": 1, "ramps": "both", "credit": false, "yield": true },
     "bankRails": [ { "rail": "USD_ACH", "in": true, "out": true, "fee": "$0" } ],
     "wallets": { "applePay": true, "googlePay": true },
     "assets": [],
@@ -254,7 +257,7 @@
     "kycRule": "both",
     "restrictedPassports": ["AF", "AL", "BA", "BF", "BI", "BQ", "BV", "BY", "CD", "CF", "CN", "CU", "CW", "ER", "ET", "GW", "HR", "HT", "IQ", "IR", "KP", "LB", "LR", "LY", "ME", "MK", "ML", "MM", "NI", "RS", "RU", "SD", "SI", "SO", "SS", "SX", "SY", "UA", "US", "VE", "XK", "YE", "ZW"],
     "signupBonus": "5 USDs welcome reward for new users: spending credit for card purchases, valid 30 days, not usable for the card fee",
-    "wallets": { "applePay": true, "googlePay": null },
+    "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDT", "USDC", "BTC", "ETH", "SOL", "BNB", "TRX", "XRP", "SUI"],
     "perks": ["Points rewards"],
     "pros": ["Available in 201 countries", "No annual or monthly fee, Apple Pay"],
@@ -280,9 +283,10 @@
       { "label": "RedotPay team, reply to G2M (25 Oct 2026): fees, ATM limits, card validity, Apple Pay; cites the RedotPay Help Center", "url": "https://helpcenter.redotpay.com/", "verified": "2026-10-25" },
       { "label": "RedotPay Terms (cited by the RedotPay team)", "url": "https://www.redotpay.com/terms/general/", "verified": "2026-10-25" },
       { "label": "RedotPay app: referral offer, $5 spend credit for new users (checked in the app by G2M)", "url": "https://www.redotpay.com/", "verified": "2026-11-04" },
-      { "label": "RedotPay Help: How do I use my 5 USDs sign-up reward?", "url": "https://helpcenter.redotpay.com/en/articles/10339297-how-do-i-use-my-5-usds-sign-up-reward", "verified": "2026-11-13" }
+      { "label": "RedotPay Help: How do I use my 5 USDs sign-up reward?", "url": "https://helpcenter.redotpay.com/en/articles/10339297-how-do-i-use-my-5-usds-sign-up-reward", "verified": "2026-11-13" },
+      { "label": "RedotPay Help: How to link my virtual RedotPay card to Google Pay", "url": "https://helpcenter.redotpay.com/en/articles/10339272-how-to-link-my-virtual-redotpay-card-to-google-pay", "verified": "2026-11-15" }
     ],
-    "lastChecked": "2026-11-13",
+    "lastChecked": "2026-11-15",
     "metal": "rose",
     "image": { "source": "https://g2m.life/card-originals/redotpay-landscape.png", "file": "/card-images/redotpay-cf3b6834.webp" }
   },
@@ -556,7 +560,7 @@
     "custody": "custodial",
     "summary": "Solana-native Visa card with 2% back in USDC, rising to 4% when you refer friends. Available across Asia-Pacific, the Gulf, Latin America and 31 US states.",
     "cashback": { "basePct": 2, "maxPct": 4, "payout": "USDC", "note": "2% capped at $100 a month; 4% after 2 qualifying referrals in the previous month, capped at $200 a month." },
-    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "No fee on USD payments. Other currencies: 1% on Rain-issued cards, 1.8% on DCS-issued cards (Asia-Pacific).", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 13.13, "atm": "Not published", "other": ["Physical card $13.13 plus shipping"] },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "No fee on USD payments. Other currencies: 1% on Rain-issued cards, 1.8% on DCS-issued cards (Asia-Pacific).", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 13.13, "atm": "Rain-issued physical card: $1 + 0.65% per withdrawal (non-USD adds $0.30 + 1%), $0.60 for a balance inquiry or decline. DCS-issued cards: no ATM access for now.", "other": ["Physical card $13.13 plus shipping"] },
     "tiers": [
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 2, "capMonthlyUsd": 100 },
       { "name": "Referral boost", "feeUsdYear": 0, "cashbackPct": 4, "capMonthlyUsd": 200, "requirement": "2 qualifying referrals in the previous month" }
@@ -583,7 +587,8 @@
       { "label": "Jupiter Docs: Risks & Security", "url": "https://docs.jup.ag/user-docs/global/spend/risks-and-security", "verified": "2026-10-24" },
       { "label": "Jupiter docs: Rewards & Referrals (friend gets $20 after $1,000 spend within 30 days of card activation; where to enter a code)", "url": "https://docs.jup.ag/user-docs/global/spend/rewards-and-referrals", "verified": "2026-11-04" },
       { "label": "Jupiter app: card not offered to residents of India (checked in the app by G2M)", "url": "https://jup.ag/", "verified": "2026-11-04" },
-      { "label": "Jupiter docs: Rewards & Referrals (2% capped at $100 a month, 4% capped at $200)", "url": "https://docs.jup.ag/user-docs/global/spend/rewards-and-referrals", "verified": "2026-11-12" }
+      { "label": "Jupiter docs: Rewards & Referrals (2% capped at $100 a month, 4% capped at $200)", "url": "https://docs.jup.ag/user-docs/global/spend/rewards-and-referrals", "verified": "2026-11-12" },
+      { "label": "Jupiter docs: Fees and limits (ATM fees for Rain and DCS cards)", "url": "https://docs.jup.ag/user-docs/global/spend/fees-and-limits", "verified": "2026-11-15" }
     ],
     "lastChecked": "2026-11-12",
     "metal": "rose",
@@ -638,7 +643,7 @@
     "custody": "self-custodial",
     "summary": "Solana-based USDC card available in 154 countries for a $20 yearly membership. Earns points rather than cashback.",
     "cashback": { "basePct": null, "maxPct": null, "payout": "Points", "note": "Earns points; no cashback rate published." },
-    "fees": { "annualUsd": 20, "fxPct": 1.5, "fxNote": "Billed in US dollars: USD purchases pay a flat $0.15 and no FX fee. Other currencies: $0.10 + 1.5% per international transaction.", "fxByCurrency": { "USD": 0 }, "topUpPct": 1, "txFlatUsd": 0.15, "cardFeeUsd": 0, "physicalCardFeeUsd": 24.99, "atm": "Supported; fee not published", "other": ["$0.15 per transaction", "1% top-up fee", "Physical card shipping: $24.99 in the US, $59.99 elsewhere", "Cards are switched off after 6 months without use"] },
+    "fees": { "annualUsd": 20, "fxPct": 1.5, "fxNote": "Billed in US dollars: USD purchases pay a flat $0.15 and no FX fee. Other currencies: $0.10 + 1.5% per international transaction.", "fxByCurrency": { "USD": 0 }, "topUpPct": 1, "txFlatUsd": 0.15, "cardFeeUsd": 0, "physicalCardFeeUsd": 24.99, "atm": "Physical card only. Solayer lists no ATM fee of its own; the ATM owner may charge.", "other": ["$0.15 per transaction", "1% top-up fee", "Physical card shipping: $24.99 in the US, $59.99 elsewhere", "Cards are switched off after 6 months without use"] },
     "tiers": [
       { "name": "Membership", "feeUsdYear": 20, "cashbackPct": null }
     ],
@@ -660,7 +665,8 @@
       { "label": "Solayer Docs: Solayer Pay overview", "url": "https://docs.solayer.org/solayer-pay/overview", "verified": "2026-10-25" },
       { "label": "Solayer Docs: Eligibility", "url": "https://docs.solayer.org/solayer-pay/eligibility", "verified": "2026-10-25" },
       { "label": "Solayer Docs: FAQ, Supported Countries for Card Issuance", "url": "https://docs.solayer.org/solayer-pay/faq", "verified": "2026-10-25" },
-      { "label": "Solayer Docs: KYC Guide", "url": "https://docs.solayer.org/solayer-pay/tutorials/kyc", "verified": "2026-10-25" }
+      { "label": "Solayer Docs: KYC Guide", "url": "https://docs.solayer.org/solayer-pay/tutorials/kyc", "verified": "2026-10-25" },
+      { "label": "Solayer Docs: FAQ (ATM with the physical card, local ATM fees may apply)", "url": "https://docs.solayer.org/solayer-pay/faq", "verified": "2026-11-15" }
     ],
     "lastChecked": "2026-11-15",
     "metal": "gunmetal",
@@ -795,7 +801,7 @@
     "coverage": { "countries": null, "scope": "Select regions worldwide", "examples": ["United States"], "markets": { "IN": "unknown", "AE": "yes", "US": "yes", "GB": "unknown", "EU": "unknown" }, "countryList": { "yes": ["AE", "AG", "AR", "AU", "BB", "BD", "BO", "BR", "BS", "BZ", "CI", "CO", "CR", "DO", "EC", "EG", "GD", "GH", "GT", "GY", "HK", "HN", "JP", "KE", "KN", "KY", "LC", "MA", "MX", "MY", "NZ", "PA", "PE", "PH", "PK", "PR", "PY", "SG", "SN", "SR", "SV", "TC", "TH", "TT", "UG", "US", "UY", "VC", "ZA", "ZM"], "others": "unknown" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 1, "ramps": "both", "credit": false, "yield": false },
     "bankRails": [ { "rail": "USD_ACH", "in": true, "out": true, "fee": "in $1, out $1 on Basic" }, { "rail": "USD_WIRE", "in": true, "out": true, "fee": "in $10-11, out $11 on Basic" } ],
-    "wallets": { "applePay": null, "googlePay": null },
+    "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
     "perks": ["Airport lounge visits on Plus and Prestige (coming soon)"],
     "pros": ["Clear, published tier pricing", "Free Basic tier with 1% back"],
@@ -805,7 +811,8 @@
       { "label": "Tangem: Pay tiers explained", "url": "https://tangem.com/en/blog/post/tangem-pay-tiers/", "verified": "2026-11-15" },
       { "label": "Tangem: Terms, fees and limits for Tangem Pay cards (PDF)", "url": "https://tangem.com/docs/en/tangem-visa-tariffs.pdf", "verified": "2026-10-25" },
       { "label": "Tangem Pay page FAQ", "url": "https://tangem.com/en/tangem-pay/", "verified": "2026-11-15" },
-      { "label": "Tangem Help Center: Getting Started & KYC", "url": "https://tangem.com/en/help-center/tangem-pay-getting-started-kyc/", "verified": "2026-10-25" }
+      { "label": "Tangem Help Center: Getting Started & KYC", "url": "https://tangem.com/en/help-center/tangem-pay-getting-started-kyc/", "verified": "2026-10-25" },
+      { "label": "Tangem Pay page FAQ (use the card with Apple Pay and Google Pay)", "url": "https://tangem.com/en/tangem-pay/", "verified": "2026-11-15" }
     ],
     "lastChecked": "2026-11-15",
     "metal": "silver",
@@ -918,7 +925,7 @@
       { "name": "Premium", "feeUsdYear": 600, "feeNote": "Or lock 20,000 XPL for 12 months instead", "cashbackPct": 2, "bands": [ { "uptoUsd": 1000, "pct": 2 }, { "uptoUsd": 2000, "pct": 1 }, { "uptoUsd": null, "pct": 0.25 } ], "fxPct": 0, "requirement": "$600 a year, or lock 20,000 XPL for 12 months", "stake": { "token": "XPL", "amount": 20000, "coingeckoId": "plasma" }, "perks": ["Visa Signature physical card", "No FX fee on the first $3,000 a month", "2 virtual cards", "$200 a year in AI credits", "eSIM mobile data", "ATM up to $3,000 a day"] },
       { "name": "Platinum", "feeUsdYear": 2500, "feeNote": "Or lock 100,000 XPL for 12 months instead", "cashbackPct": 3, "bands": [ { "uptoUsd": 3000, "pct": 3 }, { "uptoUsd": 10000, "pct": 2 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "$2,500 a year, or lock 100,000 XPL for 12 months", "stake": { "token": "XPL", "amount": 100000, "coingeckoId": "plasma" }, "perks": ["Metal card and 3 virtual cards", "Unlimited airport lounges", "Up to $600 a year back on flights", "$500 a year in AI credits", "Travel insurance and purchase protection", "ATM up to $25,000 a day"] }
     ],
-    "coverage": { "countries": null, "scope": "Growing list of countries, full list not published; the US in 31 states", "examples": ["United States"], "markets": { "IN": "unknown", "AE": "unknown", "US": "yes", "GB": "unknown", "EU": "unknown" }, "countryList": { "yes": ["US"], "no": ["CU", "IR", "KP", "RU", "SY", "UA", "VE"], "others": "unknown" } },
+    "coverage": { "countries": null, "scope": "Growing list of countries, full list not published; the US in 31 states", "examples": ["United States"], "markets": { "IN": "unknown", "AE": "unknown", "US": "yes", "GB": "unknown", "EU": "unknown" }, "countryList": { "yes": ["US"], "no": ["CU", "IR", "KP", "RU", "SY", "UA", "VE"], "unclear": ["BY", "CN", "IL", "IN", "IQ", "LK", "MM", "NG", "NI", "NP", "TR", "VN"], "others": "unknown" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 19, "ramps": "both", "credit": false, "yield": true },
     "bankRails": [ { "rail": "USD_ACH", "in": true, "out": true, "fee": "in $1, out 0.75% + ACH fee on Lite" }, { "rail": "EUR_SEPA", "in": true, "out": true, "fee": "in $0.50, out 1% + SEPA fee on Lite" }, { "rail": "GBP_FPS", "in": true, "out": true, "fee": "in $0.50, out 1% + FPS fee on Lite" }, { "rail": "MXN_SPEI", "in": true, "out": true, "fee": "in $1, out 1% + SPEI fee on Lite" }, { "rail": "BRL_PIX", "in": true, "out": true, "fee": "in $0.50, out 1% + Pix fee on Lite" }, { "rail": "COP_BANK", "in": true, "out": true, "fee": "in $1, out 1% + $1 on Lite" }, { "rail": "CAD_BANK", "in": false, "out": true }, { "rail": "AUD_BANK", "in": false, "out": true }, { "rail": "INR_BANK", "in": false, "out": true }, { "rail": "PHP_BANK", "in": false, "out": true }, { "rail": "IDR_BANK", "in": false, "out": true }, { "rail": "MYR_BANK", "in": false, "out": true }, { "rail": "THB_BANK", "in": false, "out": true }, { "rail": "VND_BANK", "in": false, "out": true }, { "rail": "KRW_BANK", "in": false, "out": true }, { "rail": "TRY_BANK", "in": false, "out": true }, { "rail": "NGN_BANK", "in": false, "out": true }, { "rail": "ZAR_BANK", "in": false, "out": true }, { "rail": "KES_BANK", "in": false, "out": true }, { "rail": "USD_WIRE", "in": true, "out": true, "fee": "in $15, out 1% + wire fee on Lite" } ],
     "bankForNonResidents": true,
@@ -953,9 +960,10 @@
       { "label": "Plasma Support: Cashback rates and spend bands by tier (Standard, Premium, Platinum, from 11 Nov 2026)", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/15506768-cashback-rates-and-spend-bands-by-tier", "verified": "2026-11-12" },
       { "label": "Plasma: Premium ($600 a year or 20,000 XPL; 0% FX up to $3,000 a month)", "url": "https://www.plasma.org/premium", "verified": "2026-11-12" },
       { "label": "Plasma: Platinum ($2,500 a year or 100,000 XPL; 0% FX, lounges)", "url": "https://www.plasma.org/personal/platinum", "verified": "2026-11-12" },
-      { "label": "Plasma: Compare memberships (Standard $0, Premium $600, Platinum $2,500 a year)", "url": "https://www.plasma.org/compare", "verified": "2026-11-12" }
+      { "label": "Plasma: Compare memberships (Standard $0, Premium $600, Platinum $2,500 a year)", "url": "https://www.plasma.org/compare", "verified": "2026-11-12" },
+      { "label": "Plasma Help: Which countries and US states is Plasma One available in? (12 Oct 2026)", "url": "https://intercom.help/plasma-6c43763cd799/en/articles/14703938-which-countries-and-us-states-is-plasma-one-available-in", "verified": "2026-11-15" }
     ],
-    "lastChecked": "2026-11-12",
+    "lastChecked": "2026-11-15",
     "metal": "silver",
     "image": { "source": "https://g2m.life/card-originals/plasma-one.png", "file": "/card-images/plasma-one-235674a2.webp" }
   },
@@ -1059,7 +1067,7 @@
     "custody": "self-custodial",
     "summary": "Non-custodial Visa from Tria that spends from 1,000+ tokens, with cashback from 1.5% to 6% depending on your membership.",
     "cashback": { "basePct": 1.5, "maxPct": 6, "payout": null, "note": "Lite: 1.5% on the first $1,000 a month, then 1%. Pro: 4.5% on the first $1,000, then 1%. Max: 6% on the first $2,000, then 1%." },
-    "fees": { "annualUsd": 20, "fxPct": 0, "fxNote": "Billed in US dollars. Tria charges no FX fee of its own; its help center says fees vary by region and card type, and the card terms allow Visa FX of up to 3%.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "physicalCardFeeUsd": 109, "atm": "Pro and Max: up to $750 a day, fee not published. No ATM access on Lite.", "other": [] },
+    "fees": { "annualUsd": 20, "fxPct": 0, "fxNote": "Billed in US dollars. Tria charges no FX fee of its own; its help center says fees vary by region and card type, and the card terms allow Visa FX of up to 3%.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "physicalCardFeeUsd": 109, "atm": "Pro and Max: up to $2 + 3% per withdrawal (up to $2 for a balance inquiry or decline), up to $750 a day. No ATM access on Lite.", "other": [] },
     "tiers": [
       { "name": "Lite", "feeUsdYear": 20, "cashbackPct": 1.5, "bands": [ { "uptoUsd": 1000, "pct": 1.5 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "perks": ["Virtual Visa Platinum card", "1.5% with no cap on Tria Travel (hotels, rentals; not flights)"] },
       { "name": "Pro", "feeUsdYear": 109, "cashbackPct": 4.5, "bands": [ { "uptoUsd": 1000, "pct": 4.5 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "$109 a year", "perks": ["Plastic Visa Signature card", "4.5% with no cap on Tria Travel (hotels, rentals; not flights)", "Lounge access", "Visa Luxury Hotels and Visa concierge", "ATM up to $750 a day"] },
@@ -1093,7 +1101,8 @@
       { "label": "Tria Card Terms (USA)", "url": "https://docs.tria.so/card-terms-us", "verified": "2026-10-25" },
       { "label": "Tria Help Center: Tria Card Top Up Guide", "url": "https://help.tria.so/en/articles/14056654-tria-card-top-up-guide", "verified": "2026-10-25" },
       { "label": "Tria app: sign-up offer, $10 after sign-up and card activation (checked in the app by G2M)", "url": "https://www.tria.so/", "verified": "2026-11-04" },
-      { "label": "Tria Help Center: What are Tria Cards? (1% after the monthly cap on every tier)", "url": "https://intercom.help/tria/en/articles/13513481-what-are-tria-cards", "verified": "2026-11-12" }
+      { "label": "Tria Help Center: What are Tria Cards? (1% after the monthly cap on every tier)", "url": "https://intercom.help/tria/en/articles/13513481-what-are-tria-cards", "verified": "2026-11-12" },
+      { "label": "Tria International Card Terms: ATM fees up to $2 + 3%", "url": "https://docs.tria.so/card-terms-international", "verified": "2026-11-15" }
     ],
     "lastChecked": "2026-11-12",
     "metal": "black",
@@ -1303,7 +1312,7 @@
       { "name": "Platinum", "feeUsdYear": 118.8, "feeNote": "$9.90 a month", "cashbackPct": null, "perks": ["Card top-up fee 0.5%", "Two virtual cards free, then $10", "Up to 10 cards", "Bank account opening $50", "Holiday card designs", "VIP concierge"] },
       { "name": "Ultra", "feeUsdYear": 358.8, "feeNote": "$29.90 a month", "cashbackPct": null, "perks": ["Card top-up fee 0.3%", "Three virtual cards free, then $10", "Up to 20 cards", "Free bank account opening", "Custom card design", "24/7 premium support"] }
     ],
-    "coverage": { "countries": null, "scope": "Depends on your region and identity checks; no country list published", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
+    "coverage": { "countries": null, "scope": "Worldwide except 28 restricted countries, including Cyprus, Russia and Vietnam (DogPay card terms); final approval depends on identity checks", "examples": [], "markets": { "IN": "yes", "AE": "yes", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": [], "no": ["AF", "AL", "BA", "BY", "CF", "CU", "CY", "ER", "HT", "IQ", "IR", "KP", "LB", "LR", "LY", "MD", "ME", "MK", "RS", "RU", "SO", "SY", "UA", "VE", "VN", "XK", "YE", "ZW"], "unclear": ["CD", "CG"], "others": "yes" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 1, "ramps": "off", "credit": null, "yield": true },
     "bankRails": [ { "rail": "USD_ACH", "in": true, "out": true, "fee": "in $35, out $15" }, { "rail": "USD_FEDWIRE", "in": true, "out": true, "fee": "in $35, out $15" }, { "rail": "SWIFT", "in": true, "out": true, "fee": "in $35, out $15" } ],
     "referralCode": "22288949",
@@ -1319,9 +1328,10 @@
       { "label": "DogPay iBank personal USD account", "url": "https://dogpay.com/us/digital-bank", "verified": "2026-10-28" },
       { "label": "DogPay card program terms", "url": "https://dogpay.com/us/card-program-terms", "verified": "2026-10-28" },
       { "label": "DogPay app: Member Center plan benefits and Supported Apps (screens from Akash)", "url": "https://dogpay.com/us/pricing/personal", "verified": "2026-10-28" },
-      { "label": "DogPay app: Virtual Card fees (create-card screen, from Akash)", "url": "https://dogpay.com/us/cards", "verified": "2026-10-28" }
+      { "label": "DogPay app: Virtual Card fees (create-card screen, from Akash)", "url": "https://dogpay.com/us/cards", "verified": "2026-10-28" },
+      { "label": "DogPay Card Program Terms: jurisdictions where the card is not available (updated 15 Jul 2025)", "url": "https://dogpay.com/us/card-program-terms", "verified": "2026-11-15" }
     ],
-    "lastChecked": "2026-10-28",
+    "lastChecked": "2026-11-15",
     "addedOn": "2026-10-28",
     "metal": "gold",
     "image": { "source": "https://g2m.life/card-originals/dogpay.webp", "file": "/card-images/dogpay-c4c811ef.webp" }
@@ -1330,14 +1340,14 @@
     "slug": "solid",
     "name": "Solid Card",
     "brand": "Solid",
-    "issuer": null,
+    "issuer": "Rain or Wirex by country; Rain cards close on 20 Nov 2026",
     "network": "Visa",
     "type": "debit",
     "forms": ["virtual"],
     "custody": "self-custodial",
     "summary": "A free non-custodial Visa from the Solid savings app: 3% cashback in USDC (up to $50 a month), no fee on US-dollar spending and 1.5% on other currencies.",
     "cashback": { "basePct": 3, "maxPct": 5, "payout": "USDC", "note": "Credited 14 days after the purchase settles, into Savings where it earns yield. Cashback is capped at $50 a month on Core, $100 on Prime and $200 on Ultra." },
-    "fees": { "annualUsd": 0, "fxPct": 1.5, "fxNote": "1.5% built into the exchange rate on non-USD purchases (1% card provider + 0.5% Solid). USD purchases are free, even at merchants abroad. Wirex-issued cards can pay euro purchases from a EUR balance with no FX fee.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "atm": null, "other": ["Bank deposit 0.5% (0.25% on Prime, free on Ultra)", "Swaps 0.5% (0.25% on Prime, free on Ultra)", "US account details $10 one-time", "Bank withdrawal free (a tiered fee is planned)"] },
+    "fees": { "annualUsd": 0, "fxPct": 1.5, "fxNote": "1.5% built into the exchange rate on non-USD purchases (1% card provider + 0.5% Solid). USD purchases are free, even at merchants abroad. Wirex-issued cards can pay euro purchases from a EUR balance with no FX fee.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "atm": null, "other": ["Bank deposit 0.5% (0.25% on Prime, free on Ultra)", "Swaps 0.5% (0.25% on Prime, free on Ultra)", "US account details $10 one-time (US accounts with Rain close on 20 Nov 2026)", "Bank withdrawal free", "Wirex cards: free EUR account with your own IBAN for SEPA"] },
     "tiers": [
       { "name": "Core", "feeUsdYear": 0, "cashbackPct": 3, "capMonthlyUsd": 50, "requirement": "All members" },
       { "name": "Prime", "feeUsdYear": 199, "feeNote": "Or lock 50,000 FUSE for 12 months instead", "cashbackPct": 4, "capMonthlyUsd": 100, "requirement": "$199 a year, or lock 50,000 FUSE for 12 months", "stake": { "token": "FUSE", "amount": 50000, "coingeckoId": "fuse-network-token" }, "perks": ["Bank deposits and swaps at 0.25%"] },
@@ -1345,13 +1355,15 @@
     ],
     "coverage": { "countries": 104, "scope": "105 countries, including the UK, the EU and EEA, the UAE and 30+ US states", "examples": ["United States", "United Kingdom", "Germany", "United Arab Emirates"], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AD", "AE", "AG", "AR", "AT", "AU", "AZ", "BB", "BD", "BE", "BG", "BH", "BO", "BR", "BS", "BZ", "CH", "CI", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "EG", "ES", "FI", "FR", "GB", "GD", "GE", "GG", "GH", "GI", "GR", "GT", "GY", "HK", "HN", "HR", "HU", "ID", "IE", "IL", "IM", "IS", "IT", "JE", "JP", "KE", "KN", "KR", "KY", "KZ", "LC", "LI", "LT", "LU", "LV", "MA", "MD", "MO", "MT", "MX", "MY", "NG", "NL", "NO", "NZ", "OM", "PA", "PE", "PH", "PK", "PL", "PT", "PY", "RO", "SA", "SE", "SG", "SI", "SK", "SN", "SR", "SV", "TC", "TH", "TR", "TT", "TW", "UA", "UG", "US", "UY", "UZ", "VC", "VN", "ZA", "ZM"], "no": ["BY", "CN", "CU", "IN", "IQ", "IR", "KP", "MM", "NI", "NP", "RU", "SY", "VE"], "others": "no" } },
     "ecosystem": { "iban": "named", "payoutCorridors": null, "ramps": "both", "credit": true, "yield": true },
+    "kycRule": "residency_id",
+    "restrictedPassports": [],
     "signupBonus": "$25 in FUSE after you verify, deposit and spend $150 within 30 days, at least $10 at each of 3 or more shops",
     "referralCode": "GEK07",
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
     "perks": ["Visa Platinum benefits: purchase and price protection, extended warranty", "Yield on savings, and borrowing against them"],
     "pros": ["3% cashback in USDC with no card fees", "No fee on US-dollar purchases", "Non-custodial: your funds stay in your own wallet"],
-    "cons": ["Cashback capped at $50 a month on the free tier", "1.5% on non-USD purchases", "Virtual only; not available in India"],
+    "cons": ["Cashback capped at $50 a month on the free tier", "1.5% on non-USD purchases", "Rain-issued cards close on 20 Nov 2026: some countries switch to a Wirex card, others lose the card", "Virtual only; not available in India"],
     "links": { "official": "https://www.solid.xyz/", "affiliate": "https://www.solid.xyz/refer?ref=GEK07" },
     "sources": [
       { "label": "Solid: fees and limits overview", "url": "https://support.solid.xyz/en/articles/13885984-understanding-solid-s-fees", "verified": "2026-10-29" },
@@ -1359,9 +1371,12 @@
       { "label": "Solid: where the Solid Card is available", "url": "https://support.solid.xyz/en/articles/12899017-where-the-solid-card-is-available", "verified": "2026-10-29" },
       { "label": "Solid blog: cashback is now in USDC (tiers and caps)", "url": "https://www.solid.xyz/post/cashback-is-now-in-usdc-and-it-earns-yield", "verified": "2026-10-29" },
       { "label": "Solid blog: referral rewards, $25 in FUSE each (terms from 8 Sep 2026)", "url": "https://www.solid.xyz/post/referral-rewards-25-fuse", "verified": "2026-11-03" },
-      { "label": "Solid app: Invite friends, $25 each after $150 spend at 3+ merchants (checked in the app by G2M)", "url": "https://www.solid.xyz/post/referral-rewards-25-fuse", "verified": "2026-11-03" }
+      { "label": "Solid app: Invite friends, $25 each after $150 spend at 3+ merchants (checked in the app by G2M)", "url": "https://www.solid.xyz/post/referral-rewards-25-fuse", "verified": "2026-11-03" },
+      { "label": "Solid Help: Rain cards are closing on 20 November (switch to a Wirex card, US Virtual Accounts close)", "url": "https://support.solid.xyz/articles/rain-cards-closing-20-november", "verified": "2026-11-15" },
+      { "label": "Solid Help: Card fees and limits (Rain or Wirex by country, 1.5% FX, EUR spending)", "url": "https://support.solid.xyz/articles/card-fees-limits", "verified": "2026-11-15" },
+      { "label": "Solid Help: KYC verification (eligibility by country of residence, any passport)", "url": "https://support.solid.xyz/articles/kyc-verification-rejections-wrong-country-and-unsupported-regions", "verified": "2026-11-15" }
     ],
-    "lastChecked": "2026-10-29",
+    "lastChecked": "2026-11-15",
     "addedOn": "2026-10-29",
     "metal": "champagne",
     "image": { "source": "https://g2m.life/card-originals/solid-visa-right.webp", "file": "/card-images/solid-c044aef0.webp" }
@@ -1381,8 +1396,12 @@
     "tiers": [
       { "name": "Cashi Card", "feeUsdYear": 0, "cashbackPct": 0, "perks": ["3% on subscriptions, 2% online, 1% travel (capped)"] }
     ],
-    "coverage": { "countries": null, "scope": "App in 100+ countries; Cashi does not publish a card country list", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
+    "coverage": { "countries": null, "scope": "App in 100+ countries, not for US residents or citizens; Cashi does not publish a full country list", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "no", "GB": "unknown", "EU": "unknown" }, "countryList": { "yes": [], "no": ["US"], "others": "unknown" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 20, "ramps": "both", "credit": null, "yield": null },
+    "bankRails": [ { "rail": "USD_ACH", "in": true, "out": true, "fee": "in free, out $0.50 + a transfer fee" }, { "rail": "USD_WIRE", "in": true, "out": true, "fee": "in free, out $10 + a transfer fee" }, { "rail": "SWIFT", "in": true, "out": true, "fee": "in free, out $25 + a transfer fee" }, { "rail": "EUR_SEPA", "in": true, "out": true }, { "rail": "BRL_PIX", "in": true, "out": true }, { "rail": "MXN_SPEI", "in": true, "out": true }, { "rail": "ARS_BANK", "in": true, "out": true }, { "rail": "CLP_BANK", "in": true, "out": true }, { "rail": "COP_BANK", "in": true, "out": true }, { "rail": "PEN_BANK", "in": true, "out": true }, { "rail": "AED_BANK", "in": true, "out": true }, { "rail": "AUD_BANK", "in": true, "out": true }, { "rail": "NGN_BANK", "in": true, "out": true }, { "rail": "MYR_BANK", "in": true, "out": true }, { "rail": "PHP_BANK", "in": true, "out": true }, { "rail": "THB_BANK", "in": false, "out": true } ],
+    "bankForNonResidents": true,
+    "kycRule": "both",
+    "restrictedPassports": ["US"],
     "wallets": { "applePay": false, "googlePay": true },
     "assets": ["USDT", "USDC"],
     "perks": ["Personal USD account", "Cash in and out in 20+ currencies"],
@@ -1394,9 +1413,13 @@
       { "label": "Cashi terms and cashback schedule", "url": "https://cashi.com/terms", "verified": "2026-10-29" },
       { "label": "Cashi blog: launch of the global card (100+ countries)", "url": "https://cashi.com/blog/cashi-launches-global-card-turning-stablecoins-into-everyday-spending-money", "verified": "2026-10-29" },
       { "label": "Cashi Help: Cashi card fees & limits (text from Akash)", "url": "https://help.cashi.com/en/articles/14524303-cashi-card-fees-limits", "verified": "2026-10-29" },
-      { "label": "Cashi Help: How 3-2-1 Cashi cashback works (text from Akash)", "url": "https://help.cashi.com/en/articles/15653216-how-3-2-1-cashi-cashback-works", "verified": "2026-10-29" }
+      { "label": "Cashi Help: How 3-2-1 Cashi cashback works (text from Akash)", "url": "https://help.cashi.com/en/articles/15653216-how-3-2-1-cashi-cashback-works", "verified": "2026-10-29" },
+      { "label": "Cashi Help: Who can use Cashi? (not for US residents or citizens)", "url": "https://help.cashi.com/en/articles/14524269-who-can-use-cashi", "verified": "2026-11-15" },
+      { "label": "Cashi Help: What is Cashi's USD account feature? (account in your name, Lead Bank)", "url": "https://help.cashi.com/en/articles/17566477-what-is-cashi-s-usd-account-feature", "verified": "2026-11-15" },
+      { "label": "Cashi Help: USD account limits and fees", "url": "https://help.cashi.com/en/articles/17566482-usd-account-limits-and-fees", "verified": "2026-11-15" },
+      { "label": "Cashi Help: Which local currencies and payment methods can I deposit and send with?", "url": "https://help.cashi.com/en/articles/16648864-which-local-currencies-payment-methods-can-i-deposit-and-send-with", "verified": "2026-11-15" }
     ],
-    "lastChecked": "2026-10-29",
+    "lastChecked": "2026-11-15",
     "addedOn": "2026-10-29",
     "metal": "rose",
     "image": { "source": "https://g2m.life/card-originals/cashi.webp", "file": "/card-images/cashi-e42703b6.webp" }
@@ -1418,6 +1441,7 @@
     ],
     "coverage": { "countries": 9, "scope": "Nine countries in Asia-Pacific", "examples": ["Singapore", "Japan", "Australia", "Philippines"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "no", "EU": "no" }, "countryList": { "yes": ["AU", "JP", "KR", "MY", "PH", "SG", "TH", "TW", "VN"], "others": "no" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 17, "ramps": "both", "credit": null, "yield": null },
+    "kycRule": "residency_id",
     "referralCode": "NF656X",
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
@@ -1434,7 +1458,8 @@
       { "label": "Kite: USD account", "url": "https://www.kiteapp.xyz/global-usd-and-euro-account", "verified": "2026-10-29" },
       { "label": "Kite: offers and rewards terms (30-day pending, paid per offer terms)", "url": "https://www.kiteapp.xyz/offer-reward-terms", "verified": "2026-10-29" },
       { "label": "Kite offer: 5% back on Grab (no cap, paid in USD to the card)", "url": "https://www.kiteapp.xyz/offers/grab", "verified": "2026-10-29" },
-      { "label": "Kite offer: 5% back on AI subscriptions (no cap)", "url": "https://www.kiteapp.xyz/offers/ai-subscriptions", "verified": "2026-10-29" }
+      { "label": "Kite offer: 5% back on AI subscriptions (no cap)", "url": "https://www.kiteapp.xyz/offers/ai-subscriptions", "verified": "2026-10-29" },
+      { "label": "Kite Help: Getting your Kite card (live in a supported country)", "url": "https://www.kiteapp.xyz/help/getting-your-kite-card-what-it-is-eligibility", "verified": "2026-11-15" }
     ],
     "lastChecked": "2026-11-03",
     "addedOn": "2026-10-29",
@@ -1501,7 +1526,8 @@
       { "name": "Reloadable card", "feeUsdYear": 0, "cashbackPct": 0, "requirement": "Laso identity verification", "perks": ["Top up from $5 to $10,000 with no fee", "Many cards from one balance", "Withdraw unspent balance as USDC on Base"] }
     ],
     "coverage": { "countries": null, "scope": "US card for US merchants; international card for merchants worldwide, no published country list", "examples": ["United States"], "markets": { "IN": "unknown", "AE": "unknown", "US": "yes", "GB": "unknown", "EU": "unknown" } },
-    "ecosystem": { "iban": null, "payoutCorridors": null, "ramps": "off", "credit": false, "yield": null },
+    "ecosystem": { "iban": "none", "payoutCorridors": 1, "ramps": "off", "credit": false, "yield": null },
+    "bankRails": [ { "rail": "USD_ACH", "in": false, "out": true, "fee": "pays US bank accounts" } ],
     "noIdCheck": "US and international cards",
     "wallets": { "applePay": null, "googlePay": true },
     "assets": ["USDC", "USDT", "DAI"],
@@ -1515,9 +1541,10 @@
       { "label": "Laso Finance: where each product can be used", "url": "https://laso.finance/get-supported-countries", "verified": "2026-10-31" },
       { "label": "Laso Finance guide: international prepaid card (expiry, billing)", "url": "https://docs.laso.finance/guides/international-prepaid-card", "verified": "2026-10-31" },
       { "label": "Laso Finance guide: reloadable card (ID check, top-ups, withdrawals)", "url": "https://docs.laso.finance/guides/reloadable-card", "verified": "2026-10-31" },
-      { "label": "Laso Finance: home page (Google Pay, FinCEN-registered MSB)", "url": "https://laso.finance/", "verified": "2026-10-31" }
+      { "label": "Laso Finance: home page (Google Pay, FinCEN-registered MSB)", "url": "https://laso.finance/", "verified": "2026-10-31" },
+      { "label": "Laso: supported countries by product (bank payments to US accounts by ACH)", "url": "https://laso.finance/get-supported-countries", "verified": "2026-11-15" }
     ],
-    "lastChecked": "2026-10-31",
+    "lastChecked": "2026-11-15",
     "addedOn": "2026-10-31",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/laso.png", "file": "/card-images/laso-555569de.webp" }
@@ -1539,7 +1566,7 @@
       { "name": "Professional", "feeUsdYear": 0, "cashbackPct": 3, "bands": [ { "uptoUsd": 1000, "pct": 3 }, { "uptoUsd": null, "pct": 1.5 } ], "fxPct": 0, "requirement": "$2,000 average balance over 30 days", "perks": ["Lite Plus card: US card number, no FX or cross-border fee, Apple Pay and Google Pay", "50% back on AI subscriptions, up to $10 a month", "Bank deposits and withdrawals 0.15%"] },
       { "name": "Elite", "feeUsdYear": 0, "cashbackPct": 5, "bands": [ { "uptoUsd": 10000, "pct": 5 }, { "uptoUsd": null, "pct": 1.5 } ], "fxPct": 0, "requirement": "$100,000 average balance over 30 days", "perks": ["Lite Plus card: US card number, no FX or cross-border fee, Apple Pay and Google Pay", "50% back on AI subscriptions, up to $100 a month", "Bank deposits and withdrawals 0.10%", "Dedicated VIP support"] }
     ],
-    "coverage": { "countries": null, "scope": "Infini says it supports 180+ countries but publishes no country list; sanctioned countries are excluded", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
+    "coverage": { "countries": null, "scope": "Worldwide except 33 restricted countries, including India, Indonesia, Bangladesh, Croatia and Slovenia", "examples": [], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": [], "no": ["AF", "AL", "BA", "BD", "BI", "BY", "CD", "CF", "CU", "HR", "ID", "IN", "IQ", "IR", "KP", "LB", "LY", "ME", "MK", "ML", "MM", "NI", "RS", "RU", "SD", "SI", "SO", "SS", "SY", "VE", "XK", "YE", "ZW"], "others": "yes" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 2, "ramps": "both", "credit": null, "yield": true },
     "bankRails": [ { "rail": "USD_ACH", "in": true, "out": true, "fee": "0.20% + $1" }, { "rail": "USD_WIRE", "in": true, "out": true, "fee": "0.20% + $20" }, { "rail": "EUR_SEPA", "in": true, "out": true, "fee": "0.20% + EUR 1" }, { "rail": "SWIFT", "in": false, "out": true, "fee": "0.10% to 0.20% + $50" } ],
     "signupBonus": "$10 after you open a card and spend $100 in total on it",
@@ -1559,9 +1586,11 @@
       { "label": "Infini Help: Level and benefits guide (membership tiers, cashback by tier)", "url": "https://help.infini.money/en/articles/17340529-level-and-benefits-guide", "verified": "2026-11-13" },
       { "label": "Infini Help: Select, create and manage cards (Lite, Lite Plus, Pro, Max fees and wallets)", "url": "https://help.infini.money/en/articles/17340045-select-create-and-manage-cards", "verified": "2026-11-13" },
       { "label": "Infini Help: AI Merchant Cashback Program rules", "url": "https://help.infini.money/en/articles/18241918-infini-ai-merchant-cashback-program-rules", "verified": "2026-11-13" },
-      { "label": "Infini: Pricing (cards, bank rails, SWIFT withdrawals)", "url": "https://infini.money/en/pricing", "verified": "2026-11-13" }
+      { "label": "Infini: Pricing (cards, bank rails, SWIFT withdrawals)", "url": "https://infini.money/en/pricing", "verified": "2026-11-13" },
+      { "label": "Infini Help: KYC restricted countries and regions (12 Oct 2026)", "url": "https://help.infini.money/en/articles/17563181-kyc-restricted-countries-regions", "verified": "2026-11-15" },
+      { "label": "Infini Help: Restricted countries and regions for the Infini platform and its products", "url": "https://help.infini.money/en/articles/17731084-restricted-countries-and-regions-for-the-infini-platform-and-its-products", "verified": "2026-11-15" }
     ],
-    "lastChecked": "2026-11-13",
+    "lastChecked": "2026-11-15",
     "addedOn": "2026-11-04",
     "metal": "rose",
     "image": { "source": "https://g2m.life/card-originals/infini.webp", "file": "/card-images/infini-3b3cbb71.webp" }
@@ -1590,7 +1619,7 @@
     "bankForNonResidents": true,
     "kycRule": "residency_id",
     "referralCode": "G2M",
-    "wallets": { "applePay": null, "googlePay": null },
+    "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT", "BTC", "ETH", "SOL", "HYPE", "beHYPE"],
     "perks": ["Credit Mode: spend against BTC, ETH, SOL or HYPE without selling", "USD and EUR bank accounts in your own name (ACH, Fedwire, SEPA); withdraw to banks in 15 currencies", "Up to 20 free virtual cards; spending up to $100,000 a month", "Savings, trading and card in one non-custodial account", "Virtual card now, physical card waitlist"],
     "pros": ["Spend crypto without selling it, with Credit Mode", "No annual or card fee", "Non-custodial account on Hyperliquid", "Your own USD and EUR bank account details", "Cashback up to 12% for heavy traders"],
@@ -1611,7 +1640,8 @@
       { "label": "Hyperbeat Help: Fees for fiat deposits (ACH, Fedwire, SWIFT, SEPA)", "url": "https://help.hyperbeat.org/en/articles/14107006-what-are-the-fees-for-fiat-deposits", "verified": "2026-11-15" },
       { "label": "Hyperbeat Help: Fees for fiat withdrawals", "url": "https://help.hyperbeat.org/en/articles/14107075-what-are-the-fees-for-fiat-withdrawals", "verified": "2026-11-15" },
       { "label": "Hyperbeat Help: Supported withdrawal currencies and limits (15 available)", "url": "https://help.hyperbeat.org/en/articles/14107064-supported-withdrawal-currencies-and-limits", "verified": "2026-11-15" },
-      { "label": "Hyperbeat Help: Which countries are supported for virtual bank accounts? (by residence, not citizenship)", "url": "https://help.hyperbeat.org/en/articles/16199140-which-countries-are-supported-for-virtual-bank-accounts", "verified": "2026-11-15" }
+      { "label": "Hyperbeat Help: Which countries are supported for virtual bank accounts? (by residence, not citizenship)", "url": "https://help.hyperbeat.org/en/articles/16199140-which-countries-are-supported-for-virtual-bank-accounts", "verified": "2026-11-15" },
+      { "label": "Hyperbeat Help: How do I add my Hyperbeat Pay card to Apple Wallet or Google Wallet?", "url": "https://help.hyperbeat.org/en/articles/12674666-how-do-i-add-my-hyperbeat-pay-card-to-apple-wallet-or-google-wallet", "verified": "2026-11-15" }
     ],
     "lastChecked": "2026-11-15",
     "addedOn": "2026-11-04",
@@ -1676,7 +1706,7 @@
       { "name": "Neo", "feeUsdYear": 12, "cashbackPct": null, "fxPct": 2, "requirement": "$12 a year", "perks": ["Visa Platinum", "$0.20 fiat conversion fee on every purchase", "Up to 10 add-on cards", "Spending up to $50,000 a day", "Plastic card $100 when physical cards launch"] },
       { "name": "Lux", "feeUsdYear": 30, "cashbackPct": null, "fxPct": 1, "requirement": "$30 a year", "perks": ["Visa Signature benefits", "$0.10 fiat conversion fee on every purchase", "Unlimited add-on cards", "No daily spending limit", "Metal card $350 when physical cards launch"] }
     ],
-    "coverage": { "countries": null, "scope": "No published country list. OrbitX focuses on Latin America, East Asia, Africa and the Middle East. The international card is not for US citizens; a separate US card agreement exists.", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "unknown", "GB": "unknown", "EU": "unknown" } },
+    "coverage": { "countries": null, "scope": "Worldwide except 18 countries, including India, China, Indonesia, Turkey and Vietnam; a separate card agreement covers the US", "examples": [], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": [], "no": ["BY", "CN", "CU", "ID", "IL", "IN", "IQ", "IR", "KP", "MM", "NI", "NP", "RU", "SY", "TR", "UA", "VE", "VN"], "others": "yes" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 9, "ramps": "both", "credit": null, "yield": true },
     "bankRails": [ { "rail": "SWIFT", "in": false, "out": true, "fee": "to 100+ countries, by local clearing or SWIFT" } ],
     "wallets": { "applePay": true, "googlePay": true },
@@ -1693,9 +1723,10 @@
       { "label": "OrbitX: Home (non-custodial wallet, transfers to 100+ countries, yield on USDC)", "url": "https://orbitxpay.com/", "verified": "2026-11-12" },
       { "label": "OrbitX: Apple Pay terms", "url": "https://orbitxpay.com/apple-pay-terms", "verified": "2026-11-12" },
       { "label": "OrbitX: Google Pay terms", "url": "https://orbitxpay.com/google-pay-terms-and-conditions", "verified": "2026-11-12" },
-      { "label": "OrbitX team, reply to G2M (12 Nov 2026): self-custodial wallets, physical cards later (Lux metal $350), KYC checks, focus regions; card picture sent by OrbitX", "url": "https://orbitxpay.com/card-fees", "verified": "2026-11-12" }
+      { "label": "OrbitX team, reply to G2M (12 Nov 2026): self-custodial wallets, physical cards later (Lux metal $350), KYC checks, focus regions; card picture sent by OrbitX", "url": "https://orbitxpay.com/card-fees", "verified": "2026-11-12" },
+      { "label": "OrbitX Prohibitions List: countries where cards cannot be issued or used (12 Dec 2025)", "url": "https://orbitxpay.com/prohibitions", "verified": "2026-11-15" }
     ],
-    "lastChecked": "2026-11-12",
+    "lastChecked": "2026-11-15",
     "addedOn": "2026-11-12",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/orbitx.webp", "file": "/card-images/orbitx-da41de2b.webp" }
