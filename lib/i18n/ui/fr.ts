@@ -73,6 +73,7 @@ export const uiFr: Ui = {
     emptyTitle: 'Aucune carte ne correspond à ces filtres',
     emptyText: "Essayez un autre pays, ou incluez les cartes dont la disponibilité n'est pas encore confirmée.",
     showAll: 'Voir toutes les cartes',
+    searchAll: 'La recherche affiche toutes les cartes correspondantes, quels que soient vos filtres.',
     caption: 'Cartes crypto classées selon le score G2M',
     sortTitle: 'Cliquez pour trier. Maj + clic pour ajouter un second tri.',
     colScore: 'Score G2M',

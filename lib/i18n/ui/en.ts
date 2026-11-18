@@ -76,6 +76,7 @@ export const uiEn = {
     emptyTitle: 'No cards match these filters',
     emptyText: 'Try another country, or allow cards whose availability is not confirmed yet.',
     showAll: 'Show all cards',
+    searchAll: 'Search shows every card that matches, whatever your filters.',
     caption: 'Crypto cards ranked by G2M score',
     sortTitle: 'Click to sort. Shift-click to add a second sort.',
     colScore: 'G2M score',

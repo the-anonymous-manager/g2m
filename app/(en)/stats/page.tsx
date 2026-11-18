@@ -6,7 +6,7 @@ import { IGNORE_COOKIE, STATS_COOKIE, isStatsUser, readyDb } from '@/lib/stats/s
 import { RANGES, rangeDays, report, type Report } from '@/lib/stats/report';
 import { login, logout, setCounted } from './actions';
 import { SPOT_LABEL, listBookings, type Booking } from '@/lib/bookings';
-import { getCard } from '@/lib/cards';
+import { getCard, getCards } from '@/lib/cards';
 
 // The private stats page: G2M's own analytics (lib/stats). Locked with STATS_PASSWORD (a Cloudflare Worker secret).
 export const metadata: Metadata = { title: 'Stats', robots: { index: false, follow: false } };
@@ -287,11 +287,26 @@ function Dashboard({ data, days, counted }: { data: Report; days: number; counte
 
       <Section
         title="What people search for"
-        note="Typed in the rankings search box. Cards found 0 means nothing matched: usually a card people expect and G2M does not list yet."
+        note="Typed in the rankings search box. 'Not on G2M' means no card matches the words: usually a card people expect and G2M does not list yet. 'Hidden by filters' means the card is listed but the visitor's country or filters hid it (before 18 Nov 2026; search now shows every match)."
       >
         <BarTable
           head={['Search', 'People', 'Cards found']}
-          rows={data.searches.map((r) => [r.q, r.people, r.found === 0 ? <b key={r.q}>0, nothing found</b> : r.found])}
+          rows={data.searches.map((r) => {
+            if (r.found > 0) return [r.q, r.people, r.found];
+            // Same words the rankings search looks in (lib/table.ts filterRows).
+            const listed = getCards().filter((c) => `${c.name} ${c.brand} ${c.coverage.scope}`.toLowerCase().includes(r.q.toLowerCase()));
+            return [
+              r.q,
+              r.people,
+              listed.length ? (
+                <span key={r.q}>
+                  0 shown, hidden by filters ({listed.map((c) => c.name).join(', ')})
+                </span>
+              ) : (
+                <b key={r.q}>0, not on G2M</b>
+              )
+            ];
+          })}
           empty="No searches yet (counted from 10 Nov 2026)."
         />
       </Section>
