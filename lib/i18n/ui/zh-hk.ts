@@ -73,6 +73,7 @@ export const uiZhHK: Ui = {
     emptyTitle: '沒有卡片符合這些篩選條件',
     emptyText: '請嘗試其他國家或地區，或包括尚未確認可否申請的卡片。',
     showAll: '顯示全部卡片',
+    searchAll: '搜尋會顯示所有相符的卡，不受篩選條件影響。',
     caption: '按 G2M 評分排名的加密貨幣卡',
     sortTitle: '按一下排序。按住 Shift 再按可加入第二個排序。',
     colScore: 'G2M 評分',

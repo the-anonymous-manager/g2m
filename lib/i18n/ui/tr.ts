@@ -73,6 +73,7 @@ export const uiTr: Ui = {
     emptyTitle: 'Bu filtrelere uyan kart yok',
     emptyText: 'Başka bir ülke dene ya da kullanılabilirliği henüz onaylanmamış kartlara da izin ver.',
     showAll: 'Tüm kartları göster',
+    searchAll: 'Arama, filtrelerinizden bağımsız olarak eşleşen her kartı gösterir.',
     caption: 'G2M puanına göre sıralanan kripto kartlar',
     sortTitle: 'Sıralamak için tıkla. İkinci bir sıralama eklemek için Shift ile tıkla.',
     colScore: 'G2M puanı',

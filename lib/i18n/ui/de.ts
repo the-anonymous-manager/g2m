@@ -73,6 +73,7 @@ export const uiDe: Ui = {
     emptyTitle: 'Keine Karte passt zu diesen Filtern',
     emptyText: 'Wähle ein anderes Land oder lass auch Karten zu, deren Verfügbarkeit noch nicht bestätigt ist.',
     showAll: 'Alle Karten zeigen',
+    searchAll: 'Die Suche zeigt jede passende Karte, unabhängig von deinen Filtern.',
     caption: 'Krypto-Karten nach G2M-Score',
     sortTitle: 'Klicken zum Sortieren. Mit Umschalttaste eine zweite Sortierung hinzufügen.',
     colScore: 'G2M-Score',

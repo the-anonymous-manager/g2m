@@ -73,6 +73,7 @@ export const uiEs: Ui = {
     emptyTitle: 'Ninguna tarjeta coincide con estos filtros',
     emptyText: 'Prueba otro país o incluye tarjetas cuya disponibilidad aún no está confirmada.',
     showAll: 'Ver todas las tarjetas',
+    searchAll: 'La búsqueda muestra todas las tarjetas que coinciden, sin importar tus filtros.',
     caption: 'Tarjetas cripto según la puntuación G2M',
     sortTitle: 'Haz clic para ordenar. Mayús + clic para añadir un segundo orden.',
     colScore: 'Puntuación G2M',

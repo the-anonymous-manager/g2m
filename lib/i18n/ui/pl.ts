@@ -73,6 +73,7 @@ export const uiPl: Ui = {
     emptyTitle: 'Żadna karta nie pasuje do tych filtrów',
     emptyText: 'Wybierz inny kraj albo uwzględnij karty, których dostępność nie jest jeszcze potwierdzona.',
     showAll: 'Pokaż wszystkie karty',
+    searchAll: 'Wyszukiwanie pokazuje każdą pasującą kartę, niezależnie od filtrów.',
     caption: 'Karty krypto według wyniku G2M',
     sortTitle: 'Kliknij, aby sortować. Shift + klik dodaje drugie sortowanie.',
     colScore: 'Wynik G2M',

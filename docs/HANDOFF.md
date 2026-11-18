@@ -599,6 +599,13 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- Search shows every match (18 Nov 2026, Akash with screenshots of /cards?q=orbitx from India showing 0 cards, and
+  /stats listing "orbitx" as nothing found: "I want that if someone searching for any card it showed up ignoring the
+  filter"). In the rankings, a search of 2+ letters now ignores country, passport and every other filter. Cards not
+  offered in the chosen country come last with a dash for rank and "Not available" in their row; a line under the
+  count says search ignores the filters (all 9 languages, `searchAll`). The filters stay set and apply again once the
+  search box is cleared. /stats now tells "0, not on G2M" (no card matches) from "hidden by filters" (older searches
+  for a listed card).
 - Gap sweep, batch 2 (15 Nov 2026, Akash: "ok"): ATM fees for Jupiter (Rain card $1 + 0.65%, DCS cards no ATM),
   Tria (up to $2 + 3%, terms), Solayer (no own fee, physical card only); ID rules: Solid (by residence, any passport),
   Kite (must live in one of its 9 countries). Searched but not published: passport/nationality rules for PEXX,

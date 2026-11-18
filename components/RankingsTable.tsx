@@ -128,8 +128,25 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
 
   // In a country view every card is scored and ranked for that country.
   const ranked = useMemo(() => (f.country ? rankIn(rows, f.country) : rows), [rows, f.country]);
-  const visible = useMemo(() => sortRows(filterRows(ranked, f), f.sort), [ranked, f]);
+  // A search (2+ letters) shows every card whose name matches, whatever the country, passport and other filters
+  // (Akash, 18 Nov 2026): someone typing "orbitx" from India should see OrbitX, marked "Not available" in its row.
+  // Cards not offered in the chosen country come after the ones that are, with no rank there. The filters stay set
+  // and apply again once the search box is cleared.
+  const searching = f.q.trim().length >= 2;
+  const visible = useMemo(() => {
+    if (!searching) return sortRows(filterRows(ranked, f), f.sort);
+    const words = { ...DEFAULT_FILTERS, q: f.q };
+    const open = sortRows(filterRows(ranked, words), f.sort);
+    if (!f.country) return open;
+    const inList = new Set(ranked.map((c) => c.slug));
+    const away = filterRows(rows, words)
+      .filter((c) => !inList.has(c.slug))
+      .map((c) => ({ ...c, rank: 0 }));
+    return [...open, ...away];
+  }, [rows, ranked, f, searching]);
   const set = <K extends keyof Filters>(key: K, value: Filters[K]) => setF((prev) => ({ ...prev, [key]: value }));
+  // Search ignores the filters that are set: say so under the count.
+  const filtersSet = serializeFilters({ ...f, q: '', sort: DEFAULT_FILTERS.sort }) !== serializeFilters(DEFAULT_FILTERS);
 
   // What people type in the search box and how many cards it finds: a search that finds nothing is a card to add.
   useEffect(() => {
@@ -326,6 +343,12 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
               {fillText(t.noneConfirmed, { place: place! })}
             </>
           ) : null}
+          {searching && filtersSet ? (
+            <>
+              <br />
+              {t.searchAll}
+            </>
+          ) : null}
         </p>
         <ShareBar
           words={c0}
@@ -382,7 +405,7 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
                   const on = picked.includes(c.slug);
                   return (
                     <tr key={c.slug}>
-                      <td className={`rank ${rank === 1 ? 'rank-1' : ''}`}>{rank}</td>
+                      <td className={`rank ${rank === 1 ? 'rank-1' : ''}`}>{rank || '—'}</td>
                       <td>
                         <div className="card-cell">
                           <CardArt card={c} size="sm" />
@@ -456,7 +479,7 @@ export function RankingsTable({ rows, initial, hadMarketParam, allCountries = fa
                 <li key={c.slug} className="panel rank-item">
                   <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
                     <span className={`rank ${rank === 1 ? 'rank-1' : ''}`} style={{ width: 24 }}>
-                      {rank}
+                      {rank || '—'}
                     </span>
                     <CardArt card={c} size="sm" />
                     <div className="stack" style={{ gap: 2, minWidth: 0, flex: 1 }}>
