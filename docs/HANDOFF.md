@@ -599,6 +599,12 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- Confirmed cards first in a country (18 Nov 2026, Akash with a screenshot of /cards from the Netherlands: Jupiter,
+  not confirmed there, ranked above Nexo, which is; Akash chose "option 1"). In a country view (`rankIn`, used by
+  /cards, the home page top 5, country guides, card pages and the finder), cards confirmed there always rank above
+  cards not confirmed there; each group is ordered by score. Scores are unchanged (not confirmed still 5 of the 12
+  country points). Worldwide ranking unchanged. Methodology updated in all 9 languages. Netherlands before: 4
+  unconfirmed cards (Jupiter, KAST, Tangem Pay, Plasma One) ranked above confirmed ones; now they follow #22.
 - Search shows every match (18 Nov 2026, Akash with screenshots of /cards?q=orbitx from India showing 0 cards, and
   /stats listing "orbitx" as nothing found: "I want that if someone searching for any card it showed up ignoring the
   filter"). In the rankings, a search of 2+ letters now ignores country, passport and every other filter. Cards not

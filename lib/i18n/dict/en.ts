@@ -312,7 +312,7 @@ export const en = {
     "Each card's English review lists its sources with the date we checked them: the issuer's own site and help pages first, then public datasets. We re-check every card at least every 90 days, and sooner when an issuer changes its terms. Countries come from the issuer's own country list; these markets are checked for every card: {markets}.",
   methCountryTitle: 'Scores by country',
   methCountry:
-    "The same card is not the same deal everywhere. The ranking for a country scores every card for that country with the same formula: rewards and fees come from the tiers offered there, and cards not available there drop out. For one country, the 12 country points become: confirmed there 12, not confirmed 5. The test basket is spent in that country's currency, so a card that bills in another currency charges its FX fee on every purchase.",
+    "The same card is not the same deal everywhere. The ranking for a country scores every card for that country with the same formula: rewards and fees come from the tiers offered there, and cards not available there drop out. For one country, the 12 country points become: confirmed there 12, not confirmed 5. Cards confirmed there always rank above cards not confirmed there; each group is ordered by score. The test basket is spent in that country's currency, so a card that bills in another currency charges its FX fee on every purchase.",
   methMoneyTitle: 'How G2M makes money',
   methMoney:
     'Some "{get}" buttons may use referral links, and card issuers can pay for a Featured spot on the home page, always marked "Sponsored". Neither a referral nor a sponsorship ever changes a card\'s score, rank or position in the ranking.',

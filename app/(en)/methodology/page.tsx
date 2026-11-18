@@ -155,8 +155,9 @@ export default function MethodologyPage() {
           The same card is not the same deal everywhere. Some tiers, fees and cashback rates are only for one country, so
           the rankings pick up where you live and score every card for that country with the same formula. Rewards and
           fees come from the tiers offered there, cards that are not available there drop out, and # is the rank in that
-          country. For one country, the 12 country points become: confirmed there 12, not confirmed 5. When no card has
-          confirmed a country yet, you see the worldwide ranking with each card marked not confirmed.
+          country. For one country, the 12 country points become: confirmed there 12, not confirmed 5. Cards confirmed there
+          always rank above cards not confirmed there; each group is ordered by score. When no card has confirmed a
+          country yet, you see the worldwide ranking with each card marked not confirmed.
         </p>
         <p>
           The test basket is spent in your country&apos;s currency. If the card does not bill in it (for example a US dollar
