@@ -18,8 +18,8 @@ import { BASKET, BASKET_USD, BASKET_PURCHASES } from '@/lib/basket';
 // Rewards and fees are kept apart: cashback always earns rewards points, and every fee charged on purchases
 // costs fees points. For one country, the same formula uses the tiers offered there; when the card does not bill
 // in that country's currency, its FX fee and foreign-only small-purchase fees are added to the basket cost; and
-// "countries" becomes: confirmed there 12, not confirmed 5. When no card is confirmed in that country, the
-// worldwide country points are kept so the ranking still tells cards apart.
+// "countries" becomes: confirmed there 12, not confirmed 5, and confirmed cards rank above the others (rankIn). When no
+// card is confirmed in that country, the worldwide country points are kept so the ranking still tells cards apart.
 export const SCORE_WEIGHTS = { rewards: 25, fees: 30, coverage: 20, ecosystem: 15, control: 10 } as const;
 
 /** Basket cashback rate that earns full rewards points. */
@@ -186,14 +186,17 @@ export function scoreCard(c: ScoreInput, place?: ScorePlace | null): ScoreBreakd
 }
 
 /**
- * Score and rank cards for one country. Cards not available there drop out; ties keep the
- * worldwide order. # in a country view is this rank.
+ * Score and rank cards for one country. Cards not available there drop out. Cards confirmed there always rank above
+ * cards not confirmed there (Akash, 18 Nov 2026: someone in the Netherlands should see the cards they can get first);
+ * each group is ordered by score, and ties keep the worldwide order. Scores do not change. # in a country view is
+ * this rank.
  */
 export function rankIn<T extends ScoreInput & { score: ScoreBreakdown; rank: number }>(rows: T[], country: string): T[] {
   const open = rows.filter((r) => availabilityIn(r, country) !== 'no');
   const anyConfirmed = open.some((r) => availabilityIn(r, country) === 'yes');
+  const group = (r: T) => (availabilityIn(r, country) === 'yes' ? 0 : 1);
   return open
     .map((r) => ({ ...r, score: scoreCard(r, { country, anyConfirmed }) }))
-    .sort((a, b) => b.score.total - a.score.total || a.rank - b.rank)
+    .sort((a, b) => group(a) - group(b) || b.score.total - a.score.total || a.rank - b.rank)
     .map((r, i) => ({ ...r, rank: i + 1 }));
 }
