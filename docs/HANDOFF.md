@@ -599,6 +599,17 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- SEO check (19 Nov 2026, Akash: "now the seo part", with the Search Console coverage export and Bing's site scan).
+  All 4,350 sitemap pages answer 200, declare themselves canonical in <head> and allow indexing; internal links on
+  ~200 pages of every type lead to no redirect or 404. Filter addresses (?country=, ?c=) point their canonical at the
+  bare page (the 346 "alternative page" entries). The impressions drop after 3 Nov was the www copy: the
+  `https://g2m.life/` property did not count www pages; the Domain property `sc-domain:g2m.life` already exists (sitemap
+  read 19 Nov, Success) and URL inspection shows https://g2m.life/ and /cards indexed with Google choosing them as
+  canonical. An older site (OpSec Ecosystem, www.g2m.life/our-portfolio) once used the domain; it now 404s. Bing's
+  site scan failed on its first page around 15 Nov, but Bing's live URL test on 19 Nov fetched the home page fine;
+  re-run the scan. Bing flagged 24 card pictures with empty alt text: `CardArt` now uses the card name (the picture
+  stays aria-hidden, so screen readers are unchanged). Proposed, not done: keep translated country guides out of the
+  index except where the language is spoken (230 countries x 8 languages, many with identical card lists).
 - Confirmed cards first in a country (18 Nov 2026, Akash with a screenshot of /cards from the Netherlands: Jupiter,
   not confirmed there, ranked above Nexo, which is; Akash chose "option 1"). In a country view (`rankIn`, used by
   /cards, the home page top 5, country guides, card pages and the finder), cards confirmed there always rank above

@@ -20,12 +20,14 @@ const NET: Record<string, string> = {
 export function CardArt({ card, size = 'md', width, className = '', style }: Props) {
   if (card.image) {
     // Already resized by the sync, so a plain <img>. Small slots get the 184px version.
+    // The alt text names the card for search engines and image search (Bing flagged empty ones, 19 Nov 2026); screen
+    // readers still skip the picture (aria-hidden), since the card's name is always written next to it.
     const small = size === 'sm' || (typeof width === 'number' && width <= 92);
     const src = small ? card.image.file.replace(/\.webp$/, '-sm.webp') : card.image.file;
     const Box = size === 'sm' ? 'span' : 'div';
     return (
       <Box className={`card-art photo ${size === 'sm' ? 'sm' : ''} ${className}`} aria-hidden="true" style={{ width, ...style }}>
-        <img src={src} alt="" width={small ? 184 : 1000} height={small ? 116 : 631} loading={small ? 'lazy' : 'eager'} decoding="async" />
+        <img src={src} alt={card.name} width={small ? 184 : 1000} height={small ? 116 : 631} loading={small ? 'lazy' : 'eager'} decoding="async" />
       </Box>
     );
   }
