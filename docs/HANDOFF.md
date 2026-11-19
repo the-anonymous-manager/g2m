@@ -599,6 +599,13 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- Full data update, batch 5 (19 Nov 2026, Akash: "batch 5"): the last nine cards without a referral link. Tangem
+  Pay: the cashback note said Plus is capped at $500 a month; the Tangem Pay page and the tier both say $300 (fixed;
+  the "5%/10%/15% on the first $500" rates and the $75 welcome bonus are marked "coming soon", not added). OrbitX: the
+  card fees page now says a metal card is included with Lux (was "metal $350 at launch"). Unchanged: Bleap (cashback
+  page re-read: 1% up to EUR3,000, 3% rides and delivery, 20% subscriptions with per-service limits), Ethena Pay
+  (pricing updated 30 Sep, same bands), Exa, Kolo, Avici, Cashi, Laso. No score or rank moved. With batches 1 to 5
+  every card has been re-checked on 19 Nov 2026.
 - Full data update, batch 4 (19 Nov 2026, Akash: "batch 4"): the first nine cards without a referral link, oldest
   check first. Crypto.com: the Level Up page now publishes every plan, so the single "Level Up (top tier)" tier (no
   price) became four: Plus US$49.90 a year, 1.5% on the first $750 a month; Pro US$299.90 a year, 2.5% on the first
