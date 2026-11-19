@@ -2563,6 +2563,34 @@ body::before {
 .ref-hero > .stack {
   flex: 1 1 280px;
 }
+/* ---------- Updates (/updates): card news and offers ---------- */
+.update-item {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+.update-item > .stack {
+  flex: 1 1 auto;
+}
+.update-art {
+  flex: none;
+  display: flex;
+  padding-top: 4px;
+}
+.update-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--faint);
+}
+@media (max-width: 560px) {
+  .update-art {
+    display: none;
+  }
+}
+
 .ref-steps {
   margin: 0;
   padding-left: 22px;

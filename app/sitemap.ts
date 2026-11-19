@@ -7,6 +7,7 @@ import { LOCALES, intlRankings, intlCompare, intlCalculator, intlFinder, intlWal
 import { intlTopics } from '@/lib/i18n/guides';
 import { alternativesPath } from '@/lib/alternatives';
 import { hasReferralPage, referralPath } from '@/lib/referral';
+import { getUpdates, intlUpdate, intlUpdates, isTranslated, updatePath } from '@/lib/updates';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const updated = new Date(`${lastUpdated()}T00:00:00Z`);
@@ -69,5 +70,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...countryGuides().map((g) => ({ url: absoluteUrl(intlCountry(l, countrySlug(g.cc))), lastModified: updated, changeFrequency: 'weekly' as const, priority: 0.5 }))
   ]);
-  return [...pages, ...cards, ...alternatives, ...referrals, ...guides, ...intl, ...pairs];
+  // Updates: the list (once it has posts) and every post; in other languages, the list and the translated posts.
+  const posts = getUpdates();
+  const latest = posts[0] ? new Date(`${posts[0].date}T00:00:00Z`) : updated;
+  const updates = posts.length
+    ? [
+        { url: absoluteUrl('/updates'), lastModified: latest, changeFrequency: 'daily' as const, priority: 0.7 },
+        ...posts.map((u) => ({ url: absoluteUrl(updatePath(u.slug)), lastModified: new Date(`${u.date}T00:00:00Z`), changeFrequency: 'monthly' as const, priority: 0.6 })),
+        ...LOCALES.flatMap((l) => [
+          { url: absoluteUrl(intlUpdates(l)), lastModified: latest, changeFrequency: 'daily' as const, priority: 0.5 },
+          ...posts
+            .filter((u) => isTranslated(u, l))
+            .map((u) => ({ url: absoluteUrl(intlUpdate(l, u.slug)), lastModified: new Date(`${u.date}T00:00:00Z`), changeFrequency: 'monthly' as const, priority: 0.4 }))
+        ])
+      ]
+    : [];
+  return [...pages, ...cards, ...alternatives, ...referrals, ...guides, ...updates, ...intl, ...pairs];
 }

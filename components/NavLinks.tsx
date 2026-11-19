@@ -10,7 +10,7 @@ export const NAV = [
   { href: '/calculator', label: 'Rewards calculator' },
   { href: '/wallet', label: 'Wallet builder' },
   { href: '/compare', label: 'Compare' },
-  { href: '/methodology', label: 'Methodology' }
+  { href: '/updates', label: 'Updates' }
 ] as const;
 
 /** `items`: the same links in another language (/de/cards …); English when left out. */

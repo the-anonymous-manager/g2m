@@ -320,7 +320,23 @@ export const en = {
   methPrivacy:
     'G2M counts page views, "{get}" clicks and how the tools are used, with the country and the kind of device. It uses no tracking cookies, stores no IP addresses or personal details, and shares nothing with ad networks.',
   methMore: 'How the rewards calculator works, and every detail of the score, is on the English page.',
-  methFull: 'Full methodology (in English)'
+  methFull: 'Full methodology (in English)',
+  updEyebrow: "updates",
+  updTitle: "Crypto card news and offers",
+  updDesc: "Crypto card news from G2M: new cards, sign-up bonuses, limited-time offers and changes to fees and cashback.",
+  updLead: "New cards, sign-up bonuses, limited-time offers and changes to fees and cashback. Card terms change often, so check the issuer's site before you apply.",
+  updEmpty: "No updates yet. Check back soon.",
+  updNews: "News",
+  updOffer: "Offer",
+  updBonus: "Bonus",
+  updEnds: "Ends {date}",
+  updEnded: "Ended {date}",
+  updSponsored: "Sponsored. It never changes a card's score or rank.",
+  updSource: "Source",
+  updReadMore: "Read more",
+  updAll: "All updates",
+  updMore: "More updates",
+  updEnglishOnly: "In English"
 };
 
 export type Dict = typeof en;

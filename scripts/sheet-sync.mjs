@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// Pulls card data from the G2M Google Sheet into data/cards.json, data/sponsor.json and data/picks.json.
+// Pulls card data from the G2M Google Sheet into data/cards.json, data/sponsor.json, data/picks.json and
+// data/updates.json (the Updates page).
 //   npm run sheet:sync            check the sheet, then write the files if everything is valid
 //   npm run sheet:sync -- --check only report whether the sheet differs (needs no npm install)
 // The sheet is set in data/sheet.json. It must be shared as "Anyone with the link can view".
@@ -9,7 +10,7 @@ import { appendFileSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { downloadImages, imagesMissing, pruneImages } from './card-images.mjs';
-import { TABS, formatCards, formatPicks, formatSponsor, parseCsv, sheetMessage, tablesToCards } from './sheet-format.mjs';
+import { TABS, formatCards, formatPicks, formatSponsor, formatUpdates, parseCsv, sheetMessage, tablesToCards } from './sheet-format.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const path = (...p) => join(root, ...p);
@@ -69,7 +70,7 @@ try {
 
 // Cards not on the site yet get today's date as addedOn ("New on G2M" on the home page for 30 days).
 const listed = JSON.parse(readFileSync(path('data', 'cards.json'), 'utf8'));
-const { cards, sponsor, picks, errors } = tablesToCards(tables, listed, new Date().toISOString().slice(0, 10));
+const { cards, sponsor, picks, updates, errors } = tablesToCards(tables, listed, new Date().toISOString().slice(0, 10));
 if (errors.length) fail(errors);
 
 const nextCards = formatCards(cards);
@@ -82,7 +83,16 @@ const oldPicks = (() => {
     return '';
   }
 })();
+const nextUpdates = formatUpdates(updates);
+const oldUpdates = (() => {
+  try {
+    return readFileSync(path('data', 'updates.json'), 'utf8');
+  } catch {
+    return '';
+  }
+})();
 const changed =
+  nextUpdates !== oldUpdates ||
   nextCards !== readFileSync(path('data', 'cards.json'), 'utf8') ||
   nextSponsor !== readFileSync(path('data', 'sponsor.json'), 'utf8') ||
   nextPicks !== oldPicks ||
@@ -98,6 +108,7 @@ const names = [
 ];
 if (nextSponsor !== readFileSync(path('data', 'sponsor.json'), 'utf8')) names.push('Sponsored spot');
 if (nextPicks !== oldPicks) names.push('Our picks');
+if (nextUpdates !== oldUpdates) names.push('Updates');
 output('summary', names.length > 4 ? `${names.slice(0, 4).join(', ')} and ${names.length - 4} more` : names.join(', '));
 
 if (!changed) {
@@ -110,7 +121,7 @@ if (checkOnly) {
 }
 
 // Full check with the same rules as the site (needs npm install for zod).
-const { PicksSchema, SponsorSchema, validateCards } = await import('../lib/card-schema.mjs');
+const { PicksSchema, SponsorSchema, UpdatesSchema, validateCards } = await import('../lib/card-schema.mjs');
 const problems = [];
 for (const e of validateCards(cards).errors) {
   const card = cards.find((c) => c.slug === e.card) ?? { slug: e.card };
@@ -122,6 +133,10 @@ const pickCheck = PicksSchema.safeParse(picks);
 if (!pickCheck.success) {
   for (const i of pickCheck.error.issues) problems.push(`Picks tab${typeof i.path[0] === 'number' ? ` row ${i.path[0] + 2}` : ''}: ${i.message}`);
 }
+const updateCheck = UpdatesSchema.safeParse(updates);
+if (!updateCheck.success) {
+  for (const i of updateCheck.error.issues) problems.push(`Updates tab${typeof i.path[0] === 'number' ? ` (post ${i.path[0] + 1})` : ''}: ${i.message}`);
+}
 if (problems.length) fail(problems);
 
 // Card pictures: download new ones (needs sharp, installed with npm install) and drop unused ones.
@@ -132,4 +147,5 @@ pruneImages(cards, root);
 writeFileSync(path('data', 'cards.json'), nextCards);
 writeFileSync(path('data', 'sponsor.json'), nextSponsor);
 writeFileSync(path('data', 'picks.json'), nextPicks);
+writeFileSync(path('data', 'updates.json'), nextUpdates);
 console.log(`✔ Copied ${cards.length} cards from the sheet.`);

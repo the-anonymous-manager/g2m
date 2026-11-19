@@ -12,6 +12,7 @@ export type Chrome = {
   wallet: string; // English: "Wallet builder"
   compare: string; // English: "Compare"
   methodology: string; // English: "Methodology"
+  updates: string; // English: "Updates" (card news and offers, /updates)
   cta: string; // English: "Find your best card"
   about: string; // English: "Spend your bags better. From on-chain to checkout. Independent crypto card rankings, built from published card terms."
   allCards: string; // English: "All cards"
@@ -36,6 +37,7 @@ export const CHROME: Record<string, Chrome> = {
     wallet: "Wallet-Planer",
     compare: "Vergleichen",
     methodology: "Methodik",
+    updates: "News",
     cta: "Beste Karte finden",
     about: "Gib deine Coins klüger aus. Von On-Chain bis zur Kasse. Unabhängige Ranglisten für Krypto-Karten, erstellt aus den veröffentlichten Kartenbedingungen.",
     allCards: "Alle Karten",
@@ -59,6 +61,7 @@ export const CHROME: Record<string, Chrome> = {
     wallet: "Portefeuille",
     compare: "Comparer",
     methodology: "Méthode",
+    updates: "Actus",
     cta: "Trouver ma carte",
     about: "Dépensez vos cryptos plus malin. De la blockchain à la caisse. Des classements indépendants de cartes crypto, établis d'après les conditions publiées des cartes.",
     allCards: "Toutes les cartes",
@@ -82,6 +85,7 @@ export const CHROME: Record<string, Chrome> = {
     wallet: "Cartera",
     compare: "Comparar",
     methodology: "Método",
+    updates: "Noticias",
     cta: "Encuentra tu tarjeta",
     about: "Gasta tus criptos con cabeza. De la blockchain a la caja. Rankings independientes de tarjetas cripto, hechos con las condiciones publicadas de cada tarjeta.",
     allCards: "Todas las tarjetas",
@@ -105,6 +109,7 @@ export const CHROME: Record<string, Chrome> = {
     wallet: "Portfel",
     compare: "Porównaj",
     methodology: "Metodologia",
+    updates: "Nowości",
     cta: "Znajdź kartę",
     about: "Wydawaj krypto mądrzej. Od blockchaina do kasy. Niezależne rankingi kart krypto oparte na opublikowanych warunkach kart.",
     allCards: "Wszystkie karty",
@@ -128,6 +133,7 @@ export const CHROME: Record<string, Chrome> = {
     wallet: "Cüzdan oluşturucu",
     compare: "Karşılaştır",
     methodology: "Yöntem",
+    updates: "Haberler",
     cta: "Kartını bul",
     about: "Kriptonuzu daha akıllıca harcayın. Zincirden kasaya. Yayımlanmış kart koşullarından hazırlanan bağımsız kripto kart sıralamaları.",
     allCards: "Tüm kartlar",
@@ -151,6 +157,7 @@ export const CHROME: Record<string, Chrome> = {
     wallet: "Набор карт",
     compare: "Сравнить",
     methodology: "Методика",
+    updates: "Новости",
     cta: "Подобрать карту",
     about: "Тратьте криптовалюту с умом. От блокчейна до кассы. Независимые рейтинги криптокарт на основе опубликованных условий карт.",
     allCards: "Все карты",
@@ -174,6 +181,7 @@ export const CHROME: Record<string, Chrome> = {
     wallet: "منشئ المحفظة",
     compare: "قارن",
     methodology: "المنهجية",
+    updates: "المستجدات",
     cta: "اعثر على أفضل بطاقة لك",
     about: "أنفق عملاتك بذكاء أكبر. من البلوكتشين إلى نقطة الدفع. تصنيفات مستقلة لبطاقات الكريبتو مبنية على شروط البطاقات المنشورة.",
     allCards: "كل البطاقات",
@@ -197,6 +205,7 @@ export const CHROME: Record<string, Chrome> = {
     wallet: "錢包組合工具",
     compare: "比較",
     methodology: "評分方法",
+    updates: "最新消息",
     cta: "尋找最適合你的卡",
     about: "更聰明地花你的加密貨幣。從鏈上到收銀台。根據各卡公佈條款編製的獨立加密卡排名。",
     allCards: "所有卡",

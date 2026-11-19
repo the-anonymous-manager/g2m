@@ -56,6 +56,7 @@ export const intlReceipt = (l: Locale) => `/${l.code}/receipt`;
 export const intlCorridors = (l: Locale) => `/${l.code}/corridors`;
 export const intlSubmit = (l: Locale) => `/${l.code}/submit`;
 export const intlBook = (l: Locale) => `/${l.code}/book`;
+export const intlUpdates = (l: Locale) => `/${l.code}/updates`;
 export const intlFeesGuide = (l: Locale) => `/${l.code}/guides/crypto-card-fees-explained`;
 
 
@@ -73,6 +74,8 @@ export function pathIn(pathname: string, to: Locale | undefined): string {
   if (country) return intlCountry(to, country[1]);
   const guide = en.match(/^\/guides\/([^/]+)$/);
   if (guide) return intlGuide(to, guide[1]);
+  // A post opens that language's Updates page: only posts with a translation have their own page there.
+  if (en === '/updates' || en.startsWith('/updates/')) return intlUpdates(to);
   if (en === '/cards' || en === '/guides' || en === '/methodology' || en === '/compare' || en === '/calculator' || en === '/finder' || en === '/wallet' || en === '/receipt' || en === '/corridors' || en === '/submit' || en === '/book' || /^\/compare\/[^/]+-vs-[^/]+$/.test(en) || /^\/cards\/[^/]+(\/alternatives|\/referral-code)?$/.test(en))
     return `/${to.code}${en}`;
   return intlHome(to);

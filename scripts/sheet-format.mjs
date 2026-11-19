@@ -7,7 +7,7 @@
 
 import { createHash } from 'node:crypto';
 
-export const TABS = ['Cards', 'Tiers', 'Country lists', 'Sources', 'Sponsor', 'Picks'];
+export const TABS = ['Cards', 'Tiers', 'Country lists', 'Sources', 'Sponsor', 'Picks', 'Updates'];
 
 /** Where the site keeps a card's downloaded picture. Named after the link, so a new link means a new file. */
 export const imageFile = (slug, source) =>
@@ -238,11 +238,28 @@ const SPONSOR_COLUMNS = ['Card ID', 'Start', 'End', 'Type'];
 // Featured, optional otherwise.
 const PICK_COLUMNS = ['Slot', 'Card ID', 'Type', 'Why (one line)', 'Start', 'End'];
 const PICK_TYPE = { pick: 'Our pick', sponsored: 'Featured' };
+// The Updates page (/updates): one post per row. Type is News, Offer or Bonus (empty = News). "Full text" is
+// optional; a blank line starts a new paragraph and lines starting with "- " become a list. Card ID links the post to
+// a card (its "Get the card" button uses the referral link). Sponsored = "yes" for a post someone paid for.
+const UPDATE_COLUMNS = ['Date', 'Title', 'Card ID', 'Type', 'Summary', 'Full text', 'Ends', 'Source link', 'Sponsored'];
+const UPDATE_TYPE = { news: 'News', offer: 'Offer', bonus: 'Bonus' };
+
+/** The page address of a post: its title in lowercase words joined by hyphens (accents dropped). */
+export const updateSlug = (title) =>
+  title
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 80)
+    .replace(/-+$/, '') || 'update';
 
 // ---------- cards.json -> sheet ----------
 
 /** @returns {Record<string, string[][]>} each tab as rows of cells, header row first */
-export function cardsToTables(cards, sponsor, picks = []) {
+export function cardsToTables(cards, sponsor, picks = [], updates = []) {
   const head = (cols) => cols.map(([h]) => h);
   return {
     Cards: [head(CARD_COLUMNS), ...cards.map((c) => CARD_COLUMNS.map(([, get]) => get(c)))],
@@ -253,7 +270,11 @@ export function cardsToTables(cards, sponsor, picks = []) {
     ],
     Sources: [head(SOURCE_COLUMNS), ...cards.flatMap((c) => c.sources.map((s) => SOURCE_COLUMNS.map(([, get]) => get(c, s))))],
     Sponsor: [SPONSOR_COLUMNS, [sponsor.slug ?? '', sponsor.start ?? '', sponsor.end ?? '', sponsor.slug ? PICK_TYPE[sponsor.type ?? 'sponsored'] : '']],
-    Picks: [PICK_COLUMNS, ...picks.map((p) => [String(p.slot), p.slug, PICK_TYPE[p.type], p.note ?? '', p.start ?? '', p.end ?? ''])]
+    Picks: [PICK_COLUMNS, ...picks.map((p) => [String(p.slot), p.slug, PICK_TYPE[p.type], p.note ?? '', p.start ?? '', p.end ?? ''])],
+    Updates: [
+      UPDATE_COLUMNS,
+      ...updates.map((u) => [u.date, u.title, u.card ?? '', UPDATE_TYPE[u.type], u.summary, u.body ?? '', u.ends ?? '', u.source ?? '', u.sponsored ? 'yes' : ''])
+    ]
   };
 }
 
@@ -318,6 +339,8 @@ export function tablesToCards(tables, previous = null, today = null) {
   const sourceRows = owned('Sources', read('Sources', SOURCE_COLUMNS.map(([h]) => h)));
   const sponsorRows = read('Sponsor', SPONSOR_COLUMNS);
   const pickRows = owned('Picks', read('Picks', PICK_COLUMNS));
+  // Updates are optional: an empty tab (header only) is fine, and so is a tab not made yet when reading old files.
+  const updateRows = tables.Updates && tables.Updates.length > 1 ? read('Updates', UPDATE_COLUMNS) : [];
 
   const tier = (r) => {
     const n = (col) => cell('Tiers', r, col, num);
@@ -471,7 +494,43 @@ export function tablesToCards(tables, previous = null, today = null) {
     return { slot, slug: str(r.get('Card ID')), type: type ?? 'pick', note: optText(r.get('Why (one line)')) ?? null, start: str(r.get('Start')) || null, end: str(r.get('End')) || null };
   });
 
-  return errors.length ? { cards: null, sponsor: null, picks: null, errors } : { cards: prune(cards), sponsor, picks, errors };
+  const iso = /^\d{4}-\d{2}-\d{2}$/;
+  const taken = new Set();
+  const updates = updateRows.map((r) => {
+    const at = (col, msg) => errors.push(`Updates row ${r.row}, column "${col}": ${msg}`);
+    const date = str(r.get('Date'));
+    if (!iso.test(date)) at('Date', 'write the date as YYYY-MM-DD, e.g. 2026-11-19.');
+    const title = str(r.get('Title'));
+    if (!title) at('Title', 'every post needs a title.');
+    else if (title.length > 120) at('Title', 'keep the title under 120 characters.');
+    const card = str(r.get('Card ID')) || null;
+    if (card && !slugs.has(card)) at('Card ID', `no card with Card ID "${card}" on the Cards tab (leave it empty for news that is not about one card).`);
+    const kind = str(r.get('Type')).toLowerCase();
+    const type = kind === '' || kind === 'news' || kind === 'update' ? 'news' : kind === 'offer' ? 'offer' : kind === 'bonus' ? 'bonus' : null;
+    if (!type) at('Type', 'use News, Offer or Bonus.');
+    const summary = str(r.get('Summary'));
+    if (!summary) at('Summary', 'every post needs a short summary (one or two sentences).');
+    else if (summary.length > 400) at('Summary', 'keep the summary under 400 characters; put the rest in "Full text".');
+    const body = str(r.get('Full text')).replace(/\r\n?/g, '\n') || null;
+    const ends = str(r.get('Ends')) || null;
+    if (ends && !iso.test(ends)) at('Ends', 'write the date as YYYY-MM-DD, or leave it empty.');
+    else if (ends && iso.test(date) && ends < date) at('Ends', 'the end date is before the post date.');
+    const source = str(r.get('Source link')) || null;
+    if (source && !/^https:\/\/\S+$/.test(source)) at('Source link', 'paste the full link, starting with https://.');
+    const sp = str(r.get('Sponsored')).toLowerCase();
+    if (sp && !['yes', 'no'].includes(sp)) at('Sponsored', 'write "yes" for a paid post, or leave it empty.');
+    // Two posts with the same title get the date added to the second one's address.
+    let slug = updateSlug(title);
+    if (taken.has(slug)) slug = `${slug}-${date}`;
+    taken.add(slug);
+    return { slug, date, title, card, type: type ?? 'news', summary, body, ends, source, sponsored: sp === 'yes' };
+  });
+  // Newest first; posts on the same day keep the sheet's order.
+  updates.sort((a, b) => b.date.localeCompare(a.date));
+
+  return errors.length
+    ? { cards: null, sponsor: null, picks: null, updates: null, errors }
+    : { cards: prune(cards), sponsor, picks, updates, errors };
 }
 
 // Drop undefined keys so the JSON matches the hand-written file.
@@ -544,6 +603,7 @@ export function formatCards(cards) {
 
 export const formatSponsor = (s) => JSON.stringify(s, null, 2) + '\n';
 export const formatPicks = (p) => JSON.stringify(p, null, 2) + '\n';
+export const formatUpdates = (u) => JSON.stringify(u, null, 2) + '\n';
 
 // ---------- Plain-words validation messages ----------
 

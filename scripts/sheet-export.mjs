@@ -5,20 +5,23 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { cardsToTables, formatCards, formatPicks, formatSponsor, parseCsv, tablesToCards, toCsv } from './sheet-format.mjs';
+import { existsSync } from 'node:fs';
+import { cardsToTables, formatCards, formatPicks, formatSponsor, formatUpdates, parseCsv, tablesToCards, toCsv } from './sheet-format.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const out = process.argv[2] ?? join(root, 'sheet-export');
 const cardsText = readFileSync(join(root, 'data', 'cards.json'), 'utf8');
 const sponsorText = readFileSync(join(root, 'data', 'sponsor.json'), 'utf8');
 const picksText = readFileSync(join(root, 'data', 'picks.json'), 'utf8');
-const tables = cardsToTables(JSON.parse(cardsText), JSON.parse(sponsorText), JSON.parse(picksText));
+const updatesFile = join(root, 'data', 'updates.json');
+const updatesText = existsSync(updatesFile) ? readFileSync(updatesFile, 'utf8') : '[]\n';
+const tables = cardsToTables(JSON.parse(cardsText), JSON.parse(sponsorText), JSON.parse(picksText), JSON.parse(updatesText));
 
 const back = tablesToCards(
   Object.fromEntries(Object.entries(tables).map(([k, v]) => [k, parseCsv(toCsv(v))])),
   JSON.parse(cardsText)
 );
-if (back.errors.length || formatCards(back.cards) !== cardsText || formatSponsor(back.sponsor) !== sponsorText || formatPicks(back.picks) !== picksText) {
+if (back.errors.length || formatCards(back.cards) !== cardsText || formatSponsor(back.sponsor) !== sponsorText || formatPicks(back.picks) !== picksText || formatUpdates(back.updates) !== formatUpdates(JSON.parse(updatesText))) {
   console.error('✖ The data does not survive a trip through the sheet unchanged:', back.errors.join('; ') || 'output differs');
   process.exit(1);
 }

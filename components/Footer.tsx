@@ -39,6 +39,7 @@ export function Footer({ updated, words }: { updated: string; words?: FooterWord
             <Link href="/corridors">Corridor finder</Link>
             <Link href="/compare">Compare</Link>
             <Link href="/guides">Guides</Link>
+            <Link href="/updates">Updates</Link>
             <Link href="/methodology">Methodology</Link>
             <Link href="/submit">Submit a card</Link>
               </>
