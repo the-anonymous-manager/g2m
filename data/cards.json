@@ -300,8 +300,8 @@
     "forms": ["virtual", "physical"],
     "custody": "self-custodial",
     "summary": "Non-custodial Visa card paying 3% back on every tier, with Visa Signature perks and airport lounges from Luxe up.",
-    "cashback": { "basePct": 3, "maxPct": 4, "payout": "ETHFI", "note": "3% on the first $2,000 a month (Core), $10,000 (Luxe) or $50,000 (Pinnacle), then 1%, then 0.5%. VIP: 4% on the first $50,000 a month (the rate above is not published). Lower 3% limits on purchases settled in euros. Paid in ETHFI after a 7-day lock." },
-    "fees": { "annualUsd": 0, "fxPct": 0.5, "fxNote": "No FX fee on USD or EUR purchases (EUR in beta). Other currencies: about 1% network rate plus 0.5% (Core), 0.25% (Luxe) or nothing (Pinnacle, VIP).", "fxByCurrency": { "USD": 0, "EUR": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 50, "atm": "Free: 10 a month on Core and Luxe, unlimited on Pinnacle and VIP. Up to $5,000 per withdrawal, 5 a day", "other": ["Virtual cards: 1 free on Core, 4 on Luxe, 10 on Pinnacle, 50 on VIP, then $10 each. In 14 countries (e.g. Mexico, Nigeria, the Philippines) the first one costs $10 on Core", "Physical card: plastic $50 on Core; Luxe includes 1 metal card, Pinnacle and VIP 2 (extra ones $100)"] },
+    "cashback": { "basePct": 3, "maxPct": 4, "payout": "ETHFI", "note": "3% on the first $2,000 a month (Core), $10,000 (Luxe) or $50,000 (Pinnacle), then 1%, then 0.5%. VIP: 4% on the first $50,000 a month (the rate above is not published). Purchases in euros or Swiss francs (no FX fee) get 3% only on a lower part of the same monthly total ($800 Core, $3,000 Luxe, $16,000 Pinnacle, 4% on $16,000 VIP) and 0.1% in the top band. Tax and rent payments earn cashback since 30 Oct 2026. Paid in ETHFI after a 7-day lock." },
+    "fees": { "annualUsd": 0, "fxPct": 0.5, "fxNote": "No FX fee on USD, EUR and (since 16 Nov 2026) Swiss franc purchases. Other currencies: about 1% network rate plus 0.5% (Core), 0.25% (Luxe) or nothing (Pinnacle, VIP).", "fxByCurrency": { "USD": 0, "EUR": 0, "CHF": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 50, "atm": "Free: 10 a month on Core and Luxe, unlimited on Pinnacle and VIP. Up to $5,000 per withdrawal, 5 a day", "other": ["Virtual cards: 1 free on Core, 4 on Luxe, 10 on Pinnacle, 50 on VIP, then $10 each. In 14 countries (e.g. Mexico, Nigeria, the Philippines) the first one costs $10 on Core", "Physical card: plastic $50 on Core; Luxe includes 1 metal card, Pinnacle and VIP 2 (extra ones $100)"] },
     "tiers": [
       { "name": "Core", "feeUsdYear": 0, "cashbackPct": 3, "bands": [ { "uptoUsd": 2000, "pct": 3 }, { "uptoUsd": 3000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "fxPct": 0.5, "requirement": "Free for everyone", "perks": ["Visa concierge", "Purchase and price protection", "10 free ATM withdrawals a month", "1 free virtual card", "Plastic physical card $50"] },
       { "name": "Luxe", "feeUsdYear": 199, "feeNote": "Or 5K points a month, $15K in Liquid, or 30K ETHFI staked", "cashbackPct": 3, "bands": [ { "uptoUsd": 10000, "pct": 3 }, { "uptoUsd": 20000, "pct": 1 }, { "uptoUsd": null, "pct": 0.5 } ], "fxPct": 0.25, "requirement": "$199/year, 5K points a month, $15K in Liquid or 30K ETHFI staked", "stake": { "token": "ETHFI", "amount": 30000, "coingeckoId": "ether-fi" }, "perks": ["10% Category Cashback on subscriptions, up to $10 a month", "Purple metal card included", "4 free virtual cards", "2 airport lounge passes a year", "10 free ATM withdrawals a month", "Visa concierge"] },
@@ -342,9 +342,12 @@
       { "label": "ether.fi Help: How does Category Cashback work?", "url": "https://help.ether.fi/en/articles/823083-how-does-category-cashback-work", "verified": "2026-10-25" },
       { "label": "ether.fi Help: Why purchase a Membership upgrade?", "url": "https://help.ether.fi/en/articles/846487-why-purchase-a-membership-upgrade", "verified": "2026-10-25" },
       { "label": "ether.fi Help: ATM withdrawal limits for personal Cash cards", "url": "https://help.ether.fi/en/articles/303623-what-are-the-atm-withdrawal-limits-for-personal-cash-cards", "verified": "2026-10-25" },
-      { "label": "ether.fi app: referral offer, 3% cashback on all purchases (checked in the app by G2M)", "url": "https://www.ether.fi/app/cash/referral", "verified": "2026-11-03" }
+      { "label": "ether.fi app: referral offer, 3% cashback on all purchases (checked in the app by G2M)", "url": "https://www.ether.fi/app/cash/referral", "verified": "2026-11-03" },
+      { "label": "ether.fi Help: How does cashback work? (EUR and CHF bands, tax and rent from 30 Oct 2026)", "url": "https://help.ether.fi/en/articles/262374-how-does-cashback-work", "verified": "2026-11-19" },
+      { "label": "ether.fi Help: CHF purchases 0% FX rate (from 16 Nov 2026)", "url": "https://help.ether.fi/en/articles/895885-chf-purchases-0-fx-rate", "verified": "2026-11-19" },
+      { "label": "ether.fi Help: EUR purchases 0% FX rate", "url": "https://help.ether.fi/en/articles/604957-eur-purchases-0-fx-rate", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-12",
+    "lastChecked": "2026-11-19",
     "metal": "silver",
     "image": { "source": "https://g2m.life/card-originals/etherfi.avif", "file": "/card-images/etherfi-771a2daf.webp" }
   },
@@ -439,9 +442,10 @@
       { "label": "Nexo Help: Nexo Savings (cited by the Nexo team)", "url": "https://support.nexo.com/en/articles/nexo-savings", "verified": "2026-10-25" },
       { "label": "Nexo: referral rewards for invited friends (45-day window, NEXO Token rewards by tier)", "url": "https://nexo.com/ref/imwig0fvpw", "verified": "2026-11-03" },
       { "label": "Nexo app: Referral Program, how it works (30-day average balance, 0.5% NEXO bonus; checked in the app by G2M)", "url": "https://nexo.com/ref", "verified": "2026-11-03" },
-      { "label": "Nexo: Crypto Card page (cashback, FX, free ATM limits by tier, physical card from Gold tier)", "url": "https://nexo.com/crypto-card", "verified": "2026-11-12" }
+      { "label": "Nexo: Crypto Card page (cashback, FX, free ATM limits by tier, physical card from Gold tier)", "url": "https://nexo.com/crypto-card", "verified": "2026-11-12" },
+      { "label": "Nexo: Crypto Card page (re-checked; cashback, FX, ATM unchanged)", "url": "https://nexo.com/crypto-card", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-12",
+    "lastChecked": "2026-11-19",
     "metal": "gunmetal",
     "image": { "source": "https://g2m.life/card-originals/nexo.webp", "file": "/card-images/nexo-ee91231a.webp" }
   },
@@ -560,7 +564,7 @@
     "custody": "custodial",
     "summary": "Solana-native Visa card with 2% back in USDC, rising to 4% when you refer friends. Available across Asia-Pacific, the Gulf, Latin America and 31 US states.",
     "cashback": { "basePct": 2, "maxPct": 4, "payout": "USDC", "note": "2% capped at $100 a month; 4% after 2 qualifying referrals in the previous month, capped at $200 a month." },
-    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "No fee on USD payments. Other currencies: 1% on Rain-issued cards, 1.8% on DCS-issued cards (Asia-Pacific).", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 13.13, "atm": "Rain-issued physical card: $1 + 0.65% per withdrawal (non-USD adds $0.30 + 1%), $0.60 for a balance inquiry or decline. DCS-issued cards: no ATM access for now.", "other": ["Physical card $13.13 plus shipping"] },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "No fee on USD payments. Other currencies: 1% on Rain-issued cards, 1.8% on DCS-issued cards (Asia-Pacific).", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 13.13, "atm": "Rain-issued physical card: $1 + 0.65% per withdrawal (non-USD adds $0.30 + 1%), $0.60 for a balance inquiry or decline, up to $250 per withdrawal and 3 tries a day. DCS-issued cards: no ATM access for now.", "other": ["Physical card $13.13 plus shipping"] },
     "tiers": [
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 2, "capMonthlyUsd": 100 },
       { "name": "Referral boost", "feeUsdYear": 0, "cashbackPct": 4, "capMonthlyUsd": 200, "requirement": "2 qualifying referrals in the previous month" }
@@ -588,9 +592,11 @@
       { "label": "Jupiter docs: Rewards & Referrals (friend gets $20 after $1,000 spend within 30 days of card activation; where to enter a code)", "url": "https://docs.jup.ag/user-docs/global/spend/rewards-and-referrals", "verified": "2026-11-04" },
       { "label": "Jupiter app: card not offered to residents of India (checked in the app by G2M)", "url": "https://jup.ag/", "verified": "2026-11-04" },
       { "label": "Jupiter docs: Rewards & Referrals (2% capped at $100 a month, 4% capped at $200)", "url": "https://docs.jup.ag/user-docs/global/spend/rewards-and-referrals", "verified": "2026-11-12" },
-      { "label": "Jupiter docs: Fees and limits (ATM fees for Rain and DCS cards)", "url": "https://docs.jup.ag/user-docs/global/spend/fees-and-limits", "verified": "2026-11-15" }
+      { "label": "Jupiter docs: Fees and limits (ATM fees for Rain and DCS cards)", "url": "https://docs.jup.ag/user-docs/global/spend/fees-and-limits", "verified": "2026-11-15" },
+      { "label": "Jupiter docs: Rewards & Referrals (re-checked; 2%/4%, $20 for the new user)", "url": "https://docs.jup.ag/user-docs/global/spend/rewards-and-referrals", "verified": "2026-11-19" },
+      { "label": "Jupiter docs: Fees and limits (ATM up to $250 per withdrawal, 3 tries a day)", "url": "https://docs.jup.ag/user-docs/global/spend/fees-and-limits", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-12",
+    "lastChecked": "2026-11-19",
     "metal": "rose",
     "image": { "source": "https://g2m.life/card-originals/jupiter.png", "file": "/card-images/jupiter-16f17db8.webp" }
   },
@@ -1434,7 +1440,7 @@
     "forms": ["virtual"],
     "custody": "self-custodial",
     "summary": "A prepaid USD Visa from the Kite wallet app, for nine Asia-Pacific countries: free card, free to load, 1.8% on non-USD spending.",
-    "cashback": { "basePct": 0, "maxPct": 5, "payout": "USD", "note": "No cashback on everyday spending. Until 30 Nov 2026: 5% back on Grab, Travala travel bookings, iShopChangi, Starlink, and one monthly charge per service for Netflix, YouTube Premium, Prime Video, Spotify, eligible AI tools (e.g. ChatGPT Plus, Claude Pro) and Figma, LinkedIn, X or Telegram Premium. No cap. Also 5% on some crypto event tickets (up to $200) and 50% off the first QR payment (up to $10). Paid in USD to the card after each month, once 30 days have passed. Plus a spend-based welcome reward of up to $200." },
+    "cashback": { "basePct": 0, "maxPct": 5, "payout": "USD", "note": "No cashback on everyday spending. Until 30 Nov 2026: 5% back on Grab, Travala travel bookings, Starlink, and one monthly charge per service for Netflix, YouTube Premium, Prime Video, Spotify, eligible AI tools (e.g. ChatGPT Plus, Claude Pro) and Figma, LinkedIn, X or Telegram Premium, with no cap; and 10% back on GTA VI (17 to 30 Nov, up to $50). Paid in USD to the card once the 30-day pending period has passed." },
     "fees": { "annualUsd": 0, "fxPct": 1.8, "fxNote": "Spending in USD is free; 1.8% on other currencies. Money on the card is held in USD.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "atm": "Coming soon", "other": ["Card replacement free", "Limits: $50,000 or 50 purchases a day; $990,000 a year"] },
     "tiers": [
       { "name": "Kite Card", "feeUsdYear": 0, "cashbackPct": 0, "perks": ["5% back on Grab, Travala, streaming, AI and creator subscriptions and Starlink until 30 Nov 2026 (no cap)"] }
@@ -1459,9 +1465,13 @@
       { "label": "Kite: offers and rewards terms (30-day pending, paid per offer terms)", "url": "https://www.kiteapp.xyz/offer-reward-terms", "verified": "2026-10-29" },
       { "label": "Kite offer: 5% back on Grab (no cap, paid in USD to the card)", "url": "https://www.kiteapp.xyz/offers/grab", "verified": "2026-10-29" },
       { "label": "Kite offer: 5% back on AI subscriptions (no cap)", "url": "https://www.kiteapp.xyz/offers/ai-subscriptions", "verified": "2026-10-29" },
-      { "label": "Kite Help: Getting your Kite card (live in a supported country)", "url": "https://www.kiteapp.xyz/help/getting-your-kite-card-what-it-is-eligibility", "verified": "2026-11-15" }
+      { "label": "Kite Help: Getting your Kite card (live in a supported country)", "url": "https://www.kiteapp.xyz/help/getting-your-kite-card-what-it-is-eligibility", "verified": "2026-11-15" },
+      { "label": "Kite: offers (5% offers until 30 Nov 2026; iShopChangi and event-ticket offers ended)", "url": "https://www.kiteapp.xyz/offers", "verified": "2026-11-19" },
+      { "label": "Kite offer: 10% back on GTA VI, up to $50 (17 to 30 Nov 2026)", "url": "https://www.kiteapp.xyz/offers/gta-6", "verified": "2026-11-19" },
+      { "label": "Kite Help: Kite Card fees & limits (re-checked)", "url": "https://www.kiteapp.xyz/help/kite-card-fees-limits", "verified": "2026-11-19" },
+      { "label": "Kite: referral program ($5 to the referrer only; until 30 Nov 2026)", "url": "https://www.kiteapp.xyz/referral-program", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-03",
+    "lastChecked": "2026-11-19",
     "addedOn": "2026-10-29",
     "metal": "silver",
     "image": { "source": "https://g2m.life/card-originals/kite.png", "file": "/card-images/kite-d251244c.webp" }
@@ -1501,9 +1511,11 @@
       { "label": "SolCard: SOLC staking tiers and card rewards", "url": "https://www.solcard.cc/staking", "verified": "2026-10-31" },
       { "label": "SolCard: card agreement (Hong Kong and sanctions restrictions, cashback expiry)", "url": "https://www.solcard.cc/terms", "verified": "2026-10-31" },
       { "label": "SolCard: crypto debit card for the US (Virtual only, Platinum not in the US)", "url": "https://www.solcard.cc/crypto-debit-card-usa", "verified": "2026-10-31" },
-      { "label": "SolCard app: referral, $10 off Virtual card issuance (checked in the app by G2M)", "url": "https://www.solcard.cc/", "verified": "2026-11-03" }
+      { "label": "SolCard app: referral, $10 off Virtual card issuance (checked in the app by G2M)", "url": "https://www.solcard.cc/", "verified": "2026-11-03" },
+      { "label": "SolCard: fee schedule (re-checked; unchanged, 5% + $10 Virtual, 0% Platinum, no monthly fee)", "url": "https://www.solcard.cc/fees", "verified": "2026-11-19" },
+      { "label": "SolCard: Virtual vs Platinum comparison (re-checked)", "url": "https://www.solcard.cc/product", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-10-31",
+    "lastChecked": "2026-11-19",
     "addedOn": "2026-10-31",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/solcard.webp", "file": "/card-images/solcard-7c9036b7.webp" }
@@ -1683,9 +1695,12 @@
       { "label": "XPlace docs: about the card (FX fees, Apple Pay, Google Pay)", "url": "https://docs.x.place/card/about-xplace-sard", "verified": "2026-11-04" },
       { "label": "XPlace: restricted countries and US states", "url": "https://docs.x.place/legal/legal/prohibitions", "verified": "2026-11-04" },
       { "label": "XPlace: card terms for international users (fees)", "url": "https://docs.x.place/legal/legal/card-terms-international-user", "verified": "2026-11-04" },
-      { "label": "XPlace docs: referral program, $5 to $250 each after card activation and $100 in Credit Mode", "url": "https://docs.x.place/getting-started/referral-program", "verified": "2026-11-04" }
+      { "label": "XPlace docs: referral program, $5 to $250 each after card activation and $100 in Credit Mode", "url": "https://docs.x.place/getting-started/referral-program", "verified": "2026-11-04" },
+      { "label": "XPlace docs: membership plans (re-checked)", "url": "https://docs.x.place/getting-started/membership", "verified": "2026-11-19" },
+      { "label": "XPlace docs: cashback rates and monthly caps (re-checked)", "url": "https://docs.x.place/getting-started/cashback", "verified": "2026-11-19" },
+      { "label": "XPlace docs: referral program, $5 to $250 each (re-checked)", "url": "https://docs.x.place/getting-started/referral-program", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-04",
+    "lastChecked": "2026-11-19",
     "addedOn": "2026-11-04",
     "metal": "silver",
     "image": { "source": "https://g2m.life/card-originals/xplace.png", "file": "/card-images/xplace-4127bb21.webp" }
@@ -1807,7 +1822,7 @@
     "perks": ["USD and EUR account details in your name", "About 5.2% APY on stablecoins through DeFi vaults (variable, capital at risk)", "Pro: double points at ChatGPT, Claude, X, Uber and Bolt, partner offers, no Invest fees"],
     "pros": ["No FX fee when you spend USD or EUR from the matching balance", "Named USD and EUR account details, funded 1:1 with stablecoins", "Apple Pay and Google Pay"],
     "cons": ["Points only refund past purchases and expire (4 months on Free)", "Virtual card only", "The Free plan pays 0.5% on the first $500 a month, then 0.25%"],
-    "links": { "official": "https://pulsar.money/", "affiliate": "https://pulsar.money/download" },
+    "links": { "official": "https://pulsar.money/", "affiliate": "https://pulsar.money/i/KW424?s=cp" },
     "sources": [
       { "label": "Pulsar Help: Pricing & Fees", "url": "https://help.pulsar.money/en/articles/16752647-pricing-fees", "verified": "2026-11-13" },
       { "label": "Pulsar Help: Pulsar Points Explained", "url": "https://help.pulsar.money/en/articles/16752632-pulsar-points-explained", "verified": "2026-11-13" },
