@@ -599,6 +599,10 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- Guessed card addresses (19 Nov 2026, Akash with a /stats screenshot of broken pages: /cards/pulsar-money-card,
+  /en/cards/pulsar-money-card, /zh-hk/cards/coca-card). `next.config.mjs` now forwards (308) "<slug>-card" to the card
+  (and "avalanche" to "avalanche-card"), in every language and for /alternatives and /referral-code; "/en/..." to the
+  English page; "/card/..." to "/cards/...". Built from data/cards.json at each deploy, so new cards are covered.
 - Updates page (19 Nov 2026, Akash: "Make methology in the footer and place something like card offers or updates. we
   will write about new card updates or new offer from cards, bonus etc. It can short update a long update ... also there
   we can place our card refer link"). The header's last link is now "Updates" (`/updates`; de News, fr Actus, es
