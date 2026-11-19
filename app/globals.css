@@ -1953,10 +1953,137 @@ body::before {
   }
 }
 
-/* ---------- Tier break-even ---------- */
+/* ---------- Which tier pays off (card page) ---------- */
+/* Marked off from the plain tiers table below: rose-gold edge and tinted head, larger title. */
+.tier-be {
+  padding: 0;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  border-inline-start: 4px solid var(--accent);
+}
+.tier-be-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 26px 20px;
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+  border-bottom: 1px solid var(--border);
+}
+.tier-be-head .field-label {
+  color: var(--accent);
+}
+.tier-be-title {
+  margin: 0;
+  font-size: clamp(1.35rem, 1.1rem + 0.9vw, 1.7rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.tier-be-head p {
+  font-size: 15.5px;
+  line-height: 1.55;
+  max-width: 78ch;
+}
+.tier-be-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin-top: 4px;
+}
+.tier-be-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.tier-be-input {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+}
+.tier-be-input .input {
+  width: 120px;
+  min-height: 42px;
+  padding: 6px 12px;
+  font-size: 16px;
+}
+.tier-be-table {
+  min-width: 860px;
+}
+.tier-be-table td {
+  font-size: 15.5px;
+  vertical-align: top;
+}
+.tier-be-name {
+  min-width: 200px;
+  max-width: 300px;
+}
+.tier-be-name b {
+  font-size: 16px;
+}
+.tier-be-sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+.tier-be-need {
+  display: block;
+  margin-top: 6px;
+  padding: 6px 9px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--warn, #b7791f) 12%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--warn, #b7791f) 35%, var(--border));
+  font-size: 13px;
+  line-height: 1.45;
+  font-weight: 400;
+}
+.tier-be-need-tag {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+.tier-be-entry {
+  background: color-mix(in srgb, var(--surface-2) 70%, transparent);
+}
+.tier-be-keep {
+  font-weight: 650;
+}
+.tier-be-up {
+  color: var(--ok);
+  font-weight: 650;
+}
+.tier-be-down {
+  color: var(--bad, #b42318);
+  font-weight: 650;
+}
+.tier-be-pays {
+  color: var(--accent);
+}
+.tier-be-never {
+  color: var(--muted);
+}
+.tier-be-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 26px 18px;
+}
+.tier-be-foot p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.tier-be-stakes {
+  padding: 18px 26px 22px;
+  border-top: 1px solid var(--border);
+}
 .tier-be-list {
   margin: 0;
-  padding-left: 18px;
+  padding-inline-start: 18px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -1966,23 +2093,22 @@ body::before {
 .tier-be-stress {
   color: var(--muted);
 }
-.tier-be-stake-head {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px 16px;
+@media (max-width: 720px) {
+  .tier-be-head,
+  .tier-be-foot,
+  .tier-be-stakes {
+    padding-inline: 16px;
+  }
+  .tier-be-table {
+    min-width: 0;
+  }
+  .tier-be-name {
+    max-width: none;
+  }
 }
-.tier-be-spend {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-}
-.tier-be-spend .input {
-  width: 110px;
-  min-height: 38px;
-  padding: 6px 10px;
+[dir='rtl'] .tier-be-head,
+[lang='ar'] .tier-be-head {
+  letter-spacing: normal;
 }
 
 /* ---------- 2-card wallet ---------- */

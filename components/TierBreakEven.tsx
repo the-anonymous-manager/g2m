@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import type { CardRow, Tier } from '@/lib/types';
-import { BREAK_EVEN_LIMIT, breakEvens, parseCalcInput, tierValue } from '@/lib/calc';
+import { BREAK_EVEN_LIMIT, hasRate, tierMonth, tierPayoffs, type TierPayoff } from '@/lib/calc';
 import { money } from '@/lib/format';
 import type { Ui } from '@/lib/i18n/ui/en';
 
@@ -12,19 +12,22 @@ type Props = {
   card: CardRow;
   /** Live USD prices by CoinGecko id. Missing = unavailable. */
   prices: Record<string, number>;
-  /** Another language: its card words and BCP 47 tag (for amounts). English when left out. */
-  words?: Ui['card'];
+  /** The card page's words in the page's language (English included). */
+  words: Ui['card'];
+  /** BCP 47 tag for amounts in another language. English ("$1,234") when left out. */
   tag?: string;
+  /** Tier names and requirements in the page's language, by tier index. English when left out. */
+  names?: string[];
+  needs?: (string | null)[];
 };
 
-const price = (t: Tier) => (t.feeUsdYear == null ? 'price not published' : t.feeUsdYear ? `${money(t.feeUsdYear)}/yr` : 'free');
-const fmtUsd = (n: number) =>
-  n >= 100 ? money(n) : `$${n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-
-// When does each tier beat the entry tier, and what does a staking tier really put at risk?
-export function TierBreakEven({ card, prices, words, tag }: Props) {
-  const w = words;
-  // Amounts: English keeps "$1,234"; other languages use Intl.
+/**
+ * "Which tier pays off?" on the card page: every tier against its starting tier at the visitor's monthly spend and
+ * share of spending in other currencies, with cashback (bands and cap), the yearly fee, the tier's FX fee and the
+ * card's other fees counted, the spend from which it pays off (a stated minimum spend included), and what else the
+ * tier asks for marked under its name. A token stake gets its live value and a 25% drop test below.
+ */
+export function TierBreakEven({ card, prices, words: w, tag, names, needs }: Props) {
   const intl = useMemo(
     () => (tag ? new Intl.NumberFormat(tag, { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 0 }) : null),
     [tag]
@@ -33,19 +36,38 @@ export function TierBreakEven({ card, prices, words, tag }: Props) {
     () => (tag ? new Intl.NumberFormat(tag, { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 }) : null),
     [tag]
   );
+  /** Whole dollars (spend levels). */
   const M = (n: number) => (intl ? intl.format(n) : money(n));
-  const F = (n: number) => (intl ? (n >= 100 ? intl.format(n) : intl2!.format(n)) : fmtUsd(n));
-  const priceOf = (t: Tier) =>
-    w ? (t.feeUsdYear == null ? w.priceNP : t.feeUsdYear ? fillT(w.pricePerYear, { x: M(t.feeUsdYear) }) : w.priceFree) : price(t);
+  /** Monthly amounts: cents under $100. */
+  const F = (n: number): string => {
+    if (n <= -0.005) return `−${F(-n)}`;
+    const a = Math.abs(n);
+    if (intl) return a >= 1000 ? intl.format(a) : intl2!.format(a);
+    return a >= 1000 ? money(a) : `$${a.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  };
+  const signed = (n: number) => (Math.abs(n) < 0.005 ? F(0) : `${n > 0 ? '+' : '−'}${F(Math.abs(n))}`);
   const num = (n: number) => (tag ? n.toLocaleString(tag) : n.toLocaleString('en-US'));
+  const name = (i: number) => names?.[i] ?? card.tiers[i].name;
+  const need = (i: number, p: TierPayoff) => (p.condition ? (needs?.[i] ?? p.condition) : null);
+
   const [spendText, setSpendText] = useState('1000');
+  const [abroadText, setAbroadText] = useState('20');
   const spend = Math.min(Math.max(Number(spendText) || 0, 0), 1_000_000);
-  // Ongoing rates and fees only, all spending in the card's own currency: the tier difference on its own.
-  const base = useMemo(() => parseCalcInput({ usd: 0, travel: 0, all: true }), []);
-  const pairs = useMemo(() => breakEvens(card, base, null, 'entry'), [card, base]);
-  const entry = card.tiers.find((t) => !t.comingSoon) ?? card.tiers[0];
-  const entryIndex = card.tiers.indexOf(entry);
-  const at = (t: Tier, s: number) => tierValue(card, t, { ...base, spend: s }, card.tiers.indexOf(t)).net;
+  const abroad = Math.min(Math.max(Number(abroadText) || 0, 0), 100);
+
+  // Pay-off points depend on the share abroad only; the monthly figures on both inputs.
+  const payoffs = useMemo(() => tierPayoffs(card, abroad), [card, abroad]);
+  const months = useMemo(() => {
+    const m = new Map<number, ReturnType<typeof tierMonth>>();
+    for (const i of payoffs.keys()) m.set(i, tierMonth(card, i, spend, abroad));
+    return m;
+  }, [card, payoffs, spend, abroad]);
+
+  const rows = [...payoffs.entries()];
+  const showOther = rows.some(([i]) => (months.get(i)?.other ?? 0) >= 0.005);
+  const entries = [...new Set(rows.map(([, p]) => p.entry))];
+  // The entry tier named in the lead: the first group's (a second line-up, e.g. US tiers, has its own row marked).
+  const leadEntry = entries[0];
 
   const stakes = card.tiers
     .map((t, i) => ({ t, i }))
@@ -54,154 +76,190 @@ export function TierBreakEven({ card, prices, words, tag }: Props) {
       const stake = t.stake!;
       const p = stake.coingeckoId ? prices[stake.coingeckoId] : undefined;
       const value = p != null && stake.amount != null ? p * stake.amount : null;
-      // Extra kept each month on this tier vs the entry tier at the visitor's spend. When the stake replaces the
-      // yearly fee ("$199 a year, or lock 20,000 XPL"), staking means not paying that fee.
-      const staked = tierValue(card, t, { ...base, spend }, i);
-      const kept = staked.net + (t.feeUsdYear ? staked.fee : 0);
-      const gain = i === entryIndex ? 0 : (kept - at(entry, spend)) / 12;
+      // Extra kept each month on this tier vs its starting tier. When the stake replaces the yearly fee ("$199 a
+      // year, or lock 20,000 XPL"), staking means not paying that fee.
+      const pay = payoffs.get(i);
+      const entry = pay?.entry ?? card.tiers.findIndex((x) => !x.comingSoon);
+      const mine = tierMonth(card, i, spend, abroad);
+      const base = tierMonth(card, entry, spend, abroad);
+      const short = pay?.minSpend != null && spend < pay.minSpend;
+      const gain = i === entry || short || pay?.noRate ? 0 : mine.net + (t.feeUsdYear ? mine.fee : 0) - base.net;
       const drop = value != null ? value * 0.25 : null;
-      return { t, stake, p, value, gain, drop, months: drop != null && gain > 0 ? drop / gain : null };
+      return { t, i, entry, stake, p, value, gain, drop, months: drop != null && gain > 0 ? drop / gain : null };
     });
 
-  if (pairs.length === 0 && stakes.length === 0) return null;
+  if (rows.length === 0 && stakes.length === 0) return null;
+
+  const paysOff = (i: number, p: TierPayoff) => {
+    if (i === p.entry) return <span className="faint">{w.beBase}</span>;
+    if (p.unpriced) return <span className="faint">{w.priceNP}</span>;
+    if (p.noRate) return <span className="faint">{w.beNoRate}</span>;
+    if (p.from == null) return <span className="tier-be-never">{fillT(w.beNever, { x: M(BREAK_EVEN_LIMIT) })}</span>;
+    const text =
+      p.from <= 1
+        ? p.until != null
+          ? fillT(w.beUpTo, { y: M(p.until) })
+          : w.beAny
+        : p.until != null
+          ? fillT(w.beRange, { x: M(p.from), y: M(p.until) })
+          : fillT(w.beFrom, { x: M(p.from) });
+    return <b className="tier-be-pays">{text}</b>;
+  };
 
   return (
-    <div className="panel panel-pad stack tier-be" style={{ gap: 14 }}>
-      <div className="stack" style={{ gap: 4 }}>
-        <span className="field-label">[ {w?.beTag ?? 'tier break-even'} ]</span>
-        <p className="muted" style={{ margin: 0, fontSize: 14 }}>
-          {w ? (
-            fillT(w.beLead, { entry: entry.name, price: priceOf(entry) })
-          ) : (
-            <>
-              When a paid tier pays for itself against {entry.name} ({price(entry)}), with its yearly fee and monthly cashback cap
-              counted.
-            </>
-          )}
-        </p>
-      </div>
-      {pairs.length ? (
-        <ul className="tier-be-list">
-          {pairs.map((p) => {
-            const to = `${p.to.tier.name} (${priceOf(p.to.tier)})`;
-            const from = `${p.from.tier.name} (${priceOf(p.from.tier)})`;
-            const unpriced = p.to.tier.feeUsdYear == null || p.from.tier.feeUsdYear == null;
-            return (
-              <li key={p.to.tier.name}>
-                {unpriced ? (
-                  <>
-                    <b>{p.to.tier.name}</b>
-                    {w ? w.beUnpriced : <>: can&apos;t be worked out, the price is not published.</>}
-                  </>
-                ) : p.beatsFrom != null && p.beatsFrom <= 1 ? (
-                  w ? (
-                    <>
-                      {fillT(w.beAnySpend, { to, from })}
-                      {p.until != null ? fillT(w.beUntil, { x: M(p.until) }) : ''}
-                      {p.to.tier.stake ? fillT(w.beIfStake, { token: p.to.tier.stake.token }) : ''}.
-                    </>
-                  ) : (
-                    <>
-                      <b>{to}</b> beats {from} at any spend{p.until != null ? `, up to ${money(p.until)} a month` : ''}
-                      {p.to.tier.stake ? `, if you hold the ${p.to.tier.stake.token} it needs (below)` : ''}.
-                    </>
-                  )
-                ) : p.beatsFrom == null ? (
-                  w ? (
-                    <>{fillT(w.beNever, { to, from, x: M(BREAK_EVEN_LIMIT) })}</>
-                  ) : (
-                    <>
-                      <b>{to}</b> never beats {from} (checked up to {money(BREAK_EVEN_LIMIT)} a month).
-                    </>
-                  )
-                ) : w ? (
-                  <>
-                    {fillT(w.beNeed, { x: M(p.beatsFrom), to, from })}
-                    {p.until != null ? fillT(w.beFallsBack, { x: M(p.until) }) : ''}.
-                  </>
-                ) : (
-                  <>
-                    You need to spend at least <b>{money(p.beatsFrom)} a month</b> for {to} to beat {from}
-                    {p.until != null ? `, and it falls behind again above ${money(p.until)}` : ''}.
-                  </>
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      ) : null}
-
-      {stakes.length ? (
-        <div className="stack" style={{ gap: 10 }}>
-          <div className="tier-be-stake-head">
-            <span className="field-label">[ {w?.stakeTag ?? 'staking check'} ]</span>
-            <label className="tier-be-spend">
-              <span className="faint">{w?.at ?? 'At'}</span>
+    <div className="panel tier-be">
+      <div className="tier-be-head">
+        <span className="field-label">[ {w.beTag} ]</span>
+        <h3 className="tier-be-title">{w.beTitle}</h3>
+        {leadEntry != null ? (
+          <p className="muted" style={{ margin: 0 }}>
+            {fillT(w.beLead, { entry: name(leadEntry) })}
+          </p>
+        ) : null}
+        <div className="tier-be-inputs">
+          <label className="tier-be-field">
+            <span>{w.beSpend}</span>
+            <span className="tier-be-input">
+              <span className="faint">$</span>
               <input
                 className="input num"
                 inputMode="decimal"
                 value={spendText}
                 onChange={(e) => setSpendText(e.target.value.replace(/[^\d.]/g, ''))}
-                aria-label={w?.spendAria ?? 'Monthly spend in US dollars'}
+                aria-label={w.spendAria}
               />
-              <span className="faint">{w?.aMonth ?? 'a month'}</span>
-            </label>
-          </div>
+              <span className="faint">{w.aMonth}</span>
+            </span>
+          </label>
+          <label className="tier-be-field">
+            <span>{w.beAbroad}</span>
+            <span className="tier-be-input">
+              <input
+                className="input num"
+                inputMode="numeric"
+                value={abroadText}
+                onChange={(e) => setAbroadText(e.target.value.replace(/[^\d]/g, '').slice(0, 3))}
+                aria-label={w.beAbroadAria}
+                style={{ width: 72 }}
+              />
+              <span className="faint">%</span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      {rows.length ? (
+        <div className="table-wrap stack-wrap">
+          <table className="table stack-table tier-be-table">
+            <thead>
+              <tr>
+                <th scope="col">{w.tier}</th>
+                <th scope="col">{w.cashback}</th>
+                <th scope="col">{w.beFx}</th>
+                <th scope="col">{w.bePlan}</th>
+                {showOther ? <th scope="col">{w.beOther}</th> : null}
+                <th scope="col">{w.beKeep}</th>
+                <th scope="col">{fillT(w.beVs, { entry: name(leadEntry) })}</th>
+                <th scope="col">{w.bePays}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map(([i, p]) => {
+                const m = months.get(i)!;
+                const base = months.get(p.entry)!;
+                const short = p.minSpend != null && spend < p.minSpend;
+                const gain = m.net - base.net;
+                const cond = need(i, p);
+                const t: Tier = card.tiers[i];
+                const isEntry = i === p.entry;
+                return (
+                  <tr key={t.name} className={isEntry ? 'tier-be-entry' : undefined}>
+                    <td className="tier-be-name">
+                      <b>{name(i)}</b>
+                      {isEntry && p.entry !== leadEntry ? <span className="faint tier-be-sub">{w.beBase}</span> : null}
+                      {cond ? (
+                        <span className="tier-be-need">
+                          <span className="tier-be-need-tag">{w.beNeeds}</span> {cond}
+                        </span>
+                      ) : null}
+                      {t.stake && t.feeUsdYear ? (
+                        <span className="faint tier-be-sub">
+                          {fillT(w.beOrStake, { amount: t.stake.amount != null ? num(t.stake.amount) : '?', token: t.stake.token })}
+                        </span>
+                      ) : null}
+                    </td>
+                    <td className="num" data-label={w.cashback}>
+                      {hasRate(t) ? F(m.cashback) : <span className="faint">{w.beNoRate}</span>}
+                    </td>
+                    <td className="num" data-label={w.beFx}>
+                      {m.fx >= 0.005 ? `−${F(m.fx)}` : F(0)}
+                    </td>
+                    <td className="num" data-label={w.bePlan}>
+                      {t.feeUsdYear == null ? <span className="faint">{w.priceNP}</span> : m.fee >= 0.005 ? `−${F(m.fee)}` : F(0)}
+                    </td>
+                    {showOther ? (
+                      <td className="num" data-label={w.beOther}>
+                        {m.other >= 0.005 ? `−${F(m.other)}` : F(0)}
+                      </td>
+                    ) : null}
+                    <td className="num tier-be-keep" data-label={w.beKeep}>
+                      {t.feeUsdYear == null || !hasRate(t) ? '—' : F(m.net)}
+                    </td>
+                    <td
+                      className={`num ${!isEntry && !short && !p.unpriced && !p.noRate ? (gain > 0.005 ? 'tier-be-up' : gain < -0.005 ? 'tier-be-down' : '') : ''}`}
+                      data-label={fillT(w.beVs, { entry: name(p.entry) })}
+                    >
+                      {isEntry || p.unpriced || p.noRate ? '—' : short ? <span className="faint">{fillT(w.beMinShort, { x: M(p.minSpend!) })}</span> : signed(gain)}
+                    </td>
+                    <td data-label={w.bePays}>{paysOff(i, p)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      ) : null}
+
+      <div className="tier-be-foot">
+        <p className="faint">{w.beMonthNote}</p>
+        <p className="faint">{w.beNotCounted}</p>
+      </div>
+
+      {stakes.length ? (
+        <div className="stack tier-be-stakes" style={{ gap: 10 }}>
+          <span className="field-label">[ {w.stakeTag} ]</span>
           <ul className="tier-be-list">
             {stakes.map((s) => (
               <li key={s.t.name}>
-                <b>{s.t.name}</b>:{' '}
-                {w
-                  ? s.stake.amount != null
-                    ? fillT(w.hold, { amount: num(s.stake.amount), token: s.stake.token })
-                    : fillT(w.holdUnknown, { token: s.stake.token })
-                  : `hold ${s.stake.amount != null ? s.stake.amount.toLocaleString('en-US') : 'an unpublished amount of'} ${s.stake.token}`}
+                <b>{name(s.i)}</b>:{' '}
+                {s.stake.amount != null
+                  ? fillT(w.hold, { amount: num(s.stake.amount), token: s.stake.token })
+                  : fillT(w.holdUnknown, { token: s.stake.token })}
                 {s.value != null ? (
                   <>
                     {' '}
-                    {w ? (
-                      fillT(w.stakeToday, { value: F(s.value), token: s.stake.token, price: F(s.p!) })
-                    ) : (
-                      <>
-                        = <b>{fmtUsd(s.value)}</b> today ({s.stake.token} at {fmtUsd(s.p!)}).
-                      </>
-                    )}{' '}
+                    {fillT(w.stakeToday, { value: F(s.value), token: s.stake.token, price: F(s.p!) })}{' '}
                     <span className="tier-be-stress">
-                      {w ? fillT(w.stakeDrop, { x: F(s.drop!) }) : (
-                        <>
-                          −25% token drop: <span style={{ whiteSpace: 'nowrap' }}>−{fmtUsd(s.drop!)}</span>.
-                        </>
-                      )}{' '}
-                      {w
-                        ? s.months != null
-                          ? fillT(w.earnBack, {
-                              time: s.months < 1 ? w.underMonth : fillT(w.monthsN, { n: Math.ceil(s.months) }),
-                              gain: F(s.gain),
-                              entry: entry.name
-                            })
-                          : fillT(w.neverBack, { entry: entry.name })
-                        : s.months != null
-                          ? `Earning that back takes ${s.months < 1 ? 'under a month' : `${Math.ceil(s.months)} month${Math.ceil(s.months) === 1 ? '' : 's'}`} of the extra ${fmtUsd(s.gain)} a month this tier keeps you over ${entry.name}.`
-                          : `At this spend the tier keeps you no more than ${entry.name}, so the cashback never earns it back.`}
+                      {fillT(w.stakeDrop, { x: F(s.drop!) })}{' '}
+                      {s.months != null
+                        ? fillT(w.earnBack, {
+                            time: s.months < 1 ? w.underMonth : !tag && Math.ceil(s.months) === 1 ? '1 month' : fillT(w.monthsN, { n: Math.ceil(s.months) }),
+                            gain: F(s.gain),
+                            entry: name(s.entry)
+                          })
+                        : fillT(w.neverBack, { entry: name(s.entry) })}
                     </span>
                   </>
                 ) : s.stake.amount == null ? (
-                  (w?.stakeNP ?? '. The stake amount is not published.')
+                  w.stakeNP
                 ) : (
-                  (w?.priceNA ?? '. Live price unavailable right now.')
+                  w.priceNA
                 )}
               </li>
             ))}
           </ul>
           <p className="faint" style={{ fontSize: 12, margin: 0 }}>
-            {w ? (
-              w.stakeNote
-            ) : (
-              <>
-                Prices from CoinGecko, updated hourly. A stake is your own money locked up, not a fee, but its value moves with
-                the token.
-              </>
-            )}
+            {w.stakeNote}
           </p>
         </div>
       ) : null}
