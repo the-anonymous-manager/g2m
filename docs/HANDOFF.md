@@ -599,6 +599,17 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- Tier check on the card page (19 Nov 2026, Akash: the tier break-even "only counts cashback ... make it a little
+  bit bigger and marked"). The old "[ tier break-even ]" list is now "Which tier pays off?" (`components/TierBreakEven.tsx`,
+  `tierPayoffs`/`tierMonth`/`tierGroups`/`tierMinSpend`/`tierCondition` in `lib/calc.ts`): a marked panel (rose-gold edge,
+  larger title) with the visitor's monthly spend and share spent in other currencies, and a table per tier: cashback
+  (bands and cap), FX fees (each tier's own FX fee), plan fee (yearly price / 12), other card fees, what you keep, the
+  difference against the starting tier, and from which monthly spend it pays off. A "spend $X" in a tier's requirement
+  is a minimum spend (Hyperbeat All boosters now pays off from $10,000 a month, not "at any spend"); any other
+  requirement (holding money or tokens, trading volume, average balance) is marked under the tier's name, not priced.
+  Region line-ups (Krak EEA/US, MEXC Thailand, Avalanche and Exa Global/US) are only compared within their own group.
+  The staking check stays below it. Not counted, and said so: perks, interest on money held, one-off card fees. Words
+  in `lib/i18n/ui/en.ts` and `lib/i18n/ui/card/<code>.ts` (be* keys).
 - Full data update, batch 3 (19 Nov 2026, Akash: "batch 3"). Bitget Wallet, RedotPay, Plasma One, Tuyo, DogPay,
   Solid, Infini and Hyperbeat re-checked against issuer pages: no fee, cashback or country changes (lastChecked and
   sources only; no score or rank moved). Posts: Solid's Rain-issued cards stop on 20 Nov (switch to the Wirex card in

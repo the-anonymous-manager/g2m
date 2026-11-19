@@ -484,39 +484,144 @@ export function breakEvens(
   against: 'previous' | 'entry' = 'previous'
 ): BreakEven[] {
   const usable = card.tiers.map((t, i) => ({ t, i })).filter(({ t }) => !t.comingSoon && (!country || tierOffered(t, country)));
-  const at = (i: number, spend: number) => tierValue(card, card.tiers[i], { ...input, spend }, i, country).net;
   const out: BreakEven[] = [];
   for (let k = 1; k < usable.length; k++) {
     const a = against === 'entry' ? usable[0].i : usable[k - 1].i;
     const b = usable[k].i;
-    const ahead = (s: number) => at(b, s) > at(a, s) + 0.005;
-    const edge = (lo: number, hi: number, want: boolean) => {
-      // First spend in (lo, hi] where ahead() === want.
-      while (hi - lo > 1) {
-        const mid = Math.floor((lo + hi) / 2);
-        if (ahead(mid) === want) hi = mid;
-        else lo = mid;
-      }
-      return hi;
-    };
-    let beatsFrom: number | null = ahead(0) ? 0 : null;
-    let until: number | null = null;
-    let prev = 0;
-    for (let s = 10; s <= BREAK_EVEN_LIMIT; s += s < 20_000 ? 10 : 100) {
-      const now = ahead(s);
-      if (beatsFrom == null && now) beatsFrom = edge(prev, s, true);
-      else if (beatsFrom != null && until == null && !now) {
-        until = edge(prev, s, false);
-        break;
-      }
-      prev = s;
-    }
     out.push({
       from: tierValue(card, card.tiers[a], input, a, country),
       to: tierValue(card, card.tiers[b], input, b, country),
-      beatsFrom,
-      until
+      ...payoffEdges(card, input, a, b, country)
     });
   }
   return out;
+}
+
+/**
+ * The monthly spend from which tier `b` keeps you more than tier `a` (beatsFrom), and from which `a` is ahead again
+ * (until), with all other settings unchanged. Found on a $10 grid, then narrowed down to the dollar.
+ */
+export function payoffEdges(
+  card: CardRow,
+  input: CalcInput,
+  a: number,
+  b: number,
+  country?: string | null
+): { beatsFrom: number | null; until: number | null } {
+  const at = (i: number, spend: number) => tierValue(card, card.tiers[i], { ...input, spend }, i, country).net;
+  const ahead = (s: number) => at(b, s) > at(a, s) + 0.005;
+  const edge = (lo: number, hi: number, want: boolean) => {
+    // First spend in (lo, hi] where ahead() === want.
+    while (hi - lo > 1) {
+      const mid = Math.floor((lo + hi) / 2);
+      if (ahead(mid) === want) hi = mid;
+      else lo = mid;
+    }
+    return hi;
+  };
+  let beatsFrom: number | null = ahead(0) ? 0 : null;
+  let until: number | null = null;
+  let prev = 0;
+  for (let s = 10; s <= BREAK_EVEN_LIMIT; s += s < 20_000 ? 10 : 100) {
+    const now = ahead(s);
+    if (beatsFrom == null && now) beatsFrom = edge(prev, s, true);
+    else if (beatsFrom != null && until == null && !now) {
+      until = edge(prev, s, false);
+      break;
+    }
+    prev = s;
+  }
+  return { beatsFrom, until };
+}
+
+// ---------- Which tier pays off (card page) ----------
+
+/**
+ * Tiers that are alternatives for the same people: a card with a separate US or Thailand line-up gets one group per
+ * line-up, so a US tier is never weighed against the Global entry tier. Coming-soon tiers are left out.
+ */
+export function tierGroups(card: CardRow): number[][] {
+  const groups = new Map<string, number[]>();
+  card.tiers.forEach((t, i) => {
+    if (t.comingSoon) return;
+    const key = JSON.stringify([t.countries ?? null, t.exceptCountries ?? null]);
+    groups.set(key, [...(groups.get(key) ?? []), i]);
+  });
+  return [...groups.values()];
+}
+
+/**
+ * Monthly card spending a tier asks for, read from its published requirement ("spend $10,000 over a rolling 30
+ * days"). null = none stated. Only a plain "spend $X" counts, not "or $200 of spending" alternatives.
+ */
+export function tierMinSpend(tier: Tier): number | null {
+  const m = tier.requirement?.match(/\bspend\s+(?:at least\s+)?\$([\d,]+(?:\.\d+)?)\s*(k\b)?/i);
+  if (!m || /\bor\s+spend\b/i.test(tier.requirement!)) return null;
+  const n = Number(m[1].replace(/,/g, '')) * (m[2] ? 1000 : 1);
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+
+/**
+ * What a tier asks of you beyond its price: holding money or tokens, trading volume, spending, referrals. null when
+ * the requirement is only the price ("$109 a year", "$199/year, ... or 30K ETHFI staked" counts the fee route) or
+ * says anyone can have it.
+ */
+export function tierCondition(tier: Tier): string | null {
+  const r = tier.requirement?.trim();
+  if (!r || /^\$[\d,.]+\s*(a year|\/\s*year|per year|the first year)/i.test(r) || /^(free|every|all members|anyone|no subscription)/i.test(r)) return null;
+  return r;
+}
+
+export type TierPayoff = {
+  /** Index of the tier this one is weighed against (its group's entry tier). */
+  entry: number;
+  /** Monthly spend from which it keeps you more than the entry tier, minimum spend included. null = never. */
+  from: number | null;
+  /** Monthly spend above which the entry tier is ahead again. */
+  until: number | null;
+  /** Monthly spend the tier asks for, when it states one. */
+  minSpend: number | null;
+  /** Something the tier asks of you beyond its price (not counted in money). */
+  condition: string | null;
+  /** True when the tier's price is not published, so no money comparison is possible. */
+  unpriced: boolean;
+};
+
+const payoffInput = (abroadPct: number, spend = 0) => parseCalcInput({ usd: 0, travel: abroadPct, all: true, spend });
+
+/**
+ * Every tier against its group's entry tier for one share of spending in other currencies: the monthly spend from
+ * which it pays off, with cashback bands and caps, the yearly fee, the tier's own FX fee and the card's other fees all
+ * counted. A tier's minimum spend moves its pay-off point up; other conditions are shown, not priced.
+ */
+export function tierPayoffs(card: CardRow, abroadPct: number): Map<number, TierPayoff> {
+  const input = payoffInput(abroadPct);
+  const out = new Map<number, TierPayoff>();
+  for (const group of tierGroups(card)) {
+    if (group.length < 2) continue;
+    const e = group[0];
+    for (const i of group) {
+      const tier = card.tiers[i];
+      const unpriced = tier.feeUsdYear == null || card.tiers[e].feeUsdYear == null;
+      const minSpend = i === e ? null : tierMinSpend(tier);
+      let from: number | null = null;
+      let until: number | null = null;
+      if (i !== e && !unpriced) {
+        ({ beatsFrom: from, until } = payoffEdges(card, input, e, i));
+        if (from != null && minSpend != null) {
+          from = Math.max(from, minSpend);
+          if (until != null && until <= from) [from, until] = [null, null];
+        }
+      }
+      out.set(i, { entry: e, from, until, minSpend, condition: i === e ? null : tierCondition(tier), unpriced });
+    }
+  }
+  return out;
+}
+
+/** One tier's month at this spend and share abroad (all amounts per month). */
+export function tierMonth(card: CardRow, i: number, spend: number, abroadPct: number) {
+  const r = tierValue(card, card.tiers[i], payoffInput(abroadPct, spend), i);
+  const m = (n: number) => n / 12;
+  return { cashback: m(r.cashback), fx: m(r.fx), fee: m(r.fee), other: m(r.tx), net: m(r.net), capCut: m(r.capCut) };
 }

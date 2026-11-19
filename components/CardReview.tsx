@@ -579,7 +579,16 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
         <h2 id="tiers" className="h3">
           {t.tiers}
         </h2>
-        {card.tiers.length > 1 ? <TierBreakEven card={row} prices={prices} words={english ? undefined : t} tag={tag} /> : null}
+        {card.tiers.length > 1 ? (
+          <TierBreakEven
+            card={row}
+            prices={prices}
+            words={t}
+            tag={tag}
+            names={english ? undefined : card.tiers.map((x) => c.tx(x.name))}
+            needs={english ? undefined : card.tiers.map((x) => (x.requirement ? c.tx(x.requirement) : null))}
+          />
+        ) : null}
         <div className="table-wrap stack-wrap">
           <table className="table stack-table" style={{ minWidth: 760 }}>
             <thead>
@@ -739,8 +748,8 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
           {fill(t.sources, { date: c.date(card.lastChecked) })}
         </h2>
         <ul style={{ margin: 0, paddingLeft: 18, display: 'flex', flexDirection: 'column', gap: 4 }}>
-          {card.sources.map((s) => (
-            <li key={s.url}>
+          {card.sources.map((s, i) => (
+            <li key={`${i}-${s.url}`}>
               <a href={s.url} target="_blank" rel="noopener noreferrer" lang={english ? undefined : 'en'}>
                 {s.label}
               </a>
