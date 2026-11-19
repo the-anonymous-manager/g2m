@@ -82,5 +82,41 @@
     "ends": "2026-11-30",
     "source": "https://help.pulsar.money/en/articles/16752652-pulsar-pro",
     "sponsored": false
+  },
+  {
+    "slug": "solid-s-rain-issued-cards-stop-working-on-20-november",
+    "date": "2026-11-19",
+    "title": "Solid's Rain-issued cards stop working on 20 November",
+    "card": "solid",
+    "type": "news",
+    "summary": "Solid cards issued by Rain, and Rain US bank details, close on 20 November 2026. Where cards are still offered, you can switch to a new Wirex-issued Solid card in the app; elsewhere the card closes but your Solid account keeps working.",
+    "body": "If you have a Rain-issued Solid card, the app shows a banner on Home and a notice on your card screen that tells you which case applies.\n\nIf you can switch:\n- Tap Get new card in the app; switching is not automatic\n- Withdraw any money left on the Rain card to your Solid wallet when the app asks\n- Verify your identity again, since the new card comes from a different provider\n- Activate the new card, then add it to Apple Pay or Google Pay and update your saved cards and subscriptions\n\nThe new Wirex-issued card keeps your cashback tier and adds Credit mode, euro spending with no FX fee from a EUR balance and a free euro account with your own IBAN.\n\nIf cards are no longer offered in your country, move your card balance to your Solid wallet before 20 November. Your savings, deposits, sends and swaps keep working, and cashback you already earned stays yours. US Virtual Accounts with Rain close too, so stop sharing those bank details.",
+    "ends": "2026-11-20",
+    "source": "https://support.solid.xyz/articles/rain-cards-closing-20-november",
+    "sponsored": false
+  },
+  {
+    "slug": "solid-25-in-fuse-when-you-join-with-a-referral",
+    "date": "2026-11-19",
+    "title": "Solid: $25 in FUSE when you join with a referral",
+    "card": "solid",
+    "type": "bonus",
+    "summary": "Join Solid with a referral, activate your card and spend $150 at 3 different merchants within 30 days: you get $25 in FUSE, and so does the person who invited you.",
+    "body": "How it works, in Solid's own terms:\n- Sign up with a referral and activate your Solid card\n- Spend $150 within 30 days, across 3 or more different merchants\n- You and the person who invited you each get $25 in FUSE, which can earn yield and counts toward Solid's reward tiers\n\nSolid's card pays 3% cashback in USDC on the free Core tier, up to $50 a month. New cards are issued by Wirex; cards issued by Rain stop working on 20 November 2026.",
+    "ends": null,
+    "source": "https://www.solid.xyz/post/referral-rewards-25-fuse",
+    "sponsored": false
+  },
+  {
+    "slug": "plasma-one-10-spend-credit-when-you-join-with-a-referral-code",
+    "date": "2026-11-19",
+    "title": "Plasma One: $10 spend credit when you join with a referral code",
+    "card": "plasma-one",
+    "type": "bonus",
+    "summary": "Join Plasma One with a referral code and spend $100 at two or more merchants within 14 days: you get $10 in spend credit, and so does the person who invited you.",
+    "body": "How it works, in Plasma's own terms:\n- Join Plasma One with a referral code and finish setting up your account\n- Make card purchases of at least $100 in total at two or more different merchants within 14 days\n- The $10 spend credit is paid on the Thursday after your qualifying purchases settle\n- Spending the whole $100 at one merchant doesn't count, and neither do refunds or transfers\n- Not available when the country on your ID is Nigeria, Bangladesh or Kenya\n\nThe offer has no set end date. Plasma One's free Standard tier pays 1% cashback in XPL on the first $500 a month.",
+    "ends": null,
+    "source": "https://intercom.help/plasma-6c43763cd799/en/articles/15926373-how-do-i-get-the-10-referral-bonus",
+    "sponsored": false
   }
 ]

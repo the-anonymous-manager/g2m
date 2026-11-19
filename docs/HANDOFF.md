@@ -599,6 +599,12 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- Full data update, batch 3 (19 Nov 2026, Akash: "batch 3"). Bitget Wallet, RedotPay, Plasma One, Tuyo, DogPay,
+  Solid, Infini and Hyperbeat re-checked against issuer pages: no fee, cashback or country changes (lastChecked and
+  sources only; no score or rank moved). Posts: Solid's Rain-issued cards stop on 20 Nov (switch to the Wirex card in
+  the app where offered), Solid referral bonus ($25 in FUSE each after $150 at 3 merchants in 30 days), Plasma One
+  referral bonus ($10 spend credit each after $100 at two or more merchants in 14 days; not for NG, BD, KE ID).
+  Infini's $10 referral bonus has no public terms page, so no post.
 - Full data update, batch 2 (19 Nov 2026, Akash: "ok batch 2"). Karta (unchanged; bank top-up fees added; virtual
   card 5 USDT, normally 30), Tria (help center now lists a 0.5% Tria fee on every purchase and 1% Visa FX on non-USD:
   txPct 0.5, fxPct 1; Lite 0.5% after the $1,000 cap; ATM $1 + 1%, up to $750 per withdrawal, 3 a day; score 69 to
