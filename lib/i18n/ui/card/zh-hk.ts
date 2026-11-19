@@ -181,6 +181,7 @@ export const cardZhHK: Ui['card'] = {
   beRange: '每月 {x} 至 {y}',
   beUpTo: '每月最多 {y}',
   beNever: '從不（已檢查至每月 {x}）',
+  beNoRate: '回贈率未有公布',
   beNeeds: '要求',
   beMinShort: '需每月 {x}',
   beOrStake: '或以鎖倉 {amount} {token} 代替年費（見下文）',

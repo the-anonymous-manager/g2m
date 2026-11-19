@@ -181,6 +181,7 @@ export const cardEs: Ui['card'] = {
   beRange: 'De {x} a {y} al mes',
   beUpTo: 'Hasta {y} al mes',
   beNever: 'Nunca (comprobado hasta {x} al mes)',
+  beNoRate: 'Tasa no publicada',
   beNeeds: 'Requisito',
   beMinShort: 'Exige {x} al mes',
   beOrStake: 'O bloquea {amount} {token} en lugar de pagar la cuota (ver más abajo)',

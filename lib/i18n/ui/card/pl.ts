@@ -181,6 +181,7 @@ export const cardPl: Ui['card'] = {
   beRange: 'Od {x} do {y} miesięcznie',
   beUpTo: 'Do {y} miesięcznie',
   beNever: 'Nigdy (sprawdzono do {x} miesięcznie)',
+  beNoRate: 'Stawka nieopublikowana',
   beNeeds: 'Wymaganie',
   beMinShort: 'Wymaga {x} miesięcznie',
   beOrStake: 'Albo zablokuj {amount} {token} zamiast opłaty (zobacz niżej)',

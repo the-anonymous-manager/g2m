@@ -181,6 +181,7 @@ export const cardTr: Ui['card'] = {
   beRange: 'Ayda {x} ile {y} arası',
   beUpTo: 'Ayda {y} değerine kadar',
   beNever: 'Asla (ayda {x} değerine kadar kontrol edildi)',
+  beNoRate: 'Oran yayımlanmadı',
   beNeeds: 'Koşul',
   beMinShort: 'Ayda {x} gerektirir',
   beOrStake: 'Ya da ücret yerine {amount} {token} kilitleyin (aşağıya bakın)',

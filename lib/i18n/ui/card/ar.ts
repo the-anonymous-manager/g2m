@@ -181,6 +181,7 @@ export const cardAr: Ui['card'] = {
   beRange: 'من {x} إلى {y} شهريًا',
   beUpTo: 'حتى {y} شهريًا',
   beNever: 'أبدًا (تم الفحص حتى {x} شهريًا)',
+  beNoRate: 'النسبة غير منشورة',
   beNeeds: 'الشرط',
   beMinShort: 'تتطلب {x} شهريًا',
   beOrStake: 'أو اقفل {amount} {token} بدلًا من الرسوم (انظر أدناه)',

@@ -181,6 +181,7 @@ export const cardDe: Ui['card'] = {
   beRange: 'Von {x} bis {y} im Monat',
   beUpTo: 'Bis {y} im Monat',
   beNever: 'Nie (geprüft bis {x} im Monat)',
+  beNoRate: 'Satz nicht veröffentlicht',
   beNeeds: 'Voraussetzung',
   beMinShort: 'Braucht {x} im Monat',
   beOrStake: 'Oder statt der Gebühr {amount} {token} sperren (siehe unten)',

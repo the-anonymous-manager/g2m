@@ -9,11 +9,14 @@
     "forms": ["virtual", "physical"],
     "custody": "custodial",
     "summary": "The best-known crypto card: prepaid in most regions plus a US Visa Signature credit card, paying rewards in CRO through Crypto.com's Level Up membership.",
-    "cashback": { "basePct": null, "maxPct": 6, "payout": "CRO", "note": "Up to 5% back on the prepaid card and 1.5% to 6% on the US credit card, depending on your Level Up tier. Rewards count on the first $750 of spending a month on Plus, $1,500 on Pro and $3,000 to $5,000 on Private (then 0.5% to 1%). The free Basic rate is not published." },
+    "cashback": { "basePct": null, "maxPct": 6, "payout": "CRO", "note": "Level Up pays 1.5% on Plus (US$4.99 a month) on the first $750 of card spending a month, 2.5% on Pro (US$29.99 a month) on the first $1,500, and 3.5% to 4.5% on Private (a 12-month CRO lockup of US$50,000 or US$500,000) on the first $3,000 to $5,000, then 0.5% to 1%. The US credit card pays 1.5% to 6%. The free Basic rate is not published." },
     "fees": { "annualUsd": 0, "fxPct": 3, "fxNote": "Billed in your region's currency (US dollars, euros or pounds). US: 3% on non-USD purchases on Midnight, Ruby, Jade and Indigo, none on Rose and above. Europe and UK: 0.2% inside the EU/UK. Outside: 2% on Midnight, free up to €400 a month on Ruby and €800 on Jade and Indigo (then 2%), free on higher tiers.", "fxByCurrency": { "USD": 0, "EUR": 0, "GBP": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 4.99, "atm": "Free each month up to $200 on Midnight, $400 on Ruby, $800 on Jade and Indigo and $1,000 on higher tiers (€200 to €1,000 in Europe), then 2%", "other": ["Card top-up with a debit or credit card: 1% (US credit card 2.99%, PayPal 2.1%)"] },
     "tiers": [
       { "name": "Basic", "feeUsdYear": 0, "cashbackPct": null, "requirement": "No subscription or CRO lockup" },
-      { "name": "Level Up (top tier)", "feeUsdYear": null, "feeNote": "Plans start at $4.99/month; top-tier price not published. CRO lockup or staking also qualifies.", "cashbackPct": 5, "requirement": "Level Up subscription, CRO lockup or staking", "stake": { "token": "CRO", "amount": null, "coingeckoId": "crypto-com-chain" }, "perks": ["Up to 5% back in CRO on the prepaid card", "Higher APY on cash balances"] }
+      { "name": "Plus", "feeUsdYear": 49.9, "feeNote": "US$4.99 a month, or US$49.90 a year", "cashbackPct": 1.5, "bands": [ { "uptoUsd": 750, "pct": 1.5 }, { "uptoUsd": null, "pct": 0 } ], "requirement": "US$4.99 a month, or US$49.90 a year", "perks": ["Zero trading fees up to US$20,000 a month", "First 30 days free"] },
+      { "name": "Pro", "feeUsdYear": 299.9, "feeNote": "US$29.99 a month, or US$299.90 a year", "cashbackPct": 2.5, "bands": [ { "uptoUsd": 1500, "pct": 2.5 }, { "uptoUsd": null, "pct": 0 } ], "requirement": "US$29.99 a month, or US$299.90 a year", "perks": ["Priority Pass lounge access with the US credit card", "Zero trading fees up to US$50,000 a month"] },
+      { "name": "Private (US$50,000)", "feeUsdYear": 0, "feeNote": "No fee: a 12-month CRO lockup worth US$50,000", "cashbackPct": 3.5, "bands": [ { "uptoUsd": 3000, "pct": 3.5 }, { "uptoUsd": null, "pct": 0.5 } ], "requirement": "Lock US$50,000 of CRO for 12 months", "perks": ["Priority Pass lounge access with the US credit card"] },
+      { "name": "Private (US$500,000)", "feeUsdYear": 0, "feeNote": "No fee: a 12-month CRO lockup worth US$500,000", "cashbackPct": 4.5, "bands": [ { "uptoUsd": 5000, "pct": 4.5 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "Lock US$500,000 of CRO for 12 months", "perks": ["Priority Pass lounge access with the US credit card"] }
     ],
     "coverage": { "countries": 38, "scope": "US, UK, EEA, Canada, Australia, Singapore, Brazil and Bahrain", "examples": ["United States", "United Kingdom", "Germany", "Australia", "Singapore", "Brazil"], "markets": { "IN": "unknown", "AE": "unknown", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AT", "AU", "BE", "BG", "CA", "CH", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LI", "LT", "LU", "LV", "MT", "NL", "NO", "NZ", "PL", "PT", "RO", "SE", "SG", "SI", "SK", "US"], "others": "unknown" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 7, "ramps": "both", "credit": false, "yield": true },
@@ -22,7 +25,7 @@
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["CRO"],
     "perks": ["Level Up membership benefits"],
-    "pros": ["Huge, established brand", "Up to 5% back on prepaid and up to 6% on the US credit card"],
+    "pros": ["Huge, established brand", "Up to 4.5% back on the card and up to 6% on the US credit card"],
     "cons": ["The best rates need a paid tier or a CRO lockup", "Rewards paid in CRO, so their value moves with the token"],
     "links": { "official": "https://crypto.com/cards" },
     "sources": [
@@ -48,9 +51,10 @@
       { "label": "Crypto.com Help: SGD Withdrawal via the FAST Network", "url": "https://help.crypto.com/en/articles/6043324-fiat-wallet-sgd-withdrawal-via-fast-network", "verified": "2026-10-25" },
       { "label": "Crypto.com Help: How do I fund my Crypto.com Prepaid Visa Card (US)?", "url": "https://help.crypto.com/en/articles/3131878", "verified": "2026-10-25" },
       { "label": "Crypto.com Help: How to set up Apple Pay in your Apple Wallet", "url": "https://help.crypto.com/en/articles/6201686-how-to-set-up-apple-pay-in-your-apple-wallet", "verified": "2026-11-15" },
-      { "label": "Crypto.com Help: How to set up Google/Samsung Pay in your Google/Samsung Wallet", "url": "https://help.crypto.com/en/articles/13396903-how-to-set-up-google-samsung-pay-in-your-google-samsung-wallet", "verified": "2026-11-15" }
+      { "label": "Crypto.com Help: How to set up Google/Samsung Pay in your Google/Samsung Wallet", "url": "https://help.crypto.com/en/articles/13396903-how-to-set-up-google-samsung-pay-in-your-google-samsung-wallet", "verified": "2026-11-15" },
+      { "label": "Crypto.com Level Up: plan prices, card rewards and monthly limits", "url": "https://crypto.com/en/levelup", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-15",
+    "lastChecked": "2026-11-19",
     "metal": "gunmetal",
     "image": { "source": "https://g2m.life/card-originals/crypto-com.webp", "file": "/card-images/crypto-com-d9046a8f.webp" }
   },
@@ -93,9 +97,10 @@
       { "label": "Bybit EU Help: FAQ — Reward Services", "url": "https://www.bybit.eu/en-EU/help-center/article/FAQ-Rewards-Service", "verified": "2026-10-24" },
       { "label": "Bybit EU Help: FAQ - Bybit Card General Inquiries", "url": "https://www.bybit.eu/en-EU/help-center/article/FAQ-Bybit-Card-General-Inquiries", "verified": "2026-10-25" },
       { "label": "Bybit EU Help: FAQ - Fiat Withdrawal", "url": "https://www.bybit.eu/en-EU/help-center/article/FAQ-Fiat-Withdrawal", "verified": "2026-10-25" },
-      { "label": "Bybit Card page (add it to Apple Pay or Google Pay)", "url": "https://www.bybit.com/en/cards/", "verified": "2026-11-15" }
+      { "label": "Bybit Card page (add it to Apple Pay or Google Pay)", "url": "https://www.bybit.com/en/cards/", "verified": "2026-11-15" },
+      { "label": "Bybit Card fees and limits (updated 6 Nov 2026)", "url": "https://www.bybit.com/en/help-center/article/Fees-and-Spending-Limits-Bybit-Card", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-15",
+    "lastChecked": "2026-11-19",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/bybit.png", "file": "/card-images/bybit-543ce936.webp" }
   },
@@ -131,9 +136,10 @@
       { "label": "Coinbase One Card cardholder agreement (Cardless / First Electronic Bank)", "url": "https://legal.cardless.com/cardholder_agreement/coinbase/cardholder_agreement.pdf", "verified": "2026-10-25" },
       { "label": "Coinbase Help: Payment methods for US customers (ACH in and out, free; set by the owner, page blocks automated reading)", "url": "https://help.coinbase.com/en/coinbase/getting-started/getting-started-with-coinbase/payment-methods-for-us-customers", "verified": "2026-10-25" },
       { "label": "Coinbase One Card Rewards Program Terms (reward tiers by assets on Coinbase, paid in bitcoin; 14 Oct 2026)", "url": "https://www.coinbase.com/legal/creditcard/rewards", "verified": "2026-11-15" },
-      { "label": "Coinbase One Card page (no annual card fee with Coinbase One, no FX fee, Travel 5%, USDC rewards, secured option)", "url": "https://www.coinbase.com/creditcard", "verified": "2026-11-15" }
+      { "label": "Coinbase One Card page (no annual card fee with Coinbase One, no FX fee, Travel 5%, USDC rewards, secured option)", "url": "https://www.coinbase.com/creditcard", "verified": "2026-11-15" },
+      { "label": "Coinbase One Card: rewards and fees", "url": "https://www.coinbase.com/creditcard", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-15",
+    "lastChecked": "2026-11-19",
     "metal": "silver",
     "image": { "source": "https://g2m.life/card-originals/coinbase-one.webp", "file": "/card-images/coinbase-one-01779548.webp" }
   },
@@ -391,9 +397,10 @@
       { "label": "MetaMask Help: Money Account", "url": "https://support.metamask.io/trade/money-account/", "verified": "2026-10-24" },
       { "label": "MetaMask Help: Sell crypto for currency in MetaMask", "url": "https://support.metamask.io/manage-crypto/move-crypto/sell/how-to-sell-your-crypto-assets-for-fiat-currency-in-metamask/", "verified": "2026-10-25" },
       { "label": "MetaMask Help: User guide: mUSD", "url": "https://support.metamask.io/manage-crypto/tokens/musd/", "verified": "2026-10-24" },
-      { "label": "MetaMask Help: Get started with MetaMask Card", "url": "https://support.metamask.io/trade/metamask-card/getting-started-with-card/", "verified": "2026-11-15" }
+      { "label": "MetaMask Help: Get started with MetaMask Card", "url": "https://support.metamask.io/trade/metamask-card/getting-started-with-card/", "verified": "2026-11-15" },
+      { "label": "MetaMask Card limits and fees", "url": "https://support.metamask.io/trade/metamask-card/limits-and-fees/", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-15",
+    "lastChecked": "2026-11-19",
     "metal": "gold",
     "image": { "source": "https://g2m.life/card-originals/metamask.png", "file": "/card-images/metamask-9ce45bb0.webp" }
   },
@@ -505,9 +512,10 @@
       { "label": "Krak Support: Cash deposit options", "url": "https://support.krak.app/articles/cash-deposit-options-fees-minimums-and-processing-times", "verified": "2026-10-25" },
       { "label": "Krak Support: US Krak Card FAQs", "url": "https://support.krak.app/articles/us-krak-card-faqs", "verified": "2026-10-25" },
       { "label": "Krak Support: Cryptocurrencies available on Krak", "url": "https://support.krak.app/articles/cryptocurrencies-available-on-krak", "verified": "2026-10-25" },
-      { "label": "Krak: Pricing (cashback tiers by 30-day average balance, no Krak ATM fee)", "url": "https://krak.app/pricing", "verified": "2026-11-12" }
+      { "label": "Krak: Pricing (cashback tiers by 30-day average balance, no Krak ATM fee)", "url": "https://krak.app/pricing", "verified": "2026-11-12" },
+      { "label": "Krak pricing: card fees and cashback tiers", "url": "https://krak.app/pricing", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-12",
+    "lastChecked": "2026-11-19",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/krak.png", "file": "/card-images/krak-517ef3c9.webp" }
   },
@@ -554,9 +562,10 @@
       { "label": "MEXC Terms of Use", "url": "https://www.mexc.com/terms", "verified": "2026-10-24" },
       { "label": "MEXC Help: What Documents Do I Need for KYC Verification? (2026-03-28)", "url": "https://www.mexc.co/announcements/article/17827791519719", "verified": "2026-10-25" },
       { "label": "MEXC Learn: MEXC Card supported countries, restricted regions and KYC", "url": "https://www.mexc.co/learn/article/mexc-card-supported-countries-restricted-regions-what-kyc-actually-requires/1", "verified": "2026-10-25" },
-      { "label": "MEXC User Agreement: Prohibited Jurisdictions (13 Oct 2026)", "url": "https://www.mexc.co/terms", "verified": "2026-10-25" }
+      { "label": "MEXC User Agreement: Prohibited Jurisdictions (13 Oct 2026)", "url": "https://www.mexc.co/terms", "verified": "2026-10-25" },
+      { "label": "MEXC Card page", "url": "https://www.mexc.co/buy-crypto/mexc-card", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-15",
+    "lastChecked": "2026-11-19",
     "metal": "gunmetal",
     "image": { "source": "https://g2m.life/card-originals/mexc.png", "file": "/card-images/mexc-32c9e8e8.webp" }
   },
@@ -639,9 +648,10 @@
       { "label": "Avalanche Card: homepage FAQ", "url": "https://www.avalanchecard.com/", "verified": "2026-10-25" },
       { "label": "Avalanche App Terms and Conditions", "url": "https://legal.avalanchecard.com/legal/avalanche-app-terms-conditions-4b62a44e", "verified": "2026-10-24" },
       { "label": "Avalanche Card US Card Agreement", "url": "https://legal.avalanchecard.com/legal/avalanche-card-us-card-agreement-bcc089aa", "verified": "2026-10-24" },
-      { "label": "Avalanche Card: homepage (FX fee 1%, no card or shipping fees)", "url": "https://www.avalanchecard.com/", "verified": "2026-11-12" }
+      { "label": "Avalanche Card: homepage (FX fee 1%, no card or shipping fees)", "url": "https://www.avalanchecard.com/", "verified": "2026-11-12" },
+      { "label": "Avalanche Card home page: fees", "url": "https://www.avalanchecard.com/", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-12",
+    "lastChecked": "2026-11-19",
     "metal": "rose",
     "image": { "source": "https://g2m.life/card-originals/avalanche-card.png", "file": "/card-images/avalanche-card-5862e75d.webp" }
   },
@@ -656,7 +666,7 @@
     "custody": "self-custodial",
     "summary": "Solana-based USDC card available in 154 countries for a $20 yearly membership. Earns points rather than cashback.",
     "cashback": { "basePct": null, "maxPct": null, "payout": "Points", "note": "Earns points; no cashback rate published." },
-    "fees": { "annualUsd": 20, "fxPct": 1.5, "fxNote": "Billed in US dollars: USD purchases pay a flat $0.15 and no FX fee. Other currencies: $0.10 + 1.5% per international transaction.", "fxByCurrency": { "USD": 0 }, "topUpPct": 1, "txFlatUsd": 0.15, "cardFeeUsd": 0, "physicalCardFeeUsd": 24.99, "atm": "Physical card only. Solayer lists no ATM fee of its own; the ATM owner may charge.", "other": ["$0.15 per transaction", "1% top-up fee", "Physical card shipping: $24.99 in the US, $59.99 elsewhere", "Cards are switched off after 6 months without use"] },
+    "fees": { "annualUsd": 20, "fxPct": 1.5, "fxNote": "Billed in US dollars: USD purchases pay a flat $0.15 and no FX fee. Other currencies: $0.10 + 1.5% per international transaction.", "fxByCurrency": { "USD": 0 }, "topUpPct": 1, "txFlatUsd": 0.15, "cardFeeUsd": 0, "physicalCardFeeUsd": 24.99, "atm": "Physical card only, up to $250 per withdrawal and 3 attempts a day. Solayer lists no ATM fee of its own; the ATM owner may charge.", "other": ["$0.15 per transaction", "1% top-up fee", "Physical card shipping: $24.99 in the US, $59.99 elsewhere", "Cards are switched off after 6 months without use"] },
     "tiers": [
       { "name": "Membership", "feeUsdYear": 20, "cashbackPct": null }
     ],
@@ -679,9 +689,11 @@
       { "label": "Solayer Docs: Eligibility", "url": "https://docs.solayer.org/solayer-pay/eligibility", "verified": "2026-10-25" },
       { "label": "Solayer Docs: FAQ, Supported Countries for Card Issuance", "url": "https://docs.solayer.org/solayer-pay/faq", "verified": "2026-10-25" },
       { "label": "Solayer Docs: KYC Guide", "url": "https://docs.solayer.org/solayer-pay/tutorials/kyc", "verified": "2026-10-25" },
-      { "label": "Solayer Docs: FAQ (ATM with the physical card, local ATM fees may apply)", "url": "https://docs.solayer.org/solayer-pay/faq", "verified": "2026-11-15" }
+      { "label": "Solayer Docs: FAQ (ATM with the physical card, local ATM fees may apply)", "url": "https://docs.solayer.org/solayer-pay/faq", "verified": "2026-11-15" },
+      { "label": "Solayer Pay fee structure", "url": "https://docs.solayer.org/solayer-pay/fee", "verified": "2026-11-19" },
+      { "label": "Solayer Pay physical card: shipping and ATM limits", "url": "https://docs.solayer.org/solayer-pay/card", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-15",
+    "lastChecked": "2026-11-19",
     "metal": "gunmetal",
     "image": { "source": "https://g2m.life/card-originals/solayer.png", "file": "/card-images/solayer-287fd11b.webp" }
   },
@@ -1312,9 +1324,11 @@
       { "label": "Pionex: how to apply for the Pionex Card", "url": "https://help.pionex.com/en/articles/14616377-how-to-apply-for-pionex-card", "verified": "2026-10-28" },
       { "label": "Pionex Card feature overview (Apple Pay, Google Pay)", "url": "https://help.pionex.com/en/articles/14616373-pionex-card-feature-overview", "verified": "2026-10-28" },
       { "label": "Pionex Card ultimate guide (5% APY, partner cashback)", "url": "https://help.pionex.com/en/articles/14616392-pionex-card-ultimate-guide-spending-crypto-assets-in-the-real-world", "verified": "2026-10-28" },
-      { "label": "Pionex: unsupported countries and regions", "url": "https://help.pionex.com/en/articles/14607876-list-of-unsupported-countries-regions-phone-numbers-kyc-verification", "verified": "2026-10-28" }
+      { "label": "Pionex: unsupported countries and regions", "url": "https://help.pionex.com/en/articles/14607876-list-of-unsupported-countries-regions-phone-numbers-kyc-verification", "verified": "2026-10-28" },
+      { "label": "Pionex Visa Card fees schedule (updated 19 Oct 2026)", "url": "https://help.pionex.com/en/articles/14616381-visa-card-fees-schedule", "verified": "2026-11-19" },
+      { "label": "Pionex card cashback programme guidelines", "url": "https://help.pionex.com/en/articles/14616369-pionex-card-global-cashback-program-guidelines", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-10-28",
+    "lastChecked": "2026-11-19",
     "addedOn": "2026-10-28",
     "metal": "gunmetal",
     "image": { "source": "https://g2m.life/card-originals/pionex.webp", "file": "/card-images/pionex-e4a16f40.webp" }

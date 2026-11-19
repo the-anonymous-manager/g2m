@@ -181,6 +181,7 @@ export const cardFr: Ui['card'] = {
   beRange: 'De {x} à {y} par mois',
   beUpTo: 'Jusqu\'à {y} par mois',
   beNever: 'Jamais (vérifié jusqu\'à {x} par mois)',
+  beNoRate: 'Taux non publié',
   beNeeds: 'Condition',
   beMinShort: 'Exige {x} par mois',
   beOrStake: 'Ou bloquez {amount} {token} au lieu des frais (voir plus bas)',

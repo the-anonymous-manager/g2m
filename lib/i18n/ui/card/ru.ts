@@ -181,6 +181,7 @@ export const cardRu: Ui['card'] = {
   beRange: 'От {x} до {y} в месяц',
   beUpTo: 'До {y} в месяц',
   beNever: 'Никогда (проверено до {x} в месяц)',
+  beNoRate: 'Ставка не опубликована',
   beNeeds: 'Условие',
   beMinShort: 'Нужно {x} в месяц',
   beOrStake: 'Или заблокируйте {amount} {token} вместо платы (см. ниже)',

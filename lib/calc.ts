@@ -568,7 +568,7 @@ export function tierMinSpend(tier: Tier): number | null {
  */
 export function tierCondition(tier: Tier): string | null {
   const r = tier.requirement?.trim();
-  if (!r || /^\$[\d,.]+\s*(a year|\/\s*year|per year|the first year)/i.test(r) || /^(free|every|all members|anyone|no subscription)/i.test(r)) return null;
+  if (!r || /^(US)?\$[\d,.]+\s*(a year|a month|\/\s*year|per year|the first year)/i.test(r) || /^(free|every|all members|anyone|no subscription)/i.test(r)) return null;
   return r;
 }
 
@@ -585,7 +585,12 @@ export type TierPayoff = {
   condition: string | null;
   /** True when the tier's price is not published, so no money comparison is possible. */
   unpriced: boolean;
+  /** True when this tier's or its starting tier's cashback rate is not published (no comparison either). */
+  noRate: boolean;
 };
+
+/** Whether a tier has a published cashback rate. */
+export const hasRate = (t: Tier) => t.cashbackPct != null || (t.bands?.length ?? 0) > 0;
 
 const payoffInput = (abroadPct: number, spend = 0) => parseCalcInput({ usd: 0, travel: abroadPct, all: true, spend });
 
@@ -603,17 +608,18 @@ export function tierPayoffs(card: CardRow, abroadPct: number): Map<number, TierP
     for (const i of group) {
       const tier = card.tiers[i];
       const unpriced = tier.feeUsdYear == null || card.tiers[e].feeUsdYear == null;
+      const noRate = !hasRate(tier) || !hasRate(card.tiers[e]);
       const minSpend = i === e ? null : tierMinSpend(tier);
       let from: number | null = null;
       let until: number | null = null;
-      if (i !== e && !unpriced) {
+      if (i !== e && !unpriced && !noRate) {
         ({ beatsFrom: from, until } = payoffEdges(card, input, e, i));
         if (from != null && minSpend != null) {
           from = Math.max(from, minSpend);
           if (until != null && until <= from) [from, until] = [null, null];
         }
       }
-      out.set(i, { entry: e, from, until, minSpend, condition: i === e ? null : tierCondition(tier), unpriced });
+      out.set(i, { entry: e, from, until, minSpend, condition: i === e ? null : tierCondition(tier), unpriced, noRate });
     }
   }
   return out;

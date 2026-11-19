@@ -321,6 +321,7 @@ export const uiEn = {
     beRange: 'From {x} to {y} a month',
     beUpTo: 'Up to {y} a month',
     beNever: 'Never (checked up to {x} a month)',
+    beNoRate: 'Rate not published',
     beNeeds: 'Needs',
     beMinShort: 'Needs {x} a month',
     beOrStake: 'Or lock {amount} {token} instead of the fee (staking check below)',

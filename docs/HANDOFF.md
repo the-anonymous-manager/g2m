@@ -599,6 +599,15 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- Full data update, batch 4 (19 Nov 2026, Akash: "batch 4"): the first nine cards without a referral link, oldest
+  check first. Crypto.com: the Level Up page now publishes every plan, so the single "Level Up (top tier)" tier (no
+  price) became four: Plus US$49.90 a year, 1.5% on the first $750 a month; Pro US$299.90 a year, 2.5% on the first
+  $1,500; Private by a 12-month CRO lockup of US$50,000 (3.5% on the first $3,000, then 0.5%) or US$500,000 (4.5% on
+  the first $5,000, then 1%). The page gives Private as "3.5-4.5%"; 3.5% for $50k and 4.5% for $500k follows its
+  footnotes. Prepaid "up to 5%" is now "up to 4.5%". Basic's rate is still not published, so the tier check says
+  "Rate not published" rather than comparing against 0%. Solayer: ATM up to $250 per withdrawal, 3 attempts a day.
+  Unchanged: Pionex, Krak, Avalanche, Bybit (fees page updated 6 Nov, same numbers), Coinbase One, MetaMask, MEXC.
+  No score or rank moved. Next (batch 5): Bleap, Tangem Pay, Ethena Pay, Exa, Kolo, Avici, Cashi, Laso, OrbitX.
 - Tier check on the card page (19 Nov 2026, Akash: the tier break-even "only counts cashback ... make it a little
   bit bigger and marked"). The old "[ tier break-even ]" list is now "Which tier pays off?" (`components/TierBreakEven.tsx`,
   `tierPayoffs`/`tierMonth`/`tierGroups`/`tierMinSpend`/`tierCondition` in `lib/calc.ts`): a marked panel (rose-gold edge,
@@ -1165,7 +1174,7 @@ staying on Next 15. Remove it when the site moves to a Next version that ships a
 6. Send the issuer outreach and add the answers (country lists, fees, card pictures) through the sheet.
 7. Data gaps to close with issuers or new research: Coinbase One banking features and rails (its help pages block
    downloads), Ethena Pay rails (IBAN currency and payout currencies not published), Tria card fee (its pages
-   disagree), the Crypto.com Level Up price (not published, so its tier break-even can't be worked out), cash-out fees that are only shown in the app (RedotPay, Bitget Wallet, Wirex One, Bybit, Nexo, most ether.fi
+   disagree), the Crypto.com Basic cashback rate (not published, so its tiers can't be compared with it), cash-out fees that are only shown in the app (RedotPay, Bitget Wallet, Wirex One, Bybit, Nexo, most ether.fi
    local rails), KYC rules not published (Krak, Exa, Avici, Kolo, Tuyo, MetaMask, Crypto.com, Coinbase One, Tangem).
 8. Coin lists (`assets`) are still empty for Coinbase One (paid off in US dollars, no stablecoins) and Nexo (its
    card page says "stablecoins" without naming them), so those show "Not stated" in the corridor finder.

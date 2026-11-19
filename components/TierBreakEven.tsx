@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import type { CardRow, Tier } from '@/lib/types';
-import { BREAK_EVEN_LIMIT, tierMonth, tierPayoffs, type TierPayoff } from '@/lib/calc';
+import { BREAK_EVEN_LIMIT, hasRate, tierMonth, tierPayoffs, type TierPayoff } from '@/lib/calc';
 import { money } from '@/lib/format';
 import type { Ui } from '@/lib/i18n/ui/en';
 
@@ -83,7 +83,7 @@ export function TierBreakEven({ card, prices, words: w, tag, names, needs }: Pro
       const mine = tierMonth(card, i, spend, abroad);
       const base = tierMonth(card, entry, spend, abroad);
       const short = pay?.minSpend != null && spend < pay.minSpend;
-      const gain = i === entry || short ? 0 : mine.net + (t.feeUsdYear ? mine.fee : 0) - base.net;
+      const gain = i === entry || short || pay?.noRate ? 0 : mine.net + (t.feeUsdYear ? mine.fee : 0) - base.net;
       const drop = value != null ? value * 0.25 : null;
       return { t, i, entry, stake, p, value, gain, drop, months: drop != null && gain > 0 ? drop / gain : null };
     });
@@ -93,6 +93,7 @@ export function TierBreakEven({ card, prices, words: w, tag, names, needs }: Pro
   const paysOff = (i: number, p: TierPayoff) => {
     if (i === p.entry) return <span className="faint">{w.beBase}</span>;
     if (p.unpriced) return <span className="faint">{w.priceNP}</span>;
+    if (p.noRate) return <span className="faint">{w.beNoRate}</span>;
     if (p.from == null) return <span className="tier-be-never">{fillT(w.beNever, { x: M(BREAK_EVEN_LIMIT) })}</span>;
     const text =
       p.from <= 1
@@ -188,7 +189,7 @@ export function TierBreakEven({ card, prices, words: w, tag, names, needs }: Pro
                       ) : null}
                     </td>
                     <td className="num" data-label={w.cashback}>
-                      {F(m.cashback)}
+                      {hasRate(t) ? F(m.cashback) : <span className="faint">{w.beNoRate}</span>}
                     </td>
                     <td className="num" data-label={w.beFx}>
                       {m.fx >= 0.005 ? `−${F(m.fx)}` : F(0)}
@@ -202,13 +203,13 @@ export function TierBreakEven({ card, prices, words: w, tag, names, needs }: Pro
                       </td>
                     ) : null}
                     <td className="num tier-be-keep" data-label={w.beKeep}>
-                      {t.feeUsdYear == null ? '—' : F(m.net)}
+                      {t.feeUsdYear == null || !hasRate(t) ? '—' : F(m.net)}
                     </td>
                     <td
-                      className={`num ${!isEntry && !short && !p.unpriced ? (gain > 0.005 ? 'tier-be-up' : gain < -0.005 ? 'tier-be-down' : '') : ''}`}
+                      className={`num ${!isEntry && !short && !p.unpriced && !p.noRate ? (gain > 0.005 ? 'tier-be-up' : gain < -0.005 ? 'tier-be-down' : '') : ''}`}
                       data-label={fillT(w.beVs, { entry: name(p.entry) })}
                     >
-                      {isEntry || p.unpriced ? '—' : short ? <span className="faint">{fillT(w.beMinShort, { x: M(p.minSpend!) })}</span> : signed(gain)}
+                      {isEntry || p.unpriced || p.noRate ? '—' : short ? <span className="faint">{fillT(w.beMinShort, { x: M(p.minSpend!) })}</span> : signed(gain)}
                     </td>
                     <td data-label={w.bePays}>{paysOff(i, p)}</td>
                   </tr>
