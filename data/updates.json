@@ -34,5 +34,53 @@
     "ends": null,
     "source": "https://docs.x.place/getting-started/referral-program",
     "sponsored": false
+  },
+  {
+    "slug": "coca-card-8-cashback-on-your-first-3-purchases-if-you-join-in-november",
+    "date": "2026-11-19",
+    "title": "COCA Card: 8% cashback on your first 3 purchases if you join in November",
+    "card": "coca",
+    "type": "offer",
+    "summary": "Sign up for COCA in November 2026 and get 8% cashback on your first 3 card purchases, on up to $300 in total, so up to $24 back. No staking or paid plan needed.",
+    "body": "8% is normally COCA's top tier rate, which needs 30,000 COCA tokens. This welcome offer gives it to new users from their first purchase.\n\n- Sign up between 2 and 30 November 2026 and verify your identity\n- Get the free virtual COCA Card and add money by bank transfer, card transfer or stablecoin deposit\n- Make your first 3 eligible purchases by 30 November 2026, 23:59 UTC\n- The 8% applies to up to $300 across those 3 purchases; anything above earns your normal tier rate (1% on the free Starter tier)\n- Cashback stays pending for 14 days, then you claim it to your USD or EUR balance in the app\n\nThe COCA Card is available to residents of 70+ countries. A physical card costs $5 plus delivery.",
+    "ends": "2026-11-30",
+    "source": "https://www.coca.xyz/post/welcome-cashback-drop-get-8-cashback-on-your-first-3-purchases",
+    "sponsored": false
+  },
+  {
+    "slug": "kast-points-end-on-30-november-card-cashback-continues",
+    "date": "2026-11-19",
+    "title": "KAST Points end on 30 November; card cashback continues",
+    "card": "kast",
+    "type": "news",
+    "summary": "KAST stops giving KAST Points on 30 November 2026. In the first week of December, eligible points become KAST Pioneer Units, and other users get reward vouchers. USD cashback on the card continues.",
+    "body": "What changes:\n- Until 30 November 2026, eligible spending still earns KAST Points under the current terms\n- In the first week of December, eligible points convert into KAST Pioneer Units (KPUs). KPUs are not shares, can't be sold or traded and have no guaranteed cash value; KAST says it plans periodic cash-out options\n- To keep KPUs, you complete a short acknowledgement in the app by a deadline KAST will announce in December\n- Users not eligible for KPUs get KAST reward vouchers for eligible spending instead, with details in December\n- US users have a separate program\n\nWhat stays: USD cashback of 1.5% on the free Standard card (on the first $2,000 a month), 2% on Premium (first $10,000) and 3% on Private (first $40,000). Premium and Private lose the extra points they earned on top.",
+    "ends": null,
+    "source": "https://concierge.kast.xyz/hc/en-us/articles/18196872344079-The-End-of-Points-Earning-and-the-Transition",
+    "sponsored": false
+  },
+  {
+    "slug": "tria-card-fees-0-5-on-every-purchase-plus-1-outside-us-dollars",
+    "date": "2026-11-19",
+    "title": "Tria Card fees: 0.5% on every purchase, plus 1% outside US dollars",
+    "card": "tria",
+    "type": "news",
+    "summary": "Tria's help center now lists a 0.5% Tria fee on every card purchase on all memberships, plus a 1% Visa fee on purchases in other currencies. Cashback stays at 1.5% to 6%.",
+    "body": "The card fees Tria now lists:\n- 0.5% Tria fee on every card purchase, on Lite, Pro and Max\n- 1% Visa foreign exchange fee on purchases not in US dollars, so 1.5% in total\n- No Tria fee to deposit\n- On Lite, cashback above the $1,000 monthly cap is now 0.5%; Pro and Max keep 1%\n- ATM on Pro and Max: $1 + 1% per withdrawal, up to $750 a withdrawal and 3 tries a day\n\nMembership prices are unchanged: $20 a year for Lite, $109 for Pro and $250 for Max. Cashback is 1.5% on Lite, 4.5% on Pro and 6% on Max, and Tria Travel bookings earn the same rate with no cap. After the 0.5% fee, Lite pays 1% net on US dollar spending up to $1,000 a month.",
+    "ends": null,
+    "source": "https://help.tria.so/en/articles/13513481-what-are-tria-cards",
+    "sponsored": false
+  },
+  {
+    "slug": "pulsar-pro-4-back-on-your-first-3-000-of-card-spending-in-november",
+    "date": "2026-11-19",
+    "title": "Pulsar Pro: 4% back on your first $3,000 of card spending in November",
+    "card": "pulsar-money",
+    "type": "offer",
+    "summary": "Pulsar Pro members, new and existing, earn 4% back in Pulsar Points on their first $3,000 of eligible card spending in November 2026. Pro costs $99.99 a year or $9.99 a month.",
+    "body": "How it works:\n- 4% back in Pulsar Points on the first $3,000 of eligible card spending in November, then 0.5% up to $10,000\n- Applies to existing and new Pro subscribers\n- Points refund part or all of an eligible purchase in USDC and expire after 60 days on Pro\n\nPulsar Money is a virtual Visa that spends US dollar or euro balances funded with stablecoins. At 4% on $3,000, November's points are worth up to $120, against a Pro price of $99.99 a year or $9.99 a month.",
+    "ends": "2026-11-30",
+    "source": "https://help.pulsar.money/en/articles/16752652-pulsar-pro",
+    "sponsored": false
   }
 ]

@@ -194,13 +194,13 @@
     "type": "credit",
     "forms": ["virtual", "physical"],
     "custody": "both",
-    "summary": "Stablecoin card built for global spenders, with USD cashback on every tier and KAST Points on top for Premium and Private members.",
-    "cashback": { "basePct": 1.5, "maxPct": 3, "payout": "USD plus KAST Points", "note": "Standard pays 1.5% on the first $2,000 each month. Premium adds 1% in points, Private adds 2%." },
-    "fees": { "annualUsd": 0, "fxPct": 2, "fxNote": "Billed in US dollars. Up to 2% on non-USD purchases; up to 3% foreign transaction fee.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "smallPurchase": { "feeUsd": 0.1, "underUsd": 25, "foreignOnly": true }, "cardFeeUsd": 0, "physicalCardFeeUsd": 40, "atm": "$3 + 2%; up to $250 per withdrawal", "other": ["Standard card shipping $40", "Extra virtual cards $2 each"] },
+    "summary": "Stablecoin card built for global spenders, with USD cashback on every tier: 1.5% on the free Standard card, up to 3% on Private.",
+    "cashback": { "basePct": 1.5, "maxPct": 3, "payout": "USD", "note": "Standard pays 1.5% on the first $2,000 each month, Premium 2% on the first $10,000 and Private 3% on the first $40,000, in USD. KAST Points (an extra 1% on Premium, 2% on Private) stop on 30 Nov 2026; eligible points convert into KAST Pioneer Units in December." },
+    "fees": { "annualUsd": 0, "fxPct": 1.75, "fxNote": "Billed in US dollars. 0.5% to 1.75% on non-USD purchases, depending on your country and the card program; the app shows it before you confirm.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "smallPurchase": { "feeUsd": 0.1, "underUsd": 25, "foreignOnly": true }, "cardFeeUsd": 0, "physicalCardFeeUsd": 40, "atm": "$3 + 2% per withdrawal (plus the FX fee outside USD); up to $500 per withdrawal, 3 withdrawals or $1,500 a day", "other": ["Standard card shipping $40", "Extra virtual cards $2 each", "$0.50 for a purchase declined for lack of balance"] },
     "tiers": [
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 1.5, "bands": [ { "uptoUsd": 2000, "pct": 1.5 }, { "uptoUsd": null, "pct": 0 } ], "perks": ["Concierge"] },
-      { "name": "Premium", "feeUsdYear": 1000, "cashbackPct": 2, "requirement": "$1,000 a year", "perks": ["+1% back in KAST Points", "Concierge"] },
-      { "name": "Private", "feeUsdYear": 10000, "cashbackPct": 3, "requirement": "$10,000 a year", "perks": ["+2% back in KAST Points", "Concierge"] }
+      { "name": "Premium", "feeUsdYear": 1000, "cashbackPct": 2, "bands": [ { "uptoUsd": 10000, "pct": 2 }, { "uptoUsd": null, "pct": 0 } ], "requirement": "$1,000 a year", "perks": ["Metal Visa Infinite card", "+1% back in KAST Points until 30 Nov 2026", "Concierge"] },
+      { "name": "Private", "feeUsdYear": 10000, "cashbackPct": 3, "bands": [ { "uptoUsd": 40000, "pct": 3 }, { "uptoUsd": null, "pct": 0 } ], "requirement": "$10,000 a year", "perks": ["Gold-plated Visa Infinite card", "+2% back in KAST Points until 30 Nov 2026", "VIP concierge and KAST events"] }
     ],
     "coverage": { "countries": null, "scope": "Global (full country list not published)", "examples": [], "markets": { "IN": "unknown", "AE": "unknown", "US": "yes", "GB": "unknown", "EU": "unknown" }, "countryList": { "yes": ["BR", "US"], "others": "unknown" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 38, "ramps": "both", "credit": false, "yield": true },
@@ -214,7 +214,7 @@
     "assets": ["BTC", "ETH", "BNB", "ARB", "ENA", "CRO", "USDC", "USDT"],
     "perks": ["Concierge on every tier"],
     "pros": ["USD cashback, not a volatile token", "Free top-ups and no card spend fee in USD"],
-    "cons": ["Standard cashback stops after $2,000 a month", "Up to 2% FX plus a $40 shipping fee"],
+    "cons": ["Standard cashback stops after $2,000 a month", "Up to 1.75% FX plus a $40 shipping fee"],
     "links": { "official": "https://www.kast.xyz/", "affiliate": "https://app.kast.xyz/referral/EZRQ0A3I" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/kast-card", "verified": "2026-08-30" },
@@ -229,9 +229,12 @@
       { "label": "KAST Cardholder Agreement (US)", "url": "https://www.kast.xyz/en/legal/kast-cardholder-agreement-us", "verified": "2026-10-24" },
       { "label": "KAST Concierge: KAST Brazil entity update, CPF, and new Terms & Conditions", "url": "https://concierge.kast.xyz/hc/en-us/articles/17407295584399-KAST-Brazil-entity-update-CPF-and-new-Terms-Conditions", "verified": "2026-10-24" },
       { "label": "KAST app: referral reward, $20 after $100 spend within 30 days (checked in the app by G2M)", "url": "https://www.kast.xyz/", "verified": "2026-11-03" },
-      { "label": "KAST Concierge: How does the KAST referral program work?", "url": "https://concierge.kast.xyz/hc/en-us/articles/15974559777679-How-Does-the-KAST-Referral-Program-Work", "verified": "2026-11-13" }
+      { "label": "KAST Concierge: How does the KAST referral program work?", "url": "https://concierge.kast.xyz/hc/en-us/articles/15974559777679-How-Does-the-KAST-Referral-Program-Work", "verified": "2026-11-13" },
+      { "label": "KAST Concierge: fees and conditions (FX 0.5%-1.75%, ATM up to $500, tier cashback caps)", "url": "https://concierge.kast.xyz/hc/en-us/articles/9850062738703-What-Are-the-Fees-and-Conditions-for-KAST-Cards-and-Accounts", "verified": "2026-11-19" },
+      { "label": "KAST Concierge: the end of Points earning on 30 Nov 2026", "url": "https://concierge.kast.xyz/hc/en-us/articles/18196872344079-The-End-of-Points-Earning-and-the-Transition", "verified": "2026-11-19" },
+      { "label": "KAST Concierge: referral program (re-checked; 10% off the first membership)", "url": "https://concierge.kast.xyz/hc/en-us/articles/15974559777679-How-Does-the-KAST-Referral-Program-Work", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-13",
+    "lastChecked": "2026-11-19",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/kast.webp", "file": "/card-images/kast-ea0f8ee9.webp" }
   },
@@ -732,9 +735,12 @@
       { "label": "Wirex One Help: Refer a Friend, how it works", "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000089566-refer-a-friend-how-it-works", "verified": "2026-11-13" },
       { "label": "Wirex One Help: Membership, how it works (tier requirements)", "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088362-wirex-one-membership-how-it-works", "verified": "2026-11-13" },
       { "label": "Wirex One Help: Membership levels benefits", "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088364-membership-levels-benefits", "verified": "2026-11-13" },
-      { "label": "Wirex One Help: Your Rewards Balance (monthly redemption cap)", "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088365-your-rewards-balance", "verified": "2026-11-13" }
+      { "label": "Wirex One Help: Your Rewards Balance (monthly redemption cap)", "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088365-your-rewards-balance", "verified": "2026-11-13" },
+      { "label": "Wirex One Help: membership levels benefits (re-checked)", "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088364-membership-levels-benefits", "verified": "2026-11-19" },
+      { "label": "Wirex One Help: Premium trial for invited friends (re-checked)", "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000089567-joined-through-a-friend-s-invite-your-premium-trial", "verified": "2026-11-19" },
+      { "label": "Wirex One Help: card limits and fees (re-checked)", "url": "https://wirexone.freshdesk.com/support/solutions/articles/76000088413-card-limits-and-fees", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-13",
+    "lastChecked": "2026-11-19",
     "metal": "silver",
     "image": { "source": "https://g2m.life/card-originals/wirex-one.png", "file": "/card-images/wirex-one-2a27e71f.webp" }
   },
@@ -1027,7 +1033,7 @@
     "custody": "self-custodial",
     "summary": "Visa Signature card run from a Telegram app, topped up with USDT or USDC on eight networks. Every card payment carries a 1.5% fee.",
     "cashback": { "basePct": 0, "maxPct": null, "payout": null, "note": "No cashback on your own spending. You earn cashback on the spending of friends you refer." },
-    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in US dollars. Visa adds 1% on payments in other currencies, on top of Karta's 1.5% fee on every card payment.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txPct": 1.5, "cardFeeUsd": 5, "physicalCardFeeUsd": 99, "atm": "1 USDT + 2.5% per withdrawal; 1 USDT for a declined withdrawal. Per the Karta app: up to 250 USDT per withdrawal including the fee, and 3 tries in any 24 hours (declined ones count)", "other": ["Virtual card: 5 USDT one-time", "Virtual card replacement: 15 USDT", "Plastic card: 99 USDT pre-order, plus shipping (not published); first shipments planned for November 2026", "Metal card: 299 USDT pre-order, plus shipping (not published); first shipments planned for December 2026", "Top-ups on Tron (TRC-20): 5.90 USDT; free on the other networks", "Sending crypto out: 0.1% plus a network fee of 0.90 to 4.90 USDT", "Bank payouts: coming soon"] },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "Billed in US dollars. Visa adds 1% on payments in other currencies, on top of Karta's 1.5% fee on every card payment.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txPct": 1.5, "cardFeeUsd": 5, "physicalCardFeeUsd": 99, "atm": "1 USDT + 2.5% per withdrawal; 1 USDT for a declined withdrawal. Per the Karta app: up to 250 USDT per withdrawal including the fee, and 3 tries in any 24 hours (declined ones count)", "other": ["Virtual card: 5 USDT one-time (normally 30 USDT)", "Virtual card replacement: 15 USDT", "Plastic card: 99 USDT pre-order, plus shipping (not published); first shipments planned for November 2026", "Metal card: 299 USDT pre-order, plus shipping (not published); first shipments planned for December 2026", "Top-ups on Tron (TRC-20): 5.90 USDT; free on the other networks", "Bank top-ups: ACH 0.30% + 2.50 USDT, SEPA 1% + 2 USDT, SWIFT 0.30% + 37.50 USDT, PIX and Colombian transfers 1% + 0.50 USDT, SPEI 1%", "Sending crypto out: 0.1% plus a network fee of 0.90 to 4.90 USDT", "Bank payouts: coming soon"] },
     "tiers": [
       { "name": "Karta Personal", "feeUsdYear": 0, "feeNote": "One-time: 5 USDT for the virtual card; 99 USDT plastic or 299 USDT metal card (pre-order)", "cashbackPct": null }
     ],
@@ -1056,9 +1062,11 @@
       { "label": "Karta Personal Help Center: Which documents are accepted for identity verification?", "url": "https://intercom.help/karta-personal/en/articles/10476379-which-documents-are-accepted-for-identity-verification", "verified": "2026-10-25" },
       { "label": "Karta Personal Help Center: What stablecoins can I use to top up my account?", "url": "https://intercom.help/karta-personal/en/articles/10460873-what-stablecoins-can-i-use-to-top-up-my-account", "verified": "2026-10-25" },
       { "label": "Karta Personal Help Center: Visa Signature Card Benefits", "url": "https://intercom.help/karta-personal/en/articles/11035105-visa-signature-card-benefits", "verified": "2026-11-12" },
-      { "label": "Karta app: fees screen (ATM withdrawal limits)", "url": "https://t.me/Karta/app", "verified": "2026-11-12" }
+      { "label": "Karta app: fees screen (ATM withdrawal limits)", "url": "https://t.me/Karta/app", "verified": "2026-11-12" },
+      { "label": "Karta Help: fees (re-checked; bank top-up fees added)", "url": "https://intercom.help/karta-personal/en/articles/10511616-are-there-any-fees-for-using-karta-personal", "verified": "2026-11-19" },
+      { "label": "Karta Help: physical card pre-order FAQ (re-checked)", "url": "https://intercom.help/karta-personal/en/articles/13915440-faq-preorder-physical-cards", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-12",
+    "lastChecked": "2026-11-19",
     "metal": "gunmetal",
     "image": { "source": "https://g2m.life/card-originals/karta-io.png", "file": "/card-images/karta-io-39be2b64.webp" }
   },
@@ -1072,12 +1080,12 @@
     "forms": ["virtual", "physical", "metal"],
     "custody": "self-custodial",
     "summary": "Non-custodial Visa from Tria that spends from 1,000+ tokens, with cashback from 1.5% to 6% depending on your membership.",
-    "cashback": { "basePct": 1.5, "maxPct": 6, "payout": null, "note": "Lite: 1.5% on the first $1,000 a month, then 1%. Pro: 4.5% on the first $1,000, then 1%. Max: 6% on the first $2,000, then 1%." },
-    "fees": { "annualUsd": 20, "fxPct": 0, "fxNote": "Billed in US dollars. Tria charges no FX fee of its own; its help center says fees vary by region and card type, and the card terms allow Visa FX of up to 3%.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "physicalCardFeeUsd": 109, "atm": "Pro and Max: up to $2 + 3% per withdrawal (up to $2 for a balance inquiry or decline), up to $750 a day. No ATM access on Lite.", "other": [] },
+    "cashback": { "basePct": 1.5, "maxPct": 6, "payout": null, "note": "Lite: 1.5% on the first $1,000 a month, then 0.5%. Pro: 4.5% on the first $1,000, then 1%. Max: 6% on the first $2,000, then 1%. Tria Travel bookings earn the same rate with no cap. Claimed in the app, paid in USDT." },
+    "fees": { "annualUsd": 20, "fxPct": 1, "fxNote": "Billed in US dollars. Purchases in other currencies carry a 1% Visa FX fee, on top of the 0.5% Tria fee on every purchase (1.5% in total).", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txPct": 0.5, "physicalCardFeeUsd": 109, "atm": "Pro and Max: $1 + 1% per withdrawal, up to $750 per withdrawal and 3 tries a day (declined tries count). No ATM access on Lite.", "other": [] },
     "tiers": [
-      { "name": "Lite", "feeUsdYear": 20, "cashbackPct": 1.5, "bands": [ { "uptoUsd": 1000, "pct": 1.5 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "perks": ["Virtual Visa Platinum card", "1.5% with no cap on Tria Travel (hotels, rentals; not flights)"] },
-      { "name": "Pro", "feeUsdYear": 109, "cashbackPct": 4.5, "bands": [ { "uptoUsd": 1000, "pct": 4.5 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "$109 a year", "perks": ["Plastic Visa Signature card", "4.5% with no cap on Tria Travel (hotels, rentals; not flights)", "Lounge access", "Visa Luxury Hotels and Visa concierge", "ATM up to $750 a day"] },
-      { "name": "Max", "feeUsdYear": 250, "cashbackPct": 6, "bands": [ { "uptoUsd": 2000, "pct": 6 }, { "uptoUsd": null, "pct": 1 } ], "fxPct": 0, "requirement": "$250 a year", "perks": ["Metal Visa Signature card", "6% with no cap on Tria Travel (hotels, rentals; not flights)", "Lounge access", "Visa Luxury Hotels and Visa concierge", "ATM up to $750 a day"] }
+      { "name": "Lite", "feeUsdYear": 20, "cashbackPct": 1.5, "bands": [ { "uptoUsd": 1000, "pct": 1.5 }, { "uptoUsd": null, "pct": 0.5 } ], "perks": ["Virtual Visa Platinum card", "1.5% with no cap on Tria Travel (hotels, rentals; not flights)"] },
+      { "name": "Pro", "feeUsdYear": 109, "cashbackPct": 4.5, "bands": [ { "uptoUsd": 1000, "pct": 4.5 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "$109 a year", "perks": ["Plastic Visa Signature card", "4.5% with no cap on Tria Travel (hotels, rentals; not flights)", "Lounge access", "Visa Luxury Hotels and Visa concierge", "ATM up to $750 per withdrawal"] },
+      { "name": "Max", "feeUsdYear": 250, "cashbackPct": 6, "bands": [ { "uptoUsd": 2000, "pct": 6 }, { "uptoUsd": null, "pct": 1 } ], "requirement": "$250 a year", "perks": ["Metal Visa Signature card", "6% with no cap on Tria Travel (hotels, rentals; not flights)", "Lounge access", "Visa Luxury Hotels and Visa concierge", "ATM up to $750 per withdrawal"] }
     ],
     "coverage": { "countries": 229, "scope": "229 countries and territories, almost worldwide; excludes sanctioned and high-risk jurisdictions", "examples": ["United States", "United Kingdom", "Germany", "Japan", "Brazil"], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AR", "AS", "AT", "AU", "AW", "AX", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN", "BO", "BQ", "BR", "BS", "BT", "BV", "BW", "BZ", "CA", "CC", "CD", "CF", "CG", "CH", "CI", "CK", "CL", "CM", "CO", "CR", "CV", "CW", "CX", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EH", "ER", "ES", "ET", "FI", "FJ", "FK", "FM", "FO", "FR", "GA", "GB", "GD", "GE", "GF", "GG", "GH", "GI", "GL", "GM", "GN", "GP", "GQ", "GR", "GS", "GT", "GU", "GW", "GY", "HK", "HM", "HN", "HR", "HT", "HU", "ID", "IE", "IM", "IO", "IS", "IT", "JE", "JM", "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KR", "KW", "KY", "KZ", "LA", "LB", "LC", "LI", "LR", "LS", "LT", "LU", "LV", "LY", "MA", "MC", "MD", "ME", "MF", "MG", "MH", "MK", "ML", "MN", "MO", "MP", "MQ", "MR", "MS", "MT", "MU", "MV", "MW", "MX", "MY", "MZ", "NA", "NC", "NE", "NF", "NG", "NL", "NO", "NR", "NU", "NZ", "OM", "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM", "PN", "PR", "PS", "PT", "PW", "PY", "QA", "RE", "RO", "RS", "RW", "SA", "SB", "SC", "SD", "SE", "SG", "SH", "SI", "SJ", "SK", "SL", "SM", "SN", "SO", "SR", "SS", "ST", "SV", "SX", "SZ", "TC", "TD", "TF", "TH", "TJ", "TK", "TL", "TM", "TN", "TO", "TT", "TV", "TW", "TZ", "UG", "UM", "US", "UY", "UZ", "VA", "VC", "VG", "VI", "VU", "WF", "WS", "XK", "YE", "YT", "ZA", "ZM", "ZW"], "no": ["AQ", "BY", "CN", "CU", "EG", "IL", "IN", "IQ", "IR", "KP", "LK", "MM", "NI", "NP", "RU", "SY", "TG", "TR", "UA", "VE", "VN"], "others": "no" } },
     "ecosystem": { "iban": "none", "payoutCorridors": 0, "ramps": "none", "credit": false, "yield": true },
@@ -1089,8 +1097,8 @@
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
     "perks": ["Price protection up to $2,000", "Purchase protection up to $10,000", "Spend up to $1M a day on Pro and Max"],
-    "pros": ["No FX or deposit fees on any tier", "1.5% on the entry tier, up to 6% on Max", "Lounge access on Pro and Max"],
-    "cons": ["Every tier has a yearly fee: $20 Lite, $109 Pro, $250 Max", "Higher rates stop after $1,000 to $2,000 a month (1% after that)"],
+    "pros": ["No deposit fees on any tier", "1.5% on the entry tier, up to 6% on Max", "Lounge access on Pro and Max"],
+    "cons": ["Every tier has a yearly fee: $20 Lite, $109 Pro, $250 Max", "0.5% Tria fee on every purchase, plus 1% on non-USD purchases", "Higher rates stop after $1,000 to $2,000 a month (0.5% to 1% after that)"],
     "links": { "official": "https://tria.so/", "affiliate": "https://app.tria.so/?accessCode=YFXSXC5574" },
     "sources": [
       { "label": "Tria Help Center: What are Tria Cards?", "url": "https://intercom.help/tria/en/articles/13513481-what-are-tria-cards", "verified": "2026-10-22" },
@@ -1108,9 +1116,12 @@
       { "label": "Tria Help Center: Tria Card Top Up Guide", "url": "https://help.tria.so/en/articles/14056654-tria-card-top-up-guide", "verified": "2026-10-25" },
       { "label": "Tria app: sign-up offer, $10 after sign-up and card activation (checked in the app by G2M)", "url": "https://www.tria.so/", "verified": "2026-11-04" },
       { "label": "Tria Help Center: What are Tria Cards? (1% after the monthly cap on every tier)", "url": "https://intercom.help/tria/en/articles/13513481-what-are-tria-cards", "verified": "2026-11-12" },
-      { "label": "Tria International Card Terms: ATM fees up to $2 + 3%", "url": "https://docs.tria.so/card-terms-international", "verified": "2026-11-15" }
+      { "label": "Tria International Card Terms: ATM fees up to $2 + 3%", "url": "https://docs.tria.so/card-terms-international", "verified": "2026-11-15" },
+      { "label": "Tria Help: What are Tria Cards? (0.5% Tria fee on every purchase, 1% Visa FX on non-USD, Lite 0.5% after the cap)", "url": "https://help.tria.so/en/articles/13513481-what-are-tria-cards", "verified": "2026-11-19" },
+      { "label": "Tria Help: What are Tria Memberships? (prices $20, $109, $250)", "url": "https://help.tria.so/en/articles/13513737-what-are-tria-memberships", "verified": "2026-11-19" },
+      { "label": "Tria Help: ATM withdrawals ($1 + 1%, up to $750 per withdrawal, 3 tries a day)", "url": "https://help.tria.so/en/articles/14780504-atm-withdrawals", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-12",
+    "lastChecked": "2026-11-19",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/tria.png", "file": "/card-images/tria-c57fc51e.webp" }
   },
@@ -1139,7 +1150,7 @@
     "bankRails": [ { "rail": "EUR_SEPA", "in": true, "out": true, "fee": "residents of 28 European countries" } ],
     "bankForNonResidents": false,
     "kycRule": "residency_id",
-    "signupBonus": "8% cashback on your first 3 eligible card purchases, if you register in November 2026, complete KYC, fund the card and buy by 30 Nov 2026. No code needed",
+    "signupBonus": "8% cashback on up to $300 across your first 3 eligible card purchases (up to $24), if you sign up in November 2026 and make them by 30 Nov 2026. No code needed",
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDT", "USDC", "EURC"],
     "perks": ["5% APY on USD balances at every tier (variable; EUR balances earn none)", "Personal EUR IBAN with SEPA transfers (residents of 28 European countries)", "Fund with USDC, USDT or EURC on 16 networks, by SEPA transfer or by card top-up", "Hotel discounts of up to 50% with COCA Travel"],
@@ -1165,9 +1176,10 @@
       { "label": "COCA Help: Supported assets for deposits in crypto", "url": "https://help.coca.xyz/support/solutions/articles/205000069392-supported-assets-for-deposits-in-crypto", "verified": "2026-11-13" },
       { "label": "COCA Help: Loyalty Program T&C (card countries 1.2, EUR IBAN countries 1.3, claiming 2-3, APY 4)", "url": "https://help.coca.xyz/support/solutions/articles/205000042710-tier-system-terms-conditions", "verified": "2026-11-13" },
       { "label": "COCA Help: How claim capacity boosters work", "url": "https://help.coca.xyz/support/solutions/articles/205000072788-how-claim-capacity-boosters-work", "verified": "2026-11-13" },
-      { "label": "COCA team, 13 Nov 2026: corrections (no ATM allowance since late October, no EURS) and card art (Google Drive)", "url": "https://drive.google.com/drive/folders/1bu5Vvz4nECKSOeTindikPTrr2fWpckVC", "verified": "2026-11-13" }
+      { "label": "COCA team, 13 Nov 2026: corrections (no ATM allowance since late October, no EURS) and card art (Google Drive)", "url": "https://drive.google.com/drive/folders/1bu5Vvz4nECKSOeTindikPTrr2fWpckVC", "verified": "2026-11-13" },
+      { "label": "COCA blog: Welcome Cashback Drop, 8% on up to $300 across the first 3 purchases (2 to 30 Nov 2026)", "url": "https://www.coca.xyz/post/welcome-cashback-drop-get-8-cashback-on-your-first-3-purchases", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-13",
+    "lastChecked": "2026-11-19",
     "metal": "rose",
     "image": { "source": "https://drive.google.com/file/d/1uqi5VbEgpKgyJWNG-wKBSDN3KwZGB79k/view", "file": "/card-images/coca-bcba93b5.webp" }
   },
@@ -1757,7 +1769,7 @@
     "custody": "custodial",
     "summary": "A debit card from PEXX that spends USD, USDT and USDC from one balance, with 1% back in PEXX Points, no annual fee and a USD account with US bank details.",
     "cashback": { "basePct": 1, "maxPct": 1, "payout": "PEXX Points", "note": "1 PEXX Point for every $1 of eligible card spend; PEXX values 100 points at $1. Points can't be cashed out yet: they convert to HeyMax Max Miles (2 points = 1 mile) for airline and hotel programmes. No cap." },
-    "fees": { "annualUsd": 0, "fxPct": 1.2, "fxNote": "PEXX's FAQ: 0.6% platform fee on every card purchase, plus a 1.2% FX markup on non-USD purchases. Its pricing page instead says one flat 2.6% per purchase, so check the rate in the app.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txPct": 0.6, "cardFeeUsd": 0, "atm": null, "other": ["Physical card: one-off issuance fee shown when you order (amount not published)", "USD deposits: ACH $0.50 + 0.1%, Fedwire $20 + 0.1%, SWIFT $30 + 0.1%", "No top-up or annual fee", "Failed dispute $25", "Limits: $30,000 a day or per purchase, $70,000 a month"] },
+    "fees": { "annualUsd": 0, "fxPct": 1.2, "fxNote": "0.6% platform fee on every card purchase, plus a 1.2% FX markup on non-USD purchases (PEXX's pricing page and help center).", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txPct": 0.6, "cardFeeUsd": 0, "atm": null, "other": ["Physical card: one-off issuance fee shown when you order (amount not published)", "USD deposits: ACH $0.50 + 0.1%, Fedwire $20 + 0.1%, SWIFT $30 + 0.1%", "No top-up or annual fee", "Failed dispute $25", "Limits: $30,000 a day or per purchase, $70,000 a month"] },
     "tiers": [
       { "name": "PEXX Card", "feeUsdYear": 0, "cashbackPct": 1 }
     ],
@@ -1788,9 +1800,11 @@
       { "label": "PEXX Help: Where can I send money to?", "url": "https://faq.pexx.com/en/articles/9233711-where-can-i-send-money-to", "verified": "2026-11-13" },
       { "label": "PEXX Help: Apple Pay and Google Pay", "url": "https://faq.pexx.com/en/articles/17346987-how-do-i-add-my-pexx-card-to-apple-pay-or-google-pay", "verified": "2026-11-13" },
       { "label": "PEXX Help: Disputes and chargebacks", "url": "https://faq.pexx.com/en/articles/11457783-how-are-disputes-or-chargebacks-handled", "verified": "2026-11-13" },
-      { "label": "PEXX Help: Referral Program (rewards go to the referrer only)", "url": "https://faq.pexx.com/en/articles/9233750-i-want-to-find-out-more-about-pexx-s-referral-program", "verified": "2026-11-13" }
+      { "label": "PEXX Help: Referral Program (rewards go to the referrer only)", "url": "https://faq.pexx.com/en/articles/9233750-i-want-to-find-out-more-about-pexx-s-referral-program", "verified": "2026-11-13" },
+      { "label": "PEXX: pricing (0.6% platform fee plus 1.2% FX on non-USD)", "url": "https://pexx.com/pricing", "verified": "2026-11-19" },
+      { "label": "PEXX Help: how paying with the card works (re-checked)", "url": "https://faq.pexx.com/en/articles/17346621-how-does-paying-with-the-pexx-card-work", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-13",
+    "lastChecked": "2026-11-19",
     "addedOn": "2026-11-13",
     "metal": "champagne",
     "image": { "source": "https://g2m.life/card-originals/pexx.webp", "file": "/card-images/pexx-c6100910.webp" }
@@ -1805,8 +1819,8 @@
     "forms": ["virtual"],
     "custody": "unknown",
     "summary": "A virtual Visa from the Pulsar Money app, issued through Wirex, that spends USD or EUR balances funded 1:1 with stablecoins. Free plan, or Pulsar Pro for more points.",
-    "cashback": { "basePct": 0.5, "maxPct": 2, "payout": "Pulsar Points (USDC refunds)", "note": "Free: 0.5% on the first $500 a month, then 0.25%. Pro ($99.99 a year): 2% standard (4% on subscriptions); in November 2026, 4% on the first $3,000. Points refund part or all of an eligible purchase in USDC (100 points per $1 for up to half of a purchase, 125 for a full refund) and expire after 4 months on Free, 6 on Pro. Double points at ChatGPT, Claude, X, Uber and Bolt." },
-    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "No FX fee when you pay in USD from a USD balance or in EUR from a EUR balance; up to 1% when the card converts.", "fxByCurrency": { "USD": 0, "EUR": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "atm": "Free up to $200 a month, then 2%", "other": ["Top-up with a credit or debit card 3.5%", "Bank transfers out: free up to $500 and 10 transfers a month on Free ($5,000 and 15 on Pro), then $1 or €1 + 0.25% (0.20% on Pro)", "Stablecoin withdrawals: free up to $2,000 a month on Free ($10,000 on Pro), then 0.20% (0.15% on Pro)", "USD-EUR exchange: free up to $1,000 a month on Free ($5,000 on Pro), then 0.60% (0.30% on Pro)", "Card limit $30,000 (can be raised on request)"] },
+    "cashback": { "basePct": 0.5, "maxPct": 2, "payout": "Pulsar Points (USDC refunds)", "note": "Free: 0.5% on the first $500 a month, then 0.25%. Pro ($99.99 a year): 2% standard; in November 2026, 4% on the first $3,000, then 0.5%. Points refund part or all of an eligible purchase in USDC (100 points per $1 for up to half of a purchase, 125 for a full refund) and expire after 30 days on Free, 60 on Pro. Double points at selected merchants listed in the app." },
+    "fees": { "annualUsd": 0, "fxPct": 1, "fxNote": "No FX fee when you pay in USD from a USD balance or in EUR from a EUR balance; up to 1% when the card converts.", "fxByCurrency": { "USD": 0, "EUR": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "atm": "Free up to $200 a month, then 2%", "other": ["Top-up with a credit or debit card 3.5%", "Bank transfers out: free up to $100 and 1 transfer a month on Free ($1,000 and 5 on Pro), then $1 or €1 + 0.20% (0.15% on Pro)", "Stablecoin withdrawals: free up to $100 a month on Free ($1,000 on Pro), then 0.20% (0.15% on Pro)", "USD-EUR exchange in the app: 0.40% on Free, 0.20% on Pro", "Card limit $30,000 (can be raised on request)"] },
     "tiers": [
       { "name": "Free", "feeUsdYear": 0, "cashbackPct": 0.5, "bands": [ { "uptoUsd": 500, "pct": 0.5 }, { "uptoUsd": null, "pct": 0.25 } ], "requirement": "Free plan" },
       { "name": "Pro", "feeUsdYear": 99.99, "feeNote": "Or $9.99 a month", "cashbackPct": 2, "bands": [ { "uptoUsd": 3000, "pct": 2 }, { "uptoUsd": 10000, "pct": 0.5 }, { "uptoUsd": null, "pct": 0.25 } ], "requirement": "$99.99 a year or $9.99 a month", "perks": ["4% on subscriptions", "Double points at ChatGPT, Claude, X, Uber and Bolt", "Points last 6 months instead of 4", "No fees in Pulsar Invest", "Bigger free allowances for bank and stablecoin withdrawals"] }
@@ -1819,9 +1833,9 @@
     "referralCode": "KW424",
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDT", "USDC", "EURC"],
-    "perks": ["USD and EUR account details in your name", "About 5.2% APY on stablecoins through DeFi vaults (variable, capital at risk)", "Pro: double points at ChatGPT, Claude, X, Uber and Bolt, partner offers, no Invest fees"],
+    "perks": ["USD and EUR account details in your name", "About 5.2% APY on stablecoins through DeFi vaults (variable, capital at risk)", "Pro: double points at selected merchants, partner offers, no Invest fees"],
     "pros": ["No FX fee when you spend USD or EUR from the matching balance", "Named USD and EUR account details, funded 1:1 with stablecoins", "Apple Pay and Google Pay"],
-    "cons": ["Points only refund past purchases and expire (4 months on Free)", "Virtual card only", "The Free plan pays 0.5% on the first $500 a month, then 0.25%"],
+    "cons": ["Points only refund past purchases and expire (30 days on Free)", "Virtual card only", "The Free plan pays 0.5% on the first $500 a month, then 0.25%"],
     "links": { "official": "https://pulsar.money/", "affiliate": "https://pulsar.money/i/KW424?s=cp" },
     "sources": [
       { "label": "Pulsar Help: Pricing & Fees", "url": "https://help.pulsar.money/en/articles/16752647-pricing-fees", "verified": "2026-11-13" },
@@ -1832,9 +1846,12 @@
       { "label": "Pulsar Money: Pulsar goes live (named accounts, points)", "url": "https://pulsar.money/en/blog/pulsar-goes-live", "verified": "2026-11-13" },
       { "label": "Pulsar Money: Feature Disclosure Pack (Wirex card, yield)", "url": "https://pulsar.money/feature-disclosure-pack", "verified": "2026-11-13" },
       { "label": "Pulsar Money: Home", "url": "https://pulsar.money/", "verified": "2026-11-13" },
-      { "label": "Pulsar Help: November referral cashback (rewards go to the referrer only)", "url": "https://help.pulsar.money/en/articles/18349245-november-referral-cashback-pulsar-pro", "verified": "2026-11-13" }
+      { "label": "Pulsar Help: November referral cashback (rewards go to the referrer only)", "url": "https://help.pulsar.money/en/articles/18349245-november-referral-cashback-pulsar-pro", "verified": "2026-11-13" },
+      { "label": "Pulsar Help: Pricing & Fees (November campaign rates, smaller free allowances, points expiry)", "url": "https://help.pulsar.money/en/articles/16752647-pricing-fees", "verified": "2026-11-19" },
+      { "label": "Pulsar Help: Pulsar Pro ($99.99 a year; 4% on the first $3,000 in November)", "url": "https://help.pulsar.money/en/articles/16752652-pulsar-pro", "verified": "2026-11-19" },
+      { "label": "Pulsar: referral invite link (no reward stated for the new user)", "url": "https://pulsar.money/i/KW424?s=cp", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-13",
+    "lastChecked": "2026-11-19",
     "addedOn": "2026-11-13",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/pulsar-money.jpg", "file": "/card-images/pulsar-money-d6ebd82e.webp" }

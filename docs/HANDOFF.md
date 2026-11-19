@@ -599,6 +599,17 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- Full data update, batch 2 (19 Nov 2026, Akash: "ok batch 2"). Karta (unchanged; bank top-up fees added; virtual
+  card 5 USDT, normally 30), Tria (help center now lists a 0.5% Tria fee on every purchase and 1% Visa FX on non-USD:
+  txPct 0.5, fxPct 1; Lite 0.5% after the $1,000 cap; ATM $1 + 1%, up to $750 per withdrawal, 3 a day; score 69 to
+  64, rank 8 to 15), KAST (FX 0.5%-1.75%, fxPct 1.75; ATM up to $500 per withdrawal, 3 or $1,500 a day; Premium 2% on
+  $10,000 and Private 3% on $40,000 a month; KAST Points end 30 Nov 2026, converting to KAST Pioneer Units in Dec),
+  Wirex (unchanged), COCA (8% welcome offer capped at $300/$24; its referral $10 needs the in-app invite link, and
+  G2M's link is an Impact affiliate link, so not claimed), PEXX (pricing page now agrees: 0.6% + 1.2% FX), Pulsar
+  (referral link now https://pulsar.money/i/KW424?s=cp; November campaign: Pro 4% on the first $3,000; points expire
+  after 30 days Free / 60 Pro; smaller free allowances; an ULTRA plan appears only in the fee table, no price, not
+  added). Posts: COCA 8% (ends 30 Nov), KAST Points ending, Tria fees, Pulsar Pro 4% (ends 30 Nov). Pulsar's fee page
+  and Pro page disagree on Free November rates, so the Free rate stays 0.5%/0.25%.
 - Full data update, batch 1 (19 Nov 2026, Akash: "start a full detailed data updates ... also latest offers or
   promotional offers for cards which have our refferal link"). Order: the 22 referral cards, oldest check first, then
   the 17 others. Batch 1 re-checked against issuer pages: SolCard (unchanged; a third-party blog's "$1 a month" claim
