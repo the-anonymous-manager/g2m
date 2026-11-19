@@ -56,7 +56,7 @@ jobs:
           git config user.name "G2M sheet sync"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           mkdir -p public/card-images
-          git add -A data/cards.json data/sponsor.json data/picks.json public/card-images
+          git add -A data/cards.json data/sponsor.json data/picks.json data/updates.json public/card-images
           git diff --cached --quiet && exit 0
           git commit -m "Update cards from Google Sheet: ${SUMMARY:-card data}"
           git pull --rebase origin main

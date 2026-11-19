@@ -83,6 +83,14 @@ and confirm what changed on the site (not which files moved).
   goes live by itself: Akash replies, then adds it to the Picks or Sponsor tab.
   Unbooked slots show cards listed in the last 30 days as "New on G2M", then the automatic picks (top ranked, best no
   annual fee, best non-custodial). Never changes a score or rank.
+- Updates (header link "Updates", `/updates`, `/de/updates` ...): card news, offers and sign-up bonuses Akash writes in
+  the sheet's Updates tab (Date, Title, Card ID, Type News/Offer/Bonus, Summary, Full text, Ends, Source link,
+  Sponsored), synced to `data/updates.json` (`lib/updates.ts`, `components/UpdatesView.tsx`), each with its own page
+  and an RSS feed (`/updates/feed.xml`). A post with a Card ID shows that card's "Get the card" (`/go/<slug>`, the
+  referral link), bonus and code. Paid posts (Sponsored "yes") always show "Sponsored". Posts never change a score or
+  rank. Their text is translated in `data/i18n` like other sheet text (`npm run i18n:missing` lists it, split by
+  paragraph); a post gets its own page in a language once its title and summary are translated, until then that
+  language's list shows it in English and links to the English post. Only state facts from the issuer; add a source link.
 - New cards: nothing to date. The sync sets `addedOn` to the day a Card ID first reaches the site and keeps it after
   (no sheet column). Without a sheet, set `addedOn` (YYYY-MM-DD) in `data/cards.json` when listing a card.
 
@@ -100,7 +108,7 @@ and confirm what changed on the site (not which files moved).
 - Two root layouts: English pages live in `app/(en)/` (the group name is not in the address), the other languages in
   `app/[lang]/` with their own `<html lang dir>`; both use `components/SiteDocument.tsx`. Addresses that match nothing
   get `app/global-not-found.tsx`.
-- `app/(en)/` pages: home, `/cards`, `/cards/[slug]`, `/cards/[slug]/alternatives` (`lib/alternatives.ts`), `/cards/[slug]/referral-code` (`lib/referral.ts`), `/compare`, `/compare/[pair]` ("a-vs-b" SEO pages, `lib/verdict.ts`), `/guides` (country and topic guides, `lib/guides.ts`), `/finder`, `/calculator`, `/methodology`, `/submit`
+- `app/(en)/` pages: home, `/updates` and `/updates/[slug]` (card news, from the sheet), `/cards`, `/cards/[slug]`, `/cards/[slug]/alternatives` (`lib/alternatives.ts`), `/cards/[slug]/referral-code` (`lib/referral.ts`), `/compare`, `/compare/[pair]` ("a-vs-b" SEO pages, `lib/verdict.ts`), `/guides` (country and topic guides, `lib/guides.ts`), `/finder`, `/calculator`, `/methodology`, `/submit`
 - Guides, "X vs Y", alternatives and referral-code pages are built ahead of time at each deploy (`generateStaticParams`,
   served from static files, see `open-next.config.ts`): they must not read cookies, headers or the time of the request.
 - Other languages (`lib/i18n/`): German, French, Spanish, Polish, Turkish, Russian, Arabic (right to left) and

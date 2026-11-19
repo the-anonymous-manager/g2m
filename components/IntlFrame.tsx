@@ -10,6 +10,7 @@ import {
   intlRankings,
   intlReceipt,
   intlSubmit,
+  intlUpdates,
   intlWallet
 } from '@/lib/i18n/locales';
 import { CHROME } from '@/lib/i18n/chrome';
@@ -34,7 +35,7 @@ export function IntlHeader({ locale }: { locale: Locale }) {
           { href: intlCalculator(locale), label: t.calculator },
           { href: intlWallet(locale), label: t.wallet },
           { href: intlCompare(locale), label: t.compare },
-          { href: intlMethodology(locale), label: t.methodology }
+          { href: intlUpdates(locale), label: t.updates }
         ],
         cta: { href: intlFinder(locale), label: t.cta }
       }}
@@ -61,6 +62,7 @@ export function IntlFooter({ locale }: { locale: Locale }) {
           { href: intlCorridors(locale), label: t.corridors },
           { href: intlCompare(locale), label: t.compare },
           { href: intlGuides(locale), label: t.guides },
+          { href: intlUpdates(locale), label: t.updates },
           { href: intlMethodology(locale), label: t.methodology },
           { href: intlSubmit(locale), label: t.submit }
         ],

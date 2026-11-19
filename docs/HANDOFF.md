@@ -599,6 +599,21 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- Guessed card addresses (19 Nov 2026, Akash with a /stats screenshot of broken pages: /cards/pulsar-money-card,
+  /en/cards/pulsar-money-card, /zh-hk/cards/coca-card). `next.config.mjs` now forwards (308) "<slug>-card" to the card
+  (and "avalanche" to "avalanche-card"), in every language and for /alternatives and /referral-code; "/en/..." to the
+  English page; "/card/..." to "/cards/...". Built from data/cards.json at each deploy, so new cards are covered.
+- Updates page (19 Nov 2026, Akash: "Make methology in the footer and place something like card offers or updates. we
+  will write about new card updates or new offer from cards, bonus etc. It can short update a long update ... also there
+  we can place our card refer link"). The header's last link is now "Updates" (`/updates`; de News, fr Actus, es
+  Noticias, pl Nowości, tr Haberler, ru Новости, ar المستجدات, zh-hk 最新消息); Methodology stays in the footer, which
+  also gained Updates. Posts come from the sheet's new Updates tab (gid 2026878257; dropdowns for Card ID, Type and
+  Sponsored; Date and Ends kept as plain text) via the hourly sync into `data/updates.json`. Each post has its own
+  page (`/updates/<title-slug>`, NewsArticle data, the card's share picture) with the full text, the card box ("Get
+  the card" through /go, sign-up bonus, referral code), the source and more posts; offers past their Ends date show
+  "Ended" and lose the list's "Get the card" button. RSS at `/updates/feed.xml`. An empty list is noindex and left out
+  of the sitemap. Other languages: the list always exists; a post gets its own page there once its title and summary
+  are in `data/i18n` (translations are Claude's, not native-reviewed).
 - SEO check (19 Nov 2026, Akash: "now the seo part", with the Search Console coverage export and Bing's site scan).
   All 4,350 sitemap pages answer 200, declare themselves canonical in <head> and allow indexing; internal links on
   ~200 pages of every type lead to no redirect or 404. Filter addresses (?country=, ?c=) point their canonical at the

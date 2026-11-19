@@ -1,7 +1,7 @@
 // Lists the English text that has no translation yet in data/i18n/<language>.json: card summaries, pros, cons and
 // sign-up bonuses, the rest of the card page's text (coverage, notes, ATM, fees, perks, tier conditions) and the corridor
 // finder's bank rail fee notes from
-// data/cards.json, the home page picks' notes (data/picks.json) and the topic guide text in
+// data/cards.json, the home page picks' notes (data/picks.json), the Updates posts (data/updates.json) and the topic guide text in
 // lib/guides.ts. Translated pages show missing text in English (marked as English) until it is added, so this only
 // reports, it never fails the build.
 //
@@ -49,7 +49,28 @@ for (const m of block.matchAll(/(title|description|intro|tips):\s*(\[[\s\S]*?\]|
   for (const s of m[2].matchAll(str)) guides.push(unq(s[1]));
 }
 
-const wanted = [...new Set([...guides, ...sheet, ...picks, ...details])];
+// Posts on the Updates page (the sheet's Updates tab): title, summary, and each paragraph and list line of the full
+// text (split the same way as lib/updates.ts bodyBlocks).
+const blocks = (body) =>
+  (body ?? '')
+    .split(/\n\s*\n/)
+    .flatMap((chunk) => {
+      const out = [];
+      let para = [];
+      for (const line of chunk.split('\n').map((l) => l.trim()).filter(Boolean)) {
+        const item = line.match(/^[-•*]\s+(.*)$/);
+        if (item) {
+          if (para.length) out.push(para.join(' '));
+          para = [];
+          out.push(item[1]);
+        } else para.push(line);
+      }
+      if (para.length) out.push(para.join(' '));
+      return out;
+    });
+const updates = JSON.parse(read('data/updates.json')).flatMap((u) => [u.title, u.summary, ...blocks(u.body)]);
+
+const wanted = [...new Set([...guides, ...sheet, ...picks, ...details, ...updates])];
 const langs = readdirSync(new URL('data/i18n/', root))
   .filter((f) => f.endsWith('.json') && f !== 'missing.json')
   .map((f) => f.replace(/\.json$/, ''));

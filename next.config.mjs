@@ -1,3 +1,18 @@
+import { readFileSync } from 'node:fs';
+
+// Card addresses people (and AI assistants) guess wrongly: "/cards/pulsar-money-card" for /cards/pulsar-money,
+// "/cards/avalanche" for /cards/avalanche-card, in any language. /stats listed them as broken pages (19 Nov 2026).
+const LANGS = 'de|fr|es|pl|tr|ru|ar|zh-hk';
+const slugs = JSON.parse(readFileSync(new URL('./data/cards.json', import.meta.url), 'utf8')).map((c) => c.slug);
+const cardGuesses = slugs.flatMap((slug) => {
+  const guess = slug.endsWith('-card') ? slug.slice(0, -'-card'.length) : `${slug}-card`;
+  if (slugs.includes(guess)) return [];
+  return [
+    { source: `/cards/${guess}/:rest*`, destination: `/cards/${slug}/:rest*`, permanent: true },
+    { source: `/:lang(${LANGS})/cards/${guess}/:rest*`, destination: `/:lang/cards/${slug}/:rest*`, permanent: true }
+  ];
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -15,7 +30,14 @@ const nextConfig = {
       // One address for the whole site: www.g2m.life was serving a full copy, and Google picked it as the main
       // address for the home page. Every www page now forwards permanently to the same page on g2m.life.
       { source: '/:path*', has: [{ type: 'host', value: 'www.g2m.life' }], destination: 'https://g2m.life/:path*', permanent: true },
-      { source: '/guides/self-custodial-crypto-cards', destination: '/guides/non-custodial-crypto-cards', permanent: true }
+      { source: '/guides/self-custodial-crypto-cards', destination: '/guides/non-custodial-crypto-cards', permanent: true },
+      // English has no /en prefix: /en/cards/kast is /cards/kast.
+      { source: '/en', destination: '/', permanent: true },
+      { source: '/en/:path*', destination: '/:path*', permanent: true },
+      // "card" for "cards".
+      { source: '/card/:path*', destination: '/cards/:path*', permanent: true },
+      { source: `/:lang(${LANGS})/card/:path*`, destination: '/:lang/cards/:path*', permanent: true },
+      ...cardGuesses
     ];
   },
   async headers() {
