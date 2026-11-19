@@ -1,1 +1,38 @@
-[]
+[
+  {
+    "slug": "kite-card-10-back-on-gta-vi-plus-5-offers-until-30-november",
+    "date": "2026-11-19",
+    "title": "Kite Card: 10% back on GTA VI, plus 5% offers until 30 November",
+    "card": "kite",
+    "type": "offer",
+    "summary": "Buy GTA VI with the Kite Card between 17 and 30 November 2026 and get 10% back, up to $50. Kite's 5% offers on Grab, travel, streaming, AI tools and Starlink also run until 30 November.",
+    "body": "The Kite Card is a prepaid US dollar Visa for nine countries: Japan, South Korea, Taiwan, Singapore, Malaysia, Thailand, Vietnam, the Philippines and Australia.\n\nThe GTA VI offer:\n- 10% back on GTA VI Standard or Ultimate Edition, up to $50 per person in total\n- Buy between 17 and 30 November 2026 and pay in full with the Kite Card\n- Only at the Rockstar Games Store, PlayStation Store or Xbox Store; add-ons and in-game currency don't count\n- Paid once in US dollars to your Kite Card after the refund period, expected by 21 December 2026\n\nAlso until 30 November 2026, 5% back with no cap on:\n- Grab\n- Travel booked on Travala: flights, hotels, car rentals and activities\n- Netflix, YouTube Premium, Prime Video and Spotify\n- Eligible AI subscriptions such as ChatGPT Plus and Claude Pro\n- Figma, LinkedIn Premium, X Premium and Telegram Premium\n- Your Starlink bill\n\nCashback stays pending for 30 days before it is paid, and refunded purchases earn nothing.",
+    "ends": "2026-11-30",
+    "source": "https://www.kiteapp.xyz/offers/gta-6",
+    "sponsored": false
+  },
+  {
+    "slug": "ether-fi-cash-card-drops-the-fx-fee-on-swiss-franc-purchases",
+    "date": "2026-11-19",
+    "title": "ether.fi Cash card drops the FX fee on Swiss franc purchases",
+    "card": "etherfi",
+    "type": "news",
+    "summary": "Since 16 November 2026, purchases charged in Swiss francs on the ether.fi Cash card have no FX markup, the same as euros. You pay the market rate.",
+    "body": "The rule applies when the merchant charges in Swiss francs (CHF), whichever asset you spend.\n\n- If a terminal offers to convert the amount to another currency, choose to pay in CHF, or a conversion fee may still apply\n- Cashback still applies: euro and Swiss franc purchases earn 3% on the first $800 a month on the free Core tier ($3,000 on Luxe, $16,000 on Pinnacle), counted in the same monthly total as your other spending\n- US dollar purchases also have no FX fee; other currencies cost 0.5% on Core, 0.25% on Luxe and nothing on Pinnacle and VIP, on top of the card network's exchange rate\n\nAlso new: since 30 October 2026, tax and rent payments made with the card earn cashback at your normal rate.",
+    "ends": null,
+    "source": "https://help.ether.fi/en/articles/895885-chf-purchases-0-fx-rate",
+    "sponsored": false
+  },
+  {
+    "slug": "xplace-card-5-to-250-in-crypto-when-you-join-with-a-referral",
+    "date": "2026-11-19",
+    "title": "XPlace Card: $5 to $250 in crypto when you join with a referral",
+    "card": "xplace",
+    "type": "bonus",
+    "summary": "Join XPlace with a referral link, activate your card and spend $100 in Credit Mode: you get a random amount between $5 and $250 in Bitcoin, Solana or Ethereum.",
+    "body": "How it works, in XPlace's own terms:\n- Sign up with a referral link and activate your XPlace card\n- Spend $100 or more in Credit Mode, where you borrow against your deposits instead of spending them\n- You and the person who invited you each get a random amount between $5 and $250, paid in Bitcoin, Solana or Ethereum, as you choose\n\nGood to know: Cash Mode purchases don't count toward the $100. Credit Mode borrowing carries interest, and your deposits can be liquidated if prices fall. XPlace is not available in India, China, Turkey, Vietnam and 13 other countries, or in 19 US states.",
+    "ends": null,
+    "source": "https://docs.x.place/getting-started/referral-program",
+    "sponsored": false
+  }
+]

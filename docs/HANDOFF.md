@@ -599,6 +599,17 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- Full data update, batch 1 (19 Nov 2026, Akash: "start a full detailed data updates ... also latest offers or
+  promotional offers for cards which have our refferal link"). Order: the 22 referral cards, oldest check first, then
+  the 17 others. Batch 1 re-checked against issuer pages: SolCard (unchanged; a third-party blog's "$1 a month" claim
+  is not on SolCard's fee page, so ignored; the $10 issuance discount is in-app only), Kite (5% offers run to 30 Nov;
+  iShopChangi, event-ticket and QR offers ended; new 10% on GTA VI up to $50, 17-30 Nov; its referral pays only the
+  referrer; the $200 welcome reward needs Kite's founder code, not ours, so dropped from the note), XPlace (unchanged),
+  ether.fi (CHF purchases 0% FX since 16 Nov 2026, so No-FX currencies "USD 0; EUR 0; CHF 0"; EUR/CHF cashback bands;
+  tax and rent earn cashback since 30 Oct 2026; Pick a Perk is a per-member beta, not posted), Nexo (unchanged),
+  Jupiter (unchanged; ATM limit $250 per withdrawal, 3 tries a day; its 0% FX campaign needs an ambassador code).
+  First Updates posts: Kite GTA VI and 5% offers (ends 30 Nov), ether.fi CHF no-FX news, XPlace $5-$250 referral
+  bonus. All translated (Claude's translations, not native-reviewed).
 - Guessed card addresses (19 Nov 2026, Akash with a /stats screenshot of broken pages: /cards/pulsar-money-card,
   /en/cards/pulsar-money-card, /zh-hk/cards/coca-card). `next.config.mjs` now forwards (308) "<slug>-card" to the card
   (and "avalanche" to "avalanche-card"), in every language and for /alternatives and /referral-code; "/en/..." to the
