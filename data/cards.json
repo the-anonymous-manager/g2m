@@ -803,9 +803,11 @@
       { "label": "Bleap Help: How to add funds to your Bleap wallet", "url": "https://help.bleap.finance/en/articles/11125240-how-to-add-funds-to-your-bleap-wallet", "verified": "2026-10-25" },
       { "label": "Bleap Help: How does the Bleap debit card use wallet balances", "url": "https://help.bleap.finance/en/articles/15820587-how-does-the-bleap-debit-card-use-wallet-balances-for-payments", "verified": "2026-10-25" },
       { "label": "Bleap Cashback Terms and Conditions (rates, monthly limits, €200 spending goal; 12 Nov 2026)", "url": "https://www.bleap.finance/legal-agreements/cashback-terms-and-conditions", "verified": "2026-11-15" },
-      { "label": "Bleap: cashback page and FAQ", "url": "https://www.bleap.finance/card/cashback", "verified": "2026-11-15" }
+      { "label": "Bleap: cashback page and FAQ", "url": "https://www.bleap.finance/card/cashback", "verified": "2026-11-15" },
+      { "label": "Bleap fee schedule (updated 1 Sep 2026)", "url": "https://help.bleap.finance/en/articles/12097920-fee-schedule", "verified": "2026-11-19" },
+      { "label": "Bleap cashback: withdrawals, rates and limits", "url": "https://help.bleap.finance/en/articles/18329590-bleap-cashback-withdrawals-rates-and-limits", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-15",
+    "lastChecked": "2026-11-19",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/bleap-flat.png", "file": "/card-images/bleap-7d0969e3.webp" }
   },
@@ -819,7 +821,7 @@
     "forms": ["virtual", "physical", "metal"],
     "custody": "self-custodial",
     "summary": "Visa card from the Tangem hardware wallet team, with three tiers from free to $999 a year and up to 4% back in USDC.",
-    "cashback": { "basePct": 1, "maxPct": 4, "payout": "USDC", "note": "Basic 1% (cap $100/month), Plus 2% (cap $500), Prestige 4% (cap $1,000, coming soon)." },
+    "cashback": { "basePct": 1, "maxPct": 4, "payout": "USDC", "note": "Basic 1% (cap $100/month), Plus 2% (cap $300), Prestige 4% (cap $1,000, coming soon)." },
     "fees": { "annualUsd": 0, "fxPct": 1.5, "fxNote": "Billed in US dollars. Visa rate + 1.5% on non-USD purchases.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 28.82, "atm": "4% on Basic, 2% on Plus, 1% on Prestige", "other": ["Physical Early Birds card for Basic and Plus, limited to the first 5,000 users; delivery from $28.82", "Virtual card replacement $5"] },
     "tiers": [
       { "name": "Basic", "feeUsdYear": 0, "cashbackPct": 1, "capMonthlyUsd": 100 },
@@ -840,9 +842,10 @@
       { "label": "Tangem: Terms, fees and limits for Tangem Pay cards (PDF)", "url": "https://tangem.com/docs/en/tangem-visa-tariffs.pdf", "verified": "2026-10-25" },
       { "label": "Tangem Pay page FAQ", "url": "https://tangem.com/en/tangem-pay/", "verified": "2026-11-15" },
       { "label": "Tangem Help Center: Getting Started & KYC", "url": "https://tangem.com/en/help-center/tangem-pay-getting-started-kyc/", "verified": "2026-10-25" },
-      { "label": "Tangem Pay page FAQ (use the card with Apple Pay and Google Pay)", "url": "https://tangem.com/en/tangem-pay/", "verified": "2026-11-15" }
+      { "label": "Tangem Pay page FAQ (use the card with Apple Pay and Google Pay)", "url": "https://tangem.com/en/tangem-pay/", "verified": "2026-11-15" },
+      { "label": "Tangem Pay page: tiers, caps, ATM fees and Plus waiver", "url": "https://tangem.com/en/tangem-pay/", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-15",
+    "lastChecked": "2026-11-19",
     "metal": "silver",
     "image": { "source": "https://g2m.life/card-originals/tangem-pay.png", "file": "/card-images/tangem-pay-dfc057bf.webp" }
   },
@@ -879,9 +882,10 @@
       { "label": "Ethena Pay: Pricing", "url": "https://pay.ethena.fi/pricing", "verified": "2026-11-15" },
       { "label": "Ethena Pay: home page (Daily Boost yield, cashback paid in AVAX)", "url": "https://pay.ethena.fi/", "verified": "2026-10-24" },
       { "label": "Ethena Pay blog: Introducing Ethena Pay", "url": "https://pay.ethena.fi/blog/introducing-ethena-pay", "verified": "2026-10-25" },
-      { "label": "Ethena Pay Terms of Use", "url": "https://pay.ethena.fi/terms", "verified": "2026-10-25" }
+      { "label": "Ethena Pay Terms of Use", "url": "https://pay.ethena.fi/terms", "verified": "2026-10-25" },
+      { "label": "Ethena Pay pricing (updated 30 Sep 2026)", "url": "https://pay.ethena.fi/pricing", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-15",
+    "lastChecked": "2026-11-19",
     "metal": "gold",
     "image": { "source": "https://g2m.life/card-originals/ethena-pay-flat.png", "file": "/card-images/ethena-pay-1976e765.webp" }
   },
@@ -930,9 +934,10 @@
       { "label": "Exa Help Center: Exa Card Terms for US citizens", "url": "https://help.exactly.app/en/articles/11384293-exa-card-terms-for-us-citizens", "verified": "2026-10-25" },
       { "label": "Exa Help Center: Bridge terms and conditions", "url": "https://help.exactly.app/en/articles/13862897-bridge-terms-and-conditions", "verified": "2026-10-25" },
       { "label": "Exa Help Center: What should I do if I sent an unsupported asset (like USDT) to my Exa wallet?", "url": "https://help.exactly.app/en/articles/11431146-what-should-i-do-if-i-sent-an-unsupported-asset-like-usdt-to-my-exa-wallet", "verified": "2026-10-25" },
-      { "label": "Exa Help: Cashback promotion terms, Argentina (1.5%, ended 31 Dec 2025)", "url": "https://help.exactly.app/es/articles/13198483-terminos-y-condiciones-promocion-cashback", "verified": "2026-11-15" }
+      { "label": "Exa Help: Cashback promotion terms, Argentina (1.5%, ended 31 Dec 2025)", "url": "https://help.exactly.app/es/articles/13198483-terminos-y-condiciones-promocion-cashback", "verified": "2026-11-15" },
+      { "label": "Exa Card associated fees and costs", "url": "https://help.exactly.app/en/articles/9055779-exa-card-associated-fees-and-costs", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-15",
+    "lastChecked": "2026-11-19",
     "metal": "rose",
     "image": { "source": "https://g2m.life/card-originals/exa.webp", "file": "/card-images/exa-1108d908.webp" }
   },
@@ -1034,9 +1039,11 @@
       { "label": "Kolo Terms of Use v3.0.0 (1 July 2026), clause 22.2.1", "url": "https://kolo.xyz/docs/terms-of-use", "verified": "2026-10-24" },
       { "label": "Kolo blog: Best crypto card in Dubai 2026", "url": "https://kolo.xyz/blog/best-crypto-card-in-dubai-2026-a-practical-comparison-for-uae-residents", "verified": "2026-10-24" },
       { "label": "Kolo Help Center: Kolo Verification - How It Works", "url": "https://help.kolo.xyz/en/articles/14550196-kolo-verification-how-it-works", "verified": "2026-10-25" },
-      { "label": "Kolo Terms of Use (PDF)", "url": "https://kolo.xyz/legal-pdf/kolo/terms-of-use", "verified": "2026-10-25" }
+      { "label": "Kolo Terms of Use (PDF)", "url": "https://kolo.xyz/legal-pdf/kolo/terms-of-use", "verified": "2026-10-25" },
+      { "label": "Kolo cashback program", "url": "https://help.kolo.xyz/en/articles/13623113-cashback-program", "verified": "2026-11-19" },
+      { "label": "Kolo fees and pricing", "url": "https://help.kolo.xyz/en/articles/13942206-fees-pricing", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-15",
+    "lastChecked": "2026-11-19",
     "metal": "gold",
     "image": { "source": "https://g2m.life/card-originals/kolo.png", "file": "/card-images/kolo-64ab5c7f.webp" }
   },
@@ -1245,9 +1252,10 @@
       { "label": "Avici Docs: Virtual Accounts - Available and Prohibited Regions", "url": "https://docs.avici.money/getting-started/virtual-accounts/available-and-prohibited-regions", "verified": "2026-10-25" },
       { "label": "Avici Docs: Virtual Accounts - Fees and Limits", "url": "https://docs.avici.money/getting-started/virtual-accounts/fees-and-limits", "verified": "2026-10-25" },
       { "label": "Avici Docs: Spending and Transactions", "url": "https://docs.avici.money/getting-started/secured-credit-cards/spending-and-transactions", "verified": "2026-10-25" },
-      { "label": "Avici Docs: Virtual Accounts - Blockchains, Currencies and Payment Rails", "url": "https://docs.avici.money/getting-started/virtual-accounts/blockchains-currencies-and-payment-rails", "verified": "2026-10-25" }
+      { "label": "Avici Docs: Virtual Accounts - Blockchains, Currencies and Payment Rails", "url": "https://docs.avici.money/getting-started/virtual-accounts/blockchains-currencies-and-payment-rails", "verified": "2026-10-25" },
+      { "label": "Avici fees and limits", "url": "https://docs.avici.money/getting-started/secured-credit-cards/fees-and-limits", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-15",
+    "lastChecked": "2026-11-19",
     "metal": "champagne",
     "image": { "source": "https://g2m.life/card-originals/avici.png", "file": "/card-images/avici-c57f64db.webp" }
   },
@@ -1459,9 +1467,11 @@
       { "label": "Cashi Help: Who can use Cashi? (not for US residents or citizens)", "url": "https://help.cashi.com/en/articles/14524269-who-can-use-cashi", "verified": "2026-11-15" },
       { "label": "Cashi Help: What is Cashi's USD account feature? (account in your name, Lead Bank)", "url": "https://help.cashi.com/en/articles/17566477-what-is-cashi-s-usd-account-feature", "verified": "2026-11-15" },
       { "label": "Cashi Help: USD account limits and fees", "url": "https://help.cashi.com/en/articles/17566482-usd-account-limits-and-fees", "verified": "2026-11-15" },
-      { "label": "Cashi Help: Which local currencies and payment methods can I deposit and send with?", "url": "https://help.cashi.com/en/articles/16648864-which-local-currencies-payment-methods-can-i-deposit-and-send-with", "verified": "2026-11-15" }
+      { "label": "Cashi Help: Which local currencies and payment methods can I deposit and send with?", "url": "https://help.cashi.com/en/articles/16648864-which-local-currencies-payment-methods-can-i-deposit-and-send-with", "verified": "2026-11-15" },
+      { "label": "How 3-2-1 Cashi cashback works", "url": "https://help.cashi.com/en/articles/15653216-how-3-2-1-cashi-cashback-works", "verified": "2026-11-19" },
+      { "label": "Cashi card fees and limits", "url": "https://help.cashi.com/en/articles/14524303-cashi-card-fees-limits", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-15",
+    "lastChecked": "2026-11-19",
     "addedOn": "2026-10-29",
     "metal": "rose",
     "image": { "source": "https://g2m.life/card-originals/cashi.webp", "file": "/card-images/cashi-e42703b6.webp" }
@@ -1590,9 +1600,10 @@
       { "label": "Laso Finance guide: international prepaid card (expiry, billing)", "url": "https://docs.laso.finance/guides/international-prepaid-card", "verified": "2026-10-31" },
       { "label": "Laso Finance guide: reloadable card (ID check, top-ups, withdrawals)", "url": "https://docs.laso.finance/guides/reloadable-card", "verified": "2026-10-31" },
       { "label": "Laso Finance: home page (Google Pay, FinCEN-registered MSB)", "url": "https://laso.finance/", "verified": "2026-10-31" },
-      { "label": "Laso: supported countries by product (bank payments to US accounts by ACH)", "url": "https://laso.finance/get-supported-countries", "verified": "2026-11-15" }
+      { "label": "Laso: supported countries by product (bank payments to US accounts by ACH)", "url": "https://laso.finance/get-supported-countries", "verified": "2026-11-15" },
+      { "label": "Laso pricing", "url": "https://laso.finance/get-pricing", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-15",
+    "lastChecked": "2026-11-19",
     "addedOn": "2026-10-31",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/laso.png", "file": "/card-images/laso-555569de.webp" }
@@ -1754,7 +1765,7 @@
     "custody": "self-custodial",
     "summary": "A Visa card from Singapore-based OrbitX that spends USDC or USDT from your own wallet, with named bank accounts in 9 currencies. Neo costs $12 a year (2% FX fee), Lux $30 (1%, Visa Signature). No published cashback; virtual card only for now.",
     "cashback": { "basePct": null, "maxPct": null, "payout": null, "note": "Not published. OrbitX told G2M it cannot yet share a full rewards breakdown." },
-    "fees": { "annualUsd": 12, "fxPct": 2, "fxNote": "Billed in US dollars, so US-dollar spending has no FX fee. Other currencies: 2% on Neo, 1% on Lux. Every purchase also pays a fiat conversion fee of $0.20 on Neo or $0.10 on Lux.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txFlatUsd": 0.2, "cardFeeUsd": 0, "atm": "Physical card only, not available yet: the ATM's own fee + 2% + $2; limit $500 on Neo, $1,000 on Lux", "other": ["Fiat conversion fee on every purchase: $0.20 on Neo, $0.10 on Lux", "Withdrawing to a crypto wallet: $2", "Declined purchase (low balance): $0.10 on Neo, $0.05 on Lux", "Card replacement: $100 on Neo, $199 on Lux", "Physical cards come later: plastic $100 (Neo), metal $350 (Lux) at launch", "Returned payment up to $69 (card terms)", "Spending limit $50,000 a day on Neo; no limit on Lux"] },
+    "fees": { "annualUsd": 12, "fxPct": 2, "fxNote": "Billed in US dollars, so US-dollar spending has no FX fee. Other currencies: 2% on Neo, 1% on Lux. Every purchase also pays a fiat conversion fee of $0.20 on Neo or $0.10 on Lux.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txFlatUsd": 0.2, "cardFeeUsd": 0, "atm": "Physical card only, not available yet: the ATM's own fee + 2% + $2; limit $500 on Neo, $1,000 on Lux", "other": ["Fiat conversion fee on every purchase: $0.20 on Neo, $0.10 on Lux", "Withdrawing to a crypto wallet: $2", "Declined purchase (low balance): $0.10 on Neo, $0.05 on Lux", "Card replacement: $100 on Neo, $199 on Lux", "Physical cards: plastic $100 on Neo; a metal card is included with Lux", "Returned payment up to $69 (card terms)", "Spending limit $50,000 a day on Neo; no limit on Lux"] },
     "tiers": [
       { "name": "Neo", "feeUsdYear": 12, "cashbackPct": null, "fxPct": 2, "requirement": "$12 a year", "perks": ["Visa Platinum", "$0.20 fiat conversion fee on every purchase", "Up to 10 add-on cards", "Spending up to $50,000 a day", "Plastic card $100 when physical cards launch"] },
       { "name": "Lux", "feeUsdYear": 30, "cashbackPct": null, "fxPct": 1, "requirement": "$30 a year", "perks": ["Visa Signature benefits", "$0.10 fiat conversion fee on every purchase", "Unlimited add-on cards", "No daily spending limit", "Metal card $350 when physical cards launch"] }
@@ -1777,9 +1788,10 @@
       { "label": "OrbitX: Apple Pay terms", "url": "https://orbitxpay.com/apple-pay-terms", "verified": "2026-11-12" },
       { "label": "OrbitX: Google Pay terms", "url": "https://orbitxpay.com/google-pay-terms-and-conditions", "verified": "2026-11-12" },
       { "label": "OrbitX team, reply to G2M (12 Nov 2026): self-custodial wallets, physical cards later (Lux metal $350), KYC checks, focus regions; card picture sent by OrbitX", "url": "https://orbitxpay.com/card-fees", "verified": "2026-11-12" },
-      { "label": "OrbitX Prohibitions List: countries where cards cannot be issued or used (12 Dec 2025)", "url": "https://orbitxpay.com/prohibitions", "verified": "2026-11-15" }
+      { "label": "OrbitX Prohibitions List: countries where cards cannot be issued or used (12 Dec 2025)", "url": "https://orbitxpay.com/prohibitions", "verified": "2026-11-15" },
+      { "label": "OrbitX card fees: Neo and Lux, metal card included with Lux", "url": "https://orbitxpay.com/card-fees", "verified": "2026-11-19" }
     ],
-    "lastChecked": "2026-11-15",
+    "lastChecked": "2026-11-19",
     "addedOn": "2026-11-12",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/orbitx.webp", "file": "/card-images/orbitx-da41de2b.webp" }
