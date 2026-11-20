@@ -605,8 +605,10 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   music, rides; airlines on Ultra) and Yield Boost (+2%/+3%) added as tier perks. New referral program since 17 Nov
   2026: the friend gets $10 card credit after $150 at 3+ shops in 30 days and $50 after $5,000 in 90 days (was $25 in
   FUSE), so the sign-up bonus and the Updates post were rewritten; the old post address forwards to the new one
-  (next.config.mjs). Not changed: Solid's email says FX is 1.5% Core, 0.75% Prime, 0% Ultra, but its own fees and
-  rewards pages say 1.5% at every tier; kept 1.5% until a public page says otherwise. The referrer's 1% spend share
+  (next.config.mjs). FX by tier: Solid's email says 1.5% Core, 0.75% Prime, 0% Ultra, taking effect soon; its fees and
+  rewards pages still said 1.5% at every tier. Akash: "new update will take effect soon so make the updates what
+  they said", so the tiers carry 0.75% and 0% (source: Solid team, reply to G2M) and the FX note says the help pages
+  still show 1.5%. Re-check the fees page and drop that clause once it changes. The referrer's 1% spend share
   ("up to $2,000 per friend") goes only to the referrer, so it isn't shown. G2M's code stays GEK07. The card art Solid
   mentioned did not come through.
 - Full data update, batch 5 (19 Nov 2026, Akash: "batch 5"): the last nine cards without a referral link. Tangem
