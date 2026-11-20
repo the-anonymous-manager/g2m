@@ -599,6 +599,16 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- Solid's reply to outreach (20 Nov 2026, forwarded by Akash). Checked against the public help pages Solid cited:
+  103 countries (Indonesia and Vietnam are no longer listed, removed), Prime is $199 a year or a 70,000 FUSE lock and
+  Ultra a 600,000 FUSE lock (since 12 Oct 2026; was 50,000/400,000), Prime/Ultra category cashback (AI, streaming,
+  music, rides; airlines on Ultra) and Yield Boost (+2%/+3%) added as tier perks. New referral program since 17 Nov
+  2026: the friend gets $10 card credit after $150 at 3+ shops in 30 days and $50 after $5,000 in 90 days (was $25 in
+  FUSE), so the sign-up bonus and the Updates post were rewritten; the old post address forwards to the new one
+  (next.config.mjs). Not changed: Solid's email says FX is 1.5% Core, 0.75% Prime, 0% Ultra, but its own fees and
+  rewards pages say 1.5% at every tier; kept 1.5% until a public page says otherwise. The referrer's 1% spend share
+  ("up to $2,000 per friend") goes only to the referrer, so it isn't shown. G2M's code stays GEK07. The card art Solid
+  mentioned did not come through.
 - Full data update, batch 5 (19 Nov 2026, Akash: "batch 5"): the last nine cards without a referral link. Tangem
   Pay: the cashback note said Plus is capped at $500 a month; the Tangem Pay page and the tier both say $300 (fixed;
   the "5%/10%/15% on the first $500" rates and the $75 welcome bonus are marked "coming soon", not added). OrbitX: the
