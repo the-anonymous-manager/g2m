@@ -1,5 +1,17 @@
 [
   {
+    "slug": "solid-s-new-referral-bonus-10-card-credit-when-you-join-50-more-at-5-000",
+    "date": "2026-11-20",
+    "title": "Solid's new referral bonus: $10 card credit when you join, $50 more at $5,000",
+    "card": "solid",
+    "type": "bonus",
+    "summary": "Since 17 November 2026, joining Solid with a referral gets you $10 in card credit after you spend $150 at 3 or more shops in your first 30 days, and $50 more after you spend $5,000 in your first 90 days.",
+    "body": "How it works, in Solid's own terms:\n- Sign up with a referral link; both time limits start that day\n- Spend $150 in your first 30 days at 3 or more different shops, at least $10 at each: you get $10 in card credit\n- Spend $5,000 in your first 90 days: you get $50 more in card credit\n- The person who invited you gets the same two bonuses\n- Card credit is spent with your Solid card and used first at checkout; it can't be withdrawn or transferred and doesn't expire\n- Purchases under $2, transfers, wallet top-ups, gift cards, game credit, gambling and refunded purchases don't count\n\nThis replaces the $25 in FUSE bonus. People who joined before 17 November 2026 stay on the earlier rules.\n\nSolid's card pays 3% cashback in USDC on the free Core tier, up to $50 a month.",
+    "ends": null,
+    "source": "https://support.solid.xyz/articles/refer-a-friend-earn-up-to-2000-per-friend",
+    "sponsored": false
+  },
+  {
     "slug": "kite-card-10-back-on-gta-vi-plus-5-offers-until-30-november",
     "date": "2026-11-19",
     "title": "Kite Card: 10% back on GTA VI, plus 5% offers until 30 November",
@@ -93,18 +105,6 @@
     "body": "If you have a Rain-issued Solid card, the app shows a banner on Home and a notice on your card screen that tells you which case applies.\n\nIf you can switch:\n- Tap Get new card in the app; switching is not automatic\n- Withdraw any money left on the Rain card to your Solid wallet when the app asks\n- Verify your identity again, since the new card comes from a different provider\n- Activate the new card, then add it to Apple Pay or Google Pay and update your saved cards and subscriptions\n\nThe new Wirex-issued card keeps your cashback tier and adds Credit mode, euro spending with no FX fee from a EUR balance and a free euro account with your own IBAN.\n\nIf cards are no longer offered in your country, move your card balance to your Solid wallet before 20 November. Your savings, deposits, sends and swaps keep working, and cashback you already earned stays yours. US Virtual Accounts with Rain close too, so stop sharing those bank details.",
     "ends": "2026-11-20",
     "source": "https://support.solid.xyz/articles/rain-cards-closing-20-november",
-    "sponsored": false
-  },
-  {
-    "slug": "solid-25-in-fuse-when-you-join-with-a-referral",
-    "date": "2026-11-19",
-    "title": "Solid: $25 in FUSE when you join with a referral",
-    "card": "solid",
-    "type": "bonus",
-    "summary": "Join Solid with a referral, activate your card and spend $150 at 3 different merchants within 30 days: you get $25 in FUSE, and so does the person who invited you.",
-    "body": "How it works, in Solid's own terms:\n- Sign up with a referral and activate your Solid card\n- Spend $150 within 30 days, across 3 or more different merchants\n- You and the person who invited you each get $25 in FUSE, which can earn yield and counts toward Solid's reward tiers\n\nSolid's card pays 3% cashback in USDC on the free Core tier, up to $50 a month. New cards are issued by Wirex; cards issued by Rain stop working on 20 November 2026.",
-    "ends": null,
-    "source": "https://www.solid.xyz/post/referral-rewards-25-fuse",
     "sponsored": false
   },
   {

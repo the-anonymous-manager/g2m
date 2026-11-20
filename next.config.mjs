@@ -37,6 +37,14 @@ const nextConfig = {
       // "card" for "cards".
       { source: '/card/:path*', destination: '/cards/:path*', permanent: true },
       { source: `/:lang(${LANGS})/card/:path*`, destination: '/:lang/cards/:path*', permanent: true },
+      // Updates posts whose title changed (the address comes from the title): Solid's $25 FUSE bonus post became the
+      // new referral program post on 20 Nov 2026.
+      ...[['solid-25-in-fuse-when-you-join-with-a-referral', 'solid-s-new-referral-bonus-10-card-credit-when-you-join-50-more-at-5-000']].flatMap(
+        ([from, to]) => [
+          { source: `/updates/${from}`, destination: `/updates/${to}`, permanent: true },
+          { source: `/:lang(${LANGS})/updates/${from}`, destination: `/:lang/updates/${to}`, permanent: true }
+        ]
+      ),
       ...cardGuesses
     ];
   },
