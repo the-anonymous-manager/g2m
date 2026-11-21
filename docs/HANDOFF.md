@@ -599,6 +599,17 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- Oobit added (21 Nov 2026, Akash sent the referral link and the card art as an SVG). From Oobit's own pages (help
+  center fees page updated 20 Oct 2026, fees page, 5x Rewards, country list, card, ATM, assets, referral articles):
+  virtual Visa issued by Rain (Brazil's new local cards by Pomelo), funded from the Oobit balance or the user's own
+  wallet through DePay (custody "both"), 1% fee per card payment with a $0.25 minimum (not modelled as a small-purchase
+  fee, it's in the fee notes), FX up to 1.5% on non-USD, ATM 2.5% (min $0.25), $250 and 3 attempts in 24 hours.
+  Cashback depends on what funds the purchase, so it is two tiers: "Pay with USDT" 5% on the first $200 a month (paid
+  in XAUT) and "Pay with OOB" 10% capped at $100 a month (paid in OOB; a Colombia article says $5,000, the main
+  article $100). Rewards balance is spendable on the card, not withdrawable. 81 countries (Vietnam on a waitlist,
+  Brazil unclear: it has a local card but isn't in the table; Hungary not listed). Sign-up bonus: no Oobit card
+  payment fee on the first $500 for 60 days; code 19905X. Score 55, rank 28. Card art: Akash's SVG rendered to
+  `public/card-originals/oobit.png`; the three site sizes were made locally so the sync doesn't wait for the deploy.
 - Solid's reply to outreach (20 Nov 2026, forwarded by Akash). Checked against the public help pages Solid cited:
   103 countries (Indonesia and Vietnam are no longer listed, removed), Prime is $199 a year or a 70,000 FUSE lock and
   Ultra a 600,000 FUSE lock (since 12 Oct 2026; was 50,000/400,000), Prime/Ultra category cashback (AI, streaming,

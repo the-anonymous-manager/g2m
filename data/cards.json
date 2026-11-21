@@ -1898,5 +1898,48 @@
     "addedOn": "2026-11-13",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/pulsar-money.jpg", "file": "/card-images/pulsar-money-d6ebd82e.webp" }
+  },
+  {
+    "slug": "oobit",
+    "name": "Oobit Crypto Card",
+    "brand": "Oobit",
+    "issuer": "Rain (Brazil's new local card: Pomelo)",
+    "network": "Visa",
+    "type": "spend",
+    "forms": ["virtual"],
+    "custody": "both",
+    "summary": "A virtual Visa from the Oobit app, issued by Rain, that spends your Oobit balance or crypto straight from your own wallet. 1% fee on every purchase; 5% back on USDT-funded purchases (on the first $200 a month) or 10% in OOB.",
+    "cashback": { "basePct": 5, "maxPct": 10, "payout": "Tether Gold (XAUT) or OOB, into a rewards balance", "note": "5% back on card purchases funded with USDT, on the first $200 of card spending a month (up to $10), paid in Tether Gold (XAUT; US residents get USDT). 10% back on purchases funded with OOB, Oobit's own token, up to $100 in cashback a month, paid in OOB. Cashback goes into a rewards balance you can spend on the card but not withdraw. None in Vietnam, or when you use Oobit inside a partner app." },
+    "fees": { "annualUsd": 0, "fxPct": 1.5, "fxNote": "Billed in US dollars. Purchases in other currencies may carry a 1.5% conversion fee, on top of the 1% card payment fee.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txPct": 1, "cardFeeUsd": 0, "atm": "2.5%, minimum $0.25 (Brazil: no minimum), plus the ATM operator's own charge. Up to $250 per withdrawal and 3 attempts in 24 hours.", "other": ["Minimum card payment fee $0.25, so purchases under $25 pay $0.25 (Brazil: 1%, no minimum)", "No fee on declined purchases", "Bank transfer deposit about 0.65%, minimum $0.50", "Swaps: fee shown in the quote before you confirm", "Crypto withdrawals: network fee only", "Sending crypto to a bank account: fee shown before you send, varies by currency"] },
+    "tiers": [
+      { "name": "Pay with USDT", "feeUsdYear": 0, "cashbackPct": 5, "bands": [ { "uptoUsd": 200, "pct": 5 }, { "uptoUsd": null, "pct": 0 } ], "requirement": "Card purchases funded with USDT", "perks": ["Cashback in Tether Gold (XAUT); USDT for US residents"] },
+      { "name": "Pay with OOB", "feeUsdYear": 0, "cashbackPct": 10, "capMonthlyUsd": 100, "requirement": "Card purchases funded with OOB, Oobit's own token", "perks": ["Cashback paid in OOB"] }
+    ],
+    "coverage": { "countries": 81, "scope": "81 countries, including the UK, most of the EU and EEA, Switzerland, the UAE, most US states, Latin America and Australia", "examples": ["United Kingdom", "Germany", "United Arab Emirates", "Mexico", "Australia"], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AD", "AE", "AL", "AM", "AR", "AT", "AU", "AZ", "BA", "BE", "BG", "BH", "BO", "BS", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GE", "GG", "GI", "GL", "GR", "GT", "HR", "IE", "IS", "IT", "KE", "KG", "KR", "KW", "KZ", "LI", "LT", "LU", "LV", "MC", "MD", "ME", "MK", "MT", "MX", "MY", "NL", "NO", "NZ", "OM", "PA", "PE", "PH", "PK", "PL", "PR", "PT", "PY", "QA", "RO", "RS", "SA", "SE", "SI", "SK", "TH", "TW", "TZ", "US", "UY", "ZA"], "no": ["AF", "BY", "CF", "CN", "CU", "ET", "HK", "IQ", "IR", "KP", "LB", "LY", "ML", "MM", "NI", "RU", "SD", "SO", "SS", "SY", "VE", "VN", "YE"], "unclear": ["BR"], "others": "no" } },
+    "ecosystem": { "iban": null, "payoutCorridors": null, "ramps": "both", "credit": null, "yield": null },
+    "signupBonus": "No Oobit card payment fee on your first $500 of card spending, for 60 days after you enter the code",
+    "referralCode": "19905X",
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["USDT", "USDC", "BTC", "ETH", "SOL", "BNB", "TRX", "XRP", "ADA", "AVAX", "LTC", "BCH", "DOGE", "SHIB", "BONK", "TRUMP", "OOB"],
+    "perks": ["5x Rewards: 1 to 5 points per $1, by your card spending over the last 90 days", "Pay from your own wallet with DePay (MetaMask, Trust Wallet, Phantom and others)", "Local QR payments in Argentina, Bolivia, the Philippines and Vietnam", "Payments by AI assistants with one-time cards"],
+    "pros": ["5% back on USDT-funded purchases, or 10% in OOB", "Pay straight from your own wallet with DePay", "No card, monthly or crypto deposit fee; works in 81 countries"],
+    "cons": ["1% fee on every purchase (minimum $0.25), plus up to 1.5% on non-USD purchases", "USDT cashback only counts the first $200 a month (up to $10)", "Cashback can only be spent on the card, not withdrawn", "Virtual only; not available in India or Hong Kong"],
+    "links": { "official": "https://www.oobit.com/", "affiliate": "https://www.oobit.com/ref?r=eyJjb2RlIjoiMTk5MDVYIiwibmFtZSI6IkFLQVNIIEtIQU4iLCJmcmVlRmVlQ2FwIjo1MDAsImxhbmciOiJlbiJ9" },
+    "sources": [
+      { "label": "Oobit Help Center: What are Oobit's fees? (updated 20 Oct 2026)", "url": "https://support.oobit.com/en/articles/17673770-what-are-oobit-s-fees", "verified": "2026-11-21" },
+      { "label": "Oobit fees page: FX 1.5% on non-USD payments, swaps", "url": "https://www.oobit.com/fees", "verified": "2026-11-21" },
+      { "label": "Oobit Help Center: 5x Rewards levels and cashback (rates, caps, rewards balance)", "url": "https://support.oobit.com/en/articles/15262334-how-do-5x-rewards-levels-and-cashback-work", "verified": "2026-11-21" },
+      { "label": "Oobit Help Center: Is Oobit available in my country? (81 countries, not supported list)", "url": "https://support.oobit.com/en/articles/15262464-is-oobit-available-in-my-country", "verified": "2026-11-21" },
+      { "label": "Oobit Help Center: What is the Oobit card? (virtual Visa issued by Rain; Brazil local card by Pomelo)", "url": "https://support.oobit.com/en/articles/17324780-what-is-the-oobit-card", "verified": "2026-11-21" },
+      { "label": "Oobit Help Center: What are the ATM limits?", "url": "https://support.oobit.com/en/articles/17325165-what-are-the-atm-limits", "verified": "2026-11-21" },
+      { "label": "Oobit Help Center: Which assets and networks does Oobit support?", "url": "https://support.oobit.com/en/articles/15262443-which-assets-and-networks-does-oobit-support", "verified": "2026-11-21" },
+      { "label": "Oobit crypto card page: Visa, connect your own wallet, Apple Pay and Google Wallet", "url": "https://www.oobit.com/crypto-card", "verified": "2026-11-21" },
+      { "label": "Oobit Help Center: What does the invited user receive? (no card fee on the first $500 for 60 days)", "url": "https://support.oobit.com/en/articles/15886332-what-does-the-invited-user-receive", "verified": "2026-11-21" },
+      { "label": "Oobit Help Center: What does the fee-free benefit include?", "url": "https://support.oobit.com/en/articles/15886346-what-does-the-fee-free-benefit-include", "verified": "2026-11-21" }
+    ],
+    "lastChecked": "2026-11-21",
+    "addedOn": "2026-11-21",
+    "metal": "rose",
+    "image": { "source": "https://g2m.life/card-originals/oobit.png", "file": "/card-images/oobit-ad2f54a4.webp" }
   }
 ]
