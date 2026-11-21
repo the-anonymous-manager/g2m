@@ -599,6 +599,8 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- ether.fi referral link changed (21 Nov 2026, Akash): https://www.ether.fi/@akash0x, code akash0x (was
+  gwei2merchant). The invite page still offers up to 3% cashback from the first purchase, so the bonus text is unchanged.
 - Oobit added (21 Nov 2026, Akash sent the referral link and the card art as an SVG). From Oobit's own pages (help
   center fees page updated 20 Oct 2026, fees page, 5x Rewards, country list, card, ATM, assets, referral articles):
   virtual Visa issued by Rain (Brazil's new local cards by Pomelo), funded from the Oobit balance or the user's own
