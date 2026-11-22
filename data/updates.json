@@ -12,6 +12,42 @@
     "sponsored": false
   },
   {
+    "slug": "ether-fi-black-friday-boost-20-cashback-on-your-first-250-up-to-50",
+    "date": "2026-11-22",
+    "title": "ether.fi Black Friday Boost: 20% cashback on your first $250, up to $50",
+    "card": "etherfi",
+    "type": "bonus",
+    "summary": "Join ether.fi through G2M's link by 30 November 2026 and get 20% cashback on your first $250 of card purchases made from 23 to 30 November, so up to $50 back.",
+    "body": "How it works, in ether.fi's own terms:\n- Sign up through G2M's link by 30 November 2026, 23:59 UTC; only new personal accounts that join through a participating creator's link qualify\n- Verify your identity and get your ether.fi card\n- Spend with the card from 23 to 30 November 2026; purchases before 23 November don't count\n- 20% is the total rate on your first $250 of card purchases, including your normal cashback, so up to $50 per person\n- Nothing to claim: the cashback reaches your ether.fi account within 30 days after 30 November\n- Refunded or declined purchases, cash equivalents, business accounts and more than one account per person don't count\n\nThe offer runs while ether.fi's promotion budget lasts and isn't available in every country. After it, the free Core tier pays 3% cashback.",
+    "ends": "2026-11-30",
+    "source": "https://etherfi.gitbook.io/etherfi/events/events/black-friday-boost",
+    "sponsored": false
+  },
+  {
+    "slug": "kast-5-back-on-your-first-bank-transfer-for-new-users-and-10-on-playstation-game",
+    "date": "2026-11-22",
+    "title": "KAST: 5% back on your first bank transfer for new users, and 10% on PlayStation games",
+    "card": "kast",
+    "type": "bonus",
+    "summary": "New KAST users who join through G2M's link by 9 December 2026 get 5% back on their first incoming bank transfer of $50 or more, up to $15. Until 25 November, a first PlayStation Store game purchase of $70 or more gets 10% back, up to $10.",
+    "body": "The bank transfer reward, in KAST's own terms:\n- For new users who sign up between 18 November and 9 December 2026\n- 5% of your first qualifying incoming bank transfer of at least $50, credited to your KAST account by 9 December\n- Up to $15 by SEPA (EUR), Faster Payments (GBP), ACH, FedNow, Fedwire or SWIFT (USD), and up to $10 by Pix (BRL), Bre-B (COP) or a local ARS transfer; MXN transfers have their own offer\n- Card and Apple Pay top-ups, crypto deposits and transfers between KAST accounts don't count\n- Paid to your KAST Reward Balance within 14 days after 9 December; no claim needed\n\nThe PlayStation offer:\n- 10% back, up to $10, on your first PlayStation Store game purchase of $70 or more in one payment, settled by 25 November 2026, 23:59 UTC\n- For users with less than $100 of lifetime KAST Card spending on 17 November; limited to the first 600 rewards\n- Consoles, accessories, gift cards and wallet top-ups don't count; paid by 8 December\n\nAlso until 31 December, KAST pays 4% USD cashback with no cap to existing users it picked at random and told by message. You can't apply for it.",
+    "ends": "2026-12-09",
+    "source": "https://www.kast.xyz/en/blog/promotions/earn-a-5-reward-on-eligible-fiat-funding-with-kast",
+    "sponsored": false
+  },
+  {
+    "slug": "nexo-card-10-back-in-nexo-on-your-first-playstation-store-or-microsoft-store-pur",
+    "date": "2026-11-22",
+    "title": "Nexo Card: 10% back in NEXO on your first PlayStation Store or Microsoft Store purchase",
+    "card": "nexo",
+    "type": "offer",
+    "summary": "Pay with your Nexo Card at the PlayStation Store or Microsoft Store and get 10% back in NEXO tokens on your first purchase there. The offer runs until 31 December 2026.",
+    "body": "What Nexo says:\n- 10% back in NEXO, credited instantly\n- Applies to your first purchase at the PlayStation Store or Microsoft Store with the Nexo Card\n- Runs until 31 December 2026\n\nNexo announced the offer on its X account; it has not published a cap or full terms on its website. The Nexo Card's normal cashback is 0.5% to 2% in NEXO, depending on your loyalty tier.",
+    "ends": "2026-12-31",
+    "source": "https://x.com/Nexo/status/2120912554134208643",
+    "sponsored": false
+  },
+  {
     "slug": "solid-s-new-referral-bonus-10-card-credit-when-you-join-50-more-at-5-000",
     "date": "2026-11-20",
     "title": "Solid's new referral bonus: $10 card credit when you join, $50 more at $5,000",

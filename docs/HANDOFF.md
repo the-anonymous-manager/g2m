@@ -607,9 +607,13 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   code needed"); its COCA post says the same. The XPlace, Solid and Plasma bonus posts now say "through G2M's link".
   New post: Pulsar Pro Beyond Friday (last week 23 to 30 Nov: Lidl, Aldi, dm, Rossmann, Bolt, Glovo; all Pro members,
   so not link-only). ether.fi Black Friday Boost (20% on the first $250, 23 to 30 Nov, up to $50) is only for sign-ups
-  through a "participating creator's" link; waiting for Akash to confirm akash0x is one before posting it.
-  Nexo's 10% on a first PlayStation or Microsoft Store purchase (until 31 Dec) was only found on Nexo's social posts,
-  not its site, so not posted.
+  through a "participating creator's" link; Akash confirmed all his referral links are affiliate links ("our primary
+  target is to get more sign up"), so it is now ether.fi's limited-time bonus (ends 30 Nov) with a post. KAST: limited
+  bonus until 9 Dec (new users: 5% on the first incoming bank transfer of $50+, up to $15, plus the 10% membership
+  discount) and a post that also covers its PlayStation Store 10% (to 25 Nov; KAST's headline says PlayStation or
+  Xbox, its terms say PlayStation Store only) and the 4% for randomly selected users (to 31 Dec, can't apply). Nexo:
+  post for 10% back in NEXO on a first PlayStation Store or Microsoft Store purchase (to 31 Dec), sourced from Nexo's
+  own X post as Akash asked; the post says no cap or full terms are published.
 - YouTube and Telegram links (22 Nov 2026, Akash): the footer (every language) now links X, YouTube
   (https://www.youtube.com/@g2mcrypto) and Telegram (https://t.me/Akash773), and the home page's Organization sameAs
   lists all three for search engines. Settings: NEXT_PUBLIC_YOUTUBE_URL, NEXT_PUBLIC_TELEGRAM_HANDLE (`socialLinks()` in

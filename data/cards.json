@@ -218,6 +218,7 @@
     "restrictedPassports": ["US"],
     "signupBonus": "10% off your first paid membership: $100 off Premium or $1,000 off Private (nothing extra on the free Standard card)",
     "referralCode": "EZRQ0A3I",
+    "limitedBonus": { "text": "When you join through G2M's link by 9 Dec 2026: 5% back on your first incoming bank transfer of $50 or more (up to $15), plus 10% off your first paid membership", "ends": "2026-12-09" },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["BTC", "ETH", "BNB", "ARB", "ENA", "CRO", "USDC", "USDT"],
     "perks": ["Concierge on every tier"],
@@ -240,9 +241,12 @@
       { "label": "KAST Concierge: How does the KAST referral program work?", "url": "https://concierge.kast.xyz/hc/en-us/articles/15974559777679-How-Does-the-KAST-Referral-Program-Work", "verified": "2026-11-13" },
       { "label": "KAST Concierge: fees and conditions (FX 0.5%-1.75%, ATM up to $500, tier cashback caps)", "url": "https://concierge.kast.xyz/hc/en-us/articles/9850062738703-What-Are-the-Fees-and-Conditions-for-KAST-Cards-and-Accounts", "verified": "2026-11-19" },
       { "label": "KAST Concierge: the end of Points earning on 30 Nov 2026", "url": "https://concierge.kast.xyz/hc/en-us/articles/18196872344079-The-End-of-Points-Earning-and-the-Transition", "verified": "2026-11-19" },
-      { "label": "KAST Concierge: referral program (re-checked; 10% off the first membership)", "url": "https://concierge.kast.xyz/hc/en-us/articles/15974559777679-How-Does-the-KAST-Referral-Program-Work", "verified": "2026-11-19" }
+      { "label": "KAST Concierge: referral program (re-checked; 10% off the first membership)", "url": "https://concierge.kast.xyz/hc/en-us/articles/15974559777679-How-Does-the-KAST-Referral-Program-Work", "verified": "2026-11-19" },
+      { "label": "KAST: 5% reward on eligible fiat funding, new users 18 Nov to 9 Dec 2026", "url": "https://www.kast.xyz/en/blog/promotions/earn-a-5-reward-on-eligible-fiat-funding-with-kast", "verified": "2026-11-22" },
+      { "label": "KAST: PlayStation Store 10% cashback campaign, up to $10, 17 to 25 Nov 2026", "url": "https://www.kast.xyz/en/blog/promotions/gta6-cashback-campaign", "verified": "2026-11-22" },
+      { "label": "KAST: 40 Days of Xmas, 4% for randomly selected users until 31 Dec 2026", "url": "https://www.kast.xyz/en/blog/promotions/40-days-of-xmas-unlimited-4-usd-cashback", "verified": "2026-11-22" }
     ],
-    "lastChecked": "2026-11-19",
+    "lastChecked": "2026-11-22",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/kast.webp", "file": "/card-images/kast-ea0f8ee9.webp" }
   },
@@ -328,6 +332,7 @@
     "kycRule": "residency_id",
     "signupBonus": "3% cashback on all purchases, from your first purchase (the same rate as the free Core tier)",
     "referralCode": "akash0x",
+    "limitedBonus": { "text": "20% cashback on your first $250 of card spending from 23 to 30 Nov 2026 (up to $50), when you join through G2M's link by 30 Nov 2026", "ends": "2026-11-30" },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
     "perks": ["Airport lounge passes from Luxe: 2 a year, unlimited on Pinnacle and VIP", "Visa Signature benefits", "ether.fi Travel: 5% back plus up to 65% off hotels and flights"],
@@ -359,9 +364,10 @@
       { "label": "ether.fi Help: How does cashback work? (EUR and CHF bands, tax and rent from 30 Oct 2026)", "url": "https://help.ether.fi/en/articles/262374-how-does-cashback-work", "verified": "2026-11-19" },
       { "label": "ether.fi Help: CHF purchases 0% FX rate (from 16 Nov 2026)", "url": "https://help.ether.fi/en/articles/895885-chf-purchases-0-fx-rate", "verified": "2026-11-19" },
       { "label": "ether.fi Help: EUR purchases 0% FX rate", "url": "https://help.ether.fi/en/articles/604957-eur-purchases-0-fx-rate", "verified": "2026-11-19" },
-      { "label": "ether.fi invite page for G2M's code akash0x: up to 3% cashback on everyday purchases", "url": "https://www.ether.fi/app/cash/referral?ref_code=akash0x", "verified": "2026-11-21" }
+      { "label": "ether.fi invite page for G2M's code akash0x: up to 3% cashback on everyday purchases", "url": "https://www.ether.fi/app/cash/referral?ref_code=akash0x", "verified": "2026-11-21" },
+      { "label": "ether.fi Black Friday Boost terms: 20% on the first $250, 23 to 30 Nov 2026, new members through a participating creator's link", "url": "https://etherfi.gitbook.io/etherfi/events/events/black-friday-boost", "verified": "2026-11-22" }
     ],
-    "lastChecked": "2026-11-21",
+    "lastChecked": "2026-11-22",
     "metal": "silver",
     "image": { "source": "https://g2m.life/card-originals/etherfi.avif", "file": "/card-images/etherfi-771a2daf.webp" }
   },
@@ -458,9 +464,10 @@
       { "label": "Nexo: referral rewards for invited friends (45-day window, NEXO Token rewards by tier)", "url": "https://nexo.com/ref/imwig0fvpw", "verified": "2026-11-03" },
       { "label": "Nexo app: Referral Program, how it works (30-day average balance, 0.5% NEXO bonus; checked in the app by G2M)", "url": "https://nexo.com/ref", "verified": "2026-11-03" },
       { "label": "Nexo: Crypto Card page (cashback, FX, free ATM limits by tier, physical card from Gold tier)", "url": "https://nexo.com/crypto-card", "verified": "2026-11-12" },
-      { "label": "Nexo: Crypto Card page (re-checked; cashback, FX, ATM unchanged)", "url": "https://nexo.com/crypto-card", "verified": "2026-11-19" }
+      { "label": "Nexo: Crypto Card page (re-checked; cashback, FX, ATM unchanged)", "url": "https://nexo.com/crypto-card", "verified": "2026-11-19" },
+      { "label": "Nexo on X: 10% back in NEXO on a first PlayStation Store or Microsoft Store purchase, until 31 Dec 2026", "url": "https://x.com/Nexo/status/2120912554134208643", "verified": "2026-11-22" }
     ],
-    "lastChecked": "2026-11-19",
+    "lastChecked": "2026-11-22",
     "metal": "gunmetal",
     "image": { "source": "https://g2m.life/card-originals/nexo.webp", "file": "/card-images/nexo-ee91231a.webp" }
   },
