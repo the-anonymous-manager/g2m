@@ -10,9 +10,19 @@ export const site = {
     'G2M is the crypto card directory. Every crypto card ranked on rewards, fees and where it actually works, from on-chain to checkout.',
   url: (process.env.NEXT_PUBLIC_SITE_URL || 'https://g2m.life').replace(/\/$/, ''),
   twitter: process.env.NEXT_PUBLIC_TWITTER_HANDLE || '@0akash0x',
+  youtube: process.env.NEXT_PUBLIC_YOUTUBE_URL || 'https://www.youtube.com/@g2mcrypto',
+  telegram: process.env.NEXT_PUBLIC_TELEGRAM_HANDLE || '@Akash773',
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'info@g2m.life',
   utm: { source: 'g2m', medium: 'referral', campaign: 'directory' }
 } as const;
+
+/** G2M's own profiles elsewhere (footer links and the home page's sameAs for search engines). Empty settings drop out. */
+export const socialLinks = (): { label: string; href: string }[] =>
+  [
+    site.twitter ? { label: 'X', href: `https://x.com/${site.twitter.replace(/^@/, '')}` } : null,
+    site.youtube ? { label: 'YouTube', href: site.youtube } : null,
+    site.telegram ? { label: 'Telegram', href: `https://t.me/${site.telegram.replace(/^@/, '')}` } : null
+  ].filter((l): l is { label: string; href: string } => l != null);
 
 export const absoluteUrl = (path = '/') => `${site.url}${path.startsWith('/') ? path : `/${path}`}`;
 

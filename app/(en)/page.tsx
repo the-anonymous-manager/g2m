@@ -11,7 +11,7 @@ import { toRow, type Card, type Market } from '@/lib/types';
 import { MARKET_LABELS, availabilityIn } from '@/lib/regions';
 import { ASIA } from '@/lib/countries.mjs';
 import { cashbackLabel, fmtDate, pct, usd } from '@/lib/format';
-import { metaDescription, site } from '@/lib/site';
+import { metaDescription, site, socialLinks } from '@/lib/site';
 import { intlHome, languageLinks } from '@/lib/i18n/locales';
 import { CardArt } from '@/components/CardArt';
 import { ArrowIcon, Eyebrow, MarketBadge, ScorePill, SearchIcon } from '@/components/bits';
@@ -57,7 +57,7 @@ function homeJsonLd(cards: Card[]) {
       name: site.name,
       url: site.url,
       logo: `${site.url}/brand/g2m-mark-512.png`,
-      ...(site.twitter ? { sameAs: [`https://x.com/${site.twitter.replace(/^@/, '')}`] } : {})
+      ...(socialLinks().length ? { sameAs: socialLinks().map((l) => l.href) } : {})
     },
     {
       '@context': 'https://schema.org',
