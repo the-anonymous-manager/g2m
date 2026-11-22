@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { LogoMark } from '@/components/Logo';
-import { site } from '@/lib/site';
+import { site, socialLinks } from '@/lib/site';
 import { fmtDate } from '@/lib/format';
 
 type FooterWords = { about: string; links: { href: string; label: string }[]; label: string; disclaimer: string };
@@ -44,11 +44,11 @@ export function Footer({ updated, words }: { updated: string; words?: FooterWord
             <Link href="/submit">Submit a card</Link>
               </>
             )}
-            {site.twitter ? (
-              <a href={`https://x.com/${site.twitter.replace(/^@/, '')}`} target="_blank" rel="noopener noreferrer">
-                X
+            {socialLinks().map((l) => (
+              <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer me">
+                {l.label}
               </a>
-            ) : null}
+            ))}
           </nav>
         </div>
         <p className="faint" style={{ fontSize: 13, maxWidth: '90ch' }}>

@@ -599,6 +599,10 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- YouTube and Telegram links (22 Nov 2026, Akash): the footer (every language) now links X, YouTube
+  (https://www.youtube.com/@g2mcrypto) and Telegram (https://t.me/Akash773), and the home page's Organization sameAs
+  lists all three for search engines. Settings: NEXT_PUBLIC_YOUTUBE_URL, NEXT_PUBLIC_TELEGRAM_HANDLE (`socialLinks()` in
+  `lib/site.ts`); an empty setting hides that link.
 - Bleap sign-up countries (22 Nov 2026, Akash, from the Bleap app): the 54 countries the app offers at sign-up (pick a
   country, phone number from it) are saved in `docs/research/bleap-signup-countries.json`. Akash confirmed it by signing up ("this is valid
   country list"), so it is now Bleap's country list on the site (source: checked in the app by G2M), replacing the
