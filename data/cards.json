@@ -770,13 +770,13 @@
     "type": "debit",
     "forms": ["virtual", "physical"],
     "custody": "self-custodial",
-    "summary": "Non-custodial Mastercard for Europe with 0% FX, free ATM cash up to €400 a month and category cashback up to 20% on subscriptions.",
+    "summary": "Non-custodial Mastercard for 54 countries in Europe, the Americas and beyond, with 0% FX, free ATM cash up to €400 a month and category cashback up to 20% on subscriptions.",
     "cashback": { "basePct": 1, "maxPct": 20, "payout": "USDC", "note": "1% on everyday spending (up to €3,000 a month), 3% on Uber and Bolt rides and on food delivery, 20% on some streaming, AI and gaming subscriptions (each with a monthly limit). Cashback can be withdrawn only while you spend €200 on everyday purchases in 30 days; otherwise it expires after 67 days." },
     "fees": { "annualUsd": 0, "fxPct": 0, "topUpPct": 0, "cardFeeUsd": 0, "physicalCardFeeUsd": 0, "atm": "Free up to €400 a month, then 2%", "other": [] },
     "tiers": [
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 1, "capMonthlyUsd": 33, "perks": ["1% on up to €3,000 of everyday spending a month (€600 a purchase)"] }
     ],
-    "coverage": { "countries": null, "scope": "EEA, with some Latin American markets", "examples": ["EEA", "Mexico"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "no", "EU": "yes" }, "countryList": { "yes": ["AT", "BE", "BG", "CH", "CY", "CZ", "DE", "DK", "EE", "FI", "FR", "GR", "HR", "HU", "IE", "IS", "LI", "LT", "LU", "LV", "MT", "NL", "NO", "PL", "PT", "RO", "SE", "SI", "SK"], "unclear": ["AR", "BO", "BR", "CL", "CO", "CR", "CU", "DO", "EC", "ES", "GT", "HN", "HT", "IT", "MX", "NI", "PA", "PE", "PY", "SV", "UY", "VE"], "others": "no" } },
+    "coverage": { "countries": 54, "scope": "54 countries, including most of the EEA, Switzerland, the UK, the US, the UAE, Latin America, Canada and Australia", "examples": ["United Kingdom", "Germany", "United States", "Mexico", "Brazil"], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AE", "AL", "AR", "AT", "AU", "BE", "BG", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "EG", "ES", "FI", "FR", "GB", "GE", "GG", "GR", "HR", "HU", "IE", "IS", "IT", "LT", "LU", "LV", "MT", "MX", "NL", "NO", "NZ", "PE", "PL", "PR", "PT", "PY", "RO", "RS", "SE", "SI", "SK", "SV", "US", "UY"], "others": "no" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 3, "ramps": "both", "credit": false, "yield": true },
     "bankRails": [ { "rail": "EUR_SEPA", "in": true, "out": true, "fee": "free" }, { "rail": "MXN_SPEI", "in": true, "out": true, "fee": "out free" }, { "rail": "BRL_PIX", "in": true, "out": true, "fee": "out no Bleap fee, BRL at the rate shown" } ],
     "bankForNonResidents": true,
@@ -786,7 +786,7 @@
     "assets": ["USDC"],
     "perks": ["Category cashback", "Free ATM up to €400 a month"],
     "pros": ["0% FX and no fees", "3% on rides and food delivery, 20% on some subscriptions"],
-    "cons": ["Mainly Europe", "Cashback can only be withdrawn after €200 of everyday spending in 30 days, and expires if you stop"],
+    "cons": ["Refused to 45 nationalities wherever they live, including US and UAE citizens", "Cashback can only be withdrawn after €200 of everyday spending in 30 days, and expires if you stop"],
     "links": { "official": "https://www.bleap.finance/en-us/card/crypto-card" },
     "sources": [
       { "label": "SpendNode review", "url": "https://www.spendnode.io/crypto-cards/bleap/", "verified": "2026-08-03" },
@@ -806,9 +806,10 @@
       { "label": "Bleap Cashback Terms and Conditions (rates, monthly limits, €200 spending goal; 12 Nov 2026)", "url": "https://www.bleap.finance/legal-agreements/cashback-terms-and-conditions", "verified": "2026-11-15" },
       { "label": "Bleap: cashback page and FAQ", "url": "https://www.bleap.finance/card/cashback", "verified": "2026-11-15" },
       { "label": "Bleap fee schedule (updated 1 Sep 2026)", "url": "https://help.bleap.finance/en/articles/12097920-fee-schedule", "verified": "2026-11-19" },
-      { "label": "Bleap cashback: withdrawals, rates and limits", "url": "https://help.bleap.finance/en/articles/18329590-bleap-cashback-withdrawals-rates-and-limits", "verified": "2026-11-19" }
+      { "label": "Bleap cashback: withdrawals, rates and limits", "url": "https://help.bleap.finance/en/articles/18329590-bleap-cashback-withdrawals-rates-and-limits", "verified": "2026-11-19" },
+      { "label": "Bleap app: sign-up country list, 54 countries; a phone number from the chosen country is required (checked in the app by G2M)", "url": "https://www.bleap.finance/", "verified": "2026-11-22" }
     ],
-    "lastChecked": "2026-11-19",
+    "lastChecked": "2026-11-22",
     "metal": "black",
     "image": { "source": "https://g2m.life/card-originals/bleap-flat.png", "file": "/card-images/bleap-7d0969e3.webp" }
   },
