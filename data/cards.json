@@ -327,13 +327,13 @@
     "bankForNonResidents": true,
     "kycRule": "residency_id",
     "signupBonus": "3% cashback on all purchases, from your first purchase (the same rate as the free Core tier)",
-    "referralCode": "gwei2merchant",
+    "referralCode": "akash0x",
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
     "perks": ["Airport lounge passes from Luxe: 2 a year, unlimited on Pinnacle and VIP", "Visa Signature benefits", "ether.fi Travel: 5% back plus up to 65% off hotels and flights"],
     "pros": ["3% back even on the free Core tier", "Non-custodial, with airport lounges from Luxe", "Metal card included from Luxe"],
     "cons": ["Core pays 3% only on the first $2,000 a month, then 1% and 0.5%", "Higher tiers cost $199 or $999 a year, or a large ETHFI stake or deposit", "The physical card costs $50 on Core"],
-    "links": { "official": "https://www.ether.fi/", "affiliate": "https://www.ether.fi/app/cash/referral?ref_code=gwei2merchant" },
+    "links": { "official": "https://www.ether.fi/", "affiliate": "https://www.ether.fi/@akash0x" },
     "sources": [
       { "label": "DefiLlama card dataset", "url": "https://defillama.com/protocol/card-details/ether.fi", "verified": "2026-08-30" },
       { "label": "ether.fi Help Center: In which countries is the Cash card available? (country list compiled by Card Map)", "url": "https://help.ether.fi/en/articles/758780-in-which-countries-is-the-cash-card-available", "verified": "2026-10-03" },
@@ -358,9 +358,10 @@
       { "label": "ether.fi app: referral offer, 3% cashback on all purchases (checked in the app by G2M)", "url": "https://www.ether.fi/app/cash/referral", "verified": "2026-11-03" },
       { "label": "ether.fi Help: How does cashback work? (EUR and CHF bands, tax and rent from 30 Oct 2026)", "url": "https://help.ether.fi/en/articles/262374-how-does-cashback-work", "verified": "2026-11-19" },
       { "label": "ether.fi Help: CHF purchases 0% FX rate (from 16 Nov 2026)", "url": "https://help.ether.fi/en/articles/895885-chf-purchases-0-fx-rate", "verified": "2026-11-19" },
-      { "label": "ether.fi Help: EUR purchases 0% FX rate", "url": "https://help.ether.fi/en/articles/604957-eur-purchases-0-fx-rate", "verified": "2026-11-19" }
+      { "label": "ether.fi Help: EUR purchases 0% FX rate", "url": "https://help.ether.fi/en/articles/604957-eur-purchases-0-fx-rate", "verified": "2026-11-19" },
+      { "label": "ether.fi invite page for G2M's code akash0x: up to 3% cashback on everyday purchases", "url": "https://www.ether.fi/app/cash/referral?ref_code=akash0x", "verified": "2026-11-21" }
     ],
-    "lastChecked": "2026-11-19",
+    "lastChecked": "2026-11-21",
     "metal": "silver",
     "image": { "source": "https://g2m.life/card-originals/etherfi.avif", "file": "/card-images/etherfi-771a2daf.webp" }
   },
