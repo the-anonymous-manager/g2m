@@ -265,6 +265,7 @@ export const uiEn = {
     cbBack: '{cb} back',
     // Referral box
     bonusWithLink: "Sign-up bonus with G2M's link:",
+    bonusUntil: 'Limited time, until {date}',
     referralCode: 'Referral code',
     copy: 'Copy',
     copied: 'Copied',

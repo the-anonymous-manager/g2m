@@ -128,6 +128,7 @@ export const cardAr: Ui['card'] = {
   allAlts: 'كل بدائل {brand}',
   cbBack: 'كاش باك {cb}',
   bonusWithLink: 'مكافأة التسجيل عبر رابط G2M:',
+  bonusUntil: 'لفترة محدودة، حتى {date}',
   referralCode: 'رمز الإحالة',
   copy: 'نسخ',
   copied: 'تم النسخ',

@@ -13,12 +13,15 @@ export function ReferralBox({
   brand,
   bonus,
   code,
+  ends,
   words
 }: {
   slug: string;
   brand: string;
   bonus?: string;
   code?: string;
+  /** Last day of a limited-time bonus, already written as a date in the page's language. */
+  ends?: string;
   /** Another language's card words (lib/i18n/ui); English when left out. */
   words?: Ui['card'];
 }) {
@@ -40,6 +43,9 @@ export function ReferralBox({
     <div className="referral-box">
       {bonus ? (
         <p>
+          {ends ? (
+            <span className="badge badge-warn referral-limited">{fillT(words?.bonusUntil ?? 'Limited time, until {date}', { date: ends })}</span>
+          ) : null}
           <strong>{words?.bonusWithLink ?? "Sign-up bonus with G2M's link:"}</strong> {bonus}
         </p>
       ) : null}

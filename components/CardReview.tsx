@@ -370,6 +370,7 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
                 brand={card.brand}
                 bonus={card.signupBonus ? c.tx(card.signupBonus) : undefined}
                 code={card.referralCode}
+                ends={card.bonusEnds ? c.date(card.bonusEnds) : undefined}
                 words={english ? undefined : t}
               />
             ) : null}

@@ -68,6 +68,14 @@ and confirm what changed on the site (not which files moved).
   source row; and the code to type in the app. Both need a referral link. Shown in a box on the card page, a line on
   the home page tiles, a "Sign-up bonus" rankings filter and a compare row. Never changes a score or rank. Bonuses
   only the referrer gets (e.g. "you get $5 when your friend spends $50") don't count.
+- Always word sign-up bonuses and referral offers as "through G2M's link" (Akash, 22 Nov 2026): they only apply to
+  people who join through our link or code, so never write "no code needed" or imply anyone gets them. Offers every
+  cardholder gets anyway (e.g. a promotion for all Pro members) are not link-only and must not be worded as if they were.
+- Time-limited sign-up bonuses (Black Friday, a November welcome offer): "Limited-time bonus" and "Limited-time bonus
+  ends" (YYYY-MM-DD), the last two Cards columns (`limitedBonus`). While it runs, the site shows it in place of the
+  regular sign-up bonus everywhere, marked "Limited time, until <date>" on the card page; the day after it ends the
+  card page drops it and the sync removes it, so the regular bonus (or none) comes back by itself. Pair it with an
+  Updates post (Type Offer or Bonus, Ends set) for the details.
 - Scores and ranks are computed (`lib/score.ts`). Never edit a rank or score by hand, and never change
   a card's position because of a referral deal.
 - Run `npm run validate` and fix every error before committing.

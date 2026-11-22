@@ -128,6 +128,7 @@ export const cardTr: Ui['card'] = {
   allAlts: 'Tüm {brand} alternatifleri',
   cbBack: '{cb} nakit iade',
   bonusWithLink: 'G2M bağlantısıyla kayıt bonusu:',
+  bonusUntil: '{date} tarihine kadar, sınırlı süre',
   referralCode: 'Davet kodu',
   copy: 'Kopyala',
   copied: 'Kopyalandı',

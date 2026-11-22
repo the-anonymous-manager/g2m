@@ -1177,7 +1177,7 @@
     "bankRails": [ { "rail": "EUR_SEPA", "in": true, "out": true, "fee": "residents of 28 European countries" } ],
     "bankForNonResidents": false,
     "kycRule": "residency_id",
-    "signupBonus": "8% cashback on up to $300 across your first 3 eligible card purchases (up to $24), if you sign up in November 2026 and make them by 30 Nov 2026. No code needed",
+    "limitedBonus": { "text": "8% cashback on up to $300 across your first 3 eligible card purchases (up to $24), if you join through G2M's link in November 2026 and make them by 30 Nov 2026", "ends": "2026-11-30" },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDT", "USDC", "EURC"],
     "perks": ["5% APY on USD balances at every tier (variable; EUR balances earn none)", "Personal EUR IBAN with SEPA transfers (residents of 28 European countries)", "Fund with USDC, USDT or EURC on 16 networks, by SEPA transfer or by card top-up", "Hotel discounts of up to 50% with COCA Travel"],
@@ -1204,7 +1204,8 @@
       { "label": "COCA Help: Loyalty Program T&C (card countries 1.2, EUR IBAN countries 1.3, claiming 2-3, APY 4)", "url": "https://help.coca.xyz/support/solutions/articles/205000042710-tier-system-terms-conditions", "verified": "2026-11-13" },
       { "label": "COCA Help: How claim capacity boosters work", "url": "https://help.coca.xyz/support/solutions/articles/205000072788-how-claim-capacity-boosters-work", "verified": "2026-11-13" },
       { "label": "COCA team, 13 Nov 2026: corrections (no ATM allowance since late October, no EURS) and card art (Google Drive)", "url": "https://drive.google.com/drive/folders/1bu5Vvz4nECKSOeTindikPTrr2fWpckVC", "verified": "2026-11-13" },
-      { "label": "COCA blog: Welcome Cashback Drop, 8% on up to $300 across the first 3 purchases (2 to 30 Nov 2026)", "url": "https://www.coca.xyz/post/welcome-cashback-drop-get-8-cashback-on-your-first-3-purchases", "verified": "2026-11-19" }
+      { "label": "COCA blog: Welcome Cashback Drop, 8% on up to $300 across the first 3 purchases (2 to 30 Nov 2026)", "url": "https://www.coca.xyz/post/welcome-cashback-drop-get-8-cashback-on-your-first-3-purchases", "verified": "2026-11-19" },
+      { "label": "COCA affiliate offer terms (G2M's affiliate account): the November welcome cashback applies only to sign-ups through an affiliate link", "url": "https://www.coca.xyz/post/welcome-cashback-drop-get-8-cashback-on-your-first-3-purchases", "verified": "2026-11-22" }
     ],
     "lastChecked": "2026-11-19",
     "metal": "rose",
@@ -1894,7 +1895,9 @@
       { "label": "Pulsar Help: November referral cashback (rewards go to the referrer only)", "url": "https://help.pulsar.money/en/articles/18349245-november-referral-cashback-pulsar-pro", "verified": "2026-11-13" },
       { "label": "Pulsar Help: Pricing & Fees (November campaign rates, smaller free allowances, points expiry)", "url": "https://help.pulsar.money/en/articles/16752647-pricing-fees", "verified": "2026-11-19" },
       { "label": "Pulsar Help: Pulsar Pro ($99.99 a year; 4% on the first $3,000 in November)", "url": "https://help.pulsar.money/en/articles/16752652-pulsar-pro", "verified": "2026-11-19" },
-      { "label": "Pulsar: referral invite link (no reward stated for the new user)", "url": "https://pulsar.money/i/KW424?s=cp", "verified": "2026-11-19" }
+      { "label": "Pulsar: referral invite link (no reward stated for the new user)", "url": "https://pulsar.money/i/KW424?s=cp", "verified": "2026-11-19" },
+      { "label": "Pulsar blog: Beyond Friday, double cashback for Pro by weekly brands, 3 to 30 Nov 2026", "url": "https://pulsar.money/en/blog/beyond-friday-double-cashback", "verified": "2026-11-22" },
+      { "label": "Pulsar Help Center: Beyond Friday campaign terms (Pro only, 2 purchases per brand)", "url": "https://help.pulsar.money/en/articles/18173906-beyond-friday-campaign-terms", "verified": "2026-11-22" }
     ],
     "lastChecked": "2026-11-19",
     "addedOn": "2026-11-13",

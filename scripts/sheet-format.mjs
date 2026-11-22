@@ -195,7 +195,9 @@ const CARD_COLUMNS = [
   ['Last checked', (c) => c.lastChecked],
   ['No ID check', (c) => c.noIdCheck ?? ''],
   ['Sign-up bonus', (c) => c.signupBonus ?? ''],
-  ['Referral code', (c) => c.referralCode ?? '']
+  ['Referral code', (c) => c.referralCode ?? ''],
+  ['Limited-time bonus', (c) => c.limitedBonus?.text ?? ''],
+  ['Limited-time bonus ends', (c) => c.limitedBonus?.ends ?? '']
 ];
 
 const TIER_COLUMNS = [
@@ -454,6 +456,12 @@ export function tablesToCards(tables, previous = null, today = null) {
       noIdCheck: optText(r.get('No ID check')),
       signupBonus: optText(r.get('Sign-up bonus')),
       referralCode: optText(r.get('Referral code')),
+      // Dropped once its end date has passed, so cards.json changes and the site redeploys without it.
+      limitedBonus:
+        str(r.get('Limited-time bonus')) && /^\d{4}-\d{2}-\d{2}$/.test(str(r.get('Limited-time bonus ends'))) &&
+        !(today && str(r.get('Limited-time bonus ends')) < today)
+          ? { text: str(r.get('Limited-time bonus')), ends: str(r.get('Limited-time bonus ends')) }
+          : undefined,
       wallets: { applePay: b('Apple Pay'), googlePay: b('Google Pay') },
       assets: commas(r.get('Assets')),
       perks: lines(r.get('Perks')),
@@ -613,7 +621,7 @@ const FIELD_COLUMNS = {
   'cashback.basePct': 'Base cashback %', 'cashback.maxPct': 'Max cashback %', 'cashback.payout': 'Cashback paid in',
   'cashback.intro.pct': 'Intro cashback %', 'cashback.intro.days': 'Intro offer days',
   bankRails: 'Banking rails', bankForNonResidents: 'Bank account for non-residents',
-  kycRule: 'KYC eligibility rule', restrictedPassports: 'Restricted passports', noIdCheck: 'No ID check', signupBonus: 'Sign-up bonus', referralCode: 'Referral code', 'cashback.maxPerTxUsd': 'Max cashback per purchase $',
+  kycRule: 'KYC eligibility rule', restrictedPassports: 'Restricted passports', noIdCheck: 'No ID check', signupBonus: 'Sign-up bonus', referralCode: 'Referral code', 'limitedBonus.text': 'Limited-time bonus', 'limitedBonus.ends': 'Limited-time bonus ends', 'cashback.maxPerTxUsd': 'Max cashback per purchase $',
   'fees.smallPurchase.freePerMonth': 'Free small purchases a month',
   'fees.annualUsd': 'Annual fee $', 'fees.cardFeeUsd': 'Card activation fee $',
   'fees.physicalCardFeeUsd': 'Physical card cost $ (issuance + shipping)', 'fees.fxPct': 'FX fee %', 'fees.fxByCurrency': 'No-FX currencies', 'fees.topUpPct': 'Top-up fee %',

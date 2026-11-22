@@ -128,6 +128,7 @@ export const cardRu: Ui['card'] = {
   allAlts: 'Все альтернативы {brand}',
   cbBack: 'кешбэк {cb}',
   bonusWithLink: 'Приветственный бонус по ссылке G2M:',
+  bonusUntil: 'Ограниченное время, до {date}',
   referralCode: 'Реферальный код',
   copy: 'Копировать',
   copied: 'Скопировано',

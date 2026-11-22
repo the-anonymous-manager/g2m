@@ -19,12 +19,27 @@ const cards: Card[] = (valid as CardData[])
   .sort((a, b) => b.score.total - a.score.total)
   .map((card, i) => ({ ...card, rank: i + 1 }));
 
+// A limited-time bonus replaces the regular sign-up bonus while it runs (checked against today's date on every
+// request, so card pages drop it the day after it ends even before the next sync redeploys the site).
+let viewDay = '';
+let view: Card[] = cards;
+function current(): Card[] {
+  const today = new Date().toISOString().slice(0, 10);
+  if (today !== viewDay) {
+    viewDay = today;
+    view = cards.map((c) =>
+      c.limitedBonus && c.limitedBonus.ends >= today ? { ...c, signupBonus: c.limitedBonus.text, bonusEnds: c.limitedBonus.ends } : c
+    );
+  }
+  return view;
+}
+
 export function getCards(): Card[] {
-  return cards;
+  return current();
 }
 
 export function getCard(slug: string): Card | undefined {
-  return cards.find((c) => c.slug === slug);
+  return current().find((c) => c.slug === slug);
 }
 
 /**

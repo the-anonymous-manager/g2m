@@ -18,7 +18,7 @@ const read = (p) => readFileSync(new URL(p, root), 'utf8');
 
 const cards = JSON.parse(read('data/cards.json'));
 const list = Array.isArray(cards) ? cards : cards.cards;
-const sheet = list.flatMap((c) => [c.summary, ...(c.pros ?? []), ...(c.cons ?? []), c.signupBonus].filter(Boolean));
+const sheet = list.flatMap((c) => [c.summary, ...(c.pros ?? []), ...(c.cons ?? []), c.signupBonus, c.limitedBonus?.text].filter(Boolean));
 // The rest of the card page's sheet text: coverage, notes, ATM, other fees, perks and each tier's conditions.
 const details = list.flatMap((c) =>
   [

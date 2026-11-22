@@ -128,6 +128,7 @@ export const cardZhHK: Ui['card'] = {
   allAlts: '所有 {brand} 的替代選擇',
   cbBack: '現金回贈 {cb}',
   bonusWithLink: '透過 G2M 連結的迎新獎賞：',
+  bonusUntil: '限時優惠，至 {date}',
   referralCode: '推薦碼',
   copy: '複製',
   copied: '已複製',
