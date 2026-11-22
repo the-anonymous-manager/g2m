@@ -599,6 +599,17 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- Time-limited bonuses and "through G2M's link" (22 Nov 2026, Akash: "we can say time limited bonus as well as sign up
+  rewards for that time period" and "always mention only through our link"). New Cards columns "Limited-time bonus" and
+  "Limited-time bonus ends" (`limitedBonus`, see CLAUDE.md); `lib/cards.ts` swaps it in for signupBonus while it runs
+  (checked per request) and the sync drops it after the end date. COCA's November 8% offer moved there (ends 30 Nov),
+  worded "if you join through G2M's link" (Akash: it only applies through the affiliate link; the old text said "No
+  code needed"); its COCA post says the same. The XPlace, Solid and Plasma bonus posts now say "through G2M's link".
+  New post: Pulsar Pro Beyond Friday (last week 23 to 30 Nov: Lidl, Aldi, dm, Rossmann, Bolt, Glovo; all Pro members,
+  so not link-only). ether.fi Black Friday Boost (20% on the first $250, 23 to 30 Nov, up to $50) is only for sign-ups
+  through a "participating creator's" link; waiting for Akash to confirm akash0x is one before posting it.
+  Nexo's 10% on a first PlayStation or Microsoft Store purchase (until 31 Dec) was only found on Nexo's social posts,
+  not its site, so not posted.
 - YouTube and Telegram links (22 Nov 2026, Akash): the footer (every language) now links X, YouTube
   (https://www.youtube.com/@g2mcrypto) and Telegram (https://t.me/Akash773), and the home page's Organization sameAs
   lists all three for search engines. Settings: NEXT_PUBLIC_YOUTUBE_URL, NEXT_PUBLIC_TELEGRAM_HANDLE (`socialLinks()` in

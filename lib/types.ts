@@ -16,7 +16,8 @@ export type ScoreBreakdown = {
 };
 
 // rank: position by G2M score across all cards (1 = best), fixed whatever the view.
-export type Card = CardData & { score: ScoreBreakdown; rank: number };
+// bonusEnds: set while a limited-time bonus runs; signupBonus then holds that bonus (lib/cards.ts).
+export type Card = CardData & { score: ScoreBreakdown; rank: number; bonusEnds?: string };
 
 // The slimmed-down shape sent to client components (keeps page payloads small).
 export type CardRow = Pick<
@@ -44,6 +45,7 @@ export type CardRow = Pick<
   | 'noIdCheck'
   | 'signupBonus'
   | 'referralCode'
+  | 'bonusEnds'
   | 'assets'
   | 'rank'
   | 'perks'
@@ -74,6 +76,7 @@ export function toRow(c: Card): CardRow {
     noIdCheck: c.noIdCheck,
     signupBonus: c.links.affiliate ? c.signupBonus : undefined,
     referralCode: c.links.affiliate ? c.referralCode : undefined,
+    bonusEnds: c.links.affiliate ? c.bonusEnds : undefined,
     assets: c.assets,
     rank: c.rank,
     perks: c.perks

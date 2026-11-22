@@ -2585,6 +2585,11 @@ body::before {
   font-size: 15px;
   max-width: 560px;
 }
+.referral-limited {
+  display: inline-block;
+  margin-inline-end: 8px;
+  margin-bottom: 4px;
+}
 .referral-box p {
   margin: 0;
 }

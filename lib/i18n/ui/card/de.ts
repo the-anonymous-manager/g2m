@@ -128,6 +128,7 @@ export const cardDe: Ui['card'] = {
   allAlts: 'Alle Alternativen zu {brand}',
   cbBack: '{cb} Cashback',
   bonusWithLink: 'Willkommensbonus über den Link von G2M:',
+  bonusUntil: 'Nur für kurze Zeit, bis {date}',
   referralCode: 'Empfehlungscode',
   copy: 'Kopieren',
   copied: 'Kopiert',
