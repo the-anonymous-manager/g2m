@@ -617,8 +617,9 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   in XAUT) and "Pay with OOB" 10% capped at $100 a month (paid in OOB; a Colombia article says $5,000, the main
   article $100). Rewards balance is spendable on the card, not withdrawable. 81 countries (Vietnam on a waitlist,
   Brazil unclear: it has a local card but isn't in the table; Hungary not listed). Sign-up bonus: no Oobit card
-  payment fee on the first $500 for 60 days; code 19905X. Score 55, rank 28. Card art: Akash's SVG rendered to
-  `public/card-originals/oobit.png`; the three site sizes were made locally so the sync doesn't wait for the deploy.
+  payment fee on the first $500 for 60 days; code 19905X. Score 55, rank 28. Card art: Akash's SVG is 1.82:1, wider than
+  a card (1.586:1), so the site showed it with empty bands (a white strip under the card, Akash 22 Nov). The pink
+  background was extended to 720 x 454 with the logo and VISA mark unchanged: `public/card-originals/oobit-card.png`; the three site sizes were made locally so the sync doesn't wait for the deploy.
 - Solid's reply to outreach (20 Nov 2026, forwarded by Akash). Checked against the public help pages Solid cited:
   103 countries (Indonesia and Vietnam are no longer listed, removed), Prime is $199 a year or a 70,000 FUSE lock and
   Ultra a 600,000 FUSE lock (since 12 Oct 2026; was 50,000/400,000), Prime/Ultra category cashback (AI, streaming,
