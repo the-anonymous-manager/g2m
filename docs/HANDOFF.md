@@ -599,6 +599,11 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
     Kite bank account (coming soon), Ethena Pay payout currencies.
   Score moves: Infini 62 to 74 (16th to 6th), OrbitX 43 to 55, DogPay 36 to 48, Tangem 62 to 66, Crypto.com 49 to 53,
   Bybit 48 to 52, RedotPay 54 to 56, Coinbase One 61 to 63.
+- Bleap sign-up countries (22 Nov 2026, Akash, from the Bleap app): the 54 countries the app offers at sign-up (pick a
+  country, phone number from it) are saved in `docs/research/bleap-signup-countries.json` for later use; not on the
+  site yet. It differs from the card rule (help center: cards only for EEA and Swiss residents, 45 nationalities
+  refused): it adds the UK, US, UAE, Canada, Australia, New Zealand, Albania, Serbia, Georgia, Egypt, Guernsey,
+  Puerto Rico, Italy, Spain and 12 Latin American countries, and leaves out Liechtenstein.
 - ether.fi referral link changed (21 Nov 2026, Akash): https://www.ether.fi/@akash0x, code akash0x (was
   gwei2merchant). The invite page still offers up to 3% cashback from the first purchase, so the bonus text is unchanged.
 - Oobit added (21 Nov 2026, Akash sent the referral link and the card art as an SVG). From Oobit's own pages (help
