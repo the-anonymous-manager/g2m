@@ -25,7 +25,7 @@ import { currentPreset, parsePick, pickText, presetIndex, tierIndex, tierPrice, 
 import { CardArt } from '@/components/CardArt';
 import { ShareBar } from '@/components/ShareBar';
 import { Chips } from '@/components/Chips';
-import { HoldSelect } from '@/components/HoldSelect';
+import { FeeSelect, HoldSelect } from '@/components/HoldSelect';
 import { WalletTeaser } from '@/components/WalletTeaser';
 import { TierPresets } from '@/components/TierPresets';
 import { useRegion } from '@/components/RegionContext';
@@ -128,6 +128,7 @@ function Calculator({ rows, initial, initialCountry, hadCountry, prices, prefix 
     tiers: initial.tiers,
     all: initial.all,
     hold: initial.hold,
+    feeMax: initial.feeMax,
     card: initial.card,
     cards: initial.cards,
     tier: initial.tier
@@ -218,7 +219,7 @@ function Calculator({ rows, initial, initialCountry, hadCountry, prices, prefix 
   const pickCard = (slug: string) => {
     const card = eligible.find((r) => r.slug === slug);
     // In the audit, start from that card's best tier for these settings.
-    const best = card ? rankByValue([card], { ...input, all: true, hold: HOLD_ANY }, country || null)[0] : null;
+    const best = card ? rankByValue([card], { ...input, all: true, hold: HOLD_ANY, feeMax: HOLD_ANY }, country || null)[0] : null;
     setOpts((o) => ({ ...o, card: slug, tier: best ? best.index : 0 }));
   };
   // Compare tiers: change, add or remove one of the (up to three) cards, or the tier shown for each.
@@ -458,6 +459,7 @@ function Calculator({ rows, initial, initialCountry, hadCountry, prices, prefix 
               ]}
             />
             {input.tiers === 'best' ? <HoldSelect id="c-hold" value={input.hold} onChange={(v) => set('hold', v)} w={w} money={(n) => L.money(n)} /> : null}
+            {input.tiers === 'best' ? <FeeSelect id="c-fee" value={input.feeMax} onChange={(v) => set('feeMax', v)} w={w} money={(n) => L.money(n)} /> : null}
             {input.tiers === 'best' ? (
               <label className="check" style={{ alignSelf: 'end' }}>
                 <input type="checkbox" checked={input.all} onChange={(e) => set('all', e.target.checked)} />

@@ -44,7 +44,7 @@ export default async function IntlCalculatorPage({ params, searchParams }: Props
   const f = formatters(locale, DICTS[locale.code]);
   const p = await searchParams;
   // Every setting lives in the link (mode, spend, currency split, purchase sizes, valuation, card, year, tier...).
-  const keys = ['mode', 'spend', 'usd', 'travel', 'foreign', 'mix', 'ticket', 'value', 'form', 'year', 'tiers', 'all', 'hold', 'card', 'cards', 'tier'];
+  const keys = ['mode', 'spend', 'usd', 'travel', 'foreign', 'mix', 'ticket', 'value', 'form', 'year', 'tiers', 'all', 'hold', 'fee', 'card', 'cards', 'tier'];
   const initial = parseCalcInput(Object.fromEntries(keys.map((k) => [k, one(p[k])])));
   // `country=JP`; older links used `market=IN`.
   const raw = (one(p.country) ?? one(p.market) ?? '').toUpperCase();

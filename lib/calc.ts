@@ -43,6 +43,9 @@ export const CalcInputSchema = z.object({
   // Money the visitor will keep with a card's company to reach a tier (an average balance, a portfolio, a deposit or
   // a lock of US$-priced tokens), in US dollars. 0 = nothing: only tiers anyone gets, or pays a fee for. HOLD_ANY = no limit.
   hold: z.coerce.number().finite().min(0).max(1_000_000_000).catch(0),
+  // Card fees the visitor will pay in a year: the tier's yearly (or monthly) fee plus any one-off fee to get the card
+  // (issuance, activation; the physical card's when they want one). 0 = free cards only. FEE_ANY = any, if it pays off.
+  feeMax: z.coerce.number().finite().min(0).max(1_000_000_000).catch(1_000_000_000),
   // Also tiers that ask for something other than money: trading volume, points, invites, VIP status, a stake counted
   // in tokens, or criteria the issuer does not publish.
   all: flag,
@@ -76,6 +79,7 @@ export const DEFAULT_INPUT: CalcInput = {
   year: 2,
   tiers: 'best',
   hold: 0,
+  feeMax: 1_000_000_000,
   all: false,
   card: null,
   cards: [],
@@ -93,6 +97,8 @@ export function parseCalcInput(raw: Record<string, unknown>): CalcInput {
     given.usd = 0;
   }
   if ('ticket' in given && !('mix' in given)) given.mix = 'custom';
+  // The address says `fee` for the yearly card fees the visitor will pay.
+  if ('fee' in given && !('feeMax' in given)) given.feeMax = given.fee;
   const input = CalcInputSchema.parse({ ...DEFAULT_INPUT, ...given });
   // The two shares cannot add up to more than all spending.
   if (input.usd + input.travel > 100) input.travel = 100 - input.usd;
@@ -115,6 +121,7 @@ export function calcParams(input: CalcInput, country: string): URLSearchParams {
   if (input.mode === 'best' && input.tiers !== 'best') p.set('tiers', input.tiers);
   if (input.mode === 'best' && input.all) p.set('all', '1');
   if (input.mode === 'best' && input.hold > 0) p.set('hold', String(input.hold));
+  if (input.mode === 'best' && input.feeMax < FEE_ANY) p.set('fee', String(input.feeMax));
   if (input.mode === 'tiers' && (input.cards.length > 1 || input.cards.some((c) => c.includes(':')))) p.set('cards', input.cards.join(','));
   else if (input.mode !== 'best' && input.card) p.set('card', input.card);
   if (input.mode === 'audit') p.set('tier', String(input.tier));
@@ -440,6 +447,20 @@ export function tierValue(
 export const HOLD_ANY = 1_000_000_000;
 /** The choices for "money you will keep with a card's company", in US dollars. */
 export const HOLD_STEPS = [0, 1000, 2500, 5000, 10000, 25000, 50000, 100000, 500000, HOLD_ANY];
+/** No limit on card fees (the "Any, if it pays off" choice). */
+export const FEE_ANY = 1_000_000_000;
+/** The choices for "card fees you will pay a year", in US dollars. */
+export const FEE_STEPS = [0, 25, 50, 100, 200, 500, 1000, FEE_ANY];
+
+/**
+ * What a tier costs to have in a year: its yearly fee plus the one-off fee to get the card (the physical card's when
+ * the visitor wants one). null = the tier's price is not published.
+ */
+export function tierFeesUsd(card: Pick<CardRow, 'fees'>, tier: Pick<Tier, 'feeUsdYear'>, form: CalcInput['form'] = 'virtual'): number | null {
+  if (tier.feeUsdYear == null) return null;
+  const once = form === 'physical' ? (card.fees.physicalCardFeeUsd ?? card.fees.cardFeeUsd ?? 0) : (card.fees.cardFeeUsd ?? 0);
+  return tier.feeUsdYear + once;
+}
 
 /** What one part of a tier's requirement asks for. */
 export type Need =
@@ -496,8 +517,18 @@ export function tierNeeds(tier: Pick<Tier, 'requirement' | 'stake'>): Need[][] {
  * "all", asking nothing but money. A starting tier's other conditions (a VIP level, a membership) belong to the card
  * itself and don't hide it; money it asks to hold still counts (Nexo, Krak).
  */
-export function tierAllowed(tier: Tier, index: number, input: Pick<CalcInput, 'hold' | 'all' | 'spend'>): boolean {
+export function tierAllowed(
+  tier: Tier,
+  index: number,
+  input: Pick<CalcInput, 'hold' | 'all' | 'spend'> & Partial<Pick<CalcInput, 'feeMax' | 'form'>>,
+  card?: Pick<CardRow, 'fees'>
+): boolean {
   if (tier.comingSoon) return false;
+  // Within the card fees the visitor will pay (a tier with no published price only when any fee is fine).
+  if (card && input.feeMax != null && input.feeMax < FEE_ANY) {
+    const fees = tierFeesUsd(card, tier, input.form);
+    if (fees == null || fees > input.feeMax) return false;
+  }
   return tierNeeds(tier).some((alt) => {
     const held = alt.reduce((s, n) => s + (n.kind === 'hold' ? n.usd : 0), 0);
     if (held > input.hold) return false;
@@ -535,7 +566,7 @@ export function rankByValue(cards: CardRow[], input: CalcInput, country?: string
       const options = card.tiers
         .map((t, i) => ({ t, i }))
         .filter(({ t }) => !country || tierOffered(t, country))
-        .filter(({ t, i }) => (input.tiers === 'entry' ? isEntryTier(t, i) : tierAllowed(t, i, input)))
+        .filter(({ t, i }) => (input.tiers === 'entry' ? isEntryTier(t, i) : tierAllowed(t, i, input, card)))
         .map(({ t, i }) => tierValue(card, t, input, i, country));
       const fallback = card.tiers.find((t) => !country || tierOffered(t, country)) ?? card.tiers[0];
       const best = options.sort((a, b) => b.net - a.net)[0] ?? tierValue(card, fallback, input, card.tiers.indexOf(fallback), country);

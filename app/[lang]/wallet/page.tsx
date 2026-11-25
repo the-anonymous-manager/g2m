@@ -39,7 +39,7 @@ export default async function IntlWalletPage({ params, searchParams }: Props) {
   const w = ui.wallet;
   const f = formatters(locale, DICTS[locale.code]);
   const p = await searchParams;
-  const keys = ['spend', 'usd', 'travel', 'foreign', 'mix', 'ticket', 'all', 'hold'];
+  const keys = ['spend', 'usd', 'travel', 'foreign', 'mix', 'ticket', 'all', 'hold', 'fee'];
   const initial = parseCalcInput(Object.fromEntries(keys.map((k) => [k, one(p[k])])));
   const need = (one(p.need) ?? '').split(',').filter((k): k is FeatureKey => (FEATURE_KEYS as readonly string[]).includes(k));
   const raw = (one(p.country) ?? '').toUpperCase();
