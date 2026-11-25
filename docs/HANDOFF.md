@@ -640,6 +640,14 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   Jupiter, Hyperbeat, Infini, PEXX, Tuyo, Avalanche, Avici, Exa, Solayer, Kolo, Cashi, Laso, OrbitX, DogPay, SolCard,
   XPlace, Karta, Pionex); Kraken's Black Friday bonus is for exchange deposits and trades, not the Krak card. Leads not
   yet checked on issuer pages: Tria cashback now paid as TLP points, Tria and Noah EUR currency accounts.
+- Floating back button (25 Nov 2026, Akash: "add back button on every page ... if I scrolled down the back button should
+  be there, not at the top, in metallic glass like design"). `FloatingBack` in `components/BackButton.tsx`, rendered
+  once in `SiteDocument.tsx`. Akash then asked for it at the top and in "liquid glass": a clear lens (light blur,
+  strong saturation, bright rim and a light catch on its top edge) with the rose-gold metal arrow coin, fixed just
+  under the sticky header (the button keeps the header's bottom edge in --hdr-bottom) at the start side (right on
+  Arabic pages), on every page but the home pages; on phones only the coin shows; pages with it get 24px more room
+  at the top. It goes to the previous g2m.life page in the tab, else one level up (`parentOf`). The old "Back" buttons at the top of card, guide, compare and "X vs Y" pages are gone (breadcrumbs stay).
+  Word: `back` in `lib/i18n/chrome.ts`.
 - Closed cards (25 Nov 2026, Akash: "keep mexc with closed"). New Cards column "Closed on" (`closed`, set for MEXC to
   2026-11-18). `lib/cards.ts` ranks and lists open cards only; `getCardPage()` also finds closed ones for their own page
   (both languages' card pages, share image, Updates posts). The card page shows a "Closed" badge in place of the rank,

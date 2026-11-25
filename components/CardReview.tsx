@@ -29,7 +29,6 @@ import { CountryStanding } from '@/components/CountryStanding';
 import { CountryList } from '@/components/CountryList';
 import { CountryToggle } from '@/components/CountryToggle';
 import { TierBreakEven } from '@/components/TierBreakEven';
-import { BackButton } from '@/components/BackButton';
 import { IntlText } from '@/components/IntlText';
 
 // The card review page, in English (/cards/[slug]) or another language (/de/cards/[slug]). One page for every
@@ -327,7 +326,6 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(cardJsonLd(card, locale)) }} />
 
       <div className="back-row">
-        <BackButton fallback={c.href.rankings} label={t.back} />
         <nav aria-label="Breadcrumb" className="faint" style={{ fontSize: 14 }}>
           <Link href={c.href.rankings} style={{ textDecoration: 'none' }}>
             {t.rankings}

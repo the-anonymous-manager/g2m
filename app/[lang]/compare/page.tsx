@@ -5,11 +5,10 @@ import { getCards } from '@/lib/cards';
 import { toRow, type CardRow } from '@/lib/types';
 import { CompareClient } from '@/components/CompareClient';
 import { Eyebrow } from '@/components/bits';
-import { BackButton } from '@/components/BackButton';
 import { PICK } from '@/lib/tierpick';
 import { usdPrices } from '@/lib/prices';
 import { allPairs, versusPath } from '@/lib/versus';
-import { fill, intlCompare, intlRankings, intlVersus, languageLinks, localeByCode, type Locale } from '@/lib/i18n/locales';
+import { fill, intlCompare, intlVersus, languageLinks, localeByCode, type Locale } from '@/lib/i18n/locales';
 import { DICTS } from '@/lib/i18n/dict';
 import { formatters } from '@/lib/i18n/format';
 import { note } from '@/lib/i18n/notes';
@@ -73,9 +72,6 @@ export default async function IntlComparePage({ params, searchParams }: Props) {
   return (
     <div className="wrap section stack" style={{ gap: 28 }}>
       <div className="stack" style={{ gap: 12 }}>
-        <div className="back-row">
-          <BackButton fallback={intlRankings(locale)} label={ui.card.back} />
-        </div>
         <Eyebrow>{w.eyebrow}</Eyebrow>
         <h1 className="h2">{w.title}</h1>
         <p className="lead">{w.lead}</p>

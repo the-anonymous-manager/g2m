@@ -9,7 +9,6 @@ import { TOPICS, countryGuide, countryGuidePath, countryGuides, countrySlug } fr
 import { absoluteUrl, metaDescription, metaTitle, shareMeta, site } from '@/lib/site';
 import { intlCountry, languageLinks } from '@/lib/i18n/locales';
 import { Eyebrow } from '@/components/bits';
-import { BackButton } from '@/components/BackButton';
 import { GuideList } from '@/components/GuideList';
 
 // Built ahead of time at every deploy (the card data is bundled, and each sheet sync deploys), so the page is served
@@ -106,7 +105,6 @@ export default async function CountryGuidePage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="stack" style={{ gap: 12 }}>
         <div className="back-row">
-          <BackButton fallback="/guides" />
           <nav aria-label="Breadcrumb" className="faint" style={{ fontSize: 14 }}>
             <Link href="/guides" style={{ textDecoration: 'none' }}>
               Guides

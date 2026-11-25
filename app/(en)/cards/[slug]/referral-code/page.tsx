@@ -8,7 +8,6 @@ import { shortName } from '@/lib/versus';
 import { absoluteUrl, metaDescription, shareMeta, site } from '@/lib/site';
 import { CardArt } from '@/components/CardArt';
 import { Eyebrow, ScorePill } from '@/components/bits';
-import { BackButton } from '@/components/BackButton';
 import { OutboundLink } from '@/components/OutboundLink';
 import { ReferralBox } from '@/components/ReferralBox';
 import { intlReferral, languageLinks } from '@/lib/i18n/locales';
@@ -116,7 +115,6 @@ export default async function ReferralCodePage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="stack" style={{ gap: 12 }}>
         <div className="back-row">
-          <BackButton fallback={`/cards/${card.slug}`} />
           <nav aria-label="Breadcrumb" className="faint" style={{ fontSize: 14 }}>
             <Link href="/cards" style={{ textDecoration: 'none' }}>
               Cards

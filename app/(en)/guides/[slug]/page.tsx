@@ -6,7 +6,6 @@ import { fmtDate } from '@/lib/format';
 import { FEES_GUIDE, TOPICS, topicCards } from '@/lib/guides';
 import { absoluteUrl, metaDescription, metaTitle, shareMeta, site } from '@/lib/site';
 import { Eyebrow } from '@/components/bits';
-import { BackButton } from '@/components/BackButton';
 import { GuideList } from '@/components/GuideList';
 import { LOCALES, intlGuide, languageLinks } from '@/lib/i18n/locales';
 import { intlTopic } from '@/lib/i18n/guides';
@@ -82,7 +81,6 @@ export default async function TopicGuidePage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="stack" style={{ gap: 12 }}>
         <div className="back-row">
-          <BackButton fallback="/guides" />
           <nav aria-label="Breadcrumb" className="faint" style={{ fontSize: 14 }}>
             <Link href="/guides" style={{ textDecoration: 'none' }}>
               Guides

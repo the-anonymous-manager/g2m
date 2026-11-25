@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import '@/app/globals.css';
 import { Analytics } from '@/components/Analytics';
 import { PageTracker } from '@/components/PageTracker';
-import { NavMemory } from '@/components/BackButton';
+import { FloatingBack, NavMemory } from '@/components/BackButton';
 import { RegionProvider } from '@/components/RegionContext';
 import { themeInitScript } from '@/components/ThemeToggle';
 import { MotionRoot, motionInitScript } from '@/components/motion/MotionRoot';
@@ -81,6 +81,7 @@ export function SiteDocument({
         <RegionProvider>{children}</RegionProvider>
         <MotionRoot />
         <NavMemory />
+        <FloatingBack />
         <Analytics />
         <PageTracker />
       </body>
