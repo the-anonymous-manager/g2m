@@ -677,6 +677,12 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   (`tierFeesUsd`; the physical card's when wanted) must fit; unpriced tiers only with "any"; pairs add both cards'
   fees. "Money you will keep" now starts at "Nothing". Example, UAE $5,000 a month, nothing held: no fees ->
   Ethena Pay + ether.fi Core ($1,500 a year); any fee -> Ethena Pay + Tria ($1,730).
+- AI-readable data (25 Nov 2026, Akash: "share the data, the other chat doesn't work properly on research"):
+  /llms.txt (what G2M is, links, wording rules) and /llms-full.txt (every card: rank, score, cashback, fees, countries,
+  tiers with what they need and the money to hold, banking, perks, pros and cons, sign-up bonus through G2M's link,
+  referral code, sources; then the live offers and news in full; then closed cards). Built per request from the site's
+  data (`lib/llms.ts`), so ended offers drop off by themselves. Give the link to another chat or upload the file to a
+  claude.ai Project.
 - Closed cards (25 Nov 2026, Akash: "keep mexc with closed"). New Cards column "Closed on" (`closed`, set for MEXC to
   2026-11-18). `lib/cards.ts` ranks and lists open cards only; `getCardPage()` also finds closed ones for their own page
   (both languages' card pages, share image, Updates posts). The card page shows a "Closed" badge in place of the rank,
