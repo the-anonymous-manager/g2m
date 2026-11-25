@@ -48,9 +48,14 @@ export const walletEn = {
   includeStake: "Also include tiers that need trading volume, points, invites or a token stake",
   holdLabel: "Money you will keep with a card company",
   holdHelp: "Some tiers need an average balance, a portfolio or locked tokens worth a set amount. Only tiers within this amount are used.",
-  holdNone: "Nothing (free or paid tiers only)",
+  holdNone: "Nothing",
   holdUpTo: "Up to {x}",
   holdAny: "Any amount",
+  feeLabel: "Card fees you will pay a year",
+  feeHelp: "A yearly or monthly plan fee plus any one-off fee to get the card (issuance or activation).",
+  feeNone: "None (free cards only)",
+  feeUpTo: "Up to {x}",
+  feeAny: "Any, if it pays off",
   needHold: "Keep {x} with {brand} for this tier",
 
   // Results

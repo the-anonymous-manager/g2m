@@ -25,7 +25,7 @@ const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
 
 export default async function WalletPage({ searchParams }: Props) {
   const p = await searchParams;
-  const keys = ['spend', 'usd', 'travel', 'foreign', 'mix', 'ticket', 'all', 'hold'];
+  const keys = ['spend', 'usd', 'travel', 'foreign', 'mix', 'ticket', 'all', 'hold', 'fee'];
   const initial = parseCalcInput(Object.fromEntries(keys.map((k) => [k, one(p[k])])));
   const need = (one(p.need) ?? '').split(',').filter((k): k is FeatureKey => (FEATURE_KEYS as readonly string[]).includes(k));
   const raw = (one(p.country) ?? '').toUpperCase();

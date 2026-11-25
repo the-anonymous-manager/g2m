@@ -671,6 +671,12 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   result, advertised rate, how it was matched, fees and cashback as a share of the price, and the date. Fee audit of
   every card: Oobit's minimum was the only unmodelled per-purchase rule; still not modelled: Solayer's "$0.10 + 1.5%"
   on foreign purchases (unclear whether it replaces the $0.15) and RedotPay's "special merchants 1.5% (min $0.50)".
+- Card fees question (25 Nov 2026, Akash: someone who pays no fee at all and someone who can pay $50 should get
+  different answers). "Card fees you will pay a year" (`feeMax`, `fee` in the address, FEE_STEPS, default any) next to
+  "Money you will keep" on the wallet builder and calculator: a tier's yearly fee plus the one-off card fee
+  (`tierFeesUsd`; the physical card's when wanted) must fit; unpriced tiers only with "any"; pairs add both cards'
+  fees. "Money you will keep" now starts at "Nothing". Example, UAE $5,000 a month, nothing held: no fees ->
+  Ethena Pay + ether.fi Core ($1,500 a year); any fee -> Ethena Pay + Tria ($1,730).
 - Closed cards (25 Nov 2026, Akash: "keep mexc with closed"). New Cards column "Closed on" (`closed`, set for MEXC to
   2026-11-18). `lib/cards.ts` ranks and lists open cards only; `getCardPage()` also finds closed ones for their own page
   (both languages' card pages, share image, Updates posts). The card page shows a "Closed" badge in place of the rank,

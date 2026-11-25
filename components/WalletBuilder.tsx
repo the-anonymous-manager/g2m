@@ -6,7 +6,7 @@ import type { CardRow } from '@/lib/types';
 import { availabilityIn, isCountry } from '@/lib/regions';
 import { currencyOf } from '@/lib/currencies.mjs';
 import { buildSegments, calcParams, parseCalcInput, tierHoldUsd, type CalcInput } from '@/lib/calc';
-import { HoldSelect } from '@/components/HoldSelect';
+import { FeeSelect, HoldSelect } from '@/components/HoldSelect';
 import { planWallet, sliceParts, type ComboSide, type SlicePart } from '@/lib/combo';
 import { FEATURES, FEATURE_KEYS, type FeatureKey } from '@/lib/features';
 import { CardArt } from '@/components/CardArt';
@@ -137,6 +137,7 @@ export function WalletBuilder({ rows, initial, initialNeed, initialCountry, hadC
   const [mix, setMix] = useState(initial.mix);
   const [all, setAll] = useState(initial.all);
   const [hold, setHold] = useState(initial.hold);
+  const [feeMax, setFeeMax] = useState(initial.feeMax);
   const [need, setNeed] = useState<FeatureKey[]>(initialNeed);
   const [country, setCountry] = useState(initialCountry);
   const { country: myCountry, ready } = useRegion();
@@ -151,8 +152,8 @@ export function WalletBuilder({ rows, initial, initialNeed, initialCountry, hadC
   const currency = currencyOf(country);
 
   const input = useMemo(
-    () => parseCalcInput({ spend: spendText, usd: usdText, travel: travelText, ticket: ticketText, mix, all, hold }),
-    [spendText, usdText, travelText, ticketText, mix, all, hold]
+    () => parseCalcInput({ spend: spendText, usd: usdText, travel: travelText, ticket: ticketText, mix, all, hold, feeMax }),
+    [spendText, usdText, travelText, ticketText, mix, all, hold, feeMax]
   );
   const homePct = Math.max(0, 100 - input.usd - input.travel);
   const eligible = useMemo(() => (country ? rows.filter((r) => availabilityIn(r, country) !== 'no') : rows), [rows, country]);
@@ -215,6 +216,7 @@ export function WalletBuilder({ rows, initial, initialNeed, initialCountry, hadC
             />
           </div>
           <HoldSelect id="w-hold" value={input.hold} onChange={setHold} w={w} money={(n) => L.money(n)} />
+          <FeeSelect id="w-fee" value={input.feeMax} onChange={setFeeMax} w={w} money={(n) => L.money(n)} />
         </div>
 
         <div className="field">
