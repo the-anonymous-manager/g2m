@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
-import { getCard, guessCard } from '@/lib/cards';
+import { getCardPage, guessCard } from '@/lib/cards';
 import { cashbackLabel, fmtDate, pct, usd } from '@/lib/format';
 import { metaDescription, metaTitle, shareMeta } from '@/lib/site';
 import { intlCard, languageLinks } from '@/lib/i18n/locales';
@@ -14,8 +14,18 @@ type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const card = getCard(slug);
+  const card = getCardPage(slug);
   if (!card) return {};
+  if (card.closed) {
+    const closedTitle = `${card.name} has closed: what happens now and alternatives`;
+    const closedDesc = `${card.brand} stopped the ${card.name} on ${fmtDate(card.closed)}. It no longer works and takes no new applications. What it offered, and the best cards to use instead.`;
+    return {
+      title: metaTitle(closedTitle),
+      description: metaDescription(closedDesc),
+      alternates: { canonical: `/cards/${card.slug}`, languages: languageLinks(`/cards/${card.slug}`, (l) => intlCard(l, card.slug)) },
+      ...shareMeta(closedTitle, closedDesc, `/cards/${card.slug}`, null)
+    };
+  }
   const cb = cashbackLabel(card.cashback.basePct, card.cashback.maxPct);
   const title = `${card.name} Review ${new Date().getUTCFullYear()}: Fees, Cashback & Countries`;
   // Search results show about 155 characters: the facts first, then the summary only when it still fits whole.
@@ -35,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CardPage({ params }: Props) {
   const { slug } = await params;
-  const card = getCard(slug);
+  const card = getCardPage(slug);
   if (!card) {
     // A cut-off or mistyped link (e.g. "ethena-pa=" from an email) goes to the one card it can mean.
     const guess = guessCard(slug);

@@ -200,7 +200,8 @@ const CARD_COLUMNS = [
   ['Sign-up bonus', (c) => c.signupBonus ?? ''],
   ['Referral code', (c) => c.referralCode ?? ''],
   ['Limited-time bonus', (c) => c.limitedBonus?.text ?? ''],
-  ['Limited-time bonus ends', (c) => c.limitedBonus?.ends ?? '']
+  ['Limited-time bonus ends', (c) => c.limitedBonus?.ends ?? ''],
+  ['Closed on', (c) => c.closed ?? '']
 ];
 
 const TIER_COLUMNS = [
@@ -465,6 +466,7 @@ export function tablesToCards(tables, previous = null, today = null) {
         !(today && str(r.get('Limited-time bonus ends')) < today)
           ? { text: str(r.get('Limited-time bonus')), ends: str(r.get('Limited-time bonus ends')) }
           : undefined,
+      closed: /^\d{4}-\d{2}-\d{2}$/.test(str(r.get('Closed on'))) ? str(r.get('Closed on')) : undefined,
       wallets: { applePay: b('Apple Pay'), googlePay: b('Google Pay') },
       assets: commas(r.get('Assets')),
       perks: lines(r.get('Perks')),
@@ -624,7 +626,7 @@ const FIELD_COLUMNS = {
   'cashback.basePct': 'Base cashback %', 'cashback.maxPct': 'Max cashback %', 'cashback.payout': 'Cashback paid in',
   'cashback.intro.pct': 'Intro cashback %', 'cashback.intro.days': 'Intro offer days',
   bankRails: 'Banking rails', bankForNonResidents: 'Bank account for non-residents',
-  kycRule: 'KYC eligibility rule', restrictedPassports: 'Restricted passports', noIdCheck: 'No ID check', signupBonus: 'Sign-up bonus', referralCode: 'Referral code', 'limitedBonus.text': 'Limited-time bonus', 'limitedBonus.ends': 'Limited-time bonus ends', 'cashback.maxPerTxUsd': 'Max cashback per purchase $',
+  kycRule: 'KYC eligibility rule', restrictedPassports: 'Restricted passports', noIdCheck: 'No ID check', signupBonus: 'Sign-up bonus', referralCode: 'Referral code', 'limitedBonus.text': 'Limited-time bonus', 'limitedBonus.ends': 'Limited-time bonus ends', closed: 'Closed on', 'cashback.maxPerTxUsd': 'Max cashback per purchase $',
   'fees.smallPurchase.freePerMonth': 'Free small purchases a month',
   'fees.annualUsd': 'Annual fee $', 'fees.cardFeeUsd': 'Card activation fee $',
   'fees.physicalCardFeeUsd': 'Physical card cost $ (issuance + shipping)', 'fees.fxPct': 'FX fee %', 'fees.fxByCurrency': 'No-FX currencies', 'fees.topUpPct': 'Top-up fee %',

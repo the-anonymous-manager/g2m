@@ -14,10 +14,17 @@ if (errors.length) {
   for (const e of errors) console.warn(`[g2m]   ${e.card}: ${e.issues.join('; ')}`);
 }
 
+// Only cards that still work are ranked and listed. A closed card (the issuer stopped it, `closed` in cards.json) keeps
+// its own page, marked closed, through getCardPage(); everything else (rankings, tools, compare, guides, "X vs Y",
+// referral pages, sponsored spots, "Get the card" buttons) sees open cards only. Its rank is 0.
 const cards: Card[] = (valid as CardData[])
+  .filter((card) => !card.closed)
   .map((card) => ({ ...card, score: scoreCard(card) }))
   .sort((a, b) => b.score.total - a.score.total)
   .map((card, i) => ({ ...card, rank: i + 1 }));
+const closedCards: Card[] = (valid as CardData[])
+  .filter((card) => card.closed)
+  .map((card) => ({ ...card, score: scoreCard(card), rank: 0 }));
 
 // A limited-time bonus replaces the regular sign-up bonus while it runs (checked against today's date on every
 // request, so card pages drop it the day after it ends even before the next sync redeploys the site).
@@ -42,6 +49,16 @@ export function getCard(slug: string): Card | undefined {
   return current().find((c) => c.slug === slug);
 }
 
+/** Cards the issuer has stopped, newest closure first (their pages stay up, marked closed). */
+export function getClosedCards(): Card[] {
+  return [...closedCards].sort((a, b) => b.closed!.localeCompare(a.closed!));
+}
+
+/** A card for its own page (and its alternatives page): an open card, or a closed one shown as closed. */
+export function getCardPage(slug: string): Card | undefined {
+  return getCard(slug) ?? closedCards.find((c) => c.slug === slug);
+}
+
 /**
  * The card a broken address most likely meant, or null. Links cut off by email apps arrive as e.g.
  * "/cards/ethena-pa=" (a line break marked with "="): keep the part up to the first character a card ID
@@ -56,9 +73,9 @@ export function guessCard(raw: string): Card | null {
   }
   const start = s.toLowerCase().match(/^[a-z0-9-]*/)![0].replace(/-+$/, '');
   if (start.length < 2) return null;
-  const exact = getCard(start);
+  const exact = getCardPage(start);
   if (exact) return exact;
-  const matches = cards.filter((c) => c.slug.startsWith(start));
+  const matches = [...cards, ...closedCards].filter((c) => c.slug.startsWith(start));
   return matches.length === 1 ? matches[0] : null;
 }
 

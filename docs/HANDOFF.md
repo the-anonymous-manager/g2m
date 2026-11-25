@@ -640,6 +640,14 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   Jupiter, Hyperbeat, Infini, PEXX, Tuyo, Avalanche, Avici, Exa, Solayer, Kolo, Cashi, Laso, OrbitX, DogPay, SolCard,
   XPlace, Karta, Pionex); Kraken's Black Friday bonus is for exchange deposits and trades, not the Krak card. Leads not
   yet checked on issuer pages: Tria cashback now paid as TLP points, Tria and Noah EUR currency accounts.
+- Closed cards (25 Nov 2026, Akash: "keep mexc with closed"). New Cards column "Closed on" (`closed`, set for MEXC to
+  2026-11-18). `lib/cards.ts` ranks and lists open cards only; `getCardPage()` also finds closed ones for their own page
+  (both languages' card pages, share image, Updates posts). The card page shows a "Closed" badge in place of the rank,
+  a notice with the date, six "Cards to use instead", and no Get the card, referral box, country standing, "X vs Y"
+  links or swipe receipt. `/go/<slug>` and the old alternatives, referral-code and "X vs Y" addresses (every language)
+  redirect to the card page (next.config.mjs `closedPages`). The sitemap keeps the card page. Words: closedBadge,
+  closedTitle, closedText, closedSee in the card packs (Claude's translations). Ranks of the cards below MEXC move up
+  one place, since MEXC is no longer counted.
 - Sheet sync fix (25 Nov 2026): the Sponsor tab said "Solid" with a capital S, so the hourly sync stopped with "no card
   with Card ID" and nothing reached the site. Card IDs on every tab except Cards now match whatever their capital
   letters (`cardId` in `scripts/sheet-format.mjs`), and the cell was changed to "solid".

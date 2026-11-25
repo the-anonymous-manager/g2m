@@ -3,7 +3,18 @@ import { readFileSync } from 'node:fs';
 // Card addresses people (and AI assistants) guess wrongly: "/cards/pulsar-money-card" for /cards/pulsar-money,
 // "/cards/avalanche" for /cards/avalanche-card, in any language. /stats listed them as broken pages (19 Nov 2026).
 const LANGS = 'de|fr|es|pl|tr|ru|ar|zh-hk';
-const slugs = JSON.parse(readFileSync(new URL('./data/cards.json', import.meta.url), 'utf8')).map((c) => c.slug);
+const cardData = JSON.parse(readFileSync(new URL('./data/cards.json', import.meta.url), 'utf8'));
+const slugs = cardData.map((c) => c.slug);
+// A closed card keeps only its own page: its alternatives, referral-code and "X vs Y" addresses (in any language) go
+// there instead of a 404, since people and search engines still have them (Akash, 25 Nov 2026: MEXC).
+const closedPages = cardData
+  .filter((c) => c.closed)
+  .flatMap(({ slug }) => [
+    { source: `/cards/${slug}/:rest(alternatives|referral-code)`, destination: `/cards/${slug}`, permanent: false },
+    { source: `/:lang(${LANGS})/cards/${slug}/:rest(alternatives|referral-code)`, destination: `/:lang/cards/${slug}`, permanent: false },
+    { source: `/compare/:pair(${slug}-vs-.+|.+-vs-${slug})`, destination: `/cards/${slug}`, permanent: false },
+    { source: `/:lang(${LANGS})/compare/:pair(${slug}-vs-.+|.+-vs-${slug})`, destination: `/:lang/cards/${slug}`, permanent: false }
+  ]);
 const cardGuesses = slugs.flatMap((slug) => {
   const guess = slug.endsWith('-card') ? slug.slice(0, -'-card'.length) : `${slug}-card`;
   if (slugs.includes(guess)) return [];
@@ -45,6 +56,7 @@ const nextConfig = {
           { source: `/:lang(${LANGS})/updates/${from}`, destination: `/:lang/updates/${to}`, permanent: true }
         ]
       ),
+      ...closedPages,
       ...cardGuesses
     ];
   },

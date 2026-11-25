@@ -99,6 +99,11 @@ and confirm what changed on the site (not which files moved).
   rank. Their text is translated in `data/i18n` like other sheet text (`npm run i18n:missing` lists it, split by
   paragraph); a post gets its own page in a language once its title and summary are translated, until then that
   language's list shows it in English and links to the English post. Only state facts from the issuer; add a source link.
+- Closed cards (the issuer stopped the card): put the day it stopped in "Closed on" (YYYY-MM-DD, last Cards column,
+  `closed`), with a source row and an Updates post (Akash, 25 Nov 2026: "keep mexc with closed"). The card keeps its
+  page, marked "Closed" with cards to use instead, but leaves the rankings, country scores, tools, compare, guides and
+  sponsored spots; its "Get the card" link, alternatives, referral-code and "X vs Y" addresses go to its page. Never
+  delete a closed card's row.
 - New cards: nothing to date. The sync sets `addedOn` to the day a Card ID first reaches the site and keeps it after
   (no sheet column). Without a sheet, set `addedOn` (YYYY-MM-DD) in `data/cards.json` when listing a card.
 

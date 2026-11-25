@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getCard } from '@/lib/cards';
+import { getCardPage } from '@/lib/cards';
+import { UI } from '@/lib/i18n/ui';
 import { fill, intlCard, languageLinks, localeByCode } from '@/lib/i18n/locales';
 import { DICTS } from '@/lib/i18n/dict';
 import { clean, formatters } from '@/lib/i18n/format';
@@ -17,7 +18,7 @@ export const dynamic = 'force-dynamic';
 
 function load(lang: string, slug: string) {
   const locale = localeByCode(lang);
-  const card = getCard(slug);
+  const card = getCardPage(slug);
   return locale && card ? { locale, card, d: DICTS[locale.code] } : null;
 }
 
@@ -27,6 +28,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!x) return {};
   const { locale, card, d } = x;
   const f = formatters(locale, d);
+  if (card.closed) {
+    const w = UI[locale.code].card;
+    const title = fill(w.closedTitle, { name: card.name });
+    const description = clean(fill(w.closedText, { brand: card.brand, date: f.date(card.closed) }));
+    const path = intlCard(locale, card.slug);
+    return {
+      title: metaTitle(title),
+      description: metaDescription(description),
+      alternates: { canonical: path, languages: languageLinks(`/cards/${card.slug}`, (l) => intlCard(l, card.slug)) },
+      ...shareMeta(title, description, path, `/cards/${card.slug}/opengraph-image`)
+    };
+  }
   const vars = {
     name: shortName(card.name),
     year: new Date().getUTCFullYear(),

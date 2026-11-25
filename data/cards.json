@@ -553,6 +553,7 @@
     "bankForNonResidents": true,
     "kycRule": "residency_id",
     "restrictedPassports": [],
+    "closed": "2026-11-18",
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDT"],
     "perks": [],

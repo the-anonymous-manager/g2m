@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { getCard } from '@/lib/cards';
+import { getCardPage } from '@/lib/cards';
 import { fmtDate } from '@/lib/format';
 import { bodyBlocks, getUpdates, hasEnded, intlUpdate, intlUpdates, isTranslated, updatePath, UPDATES_PATH, type Update } from '@/lib/updates';
 import { fill, intlCard, type Locale } from '@/lib/i18n/locales';
@@ -70,10 +70,12 @@ function Meta({ u, c }: { u: Update; c: Ctx }) {
 
 /** The card a post is about, with its "Get the card" button (referral link) and the review link. */
 function CardBox({ slug, c, placement }: { slug: string; c: Ctx; placement: string }) {
-  const card = getCard(slug);
+  const card = getCardPage(slug);
   if (!card) return null;
-  const bonus = card.links.affiliate ? card.signupBonus : undefined;
-  const code = card.links.affiliate ? card.referralCode : undefined;
+  // A closed card (its post says so) keeps its picture and review link, without the sign-up button or bonus.
+  const open = !card.closed;
+  const bonus = open && card.links.affiliate ? card.signupBonus : undefined;
+  const code = open && card.links.affiliate ? card.referralCode : undefined;
   return (
     <div className="panel panel-pad ref-hero">
       <Link href={c.cardHref(card.slug)} className="ref-hero-art" aria-label={card.name}>
@@ -84,7 +86,7 @@ function CardBox({ slug, c, placement }: { slug: string; c: Ctx; placement: stri
           <b style={{ fontSize: 18 }}>
             <bdi>{card.name}</bdi>
           </b>
-          <ScorePill value={card.score.total} label={c.d.score} />
+          {open ? <ScorePill value={card.score.total} label={c.d.score} /> : null}
         </div>
         {bonus ? (
           <p className="muted" style={{ margin: 0 }}>
@@ -100,9 +102,11 @@ function CardBox({ slug, c, placement }: { slug: string; c: Ctx; placement: stri
           </p>
         ) : null}
         <div className="pick-actions">
-          <OutboundLink slug={card.slug} name={card.name} placement={placement} className="btn btn-metal">
-            {c.d.getCard}
-          </OutboundLink>
+          {open ? (
+            <OutboundLink slug={card.slug} name={card.name} placement={placement} className="btn btn-metal">
+              {c.d.getCard}
+            </OutboundLink>
+          ) : null}
           <Link href={c.cardHref(card.slug)} className="btn">
             {c.locale ? c.d.details : 'Read the review'}
           </Link>
@@ -114,7 +118,7 @@ function CardBox({ slug, c, placement }: { slug: string; c: Ctx; placement: stri
 
 /** One post in the list: its meta line, title, summary, the card it is about and its buttons. */
 function Item({ u, c }: { u: Update; c: Ctx }) {
-  const card = u.card ? getCard(u.card) : undefined;
+  const card = u.card ? getCardPage(u.card) : undefined;
   const english = c.locale && !isTranslated(u, c.locale);
   const placement = c.locale ? `intl-${c.locale.code}-updates` : 'updates';
   return (
@@ -145,7 +149,7 @@ function Item({ u, c }: { u: Update; c: Ctx }) {
               {c.d.updReadMore}
             </Link>
           ) : null}
-          {card && !hasEnded(u) ? (
+          {card && !card.closed && !hasEnded(u) ? (
             <OutboundLink slug={card.slug} name={card.name} placement={placement} className="btn btn-sm btn-metal">
               {c.d.getCard}
             </OutboundLink>
