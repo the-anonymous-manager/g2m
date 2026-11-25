@@ -893,9 +893,10 @@
       { "label": "Ethena Pay: home page (Daily Boost yield, cashback paid in AVAX)", "url": "https://pay.ethena.fi/", "verified": "2026-10-24" },
       { "label": "Ethena Pay blog: Introducing Ethena Pay", "url": "https://pay.ethena.fi/blog/introducing-ethena-pay", "verified": "2026-10-25" },
       { "label": "Ethena Pay Terms of Use", "url": "https://pay.ethena.fi/terms", "verified": "2026-10-25" },
-      { "label": "Ethena Pay pricing (updated 30 Sep 2026)", "url": "https://pay.ethena.fi/pricing", "verified": "2026-11-19" }
+      { "label": "Ethena Pay pricing (updated 30 Sep 2026)", "url": "https://pay.ethena.fi/pricing", "verified": "2026-11-19" },
+      { "label": "Ethena Pay: Promotion Terms (Black Friday Offer)", "url": "https://pay.ethena.fi/promotions", "verified": "2026-11-25" }
     ],
-    "lastChecked": "2026-11-19",
+    "lastChecked": "2026-11-25",
     "metal": "gold",
     "image": { "source": "https://g2m.life/card-originals/ethena-pay-flat.png", "file": "/card-images/ethena-pay-1976e765.webp" }
   },

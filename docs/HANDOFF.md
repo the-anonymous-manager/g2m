@@ -627,6 +627,9 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   with nothing new for the site: Bitget's Pioneer Challenge (rewards the inviter only), Kite's $5 referral (inviter
   only), Hyperbeat, Infini, Jupiter, PEXX, Tuyo. Not confirmed on an issuer page: Tria EUR bank deposits and a
   "Plasma One Lite" tier.
+  Akash then spotted Ethena Pay's Black Friday offer, missed because the sweep looked mainly at referral cards (check
+  every card next time): 50% back in AVAX on the first $200, up to $100, 27 to 30 Nov (UTC+8), all cardholders, limited
+  budget, plus a Weekend Draw (ten winners get their 4-day card spending back, up to $1,000). Source: pay.ethena.fi/promotions.
 - Sheet sync fix (25 Nov 2026): the Sponsor tab said "Solid" with a capital S, so the hourly sync stopped with "no card
   with Card ID" and nothing reached the site. Card IDs on every tab except Cards now match whatever their capital
   letters (`cardId` in `scripts/sheet-format.mjs`), and the cell was changed to "solid".
