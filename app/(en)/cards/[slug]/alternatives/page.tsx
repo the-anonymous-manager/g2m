@@ -9,7 +9,6 @@ import { versusPath } from '@/lib/versus';
 import { alternativesPath, alternativesTo } from '@/lib/alternatives';
 import { absoluteUrl, metaDescription, metaTitle, shareMeta, site } from '@/lib/site';
 import { Eyebrow } from '@/components/bits';
-import { BackButton } from '@/components/BackButton';
 import { GuideList } from '@/components/GuideList';
 import { intlAlternatives, languageLinks } from '@/lib/i18n/locales';
 
@@ -116,7 +115,6 @@ export default async function AlternativesPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="stack" style={{ gap: 12 }}>
         <div className="back-row">
-          <BackButton fallback={`/cards/${card.slug}`} />
           <nav aria-label="Breadcrumb" className="faint" style={{ fontSize: 14 }}>
             <Link href="/cards" style={{ textDecoration: 'none' }}>
               Cards

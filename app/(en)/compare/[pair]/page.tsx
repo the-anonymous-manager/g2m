@@ -12,7 +12,6 @@ import { ROWS, best } from '@/components/compareRows';
 import { CardArt } from '@/components/CardArt';
 import { Eyebrow, ScorePill } from '@/components/bits';
 import { OutboundLink } from '@/components/OutboundLink';
-import { BackButton } from '@/components/BackButton';
 import { intlVersus, languageLinks } from '@/lib/i18n/locales';
 
 // Built ahead of time at every deploy (the card data is bundled, and each sheet sync deploys), so the page is served
@@ -95,7 +94,6 @@ export default async function VersusPage({ params }: Props) {
 
       <div className="stack" style={{ gap: 12 }}>
         <div className="back-row">
-          <BackButton fallback="/compare" />
           <nav aria-label="Breadcrumb" className="faint" style={{ fontSize: 14 }}>
             <Link href="/compare" style={{ textDecoration: 'none' }}>
               Compare
