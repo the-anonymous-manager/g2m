@@ -682,7 +682,8 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   tiers with what they need and the money to hold, banking, perks, pros and cons, sign-up bonus through G2M's link,
   referral code, sources; then the live offers and news in full; then closed cards). Built per request from the site's
   data (`lib/llms.ts`), so ended offers drop off by themselves. Give the link to another chat or upload the file to a
-  claude.ai Project.
+  claude.ai Project. Facts only: the wording rules were taken out (Akash, 25 Nov 2026: they apply to the website,
+  while he also uses the data in chats where he posts as an influencer), and referral labels are neutral.
 - Closed cards (25 Nov 2026, Akash: "keep mexc with closed"). New Cards column "Closed on" (`closed`, set for MEXC to
   2026-11-18). `lib/cards.ts` ranks and lists open cards only; `getCardPage()` also finds closed ones for their own page
   (both languages' card pages, share image, Updates posts). The card page shows a "Closed" badge in place of the rank,

@@ -8,19 +8,10 @@ import type { Card } from '@/lib/types';
 
 // Plain-text pages for AI assistants and research chats (Akash, 25 Nov 2026: "share the data, the other chat doesn't
 // work properly on research"): /llms.txt is a short guide, /llms-full.txt every card's facts, the live offers and
-// news, and the wording rules for posts. Built from the same card data as the site, so they are always current.
+// news. Facts only: no wording rules, since Akash also uses them in chats where he posts as an independent
+// influencer (25 Nov 2026). Built from the same card data as the site, so they are always current.
 
 const MARKETS = { IN: 'India', AE: 'UAE', US: 'US', GB: 'UK', EU: 'EU/EEA' } as const;
-const RULES = [
-  'Sign-up bonuses and referral codes only apply to people who join through G2M\'s link or code: always say "through G2M\'s link", never "no code needed".',
-  'Offers every cardholder gets (a promotion for all members) are not link-only: do not word them as if they were.',
-  'Say "non-custodial", never "self-custodial".',
-  'Paid placements and paid posts are always marked "Sponsored".',
-  'Scores and ranks are computed from the card data; a referral deal never changes them.',
-  'Plain, short sentences. No hype and no "#1" claims.',
-  'Only state facts the card issuer publishes, with the source link. "Not published" when the issuer does not say.'
-];
-
 const line = (label: string, value: string | null | undefined) => (value ? `- ${label}: ${value}\n` : '');
 
 function cardBlock(c: Card, closed = false): string {
@@ -29,7 +20,7 @@ function cardBlock(c: Card, closed = false): string {
   const eco = c.ecosystem;
   let s = `### ${c.name}${closed ? ` (CLOSED on ${c.closed})` : ` (rank ${c.rank}, score ${c.score.total}/100)`}\n`;
   s += line('Page', `${site.url}/cards/${c.slug}`);
-  if (!closed) s += line('Get the card (G2M referral link)', `${site.url}/go/${c.slug}`);
+  if (!closed) s += line('Referral link', `${site.url}/go/${c.slug}`);
   s += line('Summary', c.summary);
   s += line('Type', `${c.network} ${c.type}, ${c.forms.join('/')}, ${CUSTODY_LABEL[c.custody]}`);
   s += line('Cashback', `${cashbackLabel(c.cashback.basePct, c.cashback.maxPct)}${c.cashback.payout ? ` paid in ${c.cashback.payout}` : ''}${c.cashback.note ? `. ${c.cashback.note}` : ''}`);
@@ -76,9 +67,9 @@ function cardBlock(c: Card, closed = false): string {
   if (c.pros.length) s += line('Good', c.pros.join('; '));
   if (c.cons.length) s += line('Watch out', c.cons.join('; '));
   if (!closed && c.links.affiliate) {
-    s += line('Sign-up bonus through G2M\'s link', c.signupBonus ?? 'none published');
+    s += line('Sign-up bonus with this referral link', c.signupBonus ?? 'none published');
     if (c.bonusEnds) s += line('Limited-time bonus until', c.bonusEnds);
-    s += line('G2M referral code', c.referralCode);
+    s += line('Referral code', c.referralCode);
   }
   s += line('Last checked', c.lastChecked);
   if (c.sources.length) s += `- Sources:\n${c.sources.map((x) => `  - ${x.label}${x.verified ? ` (${x.verified})` : ''}: ${x.url}`).join('\n')}\n`;
@@ -106,13 +97,10 @@ against each issuer's own pages, with sources and dates.
 - [Rewards calculator](${site.url}/calculator)
 - [Swipe receipt: what one purchase really costs](${site.url}/receipt)
 - [Card finder](${site.url}/finder)
-
-## Rules when writing about G2M's cards
-${RULES.map((r) => `- ${r}`).join('\n')}
 `;
 }
 
-/** /llms-full.txt: every card's facts, the live offers and news, and the rules. */
+/** /llms-full.txt: every card's facts, the live offers and news. */
 export function llmsFull(): string {
   const today = new Date().toISOString().slice(0, 10);
   const cards = getCards();
@@ -121,10 +109,7 @@ export function llmsFull(): string {
   let s = `# ${site.name} card data (${today})
 
 Every crypto card on ${site.url}, ranked by G2M's computed score, with fees, countries, tiers, banking features,
-sign-up bonuses (through G2M's link) and sources. Then the live offers and news. Generated from the site's own data.
-
-## Rules when writing about these cards
-${RULES.map((r) => `- ${r}`).join('\n')}
+sign-up bonuses with the referral link and sources. Then the live offers and news. Generated from the site's own data.
 
 ## Live offers and news (${live.length})
 `;
