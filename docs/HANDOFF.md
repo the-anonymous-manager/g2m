@@ -648,6 +648,15 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   Arabic pages), on every page but the home pages; on phones only the coin shows; pages with it get 24px more room
   at the top. It goes to the previous g2m.life page in the tab, else one level up (`parentOf`). The old "Back" buttons at the top of card, guide, compare and "X vs Y" pages are gone (breadcrumbs stay).
   Word: `back` in `lib/i18n/chrome.ts`.
+- Minimum per-purchase fee (25 Nov 2026, Akash sent an Oobit app receipt: a $6.80 Cloudflare purchase charged $6.80 +
+  $0.25 fee = $7.05, cashback 5% = $0.34; the swipe receipt showed a 1% fee of $0.07 and then "matched" a wrong
+  exchange rate of 0.97). New Cards column "Minimum fee per purchase $" (after "Fee on every purchase $", `fees.txMinUsd`;
+  Oobit 0.25, from its help center fee page and the app receipt, a source row). Each purchase pays max(% fee, minimum)
+  in the receipt (`lib/swipe.ts`, also when matching a total charged), the calculator (per purchase size) and the
+  score's basket (`txFeeUsd` in `lib/calc.ts`). Shown as "1% (min $0.25)" on the card page, compare and the receipt
+  line; word `minFee` in the main and receipt packs. Oobit's score 55 to 52 (three places down). The back button now
+  shows only its arrow coin below 1,500 px wide (it covered the receipt's "Card" label) and the full pill in the empty
+  space left of the page above that.
 - Closed cards (25 Nov 2026, Akash: "keep mexc with closed"). New Cards column "Closed on" (`closed`, set for MEXC to
   2026-11-18). `lib/cards.ts` ranks and lists open cards only; `getCardPage()` also finds closed ones for their own page
   (both languages' card pages, share image, Updates posts). The card page shows a "Closed" badge in place of the rank,

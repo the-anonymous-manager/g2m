@@ -41,10 +41,10 @@ export function approxUsd(n: number): string {
 }
 
 /** Every per-purchase cost as one label: percentage, flat fee and any small-purchase fee. */
-export function perPurchaseFee(f: Pick<CardData['fees'], 'txPct' | 'txFlatUsd' | 'smallPurchase'>): string {
+export function perPurchaseFee(f: Pick<CardData['fees'], 'txPct' | 'txMinUsd' | 'txFlatUsd' | 'smallPurchase'>): string {
   const small = f.smallPurchase;
   const parts = [
-    f.txPct ? pct(f.txPct) : null,
+    f.txPct ? `${pct(f.txPct)}${f.txMinUsd ? ` (min ${usd(f.txMinUsd)})` : ''}` : null,
     f.txFlatUsd ? usd(f.txFlatUsd) : null,
     small
       ? `${usd(small.feeUsd)} ${small.inclusive ? 'at or under' : 'under'} ${usd(small.underUsd)}${small.foreignOnly ? ' (non-USD)' : ''}${small.freePerMonth ? `, first ${small.freePerMonth} a month free` : ''}`

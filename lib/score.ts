@@ -1,7 +1,7 @@
 import type { CardData, ScoreBreakdown, Tier } from '@/lib/types';
 import { availabilityIn, tierOffered } from '@/lib/regions';
 import { COUNTRY_CODES } from '@/lib/countries.mjs';
-import { cashbackBreakdown, isSmallPurchase, perPurchaseCut } from '@/lib/calc';
+import { cashbackBreakdown, isSmallPurchase, perPurchaseCut, txFeeUsd } from '@/lib/calc';
 import { billedIn, homeFx } from '@/lib/fx';
 import { currencyOf } from '@/lib/currencies.mjs';
 import { BASKET, BASKET_USD, BASKET_PURCHASES } from '@/lib/basket';
@@ -102,14 +102,16 @@ export function basketCosts(c: Pick<CardData, 'fees'>, foreign?: { fxPct: number
   const f = c.fees;
   if (f.topUpPct == null) return null;
   if (foreign && foreign.fxPct == null) return null;
-  const pct = f.txPct + f.topUpPct + (foreign?.fxPct ?? 0);
+  const pct = f.topUpPct + (foreign?.fxPct ?? 0);
   const sp = f.smallPurchase;
   // Basket purchases under the limit (or at it, when inclusive), less any free ones each month.
   const small =
     sp && (!sp.foreignOnly || foreign)
       ? Math.max(0, BASKET.filter((b) => isSmallPurchase(sp, b.usd)).reduce((s, b) => s + b.count, 0) - (sp.freePerMonth ?? 0)) * sp.feeUsd
       : 0;
-  const usd = (pct / 100) * BASKET_USD + f.txFlatUsd * BASKET_PURCHASES + small;
+  // The per-purchase % fee, each purchase at least the issuer's minimum (e.g. 1%, min $0.25).
+  const tx = BASKET.reduce((s, b) => s + b.count * txFeeUsd(f, b.usd), 0);
+  const usd = (pct / 100) * BASKET_USD + tx + f.txFlatUsd * BASKET_PURCHASES + small;
   return Math.round(usd * 100) / 100;
 }
 

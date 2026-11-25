@@ -50,6 +50,7 @@ export const receiptFr: typeof receiptEn = {
   lFxForeign: 'Frais de change ({p}, {cur} avec une carte en {base})',
   lFxHome: 'Frais de change ({p} sur {base})',
   lTx: 'Frais par achat ({p})',
+  minFee: "min. {x}",
   lFlat: 'Frais fixes par achat ({x})',
   lSmall: 'Frais de petit achat ({fee} {rule} {under}{foreign})',
   atOrUnder: "jusqu'à",

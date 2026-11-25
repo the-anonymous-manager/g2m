@@ -18,6 +18,7 @@ export const uiTr: Ui = {
     notAvailable: 'Mevcut değil',
     notConfirmed: 'Onaylanmadı',
     notPublished: 'Yayımlanmadı',
+    minFee: "en az {x}",
     free: 'Ücretsiz',
     upTo: '{x} değerine kadar',
     custodial: 'Gözetimli (paranız şirkette)',

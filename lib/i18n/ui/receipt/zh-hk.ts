@@ -50,6 +50,7 @@ export const receiptZhHk: typeof receiptEn = {
   lFxForeign: '外幣手續費（{p}，{base} 卡付 {cur}）',
   lFxHome: '外幣手續費（{base} 收 {p}）',
   lTx: '每筆交易費（{p}）',
+  minFee: "最低 {x}",
   lFlat: '每筆固定費用（{x}）',
   lSmall: '小額消費費（{under}{rule}收 {fee}{foreign}）',
   atOrUnder: '或以下',

@@ -72,7 +72,7 @@ function lineText(l: SwipeLine, w: W, pct: (n: number) => string, usd: (n: numbe
     case 'fx':
       return v.foreign ? fillText(w.lFxForeign, { p: pct(Number(v.pct)), cur: String(v.currency), base: String(v.base) }) : fillText(w.lFxHome, { p: pct(Number(v.pct)), base: String(v.base) });
     case 'tx':
-      return fillText(w.lTx, { p: pct(Number(v.pct)) });
+      return fillText(w.lTx, { p: v.min != null ? `${pct(Number(v.pct))}, ${fillText(w.minFee, { x: usd(Number(v.min)) })}` : pct(Number(v.pct)) });
     case 'flat':
       return fillText(w.lFlat, { x: usd(Number(v.usd)) });
     case 'small':

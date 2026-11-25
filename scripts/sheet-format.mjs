@@ -161,6 +161,7 @@ const CARD_COLUMNS = [
   ['Top-up fee %', (c) => showNum(c.fees.topUpPct)],
   ['Fee on every purchase %', (c) => (c.fees.txPct ? showNum(c.fees.txPct) : '')],
   ['Fee on every purchase $', (c) => (c.fees.txFlatUsd ? showNum(c.fees.txFlatUsd) : '')],
+  ['Minimum fee per purchase $', (c) => showNum(c.fees.txMinUsd)],
   ['Small-purchase fee $', (c) => showNum(c.fees.smallPurchase?.feeUsd)],
   ['Small purchase = under $', (c) => showNum(c.fees.smallPurchase?.underUsd)],
   ['Small-purchase fee foreign only', (c) => (c.fees.smallPurchase ? showBool(c.fees.smallPurchase.foreignOnly) : '')],
@@ -429,6 +430,7 @@ export function tablesToCards(tables, previous = null, today = null) {
         topUpPct: n('Top-up fee %'),
         txPct: n('Fee on every purchase %') || undefined,
         txFlatUsd: n('Fee on every purchase $') || undefined,
+        txMinUsd: n('Minimum fee per purchase $') || undefined,
         smallPurchase:
           smallFee != null || smallUnder != null
             ? {
@@ -630,7 +632,7 @@ const FIELD_COLUMNS = {
   'fees.smallPurchase.freePerMonth': 'Free small purchases a month',
   'fees.annualUsd': 'Annual fee $', 'fees.cardFeeUsd': 'Card activation fee $',
   'fees.physicalCardFeeUsd': 'Physical card cost $ (issuance + shipping)', 'fees.fxPct': 'FX fee %', 'fees.fxByCurrency': 'No-FX currencies', 'fees.topUpPct': 'Top-up fee %',
-  'fees.txPct': 'Fee on every purchase %', 'fees.txFlatUsd': 'Fee on every purchase $',
+  'fees.txPct': 'Fee on every purchase %', 'fees.txFlatUsd': 'Fee on every purchase $', 'fees.txMinUsd': 'Minimum fee per purchase $',
   'fees.smallPurchase.feeUsd': 'Small-purchase fee $', 'fees.smallPurchase.underUsd': 'Small purchase = under $',
   'coverage.countries': 'Number of countries', 'coverage.scope': 'Where it works',
   'coverage.markets.IN': 'India', 'coverage.markets.AE': 'UAE', 'coverage.markets.US': 'US', 'coverage.markets.GB': 'UK',

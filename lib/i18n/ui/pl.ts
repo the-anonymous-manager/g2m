@@ -18,6 +18,7 @@ export const uiPl: Ui = {
     notAvailable: 'Niedostępna',
     notConfirmed: 'Niepotwierdzone',
     notPublished: 'Nie opublikowano',
+    minFee: "min. {x}",
     free: 'Bezpłatnie',
     upTo: 'Do {x}',
     custodial: 'Powiernicza (środki u wydawcy)',

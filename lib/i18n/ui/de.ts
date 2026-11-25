@@ -18,6 +18,7 @@ export const uiDe: Ui = {
     notAvailable: 'Nicht verfügbar',
     notConfirmed: 'Nicht bestätigt',
     notPublished: 'Nicht veröffentlicht',
+    minFee: "mind. {x}",
     free: 'Kostenlos',
     upTo: 'Bis zu {x}',
     custodial: 'Verwahrung durch den Anbieter',

@@ -69,7 +69,7 @@ export function compareText(lang?: CompareLang) {
       const f = c.fees;
       const small = f.smallPurchase;
       const parts = [
-        f.txPct ? P(f.txPct) : null,
+        f.txPct ? `${P(f.txPct)}${f.txMinUsd ? ` (${fillText(ui.common.minFee, { x: M(f.txMinUsd) })})` : ''}` : null,
         f.txFlatUsd ? M(f.txFlatUsd) : null,
         small
           ? `${fillText(small.inclusive ? t.smallAtOrUnder : t.smallUnder, { fee: iso(fmt.usd(small.feeUsd)), limit: iso(fmt.usd(small.underUsd)) })}${small.foreignOnly ? t.nonUsd : ''}${
