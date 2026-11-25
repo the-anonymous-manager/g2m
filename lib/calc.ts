@@ -40,6 +40,11 @@ export const CalcInputSchema = z.object({
   year: z.coerce.number().int().min(1).max(2).catch(2),
   // Leaderboard: the best tier for this spend, or only the entry and free tiers.
   tiers: z.enum(['best', 'entry']).catch('best'),
+  // Money the visitor will keep with a card's company to reach a tier (an average balance, a portfolio, a deposit or
+  // a lock of US$-priced tokens), in US dollars. 0 = nothing: only tiers anyone gets, or pays a fee for. HOLD_ANY = no limit.
+  hold: z.coerce.number().finite().min(0).max(1_000_000_000).catch(0),
+  // Also tiers that ask for something other than money: trading volume, points, invites, VIP status, a stake counted
+  // in tokens, or criteria the issuer does not publish.
   all: flag,
   card: z.string().regex(/^[a-z0-9-]{1,60}$/).nullable().catch(null),
   // Compare tiers: up to three cards side by side (`cards=coca,tria,etherfi`), each with every tier or one tier picked by
@@ -70,6 +75,7 @@ export const DEFAULT_INPUT: CalcInput = {
   form: 'virtual',
   year: 2,
   tiers: 'best',
+  hold: 0,
   all: false,
   card: null,
   cards: [],
@@ -108,6 +114,7 @@ export function calcParams(input: CalcInput, country: string): URLSearchParams {
   if (input.year !== 2) p.set('year', String(input.year));
   if (input.mode === 'best' && input.tiers !== 'best') p.set('tiers', input.tiers);
   if (input.mode === 'best' && input.all) p.set('all', '1');
+  if (input.mode === 'best' && input.hold > 0) p.set('hold', String(input.hold));
   if (input.mode === 'tiers' && (input.cards.length > 1 || input.cards.some((c) => c.includes(':')))) p.set('cards', input.cards.join(','));
   else if (input.mode !== 'best' && input.card) p.set('card', input.card);
   if (input.mode === 'audit') p.set('tier', String(input.tier));
@@ -429,11 +436,82 @@ export function tierValue(
 // ---------- Mode 1: best card ----------
 
 /** Tiers shown by default: the entry tier, open tiers, and tiers you can simply pay for. */
-export function isOpenTier(tier: Tier, index: number): boolean {
+/** No limit on the money a visitor will hold (the "Any amount" choice). */
+export const HOLD_ANY = 1_000_000_000;
+/** The choices for "money you will keep with a card's company", in US dollars. */
+export const HOLD_STEPS = [0, 1000, 2500, 5000, 10000, 25000, 50000, 100000, 500000, HOLD_ANY];
+
+/** What one part of a tier's requirement asks for. */
+export type Need =
+  | { kind: 'ok' }
+  | { kind: 'fee' }
+  | { kind: 'hold'; usd: number }
+  | { kind: 'spend'; usd: number }
+  | { kind: 'other' };
+
+const FX_GUESS: Record<string, number> = { '€': 1.1, '£': 1.3 };
+/** The first amount of money in a text, in US dollars ("US$50,000", "€200", "$1M", "$15K"). */
+function moneyIn(s: string): number | null {
+  const m = s.match(/(US\$|\$|€|£)\s?([\d,]+(?:\.\d+)?)\s*(k|m)?\b/i);
+  if (!m) return null;
+  const n = Number(m[2].replace(/,/g, '')) * (m[3] ? (m[3].toLowerCase() === 'k' ? 1e3 : 1e6) : 1);
+  return Number.isFinite(n) ? n * (FX_GUESS[m[1]] ?? 1) : null;
+}
+
+/** One clause of a requirement ("$15K in Liquid", "spend $10,000 over 30 days", "30K ETHFI staked"). */
+function needOf(clause: string): Need {
+  const c = clause.trim().replace(/^(or|then|and)\s+/i, '');
+  if (!c) return { kind: 'ok' };
+  // Not money held: an ID check, a one-off load, where it can be used, a rule about cashback.
+  if (/identity verification|no id check|no minimum|one load of|merchants|shipping|cashback only/i.test(c)) return { kind: 'ok' };
+  if (/not published|amount shown/i.test(c)) return { kind: 'other' };
+  if (/^(US)?(\$|€|£)[\d,.]+\s*(k\b)?\s*(a year|a month|\/\s*(year|month)|per (year|month)|the first year)/i.test(c)) return { kind: 'fee' };
+  if (/trading volume|referral|invite|points|\bVIP\b|membership|credit approval/i.test(c)) return { kind: 'other' };
+  const usd = moneyIn(c);
+  if (usd != null && /\bspend/i.test(c)) return { kind: 'spend', usd };
+  if (usd != null && /balance|portfolio|assets|\bhold\b|\block\b|liquid|deposit|staked|average|\bin (USD|ENA)\b|\bof [A-Z]{2,}/i.test(c)) return { kind: 'hold', usd };
+  if (/% of it in/i.test(c)) return { kind: 'ok' };
+  if (/\b(stake|staked|lock|hold)\b|token/i.test(c)) return { kind: 'other' };
+  if (/^(free|every|all members|anyone|no subscription|no id check|email|identity verification|new users|card purchases funded with usdt)|residents|kyc/i.test(c)) return { kind: 'ok' };
+  return { kind: 'other' };
+}
+
+/**
+ * A tier's requirement as alternatives, each a list of things all needed. "A, B, C or D" lists alternatives (ether.fi:
+ * "$199/year, 5K points a month, $15K in Liquid or 30K ETHFI staked"); without "or", commas, semicolons and "and"
+ * join things all needed (Nexo: "$5,000+ portfolio, 1% of it in NEXO"; Hyperbeat: "Hold $10,000 in USD or USD+ and
+ * spend $10,000 over a rolling 30 days", where "or USD+" is not a new alternative).
+ */
+export function tierNeeds(tier: Pick<Tier, 'requirement' | 'stake'>): Need[][] {
+  const r = (tier.requirement ?? '').replace(/\([^)]*\)/g, ' ').trim();
+  if (!r) return [[tier.stake ? { kind: 'other' } : { kind: 'ok' }]];
+  const start = '(?=(?:US)?\\$|€|£|\\d|lock\\b|hold\\b|stake\\b|invite\\b|spend\\b|new users\\b)';
+  const orSplit = new RegExp(`\\s+or\\s+${start}`, 'i');
+  const alternatives = orSplit.test(r) ? r.split(/,\s+/).flatMap((part) => part.split(orSplit)) : [r];
+  return alternatives.map((alt) => alt.split(/;\s*|,\s+|\s+and\s+/i).map(needOf));
+}
+
+/**
+ * Whether a tier is open to this visitor: within the money they will hold, their monthly spend and, unless they tick
+ * "all", asking nothing but money. A starting tier's other conditions (a VIP level, a membership) belong to the card
+ * itself and don't hide it; money it asks to hold still counts (Nexo, Krak).
+ */
+export function tierAllowed(tier: Tier, index: number, input: Pick<CalcInput, 'hold' | 'all' | 'spend'>): boolean {
   if (tier.comingSoon) return false;
-  if (index === 0) return true;
-  if (!tier.requirement && !tier.stake) return true;
-  return Boolean(tier.requirement?.trim().startsWith('$'));
+  return tierNeeds(tier).some((alt) => {
+    const held = alt.reduce((s, n) => s + (n.kind === 'hold' ? n.usd : 0), 0);
+    if (held > input.hold) return false;
+    return alt.every((n) =>
+      n.kind === 'spend' ? input.spend >= n.usd : n.kind === 'other' ? input.all || index === 0 : true
+    );
+  });
+}
+
+/** The money a tier asks you to hold on its cheapest route, or 0 (fee or nothing), or null (only non-money routes). */
+export function tierHoldUsd(tier: Tier): number | null {
+  const routes = tierNeeds(tier).filter((alt) => alt.every((n) => n.kind !== 'other'));
+  if (!routes.length) return null;
+  return Math.min(...routes.map((alt) => alt.reduce((s, n) => s + (n.kind === 'hold' ? n.usd : 0), 0)));
 }
 
 /** The entry tier, and other tiers that are free with nothing to hold or qualify for. */
@@ -457,7 +535,7 @@ export function rankByValue(cards: CardRow[], input: CalcInput, country?: string
       const options = card.tiers
         .map((t, i) => ({ t, i }))
         .filter(({ t }) => !country || tierOffered(t, country))
-        .filter(({ t, i }) => (input.tiers === 'entry' ? isEntryTier(t, i) : input.all ? !t.comingSoon : isOpenTier(t, i)))
+        .filter(({ t, i }) => (input.tiers === 'entry' ? isEntryTier(t, i) : tierAllowed(t, i, input)))
         .map(({ t, i }) => tierValue(card, t, input, i, country));
       const fallback = card.tiers.find((t) => !country || tierOffered(t, country)) ?? card.tiers[0];
       const best = options.sort((a, b) => b.net - a.net)[0] ?? tierValue(card, fallback, input, card.tiers.indexOf(fallback), country);

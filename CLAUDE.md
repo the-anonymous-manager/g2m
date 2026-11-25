@@ -78,6 +78,11 @@ and confirm what changed on the site (not which files moved).
   regular sign-up bonus everywhere, marked "Limited time, until <date>" on the card page; the day after it ends the
   card page drops it and the sync removes it, so the regular bonus (or none) comes back by itself. Pair it with an
   Updates post (Type Offer or Bonus, Ends set) for the details.
+- Tier requirements (sheet Tiers "Requirement") are read as money to hold, a fee, a monthly spend or other conditions
+  (`tierNeeds` in `lib/calc.ts`): write them as "$2,000 average balance over 30 days", "$199/year", "Lock $2,000 in
+  ENA", "Hold $10,000 in USD and spend $10,000 over 30 days", alternatives as "A, B or C". The wallet builder and the
+  calculator use a tier only within "Money you will keep with a card company" (default nothing); trading volume,
+  points, invites and token-count stakes need the "Also include tiers..." box.
 - Scores and ranks are computed (`lib/score.ts`). Never edit a rank or score by hand, and never change
   a card's position because of a referral deal.
 - Run `npm run validate` and fix every error before committing.

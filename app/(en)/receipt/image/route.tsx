@@ -41,6 +41,7 @@ export async function GET(req: Request) {
   const r = swipeReceipt(row, tier, p.amt, cur, perUsd, { base: p.base, display: show, homeCurrency: p.home, cleared: p.cleared, total: p.total, rate: p.rate });
   const good = r.net >= 0;
   const color = good ? '#6fd39c' : '#f08a80';
+  if (tall) return tallReceipt({ card, tier, r, p, cur, show, handle, domain, fonts });
 
   return new ImageResponse(
     (
@@ -82,7 +83,7 @@ export async function GET(req: Request) {
                 <div key={l.key} style={{ display: 'flex', justifyContent: 'space-between', fontSize: tall ? 26 : 21, color: l.kind === 'fee' ? '#a3322a' : l.kind === 'reward' ? '#1f6b45' : '#1a1714' }}>
                   <span style={{ display: 'flex', maxWidth: tall ? 640 : 360 }}>
                     {l.kind === 'fee' ? '+ ' : l.kind === 'reward' ? '− ' : ''}
-                    {l.label.replace(/\s*\(.*\)$/, '')}
+                    {l.label.length <= 34 ? l.label : l.label.replace(/\s*\(.*\)$/, '')}
                   </span>
                   <span>{fmt(l.amount, show)}</span>
                 </div>,
@@ -157,5 +158,123 @@ export async function GET(req: Request) {
       fonts,
       headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=3600' }
     }
+  );
+}
+
+type Tall = {
+  card: { name: string };
+  tier: { name: string };
+  r: ReturnType<typeof swipeReceipt>;
+  p: ReturnType<typeof parseReceiptParams>;
+  cur: string;
+  show: string;
+  handle: string;
+  domain: string;
+  fonts: Awaited<ReturnType<typeof ogFontsRuntime>>;
+};
+
+const INK = '#1a1714';
+const MUTED = '#6b625a';
+const FEE = '#a3322a';
+const GAIN = '#1f6b45';
+const RULE = '2px dashed #cdbfb3';
+const pctText = (n: number) => `${n.toFixed(2)}%`;
+
+/**
+ * "Download image" (1080 x 1350): the same receipt as on the page, line by line with each fee's and the cashback's
+ * full description, the totals, the result, the advertised rate and how it was matched, plus the fees and cashback as
+ * a share of the price and the date (Akash, 25 Nov 2026: "the one we show on the website is really good, need the same
+ * with added details").
+ */
+function tallReceipt({ card, tier, r, p, cur, show, handle, domain, fonts }: Tall) {
+  const good = r.net >= 0;
+  const price = r.lines[0]?.amount ?? p.amt;
+  const fees = r.lines.filter((l) => l.kind === 'fee').reduce((s, l) => s + l.amount, 0);
+  const today = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }).format(new Date());
+  const notes = [
+    r.headlinePct != null ? `Advertised: up to ${r.headlinePct}% back` : null,
+    r.mode !== 'live' ? `Matched to your app${r.impliedRate ? ` · 1 ${r.base} = ${fmt(r.impliedRate, cur)} before FX` : ''}` : r.foreign ? 'Live mid-market rate; your card\'s rate on the day can differ by a few cents' : null,
+    ...r.notes
+  ].filter(Boolean) as string[];
+  const line = (key: string, label: string, amount: string, color: string, size = 29, bold = false) => (
+    <div key={key} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 24, fontSize: size, color, fontWeight: bold ? 700 : 400 }}>
+      <span style={{ display: 'flex', flex: 1, lineHeight: 1.3 }}>{label}</span>
+      <span style={{ display: 'flex', lineHeight: 1.3 }}>{amount}</span>
+    </div>
+  );
+  return new ImageResponse(
+    (
+      <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', background: '#0a0a0c', color: '#f7f5f0', fontFamily: 'Inter' }}>
+        <div style={{ display: 'flex', height: 8, backgroundImage: ROSE }} />
+        <div style={{ display: 'flex', flex: 1, flexDirection: 'column', justifyContent: 'center', padding: '40px 44px 24px' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '40px 44px',
+              borderRadius: 26,
+              background: '#f7f5f0',
+              color: INK,
+              border: '3px solid #c9806b',
+              gap: 14
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 23, letterSpacing: 3, color: '#9a5340', textTransform: 'uppercase' }}>
+              <span>[ swipe receipt ]</span>
+              <span>{card.name.length > 26 ? `${card.name.slice(0, 25)}…` : card.name}</span>
+            </div>
+            <div style={{ display: 'flex', fontSize: 24, color: MUTED }}>
+              {p.what} · {tier.name} · {r.base} card · paid in {cur} · {today}
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', borderTop: RULE, paddingTop: 16, gap: 12 }}>
+              {r.lines.flatMap((l) => [
+                line(
+                  l.key,
+                  `${l.kind === 'fee' ? '+ ' : l.kind === 'reward' ? '− ' : ''}${l.label}`,
+                  fmt(l.amount, show),
+                  l.kind === 'fee' ? FEE : l.kind === 'reward' ? GAIN : INK
+                ),
+                ...(l.key === 'fx' ? [line('cleared', '= Cleared (price + FX)', fmt(r.cleared, show), MUTED, 24)] : [])
+              ])}
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', borderTop: RULE, paddingTop: 16, gap: 10 }}>
+              {line('paid', 'Paid at the till', fmt(r.totalPaid, show), INK, 31, true)}
+              {line('real', 'Real cost after cashback', fmt(r.totalPaid - r.cashback, show), INK, 31, true)}
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', borderTop: RULE, paddingTop: 16, gap: 8 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', color: good ? GAIN : FEE }}>
+                <span style={{ display: 'flex', fontSize: 112, fontWeight: 800, letterSpacing: -3, lineHeight: 1 }}>
+                  {good ? '+' : '−'}
+                  {Math.abs(r.netPct).toFixed(2)}%
+                </span>
+                <span style={{ display: 'flex', fontSize: 34, fontWeight: 700 }}>{good ? `You keep ${fmt(r.net, show)}` : `Costs you ${fmt(-r.net, show)} more`}</span>
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 28, rowGap: 6, fontSize: 24, color: MUTED }}>
+                <span>Fees {fmt(fees, show)} ({pctText(price > 0 ? (fees / price) * 100 : 0)} of the price)</span>
+                <span>Cashback {fmt(r.cashback, show)} ({pctText(price > 0 ? (r.cashback / price) * 100 : 0)})</span>
+              </div>
+              {notes.map((n, i) => (
+                <div key={i} style={{ display: 'flex', fontSize: 22, color: MUTED, lineHeight: 1.35 }}>
+                  {n}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '22px 64px 84px', borderTop: '1px solid #2a2622', fontSize: 26 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <svg width="26" height="26" viewBox="0 0 24 24">
+              <path fill="#f7f5f0" d="M18.9 2H22l-6.8 7.8L23 22h-6.2l-4.9-6.4L6.3 22H3.2l7.3-8.3L1 2h6.3l4.4 5.9L18.9 2Zm-1.1 18h1.7L6.3 3.9H4.5L17.8 20Z" />
+            </svg>
+            <span>{handle}</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+            <OgLogo size={40} />
+            <span style={{ fontWeight: 700 }}>{domain}/receipt</span>
+          </div>
+        </div>
+      </div>
+    ),
+    { ...TALL, fonts, headers: { 'Cache-Control': 'public, max-age=3600, s-maxage=3600' } }
   );
 }
