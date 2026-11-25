@@ -18,6 +18,9 @@ export const imageFile = (slug, source) =>
 class CellError extends Error {}
 
 const str = (v) => (v ?? '').toString().trim();
+// A Card ID typed on the other tabs (Sponsor, Picks, Updates, Tiers, Sources ...) matches the Cards tab whatever its
+// capital letters: "Solid" on the Sponsor tab is the card "solid" (card IDs are always lower case).
+const cardId = (v) => str(v).toLowerCase();
 const lines = (v) =>
   str(v)
     .split(/\r?\n/)
@@ -330,7 +333,7 @@ export function tablesToCards(tables, previous = null, today = null) {
   const slugs = new Set(cardRows.map((r) => str(r.get('Card ID'))));
   const owned = (tab, rows) =>
     rows.filter((r) => {
-      const id = str(r.get('Card ID'));
+      const id = cardId(r.get('Card ID'));
       if (slugs.has(id)) return true;
       errors.push(`${tab} row ${r.row}: no card with Card ID "${id}" on the Cards tab.`);
       return false;
@@ -397,7 +400,7 @@ export function tablesToCards(tables, previous = null, today = null) {
     const market = (col) => str(r.get(col)).toLowerCase();
     const smallFee = n('Small-purchase fee $');
     const smallUnder = n('Small purchase = under $');
-    const list = listRows.find((l) => str(l.get('Card ID')) === slug);
+    const list = listRows.find((l) => cardId(l.get('Card ID')) === slug);
     return {
       slug,
       name: str(r.get('Name')),
@@ -440,7 +443,7 @@ export function tablesToCards(tables, previous = null, today = null) {
         atm: str(r.get('ATM')) || null,
         other: lines(r.get('Other fees'))
       },
-      tiers: tierRows.filter((t) => str(t.get('Card ID')) === slug).map(tier),
+      tiers: tierRows.filter((t) => cardId(t.get('Card ID')) === slug).map(tier),
       coverage: {
         countries: n('Number of countries'),
         scope: str(r.get('Where it works')),
@@ -469,7 +472,7 @@ export function tablesToCards(tables, previous = null, today = null) {
       cons: lines(r.get('Cons')),
       links: { official: str(r.get('Official link')), affiliate: optText(r.get('Referral link')) },
       sources: sourceRows
-        .filter((s) => str(s.get('Card ID')) === slug)
+        .filter((s) => cardId(s.get('Card ID')) === slug)
         .map((s) => ({ label: str(s.get('Label')), url: str(s.get('Link')), verified: optText(s.get('Verified on')) })),
       lastChecked: str(r.get('Last checked')),
       addedOn: previous ? (listed.has(slug) ? listed.get(slug) : (today ?? undefined)) : undefined,
@@ -484,7 +487,7 @@ export function tablesToCards(tables, previous = null, today = null) {
     sponsorKind === '' || sponsorKind === 'featured' || sponsorKind === 'sponsored' ? 'sponsored' : sponsorKind === 'our pick' || sponsorKind === 'pick' ? 'pick' : null;
   if (!sponsorType) errors.push('Sponsor, column "Type": use "Featured" (paid) or "Our pick".');
   const sponsor = {
-    slug: s ? str(s.get('Card ID')) || null : null,
+    slug: s ? cardId(s.get('Card ID')) || null : null,
     start: s ? str(s.get('Start')) || null : null,
     end: s ? str(s.get('End')) || null : null,
     type: sponsorType ?? 'sponsored'
@@ -499,7 +502,7 @@ export function tablesToCards(tables, previous = null, today = null) {
     const kind = str(r.get('Type')).toLowerCase();
     const type = kind === 'featured' || kind === 'sponsored' ? 'sponsored' : kind === '' || kind === 'our pick' || kind === 'pick' ? 'pick' : null;
     if (!type) errors.push(`Picks row ${r.row}, column "Type": use "Our pick" or "Featured".`);
-    return { slot, slug: str(r.get('Card ID')), type: type ?? 'pick', note: optText(r.get('Why (one line)')) ?? null, start: str(r.get('Start')) || null, end: str(r.get('End')) || null };
+    return { slot, slug: cardId(r.get('Card ID')), type: type ?? 'pick', note: optText(r.get('Why (one line)')) ?? null, start: str(r.get('Start')) || null, end: str(r.get('End')) || null };
   });
 
   const iso = /^\d{4}-\d{2}-\d{2}$/;
@@ -511,7 +514,7 @@ export function tablesToCards(tables, previous = null, today = null) {
     const title = str(r.get('Title'));
     if (!title) at('Title', 'every post needs a title.');
     else if (title.length > 120) at('Title', 'keep the title under 120 characters.');
-    const card = str(r.get('Card ID')) || null;
+    const card = cardId(r.get('Card ID')) || null;
     if (card && !slugs.has(card)) at('Card ID', `no card with Card ID "${card}" on the Cards tab (leave it empty for news that is not about one card).`);
     const kind = str(r.get('Type')).toLowerCase();
     const type = kind === '' || kind === 'news' || kind === 'update' ? 'news' : kind === 'offer' ? 'offer' : kind === 'bonus' ? 'bonus' : null;

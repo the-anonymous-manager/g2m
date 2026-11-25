@@ -618,6 +618,21 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   (https://www.youtube.com/@g2mcrypto) and Telegram (https://t.me/Akash773), and the home page's Organization sameAs
   lists all three for search engines. Settings: NEXT_PUBLIC_YOUTUBE_URL, NEXT_PUBLIC_TELEGRAM_HANDLE (`socialLinks()` in
   `lib/site.ts`); an empty setting hides that link.
+- Updates sweep (25 Nov 2026, Akash: "full new updates"). New posts: Kite Black Friday (20% back, up to $20, first 100
+  users, 23 Nov to 12 Dec, $10+ at listed shops), Nexo Black Friday ($25 in NEXO after $100 of card spending by 1 Dec,
+  one per client; on Nexo's EEA card page and its X post, full terms not published), Bybit's November prize draws
+  (every draw wins, Black Friday boost 27 to 30 Nov, not for EEA residents) and Bitget Wallet Card launching in Nigeria
+  (Bitget Wallet blog; its help page still lists 52 countries without NG, so Nigeria is added from the blog: 53
+  countries). All open to every cardholder, so none is worded as link-only and none is a limited-time bonus. Checked
+  with nothing new for the site: Bitget's Pioneer Challenge (rewards the inviter only), Kite's $5 referral (inviter
+  only), Hyperbeat, Infini, Jupiter, PEXX, Tuyo. Not confirmed on an issuer page: Tria EUR bank deposits and a
+  "Plasma One Lite" tier.
+  Akash then spotted Ethena Pay's Black Friday offer, missed because the sweep looked mainly at referral cards (check
+  every card next time): 50% back in AVAX on the first $200, up to $100, 27 to 30 Nov (UTC+8), all cardholders, limited
+  budget, plus a Weekend Draw (ten winners get their 4-day card spending back, up to $1,000). Source: pay.ethena.fi/promotions.
+- Sheet sync fix (25 Nov 2026): the Sponsor tab said "Solid" with a capital S, so the hourly sync stopped with "no card
+  with Card ID" and nothing reached the site. Card IDs on every tab except Cards now match whatever their capital
+  letters (`cardId` in `scripts/sheet-format.mjs`), and the cell was changed to "solid".
 - Bleap sign-up countries (22 Nov 2026, Akash, from the Bleap app): the 54 countries the app offers at sign-up (pick a
   country, phone number from it) are saved in `docs/research/bleap-signup-countries.json`. Akash confirmed it by signing up ("this is valid
   country list"), so it is now Bleap's country list on the site (source: checked in the app by G2M), replacing the

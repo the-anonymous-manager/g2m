@@ -159,7 +159,7 @@
       { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 2 },
       { "name": "Boosted", "feeUsdYear": 0, "cashbackPct": 3, "requirement": "New users, or $200 to $400 of card spending a month" }
     ],
-    "coverage": { "countries": 52, "scope": "EEA, UK, Latin America, Asia-Pacific and South Africa", "examples": ["United Kingdom", "Germany", "Brazil", "Japan", "South Korea", "South Africa"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AR", "AT", "AU", "BD", "BE", "BG", "BR", "CL", "CO", "CY", "CZ", "DE", "DK", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HR", "HU", "IE", "IS", "IT", "JP", "KR", "LI", "LT", "LU", "LV", "MT", "MX", "MY", "NL", "NO", "PA", "PE", "PH", "PK", "PL", "PT", "RO", "SE", "SI", "SK", "SV", "TH", "TW", "VN", "ZA"], "others": "no" } },
+    "coverage": { "countries": 53, "scope": "EEA, UK, Latin America, Asia-Pacific, South Africa and Nigeria", "examples": ["United Kingdom", "Germany", "Brazil", "Japan", "South Korea", "South Africa"], "markets": { "IN": "no", "AE": "no", "US": "no", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AR", "AT", "AU", "BD", "BE", "BG", "BR", "CL", "CO", "CY", "CZ", "DE", "DK", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HR", "HU", "IE", "IS", "IT", "JP", "KR", "LI", "LT", "LU", "LV", "MT", "MX", "MY", "NG", "NL", "NO", "PA", "PE", "PH", "PK", "PL", "PT", "RO", "SE", "SI", "SK", "SV", "TH", "TW", "VN", "ZA"], "others": "no" } },
     "ecosystem": { "iban": "named", "payoutCorridors": 3, "ramps": "both", "credit": false, "yield": true },
     "bankRails": [ { "rail": "USD_ACH", "in": true, "out": false, "fee": "deposit fee" }, { "rail": "USD_WIRE", "in": true, "out": false, "fee": "deposit fee" }, { "rail": "SWIFT", "in": true, "out": false, "fee": "deposit fee" }, { "rail": "EUR_SEPA", "in": true, "out": false, "fee": "deposit fee" }, { "rail": "ARS_BANK", "in": true, "out": false }, { "rail": "MXN_SPEI", "in": true, "out": true }, { "rail": "NGN_BANK", "in": false, "out": true }, { "rail": "PKR_BANK", "in": false, "out": true } ],
     "bankForNonResidents": true,
@@ -187,9 +187,10 @@
       { "label": "Bitget Wallet Help: Top-up FAQ (Europe, Africa, and LATAM)", "url": "https://web3.bitget.com/helpCenter/281", "verified": "2026-10-25" },
       { "label": "Bitget Wallet app: Referral Center and Card rebate screens (checked in the app by G2M)", "url": "https://web3.bitget.com/en/blog/articles/card-referral-program", "verified": "2026-11-03" },
       { "label": "Bitget Wallet: card page (re-checked; up to 3% assetback, no annual fee)", "url": "https://web3.bitget.com/card", "verified": "2026-11-19" },
-      { "label": "Bitget Wallet blog: card referral program (re-checked)", "url": "https://web3.bitget.com/en/blog/articles/card-referral-program", "verified": "2026-11-19" }
+      { "label": "Bitget Wallet blog: card referral program (re-checked)", "url": "https://web3.bitget.com/en/blog/articles/card-referral-program", "verified": "2026-11-19" },
+      { "label": "Bitget Wallet blog: card now live in Nigeria", "url": "https://web3.bitget.com/en/blog/articles/bitget-wallet-card-nigeria", "verified": "2026-11-25" }
     ],
-    "lastChecked": "2026-11-19",
+    "lastChecked": "2026-11-25",
     "metal": "champagne",
     "image": { "source": "https://g2m.life/card-originals/bitget-wallet.webp", "file": "/card-images/bitget-wallet-2c1c2ddc.webp" }
   },
@@ -892,9 +893,10 @@
       { "label": "Ethena Pay: home page (Daily Boost yield, cashback paid in AVAX)", "url": "https://pay.ethena.fi/", "verified": "2026-10-24" },
       { "label": "Ethena Pay blog: Introducing Ethena Pay", "url": "https://pay.ethena.fi/blog/introducing-ethena-pay", "verified": "2026-10-25" },
       { "label": "Ethena Pay Terms of Use", "url": "https://pay.ethena.fi/terms", "verified": "2026-10-25" },
-      { "label": "Ethena Pay pricing (updated 30 Sep 2026)", "url": "https://pay.ethena.fi/pricing", "verified": "2026-11-19" }
+      { "label": "Ethena Pay pricing (updated 30 Sep 2026)", "url": "https://pay.ethena.fi/pricing", "verified": "2026-11-19" },
+      { "label": "Ethena Pay: Promotion Terms (Black Friday Offer)", "url": "https://pay.ethena.fi/promotions", "verified": "2026-11-25" }
     ],
-    "lastChecked": "2026-11-19",
+    "lastChecked": "2026-11-25",
     "metal": "gold",
     "image": { "source": "https://g2m.life/card-originals/ethena-pay-flat.png", "file": "/card-images/ethena-pay-1976e765.webp" }
   },
