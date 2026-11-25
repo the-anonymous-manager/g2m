@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og';
-import { getCard, getCards, getRank } from '@/lib/cards';
+import { getCardPage, getCards, getRank } from '@/lib/cards';
 import { cashbackLabel, pct, usd } from '@/lib/format';
 import { METAL_BG, OG_SIZE, OgLogo, ROSE, ogFontsRuntime } from '@/lib/og';
 import { absoluteUrl } from '@/lib/site';
@@ -23,7 +23,7 @@ async function photoDataUrl(url: string): Promise<string | null> {
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const card = getCard(slug);
+  const card = getCardPage(slug);
   const total = getCards().length;
   if (!card) {
     return new ImageResponse(<div style={{ display: 'flex', width: '100%', height: '100%', background: '#0a0a0c' }} />, size);
@@ -61,7 +61,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <span style={{ fontSize: 22, color: '#e8a68f', letterSpacing: 2 }}>
-              #{getRank(card.slug)} OF {total} CRYPTO CARDS
+              {card.closed ? 'THIS CARD HAS CLOSED' : `#${getRank(card.slug)} OF ${total} CRYPTO CARDS`}
             </span>
             <span style={{ fontSize: 64, fontWeight: 800, lineHeight: 1.05, maxWidth: 640 }}>{card.name}</span>
             <div style={{ display: 'flex', gap: 28, marginTop: 10 }}>

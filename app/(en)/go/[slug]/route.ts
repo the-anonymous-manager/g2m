@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { getCard, guessCard } from '@/lib/cards';
+import { getCard, getCardPage, guessCard } from '@/lib/cards';
 import { site } from '@/lib/site';
 import { afterResponse, record } from '@/lib/stats/server';
 
@@ -11,6 +11,9 @@ const CAMPAIGNS = new Set(['sponsored']);
 export async function GET(req: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const card = getCard(slug);
+  // A closed card has nothing to sign up for: its button goes to its own page (marked closed, with alternatives).
+  const closed = card ? null : getCardPage(slug);
+  if (closed) return NextResponse.redirect(new URL(`/cards/${closed.slug}`, req.url), 302);
   if (!card) {
     // A cut-off link (e.g. "/go/ethena-pa=" from an email) still reaches the one card it can mean, counted there.
     const guess = guessCard(slug);

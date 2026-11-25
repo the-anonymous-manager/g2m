@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getCard } from '@/lib/cards';
+import { getCardPage } from '@/lib/cards';
 import { getUpdate, getUpdates, intlUpdate, isTranslated, updateJsonLd, updatePath } from '@/lib/updates';
 import { LOCALES, languageLinks } from '@/lib/i18n/locales';
 import { absoluteUrl, metaDescription, metaTitle, shareMeta } from '@/lib/site';
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: path,
       languages: languageLinks(path, (l) => intlUpdate(l, u.slug), LOCALES.filter((l) => isTranslated(u, l)))
     },
-    ...shareMeta(u.title, u.summary, path, u.card && getCard(u.card) ? `/cards/${u.card}/opengraph-image` : undefined)
+    ...shareMeta(u.title, u.summary, path, u.card && getCardPage(u.card) ? `/cards/${u.card}/opengraph-image` : undefined)
   };
 }
 

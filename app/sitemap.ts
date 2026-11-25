@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { getCards, lastUpdated } from '@/lib/cards';
+import { getCards, getClosedCards, lastUpdated } from '@/lib/cards';
 import { absoluteUrl } from '@/lib/site';
 import { allPairs, versusPath } from '@/lib/versus';
 import { FEES_GUIDE, TOPICS, countryGuidePath, countryGuides, countrySlug } from '@/lib/guides';
@@ -17,7 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'weekly' as const,
     priority: p === '/' ? 1 : p === '/cards' ? 0.9 : 0.6
   }));
-  const cards = getCards().map((c) => ({
+  // Closed cards keep their pages (marked closed); they have no alternatives, referral or "X vs Y" pages.
+  const cards = [...getCards(), ...getClosedCards()].map((c) => ({
     url: absoluteUrl(`/cards/${c.slug}`),
     lastModified: new Date(`${c.lastChecked}T00:00:00Z`),
     changeFrequency: 'weekly' as const,
@@ -62,7 +63,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       .map((c) => ({ url: absoluteUrl(intlReferral(l, c.slug)), lastModified: new Date(`${c.lastChecked}T00:00:00Z`), changeFrequency: 'weekly' as const, priority: 0.5 })),
     ...topPairs.map((pair) => ({ url: absoluteUrl(intlVersus(l, pair)), lastModified: updated, changeFrequency: 'weekly' as const, priority: 0.4 })),
     { url: absoluteUrl(intlHome(l)), lastModified: updated, changeFrequency: 'weekly' as const, priority: 0.8 },
-    ...getCards().map((c) => ({
+    ...[...getCards(), ...getClosedCards()].map((c) => ({
       url: absoluteUrl(intlCard(l, c.slug)),
       lastModified: new Date(`${c.lastChecked}T00:00:00Z`),
       changeFrequency: 'weekly' as const,

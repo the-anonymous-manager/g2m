@@ -630,6 +630,24 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   Akash then spotted Ethena Pay's Black Friday offer, missed because the sweep looked mainly at referral cards (check
   every card next time): 50% back in AVAX on the first $200, up to $100, 27 to 30 Nov (UTC+8), all cardholders, limited
   budget, plus a Weekend Draw (ten winners get their 4-day card spending back, up to $1,000). Source: pay.ethena.fi/promotions.
+  Then a Black Friday check of all 40 cards (Akash: "check for all cards"). New posts: Tangem Pay (an extra 25% cashback
+  20 to 29 Nov, capped at $15; promo.tangem.com/en/blackfriday2026; its main Tangem Pay page says 24 to 29 Nov, the post
+  says so; plus the 50% subscriptions cashback to 30 Nov), Bitget Wallet physical card ($25 instead of $49 to 31 Dec;
+  $15 after $100 of spending to 30 Nov for first-time physical card applicants; Bitget's separate "Bitget2026" code
+  event is left out because it needs Bitget's own referral code) and MEXC Card closed (18 Nov 2026, MEXC's own notice;
+  balances to Spot accounts). MEXC is still listed and ranked: removing it is Akash's call. Nothing for Black Friday
+  found for the other cards (Crypto.com, Coinbase One, RedotPay, MetaMask, Wirex, Plasma, Tria, Solid, Oobit, Bleap,
+  Jupiter, Hyperbeat, Infini, PEXX, Tuyo, Avalanche, Avici, Exa, Solayer, Kolo, Cashi, Laso, OrbitX, DogPay, SolCard,
+  XPlace, Karta, Pionex); Kraken's Black Friday bonus is for exchange deposits and trades, not the Krak card. Leads not
+  yet checked on issuer pages: Tria cashback now paid as TLP points, Tria and Noah EUR currency accounts.
+- Closed cards (25 Nov 2026, Akash: "keep mexc with closed"). New Cards column "Closed on" (`closed`, set for MEXC to
+  2026-11-18). `lib/cards.ts` ranks and lists open cards only; `getCardPage()` also finds closed ones for their own page
+  (both languages' card pages, share image, Updates posts). The card page shows a "Closed" badge in place of the rank,
+  a notice with the date, six "Cards to use instead", and no Get the card, referral box, country standing, "X vs Y"
+  links or swipe receipt. `/go/<slug>` and the old alternatives, referral-code and "X vs Y" addresses (every language)
+  redirect to the card page (next.config.mjs `closedPages`). The sitemap keeps the card page. Words: closedBadge,
+  closedTitle, closedText, closedSee in the card packs (Claude's translations). Ranks of the cards below MEXC move up
+  one place, since MEXC is no longer counted.
 - Sheet sync fix (25 Nov 2026): the Sponsor tab said "Solid" with a capital S, so the hourly sync stopped with "no card
   with Card ID" and nothing reached the site. Card IDs on every tab except Cards now match whatever their capital
   letters (`cardId` in `scripts/sheet-format.mjs`), and the cell was changed to "solid".

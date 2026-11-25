@@ -198,7 +198,7 @@ export function cardFaqs(card: Card, locale?: Locale): { q: string; a: string }[
       a: card.noIdCheck.toLowerCase() === 'yes' ? t.aNoIdYes : fill(t.aNoIdPart, { x: c.tx(card.noIdCheck) })
     });
   }
-  if (card.links.affiliate && card.signupBonus) {
+  if (card.links.affiliate && card.signupBonus && !card.closed) {
     out.push({ q: fill(t.qBonus, { name }), a: fill(t.aBonus, { bonus: c.tx(card.signupBonus) }) });
   }
   return out;
@@ -290,7 +290,8 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
   const tag = locale?.tag;
 
   // Alternatives: the best-scored cards that are available in at least one of the same confirmed markets.
-  const alternatives = alternativesTo(card, all, 3);
+  // A closed card shows more of them: they are what its visitors need now.
+  const alternatives = alternativesTo(card, all, card.closed ? 6 : 3);
 
   // Head-to-head pages: the cards ranked nearest to this one, then the top of the rankings.
   const others = all.filter((x) => x.slug !== card.slug);
@@ -340,7 +341,11 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
         <div style={{ flex: '1 1 420px', minWidth: 0 }} className="stack">
           <div className="stack" style={{ gap: 16 }}>
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
-              <span className="badge badge-accent">{fill(t.rankOf, { rank, n: all.length })}</span>
+              {card.closed ? (
+                <span className="badge badge-no">{t.closedBadge}</span>
+              ) : (
+                <span className="badge badge-accent">{fill(t.rankOf, { rank, n: all.length })}</span>
+              )}
               <span className="badge badge-unknown">{card.network}</span>
               <span className="badge badge-unknown">{typeLabel}</span>
               <span className={`badge ${card.custody === 'self-custodial' || card.custody === 'both' ? 'badge-accent' : 'badge-unknown'}`}>{custodyLabel}</span>
@@ -356,6 +361,20 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
             <p className="lead">
               <Tx s={card.summary} />
             </p>
+            {card.closed ? (
+              <div className="panel panel-pad card-closed stack" role="note" style={{ gap: 10 }}>
+                <b>{fill(t.closedTitle, { name: card.name })}</b>
+                <p className="muted" style={{ margin: 0 }}>
+                  {fill(t.closedText, { brand: card.brand, date: c.date(card.closed) })}
+                </p>
+                {alternatives.length ? (
+                  <a href="#alts" className="btn btn-metal" style={{ alignSelf: 'flex-start' }}>
+                    {t.closedSee}
+                  </a>
+                ) : null}
+              </div>
+            ) : null}
+            {card.closed ? null : (
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
               <OutboundLink slug={card.slug} name={card.brand} placement={english ? 'card-hero' : `intl-${locale!.code}-card-hero`}>
                 {fill(t.getBrand, { brand: card.brand })}
@@ -364,7 +383,8 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
                 {t.compare}
               </Link>
             </div>
-            {card.links.affiliate ? (
+            )}
+            {card.links.affiliate && !card.closed ? (
               <ReferralBox
                 slug={card.slug}
                 brand={card.brand}
@@ -374,7 +394,7 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
                 words={english ? undefined : t}
               />
             ) : null}
-            {hasReferralPage(card) ? (
+            {hasReferralPage(card) && !card.closed ? (
               <Link href={c.href.referral(card.slug)} className="muted" style={{ fontSize: 14 }}>
                 {fill(card.referralCode ? t.refHowCode : t.refHowLink, { brand: card.brand })}
               </Link>
@@ -465,7 +485,7 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
               <span style={{ fontSize: 16 }}>/100</span>
             </span>
           </div>
-          <CountryStanding standings={standings(card.slug)} words={english ? undefined : t} prefix={c.prefix} countryNames={countryNames} />
+          {card.closed ? null : <CountryStanding standings={standings(card.slug)} words={english ? undefined : t} prefix={c.prefix} countryNames={countryNames} />}
           <div className="breakdown">
             {breakdown.map((b) => (
               <div className="breakdown-row" key={b.label}>
@@ -644,7 +664,8 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
         </div>
       </section>
 
-      {/* One purchase, line by line */}
+      {/* One purchase, line by line (not for a closed card: the receipt tool lists open cards only) */}
+      {card.closed ? null : (
       <section id="receipt" aria-labelledby="receipt-title" className="stack" style={{ gap: 14, scrollMarginTop: 90 }}>
         <div className="stack" style={{ gap: 4 }}>
           <h2 id="receipt-title" className="h3">
@@ -662,6 +683,7 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
           </span>
         </Link>
       </section>
+      )}
 
       <div className="grid-2">
         <section className="panel panel-pad stack" style={{ gap: 14 }} aria-labelledby="good">
@@ -772,7 +794,8 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
         </p>
       </section>
 
-      {/* Head-to-head pages */}
+      {/* Head-to-head pages (none for a closed card: its "X vs Y" pages are gone) */}
+      {card.closed ? null : (
       <section className="stack" style={{ gap: 14 }} aria-labelledby="versus">
         <h2 id="versus" className="h3">
           {fill(t.compareWith, { name: card.name })}
@@ -785,17 +808,20 @@ export async function CardReview({ card, locale }: { card: Card; locale?: Locale
           ))}
         </div>
       </section>
+      )}
 
       {/* Alternatives */}
       {alternatives.length ? (
         <section className="stack" style={{ gap: 14 }} aria-labelledby="alts">
           <div className="pager">
             <h2 id="alts" className="h3">
-              {t.alsoWorth}
+              {card.closed ? t.closedSee : t.alsoWorth}
             </h2>
-            <Link href={c.href.alternatives(card.slug)} className="muted" style={{ fontSize: 15 }}>
-              {fill(t.allAlts, { brand: card.brand })}
-            </Link>
+            {card.closed ? null : (
+              <Link href={c.href.alternatives(card.slug)} className="muted" style={{ fontSize: 15 }}>
+                {fill(t.allAlts, { brand: card.brand })}
+              </Link>
+            )}
           </div>
           <div className="grid-3">
             {alternatives.map((a) => (

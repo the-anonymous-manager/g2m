@@ -188,7 +188,8 @@
       { "label": "Bitget Wallet app: Referral Center and Card rebate screens (checked in the app by G2M)", "url": "https://web3.bitget.com/en/blog/articles/card-referral-program", "verified": "2026-11-03" },
       { "label": "Bitget Wallet: card page (re-checked; up to 3% assetback, no annual fee)", "url": "https://web3.bitget.com/card", "verified": "2026-11-19" },
       { "label": "Bitget Wallet blog: card referral program (re-checked)", "url": "https://web3.bitget.com/en/blog/articles/card-referral-program", "verified": "2026-11-19" },
-      { "label": "Bitget Wallet blog: card now live in Nigeria", "url": "https://web3.bitget.com/en/blog/articles/bitget-wallet-card-nigeria", "verified": "2026-11-25" }
+      { "label": "Bitget Wallet blog: card now live in Nigeria", "url": "https://web3.bitget.com/en/blog/articles/bitget-wallet-card-nigeria", "verified": "2026-11-25" },
+      { "label": "Bitget: Physical Card 50% off plus a $15 reward", "url": "https://www.bitget.com/support/articles/12560603899047", "verified": "2026-11-25" }
     ],
     "lastChecked": "2026-11-25",
     "metal": "champagne",
@@ -552,6 +553,7 @@
     "bankForNonResidents": true,
     "kycRule": "residency_id",
     "restrictedPassports": [],
+    "closed": "2026-11-18",
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDT"],
     "perks": [],
@@ -572,9 +574,10 @@
       { "label": "MEXC Help: What Documents Do I Need for KYC Verification? (2026-03-28)", "url": "https://www.mexc.co/announcements/article/17827791519719", "verified": "2026-10-25" },
       { "label": "MEXC Learn: MEXC Card supported countries, restricted regions and KYC", "url": "https://www.mexc.co/learn/article/mexc-card-supported-countries-restricted-regions-what-kyc-actually-requires/1", "verified": "2026-10-25" },
       { "label": "MEXC User Agreement: Prohibited Jurisdictions (13 Oct 2026)", "url": "https://www.mexc.co/terms", "verified": "2026-10-25" },
-      { "label": "MEXC Card page", "url": "https://www.mexc.co/buy-crypto/mexc-card", "verified": "2026-11-19" }
+      { "label": "MEXC Card page", "url": "https://www.mexc.co/buy-crypto/mexc-card", "verified": "2026-11-19" },
+      { "label": "MEXC: Global Card Service Discontinuation Notice", "url": "https://www.mexc.com/announcements/article/mexc-global-card-service-discontinuation-notice-17827791539800", "verified": "2026-11-25" }
     ],
-    "lastChecked": "2026-11-19",
+    "lastChecked": "2026-11-25",
     "metal": "gunmetal",
     "image": { "source": "https://g2m.life/card-originals/mexc.png", "file": "/card-images/mexc-32c9e8e8.webp" }
   },
@@ -853,9 +856,10 @@
       { "label": "Tangem Pay page FAQ", "url": "https://tangem.com/en/tangem-pay/", "verified": "2026-11-15" },
       { "label": "Tangem Help Center: Getting Started & KYC", "url": "https://tangem.com/en/help-center/tangem-pay-getting-started-kyc/", "verified": "2026-10-25" },
       { "label": "Tangem Pay page FAQ (use the card with Apple Pay and Google Pay)", "url": "https://tangem.com/en/tangem-pay/", "verified": "2026-11-15" },
-      { "label": "Tangem Pay page: tiers, caps, ATM fees and Plus waiver", "url": "https://tangem.com/en/tangem-pay/", "verified": "2026-11-19" }
+      { "label": "Tangem Pay page: tiers, caps, ATM fees and Plus waiver", "url": "https://tangem.com/en/tangem-pay/", "verified": "2026-11-19" },
+      { "label": "Tangem: Tangem Pay Black Friday cashback boost", "url": "https://promo.tangem.com/en/blackfriday2026/", "verified": "2026-11-25" }
     ],
-    "lastChecked": "2026-11-19",
+    "lastChecked": "2026-11-25",
     "metal": "silver",
     "image": { "source": "https://g2m.life/card-originals/tangem-pay.png", "file": "/card-images/tangem-pay-dfc057bf.webp" }
   },

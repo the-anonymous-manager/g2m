@@ -60,6 +60,42 @@
     "sponsored": false
   },
   {
+    "slug": "tangem-pay-an-extra-25-cashback-from-20-to-29-november-up-to-15",
+    "date": "2026-11-25",
+    "title": "Tangem Pay: an extra 25% cashback from 20 to 29 November, up to $15",
+    "card": "tangem-pay",
+    "type": "offer",
+    "summary": "From 20 to 29 November 2026, Tangem Pay cardholders get an extra 25% cashback on their card spending, up to $15 in total. Tangem's 50% back on media and AI subscriptions, also up to $15, runs until 30 November.",
+    "body": "What Tangem says:\n- An extra 25% cashback on Tangem Pay card spending from 20 to 29 November 2026\n- Capped at $15 for the whole period\n- Credited automatically and paid in USDC\n- Terms and conditions apply; Tangem's cashback terms say which purchases count\n\nAlso until 30 November: 50% cashback on media and productivity subscriptions, such as AI tools, paid with Tangem Pay, up to $15 in total for that campaign, which started on 28 September.\n\nTangem's offer page gives 20 to 29 November; its main Tangem Pay page shows the boost as 24 to 29 November.",
+    "ends": "2026-11-29",
+    "source": "https://promo.tangem.com/en/blackfriday2026/",
+    "sponsored": false
+  },
+  {
+    "slug": "bitget-wallet-physical-card-for-25-instead-of-49-plus-15-after-you-spend-100",
+    "date": "2026-11-25",
+    "title": "Bitget Wallet physical card for $25 instead of $49, plus $15 after you spend $100",
+    "card": "bitget-wallet",
+    "type": "offer",
+    "summary": "Until 31 December 2026, the Bitget Wallet physical card costs $25 instead of $49. First-time physical card applicants who activate it and spend $100 by 30 November also get $15, while rewards last.",
+    "body": "What Bitget says:\n- The physical card's application fee drops from $49 to $25 from 29 October to 31 December 2026 (UTC+8)\n- Apply, activate the physical card and spend $100 between 29 October and 30 November 2026 to get an extra $15; rewards are limited and go first come, first served\n- Only for first-time Bitget Wallet physical card applicants; Bitget may treat several accounts, cards or devices as one person\n- New cardholders can also get Bitget Wallet's usual activation reward of up to $20\n\nThe card pays up to 3% assetback, in BTC, tokenized gold, tokenized US stocks and more.",
+    "ends": "2026-12-31",
+    "source": "https://www.bitget.com/support/articles/12560603899047",
+    "sponsored": false
+  },
+  {
+    "slug": "mexc-card-has-closed-card-payments-stopped-on-18-november",
+    "date": "2026-11-25",
+    "title": "MEXC Card has closed: card payments stopped on 18 November",
+    "card": "mexc",
+    "type": "news",
+    "summary": "MEXC ended its Global Card on 18 November 2026 at 15:30 UTC, after a change by its card issuer. Cards no longer work and new applications are closed. Money left on a card goes to your MEXC Spot account.",
+    "body": "What MEXC says:\n- Since 18 November 2026, 15:30 UTC, MEXC Global Cards can't be used and new card applications are suspended; MEXC's APAC card has closed too\n- Money left on a card moves to your Spot account: MEXC took a balance snapshot on 21 November at 15:30 UTC and credits it within three business days, with nothing for you to do\n- Pending cashback is still paid as scheduled\n- Refunds for earlier card purchases go to your Fiat account once MEXC receives them\n- Elite VVIP fee rebates are returned to Spot accounts before 15 December 2026\n- Your card transactions, orders and cashback records stay visible on the card page for three months\n\nMEXC gives a change by its third-party card issuer as the reason and has not said whether a new card will follow.",
+    "ends": null,
+    "source": "https://www.mexc.com/announcements/article/mexc-global-card-service-discontinuation-notice-17827791539800",
+    "sponsored": false
+  },
+  {
     "slug": "pulsar-pro-beyond-friday-double-cashback-at-lidl-aldi-dm-rossmann-bolt-and-glovo",
     "date": "2026-11-22",
     "title": "Pulsar Pro Beyond Friday: double cashback at Lidl, Aldi, dm, Rossmann, Bolt and Glovo until 30 November",

@@ -266,6 +266,11 @@ export const uiEn = {
     // Referral box
     bonusWithLink: "Sign-up bonus with G2M's link:",
     bonusUntil: 'Limited time, until {date}',
+    // A card the issuer has stopped (cards.json "closed"): its page stays up, marked closed, with cards to use instead.
+    closedBadge: 'Closed',
+    closedTitle: '{name} has closed',
+    closedText: '{brand} stopped this card on {date}. It no longer works and you can’t apply for it. Its details stay here for reference, and it is no longer ranked.',
+    closedSee: 'Cards to use instead',
     referralCode: 'Referral code',
     copy: 'Copy',
     copied: 'Copied',
