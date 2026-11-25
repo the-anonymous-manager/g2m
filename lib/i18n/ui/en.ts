@@ -21,6 +21,7 @@ export const uiEn = {
     notAvailable: 'Not available',
     notConfirmed: 'Not confirmed',
     notPublished: 'Not published',
+    minFee: "min {x}",
     free: 'Free',
     upTo: 'Up to {x}',
     custodial: 'Custodial',

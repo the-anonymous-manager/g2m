@@ -18,6 +18,7 @@ export const uiFr: Ui = {
     notAvailable: 'Non disponible',
     notConfirmed: 'Non confirmé',
     notPublished: 'Non publié',
+    minFee: "min. {x}",
     free: 'Gratuit',
     upTo: "Jusqu'à {x}",
     custodial: "Fonds conservés par l'émetteur (custodial)",

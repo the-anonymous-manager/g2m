@@ -18,6 +18,7 @@ export const uiZhHK: Ui = {
     notAvailable: '不可申請',
     notConfirmed: '未確認',
     notPublished: '未公布',
+    minFee: "最低 {x}",
     free: '免費',
     upTo: '最高 {x}',
     custodial: '託管（資金由發卡機構持有）',

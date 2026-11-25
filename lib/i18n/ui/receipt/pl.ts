@@ -50,6 +50,7 @@ export const receiptPl: typeof receiptEn = {
   lFxForeign: 'Opłata za przewalutowanie ({p}, {cur} kartą w {base})',
   lFxHome: 'Opłata za przewalutowanie ({p} od {base})',
   lTx: 'Opłata od zakupu ({p})',
+  minFee: "min. {x}",
   lFlat: 'Stała opłata za zakup ({x})',
   lSmall: 'Opłata za mały zakup ({fee} {rule} {under}{foreign})',
   atOrUnder: 'do',

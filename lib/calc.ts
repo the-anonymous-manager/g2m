@@ -6,6 +6,12 @@ import { currencyOf } from '@/lib/currencies.mjs';
 import { BASKET, BASKET_USD } from '@/lib/basket';
 import { PICK } from '@/lib/tierpick';
 
+/** The per-purchase % fee on one purchase of `usd`, at least the card's minimum fee when it has one (e.g. 1%, min $0.25). */
+export function txFeeUsd(f: { txPct: number; txMinUsd?: number }, usd: number): number {
+  const fee = (usd * f.txPct) / 100;
+  return f.txPct > 0 && f.txMinUsd ? Math.max(fee, f.txMinUsd) : fee;
+}
+
 // Calculator inputs are validated and clamped, so bad URL params or typed values
 // can never break the page: anything invalid falls back to a sensible default.
 export const CALC_MODES = ['best', 'tiers', 'audit'] as const;
@@ -348,7 +354,8 @@ export function tierValue(
   // Per-purchase fees
   const count = (g: Segment) => (g.size > 0 ? g.spendYear / g.size : 0);
   const purchases = segs.reduce((s, g) => s + count(g), 0);
-  const txPct = (yearSpend * card.fees.txPct) / 100;
+  // Each purchase pays the % fee or the card's minimum fee, whichever is more (segment by segment, by purchase size).
+  const txPct = card.fees.txMinUsd ? segs.reduce((s, g) => s + count(g) * txFeeUsd(card.fees, g.size), 0) : (yearSpend * card.fees.txPct) / 100;
   const txFlat = card.fees.txFlatUsd * purchases;
   const sp = card.fees.smallPurchase;
   let smallCount = 0;

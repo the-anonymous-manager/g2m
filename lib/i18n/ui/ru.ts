@@ -18,6 +18,7 @@ export const uiRu: Ui = {
     notAvailable: 'Недоступна',
     notConfirmed: 'Не подтверждено',
     notPublished: 'Не опубликовано',
+    minFee: "мин. {x}",
     free: 'Бесплатно',
     upTo: 'До {x}',
     custodial: 'Кастодиальная (средства у эмитента)',

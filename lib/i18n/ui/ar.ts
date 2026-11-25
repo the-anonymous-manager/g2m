@@ -18,6 +18,7 @@ export const uiAr: Ui = {
     notAvailable: 'غير متاحة',
     notConfirmed: 'غير مؤكَّد',
     notPublished: 'غير منشور',
+    minFee: "بحد أدنى {x}",
     free: 'مجانًا',
     upTo: 'حتى {x}',
     custodial: 'حاضنة (الأموال لدى الجهة المصدرة)',

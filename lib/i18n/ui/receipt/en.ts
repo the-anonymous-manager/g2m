@@ -56,6 +56,7 @@ export const receiptEn = {
   lFxForeign: 'FX fee ({p}, {cur} on a {base} card)',
   lFxHome: 'FX fee ({p} on {base})',
   lTx: 'Per-purchase fee ({p})',
+  minFee: "min {x}",
   lFlat: 'Flat fee per purchase ({x})',
   lSmall: 'Small-purchase fee ({fee} {rule} {under}{foreign})',
   atOrUnder: 'at or under',

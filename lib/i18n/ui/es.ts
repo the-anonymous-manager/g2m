@@ -18,6 +18,7 @@ export const uiEs: Ui = {
     notAvailable: 'No disponible',
     notConfirmed: 'Sin confirmar',
     notPublished: 'No publicado',
+    minFee: "mín. {x}",
     free: 'Gratis',
     upTo: 'Hasta {x}',
     custodial: 'Custodial (el emisor guarda los fondos)',

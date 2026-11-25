@@ -50,6 +50,7 @@ export const receiptTr: typeof receiptEn = {
   lFxForeign: 'Döviz ücreti ({p}, {base} kartla {cur})',
   lFxHome: 'Döviz ücreti ({base} üzerinden {p})',
   lTx: 'Alışveriş başı ücret ({p})',
+  minFee: "en az {x}",
   lFlat: 'Alışveriş başı sabit ücret ({x})',
   lSmall: 'Küçük alışveriş ücreti ({fee}, {under} {rule}{foreign})',
   atOrUnder: 've altı',

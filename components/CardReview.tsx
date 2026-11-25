@@ -107,7 +107,7 @@ function perPurchase(card: Card, c: Ctx) {
   const f = card.fees;
   const small = f.smallPurchase;
   const parts = [
-    f.txPct ? c.P(f.txPct) : null,
+    f.txPct ? `${c.P(f.txPct)}${f.txMinUsd ? ` (${fill(c.ui.common.minFee, { x: c.M(f.txMinUsd) })})` : ''}` : null,
     f.txFlatUsd ? c.M(f.txFlatUsd) : null,
     small
       ? `${fill(small.inclusive ? c.t.smallAtOrUnder : c.t.smallUnder, { fee: c.U(small.feeUsd), limit: c.U(small.underUsd) })}${small.foreignOnly ? c.t.nonUsd : ''}${

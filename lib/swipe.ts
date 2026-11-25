@@ -142,6 +142,9 @@ export function swipeReceipt(
   const lp = Math.min((load ?? 0) / 100, 0.5);
   const sp = card.fees.smallPurchase;
   const flatB = card.fees.txFlatUsd * baseRate;
+  // The % fee's minimum per purchase (e.g. Oobit: 1%, at least $0.25), in the base currency.
+  const minB = txp > 0 && card.fees.txMinUsd ? card.fees.txMinUsd * baseRate : 0;
+  const txB = (priceB: number) => Math.max(priceB * txp, minB);
   const smallB = sp ? sp.feeUsd * baseRate : 0;
   const smallApplies = (priceB: number) => Boolean(sp && isSmallPurchase(sp, priceB / baseRate) && (!sp.foreignOnly || foreign));
 
@@ -153,8 +156,14 @@ export function swipeReceipt(
     priceB = opts.cleared / (1 + fxp);
   } else if (opts.total && opts.total > 0) {
     mode = 'total';
-    // total = (price x (1 + FX + per-purchase %) + flat + small fee) / (1 - top-up %); try with and without the small fee.
-    const solve = (withSmall: boolean) => (opts.total! * (1 - lp) - flatB - (withSmall ? smallB : 0)) / (1 + fxp + txp);
+    // total = (price x (1 + FX) + per-purchase fee + flat + small fee) / (1 - top-up %), where the per-purchase fee
+    // is price x % or the minimum fee, whichever is more. Try with and without the small fee, and both fee forms.
+    const solve = (withSmall: boolean) => {
+      const rest = opts.total! * (1 - lp) - flatB - (withSmall ? smallB : 0);
+      const byPct = rest / (1 + fxp + txp);
+      if (!minB || byPct * txp >= minB) return byPct;
+      return (rest - minB) / (1 + fxp);
+    };
     const a = solve(true);
     priceB = smallApplies(a) ? a : solve(false);
   } else if (opts.rate && opts.rate > 0) {
@@ -179,7 +188,8 @@ export function swipeReceipt(
   const clearedRaw = mode === 'cleared' && display === base ? opts.cleared! : inDisplay(clearedB);
   let cleared = fxp > 0 ? Math.max(r(clearedRaw), price) : price;
   let fx = r(cleared - price);
-  const tx = r(inDisplay(priceB * txp));
+  const tx = r(inDisplay(txB(priceB)));
+  const atMin = minB > 0 && priceB * txp < minB;
   const flat = r(inDisplay(flatB));
   const small = smallApplies(priceB) ? r(inDisplay(smallB)) : 0;
   const before = cleared + tx + flat + small;
@@ -212,7 +222,16 @@ export function swipeReceipt(
       vars: { pct: fxPct ?? 0, currency, base, foreign }
     });
   }
-  if (tx > 0) lines.push({ key: 'tx', label: `Per-purchase fee (${card.fees.txPct}%)`, amount: tx, kind: 'fee', vars: { pct: card.fees.txPct } });
+  if (tx > 0) {
+    const min = card.fees.txMinUsd;
+    lines.push({
+      key: 'tx',
+      label: `Per-purchase fee (${card.fees.txPct}%${min ? `, min ${usdText(min)}` : ''})`,
+      amount: tx,
+      kind: 'fee',
+      vars: { pct: card.fees.txPct, ...(min ? { min, atMin } : {}) }
+    });
+  }
   if (flat > 0) lines.push({ key: 'flat', label: `Flat fee per purchase (${usdText(card.fees.txFlatUsd)})`, amount: flat, kind: 'fee', vars: { usd: card.fees.txFlatUsd } });
   if (small > 0 && sp) {
     lines.push({

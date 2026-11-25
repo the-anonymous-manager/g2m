@@ -3082,10 +3082,11 @@ body::before {
 body:has(.float-back) #main {
   padding-top: 24px;
 }
-/* On a phone: the arrow alone, so it covers less of the page. */
-@media (max-width: 560px) {
+/* The arrow alone unless there is empty space beside the page for the whole pill: then it never sits on a form
+   label or a heading (the swipe receipt's "Card" field, Akash 25 Nov 2026). The full "Back" pill shows on screens wide
+   enough to hold it left of the 1,200 px page column. */
+@media (max-width: 1499px) {
   .float-back {
-    top: calc(var(--hdr-bottom, 120px) + 10px);
     padding: 5px;
     gap: 0;
   }
@@ -3103,6 +3104,16 @@ body:has(.float-back) #main {
   .float-back-arrow {
     width: 40px;
     height: 40px;
+  }
+}
+@media (min-width: 1500px) {
+  .float-back {
+    inset-inline-start: max(16px, calc((100vw - 1200px) / 2 - 140px));
+  }
+}
+@media (max-width: 560px) {
+  .float-back {
+    top: calc(var(--hdr-bottom, 120px) + 10px);
   }
 }
 @media (prefers-reduced-motion: reduce) {

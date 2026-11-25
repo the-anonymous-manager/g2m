@@ -50,6 +50,7 @@ export const receiptAr: typeof receiptEn = {
   lFxForeign: 'رسوم الصرف ({p}، {cur} ببطاقة بعملة {base})',
   lFxHome: 'رسوم الصرف ({p} على {base})',
   lTx: 'رسوم على كل عملية شراء ({p})',
+  minFee: "بحد أدنى {x}",
   lFlat: 'رسوم ثابتة لكل عملية شراء ({x})',
   lSmall: 'رسوم المشتريات الصغيرة ({fee} {rule} {under}{foreign})',
   atOrUnder: 'حتى',

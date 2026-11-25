@@ -50,6 +50,7 @@ export const receiptRu: typeof receiptEn = {
   lFxForeign: 'Комиссия за валюту ({p}, {cur} по карте в {base})',
   lFxHome: 'Комиссия за валюту ({p} на {base})',
   lTx: 'Комиссия за покупку ({p})',
+  minFee: "мин. {x}",
   lFlat: 'Фиксированная комиссия за покупку ({x})',
   lSmall: 'Комиссия за мелкую покупку ({fee} {rule} {under}{foreign})',
   atOrUnder: 'до',

@@ -55,7 +55,9 @@ and confirm what changed on the site (not which files moved).
   Shows a badge on the card page, a "No ID check" rankings filter and a compare row. Never changes the score.
 - Per-purchase limits: "Max cashback per purchase $" (`cashback.maxPerTxUsd`, e.g. Kolo 1); "Small purchase limit
   included" (`fees.smallPurchase.inclusive`: yes = "$1.00 or less", empty = "under $1"); "Free small purchases a month"
-  (`fees.smallPurchase.freePerMonth`). Scores, calculator and receipt all use them.
+  (`fees.smallPurchase.freePerMonth`); "Minimum fee per purchase $" (`fees.txMinUsd`): the least the "Fee on every
+  purchase %" can be, e.g. Oobit 1% with a $0.25 minimum (each purchase pays the larger). Scores, calculator and receipt
+  all use them.
 - Welcome rates ("Intro cashback %" and "Intro offer days", `cashback.intro`): only short published welcome offers on
   the entry tier; the calculator's Year 1 uses them, scores never do.
 - Lounges: a perk that mentions a lounge counts as lounge access (rankings filter, finder, wallet, lounge guide), unless it

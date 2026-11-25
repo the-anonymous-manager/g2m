@@ -1928,7 +1928,7 @@
     "custody": "both",
     "summary": "A virtual Visa from the Oobit app, issued by Rain, that spends your Oobit balance or crypto straight from your own wallet. 1% fee on every purchase; 5% back on USDT-funded purchases (on the first $200 a month) or 10% in OOB.",
     "cashback": { "basePct": 5, "maxPct": 10, "payout": "Tether Gold (XAUT) or OOB, into a rewards balance", "note": "5% back on card purchases funded with USDT, on the first $200 of card spending a month (up to $10), paid in Tether Gold (XAUT; US residents get USDT). 10% back on purchases funded with OOB, Oobit's own token, up to $100 in cashback a month, paid in OOB. Cashback goes into a rewards balance you can spend on the card but not withdraw. None in Vietnam, or when you use Oobit inside a partner app." },
-    "fees": { "annualUsd": 0, "fxPct": 1.5, "fxNote": "Billed in US dollars. Purchases in other currencies may carry a 1.5% conversion fee, on top of the 1% card payment fee.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txPct": 1, "cardFeeUsd": 0, "atm": "2.5%, minimum $0.25 (Brazil: no minimum), plus the ATM operator's own charge. Up to $250 per withdrawal and 3 attempts in 24 hours.", "other": ["Minimum card payment fee $0.25, so purchases under $25 pay $0.25 (Brazil: 1%, no minimum)", "No fee on declined purchases", "Bank transfer deposit about 0.65%, minimum $0.50", "Swaps: fee shown in the quote before you confirm", "Crypto withdrawals: network fee only", "Sending crypto to a bank account: fee shown before you send, varies by currency"] },
+    "fees": { "annualUsd": 0, "fxPct": 1.5, "fxNote": "Billed in US dollars. Purchases in other currencies may carry a 1.5% conversion fee, on top of the 1% card payment fee.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "txPct": 1, "txMinUsd": 0.25, "cardFeeUsd": 0, "atm": "2.5%, minimum $0.25 (Brazil: no minimum), plus the ATM operator's own charge. Up to $250 per withdrawal and 3 attempts in 24 hours.", "other": ["Minimum card payment fee $0.25, so purchases under $25 pay $0.25 (Brazil: 1%, no minimum)", "No fee on declined purchases", "Bank transfer deposit about 0.65%, minimum $0.50", "Swaps: fee shown in the quote before you confirm", "Crypto withdrawals: network fee only", "Sending crypto to a bank account: fee shown before you send, varies by currency"] },
     "tiers": [
       { "name": "Pay with USDT", "feeUsdYear": 0, "cashbackPct": 5, "bands": [ { "uptoUsd": 200, "pct": 5 }, { "uptoUsd": null, "pct": 0 } ], "requirement": "Card purchases funded with USDT", "perks": ["Cashback in Tether Gold (XAUT); USDT for US residents"] },
       { "name": "Pay with OOB", "feeUsdYear": 0, "cashbackPct": 10, "capMonthlyUsd": 100, "requirement": "Card purchases funded with OOB, Oobit's own token", "perks": ["Cashback paid in OOB"] }
@@ -1953,9 +1953,10 @@
       { "label": "Oobit Help Center: Which assets and networks does Oobit support?", "url": "https://support.oobit.com/en/articles/15262443-which-assets-and-networks-does-oobit-support", "verified": "2026-11-21" },
       { "label": "Oobit crypto card page: Visa, connect your own wallet, Apple Pay and Google Wallet", "url": "https://www.oobit.com/crypto-card", "verified": "2026-11-21" },
       { "label": "Oobit Help Center: What does the invited user receive? (no card fee on the first $500 for 60 days)", "url": "https://support.oobit.com/en/articles/15886332-what-does-the-invited-user-receive", "verified": "2026-11-21" },
-      { "label": "Oobit Help Center: What does the fee-free benefit include?", "url": "https://support.oobit.com/en/articles/15886346-what-does-the-fee-free-benefit-include", "verified": "2026-11-21" }
+      { "label": "Oobit Help Center: What does the fee-free benefit include?", "url": "https://support.oobit.com/en/articles/15886346-what-does-the-fee-free-benefit-include", "verified": "2026-11-21" },
+      { "label": "Oobit app receipt: a $6.80 purchase charged $6.80 + $0.25 fee = $7.05, 5% cashback $0.34 (checked in the app by G2M)", "url": "https://support.oobit.com/en/articles/17673770-what-are-oobit-s-fees", "verified": "2026-11-25" }
     ],
-    "lastChecked": "2026-11-21",
+    "lastChecked": "2026-11-25",
     "addedOn": "2026-11-21",
     "metal": "rose",
     "image": { "source": "https://g2m.life/card-originals/oobit-card.png", "file": "/card-images/oobit-dac4b317.webp" }
