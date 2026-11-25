@@ -3,6 +3,7 @@ import { availabilityIn, countryName, isCountry } from '@/lib/regions';
 import { cashbackLabel, pct } from '@/lib/format';
 import { netRate, rankIn } from '@/lib/score';
 import { homeFx } from '@/lib/fx';
+import { tierHoldUsd } from '@/lib/calc';
 import { nomadFit, type NomadFit } from '@/lib/nomad';
 import { isLoungePerk } from '@/lib/perks';
 
@@ -180,7 +181,9 @@ export function recommend(cards: CardRow[], a: FinderAnswers, count = 3): Pick[]
     // Question 5: fees, staking and banking.
     const entry = c.tiers.find((t) => !t.comingSoon) ?? c.tiers[0];
     if (freeOnly) {
-      const freeEntry = c.fees.annualUsd === 0 && !entry?.stake;
+      // Free means nothing to pay, stake or keep: a starting tier that needs a balance (Nexo's $5,000 portfolio, Krak's
+      // €200) is not free to use.
+      const freeEntry = c.fees.annualUsd === 0 && !entry?.stake && !(entry && (tierHoldUsd(entry) ?? 0) > 0);
       if (freeEntry) {
         fit += 10;
         reasons.push({ k: 'free' });

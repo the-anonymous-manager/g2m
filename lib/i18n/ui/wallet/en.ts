@@ -45,7 +45,13 @@ export const walletEn = {
   balanced: 'Balanced mix',
   oneSize: 'One size',
   ticketAria: 'Purchase size in US dollars',
-  includeStake: 'Include tiers that need staking, a token lockup or an invite',
+  includeStake: "Also include tiers that need trading volume, points, invites or a token stake",
+  holdLabel: "Money you will keep with a card company",
+  holdHelp: "Some tiers need an average balance, a portfolio or locked tokens worth a set amount. Only tiers within this amount are used.",
+  holdNone: "Nothing (free or paid tiers only)",
+  holdUpTo: "Up to {x}",
+  holdAny: "Any amount",
+  needHold: "Keep {x} with {brand} for this tier",
 
   // Results
   aMonth: '{x} a month',

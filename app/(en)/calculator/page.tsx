@@ -27,7 +27,7 @@ const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
 export default async function CalculatorPage({ searchParams }: Props) {
   const p = await searchParams;
   // Every setting lives in the link (mode, spend, currency split, purchase sizes, valuation, card, year, tier...).
-  const keys = ['mode', 'spend', 'usd', 'travel', 'foreign', 'mix', 'ticket', 'value', 'form', 'year', 'tiers', 'all', 'card', 'cards', 'tier'];
+  const keys = ['mode', 'spend', 'usd', 'travel', 'foreign', 'mix', 'ticket', 'value', 'form', 'year', 'tiers', 'all', 'hold', 'card', 'cards', 'tier'];
   const initial = parseCalcInput(Object.fromEntries(keys.map((k) => [k, one(p[k])])));
   // `country=JP`; older links used `market=IN` (the EU was a market, not a country, so it has no default).
   const raw = (one(p.country) ?? one(p.market) ?? '').toUpperCase();

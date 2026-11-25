@@ -657,6 +657,20 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   line; word `minFee` in the main and receipt packs. Oobit's score 55 to 52 (three places down). The back button now
   shows only its arrow coin below 1,500 px wide (it covered the receipt's "Card" label) and the full pill in the empty
   space left of the page above that.
+- Money to hold, receipt picture, fee audit (25 Nov 2026, Akash: the wallet builder picked Infini Elite, ether.fi VIP
+  and Hyperbeat Trader $5M for someone holding nothing, "require proper calculation on every thing"). Cause: a tier
+  counted as open when its requirement started with "$", so "$100,000 average balance" and "$5M trading volume" read
+  as fees. Now `tierNeeds` reads each requirement into money to hold, a fee, a monthly spend or other conditions, and
+  `tierAllowed` keeps a tier only within the new "Money you will keep with a card company" (HOLD_STEPS, default 0,
+  `hold` in the address) on the wallet builder and the calculator; pairs count both cards' holdings together; a
+  picked tier that needs money shows "Keep $X with <brand> for this tier". The "Also include..." box now only adds
+  tiers needing trading volume, points, invites or token-count stakes. The finder's "free tiers only" no longer counts
+  a starting tier that needs a balance (Nexo, Krak). Result for the UAE, $1,000 a month, nothing held: Ethena Pay
+  Standard alone ($360 a year in AED, $480 in USD), ahead of ether.fi Core and Oobit. The "Download image" receipt
+  (`/receipt/image?size=tall`) is now the page's receipt: full fee and cashback descriptions, cleared line, totals,
+  result, advertised rate, how it was matched, fees and cashback as a share of the price, and the date. Fee audit of
+  every card: Oobit's minimum was the only unmodelled per-purchase rule; still not modelled: Solayer's "$0.10 + 1.5%"
+  on foreign purchases (unclear whether it replaces the $0.15) and RedotPay's "special merchants 1.5% (min $0.50)".
 - Closed cards (25 Nov 2026, Akash: "keep mexc with closed"). New Cards column "Closed on" (`closed`, set for MEXC to
   2026-11-18). `lib/cards.ts` ranks and lists open cards only; `getCardPage()` also finds closed ones for their own page
   (both languages' card pages, share image, Updates posts). The card page shows a "Closed" badge in place of the rank,

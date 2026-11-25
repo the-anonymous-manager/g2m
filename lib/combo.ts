@@ -1,6 +1,6 @@
 import type { CardRow } from '@/lib/types';
 import { tierOffered } from '@/lib/regions';
-import { buildSegments, isEntryTier, isOpenTier, tierValue, type CalcInput, type Segment, type TierResult } from '@/lib/calc';
+import { buildSegments, isEntryTier, tierAllowed, tierHoldUsd, tierValue, type CalcInput, type Segment, type TierResult } from '@/lib/calc';
 import { FEATURES, featuresOf, type FeatureKey } from '@/lib/features';
 
 // The best two-card wallet: one card for most spending, a second for the purchases it handles better (small
@@ -39,7 +39,7 @@ export function planWallet(cards: CardRow[], input: CalcInput, country?: string 
     card.tiers
       .map((t, i) => ({ t, i }))
       .filter(({ t }) => !country || tierOffered(t, country))
-      .filter(({ t, i }) => (input.tiers === 'entry' ? isEntryTier(t, i) : input.all ? !t.comingSoon : isOpenTier(t, i)));
+      .filter(({ t, i }) => (input.tiers === 'entry' ? isEntryTier(t, i) : tierAllowed(t, i, input)));
 
   // Every allowed tier of one card on a set of slices (memoised by card and slice set).
   const memo = new Map<string, TierResult[]>();
@@ -107,6 +107,8 @@ export function planWallet(cards: CardRow[], input: CalcInput, country?: string 
     const pairKey = [a.slug, b.slug].sort().join('+');
     for (const ra of options(a, toA)) {
       for (const rb of options(b, toB)) {
+        // The money both cards ask you to keep, together, stays within what the visitor will hold.
+        if ((tierHoldUsd(ra.tier) ?? 0) + (tierHoldUsd(rb.tier) ?? 0) > input.hold) continue;
         const fa = featuresFor(a, ra);
         const fb = featuresFor(b, rb);
         if (need.length && !covers(new Set([...fa, ...fb]), need)) continue;

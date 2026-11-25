@@ -5,7 +5,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CardRow } from '@/lib/types';
 import { availabilityIn, isCountry } from '@/lib/regions';
 import { currencyOf } from '@/lib/currencies.mjs';
-import { buildSegments, calcParams, parseCalcInput, type CalcInput } from '@/lib/calc';
+import { buildSegments, calcParams, parseCalcInput, tierHoldUsd, type CalcInput } from '@/lib/calc';
+import { HoldSelect } from '@/components/HoldSelect';
 import { planWallet, sliceParts, type ComboSide, type SlicePart } from '@/lib/combo';
 import { FEATURES, FEATURE_KEYS, type FeatureKey } from '@/lib/features';
 import { CardArt } from '@/components/CardArt';
@@ -88,6 +89,14 @@ function Side({
         </div>
       </div>
       {uses ? <p className="muted" style={{ margin: 0, fontSize: 14 }}>{uses}</p> : null}
+      {(() => {
+        const held = tierHoldUsd(side.result.tier);
+        return held ? (
+          <p className="wallet-hold" style={{ margin: 0, fontSize: 14 }}>
+            {fillText(w.needHold, { x: L.money(held), brand: side.card.brand })}
+          </p>
+        ) : null;
+      })()}
       {feats.length ? (
         <ul className="wallet-feats" aria-label={w.gives}>
           {feats.map((f) => (
@@ -127,6 +136,7 @@ export function WalletBuilder({ rows, initial, initialNeed, initialCountry, hadC
   const [ticketText, setTicketText] = useState(String(initial.ticket));
   const [mix, setMix] = useState(initial.mix);
   const [all, setAll] = useState(initial.all);
+  const [hold, setHold] = useState(initial.hold);
   const [need, setNeed] = useState<FeatureKey[]>(initialNeed);
   const [country, setCountry] = useState(initialCountry);
   const { country: myCountry, ready } = useRegion();
@@ -141,8 +151,8 @@ export function WalletBuilder({ rows, initial, initialNeed, initialCountry, hadC
   const currency = currencyOf(country);
 
   const input = useMemo(
-    () => parseCalcInput({ spend: spendText, usd: usdText, travel: travelText, ticket: ticketText, mix, all }),
-    [spendText, usdText, travelText, ticketText, mix, all]
+    () => parseCalcInput({ spend: spendText, usd: usdText, travel: travelText, ticket: ticketText, mix, all, hold }),
+    [spendText, usdText, travelText, ticketText, mix, all, hold]
   );
   const homePct = Math.max(0, 100 - input.usd - input.travel);
   const eligible = useMemo(() => (country ? rows.filter((r) => availabilityIn(r, country) !== 'no') : rows), [rows, country]);
@@ -204,6 +214,7 @@ export function WalletBuilder({ rows, initial, initialNeed, initialCountry, hadC
               aria-label={w.spendAria}
             />
           </div>
+          <HoldSelect id="w-hold" value={input.hold} onChange={setHold} w={w} money={(n) => L.money(n)} />
         </div>
 
         <div className="field">
