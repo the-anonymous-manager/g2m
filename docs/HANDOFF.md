@@ -642,10 +642,11 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   yet checked on issuer pages: Tria cashback now paid as TLP points, Tria and Noah EUR currency accounts.
 - Floating back button (25 Nov 2026, Akash: "add back button on every page ... if I scrolled down the back button should
   be there, not at the top, in metallic glass like design"). `FloatingBack` in `components/BackButton.tsx`, rendered
-  once in `SiteDocument.tsx`: a frosted pill with a rose-gold metal rim and a metal arrow coin, fixed in the bottom
-  start corner (bottom right on Arabic pages) on every page but the home pages; on phones only the coin shows. It goes
-  to the previous g2m.life page in the tab, else one level up (`parentOf`). It moves up when the rankings compare bar
-  is open. The old "Back" buttons at the top of card, guide, compare and "X vs Y" pages are gone (breadcrumbs stay).
+  once in `SiteDocument.tsx`. Akash then asked for it at the top and in "liquid glass": a clear lens (light blur,
+  strong saturation, bright rim and a light catch on its top edge) with the rose-gold metal arrow coin, fixed just
+  under the sticky header (the button keeps the header's bottom edge in --hdr-bottom) at the start side (right on
+  Arabic pages), on every page but the home pages; on phones only the coin shows; pages with it get 24px more room
+  at the top. It goes to the previous g2m.life page in the tab, else one level up (`parentOf`). The old "Back" buttons at the top of card, guide, compare and "X vs Y" pages are gone (breadcrumbs stay).
   Word: `back` in `lib/i18n/chrome.ts`.
 - Closed cards (25 Nov 2026, Akash: "keep mexc with closed"). New Cards column "Closed on" (`closed`, set for MEXC to
   2026-11-18). `lib/cards.ts` ranks and lists open cards only; `getCardPage()` also finds closed ones for their own page

@@ -70,12 +70,11 @@ function parentOf(path: string): string {
 
 /**
  * The floating "← Back" button on every page but the home page (Akash, 25 Nov 2026: it stays with you as you scroll,
- * in metallic glass). Goes to the previous g2m.life page in this tab (with its filters), else one level up.
+ * at the top under the header, in liquid glass). Goes to the previous g2m.life page in this tab (with its filters), else one level up.
  * Rendered once in the root layout, in the page's language.
  */
 export function FloatingBack() {
   const pathname = usePathname() ?? '/';
-  const router = useRouter();
   const segs = pathname.split('/').filter(Boolean);
   const lang = segs[0] && LANGS.has(segs[0]) ? segs[0] : null;
   const home = segs.length === 0 || (lang !== null && segs.length === 1);
@@ -83,6 +82,25 @@ export function FloatingBack() {
   const locale = lang ? LOCALES.find((l) => l.code === lang) : undefined;
   const label = lang ? CHROME[lang].back : 'Back';
   const fallback = parentOf(pathname);
+  return <FloatingBackLink fallback={fallback} label={label} rtl={locale?.dir === 'rtl'} />;
+}
+
+/** The button itself. Sits just under the sticky header (its bottom edge kept in --hdr-bottom), so it stays in view. */
+function FloatingBackLink({ fallback, label, rtl }: { fallback: string; label: string; rtl: boolean }) {
+  const router = useRouter();
+  useEffect(() => {
+    const header = document.querySelector<HTMLElement>('.site-header');
+    if (!header) return;
+    const set = () => document.documentElement.style.setProperty('--hdr-bottom', `${Math.round(header.getBoundingClientRect().bottom)}px`);
+    set();
+    const ro = new ResizeObserver(set);
+    ro.observe(header);
+    window.addEventListener('resize', set);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', set);
+    };
+  }, []);
   return (
     <a
       href={fallback}
@@ -96,7 +114,7 @@ export function FloatingBack() {
       }}
     >
       <span className="float-back-arrow" aria-hidden="true">
-        {locale?.dir === 'rtl' ? '→' : '←'}
+        {rtl ? '→' : '←'}
       </span>
       <span className="float-back-label">{label}</span>
     </a>
