@@ -698,6 +698,12 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   157 (every HTML page checked has a canonical; likely non-HTML addresses such as /updates/feed.xml or images), 404
   10, Google chose another canonical 1. Fixed: missing pages inherited the home page's canonical; not-found pages
   now name none (noindex).
+- MiniPay Card added (26 Nov 2026, Akash sent the card picture). Opera's MiniPay wallet, virtual Visa issued by Monavate,
+  built on Gnosis Pay (Gnosis Pay closing its own card on 20 Dec 2026 does not affect partner cards). Sources: minipay.to/card,
+  MiniPay cashback blog and terms, launch blog, Opera press release, Gnosis blog, MiniPay Instagram (not for the UK).
+  MiniPay publishes only "46 countries" (EEA yes, UK no; India, UAE, US not confirmed) and no FX fee amount. Picture stored as
+  `public/card-originals/minipay.jpg` (sheet link g2m.life/card-originals/minipay.jpg); the card-images files were made locally
+  because that link only works once deployed. No referral link yet. Score 56.
 - Closed cards (25 Nov 2026, Akash: "keep mexc with closed"). New Cards column "Closed on" (`closed`, set for MEXC to
   2026-11-18). `lib/cards.ts` ranks and lists open cards only; `getCardPage()` also finds closed ones for their own page
   (both languages' card pages, share image, Updates posts). The card page shows a "Closed" badge in place of the rank,

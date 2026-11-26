@@ -1960,5 +1960,42 @@
     "addedOn": "2026-11-21",
     "metal": "rose",
     "image": { "source": "https://g2m.life/card-originals/oobit-card.png", "file": "/card-images/oobit-dac4b317.webp" }
+  },
+  {
+    "slug": "minipay",
+    "name": "MiniPay Card",
+    "brand": "MiniPay",
+    "issuer": "Monavate",
+    "network": "Visa",
+    "type": "debit",
+    "forms": ["virtual"],
+    "custody": "self-custodial",
+    "summary": "Virtual Visa from Opera's MiniPay wallet: spend USDT, USDC or mUSD straight from your own wallet, with 5% back on travel and AI tools and 2% on everything else.",
+    "cashback": { "basePct": 2, "maxPct": 5, "payout": "Tether Gold (XAUt0); USDC in the EEA", "note": "From 26 Nov 2026: 5% on travel (flights, hotels, car rental, cruises, travel agencies) and on AI and dev tools paid directly (OpenAI, Anthropic, AWS, Google Cloud, Azure, GitHub and others), 2% on everything else. Up to $100 cashback a month, paid on the 25th once a purchase is 30 days old. No cashback on ATM withdrawals, transfers, gambling, insurance, utilities, government payments or gift cards." },
+    "fees": { "annualUsd": 0, "fxPct": null, "fxNote": "MiniPay charges no currency conversion fee. On purchases not in US dollars, Visa's exchange rate and fees may apply; the amount is not published.", "fxByCurrency": { "USD": 0 }, "topUpPct": 0, "cardFeeUsd": 0, "atm": "ATM withdrawal fee applies (amount not published)", "other": [] },
+    "tiers": [
+      { "name": "Standard", "feeUsdYear": 0, "cashbackPct": 2, "capMonthlyUsd": 100, "requirement": "Every user", "perks": ["5% on travel and AI and dev tools paid directly"] }
+    ],
+    "coverage": { "countries": 46, "scope": "46 countries in the EEA, Africa, Latin America and Southeast Asia", "examples": ["Nigeria", "Kenya", "Germany", "France"], "markets": { "IN": "unknown", "AE": "unknown", "US": "unknown", "GB": "no", "EU": "yes" } },
+    "ecosystem": { "iban": null, "payoutCorridors": null, "ramps": "on", "credit": false, "yield": null },
+    "wallets": { "applePay": true, "googlePay": true },
+    "assets": ["USDT", "USDC", "mUSD"],
+    "perks": ["Fund from any chain with no deposit fee, or in local currency from 60+ countries (bank transfer, mobile money)"],
+    "pros": ["No monthly, annual or activation fee", "5% back on travel and AI tools, 2% on everything else", "Non-custodial: your balance stays in your MiniPay wallet until you pay"],
+    "cons": ["Virtual card only, no physical card", "Cashback capped at $100 a month and paid in Tether Gold outside the EEA, so its value moves with gold", "FX fee on non-USD purchases not published", "Rolling out in waves from a waitlist; not for UK users"],
+    "links": { "official": "https://minipay.to/card" },
+    "sources": [
+      { "label": "MiniPay: card page (fees, Apple Pay and Google Pay, self-custodial, virtual only)", "url": "https://minipay.to/card", "verified": "2026-11-26" },
+      { "label": "MiniPay blog: Card Cashback, how it works (rates from 26 Nov 2026, $100 monthly cap)", "url": "https://minipay.to/blog/minipay-card-cashback-rules", "verified": "2026-11-26" },
+      { "label": "MiniPay Card Cashback Terms of Service (payout assets, no MiniPay FX fee)", "url": "https://minipay.to/minipay-card-cashback-terms-of-service", "verified": "2026-11-26" },
+      { "label": "MiniPay blog: The MiniPay Card is here (stablecoins, no activation fee, funding)", "url": "https://minipay.to/blog/minipay-card-spend-usdt-usdc-stablecoins-earn-gold-cashback", "verified": "2026-11-26" },
+      { "label": "Opera press release: MiniPay launches Visa debit card (46 countries, Monavate issuer, Gnosis Pay)", "url": "https://investor.opera.com/news-releases/news-release-details/minipay-launches-visa-debit-card-connect-stablecoin-users", "verified": "2026-11-26" },
+      { "label": "Gnosis blog: MiniPay launches its Visa card (regions, FX and ATM fees apply)", "url": "https://www.gnosis.io/blog/minipay-launches-visa-card-powered-by-gnosis-pay", "verified": "2026-11-26" },
+      { "label": "MiniPay official Instagram: card not intended for users in the UK", "url": "https://www.instagram.com/get.minipay/", "verified": "2026-11-26" }
+    ],
+    "lastChecked": "2026-11-26",
+    "addedOn": "2026-11-26",
+    "metal": "black",
+    "image": { "source": "https://g2m.life/card-originals/minipay.jpg", "file": "/card-images/minipay-1ebb3282.webp" }
   }
 ]
