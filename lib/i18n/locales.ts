@@ -28,6 +28,26 @@ export const LOCALES: Locale[] = [
 
 export const localeByCode = (code: string | undefined) => LOCALES.find((l) => l.code === code);
 
+/**
+ * Countries where each language is spoken, beyond its own markets. A translated country guide is indexed by search
+ * engines only there (Akash, 26 Nov 2026: "yes"): 230 countries x 8 languages made about 1,800 near-identical pages,
+ * e.g. the Polish guide to Peru. The others stay up for visitors, marked noindex and left out of the sitemap.
+ */
+const SPOKEN: Record<string, string[]> = {
+  de: ['LI', 'LU'],
+  fr: ['LU', 'MC', 'SN', 'CI', 'CM', 'MA', 'DZ', 'TN', 'ML', 'BF', 'NE', 'TD', 'GN', 'BJ', 'TG', 'CD', 'CG', 'GA', 'MG', 'HT', 'RW', 'BI', 'DJ', 'KM', 'SC', 'MU'],
+  es: ['VE', 'EC', 'GT', 'CU', 'BO', 'DO', 'HN', 'PY', 'SV', 'NI', 'CR', 'PA', 'UY', 'PR', 'GQ'],
+  pl: [],
+  tr: ['CY'],
+  ru: ['BY', 'KG'],
+  ar: ['OM', 'JO', 'LB', 'IQ', 'SY', 'YE', 'PS', 'MA', 'DZ', 'TN', 'LY', 'SD', 'MR'],
+  'zh-hk': []
+};
+const spokenIn = new Map(LOCALES.map((l) => [l.code, new Set([...l.markets, ...(SPOKEN[l.code] ?? [])])]));
+
+/** Whether a translated country guide (/de/best-crypto-cards/germany) is for search engines: the language is spoken there. */
+export const countryGuideIndexed = (l: Locale, cc: string) => spokenIn.get(l.code)?.has(cc) ?? false;
+
 /** The language of an address ("/de/cards/kast" → Deutsch), or undefined for the English pages. */
 export function localeOfPath(pathname: string | null | undefined): Locale | undefined {
   const first = (pathname ?? '').split('/')[1]?.toLowerCase();

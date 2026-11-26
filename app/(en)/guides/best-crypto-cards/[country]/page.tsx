@@ -7,7 +7,7 @@ import { homeFx } from '@/lib/fx';
 import { currencyOf } from '@/lib/currencies.mjs';
 import { TOPICS, countryGuide, countryGuidePath, countryGuides, countrySlug } from '@/lib/guides';
 import { absoluteUrl, metaDescription, metaTitle, shareMeta, site } from '@/lib/site';
-import { intlCountry, languageLinks } from '@/lib/i18n/locales';
+import { LOCALES, countryGuideIndexed, intlCountry, languageLinks } from '@/lib/i18n/locales';
 import { Eyebrow } from '@/components/bits';
 import { GuideList } from '@/components/GuideList';
 
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: metaTitle(title),
     description: metaDescription(description),
-    alternates: { canonical: path, languages: languageLinks(path, (l) => intlCountry(l, countrySlug(g.cc))) },
+    alternates: { canonical: path, languages: languageLinks(path, (l) => intlCountry(l, countrySlug(g.cc)), LOCALES.filter((l) => countryGuideIndexed(l, g.cc))) },
     ...shareMeta(`Best crypto cards in ${g.name} · G2M`, description, path)
   };
 }

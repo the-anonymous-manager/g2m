@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import type { Card } from '@/lib/types';
 import { homeFx } from '@/lib/fx';
 import { countryGuide, countryGuides, countrySlug } from '@/lib/guides';
-import { LOCALES, fill, hreflangOf, intlCard, intlCountry, intlHome, languageLinks, localeByCode } from '@/lib/i18n/locales';
+import { LOCALES, countryGuideIndexed, fill, hreflangOf, intlCard, intlCountry, intlHome, languageLinks, localeByCode } from '@/lib/i18n/locales';
 import { DICTS } from '@/lib/i18n/dict';
 import { formatters } from '@/lib/i18n/format';
 import { absoluteUrl, metaDescription, metaTitle, shareMeta } from '@/lib/site';
@@ -40,7 +40,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: metaTitle(title),
     description: metaDescription(description),
-    alternates: { canonical: intlCountry(locale, slug), languages: languageLinks(`/guides/best-crypto-cards/${slug}`, (l) => intlCountry(l, slug)) },
+    alternates: {
+      canonical: intlCountry(locale, slug),
+      languages: languageLinks(`/guides/best-crypto-cards/${slug}`, (l) => intlCountry(l, slug), LOCALES.filter((l) => countryGuideIndexed(l, guide.cc)))
+    },
+    // Only where the language is spoken; elsewhere the page stays for visitors but out of search results.
+    ...(countryGuideIndexed(locale, guide.cc) ? {} : { robots: { index: false, follow: true } }),
     ...shareMeta(title, description, intlCountry(locale, slug))
   };
 }
