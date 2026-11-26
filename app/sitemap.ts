@@ -3,7 +3,7 @@ import { getCards, getClosedCards, lastUpdated } from '@/lib/cards';
 import { absoluteUrl } from '@/lib/site';
 import { allPairs, versusPath } from '@/lib/versus';
 import { FEES_GUIDE, TOPICS, countryGuidePath, countryGuides, countrySlug } from '@/lib/guides';
-import { LOCALES, intlRankings, intlCompare, intlCalculator, intlFinder, intlWallet, intlReceipt, intlCorridors, intlSubmit, intlBook, intlFeesGuide, intlAlternatives, intlCard, intlCountry, intlGuide, intlGuides, intlHome, intlMethodology, intlReferral, intlVersus } from '@/lib/i18n/locales';
+import { LOCALES, countryGuideIndexed, intlRankings, intlCompare, intlCalculator, intlFinder, intlWallet, intlReceipt, intlCorridors, intlSubmit, intlBook, intlFeesGuide, intlAlternatives, intlCard, intlCountry, intlGuide, intlGuides, intlHome, intlMethodology, intlReferral, intlVersus } from '@/lib/i18n/locales';
 import { intlTopics } from '@/lib/i18n/guides';
 import { alternativesPath } from '@/lib/alternatives';
 import { hasReferralPage, referralPath } from '@/lib/referral';
@@ -69,7 +69,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly' as const,
       priority: 0.6
     })),
-    ...countryGuides().map((g) => ({ url: absoluteUrl(intlCountry(l, countrySlug(g.cc))), lastModified: updated, changeFrequency: 'weekly' as const, priority: 0.5 }))
+    ...countryGuides()
+      .filter((g) => countryGuideIndexed(l, g.cc))
+      .map((g) => ({ url: absoluteUrl(intlCountry(l, countrySlug(g.cc))), lastModified: updated, changeFrequency: 'weekly' as const, priority: 0.5 }))
   ]);
   // Updates: the list (once it has posts) and every post; in other languages, the list and the translated posts.
   const posts = getUpdates();

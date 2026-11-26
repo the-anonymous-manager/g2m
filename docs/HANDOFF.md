@@ -684,6 +684,12 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   data (`lib/llms.ts`), so ended offers drop off by themselves. Give the link to another chat or upload the file to a
   claude.ai Project. Facts only: the wording rules were taken out (Akash, 25 Nov 2026: they apply to the website,
   while he also uses the data in chats where he posts as an influencer), and referral labels are neutral.
+- Translated country guides indexed only where the language is spoken (26 Nov 2026, Akash: "yes" to the 19 Nov
+  proposal). `countryGuideIndexed` in `lib/i18n/locales.ts`: each language's markets plus `SPOKEN` (e.g. Spanish in
+  all of Latin America, French in francophone Africa, Arabic across the Arab League, Russian in Belarus and
+  Kyrgyzstan). Other combinations (the Polish guide to Peru) stay up for visitors with noindex, are left out of the
+  sitemap and out of the guides' hreflang links. Sitemap 4,575 to 2,812 pages. COCA stays on its affiliate link
+  (Akash: "coca is fine"); Bing rescan and the Search Console screenshot are Akash's to do later.
 - Closed cards (25 Nov 2026, Akash: "keep mexc with closed"). New Cards column "Closed on" (`closed`, set for MEXC to
   2026-11-18). `lib/cards.ts` ranks and lists open cards only; `getCardPage()` also finds closed ones for their own page
   (both languages' card pages, share image, Updates posts). The card page shows a "Closed" badge in place of the rank,
