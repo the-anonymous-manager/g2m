@@ -690,6 +690,14 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   Kyrgyzstan). Other combinations (the Polish guide to Peru) stay up for visitors with noindex, are left out of the
   sitemap and out of the guides' hreflang links. Sitemap 4,575 to 2,812 pages. COCA stays on its affiliate link
   (Akash: "coca is fine"); Bing rescan and the Search Console screenshot are Akash's to do later.
+- Search Console coverage, 26 Nov 2026 (Domain property sc-domain:g2m.life, export of 23 Nov: 891 indexed, 6,364 not;
+  0 clicks, 1 to 4 impressions a day). Expected: blocked by robots.txt 1,055 (/go/ referral redirects, /api, /stats);
+  alternative page with canonical 825 (filter addresses such as ?country=); page with redirect 469 (www, http, old
+  and closed-card addresses); discovered/crawled not indexed 3,735/112 (Google's queue; the smaller sitemap from the
+  country guide change should help). To check with Akash's example URLs: "Duplicate without user-selected canonical"
+  157 (every HTML page checked has a canonical; likely non-HTML addresses such as /updates/feed.xml or images), 404
+  10, Google chose another canonical 1. Fixed: missing pages inherited the home page's canonical; not-found pages
+  now name none (noindex).
 - Closed cards (25 Nov 2026, Akash: "keep mexc with closed"). New Cards column "Closed on" (`closed`, set for MEXC to
   2026-11-18). `lib/cards.ts` ranks and lists open cards only; `getCardPage()` also finds closed ones for their own page
   (both languages' card pages, share image, Updates posts). The card page shows a "Closed" badge in place of the rank,
