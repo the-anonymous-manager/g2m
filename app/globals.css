@@ -1506,6 +1506,20 @@ body::before {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 16px;
 }
+/* Labels share one row, so a label that wraps to two lines (some languages, narrow columns) does not push its box
+   below the others: each field takes four rows of the grid (label, box, slider or help, extra). */
+@supports (grid-template-rows: subgrid) {
+  .calc-grid > .field {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 4;
+    row-gap: 6px;
+    align-content: start;
+  }
+  .calc-grid > .field > .field-label {
+    align-self: end;
+  }
+}
 .range {
   width: 100%;
   accent-color: #b9705c;
