@@ -698,6 +698,12 @@ Not posting about a card is not a reason to leave it out; the directory aims to 
   157 (every HTML page checked has a canonical; likely non-HTML addresses such as /updates/feed.xml or images), 404
   10, Google chose another canonical 1. Fixed: missing pages inherited the home page's canonical; not-found pages
   now name none (noindex).
+- Script clicks removed from /stats (26 Nov 2026, Akash: "don't you think the data is wrong?"; 30 days showed 3,266 clicks
+  from 3,218 people for 377 visitors). His event export showed a script fetching "Get the card" links from 21 Nov: one
+  click per home internet address, almost all "computer", no page view, 1,972 on 26 Nov alone. New rule in
+  `lib/stats/server.ts`: a click from a button (it has a spot) counts only if the same visitor (address and browser)
+  recorded a page view in the 48 hours before; otherwise it is stored as `auto:Outbound`. Links opened on their own
+  (no spot) keep the old rule. A one-time clean-up applies the rule to past clicks (export test: 3,268 -> 48 clicks).
 - MiniPay Card added (26 Nov 2026, Akash sent the card picture). Opera's MiniPay wallet, virtual Visa issued by Monavate,
   built on Gnosis Pay (Gnosis Pay closing its own card on 20 Dec 2026 does not affect partner cards). Sources: minipay.to/card,
   MiniPay cashback blog and terms, launch blog, Opera press release, Gnosis blog, MiniPay Instagram (not for the UK).

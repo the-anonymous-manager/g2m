@@ -67,6 +67,7 @@ function ensureSchema(db: D1) {
     // Tables made before the monthly visitor code (mid) existed get the column; "duplicate column" means it is there.
     .then(() => db.prepare('ALTER TABLE ev ADD COLUMN mid TEXT').run().catch(() => {}))
     .then(() => cleanOldClicks(db).catch(() => {}))
+    .then(() => cleanScriptClicks(db).catch(() => {}))
     .catch((e) => {
       schema = null;
       throw e;
@@ -85,6 +86,37 @@ async function cleanOldClicks(db: D1) {
   await db.batch([
     db.prepare(`UPDATE ev SET name = 'auto:Outbound' WHERE name = 'Outbound' AND path = 'direct' AND (props IS NULL OR props NOT LIKE '%"v":2%')`),
     db.prepare("INSERT OR REPLACE INTO daily (day, metric, key, n) VALUES ('meta', 'migration', 'auto-clicks', 1)")
+  ]);
+}
+
+const PAGE_WINDOW = 48 * 3_600_000;
+
+/**
+ * From 21 Nov 2026 a script fetched "Get the card" links from thousands of home internet addresses with browser-like
+ * headers (3,171 clicks in 6 days, one each, none after a page view; Akash's export, 26 Nov). A person can only press
+ * a button on a page they opened, and every opened page records a page view, so a click with a spot but no page view
+ * from the same visitor (same address and browser) in the 48 hours before (a page can stay open in a tab) is a script's.
+ */
+async function noPageBefore(db: D1, mid: string, ts: number) {
+  const since = new Date(ts - PAGE_WINDOW).toISOString().slice(0, 10);
+  const row = await db
+    .prepare("SELECT 1 FROM ev WHERE day >= ? AND name = 'pageview' AND mid = ? AND ts >= ? LIMIT 1")
+    .bind(since, mid, ts - PAGE_WINDOW)
+    .first();
+  return !row;
+}
+
+/** The same rule, once, for clicks recorded before it existed. */
+async function cleanScriptClicks(db: D1) {
+  const done = await db.prepare("SELECT n FROM daily WHERE day = 'meta' AND metric = 'migration' AND key = 'no-page-clicks'").first();
+  if (done) return;
+  await db.batch([
+    db.prepare(
+      `UPDATE ev SET name = 'auto:Outbound' WHERE name = 'Outbound' AND place IS NOT NULL AND place != 'unknown' AND NOT EXISTS (
+         SELECT 1 FROM ev p WHERE p.name = 'pageview' AND (p.vid = ev.vid OR (ev.mid IS NOT NULL AND p.mid = ev.mid))
+           AND p.ts >= ev.ts - ${PAGE_WINDOW} AND p.ts <= ev.ts + 60000)`
+    ),
+    db.prepare("INSERT OR REPLACE INTO daily (day, metric, key, n) VALUES ('meta', 'migration', 'no-page-clicks', 1)")
   ]);
 }
 
@@ -200,12 +232,17 @@ export async function record(req: Request, hit: Hit) {
     // A visit "comes from" somewhere only on its first page, and not when the referrer is this site itself.
     const sameSite = !refHost && Boolean(hit.ref) && hit.ref!.includes(ownHost);
     const source = hit.landing && !sameSite ? sourceOf(refHost, clip(hit.utm, 40)) : null;
+    const mid = await visitorOf(day.slice(0, 7), ip, ua);
+    let name = `${isAutomated(req, hit.name === 'Outbound') ? 'auto:' : ''}${hit.name}`;
+    // A "Get the card" button press needs a page with the button: no page view from this visitor in the 2 days before
+    // means a script fetched the link (see noPageBefore). Links opened on their own (no spot, e.g. one shared on X) are exempt.
+    if (name === 'Outbound' && hit.place && hit.place !== 'unknown' && (await noPageBefore(db, mid, now.getTime()))) name = 'auto:Outbound';
     await db
       .prepare('INSERT INTO ev (ts, day, name, path, card, place, props, source, ref, country, device, vid, mid) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)')
       .bind(
         now.getTime(),
         day,
-        `${isAutomated(req, hit.name === 'Outbound') ? 'auto:' : ''}${hit.name}`.slice(0, 40),
+        name.slice(0, 40),
         clip(hit.path, 200),
         clip(hit.card, 60),
         clip(hit.place, 60),
@@ -215,7 +252,7 @@ export async function record(req: Request, hit: Hit) {
         /^[A-Z]{2}$/.test(country) && country !== 'XX' ? country : null,
         deviceOf(ua),
         await visitorOf(day, ip, ua),
-        await visitorOf(day.slice(0, 7), ip, ua)
+        mid
       )
       .run();
     if (Math.random() < 0.005) await tidy(db, day);
