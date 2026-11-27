@@ -35,7 +35,8 @@ Akash moved from the cloud chat to a Claude Code chat on his own computer (so Cl
 Kolo ambassador dashboard). Everything from the cloud chat is in this file, `CLAUDE.md` and git; nothing else is needed.
 
 **Open right now**
-- Pull request #116 (Solid and Kolo Black Friday posts, Kolo referral link): waiting for Akash to merge. After a pull
+- Pull request #117 (Kolo referral link, these notes, helper scripts): waiting for Akash to merge (#116 with the
+  Solid and Kolo Black Friday posts is merged). After a pull
   request merges, bring `main` into the work branch (`git fetch origin main && git merge origin/main`) and open a new
   pull request for the next change; never force-push.
 - Kolo: Akash's referral link `https://get.kolo.xyz/p742079` is in the sheet. Open question: is it an approved Kolo
