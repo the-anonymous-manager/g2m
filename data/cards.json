@@ -1424,7 +1424,6 @@
     "restrictedPassports": [],
     "signupBonus": "$10 in card credit after you spend $150 at 3 or more shops (at least $10 at each) in your first 30 days, and $50 more after you spend $5,000 in your first 90 days",
     "referralCode": "GEK07",
-    "limitedBonus": { "text": "Through G2M's link by 3 Dec 2026: 50% off your first year of Prime ($99.50) or Ultra ($499.50), free SEPA deposits for a month, and $10 card credit after $150 spent at 3+ shops in 30 days", "ends": "2026-12-03" },
     "wallets": { "applePay": true, "googlePay": true },
     "assets": ["USDC", "USDT"],
     "perks": ["Visa Platinum benefits: purchase and price protection, extended warranty", "Yield on savings, and borrowing against them"],
@@ -1449,8 +1448,7 @@
       { "label": "Refer a friend: new program from 17 Nov 2026 ($10 and $50 card credit)", "url": "https://support.solid.xyz/articles/refer-a-friend-earn-up-to-2000-per-friend", "verified": "2026-11-20" },
       { "label": "Solid team, reply to G2M (20 Nov 2026): FX on non-USD purchases 1.5% on Core, 0.75% on Prime, 0% on Ultra, taking effect soon; the help page still lists 1.5% on every tier", "url": "https://support.solid.xyz/articles/solid-fees-and-limits-the-complete-overview", "verified": "2026-11-20" },
       { "label": "Solid Help: Fees and limits, the complete overview (tier FX fees live)", "url": "https://support.solid.xyz/articles/solid-fees-and-limits-the-complete-overview", "verified": "2026-11-27" },
-      { "label": "Solid Help: Black Friday 2026 offer terms (Ultra usually $999 a year)", "url": "https://support.solid.xyz/articles/black-friday-2026-offer-terms-and-details", "verified": "2026-11-27" },
-      { "label": "Solid Help: Black Friday partner links (50% off the first year, free SEPA first month); G2M's link is a Solid partner link (confirmed by Akash, 27 Nov 2026)", "url": "https://support.solid.xyz/articles/black-friday-2026-offer-terms-and-details", "verified": "2026-11-27" }
+      { "label": "Solid Help: Black Friday 2026 offer terms (Ultra usually $999 a year)", "url": "https://support.solid.xyz/articles/black-friday-2026-offer-terms-and-details", "verified": "2026-11-27" }
     ],
     "lastChecked": "2026-11-27",
     "addedOn": "2026-10-29",
