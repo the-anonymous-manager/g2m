@@ -24,6 +24,30 @@
     "sponsored": false
   },
   {
+    "slug": "solid-black-friday-30-off-prime-and-ultra-and-10-cashback-on-ultra-until-3-decem",
+    "date": "2026-11-27",
+    "title": "Solid Black Friday: 30% off Prime and Ultra, and 10% cashback on Ultra until 3 December",
+    "card": "solid",
+    "type": "offer",
+    "summary": "From 26 November to 3 December 2026, Solid's Prime tier costs $139 for a year instead of $199 and Ultra $699 instead of $999. Ultra members earn 10% cashback instead of 5% during the sale, up to $200 a month.",
+    "body": "What's in the sale, in Solid's own terms:\n- Prime: $139 for one year instead of $199, or a FUSE lock 30% smaller, for everyone below Prime\n- Ultra: $699 for one year instead of $999, or a FUSE lock 30% smaller, for everyone below Ultra\n- You pay from your USDC balance and the tier starts at once for 12 months; it renews at the regular price a year later, and subscription fees are not refundable\n- To upgrade: Rewards tab, Explore tiers, pick Prime or Ultra, Upgrade\n\n10% cashback on Ultra:\n- Every Ultra member earns 10% back on eligible card purchases instead of 5%, whether they joined before or during the sale\n- The $200 monthly cashback cap still applies, so the 10% covers up to $2,000 of spending a month\n- Only purchases made during the sale count; cashback is paid 14 days after the purchase, into Earn\n- Core stays at 3% and Prime at 4%",
+    "ends": "2026-12-03",
+    "source": "https://support.solid.xyz/articles/black-friday-2026-offer-terms-and-details",
+    "sponsored": false
+  },
+  {
+    "slug": "kolo-black-friday-15-back-on-amazon-aliexpress-temu-and-more-until-30-november",
+    "date": "2026-11-27",
+    "title": "Kolo Black Friday: 15% back on Amazon, AliExpress, Temu and more until 30 November",
+    "card": "kolo",
+    "type": "offer",
+    "summary": "From 27 to 30 November 2026, every Kolo cardholder gets 15% cashback on purchases at Amazon, AliExpress, Temu, Shein, eBay and other marketplaces, up to $10 a purchase and $50 in total. No code needed.",
+    "body": "How it works, in Kolo's own terms:\n- For everyone with an active Kolo USD or EUR card, new or existing; business accounts don't take part\n- Counts purchases paid from 26 November, 21:00 UTC, to 30 November 2026, 23:59 UTC\n- Marketplaces: Amazon, AliExpress, Temu, Shein, eBay, Allegro, Noon, Trendyol, Zalando, Lazada, Etsy and Mercado Libre (any country site), plus Rozetka, Prom, Epicentr, Comfy, Allo, Foxtrot and Makeup in Ukraine\n- 15% back, up to $10 a purchase, so the full 15% applies up to about $67; up to $50 in total per person (€10 and €50 on the EUR card, counted separately)\n- The 15% replaces your regular cashback on these purchases and doesn't use up your regular $100 monthly limit\n- Paid automatically in BTC once the purchase settles; refunded purchases lose it\n\nDoesn't count: Amazon Prime, Kindle, Audible, AWS and other subscriptions or digital services, groceries and food delivery such as Amazon Fresh and Noon Food, gift cards and top-ups, and Amazon Pay on other websites.\n\nThe Kolo card normally pays 2% in BTC for the first 30 days, then 1%.",
+    "ends": "2026-11-30",
+    "source": "https://promo.kolo.xyz/black-friday",
+    "sponsored": false
+  },
+  {
     "slug": "kite-card-20-back-on-black-friday-shopping-up-to-20-until-12-december",
     "date": "2026-11-25",
     "title": "Kite Card: 20% back on Black Friday shopping, up to $20, until 12 December",

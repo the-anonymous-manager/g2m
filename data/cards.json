@@ -1057,9 +1057,10 @@
       { "label": "Kolo Help Center: Kolo Verification - How It Works", "url": "https://help.kolo.xyz/en/articles/14550196-kolo-verification-how-it-works", "verified": "2026-10-25" },
       { "label": "Kolo Terms of Use (PDF)", "url": "https://kolo.xyz/legal-pdf/kolo/terms-of-use", "verified": "2026-10-25" },
       { "label": "Kolo cashback program", "url": "https://help.kolo.xyz/en/articles/13623113-cashback-program", "verified": "2026-11-19" },
-      { "label": "Kolo fees and pricing", "url": "https://help.kolo.xyz/en/articles/13942206-fees-pricing", "verified": "2026-11-19" }
+      { "label": "Kolo fees and pricing", "url": "https://help.kolo.xyz/en/articles/13942206-fees-pricing", "verified": "2026-11-19" },
+      { "label": "Kolo: Black Friday 15% back on marketplaces (27 to 30 Nov 2026)", "url": "https://promo.kolo.xyz/black-friday", "verified": "2026-11-27" }
     ],
-    "lastChecked": "2026-11-19",
+    "lastChecked": "2026-11-27",
     "metal": "gold",
     "image": { "source": "https://g2m.life/card-originals/kolo.png", "file": "/card-images/kolo-64ab5c7f.webp" }
   },
@@ -1416,7 +1417,7 @@
     "tiers": [
       { "name": "Core", "feeUsdYear": 0, "cashbackPct": 3, "capMonthlyUsd": 50, "requirement": "All members" },
       { "name": "Prime", "feeUsdYear": 199, "feeNote": "Or lock 70,000 FUSE for 12 months instead", "cashbackPct": 4, "capMonthlyUsd": 100, "fxPct": 0.75, "requirement": "$199 a year, or lock 70,000 FUSE for 12 months", "stake": { "token": "FUSE", "amount": 70000, "coingeckoId": "fuse-network-token" }, "perks": ["Bank deposits and swaps at 0.25%", "10% back on AI, streaming and music and 8% on rides (first purchase in each category a month, within the cap)", "+2% APY on the first $10,000 in savings"] },
-      { "name": "Ultra", "feeUsdYear": 0, "feeNote": "No fee; needs 600,000 FUSE locked for 12 months", "cashbackPct": 5, "capMonthlyUsd": 200, "fxPct": 0, "requirement": "Lock 600,000 FUSE for 12 months", "stake": { "token": "FUSE", "amount": 600000, "coingeckoId": "fuse-network-token" }, "perks": ["No Solid fees on bank deposits and swaps", "20% back on AI, streaming and music, 10% on rides and 10% on 12 airlines booked direct (first purchase in each category a month, within the cap)", "+3% APY on the first $25,000 in savings"] }
+      { "name": "Ultra", "feeUsdYear": 999, "feeNote": "Or lock 600,000 FUSE for 12 months instead", "cashbackPct": 5, "capMonthlyUsd": 200, "fxPct": 0, "requirement": "$999 a year, or lock 600,000 FUSE for 12 months", "stake": { "token": "FUSE", "amount": 600000, "coingeckoId": "fuse-network-token" }, "perks": ["No Solid fees on bank deposits and swaps", "20% back on AI, streaming and music, 10% on rides and 10% on 12 airlines booked direct (first purchase in each category a month, within the cap)", "+3% APY on the first $25,000 in savings"] }
     ],
     "coverage": { "countries": 103, "scope": "103 countries, including the UK, the EU and EEA, Switzerland, the UAE and 30+ US states", "examples": ["United States", "United Kingdom", "Germany", "United Arab Emirates"], "markets": { "IN": "no", "AE": "yes", "US": "yes", "GB": "yes", "EU": "yes" }, "countryList": { "yes": ["AD", "AE", "AG", "AR", "AT", "AU", "AZ", "BB", "BD", "BE", "BG", "BH", "BO", "BR", "BS", "BZ", "CH", "CI", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "EG", "ES", "FI", "FR", "GB", "GD", "GE", "GG", "GH", "GI", "GR", "GT", "GY", "HK", "HN", "HR", "HU", "IE", "IL", "IM", "IS", "IT", "JE", "JP", "KE", "KN", "KR", "KY", "KZ", "LC", "LI", "LT", "LU", "LV", "MA", "MD", "MO", "MT", "MX", "MY", "NG", "NL", "NO", "NZ", "OM", "PA", "PE", "PH", "PK", "PL", "PT", "PY", "RO", "SA", "SE", "SG", "SI", "SK", "SN", "SR", "SV", "TC", "TH", "TR", "TT", "TW", "UA", "UG", "US", "UY", "UZ", "VC", "ZA", "ZM"], "no": ["BY", "CN", "CU", "IN", "IQ", "IR", "KP", "MM", "NI", "NP", "RU", "SY", "VE"], "others": "no" } },
     "ecosystem": { "iban": "named", "payoutCorridors": null, "ramps": "both", "credit": true, "yield": true },
@@ -1447,7 +1448,8 @@
       { "label": "How does Solid Rewards work: tiers, FUSE locks from 12 Oct 2026, category cashback, Yield Boost", "url": "https://support.solid.xyz/articles/how-does-solid-rewards-work", "verified": "2026-11-20" },
       { "label": "Refer a friend: new program from 17 Nov 2026 ($10 and $50 card credit)", "url": "https://support.solid.xyz/articles/refer-a-friend-earn-up-to-2000-per-friend", "verified": "2026-11-20" },
       { "label": "Solid team, reply to G2M (20 Nov 2026): FX on non-USD purchases 1.5% on Core, 0.75% on Prime, 0% on Ultra, taking effect soon; the help page still lists 1.5% on every tier", "url": "https://support.solid.xyz/articles/solid-fees-and-limits-the-complete-overview", "verified": "2026-11-20" },
-      { "label": "Solid Help: Fees and limits, the complete overview (tier FX fees live)", "url": "https://support.solid.xyz/articles/solid-fees-and-limits-the-complete-overview", "verified": "2026-11-27" }
+      { "label": "Solid Help: Fees and limits, the complete overview (tier FX fees live)", "url": "https://support.solid.xyz/articles/solid-fees-and-limits-the-complete-overview", "verified": "2026-11-27" },
+      { "label": "Solid Help: Black Friday 2026 offer terms (Ultra usually $999 a year)", "url": "https://support.solid.xyz/articles/black-friday-2026-offer-terms-and-details", "verified": "2026-11-27" }
     ],
     "lastChecked": "2026-11-27",
     "addedOn": "2026-10-29",
