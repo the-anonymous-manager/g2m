@@ -1042,7 +1042,7 @@
     "perks": ["Visa Platinum benefits, claimed through Visa", "Send crypto to any SEPA bank account"],
     "pros": ["No issuance or monthly fee", "Cashback in bitcoin at any merchant, no category limits", "Available in the UAE and the UK"],
     "cons": ["1% conversion fee on every purchase cancels out the 1% cashback", "Cashback drops to 1% after 30 days and is capped at $100 a month", "Virtual only until physical cards arrive (planned for 2027)"],
-    "links": { "official": "https://kolo.xyz/" },
+    "links": { "official": "https://kolo.xyz/", "affiliate": "https://get.kolo.xyz/p742079" },
     "sources": [
       { "label": "Kolo Help Center: cashback program", "url": "https://help.kolo.xyz/en/articles/13623113-cashback-program", "verified": "2026-11-15" },
       { "label": "Kolo Help Center: fees and pricing", "url": "https://help.kolo.xyz/en/articles/13942206-fees-pricing", "verified": "2026-11-15" },
