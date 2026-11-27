@@ -1057,9 +1057,10 @@
       { "label": "Kolo Help Center: Kolo Verification - How It Works", "url": "https://help.kolo.xyz/en/articles/14550196-kolo-verification-how-it-works", "verified": "2026-10-25" },
       { "label": "Kolo Terms of Use (PDF)", "url": "https://kolo.xyz/legal-pdf/kolo/terms-of-use", "verified": "2026-10-25" },
       { "label": "Kolo cashback program", "url": "https://help.kolo.xyz/en/articles/13623113-cashback-program", "verified": "2026-11-19" },
-      { "label": "Kolo fees and pricing", "url": "https://help.kolo.xyz/en/articles/13942206-fees-pricing", "verified": "2026-11-19" }
+      { "label": "Kolo fees and pricing", "url": "https://help.kolo.xyz/en/articles/13942206-fees-pricing", "verified": "2026-11-19" },
+      { "label": "Kolo: Black Friday 15% back on marketplaces (27 to 30 Nov 2026)", "url": "https://promo.kolo.xyz/black-friday", "verified": "2026-11-27" }
     ],
-    "lastChecked": "2026-11-19",
+    "lastChecked": "2026-11-27",
     "metal": "gold",
     "image": { "source": "https://g2m.life/card-originals/kolo.png", "file": "/card-images/kolo-64ab5c7f.webp" }
   },
