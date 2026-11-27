@@ -29,6 +29,35 @@ technical steps yourself.
 - Outreach to card issuers (email, DM, per-card gaps, how to sell the Sponsored spot) is in the Claude Doc
   "G2M card issuer outreach": https://claude.ai/artifact/96NsBhL6naMwqvFJctKpt5
 
+## Picking up in a new chat (27 Nov 2026)
+
+Akash moved from the cloud chat to a Claude Code chat on his own computer (so Claude can use his Chrome, e.g. the
+Kolo ambassador dashboard). Everything from the cloud chat is in this file, `CLAUDE.md` and git; nothing else is needed.
+
+**Open right now**
+- Pull request #116 (Solid and Kolo Black Friday posts, Kolo referral link): waiting for Akash to merge. After a pull
+  request merges, bring `main` into the work branch (`git fetch origin main && git merge origin/main`) and open a new
+  pull request for the next change; never force-push.
+- Kolo: Akash's referral link `https://get.kolo.xyz/p742079` is in the sheet. Open question: is it an approved Kolo
+  Creator Syndicate link? If yes (check ambassadors.kolo.xyz in his Chrome), add Kolo's "Ambassador Boosted Cashback"
+  as the sign-up bonus through G2M's link (terms: kolo.xyz/blog/ambassador-boosted-cashback-offer-terms-for-users;
+  5% after $500 spent in a month, up to $10 a purchase and $50 a month, first 3 months, sign-ups from 30 Nov 2026).
+- Solid: Akash's link is a Solid partner link (he confirmed), but he asked to leave the partner-link Black Friday
+  offer (50% off the first year) off the site for now. Only the public Black Friday sale is posted.
+- MiniPay (added 26 Nov): no referral link yet; card picture is the one Akash sent (ask if it came from MiniPay).
+- Later from Akash: Bing rescan result; a Search Console Performance screenshot 2 to 4 weeks after 26 Nov.
+
+**How Claude works on G2M (habits from the cloud chat)**
+- Data edits go in the Google Sheet (id in `data/sheet.json`) with the Google Sheets connector, then
+  `node scripts/sheet-sync.mjs` (add `NODE_USE_ENV_PROXY=1` behind a proxy), `npm run validate`, translate the new text
+  (`scripts/i18n-tools/README.md`), `npm run build`, `npx tsx scripts/rank-check.ts`, commit, push, pull request.
+- Every data change: a Sources row (Card ID, label, link, verified date) and "Last checked" set to today.
+- Offers: look on the issuer's help center and promo pages, not only its home page (Solid's and Kolo's Black Friday
+  offers were only there). Offers for every cardholder are Updates posts; link-only bonuses go in "Sign-up bonus" or
+  "Limited-time bonus" and are always worded "through G2M's link".
+- Akash's session limits are tight: work efficiently, explain in plain words, and say which pull request to merge.
+- Translations are Claude's and not checked by native speakers; say so when reporting.
+
 ## Next session (agreed with Akash)
 
 1. Moving hosting to Cloudflare Workers, in progress (25 Oct 2026). g2m.life's DNS already moved to Cloudflare
